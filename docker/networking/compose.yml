@@ -1,0 +1,87 @@
+services:
+  caddy:
+    image: ghcr.io/brunostjohn/custom-caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    hostname: caddy
+    environment:
+      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY}
+      - CROWDSEC_API_KEY=${CROWDSEC_API_KEY}
+      - CROWDSEC_HOST=http://crowdsec:8080
+    networks:
+      - rev_proxy
+      - crowdsec_network
+      - grafana_network
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - /mnt/jabberwock/custom-caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /mnt/jabberwock/caddy/data:/data
+      - /mnt/jabberwock/caddy/config:/config
+      - /mnt/jabberwock/caddy/logs:/var/log/caddy
+
+  cloudflare-ddns:
+    image: timothyjmiller/cloudflare-ddns:latest
+    container_name: cloudflare-ddns
+    security_opt:
+      - no-new-privileges:true
+    network_mode: "host"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /mnt/jabberwock/cloudflare-ddns/config.json:/config.json
+    restart: unless-stopped
+
+  adguardhome-sync:
+    image: lscr.io/linuxserver/adguardhome-sync:latest
+    container_name: adguardhome-sync
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Dublin
+      - CONFIGFILE=/config/adguardhome-sync.yaml
+    volumes:
+      - /mnt/jabberwock/adguardhome-sync/config:/config
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  adguard-home:
+    container_name: adguard-home
+    image: adguard/adguardhome:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "3004:80/tcp"
+      - "853:853/tcp"
+      - "784:784/udp"
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/adguard-home/opt/adguardhome/work:/opt/adguardhome/work
+      - /DATA/AppData/adguard-home/opt/adguardhome/conf:/opt/adguardhome/conf
+
+  adguard-prometheus:
+    image: ghcr.io/henrywhitaker3/adguard-exporter:latest
+    environment:
+      - ADGUARD_SERVERS=${ADGUARD_SERVERS}
+      - ADGUARD_USERNAMES=${ADGUARD_USERNAMES}
+      - ADGUARD_PASSWORDS=${ADGUARD_PASSWORDS}
+      - INTERVAL=15s
+    networks:
+      - rev_proxy
+      - crowdsec_network
+    restart: unless-stopped
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true
+  crowdsec_network:
+    external: true
+  grafana_network:
+    external: true

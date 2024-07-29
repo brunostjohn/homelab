@@ -1,0 +1,4 @@
+domains:
+  - "corner.$GLOBAL_FQDN"
+addresses:
+  - "crafty-container:25567"

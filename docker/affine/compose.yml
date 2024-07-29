@@ -1,0 +1,69 @@
+services:
+  affine:
+    image: ghcr.io/toeverything/affine-graphql:stable
+    container_name: affine_selfhosted
+    hostname: affine
+    command: ["sh", "-c", "node ./scripts/self-host-predeploy && node ./dist/index.js"]
+    networks:
+      - rev_proxy
+      - default
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - /mnt/jabberwock/affine/config:/root/.affine/config
+      - /mnt/jabberwock/affine/storage:/root/.affine/storage
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
+    restart: unless-stopped
+    env_file: stack.env
+    environment:
+      - NODE_OPTIONS="--import=./scripts/register.js"
+      - AFFINE_CONFIG_PATH=/root/.affine/config
+      - REDIS_SERVER_HOST=redis
+      - DATABASE_URL=postgres://affine:affine@postgres:5432/affine
+      - NODE_ENV=production
+      - AFFINE_ADMIN_EMAIL=${AFFINE_ADMIN_EMAIL}
+      - AFFINE_ADMIN_PASSWORD=${AFFINE_ADMIN_PASSWORD}
+
+  redis:
+    image: redis
+    container_name: affine_redis
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - /mnt/jabberwock/affine/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres
+    container_name: affine_postgres
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - /mnt/jabberwock/affine/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U affine"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      POSTGRES_USER: affine
+      POSTGRES_PASSWORD: affine
+      POSTGRES_DB: affine
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true

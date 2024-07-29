@@ -1,0 +1,29 @@
+version: 3
+
+includes:
+  homepage:
+    aliases: ["h"]
+    taskfile: ./homepage/tasks.yml
+    dir: ./homepage
+  crowdsec:
+    aliases: ["cs"]
+    taskfile: ./crowdsec/tasks.yml
+    dir: ./crowdsec
+  networking:
+    aliases: ["n"]
+    taskfile: ./networking/tasks.yml
+    dir: ./networking
+  observability:
+    aliases: ["o"]
+    taskfile: ./observability/tasks.yml
+    dir: ./observability
+
+tasks:
+  "produce:all":
+    aliases: ["p:a", "p", "pa", "pall", "p:all", "produce"]
+    desc: "Replace secrets from .env file and produce config files for all services"
+    cmds:
+      - task: homepage:produce
+      - task: crowdsec:produce
+      - task: networking:produce
+      - task: observability:produce

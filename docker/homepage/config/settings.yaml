@@ -1,0 +1,45 @@
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  showSearchSuggestions: true
+  hideVisitURL: true
+title: Zefir's Royal Cloud
+favicon: /images/server-favicon.ico
+startUrl: https://$GLOBAL_FQDN
+cardBlur: xl
+background: /images/bg.jpg
+#background:
+#  image: /images/bg.jpg
+#  brightness: 50
+#favicon:
+theme: light
+color: zinc
+providers:
+  openweathermap:
+  weatherapi:
+showStats: true
+hideVersion: true
+useEqualHeights: true
+headerStyle: boxedWidgets
+layout:
+  Server Specific:
+    style: row
+    columns: 2
+  Entertainment:
+    style: row
+    columns: 3
+  Productivity:
+    style: row
+    columns: 4
+  Personal Security:
+    style: row
+    columns: 2
+  Smart Home:
+    style: row
+    columns: 3
+  Media Fetchers:
+    style: row
+    columns: 4
+  Monitoring & Local Network:
+    style: row
+    columns: 3

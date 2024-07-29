@@ -1,0 +1,4 @@
+!.terraform.lock.hcl
+.terraform/
+terraform.tfvars
+secrets/id_ed25519

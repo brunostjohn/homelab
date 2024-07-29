@@ -1,0 +1,51 @@
+services:
+  homeassistant:
+    container_name: homeassistant
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: homeassistant
+    image: linuxserver/homeassistant:latest
+    privileged: true
+    restart: always
+    volumes:
+      - /DATA/AppData/homeassistant/config:/config
+      - /run/dbus:/run/dbus:ro
+    network_mode: host
+
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    devices:
+      - /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0:/dev/ttyACM0
+    hostname: zigbee2mqtt
+    image: koenkk/zigbee2mqtt:latest
+    restart: always
+    volumes:
+      - /DATA/AppData/zigbee2mqtt/data:/app/data
+      - /run/udev:/run/udev:ro
+    networks:
+      - rev_proxy
+      - default
+
+  mosquitto:
+    command:
+      - mosquitto
+      - -c
+      - /mosquitto-no-auth.conf
+    container_name: mosquitto
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    ports:
+      - 1883:1883
+    networks:
+      - default
+    restart: always
+    volumes:
+      - /DATA/AppData/mosquitto/config:/mosquitto/config
+      - /DATA/AppData/mosquitto/data:/mosquitto/data
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true

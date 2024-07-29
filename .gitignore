@@ -1,0 +1,7 @@
+/.infracost
+.env
+.env.*
+stack.env
+!/.env.example
+.DS_Store
+/dist

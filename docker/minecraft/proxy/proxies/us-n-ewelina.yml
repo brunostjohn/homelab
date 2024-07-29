@@ -1,0 +1,4 @@
+domains:
+  - "carrier.$GLOBAL_FQDN"
+addresses:
+  - "crafty-container:25568"

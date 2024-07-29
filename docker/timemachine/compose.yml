@@ -1,0 +1,32 @@
+services:
+  timemachine:
+    container_name: timemachine
+    image: mbentley/timemachine:smb
+    hostname: timemachine
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/timemachine/backups:/opt
+      - /mnt/jabberwock/timemachine/users:/users
+    environment:
+      - EXTERNAL_CONF=/users
+      - TM_USERNAME=timemachine
+      - TM_GROUPNAME=timemachine
+      - PASSWORD=timemachine
+      - TM_UID=1000
+      - TM_GID=1000
+      - SET_PERMISSIONS=false
+      - VOLUME_SIZE_LIMIT=0
+    networks:
+      timemachine:
+        ipv4_address: 192.168.1.124
+
+networks:
+  timemachine:
+    driver: macvlan
+    driver_opts:
+      parent: enp3s0
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          ip_range: 192.168.1.0/24
+          gateway: 192.168.1.1

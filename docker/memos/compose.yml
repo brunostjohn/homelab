@@ -1,0 +1,13 @@
+services:
+  memos:
+    image: neosmemo/memos:stable
+    container_name: memos
+    volumes:
+      - /mnt/jabberwock/casaos/memos/memos:/var/opt/memos
+    networks:
+      - rev_proxy
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true

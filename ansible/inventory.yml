@@ -1,0 +1,27 @@
+ungrouped:
+  hosts:
+    node2.zefirscloud.local:
+      ansible_user: root
+    node3.zefirscloud.local:
+      ansible_user: root
+
+apt:
+  hosts:
+    node2.zefirscloud.local:
+      ansible_user: root
+    node3.zefirscloud.local:
+      ansible_user: root
+
+raspberrypi:
+  hosts:
+    node2.zefirscloud.local:
+      ansible_user: root
+    node3.zefirscloud.local:
+      ansible_user: root
+
+k3snodes:
+  hosts:
+    node2.zefirscloud.local:
+      ansible_user: root
+    node3.zefirscloud.local:
+      ansible_user: root

@@ -1,0 +1,239 @@
+services:
+  plex:
+    image: linuxserver/plex:latest
+    hostname: plex
+    restart: unless-stopped
+    # runtime: nvidia
+    cpu_shares: 90
+    command: []
+    container_name: plex
+    ports:
+      - 32400:32400
+    networks:
+      - rev_proxy
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 64205M
+    #     reservations:
+    #       devices:
+    #         - capabilities:
+    #             - gpu
+    #           driver: nvidia
+    #           count: 1
+    volumes:
+      - /dev/dri:/dev/dri
+      - /mnt/jabberwock/casaos/plex:/config
+      - /mnt/jabberwock/entertainment:/data
+    env_file: stack.env
+
+  requestrr:
+    image: thomst08/requestrr
+    container_name: requestrr
+    restart: unless-stopped
+    networks:
+      - rev_proxy
+    ports:
+      - 4545:4545
+    volumes:
+      - /mnt/jabberwock/chat-bots/request-bot/config:/root/config
+
+  wizarr:
+    container_name: wizarr
+    image: ghcr.io/wizarrrr/wizarr:latest
+    restart: unless-stopped
+    hostname: "wizarr"
+    networks:
+      - rev_proxy
+    volumes:
+      - /mnt/jabberwock/wizarr/database:/data/database
+
+  overseerr:
+    cpu_shares: 90
+    command: []
+    networks:
+      - rev_proxy
+    container_name: overseerr
+    deploy:
+      resources:
+        limits:
+          memory: 64205M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: overseerr
+    image: ghcr.io/sct/overseerr:latest
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /mnt/jabberwock/casaos/os2
+        target: /app/config
+
+  bazarr:
+    cpu_shares: 90
+    networks:
+      - rev_proxy
+    container_name: bazarr
+    deploy:
+      resources:
+        limits:
+          memory: 64205M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: bazarr
+    image: linuxserver/bazarr:1.2.2
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/entertainment:/data
+      - /mnt/jabberwock/casaos/bazarr:/config
+
+  prowlarr:
+    cpu_shares: 90
+    networks:
+      - rev_proxy
+    container_name: prowlarr
+    deploy:
+      resources:
+        limits:
+          memory: 64205M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: prowlarr
+    image: linuxserver/prowlarr:1.9.4
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/prowlarr:/config
+
+  radarr:
+    cpu_shares: 90
+    networks:
+      - rev_proxy
+    container_name: radarr
+    deploy:
+      resources:
+        limits:
+          memory: 64205M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: radarr
+    image: linuxserver/radarr:5.2.6
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/radarr:/config
+      - /mnt/jabberwock/entertainment:/data
+
+  sonarr:
+    cpu_shares: 90
+    networks:
+      - rev_proxy
+    container_name: sonarr
+    deploy:
+      resources:
+        limits:
+          memory: 64205M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: sonarr
+    image: linuxserver/sonarr:3.0.10
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/sonarr:/config
+      - /mnt/jabberwock/entertainment:/data
+
+  lidarr:
+    cpu_shares: 90
+    networks:
+      - rev_proxy
+    container_name: lidarr
+    deploy:
+      resources:
+        limits:
+          memory: 64205M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: lidarr
+    image: linuxserver/lidarr:1.4.5
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/lidarr:/config
+      - /mnt/jabberwock/entertainment:/data
+
+  qbittorrent:
+    cpu_shares: 90
+    networks:
+      - rev_proxy
+    container_name: qbittorrent
+    deploy:
+      resources:
+        limits:
+          memory: 64205M
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+      - UMASK=002
+    hostname: qbittorrent
+    image: hotio/qbittorrent:release-4.6.2
+    restart: unless-stopped
+    ports:
+      - 29538:29538
+      - 29538:29538/udp
+    volumes:
+      - /DATA/AppData/qbittorrent/config:/config
+      - /mnt/jabberwock/entertainment:/data
+
+  readarr:
+    container_name: readarr
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: readarr
+    image: linuxserver/readarr:0.3.10-develop
+    networks:
+      - rev_proxy
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/readarr:/config
+      - /mnt/jabberwock/entertainment:/data
+
+  tautulli:
+    container_name: tautulli
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/Dublin
+    hostname: tautulli
+    image: linuxserver/tautulli:2.13.2
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/tautulli:/config
+    networks:
+      - rev_proxy
+
+  audiobookshelf:
+    container_name: audiobookshelf
+    hostname: audiobookshelf
+    image: ghcr.io/advplyr/audiobookshelf:2.8.1
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/entertainment:/data
+      - /mnt/jabberwock/casaos/audiobookshelf:/config
+    networks:
+      - rev_proxy
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true

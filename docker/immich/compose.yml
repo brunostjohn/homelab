@@ -1,0 +1,117 @@
+services:
+  database:
+    container_name: immich-postgres
+    environment:
+      - PG_DATA=/var/lib/postgresql/data
+      - POSTGRES_DB=immich
+      - POSTGRES_PASSWORD=casaos
+      - POSTGRES_USER=casaos
+    hostname: immich-postgres
+    image: tensorchord/pgvecto-rs:pg14-v0.2.0
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/immich/pgdata:/var/lib/postgresql/data
+    networks:
+      - default
+  immich-machine-learning:
+    container_name: immich-machine-learning
+    image: ghcr.io/immich-app/immich-machine-learning:v1.100.0-cuda
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - compute
+                - video
+    environment:
+      - DB_DATABASE_NAME=casaos
+      - DB_HOSTNAME=immich-postgres
+      - DB_PASSWORD=casaos
+      - DB_PORT=5432
+      - DB_USERNAME=casaos
+      - REDIS_HOSTNAME=immich-redis
+    hostname: immich-machine-learning
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/immich/ml-cache:/cache
+    networks:
+      - default
+  immich-microservices:
+    command:
+      - start.sh
+      - microservices
+    container_name: immich-microservices
+    depends_on:
+      database:
+        condition: service_started
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities:
+                - gpu
+                - compute
+                - video
+    environment:
+      - DB_DATABASE_NAME=immich
+      - DB_HOSTNAME=immich-postgres
+      - DB_PASSWORD=casaos
+      - DB_PORT=5432
+      - DB_USERNAME=casaos
+      - REDIS_HOSTNAME=immich-redis
+    hostname: immich-microservices
+    image: ghcr.io/immich-app/immich-server:v1.100.0
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/immich/upload:/usr/src/app/upload
+    networks:
+      - default
+  immich-server:
+    command:
+      - start.sh
+      - immich
+    container_name: immich-server
+    depends_on:
+      database:
+        condition: service_started
+        required: true
+      redis:
+        condition: service_started
+        required: true
+    environment:
+      - DB_DATABASE_NAME=immich
+      - DB_HOSTNAME=immich-postgres
+      - DB_PASSWORD=casaos
+      - DB_PORT=5432
+      - DB_USERNAME=casaos
+      - IMMICH_MACHINE_LEARNING_URL=http://immich-machine-learning:3003
+      - REDIS_HOSTNAME=immich-redis
+    hostname: immich-server
+    image: ghcr.io/immich-app/immich-server:v1.100.0
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/immich/upload:/usr/src/app/upload
+    networks:
+      - default
+      - rev_proxy
+  redis:
+    container_name: immich-redis
+    hostname: immich-redis
+    image: redis:6.2-alpine@sha256:70a7a5b641117670beae0d80658430853896b5ef269ccf00d1827427e3263fa3
+    restart: always
+    networks:
+      - default
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true

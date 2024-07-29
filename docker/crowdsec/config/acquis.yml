@@ -1,0 +1,23 @@
+filenames:
+  - /var/log/caddy/*.log
+labels:
+  type: caddy
+---
+source: docker
+container_name:
+  - authentication-server-1
+  - authentication-worker-1
+labels:
+  type: authentik
+---
+source: docker
+container_name:
+  - adguard-home
+labels:
+  type: adguardhome
+---
+source: docker
+container_name:
+  - homeassistant
+labels:
+  type: home-assistant

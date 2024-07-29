@@ -1,0 +1,39 @@
+version: 3
+
+tasks:
+  fmt:
+    aliases: ["f", "format"]
+    description: "Format terraform files"
+    cmds:
+      - terraform fmt
+      - cd unifi && terraform fmt
+
+  lint:
+    aliases: ["l"]
+    description: "Lint terraform files"
+    cmds:
+      - terraform validate
+      - terraform fmt -check
+      - tflint
+      - cd unifi && terraform validate
+      - cd unifi && terraform fmt -check
+      - cd unifi && tflint
+
+  init:
+    aliases: ["i"]
+    description: "Initialize terraform"
+    cmds:
+      - terraform init
+      - cd unifi && terraform init
+
+  plan:
+    aliases: ["p"]
+    description: "Plan terraform changes"
+    cmds:
+      - terraform plan
+
+  apply:
+    aliases: ["a"]
+    description: "Apply terraform changes"
+    cmds:
+      - terraform apply -auto-approve

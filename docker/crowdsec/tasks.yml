@@ -1,0 +1,11 @@
+version: 3
+
+tasks:
+  produce:
+    aliases: ["p"]
+    desc: "Replace secrets from .env file and produce config files"
+    cmds:
+      - rm -rf ../../dist/crowdsec-config
+      - mkdir -p ../../dist/crowdsec-config
+      - cp -r ./config/* ../../dist/crowdsec-config/
+      - fd . '../../dist/crowdsec-config' -t f | xargs -I {} envsubst -o {} -i {} -no-unset -no-empty -fail-fast

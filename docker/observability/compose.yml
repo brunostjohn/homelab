@@ -1,0 +1,86 @@
+services:
+  unpoller:
+    image: ghcr.io/unpoller/unpoller:latest
+    restart: unless-stopped
+    container_name: unpoller
+    env_file: stack.env
+    networks:
+      - grafana_network
+    environment:
+      - UP_INFLUXDB_DISABLE=true
+      - UP_POLLER_DEBUG=false
+      - UP_UNIFI_DYNAMIC=false
+      - UP_PROMETHEUS_HTTP_LISTEN=0.0.0.0:9130
+      - UP_PROMETHEUS_NAMESPACE=unpoller
+      - UP_UNIFI_CONTROLLER_0_PASS=${UP_UNIFI_CONTROLLER_0_PASS}
+      - UP_UNIFI_CONTROLLER_0_SAVE_ALARMS=true
+      - UP_UNIFI_CONTROLLER_0_SAVE_ANOMALIES=true
+      - UP_UNIFI_CONTROLLER_0_SAVE_DPI=true
+      - UP_UNIFI_CONTROLLER_0_SAVE_EVENTS=true
+      - UP_UNIFI_CONTROLLER_0_SAVE_IDS=true
+      - UP_UNIFI_CONTROLLER_0_SAVE_SITES=true
+      - UP_UNIFI_CONTROLLER_0_URL=${UP_UNIFI_CONTROLLER_0_URL}
+      - UP_UNIFI_CONTROLLER_0_USER=${UP_UNIFI_CONTROLLER_0_USER}
+
+  loki:
+    image: grafana/loki:latest
+    networks:
+      - grafana_network
+
+  promtail:
+    image: grafana/promtail:latest
+    command: -config.file=/etc/promtail/docker-config.yaml
+    volumes:
+      - /mnt/jabberwock/monitoring/promtail-config.yaml:/etc/promtail/docker-config.yaml
+      - /mnt/jabberwock/caddy/logs:/var/log/caddy
+    networks:
+      - grafana_network
+    depends_on:
+      - loki
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--log.level=debug"
+    restart: unless-stopped
+    networks:
+      - grafana_network
+      - reverse_proxy_network
+    volumes:
+      - /mnt/jabberwock/monitoring/prometheus/config:/etc/prometheus
+      - /mnt/jabberwock/monitoring/prometheus/data:/prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    env_file: stack.env
+    networks:
+      - grafana_network
+      - reverse_proxy_network
+    volumes:
+      - /mnt/jabberwock/monitoring/grafana:/var/lib/grafana
+    environment:
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_USERS_AUTO_ASSIGN_ORG=true
+      - GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+      - GF_AUTH_GENERIC_OAUTH_ENABLED=true
+      - GF_AUTH_GENERIC_OAUTH_NAME=${GF_AUTH_GENERIC_OAUTH_NAME}
+      - GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP=true
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_ID=${GF_AUTH_GENERIC_OAUTH_CLIENT_ID}
+      - GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET=${GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}
+      - GF_AUTH_GENERIC_OAUTH_SCOPES=openid profile email
+      - GF_AUTH_GENERIC_OAUTH_AUTH_URL=${GF_AUTH_GENERIC_OAUTH_AUTH_URL}
+      - GF_AUTH_GENERIC_OAUTH_TOKEN_URL=${GF_AUTH_GENERIC_OAUTH_TOKEN_URL}
+      - GF_AUTH_GENERIC_OAUTH_API_URL=${GF_AUTH_GENERIC_OAUTH_API_URL}
+      - GF_AUTH_SIGNOUT_REDIRECT_URL=${GF_AUTH_SIGNOUT_REDIRECT_URL}
+      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+
+networks:
+  grafana_network:
+    external: true
+  reverse_proxy_network:
+    external: true

@@ -1,0 +1,64 @@
+version: 3
+
+dotenv: [".env", "{{.ENV}}/.env.", "{{.HOME}}/.env"]
+
+includes:
+  terraform:
+    aliases: ["tf", "t"]
+    taskfile: ./terraform/tasks.yml
+    dir: ./terraform
+  nixos:
+    aliases: ["nix", "n"]
+    taskfile: ./nixos/tasks.yml
+    dir: ./nixos
+  caddy:
+    aliases: ["c"]
+    taskfile: ./reverse-proxy/tasks.yml
+    dir: ./reverse-proxy
+  ansible:
+    aliases: ["a"]
+    taskfile: ./ansible/tasks.yml
+    dir: ./ansible
+  docker:
+    aliases: ["d"]
+    taskfile: ./docker/tasks.yml
+    dir: ./docker
+
+tasks:
+  default:
+    desc: "Bootstrap repository"
+    cmds:
+      - nix-shell
+
+  clean:
+    aliases: ["c"]
+    desc: "Clean all files"
+    cmds:
+      - rm -rf dist
+
+  "yaml:lint":
+    aliases: ["yaml:l", "yaml:linting", "yaml:lints", "y:lint", "y:l", "y:linting", "y:lints"]
+    desc: "Lint all yaml files"
+    cmds:
+      - yamllint .
+
+  "yaml:fmt":
+    aliases: ["yaml:format", "yaml:f", "y:f", "y:fmt", "y:format"]
+    desc: "Format all yaml files"
+    cmds:
+      - yamlfmt .
+
+  lint:
+    aliases: ["l"]
+    desc: "Lint all files"
+    cmds:
+      - task: yaml:lint
+
+  fmt:
+    aliases: ["format", "f"]
+    desc: "Format all files"
+    cmds:
+      - task: yaml:fmt
+      - task: tf:fmt
+      - task: nixos:fmt
+      - task: caddy:fmt

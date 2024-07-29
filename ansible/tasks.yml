@@ -1,0 +1,22 @@
+version: 3
+
+tasks:
+  hosts:
+    description: "List hosts"
+    cmds:
+      - ansible all --list-hosts
+
+  facts:
+    description: "List facts"
+    cmds:
+      - ansible all -m gather_facts
+
+  ping:
+    description: "Ping hosts"
+    cmds:
+      - ansible all -m ping
+
+  upgrade:
+    description: "Upgrade hosts"
+    cmds:
+      - ansible all -m apt -a "upgrade=yes update_cache=yes" -b

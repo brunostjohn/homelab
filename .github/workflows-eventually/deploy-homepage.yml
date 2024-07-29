@@ -1,0 +1,33 @@
+name: Deploy Homepage configuration
+
+on: # yamllint disable-line rule:truthy
+  push:
+    paths:
+      - docker/homepage/config/*
+      - docker/homepage/images/*
+      - docker/homepage/tasks.yml
+      - .github/workflows/deploy-homepage.yml
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy Homepage configuration
+    runs-on: self-hosted
+    steps:
+      - name: Update Repository
+        run: |
+          cd /homelab
+          git reset --hard HEAD
+          git pull
+      - name: Get most recent secrets
+        run: |
+          cd /homelab
+          cp ~/homelab-secrets.env /homelab/.env
+      - name: Produce Homepage Configuration
+        run: |
+          cd /homelab
+          task docker:homepage:produce
+      - name: Deploy Homepage configuration
+        run: |
+          cd /homelab

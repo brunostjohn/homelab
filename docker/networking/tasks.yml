@@ -1,0 +1,11 @@
+version: 3
+
+tasks:
+  produce:
+    aliases: ["p"]
+    desc: "Replace secrets from .env file and produce config files"
+    cmds:
+      - rm -rf ../../dist/networking-config
+      - mkdir -p ../../dist/networking-config
+      - cp -r ./config/* ../../dist/networking-config/
+      - fd . '../../dist/networking-config' -t f | xargs -I {} envsubst -o {} -i {} -no-unset -no-empty -fail-fast

@@ -1,0 +1,55 @@
+services:
+  broker:
+    image: docker.io/library/redis:7
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/paperless/redisdata:/data
+    networks:
+      - default
+
+  db:
+    environment:
+      - POSTGRES_DB=paperless
+      - POSTGRES_PASSWORD=paperless
+      - POSTGRES_USER=paperless
+    image: docker.io/library/postgres:13
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/paperless/pgdata:/var/lib/postgresql/data
+    networks:
+      - default
+
+  webserver:
+    depends_on:
+      broker:
+        condition: service_started
+        required: true
+      db:
+        condition: service_started
+        required: true
+    environment:
+      - PAPERLESS_DBHOST=db
+      - PAPERLESS_REDIS=redis://broker:6379
+      - PAPERLESS_SECRET_KEY=${PAPERLESS_SECRET_KEY}
+      - PAPERLESS_TIME_ZONE=Europe/Dublin
+      - PAPERLESS_URL=${PAPERLESS_URL}
+      - PAPERLESS_APPS=allauth.socialaccount.providers.openid_connect
+      - PAPERLESS_SOCIALACCOUNT_PROVIDERS=${PAPERLESS_SOCIALACCOUNT_PROVIDERS}
+    env_file:
+      - stack.env
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    volumes:
+      - /mnt/jabberwock/casaos/paperless/data:/usr/src/paperless/data
+      - /mnt/jabberwock/casaos/paperless/media:/usr/src/paperless/media
+      - /mnt/jabberwock/casaos/paperless/export:/usr/src/paperless/export
+      - /mnt/jabberwock/casaos/paperless/consume:/usr/src/paperless/consume
+    networks:
+      - default
+      - rev_proxy
+    hostname: "paperless"
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true

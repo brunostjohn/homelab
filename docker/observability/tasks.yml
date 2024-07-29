@@ -1,0 +1,11 @@
+version: 3
+
+tasks:
+  produce:
+    aliases: ["p"]
+    desc: "Replace secrets from .env file and produce config files"
+    cmds:
+      - rm -rf ../../dist/observability-config
+      - mkdir -p ../../dist/observability-config
+      - cp -r ./config/* ../../dist/observability-config/
+      - fd . '../../dist/observability-config' -t f | xargs -I {} envsubst -o {} -i {} -no-unset -no-empty -fail-fast

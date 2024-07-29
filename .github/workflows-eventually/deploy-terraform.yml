@@ -1,0 +1,88 @@
+name: Deploy Terraform configuration
+
+env:
+  argocd_password: ${{ secrets.ARGOCD_PASSWORD }}
+
+on: # yamllint disable-line rule:truthy
+  push:
+    paths:
+      - terraform/**/*
+      - terraform/*
+      - .github/workflows/deploy-terraform.yml
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    paths:
+      - terraform/**/*
+      - terraform/*
+      - .github/workflows/deploy-terraform.yml
+
+jobs:
+  deploy:
+    name: Deploy Terraform Configuration
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Initialise Terraform
+        id: init
+        run: |
+          cd terraform
+          terraform init
+      - name: Check formatting
+        id: fmt
+        run: |
+          cd terraform
+          terraform fmt -check
+      - name: Validate
+        id: validate
+        run: |
+          cd terraform
+          terraform validate
+      - name: Terraform plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        env:
+          TF_VAR_argocd_password: ${{ env.argocd_password }}
+        run: |
+          cd terraform
+          terraform plan -no-color -input=false
+        continue-on-error: true
+      - uses: actions/github-script@v6
+        if: github.event_name == 'pull_request'
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          script: |
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`\n
+            ${process.env.PLAN}
+            \`\`\`
+
+            </details>
+            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          TF_VAR_argocd_password: ${{ env.argocd_password }}
+        run: |
+          cd terraform
+          terraform apply -auto-approve -input=false

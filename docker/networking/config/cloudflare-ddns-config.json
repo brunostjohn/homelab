@@ -1,0 +1,40 @@
+{
+  "cloudflare": [
+    {
+      "authentication": {
+        "api_token": "$CLOUDFLARE_API_TOKEN"
+      },
+      "zone_id": "$CLOUDFLARE_ZONE_ID",
+      "subdomains": [
+        {
+          "name": "",
+          "proxied": true
+        },
+        {
+          "name": "*",
+          "proxied": true
+        },
+        {
+          "name": "claws",
+          "proxied": false
+        },
+        {
+          "name": "cubes",
+          "proxied": false
+        },
+        {
+          "name": "carrier",
+          "proxied": false
+        },
+        {
+          "name": "corner",
+          "proxied": false
+        }
+      ]
+    }
+  ],
+  "a": true,
+  "aaaa": true,
+  "purgeUnknownRecords": false,
+  "ttl": 300
+}

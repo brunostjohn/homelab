@@ -1,0 +1,24 @@
+services:
+  homebox:
+    image: ghcr.io/hay-kot/homebox:latest
+    container_name: homebox
+    restart: always
+    env_file: stack.env
+    environment:
+      - HBOX_LOG_LEVEL=info
+      - HBOX_LOG_FORMAT=text
+      - HBOX_WEB_MAX_UPLOAD_SIZE=100
+      - HBOX_MAILER_PORT=587
+      - HBOX_MAILER_USERNAME=${HBOX_MAILER_USERNAME}
+      - HBOX_MAILER_PASSWORD=${HBOX_MAILER_PASSWORD}
+      - HBOX_MAILER_FROM=${HBOX_MAILER_FROM}
+      - HBOX_OPTIONS_ALLOW_REGISTRATION=true
+    volumes:
+      - /mnt/jabberwock/homebox:/data
+    networks:
+      - rev_proxy
+
+networks:
+  rev_proxy:
+    name: reverse_proxy_network
+    external: true
