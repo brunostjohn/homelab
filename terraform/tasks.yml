@@ -26,6 +26,9 @@ tasks:
       - cd cluster_apps && terraform validate
       - cd cluster_apps && terraform fmt -check
       - cd cluster_apps && tflint
+      - cd adguard && terraform validate
+      - cd adguard && terraform fmt --check
+      - cd adguard && tflint
 
   init:
     aliases: ["i"]
@@ -36,6 +39,7 @@ tasks:
       - cd docker && terraform init
       - cd cluster_base && terraform init
       - cd cluster_apps && terraform init
+      - cd adguard && terraform init
 
   plan:
     aliases: ["p"]

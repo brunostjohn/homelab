@@ -19,3 +19,8 @@ module "cluster_apps" {
   source     = "./cluster_apps"
   depends_on = [module.unifi, module.cluster_base]
 }
+
+module "adguard" {
+  source     = "./adguard"
+  depends_on = [module.unifi, module.cluster_apps]
+}
