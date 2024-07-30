@@ -3,7 +3,6 @@ services:
     image: ghcr.io/hay-kot/homebox:latest
     container_name: homebox
     restart: always
-    env_file: stack.env
     environment:
       - HBOX_LOG_LEVEL=info
       - HBOX_LOG_FORMAT=text
