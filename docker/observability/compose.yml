@@ -3,7 +3,6 @@ services:
     image: ghcr.io/unpoller/unpoller:latest
     restart: unless-stopped
     container_name: unpoller
-    env_file: stack.env
     networks:
       - grafana_network
     environment:
@@ -56,7 +55,6 @@ services:
   grafana:
     image: grafana/grafana:latest
     restart: unless-stopped
-    env_file: stack.env
     networks:
       - grafana_network
       - reverse_proxy_network
