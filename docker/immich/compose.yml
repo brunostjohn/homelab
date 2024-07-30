@@ -13,19 +13,20 @@ services:
       - /mnt/jabberwock/immich/pgdata:/var/lib/postgresql/data
     networks:
       - default
+
   immich-machine-learning:
     container_name: immich-machine-learning
     image: ghcr.io/immich-app/immich-machine-learning:v1.100.0-cuda
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities:
-                - gpu
-                - compute
-                - video
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities:
+    #             - gpu
+    #             - compute
+    #             - video
     environment:
       - DB_DATABASE_NAME=casaos
       - DB_HOSTNAME=immich-postgres
@@ -39,6 +40,7 @@ services:
       - /mnt/jabberwock/immich/ml-cache:/cache
     networks:
       - default
+
   immich-microservices:
     command:
       - start.sh
@@ -51,16 +53,16 @@ services:
       redis:
         condition: service_started
         required: true
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities:
-                - gpu
-                - compute
-                - video
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities:
+    #             - gpu
+    #             - compute
+    #             - video
     environment:
       - DB_DATABASE_NAME=immich
       - DB_HOSTNAME=immich-postgres
@@ -75,6 +77,7 @@ services:
       - /mnt/jabberwock/immich/upload:/usr/src/app/upload
     networks:
       - default
+
   immich-server:
     command:
       - start.sh
@@ -103,6 +106,7 @@ services:
     networks:
       - default
       - rev_proxy
+
   redis:
     container_name: immich-redis
     hostname: immich-redis
