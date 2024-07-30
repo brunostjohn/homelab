@@ -1,6 +1,6 @@
 services:
   caddy:
-    image: ghcr.io/brunostjohn/custom-caddy:latest
+    image: ghcr.io/brunostjohn/custom-caddy:main
     container_name: caddy
     restart: unless-stopped
     hostname: caddy
