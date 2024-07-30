@@ -35,8 +35,6 @@ services:
       - PAPERLESS_URL=${PAPERLESS_URL}
       - PAPERLESS_APPS=allauth.socialaccount.providers.openid_connect
       - PAPERLESS_SOCIALACCOUNT_PROVIDERS=${PAPERLESS_SOCIALACCOUNT_PROVIDERS}
-    env_file:
-      - stack.env
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
     volumes:
