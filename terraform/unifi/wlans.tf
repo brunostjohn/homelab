@@ -1,5 +1,5 @@
 resource "unifi_wlan" "home" {
-  name            = "Zefirs Terrace"
+  name            = var.wlan_home_ssid
   passphrase      = var.wlan_home_password
   security        = "wpapsk"
   wpa3_support    = true

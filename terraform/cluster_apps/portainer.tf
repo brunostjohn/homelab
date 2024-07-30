@@ -34,7 +34,7 @@ resource "kubernetes_service" "portainer_agent" {
     name      = "portainer-agent"
     namespace = kubernetes_namespace.portainer.metadata[0].name
     annotations = {
-      "metallb.universe.tf/allow-shared-ip"        = "key-192.168.1.2"
+      "metallb.universe.tf/allow-shared-ip"        = "key-10.0.2.0"
       "metallb.universe.tf/ip-allocated-from-pool" = "pool"
     }
   }

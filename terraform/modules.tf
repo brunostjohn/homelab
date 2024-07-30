@@ -1,6 +1,7 @@
 module "unifi" {
   source             = "./unifi"
   wlan_home_password = var.unifi_wlan_home_password
+  wlan_home_ssid     = var.unifi_wlan_home_ssid
 }
 
 module "docker" {

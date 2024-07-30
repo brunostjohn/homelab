@@ -10,7 +10,7 @@ resource "kubernetes_manifest" "metallb_addresses" {
     }
     "spec" = {
       "addresses" = [
-        "192.168.1.2-192.168.1.4"
+        "10.0.2.0-10.0.2.255"
       ]
     }
   }

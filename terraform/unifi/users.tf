@@ -10,7 +10,6 @@ resource "unifi_user" "meowbox" {
   dev_id_override = 1908
   blocked         = false
 
-  fixed_ip   = "192.168.1.102"
+  fixed_ip   = "10.0.0.2"
   network_id = unifi_network.default.id
-  site       = unifi_site.home.name
 }

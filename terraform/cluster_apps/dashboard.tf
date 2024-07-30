@@ -1,4 +1,12 @@
+resource "kubernetes_namespace" "kubernetes_dashboard" {
+  metadata {
+    name = "kubernetes-dashboard"
+  }
+}
+
 resource "argocd_application" "dashboard" {
+  depends_on = [kubernetes_namespace.kubernetes_dashboard]
+
   metadata {
     name      = "k8s-dashboard"
     namespace = "argocd"
@@ -36,6 +44,8 @@ resource "argocd_application" "dashboard" {
 }
 
 resource "kubernetes_service_account" "dashboard_admin" {
+  depends_on = [kubernetes_namespace.kubernetes_dashboard, argocd_application.dashboard]
+
   metadata {
     name      = "admin-user"
     namespace = "kubernetes-dashboard"
@@ -43,6 +53,8 @@ resource "kubernetes_service_account" "dashboard_admin" {
 }
 
 resource "kubernetes_cluster_role_binding" "dashboard_admin_binding" {
+  depends_on = [kubernetes_service_account.dashboard_admin]
+
   metadata {
     name = "admin-user"
   }

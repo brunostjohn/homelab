@@ -33,3 +33,8 @@ variable "unifi_wlan_home_password" {
   type        = string
   description = "Password for the home WLAN"
 }
+
+variable "unifi_wlan_home_ssid" {
+  type        = string
+  description = "SSID for the home WLAN"
+}
