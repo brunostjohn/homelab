@@ -2,9 +2,9 @@ terraform {
   required_version = ">= 0.13"
 
   required_providers {
-    unifi = {
-      source  = "paultyng/unifi"
-      version = "0.41.0"
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "3.0.2"
     }
   }
 }

@@ -5,8 +5,7 @@ tasks:
     aliases: ["f", "format"]
     description: "Format terraform files"
     cmds:
-      - terraform fmt
-      - cd unifi && terraform fmt
+      - terraform fmt -recursive
 
   lint:
     aliases: ["l"]
@@ -18,6 +17,15 @@ tasks:
       - cd unifi && terraform validate
       - cd unifi && terraform fmt -check
       - cd unifi && tflint
+      - cd docker && terraform validate
+      - cd docker && terraform fmt -check
+      - cd docker && tflint
+      - cd cluster_base && terraform validate
+      - cd cluster_base && terraform fmt -check
+      - cd cluster_base && tflint
+      - cd cluster_apps && terraform validate
+      - cd cluster_apps && terraform fmt -check
+      - cd cluster_apps && tflint
 
   init:
     aliases: ["i"]
@@ -25,6 +33,9 @@ tasks:
     cmds:
       - terraform init
       - cd unifi && terraform init
+      - cd docker && terraform init
+      - cd cluster_base && terraform init
+      - cd cluster_apps && terraform init
 
   plan:
     aliases: ["p"]

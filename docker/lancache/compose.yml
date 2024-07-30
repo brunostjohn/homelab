@@ -16,10 +16,9 @@ services:
       - CACHE_INDEX_SIZE=500m
       - TZ=Europe/Dublin
     networks:
-      vlan:
+      macvlan_network:
         ipv4_address: 192.168.1.122
 
 networks:
-  vlan:
-    name: time-machine_timemachine
+  macvlan_network:
     external: true
