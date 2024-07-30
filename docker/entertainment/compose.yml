@@ -6,6 +6,13 @@ services:
     # runtime: nvidia
     cpu_shares: 90
     command: []
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Dublin
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PLEX_CLAIM=${PLEX_CLAIM}
+      - VERSION=docker
     container_name: plex
     ports:
       - 32400:32400
@@ -25,7 +32,6 @@ services:
       - /dev/dri:/dev/dri
       - /mnt/jabberwock/casaos/plex:/config
       - /mnt/jabberwock/entertainment:/data
-    env_file: stack.env
 
   requestrr:
     image: thomst08/requestrr
