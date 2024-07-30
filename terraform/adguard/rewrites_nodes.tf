@@ -1,4 +1,20 @@
 resource "adguard_rewrite" "meowbox" {
-  domain = "meowbox.local"
+  for_each = toset(["meowbox.local"])
+
+  domain = each.key
   answer = var.meowbox_ipaddr
+}
+
+resource "adguard_rewrite" "node2_pi" {
+  for_each = toset(["node2.zefirscloud.local"])
+
+  domain = each.key
+  answer = var.node2_pi_ipaddr
+}
+
+resource "adguard_rewrite" "node3_pi" {
+  for_each = toset(["node3.zefirscloud.local"])
+
+  domain = each.key
+  answer = var.node3_pi_ipaddr
 }

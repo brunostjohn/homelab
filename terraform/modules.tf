@@ -24,5 +24,7 @@ module "adguard" {
   source     = "./adguard"
   depends_on = [module.unifi, module.cluster_apps]
 
-  meowbox_ipaddr = module.unifi.meowbox_ipaddr
+  meowbox_ipaddr  = module.unifi.meowbox_ipaddr
+  node2_pi_ipaddr = module.unifi.node2_pi_ipaddr
+  node3_pi_ipaddr = module.unifi.node3_pi_ipaddr
 }
