@@ -35,7 +35,7 @@ services:
       - /mnt/jabberwock/authentik/redisdata:/data
 
   server:
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2024.2.2}
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2024.6.1}
     restart: unless-stopped
     command: server
     hostname: "authentik"
@@ -60,7 +60,7 @@ services:
       - redis
 
   worker:
-    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2024.2.2}
+    image: ${AUTHENTIK_IMAGE:-ghcr.io/goauthentik/server}:${AUTHENTIK_TAG:-2024.6.1}
     restart: unless-stopped
     command: worker
     networks:
