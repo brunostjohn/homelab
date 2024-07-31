@@ -4,7 +4,7 @@ metadata:
   name: adguard-deployment
   namespace: adguard
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: adguard
