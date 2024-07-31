@@ -1,0 +1,12 @@
+bind_host: 0.0.0.0
+bind_port: 3000
+auth_name: ${auth_name}
+auth_pass: ${auth_pass}
+language: "en"
+rlimit_nofile: 0
+rlimit_nproc: 0
+log_file: ""
+log_syslog: false
+log_syslog_srv: ""
+pid_file: ""
+verbose: false

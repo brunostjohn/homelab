@@ -19,6 +19,7 @@ pkgs.mkShell {
     yamlfmt
     tflint
     envsubst
+    kubetail
     fd
     (wrapHelm kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [

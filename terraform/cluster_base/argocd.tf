@@ -7,6 +7,7 @@ resource "helm_release" "argocd" {
 
   create_namespace = true
   version          = "7.3.11"
+  wait             = true
 
   values = [var.argocd_values]
 }
@@ -19,6 +20,8 @@ resource "argocd_repository" "homelab_github" {
 
 resource "kubernetes_ingress_v1" "argocd_ingress" {
   depends_on = [helm_release.argocd]
+
+  wait_for_load_balancer = true
 
   metadata {
     namespace = "argocd"

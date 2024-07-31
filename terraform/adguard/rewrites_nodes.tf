@@ -1,3 +1,10 @@
+resource "adguard_rewrite" "k3s_ingress" {
+  for_each = toset(["k3s.local", "argocd.local", "longhorn.local"])
+
+  domain = each.key
+  answer = var.cluster_ipaddr
+}
+
 resource "adguard_rewrite" "meowbox" {
   for_each = toset(["meowbox.local"])
 

@@ -1,50 +1,53 @@
-- name: Install initial packages
-  apt:
-    update_cache: true
-    cache_valid_time: 3600
-    pkg:
-      - ca-certificates
-      - curl
-      - gnupg
+- name: Bootstrap Docker
+  hosts: all
+  tasks:
+    - name: Install initial packages
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
+        pkg:
+          - ca-certificates
+          - curl
+          - gnupg
 
-- name: Install docker repo key to apt
-  apt_key:
-    url: https://download.docker.com/linux/debian/gpg
+    - name: Install docker repo key to apt
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
 
-- shell: lsb_release -sc
-  register: os_codename
+    - shell: lsb_release -sc
+      register: os_codename
 
-- name: Install docker repository to apt
-  apt_repository:
-    repo: deb [arch=arm64] https://download.docker.com/linux/debian "{{ os_codename.stdout }}" stable
-    state: present
+    - name: Install docker repository to apt
+      apt_repository:
+        repo: deb [arch=arm64] https://download.docker.com/linux/debian "{{ os_codename.stdout }}" stable
+        state: present
 
-- name: Install docker packages
-  apt:
-    update_cache: true
-    pkg:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
+    - name: Install docker packages
+      apt:
+        update_cache: true
+        pkg:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
 
-- name: Reboot the machine to make the docker.service start # see: https://bbs.archlinux.org/viewtopic.php?id=267694
-  reboot:
+    - name: Reboot the machine to make the docker.service start # see: https://bbs.archlinux.org/viewtopic.php?id=267694
+      reboot:
 
-- name: Enable docker.service
-  service:
-    name: docker
-    state: restarted
-    enabled: yes
+    - name: Enable docker.service
+      service:
+        name: docker
+        state: restarted
+        enabled: yes
 
-- name: Create "docker" group
-  group:
-    name: docker
-    state: present
+    - name: Create "docker" group
+      group:
+        name: docker
+        state: present
 
-- name: Add user to "docker" group
-  user:
-    name: "{{ ansible_user }}"
-    groups: docker
-    append: yes
+    - name: Add user to "docker" group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes

@@ -1,0 +1,11 @@
+- name: Bootstrap Longhorn
+  hosts: all
+  tasks:
+    - name: Install open-iscsi
+      become: true
+      become_user: root
+      become_method: sudo
+      apt:
+        update_cache: true
+        pkg:
+          - open-iscsi

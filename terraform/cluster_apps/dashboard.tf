@@ -15,7 +15,7 @@ resource "argocd_application" "dashboard" {
   spec {
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = "kubernetes-dashboard"
+      namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
     }
 
     source {
@@ -48,7 +48,7 @@ resource "kubernetes_service_account" "dashboard_admin" {
 
   metadata {
     name      = "admin-user"
-    namespace = "kubernetes-dashboard"
+    namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
   }
 }
 

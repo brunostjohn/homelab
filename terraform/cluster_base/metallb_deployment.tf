@@ -12,6 +12,8 @@ resource "argocd_application" "metallb" {
     namespace = "argocd"
   }
 
+  wait = true
+
   spec {
     destination {
       server    = "https://kubernetes.default.svc"
