@@ -35,7 +35,7 @@ spec:
             - name: adguard-work
               mountPath: /opt/adguardhome/work
             - name: adguard-data
-              mountPath: /opt/adguardhome/data
+              mountPath: /opt/adguardhome/conf
           resources:
             requests:
               memory: "128Mi"
