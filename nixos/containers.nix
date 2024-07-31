@@ -27,6 +27,12 @@
       "s1.nixos.nodes.zefirscloud.local.iscsi:${config.networking.hostName}";
   };
 
-  systemd.tmpfiles.rules =
-    [ "L+ /usr/local/bin - - - - /run/current-system/sw/bin/" ];
+  systemd.mounts = [{
+    what = "/dev/zvol/zdata/longhorn-data";
+    type = "ext4";
+    where = "/var/lib/longhorn";
+    wantedBy = [ "k3s.service" ];
+    requiredBy = [ "k3s.service" ];
+    options = "noatime,discard";
+  }];
 }
