@@ -13,9 +13,8 @@ module "cluster_base" {
   source     = "./cluster_base"
   depends_on = [module.unifi]
 
-  longhorn_auth_secret = var.longhorn_auth_secret
-  argocd_values        = file("values/argocd.yml")
-  longhorn_values      = file("values/longhorn.yml")
+  argocd_values   = file("values/argocd.yml")
+  longhorn_values = file("values/longhorn.yml")
 }
 
 module "cluster_apps" {

@@ -39,17 +39,6 @@ resource "argocd_application" "longhorn" {
   }
 }
 
-resource "kubernetes_secret" "longhorn_auth" {
-  metadata {
-    namespace = kubernetes_namespace.longhorn.metadata[0].name
-    name      = "basic-auth"
-  }
-
-  data = {
-    auth = var.longhorn_auth_secret
-  }
-}
-
 resource "kubernetes_ingress_v1" "longhorn_ingress" {
   depends_on = [argocd_application.longhorn]
 
@@ -76,5 +65,23 @@ resource "kubernetes_ingress_v1" "longhorn_ingress" {
         }
       }
     }
+  }
+}
+
+resource "kubernetes_storage_class" "longhorn" {
+  depends_on = [argocd_application.longhorn]
+
+  metadata {
+    name = "longhorn"
+  }
+
+  storage_provisioner    = "driver.longhorn.io"
+  allow_volume_expansion = true
+
+  parameters = {
+    "numberOfReplicas"    = "3"
+    "staleReplicaTimeout" = "2880"
+    "fromBackup"          = ""
+    "fsType"              = "ext4"
   }
 }
