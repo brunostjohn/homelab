@@ -4,7 +4,7 @@ metadata:
   name: adguard-deployment
   namespace: adguard
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: adguard
@@ -16,12 +16,6 @@ spec:
       containers:
         - name: adguard-home
           image: adguard/adguardhome:latest
-          env:
-            - name: AGH_CONFIG
-              valueFrom:
-                configMapKeyRef:
-                  name: adguard-config
-                  key: AdGuardHome.yaml
           ports:
             - containerPort: 53
               name: dns
@@ -30,9 +24,28 @@ spec:
               name: http
               protocol: TCP
           volumeMounts:
-            - name: adguard-data
+            - name: adguard-work
               mountPath: /opt/adguardhome/work
+            - name: adguard-data
+              mountPath: /opt/adguardhome/data
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
       volumes:
         - name: adguard-data
           persistentVolumeClaim:
-            claimName: adguard-pvc
+            claimName: adguard-data-pvc
+        - name: adguard-work
+          persistentVolumeClaim:
+            claimName: adguard-work-pvc
