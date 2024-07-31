@@ -63,8 +63,3 @@ variable "cluster_ipaddr" {
   type        = string
   description = "Cluster's IP address"
 }
-
-variable "longhorn_auth_secret" {
-  type        = string
-  description = "Basic auth secret for Longhorn UI"
-}

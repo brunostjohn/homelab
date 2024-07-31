@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "kyverno" {
 }
 
 resource "argocd_application" "kyverno" {
-  depends_on = [kubernetes_namespace.kyverno]
+  depends_on = [kubernetes_namespace.kyverno, helm_release.argocd, kubernetes_ingress_v1.argocd_ingress]
 
   wait = true
 

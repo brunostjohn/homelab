@@ -61,7 +61,7 @@ provider "argocd" {
 }
 
 provider "docker" {
-  host     = "ssh://brunostjohn@s1.nixos.nodes.zefirscloud.local:22"
+  host     = "ssh://brunostjohn@10.0.0.2:22"
   ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
 }
 

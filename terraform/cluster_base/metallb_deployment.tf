@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "metallb" {
 }
 
 resource "argocd_application" "metallb" {
-  depends_on = [kubernetes_namespace.metallb]
+  depends_on = [kubernetes_namespace.metallb, helm_release.argocd]
 
   metadata {
     name      = "metallb"

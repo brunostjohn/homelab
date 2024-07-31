@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "longhorn" {
 }
 
 resource "kubernetes_config_map" "longhorn_path" {
-  depends_on = [kubernetes_namespace.longhorn]
+  depends_on = [kubernetes_namespace.longhorn, argocd_application.kyverno]
 
   metadata {
     name      = "longhorn-nixos-path"
