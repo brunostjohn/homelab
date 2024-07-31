@@ -63,3 +63,8 @@ variable "cluster_ipaddr" {
   type        = string
   description = "Cluster's IP address"
 }
+
+variable "k8s_dashboard_token" {
+  type        = string
+  description = "The token for the k8s dashboard"
+}

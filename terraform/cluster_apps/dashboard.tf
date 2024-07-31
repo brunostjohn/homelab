@@ -7,6 +7,8 @@ resource "kubernetes_namespace" "kubernetes_dashboard" {
 resource "argocd_application" "dashboard" {
   depends_on = [kubernetes_namespace.kubernetes_dashboard]
 
+  wait = true
+
   metadata {
     name      = "k8s-dashboard"
     namespace = "argocd"
@@ -22,6 +24,10 @@ resource "argocd_application" "dashboard" {
       repo_url        = "https://kubernetes.github.io/dashboard/"
       chart           = "kubernetes-dashboard"
       target_revision = "7.5.0"
+
+      helm {
+        values = var.k8s_dashboard_values
+      }
     }
 
     sync_policy {
@@ -69,5 +75,59 @@ resource "kubernetes_cluster_role_binding" "dashboard_admin_binding" {
     kind      = "ServiceAccount"
     name      = kubernetes_service_account.dashboard_admin.metadata[0].name
     namespace = kubernetes_service_account.dashboard_admin.metadata[0].namespace
+  }
+}
+
+resource "kubernetes_manifest" "dashboard_auth_middleware" {
+  depends_on = [kubernetes_cluster_role_binding.dashboard_admin_binding]
+  manifest = {
+    apiVersion = "traefik.containo.us/v1alpha1"
+    kind       = "Middleware"
+    metadata = {
+      name      = "dashboard-auth-middleware"
+      namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
+    }
+    spec = {
+      headers = {
+        customRequestHeaders = {
+          Authorization = "Bearer ${var.k8s_dashboard_token}"
+        }
+      }
+    }
+  }
+}
+
+
+resource "kubernetes_ingress_v1" "dashboard_ingress" {
+  depends_on = [argocd_application.dashboard, kubernetes_cluster_role_binding.dashboard_admin_binding]
+
+  wait_for_load_balancer = true
+
+  metadata {
+    namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
+    name      = "k8s-dashboard"
+
+    annotations = {
+      "traefik.ingress.kubernetes.io/router.middlewares" = "${kubernetes_namespace.kubernetes_dashboard.metadata[0].name}-dashboard-auth-middleware@kubernetescrd"
+    }
+  }
+
+  spec {
+    rule {
+      host = "k3s.local"
+      http {
+        path {
+          backend {
+            service {
+              name = "k8s-dashboard-kong-proxy"
+              port {
+                number = 80
+              }
+
+            }
+          }
+        }
+      }
+    }
   }
 }

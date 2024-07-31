@@ -21,9 +21,11 @@ module "cluster_apps" {
   source     = "./cluster_apps"
   depends_on = [module.unifi, module.cluster_base]
 
-  homelab_repo     = module.cluster_base.homelab_repo
-  adguard_username = var.adguard_username
-  adguard_password = var.adguard_password
+  homelab_repo         = module.cluster_base.homelab_repo
+  adguard_username     = var.adguard_username
+  adguard_password     = var.adguard_password
+  k8s_dashboard_values = file("values/dashboard.yml")
+  k8s_dashboard_token  = var.k8s_dashboard_token
 }
 
 module "adguard" {

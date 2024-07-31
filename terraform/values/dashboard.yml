@@ -1,0 +1,11 @@
+app:
+  ingress:
+    hosts:
+      - k3s.local
+  tls:
+    enabled: false
+
+kong:
+  proxy:
+    http:
+      enabled: true
