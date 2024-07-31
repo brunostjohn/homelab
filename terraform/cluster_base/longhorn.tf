@@ -67,21 +67,3 @@ resource "kubernetes_ingress_v1" "longhorn_ingress" {
     }
   }
 }
-
-resource "kubernetes_storage_class" "longhorn" {
-  depends_on = [argocd_application.longhorn]
-
-  metadata {
-    name = "longhorn"
-  }
-
-  storage_provisioner    = "driver.longhorn.io"
-  allow_volume_expansion = true
-
-  parameters = {
-    "numberOfReplicas"    = "3"
-    "staleReplicaTimeout" = "2880"
-    "fromBackup"          = ""
-    "fsType"              = "ext4"
-  }
-}

@@ -16,3 +16,4 @@ spec:
       targetPort: 53
       name: dns
   type: LoadBalancer
+  loadBalancerIp: 10.0.2.2
