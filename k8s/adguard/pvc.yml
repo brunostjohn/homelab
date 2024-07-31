@@ -9,5 +9,5 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: ""
+  storageClassName: longhorn
   volumeName: adguard-pv
