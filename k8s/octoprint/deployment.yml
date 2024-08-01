@@ -47,6 +47,6 @@ spec:
           #     port: 80
           volumeMounts:
             - name: octoprint-data
-              mountPath: /home/octoprint/.octoprint
+              mountPath: /octoprint
             - name: printer-serial
               mountPath: /dev/ttyACM0
