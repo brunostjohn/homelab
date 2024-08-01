@@ -62,6 +62,8 @@ spec:
       labels:
         app: spoolman
     spec:
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: spoolman-data
           persistentVolumeClaim:
@@ -87,8 +89,6 @@ spec:
             httpGet:
               path: /
               port: 8000
-          securityContext:
-            fsGroup: 1000
           volumeMounts:
             - name: spoolman-data
               mountPath: /home/app/.local/share/spoolman
