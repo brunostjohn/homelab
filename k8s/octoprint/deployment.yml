@@ -75,10 +75,10 @@ spec:
               protocol: TCP
           resources:
             requests:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "100m"
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
           readinessProbe:
             httpGet:
               path: /
@@ -87,6 +87,12 @@ spec:
             httpGet:
               path: /
               port: 8000
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+            runAsGroup: 1000
+            fsGroup: 1000
+            fsGroupChangePolicy: Always
           volumeMounts:
             - name: spoolman-data
               mountPath: /home/app/.local/share/spoolman
