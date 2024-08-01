@@ -22,13 +22,23 @@ module "cluster_apps" {
   source     = "./cluster_apps"
   depends_on = [module.unifi, module.cluster_base]
 
-  homelab_repo         = module.cluster_base.homelab_repo
-  adguard_username     = var.adguard_username
-  adguard_password     = var.adguard_password
-  k8s_dashboard_values = file("values/dashboard.yml")
-  k8s_dashboard_token  = var.k8s_dashboard_token
-  minio_username       = var.minio_username
-  minio_password       = var.minio_password
+  homelab_repo                = module.cluster_base.homelab_repo
+  adguard_username            = var.adguard_username
+  adguard_password            = var.adguard_password
+  k8s_dashboard_values        = file("values/dashboard.yml")
+  k8s_dashboard_token         = var.k8s_dashboard_token
+  minio_username              = var.minio_username
+  minio_password              = var.minio_password
+  authentik_postgres_password = var.authentik_postgres_password
+  authentik_secret_key        = var.authentik_secret_key
+  global_fqdn                 = var.global_fqdn
+  smtp_host                   = var.smtp_host
+  smtp_port                   = var.smtp_port
+  smtp_from                   = var.smtp_from
+  smtp_username               = var.smtp_username
+  smtp_password               = var.smtp_password
+  smtp_use_ssl                = var.smtp_use_ssl
+  smtp_use_tls                = var.smtp_use_tls
 }
 
 module "adguard" {

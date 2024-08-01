@@ -78,3 +78,53 @@ variable "minio_password" {
   type        = string
   description = "Minio password"
 }
+
+variable "authentik_secret_key" {
+  type        = string
+  description = "Authentik secret key"
+}
+
+variable "authentik_postgres_password" {
+  type        = string
+  description = "Authentik postgres password"
+}
+
+variable "global_fqdn" {
+  type        = string
+  description = "The global FQDN for the homelab"
+}
+
+variable "smtp_host" {
+  type        = string
+  description = "The SMTP host"
+}
+
+variable "smtp_port" {
+  type        = number
+  description = "The SMTP port"
+}
+
+variable "smtp_username" {
+  type        = string
+  description = "The SMTP username"
+}
+
+variable "smtp_password" {
+  type        = string
+  description = "The SMTP password"
+}
+
+variable "smtp_from" {
+  type        = string
+  description = "The SMTP from address"
+}
+
+variable "smtp_use_tls" {
+  type        = bool
+  description = "Whether to use TLS for SMTP"
+}
+
+variable "smtp_use_ssl" {
+  type        = bool
+  description = "Whether to use SSL for SMTP"
+}

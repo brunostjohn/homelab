@@ -27,10 +27,10 @@ resource "argocd_application" "minio" {
 
       helm {
         values = templatefile("${path.module}/templates/minio.yml.tpl", {
-          username    = var.minio_username,
-          password    = var.minio_password
-          sc_name     = "nfs-jabberwock-subpath"
-          size        = "100Gi"
+          username = var.minio_username,
+          password = var.minio_password
+          sc_name  = "nfs-jabberwock-subpath"
+          size     = "100Gi"
         })
       }
     }
