@@ -16,15 +16,17 @@ spec:
       volumes:
         - name: octoprint-data
           hostPath:
-            path: /home/bruno/3dprint/octoprint
+            path: /3dprint/octoprint
         - name: printer-serial
           hostPath:
             path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
       nodeSelector:
-        kubernetes.io/hostname: 3dprintpi
+        kubernetes.io/hostname: failoverpi
       containers:
         - name: octoprint
           image: octoprint/octoprint:latest
+          securityContext:
+            privileged: true
           ports:
             - containerPort: 80
               name: http
