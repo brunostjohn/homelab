@@ -1,5 +1,5 @@
 resource "adguard_rewrite" "k3s_ingress" {
-  for_each = toset(["k3s.local", "argocd.local", "longhorn.local", "minio.local", "authentik.local"])
+  for_each = toset(["k3s.local", "argocd.local", "longhorn.local", "minio.local", "authentik.local", "traefik.local"])
 
   domain = each.key
   answer = var.cluster_ipaddr
