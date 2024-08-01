@@ -15,8 +15,8 @@ spec:
     spec:
       volumes:
         - name: octoprint-data
-          hostPath:
-            path: /3dprint/octoprint
+          persistentVolumeClaim:
+            claimName: octoprint-pvc
         - name: printer-serial
           hostPath:
             path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
