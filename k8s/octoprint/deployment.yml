@@ -88,11 +88,7 @@ spec:
               path: /
               port: 8000
           securityContext:
-            runAsUser: 1000
-            runAsNonRoot: true
-            runAsGroup: 1000
             fsGroup: 1000
-            fsGroupChangePolicy: Always
           volumeMounts:
             - name: spoolman-data
               mountPath: /home/app/.local/share/spoolman
