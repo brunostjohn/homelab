@@ -37,14 +37,14 @@ spec:
               cpu: "100m"
             limits:
               memory: "256Mi"
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 80
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 80
           volumeMounts:
             - name: octoprint-data
               mountPath: /home/octoprint/.octoprint
