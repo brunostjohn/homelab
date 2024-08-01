@@ -21,6 +21,8 @@ pkgs.mkShell {
     envsubst
     kubetail
     fd
+    cmctl
+    argocd
     (wrapHelm kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [
         helm-secrets
