@@ -66,8 +66,6 @@ spec:
         - name: spoolman-data
           persistentVolumeClaim:
             claimName: spoolman-pvc
-      nodeSelector:
-        kubernetes.io/hostname: failoverpi
       containers:
         - name: spoolman
           image: ghcr.io/donkie/spoolman:latest
