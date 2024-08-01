@@ -95,3 +95,54 @@ spec:
           env:
             - name: TZ
               value: "Europe/Dublin"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mjpeg-streamer-deployment
+  namespace: octoprint
+spec:
+  selector:
+    matchLabels:
+      app: mjpeg-streamer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mjpeg-streamer
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: 3dprintpi
+      volumes:
+        - name: mjpeg-streamer-camera
+          hostPath:
+            path: /dev/video1
+      containers:
+        - name: mjpeg-streamer
+          image: davidhamm/mjpg-streamer
+          env:
+            - name: RESOLUTION
+              value: "1280x720"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: mjpeg-streamer-camera
+              mountPath: /dev/video0
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080

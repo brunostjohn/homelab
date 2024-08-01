@@ -69,5 +69,37 @@ resource "kubernetes_ingress_v1" "octoprint_ingress" {
         }
       }
     }
+
+    rule {
+      host = "camera.octoprint.local"
+      http {
+        path {
+          backend {
+            service {
+              name = "mjpeg-streamer-service"
+              port {
+                number = 8000
+              }
+            }
+          }
+        }
+      }
+    }
+
+    rule {
+      host = "spoolman.local"
+      http {
+        path {
+          backend {
+            service {
+              name = "spoolman-service"
+              port {
+                number = 8000
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
