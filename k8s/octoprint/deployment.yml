@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: octoprint-deployment
+  namespace: octoprint
+spec:
+  selector:
+    matchLabels:
+      app: octoprint
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: octoprint
+    spec:
+      volumes:
+        - name: octoprint-data
+          hostPath:
+            path: /home/bruno/3dprint/octoprint
+        - name: printer-serial
+          hostPath:
+            path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
+      nodeSelector:
+        kubernetes.io/hostname: 3dprintpi
+      containers:
+        - name: octoprint
+          image: octoprint/octoprint:latest
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+          volumeMounts:
+            - name: octoprint-data
+              mountPath: /home/octoprint/.octoprint
+            - name: printer-serial
+              mountPath: /dev/ttyACM0
