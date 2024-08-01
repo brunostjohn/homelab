@@ -78,7 +78,7 @@ resource "kubernetes_ingress_v1" "octoprint_ingress" {
             service {
               name = "mjpeg-streamer-service"
               port {
-                number = 8000
+                number = 8080
               }
             }
           }
