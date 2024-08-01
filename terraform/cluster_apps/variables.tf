@@ -22,3 +22,13 @@ variable "k8s_dashboard_token" {
   type        = string
   description = "The token for the k8s dashboard"
 }
+
+variable "minio_username" {
+  type        = string
+  description = "Minio username"
+}
+
+variable "minio_password" {
+  type        = string
+  description = "Minio password"
+}

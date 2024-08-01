@@ -5,6 +5,7 @@ provider "registry.terraform.io/gmichels/adguard" {
   version     = "1.3.0"
   constraints = "1.3.0"
   hashes = [
+    "h1:Vm9hJwPA9QxCwtB4jO7qCNVCj9d2RxIfoLf2GwU5CQw=",
     "h1:zmOKKRKiB7x58zE2Lc08X918w4SMwIbg30JwcZYOD9s=",
     "zh:221993d5e6e5507c480b8560bf0bb3ca40c977a2f67b30306577e33dda005655",
     "zh:2f1c7186c806e67f305fc37ffd64c2b6432ec9ad94432e869a3868ef17e73cbd",
@@ -25,9 +26,11 @@ provider "registry.terraform.io/gmichels/adguard" {
 }
 
 provider "registry.terraform.io/hashicorp/helm" {
-  version = "2.14.0"
+  version     = "2.14.0"
+  constraints = "2.14.0"
   hashes = [
     "h1:8Vt9264v3UE6mHLRG8yiteVl5h8ZSTkJXf1xdVLa7GA=",
+    "h1:MCwlHF214XoAqJ11wR1SQuZmjJyAagKOqgSzl9hHrPg=",
     "h1:QHpOJbeU6V8Qt6YFRWkQ7/kttJu8cN3egyG7TImZEKw=",
     "zh:087a475fda3649e4b6b9aeb5f21704972f5d85c10d0bf334289b0a1b8c1a5575",
     "zh:1877991d976491d4e2a653a89491bd3b92123a00f442f15aa62caea8902677c7",
@@ -45,10 +48,12 @@ provider "registry.terraform.io/hashicorp/helm" {
 }
 
 provider "registry.terraform.io/hashicorp/kubernetes" {
-  version = "2.31.0"
+  version     = "2.31.0"
+  constraints = "2.31.0"
   hashes = [
     "h1:WHHHlt0hm+I7edol7FQJzHiaQHoGr800dtpXrR9QJVc=",
     "h1:ZlKkkHJrjF4AiMueI2yA+abBc1c37cfwjyxURdLKhEw=",
+    "h1:wGHbATbv/pBVTST1MtEn0zyVhZbzZJD2NYq2EddASHY=",
     "zh:0d16b861edb2c021b3e9d759b8911ce4cf6d531320e5dc9457e2ea64d8c54ecd",
     "zh:1bad69ed535a5f32dec70561eb481c432273b81045d788eb8b37f2e4a322cc40",
     "zh:43c58e3912fcd5bb346b5cb89f31061508a9be3ca7dd4cd8169c066203bcdfb3",
@@ -69,6 +74,7 @@ provider "registry.terraform.io/kreuzwerker/docker" {
   constraints = "3.0.2"
   hashes = [
     "h1:XjdpVL61KtTsuPE8swok3GY8A+Bu3TZs8T2DOEpyiXo=",
+    "h1:cT2ccWOtlfKYBUE60/v2/4Q6Stk1KYTNnhxSck+VPlU=",
     "zh:15b0a2b2b563d8d40f62f83057d91acb02cd0096f207488d8b4298a59203d64f",
     "zh:23d919de139f7cd5ebfd2ff1b94e6d9913f0977fcfc2ca02e1573be53e269f95",
     "zh:38081b3fe317c7e9555b2aaad325ad3fa516a886d2dfa8605ae6a809c1072138",
@@ -91,6 +97,7 @@ provider "registry.terraform.io/oboukili/argocd" {
   constraints = "6.1.1"
   hashes = [
     "h1:OYzNBgblY87J+NVlzOQ574qLPJBns5jfqxuYvgbqJGw=",
+    "h1:s5VE4XHfWev3AwUK21IEKfyF1uOPCkfluNAUhe3Xm6s=",
     "h1:wlHhG84awC6fpanWS1y5UtC7EprToMfvaepyTaiN2rI=",
     "zh:0eeb24ae36d29296e0e4fd0bbaa90bbbb051d6894e1920fe960cb73bf60d68b4",
     "zh:4b842983692ff7bc2c40c74feccb902718c59f536fc376ab4d646178ef325b0e",
@@ -109,6 +116,7 @@ provider "registry.terraform.io/paultyng/unifi" {
   constraints = "0.41.0"
   hashes = [
     "h1:fc0gUNc7ddxeLKVgVbt2iuYBn0U9GKE9lxK78w8oRF4=",
+    "h1:vE4C9E7NtYUC7otQrAvNNkDFBHqEMxkUlcqJhLWchLY=",
     "zh:03ddd3aee05a08e1446f75a7b3f52810181d3307728cba08ce8fb67f109a9c00",
     "zh:11b14b79ad02b0a55fd6116b10c0eb6fab432dd7d1f3527af0e2055adf292451",
     "zh:18c0eb19889927f115a1e05d64f59b4e8d530ccdf1a8b574940a86be20973564",

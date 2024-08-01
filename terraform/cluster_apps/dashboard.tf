@@ -123,7 +123,6 @@ resource "kubernetes_ingress_v1" "dashboard_ingress" {
               port {
                 number = 80
               }
-
             }
           }
         }

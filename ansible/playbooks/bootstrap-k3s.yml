@@ -2,7 +2,7 @@
   hosts: all
   tasks:
     - name: Run k3s install script
-      shell: "curl -sfL https://get.k3s.io | K3S_URL=https://s1.nixos.nodes.zefirscloud.local:6443 K3S_TOKEN={{ k3s_token }} sh -"
+      shell: "curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='server' K3S_TOKEN={{ k3s_token }} sudo sh -s - server --server https://10.0.0.2:6443 --token {{ k3s_token }}"
       become_user: root
       become_method: sudo
       tags: k3s

@@ -17,3 +17,8 @@ variable "cluster_ipaddr" {
   type        = string
   description = "cluster's ip addr"
 }
+
+variable "node1_pi_ipaddr" {
+  type        = string
+  description = "node1 pi's ip addr"
+}

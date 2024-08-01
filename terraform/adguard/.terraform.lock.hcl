@@ -5,6 +5,7 @@ provider "registry.terraform.io/gmichels/adguard" {
   version     = "1.3.0"
   constraints = "1.3.0"
   hashes = [
+    "h1:Vm9hJwPA9QxCwtB4jO7qCNVCj9d2RxIfoLf2GwU5CQw=",
     "h1:zmOKKRKiB7x58zE2Lc08X918w4SMwIbg30JwcZYOD9s=",
     "zh:221993d5e6e5507c480b8560bf0bb3ca40c977a2f67b30306577e33dda005655",
     "zh:2f1c7186c806e67f305fc37ffd64c2b6432ec9ad94432e869a3868ef17e73cbd",

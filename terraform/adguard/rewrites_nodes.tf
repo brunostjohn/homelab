@@ -1,5 +1,5 @@
 resource "adguard_rewrite" "k3s_ingress" {
-  for_each = toset(["k3s.local", "argocd.local", "longhorn.local"])
+  for_each = toset(["k3s.local", "argocd.local", "longhorn.local", "minio.local"])
 
   domain = each.key
   answer = var.cluster_ipaddr
@@ -10,6 +10,13 @@ resource "adguard_rewrite" "meowbox" {
 
   domain = each.key
   answer = var.meowbox_ipaddr
+}
+
+resource "adguard_rewrite" "node1_pi" {
+  for_each = toset(["node1.zefirscloud.local"])
+
+  domain = each.key
+  answer = var.node1_pi_ipaddr
 }
 
 resource "adguard_rewrite" "node2_pi" {

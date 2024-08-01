@@ -14,6 +14,16 @@ resource "unifi_user" "meowbox" {
   network_id = unifi_network.default.id
 }
 
+resource "unifi_user" "node1_pi" {
+  mac             = "2c:cf:67:4b:d1:06"
+  name            = "Node1 Pi"
+  dev_id_override = 2813
+  blocked         = false
+
+  fixed_ip   = "10.0.0.5"
+  network_id = unifi_network.default.id
+}
+
 resource "unifi_user" "node2_pi" {
   mac             = "2c:cf:67:14:9b:3c"
   name            = "Failover Pi"

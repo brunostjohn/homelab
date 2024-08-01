@@ -1,5 +1,7 @@
 ungrouped:
   hosts:
+    node1.zefirscloud.local:
+      ansible_user: root
     node2.zefirscloud.local:
       ansible_user: root
     node3.zefirscloud.local:
@@ -7,6 +9,8 @@ ungrouped:
 
 apt:
   hosts:
+    node1.zefirscloud.local:
+      ansible_user: root
     node2.zefirscloud.local:
       ansible_user: root
     node3.zefirscloud.local:
@@ -14,6 +18,8 @@ apt:
 
 raspberrypi:
   hosts:
+    node1.zefirscloud.local:
+      ansible_user: root
     node2.zefirscloud.local:
       ansible_user: root
     node3.zefirscloud.local:
@@ -21,6 +27,8 @@ raspberrypi:
 
 k3snodes:
   hosts:
+    node1.zefirscloud.local:
+      ansible_user: root
     node2.zefirscloud.local:
       ansible_user: root
     node3.zefirscloud.local:
