@@ -10,3 +10,16 @@ spec:
     requests:
       storage: 3Gi
   storageClassName: longhorn
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: spoolman-pvc
+  namespace: octoprint
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+  storageClassName: longhorn

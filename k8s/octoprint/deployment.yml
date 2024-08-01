@@ -37,16 +37,61 @@ spec:
               cpu: "100m"
             limits:
               memory: "256Mi"
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 80
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
           volumeMounts:
             - name: octoprint-data
               mountPath: /octoprint
             - name: printer-serial
               mountPath: /dev/ttyACM0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spoolman-deployment
+  namespace: octoprint
+spec:
+  selector:
+    matchLabels:
+      app: spoolman
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spoolman
+    spec:
+      volumes:
+        - name: spoolman-data
+          persistentVolumeClaim:
+            claimName: spoolman-pvc
+      nodeSelector:
+        kubernetes.io/hostname: failoverpi
+      containers:
+        - name: spoolman
+          image: ghcr.io/donkie/spoolman:latest
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+          volumeMounts:
+            - name: spoolman-data
+              mountPath: /home/app/.local/share/spoolman
+          env:
+            - name: TZ
+              value: "Europe/Dublin"
