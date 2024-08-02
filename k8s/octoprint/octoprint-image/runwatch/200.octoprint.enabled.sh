@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-BINARY="python"
-PARAMS="-m octoprint --iknowwhatimdoing --basedir /octoprint/octoprint serve"
+BINARY="octoprint"
+PARAMS="--iknowwhatimdoing --basedir /octoprint/octoprint serve"
 
 ######################################################
 
@@ -31,8 +31,6 @@ is-running)
 start)
     echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
     if pgrep -f "socat" >/dev/null 2>&1 ; then
-        # socat is running
-        cd /usr/src/app
         $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
         exit 0
     else
