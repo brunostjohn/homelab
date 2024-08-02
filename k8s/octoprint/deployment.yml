@@ -22,6 +22,7 @@ spec:
       containers:
         - name: octoprint
           image: ghcr.io/brunostjohn/octoprint:main
+          imagePullPolicy: Always
           env:
             - name: SOCAT_PRINTER_TYPE
               value: tcp
