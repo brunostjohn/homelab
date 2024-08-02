@@ -21,11 +21,20 @@ spec:
             claimName: octoprint-pvc
       containers:
         - name: octoprint
-          image: octoprint/octoprint:latest
+          image: ghcr.io/brunostjohn/octoprint:main
+          env:
+            - name: SOCAT_PRINTER_TYPE
+              value: tcp
+            - name: SOCAT_PRINTER_HOST
+              value: akri-3dprinter-svc.octoprint.svc.cluster.local
+            - name: SOCAT_PRINTER_PORT
+              value: 2000
+            - name: SOCAT_PRINTER_LINK
+              value: /dev/printer0
           securityContext:
             privileged: true
           ports:
-            - containerPort: 80
+            - containerPort: 5000
               name: http
               protocol: TCP
           resources:
@@ -39,7 +48,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 5000
           volumeMounts:
             - name: octoprint-data
               mountPath: /octoprint
