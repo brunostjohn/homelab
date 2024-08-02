@@ -39,4 +39,7 @@ COPY runwatch/run.sh /runwatch/run.sh
 
 COPY runwatch/200.octoprint.enabled.sh /runwatch/200.octoprint.enabled.sh
 COPY runwatch/100.socat-printer.enabled.sh /runwatch/100.socat-printer.enabled.sh
+
+RUN chmod +x /runwatch/*.sh
+
 ENTRYPOINT /runwatch/run.sh
