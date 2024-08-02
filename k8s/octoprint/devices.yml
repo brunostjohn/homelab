@@ -9,7 +9,7 @@ spec:
     discoveryDetails: |
       groupRecursive: true
       udevRules:
-      - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTR{bcdDevice}=="0264"
+      - ATTRS{bDeviceClass}=="02", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTR{bcdDevice}=="0264", SUBSYSTEM=="tty"
     name: udev
   brokerSpec:
     brokerPodSpec:
