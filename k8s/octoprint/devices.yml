@@ -82,7 +82,7 @@ spec:
             - |-
               echo ENV
               printenv
-              /mjpg-streamer/mjpg-streamer-experimental/mjpg_streamer -i "./input_uvc.so -r ${RESOLUTION:-1920x1080}" -o "./output_http.so -w ./www"
+              /mjpg-streamer/mjpg-streamer-experimental/mjpg_streamer -i "./input_uvc.so -r ${RESOLUTION:-1920x1080} -d /dev/video1" -o "./output_http.so -w ./www"
           env:
             - name: RESOLUTION
               value: "1280x720"
