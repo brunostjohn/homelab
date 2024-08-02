@@ -11,3 +11,17 @@ spec:
       udevRules:
       - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTR{bcdDevice}=="0264"
     name: udev
+---
+apiVersion: akri.sh/v0
+kind: Configuration
+metadata:
+  name: akri-webcam
+  namespace: octoprint
+spec:
+  capacity: 1
+  discoveryHandler:
+    discoveryDetails: |
+      groupRecursive: true
+      udevRules:
+      - ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825"
+    name: udev
