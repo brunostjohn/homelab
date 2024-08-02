@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
   socat \
   bash
 
-RUN mkdir -p /octoprint/octoprint /octoprint/plugins /app/tmp
+RUN mkdir -p /octoprint/octoprint /octoprint/plugins /app
 
 WORKDIR /app
 
