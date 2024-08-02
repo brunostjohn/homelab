@@ -26,6 +26,9 @@ tasks:
       - cd cluster_apps && terraform validate
       - cd cluster_apps && terraform fmt -check
       - cd cluster_apps && tflint
+      - cd cluster_apps/ingress && terraform validate
+      - cd cluster_apps/ingress && terraform fmt -check
+      - cd cluster_apps/ingress && tflint
       - cd adguard && terraform validate
       - cd adguard && terraform fmt --check
       - cd adguard && tflint
@@ -39,6 +42,7 @@ tasks:
       - cd docker && terraform init
       - cd cluster_base && terraform init
       - cd cluster_apps && terraform init
+      - cd cluster_apps/ingress && terraform init
       - cd adguard && terraform init
 
   plan:

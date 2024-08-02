@@ -22,7 +22,7 @@ resource "argocd_application" "octoprint" {
 
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = kubernetes_namespace.octoprint.metadata.0.name
+      namespace = kubernetes_namespace.octoprint.metadata[0].name
     }
 
     sync_policy {
@@ -43,63 +43,32 @@ resource "argocd_application" "octoprint" {
   }
 }
 
-resource "kubernetes_ingress_v1" "octoprint_ingress" {
+module "octoprint_ingress" {
   depends_on = [argocd_application.octoprint]
+  source     = "./ingress"
 
-  wait_for_load_balancer = true
+  hosts     = ["octoprint.local"]
+  service   = "octoprint-service"
+  namespace = kubernetes_namespace.octoprint.metadata[0].name
+  port      = 80
+}
 
-  metadata {
-    namespace = kubernetes_namespace.octoprint.metadata[0].name
-    name      = "octoprint"
-  }
+module "spoolman_ingress" {
+  depends_on = [argocd_application.octoprint]
+  source     = "./ingress"
 
-  spec {
-    rule {
-      host = "octoprint.local"
-      http {
-        path {
-          backend {
-            service {
-              name = "octoprint-service"
-              port {
-                number = 80
-              }
-            }
-          }
-        }
-      }
-    }
+  hosts     = ["spoolman.local"]
+  service   = "spoolman-service"
+  namespace = kubernetes_namespace.octoprint.metadata[0].name
+  port      = 8000
+}
 
-    rule {
-      host = "camera.octoprint.local"
-      http {
-        path {
-          backend {
-            service {
-              name = "mjpeg-streamer-service"
-              port {
-                number = 8080
-              }
-            }
-          }
-        }
-      }
-    }
+module "mjpeg_ingress" {
+  depends_on = [argocd_application.octoprint]
+  source     = "./ingress"
 
-    rule {
-      host = "spoolman.local"
-      http {
-        path {
-          backend {
-            service {
-              name = "spoolman-service"
-              port {
-                number = 8000
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  hosts     = ["camera.octoprint.local"]
+  service   = "mjpeg-streamer-service"
+  namespace = kubernetes_namespace.octoprint.metadata[0].name
+  port      = 8080
 }

@@ -54,31 +54,11 @@ resource "argocd_application" "minio" {
   }
 }
 
-resource "kubernetes_ingress_v1" "minio_ingress" {
-  depends_on = [argocd_application.minio]
+module "minio_ingress" {
+  source = "./ingress"
 
-  wait_for_load_balancer = true
-
-  metadata {
-    namespace = kubernetes_namespace.minio.metadata[0].name
-    name      = "minio"
-  }
-
-  spec {
-    rule {
-      host = "minio.local"
-      http {
-        path {
-          backend {
-            service {
-              name = "minio-console"
-              port {
-                number = 9001
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  hosts     = ["minio.local", "static.${var.global_fqdn}"]
+  service   = "minio-console"
+  namespace = kubernetes_namespace.minio.metadata[0].name
+  port      = 9001
 }
