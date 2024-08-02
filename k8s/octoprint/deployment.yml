@@ -28,7 +28,7 @@ spec:
             - name: SOCAT_PRINTER_HOST
               value: akri-3dprinter-svc.octoprint.svc.cluster.local
             - name: SOCAT_PRINTER_PORT
-              value: 2000
+              value: "2000"
             - name: SOCAT_PRINTER_LINK
               value: /dev/printer0
           securityContext:
