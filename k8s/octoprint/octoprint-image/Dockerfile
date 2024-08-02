@@ -21,12 +21,11 @@ ENV PATH "${PYTHONUSERBASE}/bin:${PATH}"
 ARG octoprint_ref 
 ENV octoprint_ref ${octoprint_ref:-master}
 
-RUN	mkdir tmp && curl -fsSLO --compressed --retry 3 --retry-delay 10 \
+RUN	curl -fsSLO --compressed --retry 3 --retry-delay 10 \
   https://github.com/OctoPrint/OctoPrint/archive/${octoprint_ref}.tar.gz \
-  && tar xzf ${octoprint_ref}.tar.gz --strip-components 1 -C tmp \
-  && cd /app/tmp \
+  && tar xzf ${octoprint_ref}.tar.gz --strip-components 1 -C . \
   && pip install . \
-  && rm -rf /app/tmp
+  && rm -rf ${octoprint_ref}.tar.gz
 
 WORKDIR /octoprint
 COPY config.yaml /octoprint/octoprint
