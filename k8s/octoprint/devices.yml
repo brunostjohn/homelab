@@ -28,7 +28,7 @@ spec:
               set -euxo pipefail
               echo Installing ser2net
               apk add --no-cache ser2net
-              ser2net -d -C 2000:raw:0:$(printenv | grep UDEV_DEVNODE.*= | cut -d "=" -f2):9600
+              ser2net -d -C 2000:raw:0:/dev/ttyUSB0:9600
           ports:
             - name: device
               containerPort: 2000
