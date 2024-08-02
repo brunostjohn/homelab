@@ -23,6 +23,8 @@ spec:
             - sh
             - -c
             - |-
+              echo ENV
+              printenv
               set -euxo pipefail
               echo Installing ser2net
               apk add --no-cache ser2net
