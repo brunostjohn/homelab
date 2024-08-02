@@ -11,33 +11,34 @@ spec:
       udevRules:
       - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTR{bcdDevice}=="0264"
     name: udev
-  brokerPodSpec:
-    containers:
-      - name: 3dprinter-broker
-        image: alpine:3.14.0
-        imagePullPolicy: IfNotPresent
-        securityContext:
-          privileged: true
-        command:
-          - sh
-          - -c
-          - |-
-            set -euxo pipefail
-            echo Installing ser2net
-            apk add --no-cache ser2net
-            ser2net -d -C 2000:raw:0:$UDEV_DEVNODE:9600
-        ports:
-          - name: device
-            containerPort: 2000
-        resources:
-          requests:
-            "{{PLACEHOLDER}}": "1"
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            "{{PLACEHOLDER}}": "1"
-            cpu: 100m
-            memory: 200Mi
+  brokerSpec:
+    brokerPodSpec:
+      containers:
+        - name: 3dprinter-broker
+          image: alpine:3.14.0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          command:
+            - sh
+            - -c
+            - |-
+              set -euxo pipefail
+              echo Installing ser2net
+              apk add --no-cache ser2net
+              ser2net -d -C 2000:raw:0:$UDEV_DEVNODE:9600
+          ports:
+            - name: device
+              containerPort: 2000
+          resources:
+            requests:
+              "{{PLACEHOLDER}}": "1"
+              cpu: 10m
+              memory: 50Mi
+            limits:
+              "{{PLACEHOLDER}}": "1"
+              cpu: 100m
+              memory: 200Mi
   configurationServiceSpec:
     type: ClusterIP
     ports:
