@@ -39,11 +39,9 @@ spec:
               protocol: TCP
           resources:
             requests:
-              akri.sh/akri-3dprinter: "1"
               memory: "256Mi"
               cpu: "100m"
             limits:
-              akri.sh/akri-3dprinter: "1"
               memory: "512Mi"
           readinessProbe:
             httpGet:

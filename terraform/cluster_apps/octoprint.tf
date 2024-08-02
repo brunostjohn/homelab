@@ -50,7 +50,7 @@ module "octoprint_ingress" {
   hosts     = ["octoprint.local"]
   service   = "octoprint-service"
   namespace = kubernetes_namespace.octoprint.metadata[0].name
-  port      = 80
+  port      = 5000
 }
 
 module "spoolman_ingress" {
