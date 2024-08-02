@@ -9,5 +9,5 @@ spec:
     discoveryDetails: |
       groupRecursive: true
       udevRules:
-      - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523"
+      - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ATTR{bcdDevice}=="0264"
     name: udev
