@@ -55,7 +55,7 @@ resource "argocd_application" "minio" {
 }
 
 module "minio_ingress" {
-  source = "./ingress"
+  source = "../ingress"
 
   hosts     = ["minio.local", "static.${var.global_fqdn}"]
   service   = "minio-console"

@@ -16,6 +16,7 @@ module "cluster_base" {
   argocd_values          = file("values/argocd.yml")
   longhorn_values        = file("values/longhorn.yml")
   nfs_provisioner_values = file("values/nfs.yml")
+  akri_values            = file("values/akri.yml")
 }
 
 module "cluster_apps" {

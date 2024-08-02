@@ -97,36 +97,15 @@ resource "kubernetes_manifest" "dashboard_auth_middleware" {
   }
 }
 
-
-resource "kubernetes_ingress_v1" "dashboard_ingress" {
+module "dashboard_ingress" {
+  source     = "../ingress"
   depends_on = [argocd_application.dashboard, kubernetes_cluster_role_binding.dashboard_admin_binding]
 
-  wait_for_load_balancer = true
+  hosts     = ["k3s.local"]
+  service   = "k8s-dashboard-kong-proxy"
+  namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
 
-  metadata {
-    namespace = kubernetes_namespace.kubernetes_dashboard.metadata[0].name
-    name      = "k8s-dashboard"
-
-    annotations = {
-      "traefik.ingress.kubernetes.io/router.middlewares" = "${kubernetes_namespace.kubernetes_dashboard.metadata[0].name}-dashboard-auth-middleware@kubernetescrd"
-    }
-  }
-
-  spec {
-    rule {
-      host = "k3s.local"
-      http {
-        path {
-          backend {
-            service {
-              name = "k8s-dashboard-kong-proxy"
-              port {
-                number = 80
-              }
-            }
-          }
-        }
-      }
-    }
+  annotations = {
+    "traefik.ingress.kubernetes.io/router.middlewares" = "${kubernetes_namespace.kubernetes_dashboard.metadata[0].name}-dashboard-auth-middleware@kubernetescrd"
   }
 }

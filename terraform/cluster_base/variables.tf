@@ -12,3 +12,8 @@ variable "nfs_provisioner_values" {
   type        = string
   description = "Values file for the NFS provisioner Helm chart"
 }
+
+variable "akri_values" {
+  type        = string
+  description = "Values file for the AKRI Helm chart"
+}

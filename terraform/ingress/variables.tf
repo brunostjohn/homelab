@@ -18,3 +18,15 @@ variable "port" {
   description = "Port of the service"
   default     = 80
 }
+
+variable "annotations" {
+  type        = map(string)
+  description = "Annotations to apply to the Ingress"
+  default     = {}
+}
+
+variable "wait_for_load_balancer" {
+  type        = bool
+  description = "Wait for the LoadBalancer to be provisioned"
+  default     = true
+}

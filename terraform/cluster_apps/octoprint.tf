@@ -45,7 +45,7 @@ resource "argocd_application" "octoprint" {
 
 module "octoprint_ingress" {
   depends_on = [argocd_application.octoprint]
-  source     = "./ingress"
+  source     = "../ingress"
 
   hosts     = ["octoprint.local"]
   service   = "octoprint-service"
@@ -55,7 +55,7 @@ module "octoprint_ingress" {
 
 module "spoolman_ingress" {
   depends_on = [argocd_application.octoprint]
-  source     = "./ingress"
+  source     = "../ingress"
 
   hosts     = ["spoolman.local"]
   service   = "spoolman-service"
@@ -65,7 +65,7 @@ module "spoolman_ingress" {
 
 module "mjpeg_ingress" {
   depends_on = [argocd_application.octoprint]
-  source     = "./ingress"
+  source     = "../ingress"
 
   hosts     = ["camera.octoprint.local"]
   service   = "mjpeg-streamer-service"
