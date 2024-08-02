@@ -33,7 +33,7 @@ spec:
             - name: SOCAT_PRINTER_PORT
               value: "2000"
             - name: SOCAT_PRINTER_LINK
-              value: /dev/printer0
+              value: /dev/ttyACM0
           securityContext:
             privileged: true
           ports:
