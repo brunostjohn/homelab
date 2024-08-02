@@ -8,6 +8,8 @@ spec:
     matchLabels:
       app: octoprint
   replicas: 1
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -17,11 +19,6 @@ spec:
         - name: octoprint-data
           persistentVolumeClaim:
             claimName: octoprint-pvc
-        - name: printer-serial
-          hostPath:
-            path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
-      nodeSelector:
-        kubernetes.io/hostname: failoverpi
       containers:
         - name: octoprint
           image: octoprint/octoprint:latest
@@ -33,9 +30,11 @@ spec:
               protocol: TCP
           resources:
             requests:
+              akri.sh/akri-3dprinter: "1"
               memory: "256Mi"
               cpu: "100m"
             limits:
+              akri.sh/akri-3dprinter: "1"
               memory: "512Mi"
           readinessProbe:
             httpGet:
@@ -44,8 +43,6 @@ spec:
           volumeMounts:
             - name: octoprint-data
               mountPath: /octoprint
-            - name: printer-serial
-              mountPath: /dev/ttyACM0
 ---
 apiVersion: apps/v1
 kind: Deployment
