@@ -68,7 +68,7 @@ module "mjpeg_ingress" {
   source     = "../ingress"
 
   hosts     = ["camera.octoprint.local"]
-  service   = "mjpeg-streamer-service"
+  service   = "akri-webcam-svc"
   namespace = kubernetes_namespace.octoprint.metadata[0].name
   port      = 8080
 }
