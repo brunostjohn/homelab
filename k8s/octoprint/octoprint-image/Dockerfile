@@ -15,8 +15,6 @@ RUN groupadd --gid 1000 octoprint \
   && mkdir -p /octoprint/octoprint /octoprint/plugins \
   && chown -R octoprint:octoprint /octoprint
 
-COPY docker-entrypoint.sh /usr/local/bin
-
 USER octoprint
 
 WORKDIR /home/octoprint
