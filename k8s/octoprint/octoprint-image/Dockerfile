@@ -19,6 +19,15 @@ RUN groupadd --gid 1000 octoprint \
   && adduser octoprint sudo \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
+RUN mkdir /home/octoprint/runwatch
+COPY runwatch/run.sh /home/octoprint/runwatch/run.sh
+
+COPY runwatch/200.octoprint.enabled.sh /home/octoprint/runwatch/200.octoprint.enabled.sh
+COPY runwatch/100.socat-printer.enabled.sh /home/octoprint/runwatch/100.socat-printer.enabled.sh
+
+RUN chmod +x /home/octoprint/runwatch/*.sh \
+  && chown -R octoprint:octoprint /home/octoprint/runwatch
+
 USER octoprint
 WORKDIR /home/octoprint
 
@@ -43,13 +52,5 @@ COPY config.yaml /octoprint/octoprint
 
 VOLUME /octoprint
 EXPOSE 5000
-
-RUN mkdir /home/octoprint/runwatch
-COPY runwatch/run.sh /home/octoprint/runwatch/run.sh
-
-COPY runwatch/200.octoprint.enabled.sh /home/octoprint/runwatch/200.octoprint.enabled.sh
-COPY runwatch/100.socat-printer.enabled.sh /home/octoprint/runwatch/100.socat-printer.enabled.sh
-
-RUN chmod +x /home/octoprint/runwatch/*.sh
 
 ENTRYPOINT /home/octoprint/runwatch/run.sh
