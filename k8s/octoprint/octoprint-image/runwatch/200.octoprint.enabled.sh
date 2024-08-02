@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-BINARY="/usr/bin/python"
-PARAMS="-m octoprint --basedir /octoprint/octoprint serve"
+BINARY="octoprint"
+PARAMS="--basedir /octoprint/octoprint serve"
 
 ######################################################
 
