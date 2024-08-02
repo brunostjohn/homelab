@@ -38,6 +38,13 @@ spec:
             "{{PLACEHOLDER}}": "1"
             cpu: 100m
             memory: 200Mi
+  configurationServiceSpec:
+    type: ClusterIP
+    ports:
+      - name: device
+        port: 2000
+        protocol: TCP
+        targetPort: device
 ---
 apiVersion: akri.sh/v0
 kind: Configuration
