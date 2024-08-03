@@ -31,6 +31,7 @@ is-running)
 start)
     echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
     $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
+    exit 0
     # if pgrep -f "socat" >/dev/null 2>&1 ; then
     #     $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
     #     exit 0
