@@ -17,10 +17,10 @@ RUN python -m venv venv \
 
 FROM python:3.11-bookworm AS moonraker-cloner
 
-WORKDIR /otp
+WORKDIR /opt
 
 RUN git clone https://github.com/Arksine/moonraker moonraker \
- && rm -rf moonraker/.git
+ && rm -rf /opt/moonraker/.git
 
 RUN python -m venv venv \
  && venv/bin/pip install -r moonraker/scripts/moonraker-requirements.txt
