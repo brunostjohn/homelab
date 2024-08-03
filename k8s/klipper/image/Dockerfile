@@ -30,7 +30,7 @@ FROM python:3.11-slim-bookworm AS runner
 WORKDIR /opt
 
 RUN apt update \
- && apt install -y socat sudo \
+ && apt install -y socat sudo libsodium-dev \
  && groupadd klipper --gid 1000 \
  && useradd klipper --uid 1000 --gid klipper \
  && usermod klipper --append --groups dialout \
