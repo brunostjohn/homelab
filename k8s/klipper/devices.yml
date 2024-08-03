@@ -14,7 +14,7 @@ spec:
   brokerSpec:
     brokerPodSpec:
       containers:
-        - name: 3dprinter-broker
+        - name: 3dprint-broker
           image: alpine:3.14.0
           imagePullPolicy: IfNotPresent
           securityContext:
