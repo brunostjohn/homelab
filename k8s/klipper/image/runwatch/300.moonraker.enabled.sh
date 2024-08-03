@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-BINARY="/otp/venv-moonraker/bin/python"
-PARAMS="/otp/moonraker/moonraker/moonraker.py -d /opt/printer_data"
+BINARY="/opt/venv-moonraker/bin/python"
+PARAMS="/opt/moonraker/moonraker/moonraker.py -d /opt/printer_data"
 
 ######################################################
 

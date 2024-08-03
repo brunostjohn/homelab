@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-BINARY="/otp/venv-klipper/bin/python"
-PARAMS="/otp/klipper/klippy/klippy.py -I /opt/run/klipper.tty -a /opt/run/klipper.sock /opt/printer_data/config/printer.cfg"
+BINARY="/opt/venv-klipper/bin/python"
+PARAMS="/opt/klipper/klippy/klippy.py -I /opt/run/klipper.tty -a /opt/run/klipper.sock /opt/printer_data/config/printer.cfg"
 
 ######################################################
 
