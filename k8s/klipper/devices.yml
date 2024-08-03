@@ -48,3 +48,63 @@ spec:
         port: 2000
         protocol: TCP
         targetPort: device
+---
+apiVersion: akri.sh/v0
+kind: Configuration
+metadata:
+  name: akri-webcam
+  namespace: klipper
+spec:
+  capacity: 1
+  discoveryHandler:
+    discoveryDetails: |
+      groupRecursive: true
+      udevRules:
+      - ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825"
+    name: udev
+  configurationServiceSpec:
+    type: ClusterIP
+    ports:
+      - name: http
+        port: 8080
+        protocol: TCP
+        targetPort: http
+  brokerSpec:
+    brokerPodSpec:
+      containers:
+        - name: webcam-broker
+          image: davidhamm/mjpg-streamer
+          securityContext:
+            privileged: true
+          command:
+            - sh
+            - -c
+            - |-
+              echo ENV
+              printenv
+              /mjpg-streamer/mjpg-streamer-experimental/mjpg_streamer -i "./input_uvc.so -r ${RESOLUTION:-1920x1080} -d /dev/video0" -o "./output_http.so -w ./www"
+              /mjpg-streamer/mjpg-streamer-experimental/mjpg_streamer -i "./input_uvc.so -r ${RESOLUTION:-1920x1080} -d /dev/video1" -o "./output_http.so -w ./www"
+          env:
+            - name: RESOLUTION
+              value: "1280x720"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              "{{PLACEHOLDER}}": "1"
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              "{{PLACEHOLDER}}": "1"
+              cpu: 100m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
