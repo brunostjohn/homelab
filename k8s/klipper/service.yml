@@ -11,5 +11,4 @@ spec:
       port: 7125
       targetPort: 7125
       name: http
-  type: LoadBalancer
-  loadBalancerIp: 10.0.2.20
+  type: ClusterIP
