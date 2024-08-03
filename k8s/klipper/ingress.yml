@@ -1,0 +1,52 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: klipper-ingress
+  namespace: klipper
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: fluidd.klipper.local
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: fluidd-service
+                port:
+                  number: 80
+    - host: spoolman.local
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: spoolman-service
+                port:
+                  number: 8000
+    - host: klipper.local
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: klipper-service
+                port:
+                  number: 7125
+          - path: /moonraker
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: klipper
+                port:
+                  number: 7125
+          - path: /webcam
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: akri-webcam-svc
+                port:
+                  number: 8080

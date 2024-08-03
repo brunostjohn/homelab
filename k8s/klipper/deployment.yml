@@ -17,28 +17,23 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
-      nodeSelector:
-        kubernetes.io/hostname: failoverpi
       volumes:
         - name: printer-data
           persistentVolumeClaim:
             claimName: printer-data-pvc
-        - name: printer
-          hostPath:
-            path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
       containers:
         - name: klipper
           image: ghcr.io/brunostjohn/custom-klipper:main
           imagePullPolicy: Always
-          # env:
-          #   - name: SOCAT_PRINTER_TYPE
-          #     value: tcp
-          #   - name: SOCAT_PRINTER_HOST
-          #     value: akri-3dprinter-svc.klipper.svc.cluster.local
-          #   - name: SOCAT_PRINTER_PORT
-          #     value: "2000"
-          #   - name: SOCAT_PRINTER_LINK
-          #     value: /dev/ttyACM0
+          env:
+            - name: SOCAT_PRINTER_TYPE
+              value: tcp
+            - name: SOCAT_PRINTER_HOST
+              value: akri-3dprinter-svc.klipper.svc.cluster.local
+            - name: SOCAT_PRINTER_PORT
+              value: "2000"
+            - name: SOCAT_PRINTER_LINK
+              value: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
           securityContext:
             privileged: true
           ports:
@@ -58,5 +53,126 @@ spec:
           volumeMounts:
             - name: printer-data
               mountPath: /opt/printer_data
-            - name: printer
-              mountPath: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spoolman-deployment
+  namespace: klipper
+spec:
+  selector:
+    matchLabels:
+      app: spoolman
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spoolman
+    spec:
+      securityContext:
+        fsGroup: 1000
+      volumes:
+        - name: spoolman-data
+          persistentVolumeClaim:
+            claimName: spoolman-pvc
+      containers:
+        - name: spoolman
+          image: ghcr.io/donkie/spoolman:latest
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+          volumeMounts:
+            - name: spoolman-data
+              mountPath: /home/app/.local/share/spoolman
+          env:
+            - name: TZ
+              value: "Europe/Dublin"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mainsail-deployment
+  namespace: klipper
+spec:
+  selector:
+    matchLabels:
+      app: mainsail
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mainsail
+    spec:
+      containers:
+        - name: mainsail
+          image: ghcr.io/mainsail-crew/mainsail:latest
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fluidd-deployment
+  namespace: klipper
+spec:
+  selector:
+    matchLabels:
+      app: fluidd
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: fluidd
+    spec:
+      containers:
+        - name: fluidd
+          image: ghcr.io/fluidd-core/fluidd:latest
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80

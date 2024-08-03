@@ -11,4 +11,49 @@ spec:
       port: 7125
       targetPort: 7125
       name: http
-  type: LoadBalancer
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spoolman-service
+  namespace: klipper
+spec:
+  selector:
+    app: spoolman
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      name: http
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mainsail-service
+  namespace: klipper
+spec:
+  selector:
+    app: mainsail
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: http
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fluidd-service
+  namespace: klipper
+spec:
+  selector:
+    app: fluidd
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: http
+  type: ClusterIP
