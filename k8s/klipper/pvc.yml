@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: printer-data-pvc
-  namespace: adguard
+  namespace: klipper
 spec:
   accessModes:
     - ReadWriteOnce
