@@ -59,4 +59,4 @@ spec:
             - name: printer-data
               mountPath: /opt/printer_data
             - name: printer
-              mountPath: /dev/ttyACM0
+              mountPath: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
