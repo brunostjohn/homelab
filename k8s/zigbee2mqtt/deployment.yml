@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt-deploy
+  namespace: zigbee2mqtt
+spec:
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      volumes:
+        - name: zigbee2mqtt-data
+          persistentVolumeClaim:
+            claimName: zigbee2mqtt-pvc
+      containers:
+        - name: zigbee2mqtt
+          image: koenkk/zigbee2mqtt:latest
+          volumeMounts:
+            - name: zigbee2mqtt-data
+              mountPath: /app/data
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080

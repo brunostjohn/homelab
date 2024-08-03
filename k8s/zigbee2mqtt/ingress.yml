@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zigbee2mqtt
+  namespace: zigbee2mqtt
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: zigbee2mqtt.local
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: zigbee2mqtt
+            port:
+              number: 8080
