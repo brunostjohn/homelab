@@ -17,3 +17,8 @@ variable "akri_values" {
   type        = string
   description = "Values file for the AKRI Helm chart"
 }
+
+variable "global_fqdn" {
+  type = string
+  description = "The global FQDN for the homelab"
+}

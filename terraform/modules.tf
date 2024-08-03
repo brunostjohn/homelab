@@ -17,6 +17,8 @@ module "cluster_base" {
   longhorn_values        = file("values/longhorn.yml")
   nfs_provisioner_values = file("values/nfs.yml")
   akri_values            = file("values/akri.yml")
+
+  global_fqdn = var.global_fqdn
 }
 
 module "cluster_apps" {
@@ -40,6 +42,9 @@ module "cluster_apps" {
   smtp_password               = var.smtp_password
   smtp_use_ssl                = var.smtp_use_ssl
   smtp_use_tls                = var.smtp_use_tls
+  mqtt_homeassistant_password_hash = var.mqtt_homeassistant_password_hash
+  mqtt_zigbee2mqtt_password_hash = var.mqtt_zigbee2mqtt_password_hash
+  mqtt_octoprint_password_hash = var.mqtt_octoprint_password_hash
 }
 
 module "adguard" {

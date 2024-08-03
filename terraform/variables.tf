@@ -133,3 +133,18 @@ variable "authentik_token" {
   type        = string
   description = "Authentik token"
 }
+
+variable "mqtt_zigbee2mqtt_password_hash" {
+  type        = string
+  description = "The password hash for the zigbee2mqtt MQTT user"
+}
+
+variable "mqtt_homeassistant_password_hash" {
+  type        = string
+  description = "The password hash for the homeassistant MQTT user"
+}
+
+variable "mqtt_octoprint_password_hash" {
+  type        = string
+  description = "The password hash for the octoprint MQTT user"
+}
