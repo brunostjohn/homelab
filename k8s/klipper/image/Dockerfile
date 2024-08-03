@@ -47,7 +47,7 @@ COPY --chown=klipper:klipper --from=klipper-cloner /opt/venv /opt/venv-klipper
 COPY --chown=klipper:klipper --from=moonraker-cloner /opt/moonraker /opt/moonraker
 COPY --chown=klipper:klipper --from=moonraker-cloner /opt/venv /opt/venv-moonraker
 COPY --chown=klipper:klipper runwatch/run.sh /opt/runwatch/run.sh
-COPY --chown=klipper:klipper runwatch/100.socat-printer.enabled.sh /opt/runwatch/100.socat-printer.enabled.sh
+# COPY --chown=klipper:klipper runwatch/100.socat-printer.enabled.sh /opt/runwatch/100.socat-printer.enabled.sh
 COPY --chown=klipper:klipper runwatch/200.klipper.enabled.sh /opt/runwatch/200.klipper.enabled.sh
 COPY --chown=klipper:klipper runwatch/300.moonraker.enabled.sh /opt/runwatch/300.moonraker.enabled.sh
 
