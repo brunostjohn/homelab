@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: klipper-service
+  namespace: klipper
+spec:
+  selector:
+    app: klipper
+  ports:
+    - protocol: TCP
+      port: 7125
+      targetPort: 7125
+      name: http
+  type: LoadBalancer
+  loadBalancerIp: 10.0.2.20

@@ -3,7 +3,8 @@ name: Rebuild Klipper
 on: # yamllint disable-line rule:truthy
   push:
     paths:
-      - klipper/image/*
+      - k8s/klipper/image/*
+      - k8s/klipper/image/**/*
       - .github/workflows/rebuild-klipper.yml
     branches:
       - main

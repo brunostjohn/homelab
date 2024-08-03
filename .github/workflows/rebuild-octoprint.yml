@@ -3,8 +3,8 @@ name: Rebuild Octoprint
 on: # yamllint disable-line rule:truthy
   push:
     paths:
-      - octoprint/octoprint-image/*
-      - octoprint/octoprint-image/**/*
+      - k8s/octoprint/octoprint-image/*
+      - k8s/octoprint/octoprint-image/**/*
       - .github/workflows/rebuild-octoprint.yml
     branches:
       - main
