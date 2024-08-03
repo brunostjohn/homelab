@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-/opt/venv-moonraker/bin/python /opt/moonraker/moonraker/moonraker.py -d /opt/printer_data &
 /opt/venv-klipper/bin/python /opt/klipper/klippy/klippy.py -I /opt/run/klipper.tty -a /opt/run/klipper.sock /opt/printer_data/config/printer.cfg &
-exit 0
+/opt/venv-moonraker/bin/python /opt/moonraker/moonraker/moonraker.py -d /opt/printer_data
 # DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 # B=$(which bash)
 
