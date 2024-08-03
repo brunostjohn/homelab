@@ -1,7 +1,8 @@
 replicaCount: 1
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
+  externalTrafficPolicy: ""
 
 persistence:
   enabled: true
