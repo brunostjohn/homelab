@@ -29,17 +29,15 @@ is-running)
     ;;
 
 start)
-    echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
-    $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
-    exit 0
-    # if pgrep -f "socat" >/dev/null 2>&1 ; then
-    #     $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
-    #     exit 0
-    # else
-    #     # socat is not running
-    #     echo "##### Socat is not running, skipping start of octoprint"
-    #     exit 1
-    # fi
+    if pgrep -f "socat" >/dev/null 2>&1 ; then
+        echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
+        $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
+        exit 0
+    else
+        # socat is not running
+        echo "##### Socat is not running, skipping start of klipper"
+        exit 1
+    fi
     ;;
 
 start-fail)
@@ -48,7 +46,6 @@ start-fail)
 
 stop)
     echo "Stopping... $BINARY $PARAMS"
-    cd /usr/src/app
     kill -9 $(pgrep -f "$BINARY $PARAMS")
     ;;
 

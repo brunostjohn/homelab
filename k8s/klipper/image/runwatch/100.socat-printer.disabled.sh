@@ -37,14 +37,16 @@ is-running)
     fi
     # stop octoprint if socat is not running 
     if pgrep -f "python -m octoprint" >/dev/null 2>&1 ; then
-        echo "stopping octoprint since socat is not running"
-        kill -9 $(pgrep -f "python -m octoprint")
+        echo "stopping klipper & moonraker since socat is not running"
+        kill -9 $(pgrep -f "/opt/venv-klipper/bin/python")
+        kill -9 $(pgrep -f "/opt/venv-moonraker/bin/python")
     fi
     exit 0
     ;;
 
 start)
     echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
+    sudo mkdir -p /dev/serial/by-id
     $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
     # delay other checks for 5 seconds
     sleep 5
