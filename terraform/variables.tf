@@ -128,3 +128,8 @@ variable "smtp_use_ssl" {
   type        = bool
   description = "Whether to use SSL for SMTP"
 }
+
+variable "authentik_token" {
+  type        = string
+  description = "Authentik token"
+}

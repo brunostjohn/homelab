@@ -32,6 +32,10 @@ terraform {
       version = "1.3.0"
     }
 
+    authentik = {
+      source  = "goauthentik/authentik"
+      version = "2024.6.1"
+    }
   }
 
   backend "kubernetes" {
@@ -78,4 +82,9 @@ provider "adguard" {
   username = var.adguard_username
   password = var.adguard_password
   scheme   = var.adguard_scheme
+}
+
+provider "authentik" {
+  url   = "https://auth.${var.global_fqdn}"
+  token = var.authentik_token
 }

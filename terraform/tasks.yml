@@ -35,6 +35,9 @@ tasks:
       - cd helm_deployment && terraform validate
       - cd helm_deployment && terraform fmt --check
       - cd helm_deployment && tflint
+      - cd authentik && terraform validate
+      - cd authentik && terraform fmt --check
+      - cd authentik && tflint
 
   init:
     aliases: ["i"]
@@ -48,6 +51,7 @@ tasks:
       - cd ingress && terraform init
       - cd adguard && terraform init
       - cd helm_deployment && terraform init
+      - cd authentik && terraform init
 
   plan:
     aliases: ["p"]
