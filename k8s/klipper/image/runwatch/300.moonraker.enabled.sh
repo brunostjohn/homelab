@@ -30,14 +30,14 @@ is-running)
 
 start)
     echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
-    if pgrep -f "socat" >/dev/null 2>&1 ; then
-        $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
-        exit 0
-    else
-        # socat is not running
-        echo "##### Socat is not running, skipping start of octoprint"
-        exit 1
-    fi
+    $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
+    # if pgrep -f "socat" >/dev/null 2>&1 ; then
+    #     exit 0
+    # else
+    #     # socat is not running
+    #     echo "##### Socat is not running, skipping start of octoprint"
+    #     exit 1
+    # fi
     ;;
 
 start-fail)
