@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+sudo mkdir -p /dev/serial/by-id
+sudo ln -s /dev/ttyACM0 /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
 /opt/venv-klipper/bin/python /opt/klipper/klippy/klippy.py -I /opt/run/klipper.tty -a /opt/run/klipper.sock /opt/printer_data/config/printer.cfg &
 /opt/venv-moonraker/bin/python /opt/moonraker/moonraker/moonraker.py -d /opt/printer_data
 # DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
