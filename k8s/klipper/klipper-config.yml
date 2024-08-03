@@ -1,0 +1,429 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: klipper-config
+  namespace: klipper
+data:
+  printer.cfg: |
+    [stepper_x]
+    step_pin: PC2
+    dir_pin: !PB9
+    enable_pin: !PC3
+    microsteps: 16
+    rotation_distance: 40
+    endstop_pin: ~!PA5
+    position_endstop: -6
+    position_min: -6
+    position_max: 230
+    homing_speed: 80
+
+    [tmc2208 stepper_x]
+    uart_pin: PB12
+    run_current: 0.60
+    #hold_current: 0.5
+    sense_resistor: 0.150
+    #stealthchop_threshold: 999999
+    interpolate: True
+
+    [stepper_y]
+    step_pin: PB8
+    dir_pin: PB7
+    enable_pin: !PC3
+    microsteps: 16
+    rotation_distance: 40
+    endstop_pin: ~!PA6
+    position_endstop: -14
+    position_min: -14
+    position_max: 230
+    homing_speed: 80
+
+    [tmc2208 stepper_y]
+    uart_pin: PB13
+    run_current: 0.60
+    #hold_current: 0.5
+    sense_resistor: 0.150
+    #stealthchop_threshold: 999999
+    interpolate: True
+
+    [stepper_z]
+    step_pin: PB6
+    dir_pin: !PB5
+    enable_pin: !PC3
+    microsteps: 16
+    rotation_distance: 8
+    endstop_pin: probe:z_virtual_endstop
+    position_min: -3
+    position_max: 250
+    homing_speed: 4
+    second_homing_speed: 1
+    homing_retract_dist: 2.0
+
+    [tmc2208 stepper_z]
+    uart_pin: PB14
+    run_current: 0.8
+    #hold_current: 0.5
+    sense_resistor: 0.150
+    #stealthchop_threshold: 999999
+    interpolate: True
+
+    [extruder]
+    max_extrude_only_distance: 100.0
+    step_pin: PB4
+    dir_pin: PB3
+    enable_pin: !PC3
+    microsteps: 16
+    rotation_distance: 7.44
+    nozzle_diameter: 0.400
+    filament_diameter: 1.750
+    heater_pin: PA1
+    sensor_type: EPCOS 100K B57560G104F
+    sensor_pin: PC5
+    control: pid
+    # tuned for stock hardware with 200 degree Celsius target
+    pid_Kp: 27.142
+    pid_Ki: 1.371
+    pid_Kd: 134.351
+    min_temp: 0
+    max_temp: 260
+
+    [heater_bed]
+    heater_pin: PB2
+    sensor_type: EPCOS 100K B57560G104F
+    sensor_pin: PC4
+    control: pid
+    # tuned for stock hardware with 70 degree Celsius target
+    pid_kp: 66.371
+    pid_ki: 0.846
+    pid_kd: 1301.702
+    min_temp: 0
+    max_temp: 100
+
+    [heater_fan hotend_fan]
+    pin: PC1
+
+    [fan]
+    pin: PA0
+
+    [mcu]
+    serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
+    restart_method: command
+
+    [printer]
+    kinematics: cartesian
+    max_velocity: 250
+    max_accel: 2500
+    max_z_velocity: 5
+    square_corner_velocity: 5.0
+    max_z_accel: 100
+
+    [bltouch]
+    sensor_pin: ^PC14
+    control_pin: PC13
+    x_offset: -23.0
+    y_offset: -14.5
+    z_offset: 2.65
+    speed: 20
+    pin_move_time: 0.4
+    stow_on_each_sample: False
+    probe_with_touch_mode: True
+
+    [safe_z_home]
+    home_xy_position: 134,123
+    speed: 150
+    z_hop: 10
+    z_hop_speed: 10
+
+    [bed_mesh]
+    speed: 120
+    horizontal_move_z: 5
+    mesh_min: 30,30         # Need to handle head distance with cr-touch (bl_touch)
+    mesh_max: 207,215.5     # Max probe range (230-23,230-14.5)
+    probe_count: 5,5
+    algorithm: bicubic
+
+    [output_pin beeper]
+    pin: PB0
+
+    [screws_tilt_adjust]
+    screw1: 54.5, 45.5
+    screw1_name: front left screw
+    screw2: 224.5, 45.5
+    screw2_name: front right screw
+    screw3: 224.5, 215.5
+    screw3_name: rear right screw
+    screw4: 54.5, 215.5
+    screw4_name: rear left screw
+    horizontal_move_z: 10.
+    speed: 50.
+    screw_thread: CCW-M4
+
+    [filter]
+
+    [dirzctl]
+
+    [hx711s]
+    sensor0_clk_pin: PA4             # Pressure detection clock pin
+    sensor0_sdo_pin: PC6             # Pressure detection data pin
+
+    [prtouch]
+    sensor_x: 32
+    sensor_y: 30
+    clr_noz_start_x: 15
+    clr_noz_start_y: 25
+    clr_noz_len_y: 15
+    s_hot_min_temp: 160
+    s_hot_max_temp: 200
+    s_bed_max_temp: 60
+    show_msg: True
+    wipe_retract_distance: 2
+
+    [e3v3se_display]
+    language: english
+    logging: True
+
+    [include mainsail.cfg]
+  mainsail.cfg: |
+    [virtual_sdcard]
+    path: /opt/printer_data/gcodes
+    on_error_gcode: CANCEL_PRINT
+
+    [pause_resume]
+    #recover_velocity: 50.
+    #   When capture/restore is enabled, the speed at which to return to
+    #   the captured position (in mm/s). Default is 50.0 mm/s.
+
+    [display_status]
+
+    [respond]
+
+    [gcode_macro CANCEL_PRINT]
+    description: Cancel the actual running print
+    rename_existing: CANCEL_PRINT_BASE
+    gcode:
+      ##### get user parameters or use default #####
+      {% set client = printer['gcode_macro _CLIENT_VARIABLE']|default({}) %}
+      {% set allow_park = client.park_at_cancel|default(false)|lower == 'true' %}
+      {% set retract = client.cancel_retract|default(5.0)|abs %}
+      ##### define park position #####
+      {% set park_x = "" if (client.park_at_cancel_x|default(none) is none)
+                else "X=" ~ client.park_at_cancel_x %}
+      {% set park_y = "" if (client.park_at_cancel_y|default(none) is none)
+                else "Y=" ~ client.park_at_cancel_y %}
+      {% set custom_park = park_x|length > 0 or park_y|length > 0 %}
+      ##### end of definitions #####
+      # restore idle_timeout time if needed
+      {% if printer['gcode_macro RESUME'].restore_idle_timeout > 0 %}
+        SET_IDLE_TIMEOUT TIMEOUT={printer['gcode_macro RESUME'].restore_idle_timeout}
+      {% endif %}
+      {% if (custom_park or not printer.pause_resume.is_paused) and allow_park %} _TOOLHEAD_PARK_PAUSE_CANCEL {park_x} {park_y} {% endif %}
+      _CLIENT_RETRACT LENGTH={retract}
+      TURN_OFF_HEATERS
+      M106 S0
+      {client.user_cancel_macro|default("")}
+      SET_GCODE_VARIABLE MACRO=RESUME VARIABLE=idle_state VALUE=False
+      # clear pause_next_layer and pause_at_layer as preparation for next print
+      SET_PAUSE_NEXT_LAYER ENABLE=0
+      SET_PAUSE_AT_LAYER ENABLE=0 LAYER=0
+      CANCEL_PRINT_BASE
+
+    [gcode_macro PAUSE]
+    description: Pause the actual running print
+    rename_existing: PAUSE_BASE
+    gcode:
+      ##### get user parameters or use default ##### 
+      {% set client = printer['gcode_macro _CLIENT_VARIABLE']|default({}) %}
+      {% set idle_timeout = client.idle_timeout|default(0) %}
+      {% set temp = printer[printer.toolhead.extruder].target if printer.toolhead.extruder != '' else 0 %}
+      {% set restore = False if printer.toolhead.extruder == ''
+                  else True  if params.RESTORE|default(1)|int == 1 else False %}
+      ##### end of definitions #####
+      SET_GCODE_VARIABLE MACRO=RESUME VARIABLE=last_extruder_temp VALUE="{{'restore': restore, 'temp': temp}}"
+      # set a new idle_timeout value
+      {% if idle_timeout > 0 %}
+        SET_GCODE_VARIABLE MACRO=RESUME VARIABLE=restore_idle_timeout VALUE={printer.configfile.settings.idle_timeout.timeout}
+        SET_IDLE_TIMEOUT TIMEOUT={idle_timeout}
+      {% endif %}
+      PAUSE_BASE
+      {client.user_pause_macro|default("")}
+      _TOOLHEAD_PARK_PAUSE_CANCEL {rawparams}
+
+    [gcode_macro RESUME]
+    description: Resume the actual running print
+    rename_existing: RESUME_BASE
+    variable_last_extruder_temp: {'restore': False, 'temp': 0}
+    variable_restore_idle_timeout: 0
+    variable_idle_state: False
+    gcode:
+      ##### get user parameters or use default #####
+      {% set client = printer['gcode_macro _CLIENT_VARIABLE']|default({}) %}
+      {% set velocity = printer.configfile.settings.pause_resume.recover_velocity %}
+      {% set sp_move = client.speed_move|default(velocity) %}
+      {% set runout_resume = True if client.runout_sensor|default("") == ""     # no runout
+                        else True if not printer[client.runout_sensor].enabled  # sensor is disabled
+                        else printer[client.runout_sensor].filament_detected %} # sensor status
+      {% set can_extrude = True if printer.toolhead.extruder == ''           # no extruder defined in config
+                      else printer[printer.toolhead.extruder].can_extrude %} # status of active extruder
+      {% set do_resume = False %}
+      {% set prompt_txt = [] %}
+      ##### end of definitions #####
+      #### Printer comming from timeout idle state ####
+      {% if printer.idle_timeout.state|upper == "IDLE" or idle_state %}
+        SET_GCODE_VARIABLE MACRO=RESUME VARIABLE=idle_state VALUE=False
+        {% if last_extruder_temp.restore %}
+          # we need to use the unicode (\u00B0) for the ° as py2 env's would throw an error otherwise 
+          RESPOND TYPE=echo MSG='{"Restoring \"%s\" temperature to %3.1f\u00B0C, this may take some time" % (printer.toolhead.extruder, last_extruder_temp.temp) }'
+          M109 S{last_extruder_temp.temp}
+          {% set do_resume = True %}
+        {% elif can_extrude %}
+          {% set do_resume = True %}
+        {% else %} 
+          RESPOND TYPE=error MSG='{"Resume aborted !!! \"%s\" not hot enough, please heat up again and press RESUME" % printer.toolhead.extruder}'
+          {% set _d = prompt_txt.append("\"%s\" not hot enough, please heat up again and press RESUME" % printer.toolhead.extruder) %}
+        {% endif %}
+      #### Printer comming out of regular PAUSE state ####
+      {% elif can_extrude %}
+        {% set do_resume = True %}
+      {% else %}
+        RESPOND TYPE=error MSG='{"Resume aborted !!! \"%s\" not hot enough, please heat up again and press RESUME" % printer.toolhead.extruder}'
+        {% set _d = prompt_txt.append("\"%s\" not hot enough, please heat up again and press RESUME" % printer.toolhead.extruder) %}
+      {% endif %}
+      {% if runout_resume %}
+        {% if do_resume %}
+          {% if restore_idle_timeout > 0 %} SET_IDLE_TIMEOUT TIMEOUT={restore_idle_timeout} {% endif %} # restore idle_timeout time
+          {client.user_resume_macro|default("")}
+          _CLIENT_EXTRUDE
+          RESUME_BASE VELOCITY={params.VELOCITY|default(sp_move)}
+        {% endif %}
+      {% else %}
+        RESPOND TYPE=error MSG='{"Resume aborted !!! \"%s\" detects no filament, please load filament and press RESUME" % (client.runout_sensor.split(" "))[1]}'
+        {% set _d = prompt_txt.append("\"%s\" detects no filament, please load filament and press RESUME" % (client.runout_sensor.split(" "))[1]) %}
+      {% endif %}
+      ##### Generate User Information box in case of abort #####
+      {% if not (runout_resume and do_resume) %} 
+        RESPOND TYPE=command MSG="action:prompt_begin RESUME aborted !!!"
+        {% for element in prompt_txt %}
+          RESPOND TYPE=command MSG='{"action:prompt_text %s" % element}' 
+        {% endfor %}
+        RESPOND TYPE=command MSG="action:prompt_footer_button Ok|RESPOND TYPE=command MSG=action:prompt_end|info"
+        RESPOND TYPE=command MSG="action:prompt_show"
+      {% endif %}
+      
+    # Usage: SET_PAUSE_NEXT_LAYER [ENABLE=[0|1]] [MACRO=<name>]
+    [gcode_macro SET_PAUSE_NEXT_LAYER]
+    description: Enable a pause if the next layer is reached
+    gcode:
+      {% set pause_next_layer = printer['gcode_macro SET_PRINT_STATS_INFO'].pause_next_layer %}
+      {% set ENABLE = params.ENABLE|default(1)|int != 0 %}
+      {% set MACRO = params.MACRO|default(pause_next_layer.call, True) %}
+      SET_GCODE_VARIABLE MACRO=SET_PRINT_STATS_INFO VARIABLE=pause_next_layer VALUE="{{ 'enable': ENABLE, 'call': MACRO }}"
+
+    # Usage: SET_PAUSE_AT_LAYER [ENABLE=[0|1]] [LAYER=<number>] [MACRO=<name>]
+    [gcode_macro SET_PAUSE_AT_LAYER]
+    description: Enable/disable a pause if a given layer number is reached
+    gcode:
+      {% set pause_at_layer = printer['gcode_macro SET_PRINT_STATS_INFO'].pause_at_layer %}
+      {% set ENABLE = params.ENABLE|int != 0 if params.ENABLE is defined
+                else params.LAYER is defined %}
+      {% set LAYER = params.LAYER|default(pause_at_layer.layer)|int %}
+      {% set MACRO = params.MACRO|default(pause_at_layer.call, True) %}
+      SET_GCODE_VARIABLE MACRO=SET_PRINT_STATS_INFO VARIABLE=pause_at_layer VALUE="{{ 'enable': ENABLE, 'layer': LAYER, 'call': MACRO }}"
+
+    # Usage: SET_PRINT_STATS_INFO [TOTAL_LAYER=<total_layer_count>] [CURRENT_LAYER= <current_layer>]
+    [gcode_macro SET_PRINT_STATS_INFO]
+    rename_existing: SET_PRINT_STATS_INFO_BASE
+    description: Overwrite, to get pause_next_layer and pause_at_layer feature
+    variable_pause_next_layer: { 'enable': False, 'call': "PAUSE" }
+    variable_pause_at_layer  : { 'enable': False, 'layer': 0, 'call': "PAUSE" }
+    gcode:
+      {% if pause_next_layer.enable %}
+        RESPOND TYPE=echo MSG='{"%s, forced by pause_next_layer" % pause_next_layer.call}'
+        {pause_next_layer.call} ; execute the given gcode to pause, should be either M600 or PAUSE
+        SET_PAUSE_NEXT_LAYER ENABLE=0
+      {% elif pause_at_layer.enable and params.CURRENT_LAYER is defined and params.CURRENT_LAYER|int == pause_at_layer.layer %}
+        RESPOND TYPE=echo MSG='{"%s, forced by pause_at_layer [%d]" % (pause_at_layer.call, pause_at_layer.layer)}'
+        {pause_at_layer.call} ; execute the given gcode to pause, should be either M600 or PAUSE
+        SET_PAUSE_AT_LAYER ENABLE=0
+      {% endif %}
+      SET_PRINT_STATS_INFO_BASE {rawparams}
+      
+    ##### internal use #####
+    [gcode_macro _TOOLHEAD_PARK_PAUSE_CANCEL]
+    description: Helper: park toolhead used in PAUSE and CANCEL_PRINT
+    gcode:
+      ##### get user parameters or use default #####
+      {% set client = printer['gcode_macro _CLIENT_VARIABLE']|default({}) %}
+      {% set velocity = printer.configfile.settings.pause_resume.recover_velocity %}
+      {% set use_custom     = client.use_custom_pos|default(false)|lower == 'true' %}
+      {% set custom_park_x  = client.custom_park_x|default(0.0) %}
+      {% set custom_park_y  = client.custom_park_y|default(0.0) %}
+      {% set park_dz        = client.custom_park_dz|default(2.0)|abs %}
+      {% set sp_hop         = client.speed_hop|default(15) * 60 %}
+      {% set sp_move        = client.speed_move|default(velocity) * 60 %}
+      ##### get config and toolhead values #####
+      {% set origin    = printer.gcode_move.homing_origin %}
+      {% set act       = printer.gcode_move.gcode_position %}
+      {% set max       = printer.toolhead.axis_maximum %}
+      {% set cone      = printer.toolhead.cone_start_z|default(max.z) %} ; height as long the toolhead can reach max and min of an delta
+      {% set round_bed = True if printer.configfile.settings.printer.kinematics is in ['delta','polar','rotary_delta','winch']
+                    else False %}
+      ##### define park position #####
+      {% set z_min = params.Z_MIN|default(0)|float %}
+      {% set z_park = [[(act.z + park_dz), z_min]|max, (max.z - origin.z)]|min %}
+      {% set x_park = params.X       if params.X is defined
+                else custom_park_x  if use_custom
+                else 0.0            if round_bed
+                else (max.x - 5.0) %}
+      {% set y_park = params.Y       if params.Y is defined
+                else custom_park_y  if use_custom
+                else (max.y - 5.0)  if round_bed and z_park < cone
+                else 0.0            if round_bed
+                else (max.y - 5.0) %}
+      ##### end of definitions #####
+      _CLIENT_RETRACT
+      {% if "xyz" in printer.toolhead.homed_axes %}
+        G90
+        G1 Z{z_park} F{sp_hop}
+        G1 X{x_park} Y{y_park} F{sp_move}
+        {% if not printer.gcode_move.absolute_coordinates %} G91 {% endif %}
+      {% else %}
+        RESPOND TYPE=echo MSG='Printer not homed'
+      {% endif %}
+      
+    [gcode_macro _CLIENT_EXTRUDE]
+    description: Extrudes, if the extruder is hot enough
+    gcode:
+      ##### get user parameters or use default #####
+      {% set client = printer['gcode_macro _CLIENT_VARIABLE']|default({}) %}
+      {% set use_fw_retract = (client.use_fw_retract|default(false)|lower == 'true') and (printer.firmware_retraction is defined) %}
+      {% set length = params.LENGTH|default(client.unretract)|default(1.0)|float %}
+      {% set speed = params.SPEED|default(client.speed_unretract)|default(35) %}
+      {% set absolute_extrude = printer.gcode_move.absolute_extrude %}
+      ##### end of definitions #####
+      {% if printer.toolhead.extruder != '' %}
+        {% if printer[printer.toolhead.extruder].can_extrude %}
+          {% if use_fw_retract %}
+            {% if length < 0 %}
+              G10
+            {% else %}
+              G11
+            {% endif %}
+          {% else %}
+            M83
+            G1 E{length} F{(speed|float|abs) * 60}
+            {% if absolute_extrude %}
+              M82
+            {% endif %}
+          {% endif %}
+        {% else %}
+          RESPOND TYPE=echo MSG='{"\"%s\" not hot enough" % printer.toolhead.extruder}'
+        {% endif %}
+      {% endif %}
+
+    [gcode_macro _CLIENT_RETRACT]
+    description: Retracts, if the extruder is hot enough
+    gcode:
+      {% set client = printer['gcode_macro _CLIENT_VARIABLE']|default({}) %}
+      {% set length = params.LENGTH|default(client.retract)|default(1.0)|float %}
+      {% set speed = params.SPEED|default(client.speed_retract)|default(35) %}
+
+      _CLIENT_EXTRUDE LENGTH=-{length|float|abs} SPEED={speed|float|abs}

@@ -21,6 +21,15 @@ spec:
         - name: printer-data
           persistentVolumeClaim:
             claimName: printer-data-pvc
+        - name: printer-cfg
+          configMap:
+            name: klipper-config
+        - name: mainsail-cfg
+          configMap:
+            name: mainsail-config
+        - name: moonraker-cfg
+          configMap:
+            name: moonraker-config
       containers:
         - name: klipper
           image: ghcr.io/brunostjohn/custom-klipper:main
@@ -53,6 +62,15 @@ spec:
           volumeMounts:
             - name: printer-data
               mountPath: /opt/printer_data
+            - name: printer-cfg
+              mountPath: /opt/printer_data/config/printer.cfg
+              subPath: printer.cfg
+            - name: mainsail-cfg
+              mountPath: /opt/printer_data/config/mainsail.cfg
+              subPath: mainsail.cfg
+            - name: moonraker-cfg
+              mountPath: /opt/printer_data/config/moonraker.conf
+              subPath: moonraker.conf
 ---
 apiVersion: apps/v1
 kind: Deployment
