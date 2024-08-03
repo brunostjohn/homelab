@@ -20,8 +20,7 @@ FROM python:3.11-bookworm AS moonraker-cloner
 WORKDIR /otp
 
 RUN git clone https://github.com/Arksine/moonraker moonraker \
- && cd moonraker \
- && rm -rf .git
+ && rm -rf moonraker/.git
 
 RUN python -m venv venv \
  && venv/bin/pip install -r moonraker/scripts/moonraker-requirements.txt
@@ -48,7 +47,9 @@ COPY --chown=klipper:klipper --from=klipper-cloner /opt/venv /opt/venv-klipper
 COPY --chown=klipper:klipper --from=moonraker-cloner /opt/moonraker /opt/moonraker
 COPY --chown=klipper:klipper --from=moonraker-cloner /opt/venv /opt/venv-moonraker
 COPY --chown=klipper:klipper runwatch/run.sh /opt/runwatch/run.sh
-COPY --chown=klipper:klipper runwatch/100.socat-printer.enabled.sh /opt/runwatch/200.klipper.enabled.sh
+COPY --chown=klipper:klipper runwatch/100.socat-printer.enabled.sh /opt/runwatch/100.socat-printer.enabled.sh
+COPY --chown=klipper:klipper runwatch/200.socat-klipper.enabled.sh /opt/runwatch/200.klipper.enabled.sh
+COPY --chown=klipper:klipper runwatch/300.socat-moonraker.enabled.sh /opt/runwatch/300.moonraker.enabled.sh
 
 RUN chmod +x /opt/runwatch/*.sh
 
