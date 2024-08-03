@@ -55,5 +55,5 @@ RUN chmod +x /opt/runwatch/*.sh
 
 USER klipper
 EXPOSE 7125
-VOLUME ["/opt/printer_data/gcodes", "/opt/printer_data/logs", "/opt/printer_data/config"]
+VOLUME ["/opt/printer_data"]
 ENTRYPOINT /opt/runwatch/run.sh

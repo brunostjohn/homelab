@@ -54,7 +54,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 5000
+              port: 7125
           volumeMounts:
             - name: printer-data
               mountPath: /opt/printer_data
