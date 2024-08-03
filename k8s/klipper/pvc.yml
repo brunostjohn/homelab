@@ -11,3 +11,17 @@ spec:
       storage: 2Gi
   storageClassName: longhorn
   volumeName: printer-data-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: spoolman-pvc
+  namespace: klipper
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+  storageClassName: longhorn
+  volumeName: spoolman-pv
