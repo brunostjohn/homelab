@@ -22,7 +22,7 @@ spec:
           persistentVolumeClaim:
             claimName: printer-data-pvc
       containers:
-        - name: octoprint
+        - name: klipper
           image: ghcr.io/brunostjohn/custom-klipper:main
           imagePullPolicy: Always
           env:

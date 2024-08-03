@@ -1,7 +1,7 @@
 apiVersion: akri.sh/v0
 kind: Configuration
 metadata:
-  name: akri-3dprinter
+  name: 3dprinter
   namespace: klipper
 spec:
   capacity: 1
