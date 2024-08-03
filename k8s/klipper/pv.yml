@@ -38,4 +38,4 @@ spec:
     volumeAttributes:
       numberOfReplicas: "2"
       staleReplicaTimeout: "30"
-    volumeHandle: pvc-3f6d3c93-79e5-41e7-b1e4-62191dc41703
+    volumeHandle: spoolman
