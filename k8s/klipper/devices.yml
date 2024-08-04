@@ -28,7 +28,7 @@ spec:
               set -euxo pipefail
               echo Installing ser2net
               apk add --no-cache ser2net
-              ser2net -d -C 2000:raw:0:/dev/ttyUSB0:250000
+              ser2net -d -C 2000:raw:0:/dev/ttyUSB0:230400
           ports:
             - name: device
               containerPort: 2000
@@ -52,7 +52,7 @@ spec:
 apiVersion: akri.sh/v0
 kind: Configuration
 metadata:
-  name: akri-webcam
+  name: akri-cam
   namespace: klipper
 spec:
   capacity: 1
@@ -60,7 +60,7 @@ spec:
     discoveryDetails: |
       groupRecursive: true
       udevRules:
-      - ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825"
+        - ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825"
     name: udev
   configurationServiceSpec:
     type: ClusterIP
@@ -72,7 +72,7 @@ spec:
   brokerSpec:
     brokerPodSpec:
       containers:
-        - name: webcam-broker
+        - name: cam-broker
           image: davidhamm/mjpg-streamer
           securityContext:
             privileged: true
