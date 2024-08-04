@@ -37,7 +37,7 @@ spec:
         - name: klipper
           image: ghcr.io/brunostjohn/custom-klipper@sha256:c5facca5cc235cadf422d31c9b7bd60af0db961fd1f3bd8dfd01ee0efa5f0b4a
           nodeSelector:
-            kubernetes.io/hostname: failoverpi
+            kubernetes.io/hostname: node1
           imagePullPolicy: Always
           env:
             - name: SOCAT_PRINTER_TYPE
