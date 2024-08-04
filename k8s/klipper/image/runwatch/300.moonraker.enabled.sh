@@ -29,15 +29,15 @@ is-running)
     ;;
 
 start)
-    echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
-    $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
-    exit 0
-    # if pgrep -f "socat" >/dev/null 2>&1 ; then
-    # else
-    #     # socat is not running
-    #     echo "##### Socat is not running, skipping start of moonraker"
-    #     exit 1
-    # fi
+    if pgrep -f "socat" >/dev/null 2>&1 ; then
+        echo "Starting... $BINARY $PARAMS" >> "$LOG_FILE"
+        $BINARY $PARAMS 2>$LOG_FILE >$LOG_FILE &
+        exit 0
+    else
+        # socat is not running
+        echo "##### Socat is not running, skipping start of moonraker"
+        exit 1
+    fi
     ;;
 
 start-fail)
