@@ -142,6 +142,10 @@ spec:
     metadata:
       labels:
         app: mainsail
+    volumes:
+      - name: mainsail-config
+        configMap:
+          name: mainsail-config
     spec:
       containers:
         - name: mainsail
@@ -164,6 +168,10 @@ spec:
             httpGet:
               path: /
               port: 80
+          volumeMounts:
+            - name: mainsail-config
+              mountPath: /usr/share/nginx/html/config.json
+              subPath: config.json
 ---
 apiVersion: apps/v1
 kind: Deployment

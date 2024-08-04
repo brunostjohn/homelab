@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mainsail-config
+  namespace: klipper
+data:
+  config.json: |
+    {
+      "instancesDB": "json",
+      "instances": [
+        {
+          "hostname": "klipper.local",
+          "port": 80,
+          "path": "/moonraker"
+        }
+      ]
+    }
