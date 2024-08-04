@@ -121,7 +121,7 @@ data:
     control_pin: PC13
     x_offset: -23.0
     y_offset: -14.5
-    z_offset: 2.65
+    z_offset: 1.029
     speed: 20
     pin_move_time: 0.4
     stow_on_each_sample: False
