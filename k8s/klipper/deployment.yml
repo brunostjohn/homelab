@@ -142,11 +142,11 @@ spec:
     metadata:
       labels:
         app: mainsail
-    volumes:
-      - name: mainsail
-        configMap:
-          name: mainsail-config
     spec:
+      volumes:
+        - name: mainsail
+          configMap:
+            name: mainsail-config
       containers:
         - name: mainsail
           image: ghcr.io/mainsail-crew/mainsail:latest
