@@ -1,7 +1,7 @@
 apiVersion: akri.sh/v0
 kind: Configuration
 metadata:
-  name: 3dprinter
+  name: akri-3dprinter
   namespace: klipper
 spec:
   capacity: 1
@@ -14,7 +14,7 @@ spec:
   brokerSpec:
     brokerPodSpec:
       containers:
-        - name: 3dprint-broker
+        - name: 3dprintwe-broker
           image: alpine:3.14.0
           imagePullPolicy: IfNotPresent
           securityContext:
