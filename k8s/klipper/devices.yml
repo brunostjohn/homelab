@@ -26,9 +26,10 @@ spec:
               echo ENV
               printenv
               set -euxo pipefail
-              echo Installing ser2net
+              echo Installing socat
               apk add --no-cache socat
-              socat -d -d TCP-LISTEN:2000,fork,reuseaddr FILE:/dev/ttyUSB0,b250000,raw
+              stty -F /dev/ttyUSB0 250000
+              socat -d -d TCP-LISTEN:2000,fork,reuseaddr FILE:/dev/ttyUSB0,raw
           ports:
             - name: device
               containerPort: 2000
