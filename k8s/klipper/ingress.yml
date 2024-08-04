@@ -29,13 +29,6 @@ spec:
     - host: klipper.local
       http:
         paths:
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: mainsail-service
-                port:
-                  number: 80
           - path: /moonraker
             pathType: ImplementationSpecific
             backend:
@@ -50,3 +43,10 @@ spec:
                 name: akri-webcam-svc
                 port:
                   number: 8080
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: mainsail-service
+                port:
+                  number: 80
