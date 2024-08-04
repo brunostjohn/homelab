@@ -33,14 +33,14 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: klipper-service
+                name: mainsail-service
                 port:
-                  number: 7125
+                  number: 80
           - path: /moonraker
             pathType: ImplementationSpecific
             backend:
               service:
-                name: klipper
+                name: klipper-service
                 port:
                   number: 7125
           - path: /webcam
