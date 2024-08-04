@@ -143,7 +143,7 @@ spec:
       labels:
         app: mainsail
     volumes:
-      - name: mainsail-config
+      - name: mainsail
         configMap:
           name: mainsail-config
     spec:
@@ -169,7 +169,7 @@ spec:
               path: /
               port: 80
           volumeMounts:
-            - name: mainsail-config
+            - name: mainsail
               mountPath: /usr/share/nginx/html/config.json
               subPath: config.json
 ---
