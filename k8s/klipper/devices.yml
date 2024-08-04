@@ -60,7 +60,7 @@ spec:
     discoveryDetails: |
       groupRecursive: true
       udevRules:
-        - ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0825"
+        - ATTRS{idProduct}=="0825", ATTRS{idVendor}=="046d"
     name: udev
   configurationServiceSpec:
     type: ClusterIP
