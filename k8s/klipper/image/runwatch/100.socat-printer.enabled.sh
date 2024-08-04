@@ -11,7 +11,7 @@ if [[ -z "${SOCAT_PRINTER_LINK}" ]]; then
 fi
 
 BINARY="sudo"
-PARAMS="socat $INT_SOCAT_LOG-d -d -d pty,link=$SOCAT_PRINTER_LINK,raw,user=root,mode=777,ignoreeof,echo=0,forever,interval=10,forever,keepalive $SOCAT_PRINTER_TYPE:$SOCAT_PRINTER_HOST:$SOCAT_PRINTER_PORT"
+PARAMS="socat $INT_SOCAT_LOG-d -d -d pty,link=$SOCAT_PRINTER_LINK,raw,user=root,mode=777,ignoreeof,echo=0,interval=10,keepalive $SOCAT_PRINTER_TYPE:$SOCAT_PRINTER_HOST:$SOCAT_PRINTER_PORT"
 
 ######################################################
 
