@@ -62,7 +62,7 @@ spec:
               memory: "512Mi"
           readinessProbe:
             httpGet:
-              path: /
+              path: /server/info
               port: 7125
           volumeMounts:
             - name: printer-data
