@@ -12,6 +12,6 @@
     isNormalUser = true;
     description = "Klaudia Strugacz";
     extraGroups = [ "networkmanager" "wheel" "docker" "sudo" ];
-    packages = with pkgs; [ fastfetch ];
+    packages = with pkgs; [ ];
   };
 }

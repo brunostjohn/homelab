@@ -9,8 +9,8 @@ includes:
     dir: ./terraform
   nixos:
     aliases: ["nix", "n"]
-    taskfile: ./nixos/tasks.yml
-    dir: ./nixos
+    taskfile: ./nix/tasks.yml
+    dir: ./nix
   caddy:
     aliases: ["c"]
     taskfile: ./reverse-proxy/tasks.yml

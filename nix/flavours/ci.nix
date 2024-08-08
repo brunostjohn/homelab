@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, pool, ... }:
 
 {
   users.users.githubActionsUser = {
@@ -8,10 +8,10 @@
     packages = with pkgs; [ git gawk openssh ];
   };
 
-  services.github-runners.jabberwockRunner = {
+  services.github-runners."${pool.name}Runner" = {
     enable = true;
-    name = "jabberwock-runner";
-    tokenFile = "/mnt/jabberwock/githubactions/jabberwock-runner-secret";
+    name = "${pool.name}-runner";
+    tokenFile = "/mnt/${pool.name}/githubactions/${pool.name}-runner-secret";
     url = "https://github.com/brunostjohn/homelab";
     user = "githubActionsUser";
     extraPackages = with pkgs; [
@@ -32,12 +32,12 @@
       })
     ];
     serviceOverrides = {
-      ReadWritePaths = [ "/mnt/jabberwock/caddy/Caddyfile" ];
+      ReadWritePaths = [ "/mnt/${pool.name}/caddy/Caddyfile" ];
       ReadWriteDirectories = [ "/homelab" ];
       ProtectHome = false;
     };
   };
 
-  systemd.services.github-runner-jabberwockRunner.serviceConfig.SupplementaryGroups =
+  systemd.services."github-runner-${pool.name}Runner".serviceConfig.SupplementaryGroups =
     [ "docker" ];
 }
