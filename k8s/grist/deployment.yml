@@ -48,7 +48,7 @@ spec:
                   name: grist-secrets
                   key: GRIST_SESSION_SECRET
             - name: GRIST_SANDBOX_FLAVOR
-              value: unsandboxed
+              value: gvisor
             - name: APP_HOME_URL
               value: https://grist.zefirsroyal.cloud
             - name: DEBUG
