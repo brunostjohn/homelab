@@ -60,12 +60,12 @@ spec:
                 secretKeyRef:
                   name: grist-secrets
                   key: GRIST_OIDC_IDP_ISSUER
-            - name: GRIST_OIDC_CLIENT_ID
+            - name: GRIST_OIDC_IDP_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: grist-secrets
                   key: GRIST_OIDC_CLIENT_ID
-            - name: GRIST_OIDC_CLIENT_SECRET
+            - name: GRIST_OIDC_IDP_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: grist-secrets
