@@ -42,6 +42,10 @@ spec:
                 secretKeyRef:
                   name: grist-secrets
                   key: GRIST_SESSION_SECRET
+            - name: GRIST_SANDBOX_FLAVOR
+              value: gvisor
+            - name: APP_HOME_URL
+              value: https://grist.zefirsroyal.cloud
           resources:
             requests:
               memory: "128Mi"
