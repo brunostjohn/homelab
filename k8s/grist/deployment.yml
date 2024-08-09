@@ -19,7 +19,9 @@ spec:
         app: grist
     spec:
       securityContext:
-        fsGroup: 1000
+        fsGroup: 1001
+        runAsUser: 1001
+        runAsGroup: 1001
       volumes:
         - name: grist-data
           persistentVolumeClaim:
@@ -27,9 +29,6 @@ spec:
       containers:
         - name: grist
           image: gristlabs/grist:latest
-          securityContext:
-            privileged: false
-            allowPrivilegeEscalation: false
           ports:
             - containerPort: 8484
               name: http
