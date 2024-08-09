@@ -24,7 +24,7 @@ spec:
             claimName: grist-data-pvc
       containers:
         - name: grist
-          image: grist/grist:latest
+          image: gristlabs/grist:latest
           securityContext:
             privileged: false
             allowPrivilegeEscalation: false
