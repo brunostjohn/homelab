@@ -60,10 +60,10 @@ spec:
             limits:
               memory: "256Mi"
           readinessProbe:
-            httpGet:
+            tcpSocket:
               path: /
               port: 8484
           livenessProbe:
-            httpGet:
+            tcpSocket:
               path: /
               port: 8484
