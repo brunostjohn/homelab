@@ -29,6 +29,10 @@ spec:
       containers:
         - name: grist
           image: gristlabs/grist:latest
+          securityContext:
+            capabilities:
+              add:
+                - SYS_PTRACE
           ports:
             - containerPort: 8484
               name: http
