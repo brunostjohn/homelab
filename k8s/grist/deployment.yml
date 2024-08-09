@@ -80,9 +80,7 @@ spec:
               memory: "256Mi"
           readinessProbe:
             tcpSocket:
-              path: /
               port: 8484
           livenessProbe:
             tcpSocket:
-              path: /
               port: 8484
