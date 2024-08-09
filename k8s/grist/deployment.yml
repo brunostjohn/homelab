@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grist-deployment
+  namespace: grist
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grist
+  template:
+    metadata:
+      labels:
+        app: grist
+    spec:
+      volumes:
+        - name: grist-data
+          persistentVolumeClaim:
+            claimName: grist-data-pvc
+      containers:
+        - name: grist
+          image: grist/grist:latest
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+          ports:
+            - containerPort: 8484
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: grist-data
+              mountPath: /persist
+          env:
+            - name: GRIST_SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grist-secrets
+                  key: GRIST_SESSION_SECRET
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8484
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8484
