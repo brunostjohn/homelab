@@ -29,6 +29,7 @@ spec:
       containers:
         - name: grist
           image: gristlabs/grist:latest
+          imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
               add:
@@ -50,6 +51,8 @@ spec:
               value: gvisor
             - name: APP_HOME_URL
               value: https://grist.zefirsroyal.cloud
+            - name: DEBUG
+              value: "true"
           resources:
             requests:
               memory: "128Mi"
