@@ -18,6 +18,8 @@ spec:
       labels:
         app: grist
     spec:
+      securityContext:
+        fsGroup: 1000
       volumes:
         - name: grist-data
           persistentVolumeClaim:

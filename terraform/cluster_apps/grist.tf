@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "grist" {
 
 resource "kubernetes_secret" "grist" {
   metadata {
-    name      = "grist"
+    name      = "grist-secrets"
     namespace = kubernetes_namespace.grist.metadata[0].name
   }
 
