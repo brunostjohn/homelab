@@ -102,3 +102,18 @@ variable "grist_session_secret" {
   type        = string
   description = "The session secret for Grist"
 }
+
+variable "grist_oidc_idp_issuer" {
+  type        = string
+  description = "The OIDC IDP issuer for Grist"
+}
+
+variable "grist_oidc_client_id" {
+  type        = string
+  description = "The OIDC client ID for Grist"
+}
+
+variable "grist_oidc_client_secret" {
+  type        = string
+  description = "The OIDC client secret for Grist"
+}

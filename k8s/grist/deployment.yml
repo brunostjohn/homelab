@@ -48,11 +48,30 @@ spec:
                   name: grist-secrets
                   key: GRIST_SESSION_SECRET
             - name: GRIST_SANDBOX_FLAVOR
-              value: gvisor
+              value: unsandboxed
+            - name: GRIST_FORCE_LOGIN
+              value: "true"
             - name: APP_HOME_URL
               value: https://grist.zefirsroyal.cloud
             - name: DEBUG
               value: "true"
+            - name: GRIST_OIDC_IDP_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: grist-secrets
+                  key: GRIST_OIDC_IDP_ISSUER
+            - name: GRIST_OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: grist-secrets
+                  key: GRIST_OIDC_CLIENT_ID
+            - name: GRIST_OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: grist-secrets
+                  key: GRIST_OIDC_CLIENT_SECRET
+            - name: GRIST_OIDC_IDP_SCOPES
+              value: "openid email profile"
           resources:
             requests:
               memory: "128Mi"

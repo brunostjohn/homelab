@@ -46,6 +46,9 @@ module "cluster_apps" {
   mqtt_zigbee2mqtt_password_hash   = var.mqtt_zigbee2mqtt_password_hash
   mqtt_octoprint_password_hash     = var.mqtt_octoprint_password_hash
   grist_session_secret             = var.grist_session_secret
+  grist_oidc_client_id = var.grist_oidc_client_id
+  grist_oidc_client_secret = var.grist_oidc_client_secret
+  grist_oidc_idp_issuer = var.grist_oidc_idp_issuer
 }
 
 module "adguard" {

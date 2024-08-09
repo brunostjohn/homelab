@@ -12,6 +12,9 @@ resource "kubernetes_secret" "grist" {
 
   data = {
     "GRIST_SESSION_SECRET" = var.grist_session_secret
+    "GRIST_OIDC_IDP_ISSUER" = var.grist_oidc_idp_issuer
+    "GRIST_OIDC_CLIENT_ID" = var.grist_oidc_client_id
+    "GRIST_OIDC_CLIENT_SECRET" = var.grist_oidc_client_secret
   }
 }
 
