@@ -4,7 +4,7 @@
 
 #     namespace = "monitoring"
 #     create_namespace = true
-    
+
 #     name = "monitoring"
 #     chart = "kube-prometheus-stack"
 #     repo_url = "https://prometheus-community.github.io/helm-charts"

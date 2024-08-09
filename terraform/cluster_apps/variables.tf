@@ -97,3 +97,8 @@ variable "mqtt_octoprint_password_hash" {
   type        = string
   description = "The password hash for the octoprint MQTT user"
 }
+
+variable "grist_session_secret" {
+  type        = string
+  description = "The session secret for Grist"
+}

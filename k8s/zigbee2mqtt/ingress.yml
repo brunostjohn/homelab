@@ -6,13 +6,13 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-  - host: zigbee2mqtt.local
-    http:
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: zigbee2mqtt
-            port:
-              number: 8080
+    - host: zigbee2mqtt.local
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: zigbee2mqtt
+                port:
+                  number: 8080

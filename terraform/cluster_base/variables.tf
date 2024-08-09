@@ -19,6 +19,6 @@ variable "akri_values" {
 }
 
 variable "global_fqdn" {
-  type = string
+  type        = string
   description = "The global FQDN for the homelab"
 }

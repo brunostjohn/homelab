@@ -6,7 +6,7 @@ metadata:
   annotations:
     nfs.io/storage-path: "grist"
 spec:
-  storageClassName: nfs-client
+  storageClassName: nfs-jabberwock-subpath
   accessModes:
     - ReadWriteMany
   resources:
