@@ -15,6 +15,8 @@ resource "argocd_application" "metallb" {
   wait = true
 
   spec {
+    project = argocd_project.networking.metadata[0].name
+
     destination {
       server    = "https://kubernetes.default.svc"
       namespace = "metallb"

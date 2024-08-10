@@ -208,3 +208,13 @@ variable "letsencrypt_cloudflare_api_token" {
   type        = string
   description = "The Cloudflare API token to use for Let's Encrypt DNS-01 challenges"
 }
+
+variable "mqtt_exporter_password_hash" {
+  type        = string
+  description = "The password hash for the exporter MQTT user"
+}
+
+variable "mqtt_exporter_password" {
+  type        = string
+  description = "The password for the exporter MQTT user"
+}

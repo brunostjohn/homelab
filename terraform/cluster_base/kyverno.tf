@@ -15,6 +15,8 @@ resource "argocd_application" "kyverno" {
   }
 
   spec {
+    project = argocd_project.cluster_mgmt.metadata[0].name
+
     source {
       repo_url        = "https://kyverno.github.io/kyverno"
       chart           = "kyverno"

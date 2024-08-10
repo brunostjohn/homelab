@@ -66,6 +66,8 @@ resource "argocd_application" "authentik" {
   }
 
   spec {
+    project = var.security_project
+
     destination {
       server    = "https://kubernetes.default.svc"
       namespace = kubernetes_namespace.authentik.metadata[0].name

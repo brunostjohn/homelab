@@ -25,12 +25,16 @@ module "cluster_base" {
   traefik_values                   = file("values/traefik.yml")
   letsencrypt_email                = var.letsencrypt_email
   letsencrypt_cloudflare_api_token = var.letsencrypt_cloudflare_api_token
+  nvidia_plugin_values             = file("values/nvidia.yml")
 }
 
 module "cluster_apps" {
   source     = "./cluster_apps"
   depends_on = [module.unifi, module.cluster_base]
 
+  networking_project               = module.cluster_base.networking_project
+  security_project                 = module.cluster_base.security_project
+  storage_project                  = module.cluster_base.storage_project
   homelab_repo                     = module.cluster_base.homelab_repo
   adguard_username                 = var.adguard_username
   adguard_password                 = var.adguard_password
@@ -58,6 +62,8 @@ module "cluster_apps" {
   grist_oidc_client_id             = var.grist_oidc_client_id
   grist_oidc_client_secret         = var.grist_oidc_client_secret
   grist_oidc_idp_issuer            = var.grist_oidc_idp_issuer
+  mqtt_exporter_password_hash      = var.mqtt_exporter_password_hash
+  mqtt_exporter_password           = var.mqtt_exporter_password
 }
 
 module "adguard" {

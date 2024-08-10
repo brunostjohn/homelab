@@ -91,6 +91,8 @@ resource "argocd_application" "longhorn" {
   }
 
   spec {
+    project = argocd_project.storage.metadata[0].name
+
     source {
       repo_url        = "https://charts.longhorn.io"
       chart           = "longhorn"

@@ -98,6 +98,16 @@ variable "mqtt_octoprint_password_hash" {
   description = "The password hash for the octoprint MQTT user"
 }
 
+variable "mqtt_exporter_password_hash" {
+  type        = string
+  description = "The password hash for the exporter MQTT user"
+}
+
+variable "mqtt_exporter_password" {
+  type        = string
+  description = "The password for the exporter MQTT user"
+}
+
 variable "grist_session_secret" {
   type        = string
   description = "The session secret for Grist"
@@ -131,4 +141,19 @@ variable "minio_oidc_client_id" {
 variable "minio_oidc_client_secret" {
   type        = string
   description = "The OIDC client secret for Minio"
+}
+
+variable "networking_project" {
+  type        = string
+  description = "The name of the Networking project"
+}
+
+variable "storage_project" {
+  type        = string
+  description = "The name of the Storage project"
+}
+
+variable "security_project" {
+  type        = string
+  description = "The name of the Security project"
 }

@@ -9,6 +9,8 @@ module "cert_manager" {
   repo_url        = "https://charts.jetstack.io"
   target_revision = "v1.15.2"
 
+  project = argocd_project.security.metadata[0].name
+
   create_ingress = false
 
   values = templatefile("${path.module}/values/certmanager.yml.tpl", {

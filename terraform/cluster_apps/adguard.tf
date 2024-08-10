@@ -29,7 +29,7 @@ resource "argocd_application" "adguard" {
   wait = true
 
   spec {
-    project = "default"
+    project = var.networking_project
 
     source {
       repo_url        = var.homelab_repo

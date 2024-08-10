@@ -49,16 +49,25 @@ alertmanager:
           storage: 512Mi
 
 grafana:
+  initChownData:
+    enabled: false
   defaultDashboardsEnabled: false
   ingress:
     enabled: true
     ingressClassName: traefik
     hosts:
       - grafana.${global_fqdn}
-  persistance:
+  persistence:
     enabled: true
     storageClassName: nfs-jabberwock-subpath
     size: 1Gi
+  securityContext:
+    fsGroup: 1001
+    runAsGroup: 1001
+    runAsNonRoot: true
+    runAsUser: 1001
+    seccompProfile:
+      type: RuntimeDefault
   grafana.ini:
     server:
       root_url: https://grafana.${global_fqdn}

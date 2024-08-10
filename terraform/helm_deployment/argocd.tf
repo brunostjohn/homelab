@@ -12,6 +12,8 @@ resource "argocd_application" "app" {
       namespace = var.create_namespace ? kubernetes_namespace.ns[0].metadata[0].name : var.namespace
     }
 
+    project = var.project
+
     source {
       repo_url        = var.repo_url
       chart           = var.chart

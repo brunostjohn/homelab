@@ -70,3 +70,9 @@ variable "server_side_apply" {
   default     = false
   description = "Use server-side apply"
 }
+
+variable "project" {
+  type        = string
+  description = "ArgoCD project"
+  default     = null
+}

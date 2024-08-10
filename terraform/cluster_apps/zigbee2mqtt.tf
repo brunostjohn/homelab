@@ -15,6 +15,8 @@ resource "kubernetes_namespace" "zigbee2mqtt" {
 #   }
 
 #   spec {
+#     project = argocd_project.smarthome.metadata[0].name
+#
 #     source {
 #       repo_url = var.homelab_repo
 #       path     = "k8s/zigbee2mqtt"

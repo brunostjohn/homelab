@@ -15,6 +15,8 @@ resource "argocd_application" "nfs_provisioner" {
   wait = true
 
   spec {
+    project = argocd_project.storage.metadata[0].name
+
     destination {
       server    = "https://kubernetes.default.svc"
       namespace = kubernetes_namespace.nfs_provisioner.metadata[0].name

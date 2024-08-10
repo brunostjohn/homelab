@@ -67,7 +67,7 @@ resource "argocd_application" "grist" {
 }
 
 resource "kubernetes_ingress_v1" "grist_ingress" {
-  depends_on = [ argocd_application.grist ]
+  depends_on = [argocd_application.grist]
 
   metadata {
     name      = "grist"

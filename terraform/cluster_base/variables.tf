@@ -52,3 +52,8 @@ variable "letsencrypt_cloudflare_api_token" {
   type        = string
   description = "The Cloudflare API token to use for Let's Encrypt DNS-01 challenges"
 }
+
+variable "nvidia_plugin_values" {
+  type        = string
+  description = "Values file for the NVIDIA device plugin Helm chart"
+}

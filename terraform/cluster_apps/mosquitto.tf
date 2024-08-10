@@ -66,11 +66,15 @@ module "mosquitto_helm" {
   repo_url        = "https://storage.googleapis.com/t3n-helm-charts"
   target_revision = "2.4.1"
 
+  project = argocd_project.smarthome.metadata[0].name
+
   create_ingress = false
 
   values = templatefile("${path.module}/templates/mosquitto.yml.tpl", {
     zigbee2mqtt_password_hash   = var.mqtt_zigbee2mqtt_password_hash
     homeassistant_password_hash = var.mqtt_homeassistant_password_hash
+    exporter_password_hash      = var.mqtt_exporter_password_hash
+    exporter_password           = var.mqtt_exporter_password
     octoprint_password_hash     = var.mqtt_octoprint_password_hash
     pvc                         = kubernetes_persistent_volume_claim.mosquitto_pvc.metadata[0].name
   })

@@ -12,6 +12,8 @@ module "kube_prometheus_helm" {
 
   server_side_apply = true
 
+  project = argocd_project.cluster_mgmt.metadata[0].name
+
   values = templatefile("${path.module}/values/monitoring.yml.tpl", {
     global_fqdn         = var.global_fqdn,
     namespace           = "monitoring",

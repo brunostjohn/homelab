@@ -15,6 +15,8 @@ resource "argocd_application" "minio" {
   }
 
   spec {
+    project = var.storage_project
+
     destination {
       server    = "https://kubernetes.default.svc"
       namespace = kubernetes_namespace.minio.metadata[0].name
