@@ -9,6 +9,10 @@ authentik:
     password: ${postgres_password}
 
 server:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
   ingress:
     ingressClassName: traefik
     enabled: true
