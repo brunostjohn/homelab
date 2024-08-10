@@ -25,12 +25,12 @@ resource "kubernetes_config_map" "grist_fqdn" {
   }
 
   data = {
-    "GRIST_FQDN" = "grist.${var.global_fqdn}"
+    "GRIST_FQDN" = "https://grist.${var.global_fqdn}"
   }
 }
 
 resource "argocd_application" "grist" {
-  depends_on = [kubernetes_namespace.grist, kubernetes_secret.grist]
+  depends_on = [kubernetes_namespace.grist, kubernetes_secret.grist, kubernetes_config_map.grist_fqdn]
 
   metadata {
     name      = "grist"
