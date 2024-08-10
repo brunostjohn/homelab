@@ -1,6 +1,8 @@
 global:
   image:
     tag: v2.11.7
+  addPrometheusAnnotations: true
+
 server:
   extraArgs:
     - --insecure

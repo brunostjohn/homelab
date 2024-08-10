@@ -50,7 +50,7 @@ variable "target_revision" {
 variable "values" {
   type        = string
   description = "values file"
-  default     = ""
+  default     = " "
 }
 
 variable "service_port" {
@@ -63,4 +63,10 @@ variable "ingress_annotations" {
   type        = map(string)
   description = "Annotations to apply to the Ingress"
   default     = {}
+}
+
+variable "server_side_apply" {
+  type        = bool
+  default     = false
+  description = "Use server-side apply"
 }

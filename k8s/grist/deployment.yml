@@ -51,8 +51,11 @@ spec:
               value: unsandboxed
             - name: GRIST_FORCE_LOGIN
               value: "true"
-            - name: APP_HOME_URL
-              value: https://grist.zefirsroyal.cloud
+            - name: APP_HOME
+              valueFrom:
+                configMapKeyRef:
+                  name: grist-fqdn
+                  key: GRIST_FQDN
             - name: DEBUG
               value: "true"
             - name: GRIST_OIDC_IDP_ISSUER

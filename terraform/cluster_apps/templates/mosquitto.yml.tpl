@@ -30,6 +30,6 @@ authorization:
 
 monitoring:
   podMonitor:
-    enabled: false
+    enabled: true
   sidecar:
-    enabled: false
+    enabled: true

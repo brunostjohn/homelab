@@ -117,3 +117,18 @@ variable "grist_oidc_client_secret" {
   type        = string
   description = "The OIDC client secret for Grist"
 }
+
+variable "minio_oidc_config_url" {
+  type        = string
+  description = "The OIDC config URL for Minio"
+}
+
+variable "minio_oidc_client_id" {
+  type        = string
+  description = "The OIDC client ID for Minio"
+}
+
+variable "minio_oidc_client_secret" {
+  type        = string
+  description = "The OIDC client secret for Minio"
+}

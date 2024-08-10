@@ -29,6 +29,8 @@ resource "argocd_application" "app" {
         allow_empty = true
       }
 
+      sync_options = var.server_side_apply ? ["ServerSideApply=true"] : []
+
       retry {
         limit = "5"
         backoff {

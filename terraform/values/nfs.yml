@@ -4,4 +4,4 @@ nfs:
 
 storageClass:
   name: nfs-jabberwock-subpath
-  pathPattern: "${.PVC.namespace}/${.PVC.annotations.nfs.io/storage-path}"
+  pathPattern: "${.PVC.namespace}/${.PVC.name}"

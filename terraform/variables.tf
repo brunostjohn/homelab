@@ -79,6 +79,21 @@ variable "minio_password" {
   description = "Minio password"
 }
 
+variable "minio_oidc_config_url" {
+  type        = string
+  description = "The OIDC config URL for Minio"
+}
+
+variable "minio_oidc_client_id" {
+  type        = string
+  description = "The OIDC client ID for Minio"
+}
+
+variable "minio_oidc_client_secret" {
+  type        = string
+  description = "The OIDC client secret for Minio"
+}
+
 variable "authentik_secret_key" {
   type        = string
   description = "Authentik secret key"
@@ -167,4 +182,29 @@ variable "grist_oidc_client_id" {
 variable "grist_oidc_client_secret" {
   type        = string
   description = "The OIDC client secret for Grist"
+}
+
+variable "alertmanager_discord_webhook_url" {
+  type        = string
+  description = "The Discord webhook URL for Alertmanager"
+}
+
+variable "crowdsec_enroll_key" {
+  type        = string
+  description = "The CrowdSec enrollment key"
+}
+
+variable "crowdsec_bouncer_key_traefik" {
+  type        = string
+  description = "The CrowdSec Traefik bouncer key"
+}
+
+variable "letsencrypt_email" {
+  type        = string
+  description = "The email address to use for Let's Encrypt"
+}
+
+variable "letsencrypt_cloudflare_api_token" {
+  type        = string
+  description = "The Cloudflare API token to use for Let's Encrypt DNS-01 challenges"
 }

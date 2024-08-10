@@ -7,6 +7,14 @@ resources:
 
 replicas: 2
 
+metrics:
+  serviceMonitor:
+    enabled: true
+    includeNode: true
+
+environment:
+  MINIO_DOMAIN: static.${global_fqdn}
+
 persistence:
   enabled: true
   storageClass: ${sc_name}
@@ -14,3 +22,13 @@ persistence:
 
 securityContext:
   enabled: false
+
+oidc:
+  enabled: true
+  configUrl: "${oidc_config_url}"
+  clientId: "${oidc_client_id}"
+  clientSecret: "${oidc_client_secret}"
+  claimName: "policy"
+  scopes: "openid profile email minio"
+  redirectUri: "http://minio.local/oauth_callback"
+  displayName: "Zefir's Cloud"

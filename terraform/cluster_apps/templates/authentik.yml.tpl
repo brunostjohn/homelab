@@ -1,3 +1,6 @@
+global:
+  addPrometheusAnnotations: true
+
 authentik:
   secret_key: ${secret_key}
   error_reporting:
