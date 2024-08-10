@@ -51,7 +51,7 @@ spec:
               value: unsandboxed
             - name: GRIST_FORCE_LOGIN
               value: "true"
-            - name: APP_HOME
+            - name: APP_HOME_URL
               valueFrom:
                 configMapKeyRef:
                   name: grist-fqdn
