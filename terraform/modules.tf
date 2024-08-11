@@ -25,7 +25,7 @@ module "cluster_base" {
   letsencrypt_email                = var.letsencrypt_email
   letsencrypt_cloudflare_api_token = var.letsencrypt_cloudflare_api_token
   nvidia_plugin_values             = file("values/nvidia.yml")
-  cluster_loadbalancer_ip = var.cluster_ipaddr
+  cluster_loadbalancer_ip          = var.cluster_ipaddr
 }
 
 module "cluster_apps" {
@@ -64,7 +64,8 @@ module "cluster_apps" {
   grist_oidc_idp_issuer            = var.grist_oidc_idp_issuer
   mqtt_exporter_password_hash      = var.mqtt_exporter_password_hash
   mqtt_exporter_password           = var.mqtt_exporter_password
-  cluster_ipaddr = var.cluster_ipaddr
+  cluster_ipaddr                   = var.cluster_ipaddr
+  hassio_token = var.hassio_token
 }
 
 module "adguard" {

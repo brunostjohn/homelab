@@ -218,3 +218,8 @@ variable "mqtt_exporter_password" {
   type        = string
   description = "The password for the exporter MQTT user"
 }
+
+variable "hassio_token" {
+  type = string
+  description = "Auth token for Home Assistant"
+}

@@ -162,3 +162,8 @@ variable "cluster_ipaddr" {
   type        = string
   description = "The desired IP address of the cluster load balancer"
 }
+
+variable "hassio_token" {
+  type = string
+  description = "Auth token for Home Assistant"
+}

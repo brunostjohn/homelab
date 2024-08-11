@@ -54,6 +54,6 @@ variable "nvidia_plugin_values" {
 }
 
 variable "cluster_loadbalancer_ip" {
-  type = string
+  type        = string
   description = "The desired IP address of the cluster load balancer"
 }

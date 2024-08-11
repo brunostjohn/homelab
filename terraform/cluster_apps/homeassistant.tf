@@ -4,6 +4,17 @@ resource "kubernetes_namespace" "homeassistant" {
   }
 }
 
+resource "kubernetes_secret" "hassio_token" {
+  metadata {
+    name      = "hassio-token"
+    namespace = kubernetes_namespace.homeassistant.metadata[0].name
+  }
+
+  data = {
+    "token" = var.hassio_token
+  }
+}
+
 resource "argocd_application" "homeassistant" {
   depends_on = [kubernetes_namespace.homeassistant]
 

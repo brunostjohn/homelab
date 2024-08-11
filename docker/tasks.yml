@@ -13,10 +13,6 @@ includes:
     aliases: ["n"]
     taskfile: ./networking/tasks.yml
     dir: ./networking
-  observability:
-    aliases: ["o"]
-    taskfile: ./observability/tasks.yml
-    dir: ./observability
 
 tasks:
   "produce:all":
