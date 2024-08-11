@@ -164,6 +164,6 @@ variable "cluster_ipaddr" {
 }
 
 variable "hassio_token" {
-  type = string
+  type        = string
   description = "Auth token for Home Assistant"
 }

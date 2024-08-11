@@ -22,3 +22,8 @@ variable "node1_pi_ipaddr" {
   type        = string
   description = "node1 pi's ip addr"
 }
+
+variable "global_fqdn" {
+  type        = string
+  description = "global fqdn"
+}

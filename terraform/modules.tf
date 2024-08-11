@@ -65,7 +65,7 @@ module "cluster_apps" {
   mqtt_exporter_password_hash      = var.mqtt_exporter_password_hash
   mqtt_exporter_password           = var.mqtt_exporter_password
   cluster_ipaddr                   = var.cluster_ipaddr
-  hassio_token = var.hassio_token
+  hassio_token                     = var.hassio_token
 }
 
 module "adguard" {
@@ -77,4 +77,5 @@ module "adguard" {
   node1_pi_ipaddr = module.unifi.node1_pi_ipaddr
   node2_pi_ipaddr = module.unifi.node2_pi_ipaddr
   node3_pi_ipaddr = module.unifi.node3_pi_ipaddr
+  global_fqdn     = var.global_fqdn
 }
