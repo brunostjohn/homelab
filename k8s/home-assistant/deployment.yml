@@ -18,9 +18,13 @@ spec:
       labels:
         app: home-assistant
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: home-assistant
-          image: "ghcr.io/home-assistant/home-assistant"
+          image: "ghcr.io/home-assistant/home-assistant:stable"
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
