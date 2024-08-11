@@ -24,7 +24,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: home-assistant
-          image: "ghcr.io/home-assistant/home-assistant:stable"
+          image: "linuxserver/homeassistant"
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
