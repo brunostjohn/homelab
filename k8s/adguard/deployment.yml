@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: adguard-deployment
   namespace: adguard
+  labels:
+    app: adguard
 spec:
   strategy:
     type: RollingUpdate

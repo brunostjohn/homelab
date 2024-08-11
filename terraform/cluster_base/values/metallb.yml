@@ -1,0 +1,5 @@
+prometheus:
+  serviceMonitor:
+    enabled: true
+  serviceAccount: monitoring-kube-prometheus-prometheus
+  namespace: monitoring

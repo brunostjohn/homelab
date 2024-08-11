@@ -8,9 +8,9 @@ tls:
 
 agent:
   metrics:
+    enabled: true
+    serviceMonitor:
       enabled: true
-      serviceMonitor:
-        enabled: true
   acquisition:
     - namespace: traefik
       podName: traefik-*

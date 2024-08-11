@@ -23,7 +23,7 @@ spec:
           image: ghcr.io/unpoller/unpoller:latest
           ports:
             - containerPort: 9130
-              name: tcp
+              name: metrics
               protocol: TCP
             - containerPort: 9130
               name: udp

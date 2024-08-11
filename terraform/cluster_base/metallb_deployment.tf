@@ -26,6 +26,10 @@ resource "argocd_application" "metallb" {
       repo_url        = "https://metallb.github.io/metallb"
       chart           = "metallb"
       target_revision = "v0.14"
+
+      helm {
+        values = file("${path.module}/values/metallb.yml")
+      }
     }
 
     sync_policy {
