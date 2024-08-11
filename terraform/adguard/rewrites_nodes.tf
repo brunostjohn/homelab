@@ -6,7 +6,7 @@ resource "adguard_rewrite" "k3s_ingress" {
 }
 
 resource "adguard_rewrite" "meowbox" {
-  for_each = toset(["meowbox.local", "${var.global_fqdn}", "*.${var.global_fqdn}", "*.static.${var.global_fqdn}"])
+  for_each = toset(["meowbox.local", var.global_fqdn, "*.${var.global_fqdn}", "*.static.${var.global_fqdn}"])
 
   domain = each.key
   answer = var.meowbox_ipaddr

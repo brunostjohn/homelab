@@ -38,6 +38,12 @@ tasks:
       - cd authentik && terraform validate
       - cd authentik && terraform fmt --check
       - cd authentik && tflint
+      - cd grafana && terraform validate
+      - cd grafana && terraform fmt --check
+      - cd grafana && tflint
+      - cd cloudflare && terraform validate
+      - cd cloudflare && terraform fmt --check
+      - cd cloudflare && tflint
 
   init:
     aliases: ["i"]
@@ -52,6 +58,8 @@ tasks:
       - cd adguard && terraform init
       - cd helm_deployment && terraform init
       - cd authentik && terraform init
+      - cd grafana && terraform init
+      - cd cloudflare && terraform init
 
   plan:
     aliases: ["p"]

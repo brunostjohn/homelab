@@ -140,9 +140,9 @@ resource "kubernetes_manifest" "root_cert_prod" {
         name = kubernetes_manifest.letsencrypt_prod_issuer.manifest.metadata.name
         kind = "ClusterIssuer"
       }
-      commonName = "${var.global_fqdn}"
+      commonName = var.global_fqdn
       dnsNames = [
-        "${var.global_fqdn}"
+        var.global_fqdn
       ]
     }
   }
@@ -170,9 +170,9 @@ resource "kubernetes_manifest" "root_cert_staging" {
         name = kubernetes_manifest.letsencrypt_staging_issuer.manifest.metadata.name
         kind = "ClusterIssuer"
       }
-      commonName = "${var.global_fqdn}"
+      commonName = var.global_fqdn
       dnsNames = [
-        "${var.global_fqdn}"
+        var.global_fqdn
       ]
     }
   }

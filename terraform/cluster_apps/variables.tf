@@ -13,16 +13,6 @@ variable "adguard_password" {
   description = "adguard password"
 }
 
-variable "k8s_dashboard_values" {
-  type        = string
-  description = "The values file for the k8s dashboard"
-}
-
-variable "k8s_dashboard_token" {
-  type        = string
-  description = "The token for the k8s dashboard"
-}
-
 variable "minio_username" {
   type        = string
   description = "Minio username"
@@ -156,11 +146,6 @@ variable "storage_project" {
 variable "security_project" {
   type        = string
   description = "The name of the Security project"
-}
-
-variable "cluster_ipaddr" {
-  type        = string
-  description = "The desired IP address of the cluster load balancer"
 }
 
 variable "hassio_token" {

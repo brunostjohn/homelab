@@ -4,6 +4,12 @@ module "unifi" {
   wlan_home_ssid     = var.unifi_wlan_home_ssid
 }
 
+module "cloudflare" {
+  depends_on = [module.unifi]
+
+  source = "./cloudflare"
+}
+
 module "docker" {
   source     = "./docker"
   depends_on = [module.unifi]
@@ -30,7 +36,7 @@ module "cluster_base" {
 
 module "cluster_apps" {
   source     = "./cluster_apps"
-  depends_on = [module.unifi, module.cluster_base]
+  depends_on = [module.unifi, module.cluster_base, module.cloudflare]
 
   networking_project               = module.cluster_base.networking_project
   security_project                 = module.cluster_base.security_project
@@ -38,8 +44,6 @@ module "cluster_apps" {
   homelab_repo                     = module.cluster_base.homelab_repo
   adguard_username                 = var.adguard_username
   adguard_password                 = var.adguard_password
-  k8s_dashboard_values             = file("values/dashboard.yml")
-  k8s_dashboard_token              = var.k8s_dashboard_token
   minio_username                   = var.minio_username
   minio_password                   = var.minio_password
   minio_oidc_client_id             = var.minio_oidc_client_id
@@ -64,7 +68,6 @@ module "cluster_apps" {
   grist_oidc_idp_issuer            = var.grist_oidc_idp_issuer
   mqtt_exporter_password_hash      = var.mqtt_exporter_password_hash
   mqtt_exporter_password           = var.mqtt_exporter_password
-  cluster_ipaddr                   = var.cluster_ipaddr
   hassio_token                     = var.hassio_token
 }
 
@@ -78,4 +81,18 @@ module "adguard" {
   node2_pi_ipaddr = module.unifi.node2_pi_ipaddr
   node3_pi_ipaddr = module.unifi.node3_pi_ipaddr
   global_fqdn     = var.global_fqdn
+}
+
+module "authentik" {
+  source     = "./authentik"
+  depends_on = [module.unifi, module.cluster_apps]
+}
+
+module "grafana" {
+  source     = "./grafana"
+  depends_on = [module.unifi, module.cluster_apps, module.authentik]
+
+  global_fqdn   = var.global_fqdn
+  client_id     = var.grafana_client_id
+  client_secret = var.grafana_client_secret
 }

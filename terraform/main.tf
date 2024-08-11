@@ -36,6 +36,16 @@ terraform {
       source  = "goauthentik/authentik"
       version = "2024.6.1"
     }
+
+    grafana = {
+      source  = "grafana/grafana"
+      version = "3.7.0"
+    }
+
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
   }
 
   backend "kubernetes" {
@@ -87,4 +97,14 @@ provider "adguard" {
 provider "authentik" {
   url   = "https://auth.${var.global_fqdn}"
   token = var.authentik_token
+}
+
+provider "grafana" {
+  url  = "http://grafana.${var.global_fqdn}"
+  auth = var.grafana_auth
+}
+
+provider "cloudflare" {
+  api_key = var.provider_cloudflare_api_key
+  email   = var.provider_cloudflare_api_email
 }

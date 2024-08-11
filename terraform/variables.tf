@@ -64,11 +64,6 @@ variable "cluster_ipaddr" {
   description = "Cluster's IP address"
 }
 
-variable "k8s_dashboard_token" {
-  type        = string
-  description = "The token for the k8s dashboard"
-}
-
 variable "minio_username" {
   type        = string
   description = "Minio username"
@@ -222,4 +217,29 @@ variable "mqtt_exporter_password" {
 variable "hassio_token" {
   type        = string
   description = "Auth token for Home Assistant"
+}
+
+variable "grafana_auth" {
+  type        = string
+  description = "auth token for grafana"
+}
+
+variable "grafana_client_id" {
+  type        = string
+  description = "The OIDC client ID for Grafana"
+}
+
+variable "grafana_client_secret" {
+  type        = string
+  description = "The OIDC client secret for Grafana"
+}
+
+variable "provider_cloudflare_api_key" {
+  type        = string
+  description = "Cloudflare API key for provider"
+}
+
+variable "provider_cloudflare_api_email" {
+  type        = string
+  description = "Cloudflare API email for provider"
 }
