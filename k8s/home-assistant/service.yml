@@ -11,6 +11,10 @@ spec:
       name: http
       protocol: TCP
       targetPort: 2137
+    - port: 8123
+      name: http
+      protocol: TCP
+      targetPort: 8123
   selector:
     app: homeassistant
   type: ClusterIP
