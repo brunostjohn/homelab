@@ -3,3 +3,9 @@ resource "grafana_dashboard" "moqsuitto" {
   org_id      = grafana_organization.zefirs_cloud.id
   folder      = grafana_folder.apps.id
 }
+
+resource "grafana_dashboard" "argocd" {
+  config_json = file("${path.module}/dashboards/argocd.json")
+  org_id      = grafana_organization.zefirs_cloud.id
+  folder      = grafana_folder.apps.id
+}
