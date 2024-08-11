@@ -32,9 +32,12 @@ spec:
               name: http
               protocol: TCP
           env:
-            VIRTUAL_HOST: "homeassistant-svc.homeassistant.svc.cluster.local"
-            PROXY_URL: "http://localhost:8123"
-            PROXY_REPLACE_URL: "http://homeassistant-svc.homeassistant.svc.cluster.local"
+            - name: VIRTUAL_HOST
+              value: "homeassistant-svc.homeassistant.svc.cluster.local"
+            - name: PROXY_URL
+              value: "http://localhost:8123"
+            - name: PROXY_REPLACE_URL
+              value: "http://homeassistant-svc.homeassistant.svc.cluster.local"
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:stable
           imagePullPolicy: IfNotPresent
