@@ -15,6 +15,8 @@ resource "kubernetes_config_map" "adguard_config" {
       auth_name = var.adguard_username,
       auth_pass = var.adguard_password
     })
+    "username" = var.adguard_username
+    "password" = var.adguard_password
   }
 }
 

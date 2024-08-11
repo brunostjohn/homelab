@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: adguard
+  namespace: adguard
+spec:
+  groups:
+    - name: AdGuard
+      rules:
+        - alert: AdGuardAbsent
+          annotations:
+            description: AdGuard Home has disappeared from Prometheus service discovery.
+            summary: AdGuard Home is down.
+          expr: |
+            absent(up{job=~".*AdGuard.*"} == 1)
+          for: 5m
+          labels:
+            severity: critical

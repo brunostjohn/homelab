@@ -50,6 +50,32 @@ spec:
             httpGet:
               path: /
               port: 3000
+        - name: adguard-exporter
+          image: ghcr.io/henrywhitaker3/adguard-exporter
+          pullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9618
+              name: metrics
+              protocol: TCP
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+          env:
+            - name: ADGUARD_SERVERS
+              value: "http://localhost:3000"
+            - name: ADGUARD_USERNAMES
+              valueFrom:
+                configMapKeyRef:
+                  name: adguard-config
+                  key: username
+            - name: ADGUARD_PASSWORDS
+              valueFrom:
+                configMapKeyRef:
+                  name: adguard-config
+                  key: password
       volumes:
         - name: adguard-data
           persistentVolumeClaim:

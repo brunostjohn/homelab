@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: adguard
+  namespace: adguard
+  labels: {}
+spec:
+  selector:
+    matchLabels:
+      app: adguard
+  endpoints:
+    - port: metrics
+      interval: 15s
+      scrapeTimeout: 10s

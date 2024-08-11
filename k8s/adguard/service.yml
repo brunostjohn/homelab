@@ -15,5 +15,9 @@ spec:
       port: 53
       targetPort: 53
       name: dns
+    - protocol: TCP
+      port: 9618
+      targetPort: 9618
+      name: metrics
   type: LoadBalancer
   loadBalancerIp: 10.0.2.1
