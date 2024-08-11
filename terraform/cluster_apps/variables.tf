@@ -157,3 +157,8 @@ variable "security_project" {
   type        = string
   description = "The name of the Security project"
 }
+
+variable "cluster_ipaddr" {
+  type        = string
+  description = "The desired IP address of the cluster load balancer"
+}

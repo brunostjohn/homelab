@@ -7,10 +7,10 @@ metadata:
     app: homeassistant
 spec:
   ports:
-    - port: 8123
+    - port: 80
       name: http
       protocol: TCP
-      targetPort: 8123
+      targetPort: 80
   selector:
     app: homeassistant
   type: ClusterIP

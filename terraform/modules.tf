@@ -64,6 +64,7 @@ module "cluster_apps" {
   grist_oidc_idp_issuer            = var.grist_oidc_idp_issuer
   mqtt_exporter_password_hash      = var.mqtt_exporter_password_hash
   mqtt_exporter_password           = var.mqtt_exporter_password
+  cluster_ipaddr = var.cluster_ipaddr
 }
 
 module "adguard" {

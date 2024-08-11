@@ -77,5 +77,6 @@ module "mosquitto_helm" {
     exporter_password           = var.mqtt_exporter_password
     octoprint_password_hash     = var.mqtt_octoprint_password_hash
     pvc                         = kubernetes_persistent_volume_claim.mosquitto_pvc.metadata[0].name
+    cluster_ip                  = "10.0.2.4"
   })
 }
