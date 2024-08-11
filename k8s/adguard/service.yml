@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: adguard-service
   namespace: adguard
-  annotations:
-    metallb.universe.tf/allow-shared-ip: "pool-10.0.2.0"
 spec:
   selector:
     app: adguard
@@ -18,4 +16,4 @@ spec:
       targetPort: 53
       name: dns
   type: LoadBalancer
-  loadBalancerIp: 10.0.2.0
+  loadBalancerIp: 10.0.2.1
