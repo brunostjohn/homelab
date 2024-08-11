@@ -4,6 +4,8 @@ ingressRoute:
 
 service:
   loadBalancerIP: ${cluster_ip}
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "pool-10.0.2.0"
 
 ports:
   traefik:

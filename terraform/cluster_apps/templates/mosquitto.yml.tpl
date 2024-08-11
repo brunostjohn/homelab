@@ -6,8 +6,7 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: LoadBalancer
-  loadBalancerIP: ${cluster_ip}
+  type: ClusterIP
   externalTrafficPolicy: ""
 
 persistence:
