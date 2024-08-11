@@ -64,6 +64,12 @@ resource "grafana_dashboard" "k8s_resources_workload" {
   folder      = grafana_folder.kubernetes_compute.id
 }
 
+resource "grafana_dashboard" "k8s_nvidia_gpu" {
+  config_json = file("${path.module}/dashboards/nvidia.json")
+  org_id      = grafana_organization.zefirs_cloud.id
+  folder      = grafana_folder.kubernetes_compute.id
+}
+
 resource "grafana_dashboard" "k8s_resources_workloads_namespace" {
   config_json = file("${path.module}/dashboards/k8s-resources-workloads-namespace.json")
   org_id      = grafana_organization.zefirs_cloud.id
