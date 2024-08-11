@@ -28,14 +28,14 @@ spec:
         - name: hassioproxy
           image: caddy
           ports:
-            - containerPort: 80
+            - containerPort: 2137
               name: http
               protocol: TCP
           command:
             - caddy
             - reverse-proxy
             - --from
-            - :80
+            - :2137
             - --to
             - localhost:8123
         - name: homeassistant
