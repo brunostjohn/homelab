@@ -23,6 +23,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:stable
