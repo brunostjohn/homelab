@@ -1,50 +1,50 @@
-apiVersion: akri.sh/v0
-kind: Configuration
-metadata:
-  name: zigbee-dongle
-  namespace: zigbee2mqtt
-spec:
-  capacity: 1
-  discoveryHandler:
-    discoveryDetails: |
-      groupRecursive: true
-      udevRules:
-        - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523"
-    name: udev
-  brokerSpec:
-    brokerPodSpec:
-      containers:
-        - name: zigbee-dongle-broker
-          image: alpine:3.14.0
-          imagePullPolicy: IfNotPresent
-          securityContext:
-            privileged: true
-          command:
-            - sh
-            - -c
-            - |-
-              echo ENV
-              printenv
-              set -euxo pipefail
-              echo Installing ser2net
-              apk add --no-cache ser2net
-              ser2net -d -C 2000:raw:0:/dev/ttyUSB0:115200
-          ports:
-            - name: device
-              containerPort: 2000
-          resources:
-            requests:
-              "{{PLACEHOLDER}}": "1"
-              cpu: 10m
-              memory: 50Mi
-            limits:
-              "{{PLACEHOLDER}}": "1"
-              cpu: 100m
-              memory: 200Mi
-  configurationServiceSpec:
-    type: ClusterIP
-    ports:
-      - name: device
-        port: 2000
-        protocol: TCP
-        targetPort: device
+# apiVersion: akri.sh/v0
+# kind: Configuration
+# metadata:
+#   name: zigbee-dongle
+#   namespace: zigbee2mqtt
+# spec:
+#   capacity: 1
+#   discoveryHandler:
+#     discoveryDetails: |
+#       groupRecursive: true
+#       udevRules:
+#         - ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523"
+#     name: udev
+#   brokerSpec:
+#     brokerPodSpec:
+#       containers:
+#         - name: zigbee-dongle-broker
+#           image: alpine:3.14.0
+#           imagePullPolicy: IfNotPresent
+#           securityContext:
+#             privileged: true
+#           command:
+#             - sh
+#             - -c
+#             - |-
+#               echo ENV
+#               printenv
+#               set -euxo pipefail
+#               echo Installing ser2net
+#               apk add --no-cache ser2net
+#               ser2net -d -C 2000:raw:0:/dev/ttyUSB0:115200
+#           ports:
+#             - name: device
+#               containerPort: 2000
+#           resources:
+#             requests:
+#               "{{PLACEHOLDER}}": "1"
+#               cpu: 10m
+#               memory: 50Mi
+#             limits:
+#               "{{PLACEHOLDER}}": "1"
+#               cpu: 100m
+#               memory: 200Mi
+#   configurationServiceSpec:
+#     type: ClusterIP
+#     ports:
+#       - name: device
+#         port: 2000
+#         protocol: TCP
+#         targetPort: device

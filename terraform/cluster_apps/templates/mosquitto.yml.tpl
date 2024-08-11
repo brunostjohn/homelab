@@ -32,20 +32,17 @@ authentication:
 authorization:
   acls: |-
     user zigbee2mqtt
-    topic readwrite zigbee2mqtt
-    topic readwrite homeassistant
-    pattern read cmnd/%u/#
-    pattern write stat/%u/#
-    pattern write tele/%u/#
+    topic readwrite zigbee2mqtt/#
+    topic readwrite homeassistant/#
     user homeassistant
-    topic readwrite zigbee2mqtt
-    topic readwrite homeassistant
-    topic readwrite octoprint
+    topic readwrite zigbee2mqtt/#
+    topic readwrite homeassistant/#
+    topic readwrite octoprint/#
     user octoprint
-    topic readwrite homeassistant
-    topic readwrite octoprint
+    topic readwrite homeassistant/#
+    topic readwrite octoprint/#
     user exporter
-    topic read $SYS
+    topic read $SYS/#
 
 monitoring:
   podMonitor:
