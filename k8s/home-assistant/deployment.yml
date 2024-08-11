@@ -12,18 +12,18 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: home-assistant
+      app: homeassistant
   template:
     metadata:
       labels:
-        app: home-assistant
+        app: homeassistant
     spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
       containers:
-        - name: home-assistant
+        - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:stable
           imagePullPolicy: IfNotPresent
           securityContext:

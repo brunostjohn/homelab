@@ -113,3 +113,12 @@ resource "argocd_application" "authentik" {
     }
   }
 }
+
+module "authentik_proxy_ingress" {
+  source = "../ingress"
+
+  hosts     = ["thekingdom.${var.global_fqdn}"]
+  service   = "ak-outpost-auth-proxy"
+  namespace = kubernetes_namespace.authentik.metadata[0].name
+  port      = 9000
+}
