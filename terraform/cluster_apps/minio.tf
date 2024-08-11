@@ -72,7 +72,7 @@ module "minio_ingress" {
 module "minio_bucket_ingress" {
   source = "../ingress"
 
-  hosts     = ["*.static.zefirsroyal.cloud"]
+  hosts     = ["*.static.${var.global_fqdn}"]
   service   = "minio"
   namespace = kubernetes_namespace.minio.metadata[0].name
   port      = 9000

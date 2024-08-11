@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: unifi-poller
+  namespace: monitoring
+  labels: {}
+spec:
+  selector:
+    matchLabels:
+      app: unifi-poller
+      type: poller
+  endpoints:
+    - port: tcp
+      interval: 15s
+      scrapeTimeout: 10s
+      path: /metrics

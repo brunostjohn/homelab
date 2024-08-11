@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi-poller
+  namespace: monitoring
+  labels:
+    app: unifi-poller
+    type: poller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unifi-poller
+      type: poller
+  template:
+    metadata:
+      labels:
+        app: unifi-poller
+        type: poller
+    spec:
+      containers:
+        - name: unifi-poller
+          image: ghcr.io/unpoller/unpoller:latest
+          ports:
+            - containerPort: 9130
+              name: tcp
+              protocol: TCP
+            - containerPort: 9130
+              name: udp
+              protocol: UDP
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/unpoller/up.conf
+              subPath: unifi-poller.conf
+      volumes:
+        - name: config-volume
+          secret:
+            secretName: unifi-poller

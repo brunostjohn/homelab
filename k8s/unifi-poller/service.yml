@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: unpoller-svc
+  namespace: monitoring
+spec:
+  selector:
+    app: unifi-poller
+    type: poller
+  ports:
+    - port: 9130
+      targetPort: 9130
+      name: tcp
+      protocol: TCP
+    - port: 9130
+      targetPort: 9130
+      name: udp
+      protocol: UDP
+  type: ClusterIP

@@ -69,6 +69,8 @@ module "cluster_apps" {
   mqtt_exporter_password_hash      = var.mqtt_exporter_password_hash
   mqtt_exporter_password           = var.mqtt_exporter_password
   hassio_token                     = var.hassio_token
+  unifi_username                   = var.unifi_username
+  unifi_password                   = var.unifi_password
 }
 
 module "adguard" {
@@ -92,7 +94,8 @@ module "grafana" {
   source     = "./grafana"
   depends_on = [module.unifi, module.cluster_apps, module.authentik]
 
-  global_fqdn   = var.global_fqdn
-  client_id     = var.grafana_client_id
-  client_secret = var.grafana_client_secret
+  global_fqdn    = var.global_fqdn
+  client_id      = var.grafana_client_id
+  client_secret  = var.grafana_client_secret
+  personal_email = var.personal_email
 }

@@ -152,3 +152,13 @@ variable "hassio_token" {
   type        = string
   description = "Auth token for Home Assistant"
 }
+
+variable "unifi_username" {
+  type        = string
+  description = "username for unifi poller"
+}
+
+variable "unifi_password" {
+  type        = string
+  description = "password for unifi poller"
+}

@@ -243,3 +243,8 @@ variable "provider_cloudflare_api_email" {
   type        = string
   description = "Cloudflare API email for provider"
 }
+
+variable "personal_email" {
+  type        = string
+  description = "The email address of the person deploying the homelab"
+}
