@@ -33,6 +33,10 @@ spec:
               value: "1000"
             - name: PGID
               value: "1000"
+            - name: SKIP_CHOWN
+              value: "true"
+            - name: SKIP_SETCAP
+              value: "true"
           securityContext:
             privileged: true
             capabilities:
