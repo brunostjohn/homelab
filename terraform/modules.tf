@@ -7,12 +7,10 @@ module "unifi" {
 module "cloudflare" {
   depends_on = [module.unifi]
 
-  source = "./cloudflare"
-}
+  global_fqdn = var.global_fqdn
+  account_id  = var.cloudflare_account_id
 
-module "docker" {
-  source     = "./docker"
-  depends_on = [module.unifi]
+  source = "./cloudflare"
 }
 
 module "cluster_base" {

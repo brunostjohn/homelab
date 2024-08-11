@@ -105,6 +105,5 @@ provider "grafana" {
 }
 
 provider "cloudflare" {
-  api_key = var.provider_cloudflare_api_key
-  email   = var.provider_cloudflare_api_email
+  api_token = var.provider_cloudflare_api_token  
 }

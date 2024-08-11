@@ -234,17 +234,17 @@ variable "grafana_client_secret" {
   description = "The OIDC client secret for Grafana"
 }
 
-variable "provider_cloudflare_api_key" {
+variable "provider_cloudflare_api_token" {
   type        = string
-  description = "Cloudflare API key for provider"
-}
-
-variable "provider_cloudflare_api_email" {
-  type        = string
-  description = "Cloudflare API email for provider"
+  description = "Cloudflare API token for provider"
 }
 
 variable "personal_email" {
   type        = string
   description = "The email address of the person deploying the homelab"
+}
+
+variable "cloudflare_account_id" {
+  type        = string
+  description = "The account ID to use in Cloudflare"
 }
