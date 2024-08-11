@@ -19,20 +19,10 @@ spec:
             name: ser2net-config
       containers:
         - name: zigbee-dongle-broker
-          image: alpine:3.14.0
+          image: ghcr.io/jippi/docker-ser2net
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
-          command:
-            - sh
-            - -c
-            - |-
-              echo ENV
-              printenv
-              set -euxo pipefail
-              echo Installing ser2net
-              apk add --no-cache ser2net
-              ser2net -c /etc/ser2net/ser2net.yml
           ports:
             - name: device
               containerPort: 2000
