@@ -24,19 +24,8 @@ spec:
         fsGroup: 1000
       containers:
         - name: home-assistant
-          image: "linuxserver/homeassistant"
+          image: ghcr.io/home-assistant/home-assistant:stable
           imagePullPolicy: IfNotPresent
-          env:
-            - name: TZ
-              value: "Europe/Dublin"
-            - name: PUID
-              value: "1000"
-            - name: PGID
-              value: "1000"
-            - name: SKIP_CHOWN
-              value: "true"
-            - name: SKIP_SETCAP
-              value: "true"
           securityContext:
             privileged: true
             capabilities:
