@@ -28,7 +28,7 @@ spec:
               containerPort: 2000
           volumeMounts:
             - name: ser2net-config
-              mountPath: /etc/ser2net/ser2net.yml
+              mountPath: /etc/ser2net/ser2net.yaml
               subPath: ser2net.yml
           resources:
             requests:
