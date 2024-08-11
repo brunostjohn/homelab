@@ -2,6 +2,9 @@ ingressRoute:
   dashboard:
     enabled: true
 
+service:
+  loadBalancerIP: ${cluster_ip}
+
 ports:
   traefik:
     port: 9000

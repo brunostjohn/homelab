@@ -38,11 +38,6 @@ variable "crowdsec_bouncer_key_traefik" {
   description = "The CrowdSec Traefik bouncer key"
 }
 
-variable "traefik_values" {
-  type        = string
-  description = "Values file for the Traefik Helm chart"
-}
-
 variable "letsencrypt_email" {
   type        = string
   description = "The email address to use for Let's Encrypt"
@@ -56,4 +51,9 @@ variable "letsencrypt_cloudflare_api_token" {
 variable "nvidia_plugin_values" {
   type        = string
   description = "Values file for the NVIDIA device plugin Helm chart"
+}
+
+variable "cluster_loadbalancer_ip" {
+  type = string
+  description = "The desired IP address of the cluster load balancer"
 }

@@ -13,7 +13,9 @@ resource "kubernetes_manifest" "helm_chart_config_traefik" {
       namespace = "kube-system"
     }
     spec = {
-      valuesContent = var.traefik_values
+      valuesContent = templatefile("${path.module}/values/traefik.yml.tpl", {
+        cluster_ip = var.cluster_loadbalancer_ip
+      })
     }
   }
 }

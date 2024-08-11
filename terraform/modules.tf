@@ -22,10 +22,10 @@ module "cluster_base" {
   alertmanager_discord_webhook_url = var.alertmanager_discord_webhook_url
   crowdsec_enroll_key              = var.crowdsec_enroll_key
   crowdsec_bouncer_key_traefik     = var.crowdsec_bouncer_key_traefik
-  traefik_values                   = file("values/traefik.yml")
   letsencrypt_email                = var.letsencrypt_email
   letsencrypt_cloudflare_api_token = var.letsencrypt_cloudflare_api_token
   nvidia_plugin_values             = file("values/nvidia.yml")
+  cluster_loadbalancer_ip = var.cluster_ipaddr
 }
 
 module "cluster_apps" {
