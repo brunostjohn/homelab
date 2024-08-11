@@ -52,7 +52,6 @@ spec:
               port: 3000
         - name: adguard-exporter
           image: ghcr.io/henrywhitaker3/adguard-exporter
-          pullPolicy: IfNotPresent
           ports:
             - containerPort: 9618
               name: metrics
