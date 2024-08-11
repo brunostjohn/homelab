@@ -21,12 +21,17 @@ spec:
         - name: zigbee2mqtt-data
           persistentVolumeClaim:
             claimName: zigbee2mqtt-pvc
+        - name: dongle
+          hostPath:
+            path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
       containers:
         - name: zigbee2mqtt
           image: koenkk/zigbee2mqtt:latest
           volumeMounts:
             - name: zigbee2mqtt-data
               mountPath: /app/data
+            - name: dongle
+              mountPath: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
           securityContext:
             privileged: true
           ports:
