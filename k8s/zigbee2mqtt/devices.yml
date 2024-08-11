@@ -13,6 +13,10 @@ spec:
     name: udev
   brokerSpec:
     brokerPodSpec:
+      volumes:
+        - name: ser2net-config
+          configMap:
+            name: ser2net-config
       containers:
         - name: zigbee-dongle-broker
           image: alpine:3.14.0
@@ -28,10 +32,14 @@ spec:
               set -euxo pipefail
               echo Installing ser2net
               apk add --no-cache ser2net
-              ser2net -d -C 2000:raw:0:/dev/ttyUSB0:115200
+              ser2net -c /etc/ser2net/ser2net.yml
           ports:
             - name: device
               containerPort: 2000
+          volumeMounts:
+            - name: ser2net-config
+              mountPath: /etc/ser2net/ser2net.yml
+              subPath: ser2net.yml
           resources:
             requests:
               "{{PLACEHOLDER}}": "1"
