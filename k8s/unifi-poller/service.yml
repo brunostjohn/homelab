@@ -5,11 +5,9 @@ metadata:
   namespace: monitoring
   labels:
     app: unifi-poller
-    type: poller
 spec:
   selector:
     app: unifi-poller
-    type: poller
   ports:
     - port: 9130
       targetPort: 9130

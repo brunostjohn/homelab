@@ -8,7 +8,6 @@ spec:
   selector:
     matchLabels:
       app: unifi-poller
-      type: poller
   endpoints:
     - port: tcp
       interval: 15s

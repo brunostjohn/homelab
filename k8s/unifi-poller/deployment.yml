@@ -5,18 +5,15 @@ metadata:
   namespace: monitoring
   labels:
     app: unifi-poller
-    type: poller
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: unifi-poller
-      type: poller
   template:
     metadata:
       labels:
         app: unifi-poller
-        type: poller
     spec:
       containers:
         - name: unifi-poller
