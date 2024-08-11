@@ -12,7 +12,7 @@ spec:
       protocol: TCP
       targetPort: 2137
     - port: 8123
-      name: http
+      name: http-hassio
       protocol: TCP
       targetPort: 8123
   selector:
