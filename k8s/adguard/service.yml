@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: adguard-service
   namespace: adguard
+  labels:
+    app: adguard
 spec:
   selector:
     app: adguard

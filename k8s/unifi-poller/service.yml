@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: unpoller-svc
   namespace: monitoring
+  labels:
+    app: unifi-poller
+    type: poller
 spec:
   selector:
     app: unifi-poller
