@@ -26,18 +26,18 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: hassioproxy
-          image: schmailzl/simple-reverse-proxy
+          image: caddy
           ports:
             - containerPort: 80
               name: http
               protocol: TCP
-          env:
-            - name: VIRTUAL_HOST
-              value: "homeassistant-svc.homeassistant.svc.cluster.local"
-            - name: PROXY_URL
-              value: "http://localhost:8123"
-            - name: PROXY_REPLACE_URL
-              value: "http://homeassistant-svc.homeassistant.svc.cluster.local"
+          command:
+            - caddy
+            - reverse-proxy
+            - --from
+            - :80
+            - --to
+            - localhost:8123
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:stable
           imagePullPolicy: IfNotPresent
