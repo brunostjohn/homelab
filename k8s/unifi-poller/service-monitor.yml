@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: unifi-poller
   endpoints:
-    - port: tcp
+    - port: metrics
       interval: 15s
       scrapeTimeout: 10s
       path: /metrics
