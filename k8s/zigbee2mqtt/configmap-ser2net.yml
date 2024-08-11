@@ -7,7 +7,7 @@ data:
   ser2net.yml: |
     connection: &con01
       accepter: tcp,2000
-      connector: serialdev,/dev/ttyUSB0,115200n81,local
+      connector: serialdev,/dev/ttyUSB0,9600n81,local
       enable: on
       options:
         kickolduser: true
