@@ -13,7 +13,7 @@ spec:
             description: Home Assistant has disappeared from Prometheus service discovery.
             summary: Home Assistant is down.
           expr: |
-            absent(up{job=~".*HomeAssistant.*"} == 1)
+            absent(up{job=~".*homeassistant-svc.*"} == 1)
           for: 5m
           labels:
             severity: critical

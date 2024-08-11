@@ -12,7 +12,7 @@ spec:
             description: AdGuard Home has disappeared from Prometheus service discovery.
             summary: AdGuard Home is down.
           expr: |
-            absent(up{job=~".*AdGuard.*"} == 1)
+            absent(up{job=~".*adguard-service.*"} == 1)
           for: 5m
           labels:
             severity: critical
