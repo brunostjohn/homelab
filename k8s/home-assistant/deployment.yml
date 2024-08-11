@@ -22,6 +22,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      hostNetwork: true
       containers:
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:stable
@@ -36,7 +37,6 @@ spec:
             - name: http
               containerPort: 8123
               protocol: TCP
-          hostNetwork: true
           resources:
             requests:
               memory: "512Mi"
