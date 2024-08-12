@@ -66,6 +66,8 @@ spec:
             periodSeconds: 10
         - name: sonarr-exporter
           image: ghcr.io/onedr0p/exportarr:v1.5.3
+          args:
+            - sonarr
           imagePullPolicy: IfNotPresent
           env:
             - name: PORT
