@@ -13,3 +13,19 @@ resource "prowlarr_application_lidarr" "lidarr" {
   prowlarr_url = "http://prowlarr.entertainment.svc.cluster.local:9696"
   sync_level   = "fullSync"
 }
+
+resource "prowlarr_application_sonarr" "sonarr" {
+  name         = "Sonarr"
+  base_url     = "http://sonarr.entertainment.svc.cluster.local:8989"
+  api_key      = var.sonarr_api_key
+  prowlarr_url = "http://prowlarr.entertainment.svc.cluster.local:9696"
+  sync_level   = "fullSync"
+}
+
+resource "prowlarr_application_readarr" "readarr" {
+  name         = "Readarr"
+  base_url     = "http://readarr.entertainment.svc.cluster.local:8787"
+  api_key      = var.readarr_api_key
+  prowlarr_url = "http://prowlarr.entertainment.svc.cluster.local:9696"
+  sync_level   = "fullSync"
+}

@@ -1,53 +1,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: requestrr
+  name: flaresolverr
   namespace: entertainment
 spec:
-  replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
-      app: requestrr
+      app: flaresolverr
   template:
     metadata:
       labels:
-        app: requestrr
+        app: flaresolverr
     spec:
-      volumes:
-        - name: requestrr-config
-          persistentVolumeClaim:
-            claimName: requestrr-pvc
       containers:
-        - name: requestrr
-          image: thomst08/requestrr
+        - name: flaresolverr
+          image: ghcr.io/flaresolverr/flaresolverr
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
           ports:
-            - containerPort: 4545
+            - containerPort: 8191
               name: http
               protocol: TCP
-          volumeMounts:
-            - name: requestrr-config
-              mountPath: /root/config
+            - containerPort: 2112
+              name: metrics
+              protocol: TCP
           startupProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
             failureThreshold: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
             failureThreshold: 5
             periodSeconds: 10
+          env:
+            - name: PROMETHEUS_ENABLED
+              value: "true"
+            - name: PROMETHEUS_PORT
+              value: "2112"
