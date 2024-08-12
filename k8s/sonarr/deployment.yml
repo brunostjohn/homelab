@@ -4,6 +4,9 @@ metadata:
   name: sonarr
   namespace: entertainment
 spec:
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: sonarr
@@ -54,13 +57,13 @@ spec:
               subPath: entertainment/
           livenessProbe:
             httpGet:
-              path: /
+              path: /ping
               port: http
             failureThreshold: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /
+              path: /ping
               port: http
             failureThreshold: 5
             periodSeconds: 10
