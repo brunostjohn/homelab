@@ -39,7 +39,7 @@ spec:
             - containerPort: 7878
               name: http
               protocol: TCP
-          environment:
+          env:
             - name: PGID
               value: "1000"
             - name: PUID
@@ -55,6 +55,12 @@ spec:
             - name: radarr-data
               mountPath: /data
               subPath: entertainment/
+          startupProbe:
+            httpGet:
+              path: /api
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /ping

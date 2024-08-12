@@ -69,6 +69,11 @@ module "cluster_apps" {
   hassio_token                     = var.hassio_token
   unifi_username                   = var.unifi_username
   unifi_password                   = var.unifi_password
+
+  sonarr_api_key = var.sonarr_api_key
+  radarr_api_key = var.radarr_api_key
+  lidarr_api_key = var.lidarr_api_key
+  bazarr_api_key = var.bazarr_api_key
 }
 
 module "adguard" {

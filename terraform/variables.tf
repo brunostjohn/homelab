@@ -248,3 +248,23 @@ variable "cloudflare_account_id" {
   type        = string
   description = "The account ID to use in Cloudflare"
 }
+
+variable "sonarr_api_key" {
+  type = string
+  description = "API key for Sonarr"
+}
+
+variable "radarr_api_key" {
+  type = string
+  description = "API key for Radarr"
+}
+
+variable "lidarr_api_key" {
+  type = string
+  description = "API key for Lidarr"
+}
+
+variable "bazarr_api_key" {
+  type = string
+  description = "API key for Bazarr"
+}

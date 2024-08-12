@@ -53,58 +53,58 @@ spec:
             - name: bazarr-data
               mountPath: /data
               subPath: entertainment/
-          # startupProbe:
-          #   httpGet:
-          #     path: /api
-          #     port: http
-          #   failureThreshold: 30
-          #   periodSeconds: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /api
-          #     port: http
-          #   failureThreshold: 5
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   httpGet:
-          #     path: /api
-          #     port: http
-          #   failureThreshold: 5
-          #   periodSeconds: 10
-        # - name: bazarr-exporter
-        #   image: ghcr.io/onedr0p/exportarr:v1.5.3
-        #   args:
-        #     - bazarr
-        #   imagePullPolicy: IfNotPresent
-        #   env:
-        #     - name: PORT
-        #       value: "9707"
-        #     - name: URL
-        #       value: "http://bazarr.entertainment.svc.cluster.local:6767"
-        #     - name: APIKEY
-        #       valueFrom:
-        #         secretKeyRef:
-        #           name: bazarr-exporter
-        #           key: api-key
-        #   ports:
-        #     - name: monitoring
-        #       containerPort: 9707
-        #   livenessProbe:
-        #     httpGet:
-        #       path: /healthz
-        #       port: monitoring
-        #     failureThreshold: 5
-        #     periodSeconds: 10
-        #   readinessProbe:
-        #     httpGet:
-        #       path: /healthz
-        #       port: monitoring
-        #     failureThreshold: 5
-        #     periodSeconds: 10
-        #   resources:
-        #     requests:
-        #       cpu: 100m
-        #       memory: 64Mi
-        #     limits:
-        #       cpu: 500m
-        #       memory: 256Mi
+          startupProbe:
+            httpGet:
+              path: /api
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+        - name: bazarr-exporter
+          image: ghcr.io/onedr0p/exportarr:v1.5.3
+          args:
+            - bazarr
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "9707"
+            - name: URL
+              value: "http://bazarr.entertainment.svc.cluster.local:6767"
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: bazarr-exporter
+                  key: api-key
+          ports:
+            - name: monitoring
+              containerPort: 9707
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi

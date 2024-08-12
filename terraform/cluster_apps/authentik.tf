@@ -117,7 +117,7 @@ resource "argocd_application" "authentik" {
 module "authentik_proxy_ingress" {
   source = "../ingress"
 
-  hosts     = ["thekingdom.${var.global_fqdn}"]
+  hosts     = ["thekingdom.${var.global_fqdn}", "sonarr.${var.global_fqdn}", "radarr.${var.global_fqdn}", "lidarr.${var.global_fqdn}", "bazarr.${var.global_fqdn}"]
   service   = "ak-outpost-auth-proxy"
   namespace = kubernetes_namespace.authentik.metadata[0].name
   port      = 9000

@@ -162,3 +162,23 @@ variable "unifi_password" {
   type        = string
   description = "password for unifi poller"
 }
+
+variable "sonarr_api_key" {
+  type = string
+  description = "API key for Sonarr"
+}
+
+variable "radarr_api_key" {
+  type = string
+  description = "API key for Radarr"
+}
+
+variable "lidarr_api_key" {
+  type = string
+  description = "API key for Lidarr"
+}
+
+variable "bazarr_api_key" {
+  type = string
+  description = "API key for Bazarr"
+}
