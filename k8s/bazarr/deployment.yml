@@ -46,10 +46,6 @@ spec:
               value: "1000"
             - name: TZ
               value: "Europe/Dublin"
-            - name: UMASK
-              value: "002"
-            - name: WEBUI_PORTS
-              value: "6767/tcp,6767/udp"
           volumeMounts:
             - name: bazarr-config
               mountPath: /config
