@@ -36,7 +36,7 @@ spec:
               memory: "128Mi"
               cpu: "500m"
           ports:
-            - containerPort: 8989
+            - containerPort: 7878
               name: http
               protocol: TCP
           environment:
@@ -76,7 +76,7 @@ spec:
         #     - name: PORT
         #       value: "9707"
         #     - name: URL
-        #       value: "http://radarr.entertainment.svc.cluster.local:8989"
+        #       value: "http://radarr.entertainment.svc.cluster.local:7878"
         #     - name: APIKEY
         #       valueFrom:
         #         secretKeyRef:

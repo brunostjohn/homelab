@@ -7,8 +7,8 @@ spec:
   selector:
     app: radarr
   ports:
-    - port: 8989
-      targetPort: 8989
+    - port: 7878
+      targetPort: 7878
       name: http
       protocol: TCP
     # - port: 9707
