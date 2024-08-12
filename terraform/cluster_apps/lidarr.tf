@@ -18,6 +18,8 @@ resource "argocd_application" "lidarr" {
   }
 
   spec {
+    project = argocd_project.entertainment.metadata[0].name
+
     source {
       repo_url = var.homelab_repo
       path     = "k8s/lidarr"

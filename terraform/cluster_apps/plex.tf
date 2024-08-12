@@ -19,6 +19,8 @@ resource "argocd_application" "plex" {
   }
 
   spec {
+    project = argocd_project.entertainment.metadata[0].name
+
     source {
       repo_url = var.homelab_repo
       path     = "k8s/plex"

@@ -1,8 +1,8 @@
-resource "argocd_application" "requestrr" {
+resource "argocd_application" "flaresolverr" {
   depends_on = [kubernetes_namespace.entertainment]
 
   metadata {
-    name      = "requestrr"
+    name      = "flaresolverr"
     namespace = "argocd"
   }
 
@@ -11,7 +11,7 @@ resource "argocd_application" "requestrr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/requestrr"
+      path     = "k8s/flaresolverr"
     }
 
     destination {
@@ -35,14 +35,4 @@ resource "argocd_application" "requestrr" {
       }
     }
   }
-}
-
-module "requestrr_ingress" {
-  source     = "../ingress"
-  depends_on = [argocd_application.requestrr]
-
-  service   = "requestrr"
-  hosts     = ["requestrr.local"]
-  namespace = kubernetes_namespace.entertainment.metadata[0].name
-  port      = 4545
 }

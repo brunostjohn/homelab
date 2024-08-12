@@ -27,3 +27,9 @@ resource "grafana_dashboard" "overseerr" {
   folder      = grafana_folder.entertainment.id
   org_id      = grafana_organization.zefirs_cloud.id
 }
+
+resource "grafana_dashboard" "flaresolverr" {
+  config_json = file("${path.module}/dashboards/flaresolverr.json")
+  folder      = grafana_folder.entertainment.id
+  org_id      = grafana_organization.zefirs_cloud.id
+}
