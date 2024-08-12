@@ -11,8 +11,8 @@ spec:
       targetPort: 5055
       name: http
       protocol: TCP
-    # - port: 9594
-    #   targetPort: 9594
-    #   name: monitoring
-    #   protocol: TCP
+    - port: 9850
+      targetPort: 9850
+      name: metrics
+      protocol: TCP
   type: ClusterIP

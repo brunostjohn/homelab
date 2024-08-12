@@ -21,6 +21,43 @@ spec:
             server: 10.0.0.2
             path: /mnt/jabberwock
       containers:
+        - name: overseerr-exporter
+          image: ghcr.io/willfantom/overseerr-exporter
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 9850
+              protocol: TCP
+              name: metrics
+          env:
+            - name: OVERSEERR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: overseerr-exporter
+                  key: api-key
+          args:
+            - --overseerr.address=http://localhost:5055
+            - --overseerr.api-key=$(OVERSEERR_API_KEY)
+          startupProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            failureThreshold: 5
+            periodSeconds: 10
         - name: overseerr
           image: ghcr.io/sct/overseerr
           resources:
@@ -38,3 +75,21 @@ spec:
             - name: overseerr-config
               mountPath: /app/config
               subPath: casaos/os2
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
