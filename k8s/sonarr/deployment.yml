@@ -12,10 +12,6 @@ spec:
       labels:
         app: sonarr
     spec:
-      securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
-        runAsGroup: 1000
       volumes:
         - name: sonarr-config
           nfs:
@@ -29,6 +25,8 @@ spec:
         - name: sonarr
           image: linuxserver/sonarr:4.0.8
           imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
           resources:
             limits:
               memory: "128Mi"
