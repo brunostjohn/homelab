@@ -48,6 +48,8 @@ spec:
               value: "Europe/Dublin"
             - name: UMASK
               value: "002"
+            - name: WEBUI_PORTS
+              value: "6767/tcp,6767/udp"
           volumeMounts:
             - name: bazarr-config
               mountPath: /config
@@ -55,24 +57,24 @@ spec:
             - name: bazarr-data
               mountPath: /data
               subPath: entertainment/
-          startupProbe:
-            httpGet:
-              path: /api
-              port: http
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /api
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /api
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
+          # startupProbe:
+          #   httpGet:
+          #     path: /api
+          #     port: http
+          #   failureThreshold: 30
+          #   periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /api
+          #     port: http
+          #   failureThreshold: 5
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /api
+          #     port: http
+          #   failureThreshold: 5
+          #   periodSeconds: 10
         # - name: bazarr-exporter
         #   image: ghcr.io/onedr0p/exportarr:v1.5.3
         #   args:
