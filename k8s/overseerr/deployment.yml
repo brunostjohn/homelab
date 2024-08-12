@@ -62,7 +62,7 @@ spec:
           image: ghcr.io/sct/overseerr
           resources:
             limits:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "500m"
           ports:
             - containerPort: 5055
