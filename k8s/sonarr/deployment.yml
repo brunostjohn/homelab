@@ -20,11 +20,11 @@ spec:
         - name: sonarr-config
           nfs:
             server: 10.0.0.2
-            path: /export/jabberwock/casaos/sonarr
+            path: /export/jabberwock
         - name: sonarr-data
           nfs:
             server: 10.0.0.2
-            path: /export/jabberwock/entertainment
+            path: /export/jabberwock
       containers:
         - name: sonarr
           image: linuxserver/sonarr:4.0.8
@@ -47,8 +47,10 @@ spec:
           volumeMounts:
             - name: sonarr-config
               mountPath: /config
+              subPath: /casaos/sonarr
             - name: sonarr-data
               mountPath: /data
+              subPath: /entertainment
           livenessProbe:
             httpGet:
               path: /
