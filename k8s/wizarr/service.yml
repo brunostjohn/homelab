@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: wizarr
   namespace: entertainment
+  labels:
+    app: wizarr
 spec:
   selector:
     app: wizarr

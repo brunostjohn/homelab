@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: tautulli
   namespace: entertainment
+  labels:
+    app: tautulli
 spec:
   selector:
     app: tautulli

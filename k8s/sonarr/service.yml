@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: sonarr
   namespace: entertainment
+  labels:
+    app: sonarr
 spec:
   selector:
     app: sonarr

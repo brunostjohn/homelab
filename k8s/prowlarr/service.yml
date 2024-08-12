@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: prowlarr
   namespace: entertainment
+  labels:
+    app: prowlarr
 spec:
   selector:
     app: prowlarr

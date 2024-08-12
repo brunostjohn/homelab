@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: qbittorrent
   namespace: entertainment
+  labels:
+    app: qbittorrent
 spec:
   selector:
     app: qbittorrent

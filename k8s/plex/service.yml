@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: plex
   namespace: entertainment
+  labels:
+    app: plex
 spec:
   selector:
     app: plex
