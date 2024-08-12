@@ -94,7 +94,7 @@ spec:
           command:
             - /bin/sh
             - -c
-            - cd /exporter && ./overseerr-exporter --overseerr.address="http://localhost:5055" --overseerr.api-key=$OVERSEERR_API_KEY --web.listen-address=:9850
+            - cd /exporter && ./overseerr-exporter --overseerr.address="http://overseerr.entertainment.svc.cluster.local:5055" --overseerr.api-key=$OVERSEERR_API_KEY --web.listen-address=:9850
           startupProbe:
             httpGet:
               path: /

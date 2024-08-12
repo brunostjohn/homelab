@@ -93,6 +93,8 @@ spec:
               name: metrics
               protocol: TCP
           env:
+            - name: TAUTULLI_URL
+              value: http://tautulli.entertainment.svc.cluster.local:8181
             - name: TAUTULLI_API_KEY
               valueFrom:
                 secretKeyRef:
