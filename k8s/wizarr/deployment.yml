@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wizarr
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: wizarr
+  template:
+    metadata:
+      labels:
+        app: wizarr
+    spec:
+      volumes:
+        - name: wizarr-data
+          persistentVolumeClaim:
+            claimName: wizarr-pvc
+      containers:
+        - name: wizarr
+          image: ghcr.io/wizarrrr/wizarr:beta
+          pullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5690
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: wizarr-data
+              mountPath: /data/database
