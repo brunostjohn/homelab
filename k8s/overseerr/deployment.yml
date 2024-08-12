@@ -21,6 +21,60 @@ spec:
             server: 10.0.0.2
             path: /mnt/jabberwock
       containers:
+        - name: overseerr
+          image: ghcr.io/sct/overseerr
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5055
+              protocol: TCP
+              name: http
+          env:
+            - name: TZ
+              value: Europe/Dublin
+          volumeMounts:
+            - name: overseerr-config
+              mountPath: /app/config
+              subPath: casaos/os2
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: overseerr-exporter
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: overseerr
+  template:
+    metadata:
+      labels:
+        app: overseerr
+    spec:
+      containers:
         - name: overseerr-exporter
           image: ghcr.io/willfantom/overseerr-exporter
           resources:
@@ -57,40 +111,5 @@ spec:
             httpGet:
               path: /
               port: metrics
-            failureThreshold: 5
-            periodSeconds: 10
-        - name: overseerr
-          image: ghcr.io/sct/overseerr
-          resources:
-            limits:
-              memory: "1Gi"
-              cpu: "500m"
-          ports:
-            - containerPort: 5055
-              protocol: TCP
-              name: http
-          env:
-            - name: TZ
-              value: Europe/Dublin
-          volumeMounts:
-            - name: overseerr-config
-              mountPath: /app/config
-              subPath: casaos/os2
-          startupProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
             failureThreshold: 5
             periodSeconds: 10

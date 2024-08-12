@@ -88,6 +88,25 @@ spec:
               port: http
             failureThreshold: 5
             periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex-metrics
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      containers:
         - name: plex-exporter
           image: ghcr.io/axsuul/plex-media-server-exporter
           imagePullPolicy: IfNotPresent
@@ -98,22 +117,22 @@ spec:
                   name: plex-secrets
                   key: api-key
             - name: PLEX_ADDR
-              value: http://localhost:32400
+              value: http://plex.entertainment.svc.cluster.local:32400
           ports:
             - name: monitoring
               containerPort: 9594
-          # livenessProbe:
-          #   httpGet:
-          #     path: /metrics
-          #     port: monitoring
-          #   failureThreshold: 5
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   httpGet:
-          #     path: /metrics
-          #     port: monitoring
-          #   failureThreshold: 5
-          #   periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
           resources:
             requests:
               cpu: 100m

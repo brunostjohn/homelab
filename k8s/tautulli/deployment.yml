@@ -20,41 +20,6 @@ spec:
           persistentVolumeClaim:
             claimName: tautulli-pvc
       containers:
-        - name: tautulli-exporter
-          image: nwalke/tautulli_exporter
-          pullPolicy: IfNotPresent
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-          ports:
-            - containerPort: 9487
-              name: metrics
-              protocol: TCP
-          env:
-            - name: TAUTULLI_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: tautulli
-                  key: api-key
-          startupProbe:
-            httpGet:
-              path: /
-              port: 9487
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 9487
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 9487
-            failureThreshold: 3
-            periodSeconds: 10
         - name: tautulli
           image: ghcr.io/tautulli/tautulli
           pullPolicy: IfNotPresent
@@ -97,3 +62,57 @@ spec:
           volumeMounts:
             - name: tautulli-data
               mountPath: /config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tautulli-exporter
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: tautulli
+  template:
+    metadata:
+      labels:
+        app: tautulli
+    spec:
+      containers:
+        - name: tautulli-exporter
+          image: nwalke/tautulli_exporter
+          pullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 9487
+              name: metrics
+              protocol: TCP
+          env:
+            - name: TAUTULLI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: tautulli
+                  key: api-key
+          startupProbe:
+            httpGet:
+              path: /
+              port: 9487
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9487
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9487
+            failureThreshold: 3
+            periodSeconds: 10

@@ -64,6 +64,25 @@ spec:
               port: http
             failureThreshold: 5
             periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr-exporter
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      containers:
         - name: prowlarr-exporter
           image: ghcr.io/onedr0p/exportarr:v2.0
           args:

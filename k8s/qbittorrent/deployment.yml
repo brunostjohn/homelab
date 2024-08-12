@@ -19,88 +19,11 @@ spec:
         - name: qbittorrent-config
           persistentVolumeClaim:
             claimName: qbittorrent-config-pvc
-        - name: flood-config
-          persistentVolumeClaim:
-            claimName: flood-config-pvc
         - name: downloads
           nfs:
             server: 10.0.0.2
             path: /mnt/jabberwock
       containers:
-        - name: qbittorrent-exporter
-          image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-          env:
-            - name: QBITTORRENT_PORT
-              value: "8080"
-            - name: QBITTORRENT_HOST
-              value: "localhost"
-            - name: QBITTORRENT_USER
-              value: "admin"
-            - name: QBITTORRENT_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: qbittorrent
-                  key: password
-          ports:
-            - containerPort: 8000
-              name: metrics
-              protocol: TCP
-          startupProbe:
-            httpGet:
-              path: /metrics
-              port: 8000
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /metrics
-              port: 8000
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /metrics
-              port: 8000
-            failureThreshold: 3
-            periodSeconds: 10
-        - name: flood
-          image: jesec/flood
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-          env:
-            - name: HOME
-              value: "/config"
-          volumeMounts:
-            - name: flood-config
-              mountPath: /config
-          ports:
-            - containerPort: 3000
-              name: flood
-              protocol: TCP
-          startupProbe:
-            httpGet:
-              path: /
-              port: 3000
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 3000
-            failureThreshold: 3
-            periodSeconds: 10
         - name: qbittorrent
           image: linuxserver/qbittorrent
           resources:
@@ -153,5 +76,121 @@ spec:
             httpGet:
               path: /
               port: 8080
+            failureThreshold: 3
+            periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent-exporter
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+        - name: qbittorrent-exporter
+          image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: QBITTORRENT_PORT
+              value: "8080"
+            - name: QBITTORRENT_HOST
+              value: "localhost"
+            - name: QBITTORRENT_USER
+              value: "admin"
+            - name: QBITTORRENT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: qbittorrent
+                  key: password
+          ports:
+            - containerPort: 8000
+              name: metrics
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /metrics
+              port: 8000
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 8000
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 8000
+            failureThreshold: 3
+            periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flood
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      volumes:
+        - name: flood-config
+          persistentVolumeClaim:
+            claimName: flood-config-pvc
+      containers:
+        - name: flood
+          image: jesec/flood
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: HOME
+              value: "/config"
+          volumeMounts:
+            - name: flood-config
+              mountPath: /config
+          ports:
+            - containerPort: 3000
+              name: flood
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
             failureThreshold: 3
             periodSeconds: 10

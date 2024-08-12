@@ -73,6 +73,25 @@ spec:
               port: http
             failureThreshold: 5
             periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr-exporter
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      containers:
         - name: lidarr-exporter
           image: ghcr.io/onedr0p/exportarr:v1.5.3
           args:
