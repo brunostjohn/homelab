@@ -21,16 +21,13 @@ spec:
           nfs:
             server: 10.0.0.2
             path: /mnt/jabberwock
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
       containers:
         - name: sonarr
           image: ghcr.io/hotio/sonarr:release-4.0.8.1874
           imagePullPolicy: IfNotPresent
           securityContext:
-            privileged: true
+            allowPrivilegeEscalation: false
+            runAsUser: 0
           resources:
             limits:
               memory: "128Mi"
@@ -59,10 +56,14 @@ spec:
             httpGet:
               path: /
               port: http
+            failureThreshold: 5
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: http
+            failureThreshold: 5
+            periodSeconds: 10
         - name: sonarr-exporter
           image: ghcr.io/onedr0p/exportarr:v1.5.3
           imagePullPolicy: IfNotPresent
