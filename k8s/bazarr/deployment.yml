@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bazarr
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: bazarr
+  template:
+    metadata:
+      labels:
+        app: bazarr
+    spec:
+      volumes:
+        - name: bazarr-config
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+        - name: bazarr-data
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+      containers:
+        - name: bazarr
+          image: ghcr.io/hotio/bazarr:release-1.4.3
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 6767
+              name: http
+              protocol: TCP
+          environment:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Dublin"
+            - name: UMASK
+              value: "002"
+          volumeMounts:
+            - name: bazarr-config
+              mountPath: /config
+              subPath: casaos/bazarr/
+            - name: bazarr-data
+              mountPath: /data
+              subPath: entertainment/
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+        # - name: bazarr-exporter
+        #   image: ghcr.io/onedr0p/exportarr:v1.5.3
+        #   args:
+        #     - bazarr
+        #   imagePullPolicy: IfNotPresent
+        #   env:
+        #     - name: PORT
+        #       value: "9707"
+        #     - name: URL
+        #       value: "http://bazarr.entertainment.svc.cluster.local:6767"
+        #     - name: APIKEY
+        #       valueFrom:
+        #         secretKeyRef:
+        #           name: bazarr-exporter
+        #           key: api-key
+        #   ports:
+        #     - name: monitoring
+        #       containerPort: 9707
+        #   livenessProbe:
+        #     httpGet:
+        #       path: /healthz
+        #       port: monitoring
+        #     failureThreshold: 5
+        #     periodSeconds: 10
+        #   readinessProbe:
+        #     httpGet:
+        #       path: /healthz
+        #       port: monitoring
+        #     failureThreshold: 5
+        #     periodSeconds: 10
+        #   resources:
+        #     requests:
+        #       cpu: 100m
+        #       memory: 64Mi
+        #     limits:
+        #       cpu: 500m
+        #       memory: 256Mi
