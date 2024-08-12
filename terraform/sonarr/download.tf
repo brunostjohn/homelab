@@ -1,4 +1,4 @@
-resource "radarr_download_client_qbittorrent" "qbittorrent" {
+resource "sonarr_download_client_qbittorrent" "qbittorrent" {
   name                       = "qBittorrent"
   host                       = "qbittorrent.entertainment.svc.cluster.local"
   port                       = 8080
@@ -6,11 +6,12 @@ resource "radarr_download_client_qbittorrent" "qbittorrent" {
   password                   = var.qbittorrent_password
   enable                     = true
   priority                   = 1
-  movie_category             = "Movies"
-  movie_imported_category    = "Movies (Imported)"
   initial_state              = 0
-  recent_movie_priority      = 1
   remove_completed_downloads = true
   remove_failed_downloads    = true
-  older_movie_priority       = 0
+  tv_category                = "Shows"
+  tv_imported_category       = "Shows (Imported)"
+  recent_tv_priority         = 1
+  older_tv_priority          = 0
+
 }
