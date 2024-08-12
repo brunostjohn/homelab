@@ -48,24 +48,24 @@ spec:
               subPath: casaos/prowlarr/
           startupProbe:
             httpGet:
-              path: /api
+              path: /ping
               port: http
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /api
+              path: /ping
               port: http
             failureThreshold: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /api
+              path: /ping
               port: http
             failureThreshold: 5
             periodSeconds: 10
         # - name: prowlarr-exporter
-        #   image: ghcr.io/onedr0p/exportarr:v1.5.3
+        #   image: ghcr.io/onedr0p/exportarr:v2.0
         #   args:
         #     - prowlarr
         #   imagePullPolicy: IfNotPresent
