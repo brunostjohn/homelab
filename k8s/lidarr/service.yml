@@ -11,8 +11,8 @@ spec:
       targetPort: 8686
       name: http
       protocol: TCP
-    # - port: 9707
-    #   targetPort: 9707
-    #   name: monitoring
-    #   protocol: TCP
+    - port: 9707
+      targetPort: 9707
+      name: monitoring
+      protocol: TCP
   type: ClusterIP
