@@ -27,7 +27,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: sonarr
-          image: linuxserver/sonarr:4.0.8
+          image: ghcr.io/hotio/sonarr:release-4.0.8.1874
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
@@ -46,6 +46,8 @@ spec:
               value: "1000"
             - name: TZ
               value: "Europe/Dublin"
+            - name: UMASK
+              value: "002"
           volumeMounts:
             - name: sonarr-config
               mountPath: /config
