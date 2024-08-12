@@ -13,5 +13,4 @@ resource "sonarr_download_client_qbittorrent" "qbittorrent" {
   tv_imported_category       = "Shows (Imported)"
   recent_tv_priority         = 1
   older_tv_priority          = 0
-
 }
