@@ -22,7 +22,7 @@ spec:
             path: /mnt/jabberwock
       containers:
         - name: prowlarr
-          image: ghcr.io/hotio/prowlarr:release-1.21.2.4649
+          image: linuxserver/prowlarr:1.9.4
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
