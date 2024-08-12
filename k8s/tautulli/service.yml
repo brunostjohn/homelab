@@ -11,8 +11,8 @@ spec:
       port: 8181
       targetPort: 8181
       name: http
-    # - protocol: TCP
-    #   port: 9487
-    #   targetPort: 9487
-    #   name: metrics
+    - protocol: TCP
+      port: 9487
+      targetPort: 9487
+      name: metrics
   type: ClusterIP
