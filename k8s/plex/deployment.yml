@@ -92,16 +92,16 @@ spec:
           image: ghcr.io/axsuul/plex-media-server-exporter
           imagePullPolicy: IfNotPresent
           env:
-            - name: PORT
-              value: "9707"
             - name: PLEX_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: plex-secrets
                   key: api-key
+            - name: PLEX_ADDR
+              value: http://localhost:32400
           ports:
             - name: monitoring
-              containerPort: 9707
+              containerPort: 9549
           livenessProbe:
             httpGet:
               path: /metrics
