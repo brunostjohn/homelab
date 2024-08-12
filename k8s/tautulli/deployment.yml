@@ -4,6 +4,9 @@ metadata:
   name: tautulli
   namespace: entertainment
 spec:
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: tautulli
