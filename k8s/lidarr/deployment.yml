@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidarr
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lidarr
+  template:
+    metadata:
+      labels:
+        app: lidarr
+    spec:
+      volumes:
+        - name: lidarr-config
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+        - name: lidarr-data
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+      containers:
+        - name: lidarr
+          image: ghcr.io/hotio/lidarr:release-4.0.8.1874
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8686
+              name: http
+              protocol: TCP
+          environment:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Dublin"
+            - name: UMASK
+              value: "002"
+          volumeMounts:
+            - name: lidarr-config
+              mountPath: /config
+              subPath: casaos/lidarr/
+            - name: lidarr-data
+              mountPath: /data
+              subPath: entertainment/
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+        # - name: lidarr-exporter
+        #   image: ghcr.io/onedr0p/exportarr:v1.5.3
+        #   args:
+        #     - lidarr
+        #   imagePullPolicy: IfNotPresent
+        #   env:
+        #     - name: PORT
+        #       value: "9707"
+        #     - name: URL
+        #       value: "http://lidarr.entertainment.svc.cluster.local:8686"
+        #     - name: APIKEY
+        #       valueFrom:
+        #         secretKeyRef:
+        #           name: lidarr-exporter
+        #           key: api-key
+        #   ports:
+        #     - name: monitoring
+        #       containerPort: 9707
+        #   livenessProbe:
+        #     httpGet:
+        #       path: /healthz
+        #       port: monitoring
+        #     failureThreshold: 5
+        #     periodSeconds: 10
+        #   readinessProbe:
+        #     httpGet:
+        #       path: /healthz
+        #       port: monitoring
+        #     failureThreshold: 5
+        #     periodSeconds: 10
+        #   resources:
+        #     requests:
+        #       cpu: 100m
+        #       memory: 64Mi
+        #     limits:
+        #       cpu: 500m
+        #       memory: 256Mi
