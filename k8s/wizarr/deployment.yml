@@ -24,6 +24,24 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8181
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8181
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8181
+            failureThreshold: 3
+            periodSeconds: 10
           ports:
             - containerPort: 5690
               name: http

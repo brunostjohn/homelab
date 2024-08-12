@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: tautulli-pvc
+  namespace: entertainment
+spec:
+  storageClassName: nfs-jabberwock-subpath
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
