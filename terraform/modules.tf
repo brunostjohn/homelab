@@ -122,21 +122,29 @@ module "prowlarr" {
 }
 
 module "lidarr" {
-  depends_on = [ module.prowlarr ]
+  depends_on = [module.prowlarr]
   source     = "./lidarr"
+
+  qbittorrent_password = var.qbittorrent_admin_password
 }
 
 module "radarr" {
-  depends_on = [ module.lidarr ]
+  depends_on = [module.lidarr]
   source     = "./radarr"
+
+  qbittorrent_password = var.qbittorrent_admin_password
 }
 
 module "sonarr" {
-  depends_on = [ module.radarr ]
+  depends_on = [module.radarr]
   source     = "./sonarr"
+
+  qbittorrent_password = var.qbittorrent_admin_password
 }
 
 module "readarr" {
-  depends_on = [ module.sonarr ]
+  depends_on = [module.sonarr]
   source     = "./readarr"
+
+  qbittorrent_password = var.qbittorrent_admin_password
 }
