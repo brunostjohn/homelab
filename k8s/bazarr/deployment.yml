@@ -57,13 +57,13 @@ spec:
               subPath: entertainment/
           livenessProbe:
             httpGet:
-              path: /ping
+              path: /api
               port: http
             failureThreshold: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /ping
+              path: /api
               port: http
             failureThreshold: 5
             periodSeconds: 10
