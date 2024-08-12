@@ -47,10 +47,10 @@ spec:
           volumeMounts:
             - name: sonarr-config
               mountPath: /config
-              subPath: /casaos/sonarr
+              subPath: casaos/sonarr/
             - name: sonarr-data
               mountPath: /data
-              subPath: /entertainment
+              subPath: entertainment/
           livenessProbe:
             httpGet:
               path: /
