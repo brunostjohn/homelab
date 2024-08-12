@@ -20,3 +20,4 @@ spec:
       targetPort: 6881
       name: p2p-udp
   type: LoadBalancer
+  loadBalancerIP: 10.0.2.9
