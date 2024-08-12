@@ -16,17 +16,19 @@ spec:
         - name: sonarr-config
           nfs:
             server: 10.0.0.2
-            path: /export/jabberwock
+            path: /mnt/jabberwock
         - name: sonarr-data
           nfs:
             server: 10.0.0.2
-            path: /export/jabberwock
+            path: /mnt/jabberwock
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: sonarr
           image: linuxserver/sonarr:4.0.8
           imagePullPolicy: IfNotPresent
-          securityContext:
-            privileged: true
           resources:
             limits:
               memory: "128Mi"
