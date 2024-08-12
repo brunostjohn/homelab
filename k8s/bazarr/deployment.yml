@@ -26,7 +26,7 @@ spec:
             path: /mnt/jabberwock
       containers:
         - name: bazarr
-          image: linuxserver/bazarr
+          image: linuxserver/bazarr:1.2.2
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
