@@ -12,6 +12,9 @@ resource "prowlarr_download_client_qbittorrent" "qbittorrent" {
 
 resource "prowlarr_indexer_proxy_flaresolverr" "flaresolverr" {
   name            = "FlareSolverr"
-  request_timeout = 10
-  host            = ""
+  request_timeout = 60
+  tags = [
+    prowlarr_tag.flare.id,
+  ]
+  host = "http://flaresolverr.entertainment.svc.cluster.local:8191/"
 }
