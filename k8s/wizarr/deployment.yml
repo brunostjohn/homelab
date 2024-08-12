@@ -27,19 +27,19 @@ spec:
           startupProbe:
             httpGet:
               path: /
-              port: 8181
+              port: 5690
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /
-              port: 8181
+              port: 5690
             failureThreshold: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
-              port: 8181
+              port: 5690
             failureThreshold: 3
             periodSeconds: 10
           ports:
