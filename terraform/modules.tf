@@ -109,3 +109,14 @@ module "grafana" {
   client_secret  = var.grafana_client_secret
   personal_email = var.personal_email
 }
+
+module "prowlarr" {
+  depends_on = [module.authentik, module.cluster_apps]
+  source     = "./prowlarr"
+
+  sonarr_api_key             = var.sonarr_api_key
+  radarr_api_key             = var.radarr_api_key
+  lidarr_api_key             = var.lidarr_api_key
+  readarr_api_key            = var.readarr_api_key
+  qbittorrent_admin_password = var.qbittorrent_admin_password
+}

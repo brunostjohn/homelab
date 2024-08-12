@@ -46,6 +46,11 @@ terraform {
       source  = "cloudflare/cloudflare"
       version = "~> 4.0"
     }
+
+    prowlarr = {
+      source  = "devopsarr/prowlarr"
+      version = "2.4.2"
+    }
   }
 
   backend "kubernetes" {
@@ -106,4 +111,9 @@ provider "grafana" {
 
 provider "cloudflare" {
   api_token = var.provider_cloudflare_api_token
+}
+
+provider "prowlarr" {
+  url     = "http://prowlarr.${var.global_fqdn}"
+  api_key = var.prowlarr_api_key
 }
