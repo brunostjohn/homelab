@@ -15,4 +15,5 @@ spec:
       targetPort: 9707
       name: monitoring
       protocol: TCP
-  type: ClusterIP
+  type: LoadBalancer
+  loadBalancerIP: 10.0.2.10
