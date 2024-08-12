@@ -11,8 +11,8 @@ spec:
       targetPort: 32400
       name: http
       protocol: TCP
-    - port: 9549
-      targetPort: 9549
+    - port: 9594
+      targetPort: 9594
       name: monitoring
       protocol: TCP
   type: LoadBalancer

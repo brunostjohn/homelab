@@ -101,7 +101,7 @@ spec:
               value: http://localhost:32400
           ports:
             - name: monitoring
-              containerPort: 9549
+              containerPort: 9594
           livenessProbe:
             httpGet:
               path: /metrics
