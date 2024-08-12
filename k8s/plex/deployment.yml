@@ -102,18 +102,18 @@ spec:
           ports:
             - name: monitoring
               containerPort: 9594
-          livenessProbe:
-            httpGet:
-              path: /metrics
-              port: monitoring
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /metrics
-              port: monitoring
-            failureThreshold: 5
-            periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: monitoring
+          #   failureThreshold: 5
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /metrics
+          #     port: monitoring
+          #   failureThreshold: 5
+          #   periodSeconds: 10
           resources:
             requests:
               cpu: 100m
