@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: overseerr
+  namespace: entertainment
+spec:
+  selector:
+    app: overseerr
+  ports:
+    - port: 5055
+      targetPort: 5055
+      name: http
+      protocol: TCP
+    # - port: 9594
+    #   targetPort: 9594
+    #   name: monitoring
+    #   protocol: TCP
+  type: ClusterIP

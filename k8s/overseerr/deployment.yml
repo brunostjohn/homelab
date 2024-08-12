@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: overseerr
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: overseerr
+  template:
+    metadata:
+      labels:
+        app: overseerr
+    spec:
+      volumes:
+        - name: overseerr-config
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+      containers:
+        - name: overseerr
+          image: ghcr.io/sct/overseerr
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5055
+              protocol: TCP
+              name: http
+          env:
+            - name: TZ
+              value: Europe/Dublin
+          volumeMounts:
+            - name: overseerr-config
+              mountPath: /app/config
+              subPath: casaos/os2
