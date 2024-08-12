@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audiobookshelf
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: audiobookshelf
+  template:
+    metadata:
+      labels:
+        app: audiobookshelf
+    spec:
+      volumes:
+        - name: audiobookshelf-config
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+        - name: audiobookshelf-data
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+      containers:
+        - name: audiobookshelf
+          image: ghcr.io/advplyr/audiobookshelf:2.8.1
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: audiobookshelf-config
+              mountPath: /config
+              subPath: casaos/audiobookshelf/
+            - name: audiobookshelf-data
+              mountPath: /data
+              subPath: entertainment/
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
