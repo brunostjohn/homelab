@@ -24,6 +24,7 @@ spec:
           nfs:
             server: 10.0.0.2
             path: /mnt/jabberwock
+      runtimeClassName: nvidia
       tolerations:
         - key: nvidia.com/gpu
           operator: Exists
@@ -32,7 +33,6 @@ spec:
         - name: plex
           image: linuxserver/plex
           imagePullPolicy: IfNotPresent
-          runtimeClassName: nvidia
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
