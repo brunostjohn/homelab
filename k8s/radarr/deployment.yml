@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      volumes:
+        - name: radarr-config
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+        - name: radarr-data
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+      containers:
+        - name: radarr
+          image: ghcr.io/hotio/radarr:release-5.8.3.8933
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8989
+              name: http
+              protocol: TCP
+          environment:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Dublin"
+            - name: UMASK
+              value: "002"
+          volumeMounts:
+            - name: radarr-config
+              mountPath: /config
+              subPath: casaos/radarr/
+            - name: radarr-data
+              mountPath: /data
+              subPath: entertainment/
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+        # - name: radarr-exporter
+        #   image: ghcr.io/onedr0p/exportarr:v1.5.3
+        #   args:
+        #     - radarr
+        #   imagePullPolicy: IfNotPresent
+        #   env:
+        #     - name: PORT
+        #       value: "9707"
+        #     - name: URL
+        #       value: "http://radarr.entertainment.svc.cluster.local:8989"
+        #     - name: APIKEY
+        #       valueFrom:
+        #         secretKeyRef:
+        #           name: radarr-exporter
+        #           key: api-key
+        #   ports:
+        #     - name: monitoring
+        #       containerPort: 9707
+        #   livenessProbe:
+        #     httpGet:
+        #       path: /healthz
+        #       port: monitoring
+        #     failureThreshold: 5
+        #     periodSeconds: 10
+        #   readinessProbe:
+        #     httpGet:
+        #       path: /healthz
+        #       port: monitoring
+        #     failureThreshold: 5
+        #     periodSeconds: 10
+        #   resources:
+        #     requests:
+        #       cpu: 100m
+        #       memory: 64Mi
+        #     limits:
+        #       cpu: 500m
+        #       memory: 256Mi
