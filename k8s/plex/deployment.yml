@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plex
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      volumes:
+        - name: plex-config
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+        - name: plex-data
+          nfs:
+            server: 10.0.0.2
+            path: /mnt/jabberwock
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: plex
+          image: linuxserver/plex
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+              nvidia.com/gpu: 1
+          ports:
+            - containerPort: 32400
+              name: http
+              protocol: TCP
+          env:
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Dublin"
+            - name: VERSION
+              value: docker
+            - name: PLEX_CLAIM
+              valueFrom:
+                secretKeyRef:
+                  key: claim
+                  name: plex-secrets
+          volumeMounts:
+            - name: plex-config
+              mountPath: /config
+              subPath: casaos/plex/
+            - name: plex-data
+              mountPath: /data
+              subPath: entertainment/
+          startupProbe:
+            httpGet:
+              path: /identify
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /identify
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /identify
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+        - name: plex-exporter
+          image: ghcr.io/axsuul/plex-media-server-exporter
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PORT
+              value: "9707"
+            - name: PLEX_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: plex-secrets
+                  key: api-key
+          ports:
+            - name: monitoring
+              containerPort: 9707
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: monitoring
+            failureThreshold: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
