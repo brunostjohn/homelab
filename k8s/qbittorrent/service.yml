@@ -12,6 +12,10 @@ spec:
       targetPort: 8080
       name: web
     - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      name: flood
+    - protocol: TCP
       port: 6881
       targetPort: 6881
       name: p2p
