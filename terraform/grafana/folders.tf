@@ -65,3 +65,9 @@ resource "grafana_folder" "unifi" {
   title = "UniFi"
   uid   = "unifi"
 }
+
+resource "grafana_folder" "entertainment" {
+  title             = "Entertainment"
+  uid               = "entertainment"
+  parent_folder_uid = grafana_folder.apps.uid
+}

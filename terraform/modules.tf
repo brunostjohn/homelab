@@ -70,10 +70,17 @@ module "cluster_apps" {
   unifi_username                   = var.unifi_username
   unifi_password                   = var.unifi_password
 
-  sonarr_api_key = var.sonarr_api_key
-  radarr_api_key = var.radarr_api_key
-  lidarr_api_key = var.lidarr_api_key
-  bazarr_api_key = var.bazarr_api_key
+  sonarr_api_key             = var.sonarr_api_key
+  radarr_api_key             = var.radarr_api_key
+  lidarr_api_key             = var.lidarr_api_key
+  bazarr_api_key             = var.bazarr_api_key
+  prowlarr_api_key           = var.prowlarr_api_key
+  readarr_api_key            = var.readarr_api_key
+  plex_token                 = var.plex_token
+  plex_claim                 = var.plex_claim
+  tautulli_api_key           = var.tautulli_api_key
+  qbittorrent_admin_password = var.qbittorrent_admin_password
+  overseerr_api_key          = var.overseerr_api_key
 }
 
 module "adguard" {

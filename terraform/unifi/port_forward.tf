@@ -28,12 +28,12 @@ resource "unifi_port_forward" "meowbox_mc" {
   name                   = "Minecraft Port Forward"
 }
 
-resource "unifi_port_forward" "meowbox_qbittorrent" {
+resource "unifi_port_forward" "cluster_qbittorrent" {
   port_forward_interface = "wan"
   protocol               = "tcp_udp"
-  fwd_port               = 29538
-  dst_port               = 29538
-  fwd_ip                 = unifi_user.meowbox.fixed_ip
+  fwd_port               = 6881
+  dst_port               = 6881
+  fwd_ip                 = "10.0.2.9"
   log                    = true
   name                   = "qBittorrent Port Forward"
 }

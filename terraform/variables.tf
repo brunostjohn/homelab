@@ -250,21 +250,56 @@ variable "cloudflare_account_id" {
 }
 
 variable "sonarr_api_key" {
-  type = string
+  type        = string
   description = "API key for Sonarr"
 }
 
 variable "radarr_api_key" {
-  type = string
+  type        = string
   description = "API key for Radarr"
 }
 
 variable "lidarr_api_key" {
-  type = string
+  type        = string
   description = "API key for Lidarr"
 }
 
 variable "bazarr_api_key" {
-  type = string
+  type        = string
   description = "API key for Bazarr"
+}
+
+variable "prowlarr_api_key" {
+  type        = string
+  description = "API key for Prowlarr"
+}
+
+variable "readarr_api_key" {
+  type        = string
+  description = "API key for Readarr"
+}
+
+variable "plex_token" {
+  type        = string
+  description = "Plex token"
+}
+
+variable "plex_claim" {
+  type        = string
+  description = "Plex claim"
+}
+
+variable "tautulli_api_key" {
+  type        = string
+  description = "API key for tautulli"
+}
+
+variable "qbittorrent_admin_password" {
+  type        = string
+  description = "Admin password for qBittorrent"
+}
+
+variable "overseerr_api_key" {
+  type        = string
+  description = "API key for Overseerr"
 }
