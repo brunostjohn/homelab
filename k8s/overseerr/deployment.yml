@@ -39,7 +39,7 @@ spec:
                   key: api-key
           args:
             - --overseerr.address=http://localhost:5055
-            - --overseerr.api-key=$OVERSEERR_API_KEY
+            - --overseerr.api-key=$(OVERSEERR_API_KEY)
           startupProbe:
             httpGet:
               path: /
