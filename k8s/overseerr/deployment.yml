@@ -39,22 +39,22 @@ spec:
                   key: api-key
           args:
             - --overseerr.address=http://localhost:5055
-            - --overseerr.api-key=$(OVERSEERR_API_KEY)
+            - --overseerr.api-key=$OVERSEERR_API_KEY
           startupProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: metrics
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: metrics
             failureThreshold: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: metrics
             failureThreshold: 5
             periodSeconds: 10
