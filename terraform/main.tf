@@ -51,6 +51,26 @@ terraform {
       source  = "devopsarr/prowlarr"
       version = "2.4.2"
     }
+
+    radarr = {
+      source  = "devopsarr/radarr"
+      version = "2.2.0"
+    }
+
+    sonarr = {
+      source  = "devopsarr/sonarr"
+      version = "3.2.0"
+    }
+
+    readarr = {
+      source  = "devopsarr/readarr"
+      version = "2.1.0"
+    }
+
+    lidarr = {
+      source  = "devopsarr/lidarr"
+      version = "1.12.0"
+    }
   }
 
   backend "kubernetes" {
@@ -114,6 +134,26 @@ provider "cloudflare" {
 }
 
 provider "prowlarr" {
-  url     = "http://prowlarr.${var.global_fqdn}"
+  url     = "https://prowlarr.${var.global_fqdn}"
   api_key = var.prowlarr_api_key
+}
+
+provider "radarr" {
+  url     = "https://radarr.${var.global_fqdn}"
+  api_key = var.radarr_api_key
+}
+
+provider "sonarr" {
+  url     = "https://sonarr.${var.global_fqdn}"
+  api_key = var.sonarr_api_key
+}
+
+provider "readarr" {
+  url     = "https://readarr.${var.global_fqdn}"
+  api_key = var.readarr_api_key
+}
+
+provider "lidarr" {
+  url     = "https://lidarr.${var.global_fqdn}"
+  api_key = var.lidarr_api_key
 }

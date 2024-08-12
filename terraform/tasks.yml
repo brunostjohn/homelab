@@ -44,6 +44,18 @@ tasks:
       - cd cloudflare && terraform validate
       - cd cloudflare && terraform fmt --check
       - cd cloudflare && tflint
+      - cd lidarr && terraform validate
+      - cd lidarr && terraform fmt --check
+      - cd lidarr && tflint
+      - cd sonarr && terraform validate
+      - cd sonarr && terraform fmt --check
+      - cd sonarr && tflint
+      - cd radarr && terraform validate
+      - cd radarr && terraform fmt --check
+      - cd radarr && tflint
+      - cd readarr && terraform validate
+      - cd readarr && terraform fmt --check
+      - cd readarr && tflint
 
   init:
     aliases: ["i"]
@@ -60,6 +72,10 @@ tasks:
       - cd authentik && terraform init
       - cd grafana && terraform init
       - cd cloudflare && terraform init
+      - cd lidarr && terraform init
+      - cd sonarr && terraform init
+      - cd radarr && terraform init
+      - cd readarr && terraform init
 
   plan:
     aliases: ["p"]

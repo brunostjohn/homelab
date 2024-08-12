@@ -120,3 +120,23 @@ module "prowlarr" {
   readarr_api_key            = var.readarr_api_key
   qbittorrent_admin_password = var.qbittorrent_admin_password
 }
+
+module "lidarr" {
+  depends_on = [ module.prowlarr ]
+  source     = "./lidarr"
+}
+
+module "radarr" {
+  depends_on = [ module.lidarr ]
+  source     = "./radarr"
+}
+
+module "sonarr" {
+  depends_on = [ module.radarr ]
+  source     = "./sonarr"
+}
+
+module "readarr" {
+  depends_on = [ module.sonarr ]
+  source     = "./readarr"
+}
