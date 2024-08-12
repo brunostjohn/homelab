@@ -26,7 +26,7 @@ spec:
             path: /mnt/jabberwock
       containers:
         - name: lidarr
-          image: ghcr.io/hotio/lidarr:release-4.0.8.1874
+          image: ghcr.io/hotio/lidarr:release-2.4.3.4248
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
