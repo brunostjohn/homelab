@@ -13,10 +13,6 @@ spec:
       targetPort: 32400
       name: http
       protocol: TCP
-    - port: 9594
-      targetPort: 9594
-      name: monitoring
-      protocol: TCP
   type: LoadBalancer
   loadBalancerIP: 10.0.2.10
 ---
