@@ -4,6 +4,7 @@ metadata:
   name: prowlarr
   namespace: entertainment
 spec:
+  revisionHistoryLimit: 3
   replicas: 1
   strategy:
     type: Recreate
@@ -22,7 +23,7 @@ spec:
             path: /mnt/jabberwock
       containers:
         - name: prowlarr
-          image: linuxserver/prowlarr:1.9.4
+          image: linuxserver/prowlarr
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
@@ -30,7 +31,7 @@ spec:
           resources:
             limits:
               memory: "2Gi"
-              cpu: "1"
+              cpu: "2"
           ports:
             - containerPort: 9696
               name: http
