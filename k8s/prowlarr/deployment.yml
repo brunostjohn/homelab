@@ -31,7 +31,7 @@ spec:
           resources:
             limits:
               memory: "2Gi"
-              cpu: "2"
+              cpu: "1"
           ports:
             - containerPort: 9696
               name: http
