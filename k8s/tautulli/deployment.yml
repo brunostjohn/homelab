@@ -74,11 +74,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: tautulli
+      app: tautulli-exporter
   template:
     metadata:
       labels:
-        app: tautulli
+        app: tautulli-exporter
     spec:
       nodeSelector:
         kubernetes.io/hostname: meowbox

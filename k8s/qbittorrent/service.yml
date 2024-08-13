@@ -10,10 +10,6 @@ spec:
     app: qbittorrent
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
-      name: metrics
-    - protocol: TCP
       port: 8080
       targetPort: 8080
       name: web
@@ -31,3 +27,20 @@ spec:
       name: p2p-udp
   type: LoadBalancer
   loadBalancerIP: 10.0.2.9
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent-exporter
+  namespace: entertainment
+  labels:
+    app: qbittorrent-exporter
+spec:
+  selector:
+    app: qbittorrent-exporter
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      name: metrics
+  type: ClusterIP

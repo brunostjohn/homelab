@@ -13,6 +13,19 @@ spec:
       targetPort: 8989
       name: http
       protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr-exporter
+  namespace: entertainment
+  labels:
+    app: sonarr-exporter
+spec:
+  selector:
+    app: sonarr-exporter
+  ports:
     - port: 9707
       targetPort: 9707
       name: monitoring

@@ -68,11 +68,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: overseerr
+      app: overseerr-exporter
   template:
     metadata:
       labels:
-        app: overseerr
+        app: overseerr-exporter
     spec:
       containers:
         - name: overseerr-exporter

@@ -13,6 +13,19 @@ spec:
       targetPort: 8787
       name: http
       protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: readarr-exporter
+  namespace: entertainment
+  labels:
+    app: readarr-exporter
+spec:
+  selector:
+    app: readarr-exporter
+  ports:
     - port: 9707
       targetPort: 9707
       name: monitoring

@@ -13,6 +13,19 @@ spec:
       targetPort: 8686
       name: http
       protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lidarr-exporter
+  namespace: entertainment
+  labels:
+    app: lidarr-exporter
+spec:
+  selector:
+    app: lidarr-exporter
+  ports:
     - port: 9707
       targetPort: 9707
       name: monitoring

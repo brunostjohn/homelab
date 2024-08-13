@@ -83,11 +83,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: bazarr
+      app: bazarr-exporter
   template:
     metadata:
       labels:
-        app: bazarr
+        app: bazarr-exporter
     spec:
       containers:
         - name: bazarr-exporter

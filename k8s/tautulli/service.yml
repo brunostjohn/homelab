@@ -13,6 +13,19 @@ spec:
       port: 8181
       targetPort: 8181
       name: http
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tautulli-exporter
+  namespace: entertainment
+  labels:
+    app: tautulli-exporter
+spec:
+  selector:
+    app: tautulli-exporter
+  ports:
     - protocol: TCP
       port: 9487
       targetPort: 9487

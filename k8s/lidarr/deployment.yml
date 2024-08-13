@@ -85,11 +85,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: lidarr
+      app: lidarr-exporter
   template:
     metadata:
       labels:
-        app: lidarr
+        app: lidarr-exporter
     spec:
       containers:
         - name: lidarr-exporter

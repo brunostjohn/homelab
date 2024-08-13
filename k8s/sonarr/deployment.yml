@@ -85,11 +85,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: sonarr
+      app: sonarr-exporter
   template:
     metadata:
       labels:
-        app: sonarr
+        app: sonarr-exporter
     spec:
       containers:
         - name: sonarr-exporter

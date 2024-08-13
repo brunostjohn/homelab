@@ -13,6 +13,19 @@ spec:
       targetPort: 6767
       name: http
       protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bazarr-exporter
+  namespace: entertainment
+  labels:
+    app: bazarr-exporter
+spec:
+  selector:
+    app: bazarr-exporter
+  ports:
     - port: 9707
       targetPort: 9707
       name: monitoring

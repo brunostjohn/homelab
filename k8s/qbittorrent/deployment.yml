@@ -90,11 +90,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: qbittorrent
+      app: qbittorrent-exporter
   template:
     metadata:
       labels:
-        app: qbittorrent
+        app: qbittorrent-exporter
     spec:
       containers:
         - name: qbittorrent-exporter

@@ -85,11 +85,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: radarr
+      app: radarr-exporter
   template:
     metadata:
       labels:
-        app: radarr
+        app: radarr-exporter
     spec:
       containers:
         - name: radarr-exporter

@@ -85,11 +85,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: readarr
+      app: readarr-exporter
   template:
     metadata:
       labels:
-        app: readarr
+        app: readarr-exporter
     spec:
       containers:
         - name: readarr-exporter

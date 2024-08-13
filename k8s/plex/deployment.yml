@@ -100,11 +100,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: plex
+      app: plex-metrics
   template:
     metadata:
       labels:
-        app: plex
+        app: plex-metrics
     spec:
       containers:
         - name: plex-exporter
