@@ -124,7 +124,8 @@ module "authentik_proxy_ingress" {
     "lidarr.${var.global_fqdn}",
     "bazarr.${var.global_fqdn}",
     "prowlarr.${var.global_fqdn}",
-    "readarr.${var.global_fqdn}"
+    "readarr.${var.global_fqdn}",
+    var.global_fqdn
   ]
   service   = "ak-outpost-auth-proxy"
   namespace = kubernetes_namespace.authentik.metadata[0].name

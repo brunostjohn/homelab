@@ -29,7 +29,7 @@ spec:
             runAsUser: 0
           resources:
             limits:
-              memory: "512Mi"
+              memory: "2Gi"
               cpu: "1"
           ports:
             - containerPort: 9696
