@@ -31,7 +31,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: plex
-          image: linuxserver/plex
+          image: linuxserver/plex:version-1.40.2.8395-c67dce28e
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
