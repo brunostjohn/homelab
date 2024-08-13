@@ -2,6 +2,7 @@ module "unifi" {
   source             = "./unifi"
   wlan_home_password = var.unifi_wlan_home_password
   wlan_home_ssid     = var.unifi_wlan_home_ssid
+  cluster_ip = var.cluster_ipaddr
 }
 
 module "cloudflare" {
@@ -122,28 +123,28 @@ module "prowlarr" {
 }
 
 module "lidarr" {
-  depends_on = [module.prowlarr]
+  depends_on = [module.authentik, module.cluster_apps]
   source     = "./lidarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
 }
 
 module "radarr" {
-  depends_on = [module.lidarr]
+  depends_on = [module.authentik, module.cluster_apps]
   source     = "./radarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
 }
 
 module "sonarr" {
-  depends_on = [module.radarr]
+  depends_on = [module.authentik, module.cluster_apps]
   source     = "./sonarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
 }
 
 module "readarr" {
-  depends_on = [module.sonarr]
+  depends_on = [module.authentik, module.cluster_apps]
   source     = "./readarr"
 
   qbittorrent_password = var.qbittorrent_admin_password

@@ -47,3 +47,13 @@ resource "argocd_application" "readarr" {
     }
   }
 }
+
+module "readarr_ingress" {
+  source     = "../ingress"
+  depends_on = [argocd_application.readarr]
+
+  service   = "readarr"
+  hosts     = ["readarr.local"]
+  namespace = kubernetes_namespace.entertainment.metadata[0].name
+  port      = 8787
+}

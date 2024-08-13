@@ -48,8 +48,7 @@ provider "registry.terraform.io/devopsarr/lidarr" {
 }
 
 provider "registry.terraform.io/devopsarr/prowlarr" {
-  version     = "2.4.2"
-  constraints = "2.4.2"
+  version = "2.4.2"
   hashes = [
     "h1:t9GhSA+lTUgna0u/etDunwsYZkUgnkb2JGxo7TaBIKM=",
     "zh:0b0d7a6722b985dbbcc4d6b6fc8836cce1e03aaaca5668e0bc2eef8c0ef4d0b3",
@@ -71,8 +70,7 @@ provider "registry.terraform.io/devopsarr/prowlarr" {
 }
 
 provider "registry.terraform.io/devopsarr/radarr" {
-  version     = "2.2.0"
-  constraints = "2.2.0"
+  version = "2.2.0"
   hashes = [
     "h1:yX5MU427D0T0oQY68fJv9wk907c2Vde4ZccQKCpaUpo=",
     "zh:0e185607af7bb29363511411d32bd950494c31e3137fd91d22b6ca435fd48311",
@@ -117,8 +115,7 @@ provider "registry.terraform.io/devopsarr/readarr" {
 }
 
 provider "registry.terraform.io/devopsarr/sonarr" {
-  version     = "3.2.0"
-  constraints = "3.2.0"
+  version = "3.2.0"
   hashes = [
     "h1:6POgYh/3hJEu606jJU25ErS5kqc9Yzi2/eDRLKLEm+I=",
     "zh:18e8ce01cd2084e06d8208c3cfa639c37c80cffc227511917f7e54e314733d12",

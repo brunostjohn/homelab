@@ -134,26 +134,26 @@ provider "cloudflare" {
 }
 
 provider "prowlarr" {
-  url     = "https://prowlarr.${var.global_fqdn}"
+  url     = "http://prowlarr.local"
   api_key = var.prowlarr_api_key
 }
 
 provider "radarr" {
-  url     = "https://radarr.${var.global_fqdn}"
+  url     = "http://radarr.local"
   api_key = var.radarr_api_key
 }
 
 provider "sonarr" {
-  url     = "https://sonarr.${var.global_fqdn}"
+  url     = "http://sonarr.local"
   api_key = var.sonarr_api_key
 }
 
 provider "readarr" {
-  url     = "https://readarr.${var.global_fqdn}"
+  url     = "http://readarr.local"
   api_key = var.readarr_api_key
 }
 
 provider "lidarr" {
-  url     = "https://lidarr.${var.global_fqdn}"
+  url     = "http://lidarr.local"
   api_key = var.lidarr_api_key
 }

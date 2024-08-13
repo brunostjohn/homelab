@@ -12,7 +12,16 @@ resource "adguard_rewrite" "k3s_ingress" {
     "spoolman.local",
     "klipper.local",
     "fluidd.klipper.local",
-    "camera.octoprint.local"
+    "camera.octoprint.local",
+    var.global_fqdn,
+    "*.${var.global_fqdn}",
+    "*.static.${var.global_fqdn}",
+    "radarr.local",
+    "sonarr.local",
+    "readarr.local",
+    "lidarr.local",
+    "prowlarr.local",
+    "qbittorrent.local",
   ])
 
   domain = each.key
@@ -20,7 +29,7 @@ resource "adguard_rewrite" "k3s_ingress" {
 }
 
 resource "adguard_rewrite" "meowbox" {
-  for_each = toset(["meowbox.local", var.global_fqdn, "*.${var.global_fqdn}", "*.static.${var.global_fqdn}"])
+  for_each = toset(["meowbox.local"])
 
   domain = each.key
   answer = var.meowbox_ipaddr

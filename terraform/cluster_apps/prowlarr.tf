@@ -47,3 +47,13 @@ resource "argocd_application" "prowlarr" {
     }
   }
 }
+
+module "prowlarr_ingress" {
+  source     = "../ingress"
+  depends_on = [argocd_application.prowlarr]
+
+  service   = "prowlarr"
+  hosts     = ["prowlarr.local"]
+  namespace = kubernetes_namespace.entertainment.metadata[0].name
+  port      = 9696
+}

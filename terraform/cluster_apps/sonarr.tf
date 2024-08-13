@@ -53,3 +53,13 @@ resource "argocd_application" "sonarr" {
     }
   }
 }
+
+module "sonarr_ingress" {
+  source     = "../ingress"
+  depends_on = [argocd_application.sonarr]
+
+  service   = "sonarr"
+  hosts     = ["sonarr.local"]
+  namespace = kubernetes_namespace.entertainment.metadata[0].name
+  port      = 8989
+}

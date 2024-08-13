@@ -47,3 +47,13 @@ resource "argocd_application" "bazarr" {
     }
   }
 }
+
+module "bazarr_ingress" {
+  source     = "../ingress"
+  depends_on = [argocd_application.bazarr]
+
+  service   = "bazarr"
+  hosts     = ["bazarr.local"]
+  namespace = kubernetes_namespace.entertainment.metadata[0].name
+  port      = 6767
+}

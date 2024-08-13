@@ -7,3 +7,8 @@ variable "wlan_home_ssid" {
   type        = string
   description = "SSID for the home WLAN"
 }
+
+variable "cluster_ip" {
+  type = string
+  description = "IP address of the cluster"
+}

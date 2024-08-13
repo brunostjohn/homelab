@@ -47,3 +47,13 @@ resource "argocd_application" "radarr" {
     }
   }
 }
+
+module "radarr_ingress" {
+  source     = "../ingress"
+  depends_on = [argocd_application.radarr]
+
+  service   = "radarr"
+  hosts     = ["radarr.local"]
+  namespace = kubernetes_namespace.entertainment.metadata[0].name
+  port      = 7878
+}

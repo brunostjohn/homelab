@@ -47,3 +47,13 @@ resource "argocd_application" "lidarr" {
     }
   }
 }
+
+module "lidarr_ingress" {
+  source     = "../ingress"
+  depends_on = [argocd_application.lidarr]
+
+  service   = "lidarr"
+  hosts     = ["lidarr.local"]
+  namespace = kubernetes_namespace.entertainment.metadata[0].name
+  port      = 8686
+}

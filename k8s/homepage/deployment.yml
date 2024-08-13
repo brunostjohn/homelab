@@ -32,7 +32,7 @@ spec:
               protocol: TCP
           resources:
             limits:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "500m"
           volumeMounts:
             - mountPath: /app/config/custom.js
