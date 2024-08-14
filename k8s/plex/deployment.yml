@@ -38,8 +38,8 @@ spec:
             runAsUser: 0
           resources:
             limits:
-              memory: "8Gi"
-              cpu: "4"
+              memory: "4Gi"
+              cpu: "2"
               nvidia.com/gpu: 1
           ports:
             - containerPort: 32400

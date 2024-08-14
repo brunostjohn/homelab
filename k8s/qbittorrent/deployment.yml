@@ -101,8 +101,8 @@ spec:
           image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "64Mi"
+              cpu: "100m"
           env:
             - name: QBITTORRENT_PORT
               value: "8080"
@@ -164,8 +164,8 @@ spec:
           image: jesec/flood
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "64Mi"
+              cpu: "100m"
           env:
             - name: HOME
               value: "/config"

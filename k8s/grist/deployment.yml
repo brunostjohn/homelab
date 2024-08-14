@@ -76,10 +76,8 @@ spec:
             - name: GRIST_OIDC_IDP_SCOPES
               value: "openid email profile"
           resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
             limits:
+              cpu: "200m"
               memory: "256Mi"
           readinessProbe:
             tcpSocket:
