@@ -39,7 +39,7 @@ spec:
               mountPath: /data/data
           env:
             - name: DATABASE_URL
-              value: postgresql://postgres:postgres@postgres.linkwarden.svc.cluster.local:5432/postgres
+              value: postgresql://postgres:postgres@linkwarden-postgres-postgresql.linkwarden.svc.cluster.local:5432/postgres
             - name: NEXTAUTH_SECRET
               valueFrom:
                 secretKeyRef:
