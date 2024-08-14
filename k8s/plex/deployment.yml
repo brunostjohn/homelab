@@ -17,13 +17,11 @@ spec:
     spec:
       volumes:
         - name: plex-config
-          nfs:
-            server: 10.0.0.2
-            path: /mnt/jabberwock
+          hostPath:
+            path: /mnt/jabberwock/casaos/plex
         - name: plex-data
-          nfs:
-            server: 10.0.0.2
-            path: /mnt/jabberwock
+          hostPath:
+            path: /mnt/jabberwock/entertainment
       runtimeClassName: nvidia
       tolerations:
         - key: nvidia.com/gpu
@@ -66,10 +64,8 @@ spec:
           volumeMounts:
             - name: plex-config
               mountPath: /config
-              subPath: casaos/plex/
             - name: plex-data
               mountPath: /data
-              subPath: entertainment/
           startupProbe:
             httpGet:
               path: /identity
