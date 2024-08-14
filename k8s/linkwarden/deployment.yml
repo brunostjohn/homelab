@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linkwarden
+  namespace: linkwarden
+spec:
+  selector:
+    matchLabels:
+      app: linkwarden
+  template:
+    metadata:
+      labels:
+        app: linkwarden
+    spec:
+      volumes:
+        - name: linkwarden-volume
+          persistentVolumeClaim:
+            claimName: linkwarden-pvc
+      containers:
+        - name: linkwarden
+          image: ghcr.io/linkwarden/linkwarden:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          volumeMounts:
+            - name: linkwarden-volume
+              mountPath: /data/data
+          env:
+            - name: DATABASE_URL
+              value: postgresql://postgres:postgres@postgres.linkwarden.svc.cluster.local:5432/postgres
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-secrets
+                  key: nextauth-secret
+            - name: NEXTAUTH_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: linkwarden-config
+                  key: nextauth-url
+            - name: NEXT_PUBLIC_DISABLE_REGISTRATION
+              value: "true"
+            - name: NEXT_PUBLIC_CREDENTIALS_ENABLED
+              value: "false"
+            - name: DISABLE_NEW_SSO_USERS
+              value: "false"
+            - name: NEXT_PUBLIC_AUTHENTIK_ENABLED
+              value: "true"
+            - name: AUTHENTIK_CUSTOM_NAME
+              value: "Zefir's Cloud"
+            - name: AUTHENTIK_ISSUER
+              valueFrom:
+                configMapKeyRef:
+                  name: linkwarden-config
+                  key: authentik-issuer
+            - name: AUTHENTIK_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: linkwarden-config
+                  key: authentik-client-id
+            - name: AUTHENTIK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-secrets
+                  key: authentik-client-secret
