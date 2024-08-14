@@ -9,6 +9,6 @@ variable "wlan_home_ssid" {
 }
 
 variable "cluster_ip" {
-  type = string
+  type        = string
   description = "IP address of the cluster"
 }

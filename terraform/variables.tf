@@ -303,3 +303,18 @@ variable "overseerr_api_key" {
   type        = string
   description = "API key for Overseerr"
 }
+
+variable "linkwarden_nextauth_secret" {
+  type        = string
+  description = "NextAuth secret for Linkwarden"
+}
+
+variable "linkwarden_authentik_client_secret" {
+  type        = string
+  description = "Authentik client secret for Linkwarden"
+}
+
+variable "linkwarden_authentik_client_id" {
+  type        = string
+  description = "Authentik client ID for Linkwarden"
+}

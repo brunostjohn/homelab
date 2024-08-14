@@ -2,7 +2,7 @@ module "unifi" {
   source             = "./unifi"
   wlan_home_password = var.unifi_wlan_home_password
   wlan_home_ssid     = var.unifi_wlan_home_ssid
-  cluster_ip = var.cluster_ipaddr
+  cluster_ip         = var.cluster_ipaddr
 }
 
 module "cloudflare" {
@@ -82,6 +82,10 @@ module "cluster_apps" {
   tautulli_api_key           = var.tautulli_api_key
   qbittorrent_admin_password = var.qbittorrent_admin_password
   overseerr_api_key          = var.overseerr_api_key
+
+  linkwarden_authentik_client_id     = var.linkwarden_authentik_client_id
+  linkwarden_authentik_client_secret = var.linkwarden_authentik_client_secret
+  linkwarden_nextauth_secret         = var.linkwarden_nextauth_secret
 }
 
 module "adguard" {
