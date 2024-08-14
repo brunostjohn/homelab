@@ -19,6 +19,10 @@ spec:
         - name: linkwarden-volume
           persistentVolumeClaim:
             claimName: linkwarden-pvc
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
       containers:
         - name: linkwarden
           image: ghcr.io/linkwarden/linkwarden:latest
@@ -71,3 +75,27 @@ spec:
                 secretKeyRef:
                   name: linkwarden-secrets
                   key: authentik-client-secret
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
