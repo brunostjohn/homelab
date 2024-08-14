@@ -164,7 +164,7 @@ spec:
           image: jesec/flood
           resources:
             limits:
-              memory: "64Mi"
+              memory: "128Mi"
               cpu: "100m"
           env:
             - name: HOME
