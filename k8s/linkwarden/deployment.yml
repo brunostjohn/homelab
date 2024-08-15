@@ -19,9 +19,6 @@ spec:
         - name: linkwarden-volume
           persistentVolumeClaim:
             claimName: linkwarden-pvc
-        - name: linkwarden-yarn-cm
-          configMap:
-            name: linkwarden-yarn-cm
       securityContext:
         runAsUser: 1001
         runAsGroup: 1001
