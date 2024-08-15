@@ -4,6 +4,7 @@ global:
   addPrometheusAnnotations: true
 
 configs:
+  url: http://argocd.local
   cm:
     dex.config: |
       connectors:
@@ -11,7 +12,7 @@ configs:
           id: oidc
           name: OIDC
           config:
-            issuer: https://auth.${global_fqdn}/[stuff]
+            issuer: https://auth.${global_fqdn}/application/o/argocd/
             clientID: ${oidc_client_id}
             clientSecret: ${oidc_client_secret}
 

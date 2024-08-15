@@ -26,8 +26,8 @@ module "cluster_base" {
   letsencrypt_cloudflare_api_token = var.letsencrypt_cloudflare_api_token
   cluster_loadbalancer_ip          = var.cluster_ipaddr
   cloudflare_ddns_api_token        = var.cloudflare_ddns_api_token
-  argocd_oidc_client_id = var.argocd_oidc_client_id
-  argocd_oidc_client_secret = var.argocd_oidc_client_secret
+  argocd_oidc_client_id            = var.argocd_oidc_client_id
+  argocd_oidc_client_secret        = var.argocd_oidc_client_secret
 }
 
 module "cluster_apps" {
@@ -121,6 +121,9 @@ module "prowlarr" {
   lidarr_api_key             = var.lidarr_api_key
   readarr_api_key            = var.readarr_api_key
   qbittorrent_admin_password = var.qbittorrent_admin_password
+  auth_username              = var.prowlarr_auth_username
+  auth_password              = var.prowlarr_auth_password
+  discord_webhook_url        = var.prowlarr_discord_webhook_url
 }
 
 module "lidarr" {
@@ -128,6 +131,9 @@ module "lidarr" {
   source     = "./lidarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
+  auth_username        = var.lidarr_auth_username
+  auth_password        = var.lidarr_auth_password
+  discord_webhook_url  = var.lidarr_discord_webhook_url
 }
 
 module "radarr" {
@@ -135,6 +141,9 @@ module "radarr" {
   source     = "./radarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
+  discord_webhook_url  = var.radarr_discord_webhook_url
+  auth_username        = var.radarr_auth_username
+  auth_password        = var.radarr_auth_password
 }
 
 module "sonarr" {
@@ -142,6 +151,9 @@ module "sonarr" {
   source     = "./sonarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
+  discord_webhook_url  = var.sonarr_discord_webhook_url
+  auth_username        = var.sonarr_auth_username
+  auth_password        = var.sonarr_auth_password
 }
 
 module "readarr" {
@@ -149,4 +161,5 @@ module "readarr" {
   source     = "./readarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
+  discord_webhook_url  = var.readarr_discord_webhook_url
 }

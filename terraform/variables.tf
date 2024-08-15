@@ -333,3 +333,68 @@ variable "argocd_oidc_client_secret" {
   type        = string
   description = "The OIDC client secret for ArgoCD"
 }
+
+variable "prowlarr_auth_username" {
+  type        = string
+  description = "Username for Prowlarr basic authentication"
+}
+
+variable "prowlarr_auth_password" {
+  type        = string
+  description = "Password for Prowlarr basic authentication"
+}
+
+variable "prowlarr_discord_webhook_url" {
+  type        = string
+  description = "Discord webhook URL for Prowlarr"
+}
+
+variable "lidarr_auth_username" {
+  type        = string
+  description = "Username"
+}
+
+variable "lidarr_auth_password" {
+  type        = string
+  description = "Password"
+}
+
+variable "lidarr_discord_webhook_url" {
+  type        = string
+  description = "Discord webhook URL for Lidarr"
+}
+
+variable "radarr_auth_username" {
+  type        = string
+  description = "Username"
+}
+
+variable "radarr_auth_password" {
+  type        = string
+  description = "Password"
+}
+
+variable "radarr_discord_webhook_url" {
+  type        = string
+  description = "Discord webhook URL for Radarr"
+}
+
+variable "readarr_discord_webhook_url" {
+  type        = string
+  description = "Discord webhook URL for Readarr"
+}
+
+variable "sonarr_auth_username" {
+  type        = string
+  description = "Username"
+}
+
+variable "sonarr_auth_password" {
+  type        = string
+  description = "Password"
+}
+
+variable "sonarr_discord_webhook_url" {
+  type        = string
+  description = "Discord webhook URL for Sonarr"
+}

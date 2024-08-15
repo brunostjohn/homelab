@@ -4,6 +4,7 @@ resource "prowlarr_download_client_qbittorrent" "qbittorrent" {
   password      = var.qbittorrent_admin_password
   host          = "qbittorrent.entertainment.svc.cluster.local"
   port          = 8080
+  use_ssl       = false
   enable        = true
   priority      = 1
   initial_state = 0

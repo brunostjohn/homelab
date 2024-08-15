@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: linkwarden-yarn-cm
-  namespace: linkwarden
-data:
-  .yarnrc: |
-    cache-folder=/data/data/yarn-cache

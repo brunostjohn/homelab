@@ -5,14 +5,6 @@ includes:
     aliases: ["h"]
     taskfile: ./homepage/tasks.yml
     dir: ./homepage
-  crowdsec:
-    aliases: ["cs"]
-    taskfile: ./crowdsec/tasks.yml
-    dir: ./crowdsec
-  networking:
-    aliases: ["n"]
-    taskfile: ./networking/tasks.yml
-    dir: ./networking
 
 tasks:
   "produce:all":

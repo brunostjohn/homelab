@@ -22,3 +22,18 @@ variable "qbittorrent_admin_password" {
   type        = string
   description = "Admin password for qBittorrent"
 }
+
+variable "auth_username" {
+  type        = string
+  description = "Username for basic authentication"
+}
+
+variable "auth_password" {
+  type        = string
+  description = "Password for basic authentication"
+}
+
+variable "discord_webhook_url" {
+  type        = string
+  description = "Discord webhook URL"
+}
