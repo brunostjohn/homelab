@@ -99,7 +99,7 @@ resource "argocd_application" "longhorn" {
       target_revision = "1.6.2"
 
       helm {
-        values = var.longhorn_values
+        values = file("${path.module}/values/longhorn.yml")
       }
     }
 

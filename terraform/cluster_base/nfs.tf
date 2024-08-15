@@ -28,7 +28,7 @@ resource "argocd_application" "nfs_provisioner" {
       target_revision = "4.0.18"
 
       helm {
-        values = var.nfs_provisioner_values
+        values = file("${path.module}/values/nfs.yml")
       }
     }
 

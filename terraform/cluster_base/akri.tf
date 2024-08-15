@@ -17,5 +17,5 @@ resource "helm_release" "akri" {
   chart      = "akri"
   version    = "0.12.20"
 
-  values = [var.akri_values]
+  values = [file("${path.module}/values/akri.yml")]
 }

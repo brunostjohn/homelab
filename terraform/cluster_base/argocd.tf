@@ -9,7 +9,11 @@ resource "helm_release" "argocd" {
   version          = "7.3.11"
   wait             = true
 
-  values = [var.argocd_values]
+  values = [templatefile("${path.module}/values/argocd.yml.tpl", {
+    global_fqdn = var.global_fqdn
+    oidc_client_id = var.argocd_oidc_client_id
+    oidc_client_secret = var.argocd_oidc_client_secret
+  })]
 }
 
 resource "argocd_repository" "homelab_github" {

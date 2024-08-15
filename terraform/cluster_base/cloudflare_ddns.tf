@@ -11,8 +11,8 @@ resource "kubernetes_config_map" "cloudflare_ddns" {
   }
 
   data = {
-    domains = ""
-    proxied = ""
+    domains = "${var.global_fqdn},*.${var.global_fqdn},*.static.${var.global_fqdn},corner.${var.global_fqdn},cubes.${var.global_fqdn},carrier.${var.global_fqdn}"
+    proxied = "!(is(corner.${var.global_fqdn}) || is(cubes.${var.global_fqdn}) || is(carrier.${var.global_fqdn}))"
   }
 }
 
@@ -23,12 +23,12 @@ resource "kubernetes_secret" "cloudflare_ddns" {
   }
 
   data = {
-    "api-token" = ""
+    "api-token" = var.cloudflare_ddns_api_token
   }
 }
 
 resource "argocd_application" "cloudflare_ddns" {
-  depends_on = [ kubernetes_secret.cloudflare_ddns, kubernetes_config_map.cloudflare_ddns ]
+  depends_on = [kubernetes_secret.cloudflare_ddns, kubernetes_config_map.cloudflare_ddns]
 
   metadata {
     name      = "cloudflare-ddns"

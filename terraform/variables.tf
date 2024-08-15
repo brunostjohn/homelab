@@ -318,3 +318,18 @@ variable "linkwarden_authentik_client_id" {
   type        = string
   description = "Authentik client ID for Linkwarden"
 }
+
+variable "cloudflare_ddns_api_token" {
+  type        = string
+  description = "The Cloudflare API token for the Cloudflare DDNS service"
+}
+
+variable "argocd_oidc_client_id" {
+  type        = string
+  description = "The OIDC client ID for ArgoCD"
+}
+
+variable "argocd_oidc_client_secret" {
+  type        = string
+  description = "The OIDC client secret for ArgoCD"
+}

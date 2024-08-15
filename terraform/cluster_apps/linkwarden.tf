@@ -25,7 +25,7 @@ resource "kubernetes_config_map" "linkwarden_config" {
   data = {
     "authentik-issuer"    = "https://auth.${var.global_fqdn}/application/o/linkwarden"
     "authentik-client-id" = var.linkwarden_authentik_client_id
-    "nextauth-url" = "https://links.${var.global_fqdn}/api/v1/auth"
+    "nextauth-url"        = "https://links.${var.global_fqdn}/api/v1/auth"
   }
 }
 
@@ -82,7 +82,7 @@ resource "argocd_application" "linkwarden" {
 }
 
 module "linkwarden_ingress" {
-  depends_on = [ argocd_application.linkwarden ]
+  depends_on = [argocd_application.linkwarden]
 
   source = "../ingress"
 

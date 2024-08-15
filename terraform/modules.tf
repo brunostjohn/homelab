@@ -18,19 +18,16 @@ module "cluster_base" {
   source     = "./cluster_base"
   depends_on = [module.unifi]
 
-  argocd_values          = file("values/argocd.yml")
-  longhorn_values        = file("values/longhorn.yml")
-  nfs_provisioner_values = file("values/nfs.yml")
-  akri_values            = file("values/akri.yml")
-
   global_fqdn                      = var.global_fqdn
   alertmanager_discord_webhook_url = var.alertmanager_discord_webhook_url
   crowdsec_enroll_key              = var.crowdsec_enroll_key
   crowdsec_bouncer_key_traefik     = var.crowdsec_bouncer_key_traefik
   letsencrypt_email                = var.letsencrypt_email
   letsencrypt_cloudflare_api_token = var.letsencrypt_cloudflare_api_token
-  nvidia_plugin_values             = file("values/nvidia.yml")
   cluster_loadbalancer_ip          = var.cluster_ipaddr
+  cloudflare_ddns_api_token        = var.cloudflare_ddns_api_token
+  argocd_oidc_client_id = var.argocd_oidc_client_id
+  argocd_oidc_client_secret = var.argocd_oidc_client_secret
 }
 
 module "cluster_apps" {

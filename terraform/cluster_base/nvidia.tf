@@ -22,7 +22,7 @@ module "nvidia_plugin" {
   chart           = "nvidia-device-plugin"
   repo_url        = "https://nvidia.github.io/k8s-device-plugin"
   target_revision = "v0.16.2"
-  values          = var.nvidia_plugin_values
+  values          = file("${path.module}/values/nvidia.yml")
 
   create_ingress = false
 }
