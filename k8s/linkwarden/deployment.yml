@@ -19,6 +19,9 @@ spec:
         - name: linkwarden-volume
           persistentVolumeClaim:
             claimName: linkwarden-pvc
+        - name: linkwarden-yarn-cm
+          configMap:
+            name: linkwarden-yarn-cm
       securityContext:
         runAsUser: 1001
         runAsGroup: 1001
@@ -37,6 +40,8 @@ spec:
           volumeMounts:
             - name: linkwarden-volume
               mountPath: /data/data
+            - name: linkwarden-yarn-cm
+              mountPath: /data/.yarnrc
           env:
             - name: YARN_CACHE_FOLDER
               value: /data/data/yarn-cache
