@@ -33,7 +33,7 @@ spec:
             runAsUser: 0
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "250m"
           ports:
             - containerPort: 6767
