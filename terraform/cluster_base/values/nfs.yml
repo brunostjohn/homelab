@@ -1,0 +1,7 @@
+nfs:
+  server: 10.0.0.2
+  path: /export/zfsData
+
+storageClass:
+  name: nfs-jabberwock-subpath
+  pathPattern: "${.PVC.namespace}/${.PVC.name}"

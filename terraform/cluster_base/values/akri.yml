@@ -1,0 +1,8 @@
+kubernetesDistro: k3s
+
+udev:
+  discovery:
+    enabled: true
+
+prometheus:
+  enabled: true
