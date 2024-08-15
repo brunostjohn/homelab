@@ -38,6 +38,8 @@ spec:
             - name: linkwarden-volume
               mountPath: /data/data
           env:
+            - name: YARN_CACHE_FOLDER
+              value: /data/data/yarn-cache
             - name: DATABASE_URL
               value: postgresql://postgres:postgres@linkwarden-postgres-postgresql.linkwarden.svc.cluster.local:5432/postgres
             - name: NEXTAUTH_SECRET
