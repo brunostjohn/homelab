@@ -19,11 +19,6 @@ spec:
         runAsNonRoot: true
         runAsUser: 1000
         fsGroup: 1000
-        readOnlyRootFilesystem: true
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
       containers:
         - name: cloudflare-ddns
           image: favonia/cloudflare-ddns
@@ -53,3 +48,8 @@ spec:
                   key: proxied
           securityContext:
             privileged: false
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
