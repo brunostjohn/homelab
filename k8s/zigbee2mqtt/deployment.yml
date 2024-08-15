@@ -16,7 +16,7 @@ spec:
         app: zigbee2mqtt
     spec:
       nodeSelector:
-        kubernetes.io/hostname: meowbox
+        kubernetes.io/hostname: s2.sm-nodes.zefirscloud.local
       volumes:
         - name: zigbee2mqtt-data
           persistentVolumeClaim:
@@ -44,6 +44,7 @@ spec:
               cpu: "100m"
             limits:
               memory: "512Mi"
+              cpu: "250m"
           readinessProbe:
             httpGet:
               path: /

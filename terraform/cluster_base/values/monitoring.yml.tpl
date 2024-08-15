@@ -97,6 +97,13 @@ prometheus:
     scrapeConfigSelectorNilUsesHelmValues: false
     scrapeConfigSelector: {}
     scrapeConfigNamespaceSelector: {}
+    securityContext:
+      runAsGroup: 1001
+      runAsNonRoot: true
+      runAsUser: 1001
+      fsGroup: 1001
+      seccompProfile:
+        type: RuntimeDefault
     storageSpec:
       volumeClaimTemplate:
         spec:
