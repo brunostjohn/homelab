@@ -37,8 +37,6 @@ spec:
           volumeMounts:
             - name: linkwarden-volume
               mountPath: /data/data
-            - name: linkwarden-yarn-cm
-              mountPath: /data/.yarnrc
           env:
             - name: YARN_CACHE_FOLDER
               value: /data/data/yarn-cache
