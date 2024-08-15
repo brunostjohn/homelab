@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflare-ddns
+  namespace: cloudflare-ddns
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cloudflare-ddns
+  template:
+    metadata:
+      labels:
+        app: cloudflare-ddns
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+        readOnlyRootFilesystem: true
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+      containers:
+        - name: cloudflare-ddns
+          image: favonia/cloudflare-ddns
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          env:
+            - name: PROXIED
+              value: "true"
+            - name: IP6_PROVIDER
+              value: none
+            - name: CF_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-ddns-secrets
+                  key: api-token
+            - name: DOMAINS
+              valueFrom:
+                configMapKeyRef:
+                  name: cloudflare-ddns-config
+                  key: domains
+            - name: PROXIED
+              valueFrom:
+                configMapKeyRef:
+                  name: cloudflare-ddns-config
+                  key: proxied
+          securityContext:
+            privileged: false
