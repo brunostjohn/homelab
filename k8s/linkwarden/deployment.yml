@@ -26,7 +26,7 @@ spec:
           image: ghcr.io/linkwarden/linkwarden:latest
           resources:
             limits:
-              memory: "1Gi"
+              memory: "2Gi"
               cpu: "1"
           ports:
             - containerPort: 3000
