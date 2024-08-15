@@ -17,8 +17,8 @@ spec:
           image: ghcr.io/flaresolverr/flaresolverr
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: "1Gi"
+              cpu: "1"
           ports:
             - containerPort: 8191
               name: http
