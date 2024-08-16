@@ -19,7 +19,7 @@ spec:
       volumes:
         - name: prowlarr-config
           nfs:
-            server: 10.0.0.2
+            server: 10.0.3.1
             path: /mnt/jabberwock
       containers:
         - name: prowlarr

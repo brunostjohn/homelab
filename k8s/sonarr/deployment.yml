@@ -18,11 +18,11 @@ spec:
       volumes:
         - name: sonarr-config
           nfs:
-            server: 10.0.0.2
+            server: 10.0.3.1
             path: /mnt/jabberwock
         - name: sonarr-data
           nfs:
-            server: 10.0.0.2
+            server: 10.0.3.1
             path: /mnt/jabberwock
       containers:
         - name: sonarr

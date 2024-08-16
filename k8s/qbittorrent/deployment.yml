@@ -21,7 +21,7 @@ spec:
             claimName: qbittorrent-config-pvc
         - name: downloads
           nfs:
-            server: 10.0.0.2
+            server: 10.0.3.1
             path: /mnt/jabberwock
       containers:
         - name: qbittorrent
