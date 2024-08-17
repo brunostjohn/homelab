@@ -18,7 +18,7 @@ spec:
       volumes:
         - name: config
           secret:
-            name: pve-exporter-config
+            secretName: pve-exporter-config
       containers:
         - name: pve-exporter
           image: prompve/prometheus-pve-exporter
@@ -32,5 +32,25 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: config
-              mountPath: /etc/prometheus/pve.yml
-              subPath: config.yml
+              mountPath: /etc/prometheus
+          startupProbe:
+            httpGet:
+              path: /
+              port: metrics
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: metrics
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: metrics
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
