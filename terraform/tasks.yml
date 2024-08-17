@@ -56,6 +56,9 @@ tasks:
       - cd readarr && terraform validate
       - cd readarr && terraform fmt --check
       - cd readarr && tflint
+      - cd proxmox && terraform validate
+      - cd proxmox && terraform fmt --check
+      - cd proxmox && tflint
 
   init:
     aliases: ["i"]
@@ -76,6 +79,7 @@ tasks:
       - cd sonarr && terraform init
       - cd radarr && terraform init
       - cd readarr && terraform init
+      - cd proxmox && terraform init
 
   plan:
     aliases: ["p"]

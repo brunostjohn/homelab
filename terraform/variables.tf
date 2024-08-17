@@ -1,3 +1,18 @@
+variable "proxmox_service_account_username" {
+  type        = string
+  description = "The username of the service account to use for Proxmox"
+}
+
+variable "proxmox_service_account_password" {
+  type        = string
+  description = "The password of the service account to use for Proxmox"
+}
+
+variable "proxmox_s1_ip" {
+  type        = string
+  description = "The IP address of the first Proxmox node"
+}
+
 variable "argocd_password" {
   type        = string
   description = "ArgoCD admin password"

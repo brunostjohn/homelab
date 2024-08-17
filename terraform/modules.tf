@@ -5,6 +5,10 @@ module "unifi" {
   cluster_ip         = var.cluster_ipaddr
 }
 
+module "proxmox" {
+  source = "./proxmox"
+}
+
 module "cloudflare" {
   depends_on = [module.unifi]
 
@@ -16,7 +20,7 @@ module "cloudflare" {
 
 module "cluster_base" {
   source     = "./cluster_base"
-  depends_on = [module.unifi]
+  depends_on = [module.unifi, module.cloudflare, module.proxmox]
 
   global_fqdn                      = var.global_fqdn
   alertmanager_discord_webhook_url = var.alertmanager_discord_webhook_url
@@ -32,7 +36,7 @@ module "cluster_base" {
 
 module "cluster_apps" {
   source     = "./cluster_apps"
-  depends_on = [module.unifi, module.cluster_base, module.cloudflare]
+  depends_on = [module.cluster_base]
 
   networking_project               = module.cluster_base.networking_project
   security_project                 = module.cluster_base.security_project
@@ -87,7 +91,7 @@ module "cluster_apps" {
 
 module "adguard" {
   source     = "./adguard"
-  depends_on = [module.unifi, module.cluster_apps]
+  depends_on = [module.cluster_apps]
 
   meowbox_ipaddr  = module.unifi.meowbox_ipaddr
   cluster_ipaddr  = var.cluster_ipaddr
@@ -99,12 +103,12 @@ module "adguard" {
 
 module "authentik" {
   source     = "./authentik"
-  depends_on = [module.unifi, module.cluster_apps]
+  depends_on = [module.cluster_apps]
 }
 
 module "grafana" {
   source     = "./grafana"
-  depends_on = [module.unifi, module.cluster_apps, module.authentik]
+  depends_on = [module.authentik]
 
   global_fqdn    = var.global_fqdn
   client_id      = var.grafana_client_id
@@ -113,7 +117,7 @@ module "grafana" {
 }
 
 module "prowlarr" {
-  depends_on = [module.authentik, module.cluster_apps]
+  depends_on = [module.authentik]
   source     = "./prowlarr"
 
   sonarr_api_key             = var.sonarr_api_key
@@ -127,7 +131,7 @@ module "prowlarr" {
 }
 
 module "lidarr" {
-  depends_on = [module.authentik, module.cluster_apps]
+  depends_on = [module.authentik]
   source     = "./lidarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
@@ -137,7 +141,7 @@ module "lidarr" {
 }
 
 module "radarr" {
-  depends_on = [module.authentik, module.cluster_apps]
+  depends_on = [module.authentik]
   source     = "./radarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
@@ -147,7 +151,7 @@ module "radarr" {
 }
 
 module "sonarr" {
-  depends_on = [module.authentik, module.cluster_apps]
+  depends_on = [module.authentik]
   source     = "./sonarr"
 
   qbittorrent_password = var.qbittorrent_admin_password
@@ -157,7 +161,7 @@ module "sonarr" {
 }
 
 module "readarr" {
-  depends_on = [module.authentik, module.cluster_apps]
+  depends_on = [module.authentik]
   source     = "./readarr"
 
   qbittorrent_password = var.qbittorrent_admin_password

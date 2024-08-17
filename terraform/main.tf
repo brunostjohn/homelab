@@ -71,6 +71,11 @@ terraform {
       source  = "devopsarr/lidarr"
       version = "1.12.0"
     }
+
+    proxmox = {
+      source  = "bpg/proxmox"
+      version = "0.62.0"
+    }
   }
 
   backend "kubernetes" {
@@ -156,4 +161,11 @@ provider "readarr" {
 provider "lidarr" {
   url     = "http://lidarr.local"
   api_key = var.lidarr_api_key
+}
+
+provider "proxmox" {
+  endpoint = "https://${var.proxmox_s1_ip}:8006/"
+  insecure = true
+  username = var.proxmox_service_account_username
+  password = var.proxmox_service_account_password
 }
