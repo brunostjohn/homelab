@@ -1,3 +1,8 @@
+variable "control_plane_ipaddr" {
+  type        = string
+  description = "control plane ip addr"
+}
+
 variable "meowbox_ipaddr" {
   type        = string
   description = "meowbox' ip addr"

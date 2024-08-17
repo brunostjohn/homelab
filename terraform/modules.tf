@@ -99,6 +99,7 @@ module "adguard" {
   node2_pi_ipaddr = module.unifi.node2_pi_ipaddr
   node3_pi_ipaddr = module.unifi.node3_pi_ipaddr
   global_fqdn     = var.global_fqdn
+  control_plane_ipaddr = "10.0.2.22"
 }
 
 module "authentik" {

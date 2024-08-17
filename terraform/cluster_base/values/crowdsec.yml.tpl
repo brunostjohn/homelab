@@ -27,10 +27,7 @@ lapi:
     serviceMonitor:
       enabled: true
   dashboard:
-    enabled: true
-    ingress:
-      host: crowdsec.local
-      enabled: true
+    enabled: false
   persistentVolume:
     config:
       enabled: false

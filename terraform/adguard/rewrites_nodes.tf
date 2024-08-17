@@ -2,17 +2,12 @@ resource "adguard_rewrite" "k3s_ingress" {
   for_each = toset([
     "requestrr.local",
     "qbittorrent.local",
-    "k3s.local",
     "argocd.local",
     "longhorn.local",
     "minio.local",
     "authentik.local",
     "traefik.local",
-    "octoprint.local",
     "spoolman.local",
-    "klipper.local",
-    "fluidd.klipper.local",
-    "camera.octoprint.local",
     var.global_fqdn,
     "*.${var.global_fqdn}",
     "*.static.${var.global_fqdn}",
@@ -27,6 +22,13 @@ resource "adguard_rewrite" "k3s_ingress" {
 
   domain = each.key
   answer = var.cluster_ipaddr
+}
+
+resource "adguard_rewrite" "control_plane" {
+  for_each = toset(["control-plane.k3s.local"])
+
+  domain = each.key
+  answer = var.control_plane_ipaddr
 }
 
 resource "adguard_rewrite" "meowbox" {
