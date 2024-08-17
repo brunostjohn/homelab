@@ -27,6 +27,8 @@ spec:
         - key: nvidia.com/gpu
           operator: Exists
           effect: NoSchedule
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: plex
           image: linuxserver/plex:version-1.40.2.8395-c67dce28e
@@ -34,7 +36,6 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
-            fsGroup: 1000
           resources:
             limits:
               memory: "4Gi"
