@@ -12,3 +12,9 @@ spec:
     - port: metrics
       interval: 15s
       scrapeTimeout: 10s
+      path: /pve
+      params:
+        module: [default]
+        cluster: ["1"]
+        node: ["1"]
+        target: ["10.0.0.2"]

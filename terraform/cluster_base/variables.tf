@@ -47,3 +47,13 @@ variable "argocd_oidc_client_secret" {
   type        = string
   description = "The OIDC client secret for ArgoCD"
 }
+
+variable "proxmox_service_account_username" {
+  type        = string
+  description = "The username of the service account to use for Proxmox"
+}
+
+variable "proxmox_service_account_password" {
+  type        = string
+  description = "The password of the service account to use for Proxmox"
+}

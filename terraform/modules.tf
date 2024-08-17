@@ -32,6 +32,8 @@ module "cluster_base" {
   cloudflare_ddns_api_token        = var.cloudflare_ddns_api_token
   argocd_oidc_client_id            = var.argocd_oidc_client_id
   argocd_oidc_client_secret        = var.argocd_oidc_client_secret
+  proxmox_service_account_username = var.proxmox_service_account_username
+  proxmox_service_account_password = var.proxmox_service_account_password
 }
 
 module "cluster_apps" {
@@ -93,12 +95,12 @@ module "adguard" {
   source     = "./adguard"
   depends_on = [module.cluster_apps]
 
-  meowbox_ipaddr  = module.unifi.meowbox_ipaddr
-  cluster_ipaddr  = var.cluster_ipaddr
-  node1_pi_ipaddr = module.unifi.node1_pi_ipaddr
-  node2_pi_ipaddr = module.unifi.node2_pi_ipaddr
-  node3_pi_ipaddr = module.unifi.node3_pi_ipaddr
-  global_fqdn     = var.global_fqdn
+  meowbox_ipaddr       = module.unifi.meowbox_ipaddr
+  cluster_ipaddr       = var.cluster_ipaddr
+  node1_pi_ipaddr      = module.unifi.node1_pi_ipaddr
+  node2_pi_ipaddr      = module.unifi.node2_pi_ipaddr
+  node3_pi_ipaddr      = module.unifi.node3_pi_ipaddr
+  global_fqdn          = var.global_fqdn
   control_plane_ipaddr = "10.0.2.22"
 }
 
