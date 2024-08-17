@@ -80,8 +80,6 @@ spec:
       labels:
         app: tautulli-exporter
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: meowbox
       containers:
         - name: tautulli-exporter
           image: nwalke/tautulli_exporter
