@@ -1,4 +1,8 @@
 alertmanager:
+  ingress:
+    enabled: true
+    hosts:
+      - alertmanager.local
   config:
     global:
       resolve_timeout: 5m
@@ -71,6 +75,15 @@ grafana:
   grafana.ini:
     server:
       root_url: https://grafana.${global_fqdn}
+
+kubeEtcd:
+  enabled: true
+  endpoints:
+    - 10.0.0.2
+  service:
+    enabled: true
+    port: 2381
+    targetPort: 2381
 
 prometheusOperator:
   enabled: true
