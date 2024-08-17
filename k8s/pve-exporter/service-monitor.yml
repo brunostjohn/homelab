@@ -17,4 +17,4 @@ spec:
         module: [default]
         cluster: ["1"]
         node: ["1"]
-        target: ["10.0.0.2"]
+        target: ["10.0.0.11"]
