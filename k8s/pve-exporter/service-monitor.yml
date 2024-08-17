@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: pve-exporter
+  namespace: pve-exporter
+  labels: {}
+spec:
+  selector:
+    matchLabels:
+      app: pve-exporter
+  endpoints:
+    - port: metrics
+      interval: 15s
+      scrapeTimeout: 10s
