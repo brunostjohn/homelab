@@ -34,6 +34,7 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
+            fsGroup: 1000
           resources:
             limits:
               memory: "4Gi"
