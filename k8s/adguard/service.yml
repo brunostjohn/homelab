@@ -22,4 +22,4 @@ spec:
       targetPort: 9618
       name: metrics
   type: LoadBalancer
-  loadBalancerIp: 10.0.2.1
+  loadBalancerIP: 10.0.2.1

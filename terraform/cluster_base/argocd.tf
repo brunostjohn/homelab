@@ -23,7 +23,7 @@ resource "argocd_repository" "homelab_github" {
 }
 
 resource "kubernetes_ingress_v1" "argocd_ingress" {
-  depends_on = [helm_release.argocd, argocd_application.metallb]
+  depends_on = [helm_release.argocd]
 
   wait_for_load_balancer = true
 

@@ -81,7 +81,7 @@ resource "kubernetes_manifest" "longhorn_nixos_path" {
 }
 
 resource "argocd_application" "longhorn" {
-  depends_on = [argocd_application.metallb, kubernetes_namespace.longhorn, argocd_application.kyverno, kubernetes_manifest.longhorn_nixos_path]
+  depends_on = [kubernetes_namespace.longhorn, argocd_application.kyverno, kubernetes_manifest.longhorn_nixos_path]
 
   wait = true
 
