@@ -17,8 +17,8 @@ spec:
     spec:
       volumes:
         - name: plex-config
-          hostPath:
-            path: /mnt/jabberwock/casaos/plex
+          persistentVolumeClaim:
+            claimName: plex-config-pvc
         - name: plex-data
           hostPath:
             path: /mnt/jabberwock/entertainment
@@ -38,7 +38,7 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "2"
-              nvidia.com/gpu: 1
+              nvidia.com/gpu: "1"
           ports:
             - containerPort: 32400
               name: http
