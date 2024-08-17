@@ -1,0 +1,51 @@
+immich:
+  metrics:
+    enabled: true
+  persistence:
+    library:
+      existingClaim: immich-library-pvc
+
+postgresql:
+  metrics:
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true
+  enabled: true
+  primary:
+    persistence:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 3Gi
+      storageClass: nfs-jabberwock-subpath
+    podSecurityContext:
+      enabled: true
+      fsGroup: 1001
+      runAsUser: 1001
+      runAsGroup: 1001
+    containerSecurityContext:
+      enabled: true
+      runAsUser: 1001
+      runAsGroup: 1001
+    startupProbe:
+      enabled: true
+
+redis:
+  enabled: true
+  master:
+    persistence:
+      storageClass: longhorn
+      size: 2Gi
+
+server:
+  enabled: true
+
+machine-learning:
+  enabled: true
+  persistence:
+    cache:
+      enabled: true
+      size: 10Gi
+      type: pvc
+      storageClass: nfs-jabberwock-subpath
+      accessMode: ReadWriteMany
