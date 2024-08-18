@@ -1,13 +1,12 @@
-resource "proxmox_virtual_environment_vm" "k3s_agent" {
+resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
   node_name = data.proxmox_virtual_environment_node.s1.node_name
 
-  name        = "s2.m-nodes.zefirscloud.local"
-  description = "K3S Agent Node"
+  name        = "s1.m-nodes.zefirscloud.local"
+  description = "K3S Master Node"
   tags = [
     "compute",
     "kubernetes",
-    "nixos",
-    "gpu"
+    "nixos"
   ]
 
   bios            = "ovmf"
@@ -18,7 +17,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 9
+    cores        = 8
     type         = "host"
     units        = 1024
   }
@@ -32,9 +31,9 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
     file_format       = "raw"
     interface         = "scsi0"
     iothread          = true
-    path_in_datastore = "vm-102-disk-1"
+    path_in_datastore = "vm-101-disk-1"
     replicate         = true
-    size              = 92
+    size              = 102
     ssd               = false
   }
 
@@ -46,7 +45,7 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
   }
 
   memory {
-    dedicated = 23712
+    dedicated = 31744
   }
 
   network_device {
@@ -62,13 +61,5 @@ resource "proxmox_virtual_environment_vm" "k3s_agent" {
 
   startup {
     order = 2
-  }
-
-  hostpci {
-    device = "hostpci0"
-    id     = "0000:0b:00"
-    pcie   = false
-    rombar = true
-    xvga   = false
   }
 }

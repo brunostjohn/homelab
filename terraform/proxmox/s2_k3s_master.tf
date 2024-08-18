@@ -1,7 +1,7 @@
-resource "proxmox_virtual_environment_vm" "k3s_master" {
-  node_name = data.proxmox_virtual_environment_node.s1.node_name
+resource "proxmox_virtual_environment_vm" "s2_k3s_master" {
+  node_name = data.proxmox_virtual_environment_node.s2.node_name
 
-  name        = "s1.m-nodes.zefirscloud.local"
+  name        = "s3.m-nodes.zefirscloud.local"
   description = "K3S Master Node"
   tags = [
     "compute",
@@ -17,7 +17,7 @@ resource "proxmox_virtual_environment_vm" "k3s_master" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 8
+    cores        = 16
     type         = "host"
     units        = 1024
   }
@@ -31,9 +31,8 @@ resource "proxmox_virtual_environment_vm" "k3s_master" {
     file_format       = "raw"
     interface         = "scsi0"
     iothread          = true
-    path_in_datastore = "vm-101-disk-1"
     replicate         = true
-    size              = 102
+    size              = 32
     ssd               = false
   }
 
@@ -57,9 +56,5 @@ resource "proxmox_virtual_environment_vm" "k3s_master" {
 
   operating_system {
     type = "l26"
-  }
-
-  startup {
-    order = 2
   }
 }
