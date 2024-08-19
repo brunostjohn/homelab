@@ -149,11 +149,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: qbittorrent
+      app: flood
   template:
     metadata:
       labels:
-        app: qbittorrent
+        app: flood
     spec:
       volumes:
         - name: flood-config

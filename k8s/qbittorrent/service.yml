@@ -31,6 +31,22 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  name: flood
+  namespace: entertainment
+  labels:
+    app: flood
+spec:
+  selector:
+    app: flood
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      name: flood
+---
+apiVersion: v1
+kind: Service
+metadata:
   name: qbittorrent-exporter
   namespace: entertainment
   labels:
