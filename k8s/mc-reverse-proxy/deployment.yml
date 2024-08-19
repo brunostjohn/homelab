@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mc-reverse-proxy
+  namespace: minecraft
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mc-reverse-proxy
+  template:
+    metadata:
+      labels:
+        app: mc-reverse-proxy
+    spec:
+      containers:
+        - name: mc-reverse-proxy
+          image: ghcr.io/brunostjohn/k8s-mc-loadbalancer:edge
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          env:
+            - name: ENABLE_PROMETHEUS
+              value: "true"
+          ports:
+            - containerPort: 25565
+              name: minecraft
+              protocol: TCP
+            - containerPort: 2112
+              name: metrics
+              protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 25565
+            initialDelaySeconds: 5
+            periodSeconds: 10
