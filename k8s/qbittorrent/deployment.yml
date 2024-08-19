@@ -27,9 +27,12 @@ spec:
         - name: qbittorrent
           image: linuxserver/qbittorrent
           resources:
-            limits:
+            requests:
               memory: "1Gi"
               cpu: "1"
+            limits:
+              memory: "2Gi"
+              cpu: "2"
           env:
             - name: PUID
               value: "1000"
