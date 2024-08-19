@@ -4,12 +4,12 @@ metadata:
   name: qbittorrent-config-pvc
   namespace: entertainment
 spec:
-  storageClassName: nfs-jabberwock-subpath
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 4Gi
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1

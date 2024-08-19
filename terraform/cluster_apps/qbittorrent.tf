@@ -55,5 +55,5 @@ module "qbittorrent_ingress" {
   service   = "qbittorrent"
   hosts     = ["qbittorrent.local"]
   namespace = kubernetes_namespace.entertainment.metadata[0].name
-  port      = 3000
+  port      = 8080
 }
