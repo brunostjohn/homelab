@@ -40,10 +40,11 @@ spec:
               mountPath: /opt/adguardhome/conf
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
               memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
           readinessProbe:
             httpGet:
               path: /
