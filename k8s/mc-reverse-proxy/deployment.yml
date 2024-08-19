@@ -15,9 +15,9 @@ spec:
       labels:
         app: mc-reverse-proxy
     spec:
+      serviceAccountName: mc-reverse-proxy-sa
       containers:
         - name: mc-reverse-proxy
-          serviceAccountName: mc-reverse-proxy-sa
           imagePullPolicy: Always
           image: ghcr.io/brunostjohn/k8s-mc-loadbalancer:edge
           resources:
