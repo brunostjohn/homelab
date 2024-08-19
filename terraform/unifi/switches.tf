@@ -28,13 +28,6 @@ resource "unifi_device" "switch_24_pro_max" {
   }
 
   port_override {
-    name            = "WAN1 Link"
-    number          = 24
-    op_mode         = "switch"
-    port_profile_id = unifi_port_profile.vlan_wan1_ports.id
-  }
-
-  port_override {
     name            = "WAN2 Link"
     number          = 23
     op_mode         = "switch"

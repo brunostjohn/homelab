@@ -71,4 +71,9 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_agent" {
     rombar = true
     xvga   = false
   }
+
+  usb {
+    host = "1a86:7523"
+    usb3 = false
+  }
 }

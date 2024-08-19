@@ -21,7 +21,7 @@ resource "argocd_application" "mc_reverse_proxy" {
 
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = kubernetes_namespace.mc_reverse_proxy.metadata[0].name
+      namespace = kubernetes_namespace.minecraft.metadata[0].name
     }
 
     sync_policy {
