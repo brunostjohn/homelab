@@ -24,6 +24,13 @@ resource "adguard_rewrite" "k3s_ingress" {
   answer = var.cluster_ipaddr
 }
 
+resource "adguard_rewrite" "mc_ingress" {
+  for_each = toset(["cubes.${var.global_fqdn}"])
+
+  domain = each.key
+  answer = "10.0.2.25"
+}
+
 resource "adguard_rewrite" "control_plane" {
   for_each = toset(["control-plane.k3s.local"])
 

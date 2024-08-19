@@ -23,17 +23,17 @@ resource "proxmox_virtual_environment_vm" "s2_k3s_master" {
   }
 
   disk {
-    aio               = "io_uring"
-    backup            = true
-    cache             = "none"
-    datastore_id      = "local-lvm"
-    discard           = "ignore"
-    file_format       = "raw"
-    interface         = "scsi0"
-    iothread          = true
-    replicate         = true
-    size              = 32
-    ssd               = false
+    aio          = "io_uring"
+    backup       = true
+    cache        = "none"
+    datastore_id = "local-lvm"
+    discard      = "ignore"
+    file_format  = "raw"
+    interface    = "scsi0"
+    iothread     = true
+    replicate    = true
+    size         = 32
+    ssd          = false
   }
 
   efi_disk {

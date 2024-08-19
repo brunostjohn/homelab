@@ -1,4 +1,0 @@
-domains:
-  - "cubes.$GLOBAL_FQDN"
-addresses:
-  - crafty-container:25566

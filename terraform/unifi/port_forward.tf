@@ -23,7 +23,7 @@ resource "unifi_port_forward" "cluster_mc" {
   protocol               = "tcp"
   fwd_port               = 25565
   dst_port               = 25565
-  fwd_ip                 = var.cluster_ip
+  fwd_ip                 = "10.0.2.25"
   log                    = true
   name                   = "Minecraft Port Forward"
 }
