@@ -16,7 +16,7 @@ spec:
         app: zigbee2mqtt
     spec:
       nodeSelector:
-        kubernetes.io/hostname: s1
+        kubernetes.io/hostname: s2.m-nodes.zefirscloud.local
       volumes:
         - name: zigbee2mqtt-data
           persistentVolumeClaim:
