@@ -35,17 +35,20 @@ spec:
               name: metrics
               protocol: TCP
           readinessProbe:
-            tcpSocket:
-              port: 25565
+            httpGet:
+              path: /metrics
+              port: 2112
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
-            tcpSocket:
-              port: 25565
+            httpGet:
+              path: /metrics
+              port: 2112
             initialDelaySeconds: 5
             periodSeconds: 10
           startupProbe:
-            tcpSocket:
-              port: 25565
+            httpGet:
+              path: /metrics
+              port: 2112
             initialDelaySeconds: 5
             periodSeconds: 10
