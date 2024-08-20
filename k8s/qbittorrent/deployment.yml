@@ -63,24 +63,24 @@ spec:
             - name: downloads
               mountPath: /data
               subPath: entertainment/
-          # startupProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8080
-          #   failureThreshold: 30
-          #   periodSeconds: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8080
-          #   failureThreshold: 5
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8080
-          #   failureThreshold: 3
-          #   periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 3
+            periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
