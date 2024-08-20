@@ -36,11 +36,11 @@ ingress:
 
 resources:
   requests:
-    cpu: 250m
-    memory: 256Mi
-  limits:
     cpu: 500m
     memory: 512Mi
+  limits:
+    cpu: 1
+    memory: 1Gi
 
 autoscaling:
   enabled: false
@@ -67,8 +67,8 @@ storage:
 postgresql:
   resources:
     limits:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 250m
+      memory: 512Mi
   metrics:
     serviceMonitor:
       enabled: true
