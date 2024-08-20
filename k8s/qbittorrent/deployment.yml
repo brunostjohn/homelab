@@ -25,7 +25,7 @@ spec:
             path: /mnt/jabberwock
       containers:
         - name: qbittorrent
-          image: linuxserver/qbittorrent
+          image: qbittorrentofficial/qbittorrent-nox
           resources:
             requests:
               memory: "1Gi"
