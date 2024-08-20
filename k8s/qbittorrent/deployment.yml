@@ -15,6 +15,8 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      securityContext:
+        fsGroup: 1001
       volumes:
         - name: qbittorrent-config
           persistentVolumeClaim:
@@ -44,9 +46,6 @@ spec:
               value: "8080"
             - name: TORRENTING_PORT
               value: "6881"
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 0
           ports:
             - containerPort: 8080
               name: web
