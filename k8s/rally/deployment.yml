@@ -26,6 +26,22 @@ spec:
             - containerPort: 3000
               name: http
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
           env:
             - name: DATABASE_URL
               value: "postgres://postgres:postgres@rally-postgres-postgresql.rally.svc.cluster.local:5432/postgres"
@@ -92,4 +108,6 @@ spec:
                   name: rally-secrets
                   key: smtp_password
             - name: SMTP_SECURE
-              value: "true"
+              value: "false"
+            - name: SMTP_TLS_ENABLED
+              value: "false"
