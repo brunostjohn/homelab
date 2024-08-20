@@ -65,8 +65,6 @@ storage:
   storageClassName: nfs-jabberwock-subpath
 
 postgresql:
-  volumePermissions:
-    enabled: true
   resources:
     limits:
       cpu: 500m
