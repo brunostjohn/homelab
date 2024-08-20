@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/brunostjohn/nocodb
+  repository: ghcr.io/brunostjohn/nocodb-oidc
   pullPolicy: Always
-  tag: latest
+  tag: edge
 
 imagePullSecrets: []
 nameOverride: ""
