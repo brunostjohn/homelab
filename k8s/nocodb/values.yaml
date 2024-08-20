@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/brunostjohn/nocodb
   pullPolicy: Always
-  tag: ""
+  tag: latest
 
 imagePullSecrets: []
 nameOverride: ""
