@@ -9,6 +9,10 @@ immich:
       existingClaim: immich-library-pvc
 
 postgresql:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
   metrics:
     serviceMonitor:
       enabled: true

@@ -13,6 +13,10 @@ metrics:
     enabled: true
 
 primary:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
   persistence:
     enabled: true
     accessMode: ReadWriteOnce

@@ -232,3 +232,18 @@ variable "linkwarden_authentik_client_id" {
   type        = string
   description = "Authentik client ID for Linkwarden"
 }
+
+variable "nocodb_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for NocoDB"
+}
+
+variable "nocodb_oidc_client_secret" {
+  type        = string
+  description = "OIDC client secret for NocoDB"
+}
+
+variable "nocodb_auth_secret" {
+  type        = string
+  description = "Auth secret for NocoDB"
+}

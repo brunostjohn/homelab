@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rally
+  namespace: rally
+spec:
+  selector:
+    matchLabels:
+      app: rally
+  template:
+    metadata:
+      labels:
+        app: rally
+    spec:
+      containers:
+        - name: rally
+          image: lukevella/rallly:latest
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          env:
+            - name: DATABASE_URL
+              value: "postgres://postgres:postgres@rally-postgres-postgresql.rally.svc.cluster.local:5432/postgres"

@@ -89,6 +89,10 @@ module "cluster_apps" {
   linkwarden_authentik_client_id     = var.linkwarden_authentik_client_id
   linkwarden_authentik_client_secret = var.linkwarden_authentik_client_secret
   linkwarden_nextauth_secret         = var.linkwarden_nextauth_secret
+
+  nocodb_oidc_client_id     = var.nocodb_oidc_client_id
+  nocodb_oidc_client_secret = var.nocodb_oidc_client_secret
+  nocodb_auth_secret        = var.nocodb_auth_secret
 }
 
 module "adguard" {

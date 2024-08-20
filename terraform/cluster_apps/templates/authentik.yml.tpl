@@ -21,6 +21,10 @@ server:
       - authentik.local
 
 postgresql:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
   enabled: true
   architecture: standalone
   auth:
