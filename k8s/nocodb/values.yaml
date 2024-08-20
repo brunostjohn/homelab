@@ -75,6 +75,10 @@ postgresql:
     prometheusRule:
       enabled: true
   enabled: true
+  auth:
+    database: nocodb
+    postgresPassword: postgres
+    enablePostgresUser: true
   primary:
     persistence:
       enabled: true
