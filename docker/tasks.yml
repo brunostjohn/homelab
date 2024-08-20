@@ -1,11 +1,5 @@
 version: 3
 
-includes:
-  homepage:
-    aliases: ["h"]
-    taskfile: ./homepage/tasks.yml
-    dir: ./homepage
-
 tasks:
   "produce:all":
     aliases: ["p:a", "p", "pa", "pall", "p:all", "produce"]

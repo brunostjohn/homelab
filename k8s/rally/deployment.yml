@@ -29,3 +29,67 @@ spec:
           env:
             - name: DATABASE_URL
               value: "postgres://postgres:postgres@rally-postgres-postgresql.rally.svc.cluster.local:5432/postgres"
+            - name: OIDC_NAME
+              value: "Zefir's Cloud"
+            - name: OIDC_DISCOVERY_URL
+              valueFrom:
+                secretKeyRef:
+                  name: rally-secrets
+                  key: discovery_url
+            - name: OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: rally-secrets
+                  key: client_id
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: rally-secrets
+                  key: client_secret
+            - name: SECRET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rally-secrets
+                  key: secret_password
+            - name: NEXT_PUBLIC_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: base_url
+                  name: rally-config
+            - name: NOREPLY_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  key: noreply_email
+                  name: rally-config
+            - name: NOREPLY_EMAIL_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: noreply_email_name
+                  name: rally-config
+            - name: SUPPORT_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  key: support_email
+                  name: rally-config
+            - name: SMTP_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: smtp_host
+                  name: rally-config
+            - name: SMTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: smtp_port
+                  name: rally-config
+            - name: SMTP_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: smtp_user
+                  name: rally-config
+            - name: SMTP_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: rally-secrets
+                  key: smtp_password
+            - name: SMTP_SECURE
+              value: "true"

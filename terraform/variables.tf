@@ -428,3 +428,18 @@ variable "nocodb_auth_secret" {
   type        = string
   description = "Auth secret for NocoDB"
 }
+
+variable "rally_client_id" {
+  type        = string
+  description = "Client ID for Rally"
+}
+
+variable "rally_client_secret" {
+  type        = string
+  description = "Client secret for Rally"
+}
+
+variable "rally_secret_password" {
+  type        = string
+  description = "Secret password for Rally"
+}

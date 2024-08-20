@@ -93,6 +93,10 @@ module "cluster_apps" {
   nocodb_oidc_client_id     = var.nocodb_oidc_client_id
   nocodb_oidc_client_secret = var.nocodb_oidc_client_secret
   nocodb_auth_secret        = var.nocodb_auth_secret
+
+  rally_client_id       = var.rally_client_id
+  rally_client_secret   = var.rally_client_secret
+  rally_secret_password = var.rally_secret_password
 }
 
 module "adguard" {

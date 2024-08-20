@@ -31,8 +31,8 @@ resource "kubernetes_config_map" "nocodb_config" {
     "NC_OIDC_PROVIDER_NAME" = "Zefir's Cloud"
     "NC_OIDC_ISSUER"        = "https://auth.${var.global_fqdn}/application/o/nocodb/"
     "NC_OIDC_TOKEN_URL"     = "https://auth.${var.global_fqdn}/application/o/token/"
-    "NC_OIDC_AUTH_URL"      = "https://auth.${var.global_fqdn}/application/o/token/"
-    "NC_OIDC_USER_INFO_URL" = "https://auth.${var.global_fqdn}/application/o/token/"
+    "NC_OIDC_AUTH_URL"      = "https://auth.${var.global_fqdn}/application/o/authorize/"
+    "NC_OIDC_USER_INFO_URL" = "https://auth.${var.global_fqdn}/application/o/userinfo/"
     "NC_SMTP_FROM"          = var.smtp_from
     "NC_SMTP_HOST"          = var.smtp_host
     "NC_SMTP_PORT"          = var.smtp_port
