@@ -30,7 +30,7 @@ spec:
           - 8.8.4.4
       containers:
         - name: qbittorrent
-          image: linuxserver/qbittorrent:4.6.0
+          image: ghcr.io/onedr0p/qbittorrent
           resources:
             requests:
               memory: "1Gi"
