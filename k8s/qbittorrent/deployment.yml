@@ -114,7 +114,7 @@ spec:
             - name: QBITTORRENT_PORT
               value: "8080"
             - name: QBITTORRENT_HOST
-              value: "http://qbittorrent.entertainment.svc.cluster.local"
+              value: "qbittorrent.entertainment.svc.cluster.local"
             - name: QBITTORRENT_USER
               value: "admin"
             - name: QBITTORRENT_PASS
