@@ -23,6 +23,11 @@ spec:
           nfs:
             server: 10.0.3.1
             path: /mnt/jabberwock
+      dnsConfig:
+        nameservers:
+          - 1.1.1.1
+          - 8.8.8.8
+          - 8.8.4.4
       containers:
         - name: qbittorrent
           image: linuxserver/qbittorrent:4.6.0
