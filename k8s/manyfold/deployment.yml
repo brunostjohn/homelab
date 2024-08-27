@@ -22,21 +22,16 @@ spec:
         fsGroup: 1001
       containers:
         - name: manyfold
-          image: ghcr.io/manyfold3d/manyfold:latest
+          image: ghcr.io/manyfold3d/manyfold
           resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "512Mi"
+              cpu: "250m"
           securityContext:
             privileged: true
-            capabilities:
-              add:
-                - CHOWN
-                - DAC_OVERRIDE
-                - SETGID
-                - SETUID
-              drop:
-                - ALL
           env:
             - name: PGID
               value: "1001"
