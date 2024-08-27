@@ -29,7 +29,6 @@ spec:
               cpu: "500m"
           securityContext:
             privileged: true
-            allowPrivilegeEscalation: false
             capabilities:
               add:
                 - CHOWN
