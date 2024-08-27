@@ -25,7 +25,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: manyfold
-          image: lscr.io/linuxserver/manyfold:latest
+          image: ghcr.io/manyfold3d/manyfold:latest
           resources:
             requests:
               memory: "256Mi"
