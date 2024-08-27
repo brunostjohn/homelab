@@ -15,14 +15,17 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: manyfold-pvc
+            claimName: manyfold-data-pvc
+        - name: config
+          persistentVolumeClaim:
+            claimName: manyfold-config-pvc
       securityContext:
         runAsUser: 1001
         runAsGroup: 1001
         fsGroup: 1001
       containers:
         - name: manyfold
-          image: ghcr.io/manyfold3d/manyfold
+          image: lscr.io/linuxserver/manyfold:latest
           resources:
             requests:
               memory: "256Mi"
@@ -37,6 +40,8 @@ spec:
               value: "1001"
             - name: PUID
               value: "1001"
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/manyfold
             - name: DATABASE_ADAPTER
               value: postgresql
             - name: DATABASE_HOST
@@ -75,3 +80,5 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /libraries
+            - name: config
+              mountPath: /config
