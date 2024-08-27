@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: manyfold-pvc
+  namespace: 3dprint
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: nfs-jabberwock-subpath
+  accessModes:
+    - ReadWriteOnce

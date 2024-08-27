@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manyfold
+  namespace: 3dprint
+spec:
+  selector:
+    matchLabels:
+      app: manyfold
+  template:
+    metadata:
+      labels:
+        app: manyfold
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: manyfold-pvc
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+        - name: manyfold
+          image: ghcr.io/manyfold3d/manyfold:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              add:
+                - CHOWN
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
+              drop:
+                - ALL
+          env:
+            - name: PGID
+              value: "1001"
+            - name: PUID
+              value: "1001"
+            - name: DATABASE_ADAPTER
+              value: postgresql
+            - name: DATABASE_HOST
+              value: postgres-postgresql.databases.svc.cluster.local
+            - name: DATABASE_USER
+              value: postgres
+            - name: DATABASE_PASSWORD
+              value: postgres
+            - name: DATABASE_NAME
+              value: manyfold
+            - name: REDIS_URL
+              value: redis://redis-master.databases.svc.cluster.local:6379/0
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: manyfold
+                  key: secret_key_base
+          ports:
+            - containerPort: 3214
+              name: http
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: data
+              mountPath: /libraries

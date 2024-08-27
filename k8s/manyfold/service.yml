@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: manyfold
+  namespace: 3dprint
+spec:
+  selector:
+    app: manyfold
+  ports:
+    - port: 3214
+      targetPort: 3214
+      name: http
+      protocol: TCP
+  type: ClusterIP
