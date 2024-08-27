@@ -4,19 +4,6 @@ resource "kubernetes_namespace" "rally" {
   }
 }
 
-module "rally_postgres_helm" {
-  source           = "../helm_deployment"
-  namespace        = kubernetes_namespace.rally.metadata[0].name
-  name             = "rally-postgres"
-  create_namespace = false
-  create_ingress   = false
-
-  chart           = "postgresql"
-  repo_url        = "https://charts.bitnami.com/bitnami"
-  target_revision = "15.5.21"
-  values          = file("${path.module}/values/rally-postgres.yml")
-}
-
 resource "kubernetes_secret" "rally_secrets" {
   metadata {
     name      = "rally-secrets"
@@ -50,7 +37,7 @@ resource "kubernetes_config_map" "rally_config" {
 }
 
 resource "argocd_application" "rally" {
-  depends_on = [module.rally_postgres_helm, kubernetes_secret.rally_secrets, kubernetes_config_map.rally_config]
+  depends_on = [kubernetes_secret.rally_secrets, kubernetes_config_map.rally_config]
   metadata {
     name      = "rally"
     namespace = "argocd"
@@ -86,12 +73,12 @@ resource "argocd_application" "rally" {
 }
 
 module "rally_ingress" {
-  depends_on = [ argocd_application.rally ]
-  source = "../ingress"
+  depends_on = [argocd_application.rally]
+  source     = "../ingress"
 
   namespace = kubernetes_namespace.rally.metadata[0].name
 
   service = "rally"
-  port = 3000
-  hosts = ["rally.${var.global_fqdn}"]
+  port    = 3000
+  hosts   = ["rally.${var.global_fqdn}"]
 }

@@ -443,3 +443,8 @@ variable "rally_secret_password" {
   type        = string
   description = "Secret password for Rally"
 }
+
+variable "manyfold_secret_key_base" {
+  type        = string
+  description = "Secret key base for Manyfold"
+}

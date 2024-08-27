@@ -29,21 +29,8 @@ resource "kubernetes_config_map" "linkwarden_config" {
   }
 }
 
-module "linkwarden_postgres" {
-  source           = "../helm_deployment"
-  namespace        = kubernetes_namespace.linkwarden.metadata[0].name
-  name             = "linkwarden-postgres"
-  create_namespace = false
-  create_ingress   = false
-
-  chart           = "postgresql"
-  repo_url        = "https://charts.bitnami.com/bitnami"
-  target_revision = "15.5.21"
-  values          = file("${path.module}/values/linkwarden-postgres.yml")
-}
-
 resource "argocd_application" "linkwarden" {
-  depends_on = [kubernetes_namespace.linkwarden, kubernetes_secret.linkwarden_secrets, kubernetes_config_map.linkwarden_config, module.linkwarden_postgres]
+  depends_on = [kubernetes_namespace.linkwarden, kubernetes_secret.linkwarden_secrets, kubernetes_config_map.linkwarden_config]
 
   wait = true
 

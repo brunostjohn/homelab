@@ -34,13 +34,13 @@ spec:
             privileged: true
           resources:
             requests:
-              # nvidia.com/gpu: 1
+              nvidia.com/gpu: "1"
               memory: "512Mi"
               cpu: "500m"
             limits:
               memory: "2Gi"
               cpu: "1"
-              # nvidia.com/gpu: 1
+              nvidia.com/gpu: "1"
           ports:
             - containerPort: 8096
               protocol: TCP

@@ -65,3 +65,8 @@ resource "adguard_rewrite" "node3_pi" {
   domain = each.key
   answer = var.node3_pi_ipaddr
 }
+
+resource "adguard_rewrite" "klaudia_postgres" {
+  domain = "klaudia-postgres.local"
+  answer = "10.0.3.11"
+}
