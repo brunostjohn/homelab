@@ -27,7 +27,6 @@ spec:
         nameservers:
           - 1.1.1.1
           - 8.8.8.8
-          - 8.8.4.4
       containers:
         - name: qbittorrent
           image: ghcr.io/onedr0p/qbittorrent:4.6.6
