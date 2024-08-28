@@ -1,0 +1,149 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless
+  namespace: paperless
+spec:
+  selector:
+    matchLabels:
+      app: paperless
+  template:
+    metadata:
+      labels:
+        app: paperless
+    spec:
+      volumes:
+        - name: paperless-media
+          persistentVolumeClaim:
+            claimName: paperless-media
+        - name: paperless-data
+          persistentVolumeClaim:
+            claimName: paperless-data
+        - name: paperless-export
+          persistentVolumeClaim:
+            claimName: paperless-export
+        - name: paperless-consume
+          nfs:
+            server: 10.0.3.1
+            path: /mnt/jabberwock
+      containers:
+        - name: paperless
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: paperless-media
+              mountPath: /usr/src/paperless/media
+            - name: paperless-data
+              mountPath: /usr/src/paperless/data
+            - name: paperless-export
+              mountPath: /usr/src/paperless/export
+            - name: paperless-consume
+              mountPath: /usr/src/paperless/consume
+              subPath: paperless-consume/
+          env:
+            - name: PAPERLESS_REDIS
+              value: redis://redis@redis-master.databases.svc.cluster.local:6379/2
+            - name: PAPERLESS_DBHOST
+              value: postgres-postgresql.databases.svc.cluster.local
+            - name: PAPERLESS_DBNAME
+              value: paperless
+            - name: PAPERLESS_DBUSER
+              value: postgres
+            - name: PAPERLESS_DBPASSWORD
+              value: postgres
+            - name: PAPERLESS_TIKA_ENABLED
+              value: "1"
+            - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
+              value: http://gotenberg.paperless.svc.cluster.local:3000
+            - name: PAPERLESS_TIKA_ENDPOINT
+              value: http://tika.paperless.svc.cluster.local:9998
+            - name: PAPERLESS_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: PAPERLESS_URL
+                  name: paperless-config
+            - name: PAPERLESS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: PAPERLESS_SECRET_KEY
+                  name: paperless-secrets
+            - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  key: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+                  name: paperless-secrets
+            - name: PAPERLESS_SOCIAL_AUTO_SIGNUP
+              value: "true"
+            - name: PAPERLESS_DISABLE_REGULAR_LOGIN
+              value: "true"
+            - name: PAPERLESS_REDIRECT_LOGIN_TO_SSO
+              value: "true"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tika
+  namespace: paperless
+spec:
+  selector:
+    matchLabels:
+      app: tika
+  template:
+    metadata:
+      labels:
+        app: tika
+    spec:
+      containers:
+        - name: tika
+          image: docker.io/apache/tika:latest
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 9998
+              name: http
+              protocol: TCP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gotenberg
+  namespace: paperless
+spec:
+  selector:
+    matchLabels:
+      app: gotenberg
+  template:
+    metadata:
+      labels:
+        app: gotenberg
+    spec:
+      containers:
+        - name: gotenberg
+          image: docker.io/gotenberg/gotenberg:8.7
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          command: ["gotenberg", "--chromium-disable-javascript=true", "--chromium-allow-list=file:///tmp/.*"]

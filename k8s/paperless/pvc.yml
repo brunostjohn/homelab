@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-data
+  namespace: paperless
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-jabberwock-subpath
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-media
+  namespace: paperless
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-jabberwock-subpath
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-export
+  namespace: paperless
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-jabberwock-subpath
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

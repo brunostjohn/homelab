@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: paperless
+  namespace: paperless
+spec:
+  selector:
+    app: paperless
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tika
+  namespace: paperless
+spec:
+  selector:
+    app: tika
+  ports:
+    - port: 9998
+      targetPort: 9998
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gotenberg
+  namespace: paperless
+spec:
+  selector:
+    app: gotenberg
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
