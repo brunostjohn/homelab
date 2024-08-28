@@ -14,11 +14,9 @@ pkgs.mkShell {
     nixfmt-classic
     go-task
     kubectl
-    caddy
     yamllint
     yamlfmt
     tflint
-    envsubst
     kubetail
     fd
     cmctl

@@ -11,18 +11,10 @@ includes:
     aliases: ["nix", "n"]
     taskfile: ./nixos/tasks.yml
     dir: ./nixos
-  caddy:
-    aliases: ["c"]
-    taskfile: ./reverse-proxy/tasks.yml
-    dir: ./reverse-proxy
   ansible:
     aliases: ["a"]
     taskfile: ./ansible/tasks.yml
     dir: ./ansible
-  docker:
-    aliases: ["d"]
-    taskfile: ./docker/tasks.yml
-    dir: ./docker
 
 tasks:
   default:

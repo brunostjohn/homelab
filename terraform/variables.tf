@@ -448,3 +448,28 @@ variable "manyfold_secret_key_base" {
   type        = string
   description = "Secret key base for Manyfold"
 }
+
+variable "nextcloud_s3_access_key" {
+  type        = string
+  description = "nextcloud s3 access key"
+}
+
+variable "nextcloud_s3_secret_key" {
+  type        = string
+  description = "nextcloud s3 secret key"
+}
+
+variable "paperless_secret_key" {
+  type        = string
+  description = "Paperless secret key"
+}
+
+variable "paperless_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for Paperless"
+}
+
+variable "paperless_oidc_client_secret" {
+  type        = string
+  description = "OIDC client secret for Paperless"
+}

@@ -99,6 +99,13 @@ module "cluster_apps" {
   rally_secret_password = var.rally_secret_password
 
   manyfold_secret_key_base = var.manyfold_secret_key_base
+
+  nextcloud_s3_access_key = var.nextcloud_s3_access_key
+  nextcloud_s3_secret_key = var.nextcloud_s3_secret_key
+
+  paperless_secret_key         = var.paperless_secret_key
+  paperless_oidc_client_id     = var.paperless_oidc_client_id
+  paperless_oidc_client_secret = var.paperless_oidc_client_secret
 }
 
 module "adguard" {
