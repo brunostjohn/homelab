@@ -26,6 +26,10 @@ spec:
           nfs:
             server: 10.0.3.1
             path: /mnt/jabberwock
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+        runAsGroup: 1001
       containers:
         - name: paperless
           image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -84,6 +88,8 @@ spec:
                 secretKeyRef:
                   key: PAPERLESS_SOCIALACCOUNT_PROVIDERS
                   name: paperless-secrets
+            - name: PAPERLESS_APPS
+              value: allauth.socialaccount.providers.openid_connect
             - name: PAPERLESS_SOCIAL_AUTO_SIGNUP
               value: "true"
             - name: PAPERLESS_DISABLE_REGULAR_LOGIN
