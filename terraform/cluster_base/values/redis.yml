@@ -1,0 +1,16 @@
+global:
+  storageClass: nfs-jabberwock-subpath
+  redis:
+    password: redis
+
+architecture: standalone
+
+master:
+  persistence:
+    enabled: true
+
+metrics:
+  serviceMonitor:
+    enabled: true
+  prometheusRule:
+    enabled: true

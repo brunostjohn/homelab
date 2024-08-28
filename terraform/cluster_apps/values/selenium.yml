@@ -1,0 +1,8 @@
+basicAuth:
+  enabled: false
+
+firefoxNode:
+  enabled: false
+
+edgeNode:
+  enabled: false
