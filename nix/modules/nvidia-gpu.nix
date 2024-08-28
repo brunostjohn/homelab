@@ -9,4 +9,6 @@
     modesetting.enable = true;
     open = false;
   };
+  boot.initrd.kernelModules = [ "nvidia" ];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
 }

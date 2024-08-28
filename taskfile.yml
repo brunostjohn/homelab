@@ -7,10 +7,6 @@ includes:
     aliases: ["tf", "t"]
     taskfile: ./terraform/tasks.yml
     dir: ./terraform
-  nixos:
-    aliases: ["nix", "n"]
-    taskfile: ./nixos/tasks.yml
-    dir: ./nixos
   ansible:
     aliases: ["a"]
     taskfile: ./ansible/tasks.yml
@@ -52,5 +48,3 @@ tasks:
     cmds:
       - task: yaml:fmt
       - task: tf:fmt
-      - task: nixos:fmt
-      - task: caddy:fmt

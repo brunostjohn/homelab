@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   time.timeZone = "Europe/Dublin";
 

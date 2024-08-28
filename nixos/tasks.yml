@@ -1,7 +1,0 @@
-version: 3
-
-tasks:
-  fmt:
-    description: "Format nix files"
-    cmds:
-      - nixfmt .

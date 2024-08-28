@@ -21,6 +21,7 @@ pkgs.mkShell {
     fd
     cmctl
     argocd
+    python311Packages.kubernetes
     (wrapHelm kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [
         helm-secrets
