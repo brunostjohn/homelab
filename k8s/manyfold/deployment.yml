@@ -28,11 +28,11 @@ spec:
           image: lscr.io/linuxserver/manyfold:latest
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
               memory: "512Mi"
-              cpu: "500m"
+              cpu: "150m"
+            limits:
+              memory: "1Gi"
+              cpu: "300m"
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
