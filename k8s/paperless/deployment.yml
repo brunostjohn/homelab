@@ -59,7 +59,7 @@ spec:
               value: paperless
             - name: PAPERLESS_DBUSER
               value: postgres
-            - name: PAPERLESS_DBPASSWORD
+            - name: PAPERLESS_DBPASS
               value: postgres
             - name: PAPERLESS_TIKA_ENABLED
               value: "1"
