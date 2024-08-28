@@ -26,10 +26,10 @@ spec:
           nfs:
             server: 10.0.3.1
             path: /mnt/jabberwock
-      securityContext:
-        fsGroup: 1001
-        runAsUser: 1001
-        runAsGroup: 1001
+      # securityContext:
+      #   fsGroup: 1001
+      #   runAsUser: 1001
+      #   runAsGroup: 1001
       containers:
         - name: paperless
           image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -158,3 +158,16 @@ spec:
               name: http
               protocol: TCP
           command: ["gotenberg", "--chromium-disable-javascript=true", "--chromium-allow-list=file:///tmp/.*"]
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
