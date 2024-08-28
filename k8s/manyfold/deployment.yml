@@ -29,10 +29,10 @@ spec:
           resources:
             requests:
               memory: "512Mi"
-              cpu: "150m"
+              cpu: "250m"
             limits:
               memory: "1Gi"
-              cpu: "300m"
+              cpu: "500m"
           securityContext:
             allowPrivilegeEscalation: false
             runAsUser: 0
