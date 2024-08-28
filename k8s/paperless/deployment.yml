@@ -31,11 +31,11 @@ spec:
           image: ghcr.io/paperless-ngx/paperless-ngx:latest
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
               memory: "512Mi"
-              cpu: "500m"
+              cpu: "0.2"
+            limits:
+              memory: "1Gi"
+              cpu: "0.5"
           ports:
             - containerPort: 8000
               name: http
@@ -137,13 +137,16 @@ spec:
       containers:
         - name: gotenberg
           image: docker.io/gotenberg/gotenberg:8.7
+          securityContext:
+            privileged: false
+            runAsUser: 1001
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
+              memory: "512Mi"
+              cpu: "0.2"
             limits:
-              memory: "256Mi"
-              cpu: "250m"
+              memory: "1Gi"
+              cpu: "0.5"
           ports:
             - containerPort: 3000
               name: http
