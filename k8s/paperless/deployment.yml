@@ -52,7 +52,7 @@ spec:
               subPath: paperless-consume/
           env:
             - name: PAPERLESS_REDIS
-              value: redis://redis@redis-master.databases.svc.cluster.local:6379/2
+              value: redis://:redis@redis-master.databases.svc.cluster.local:6379/2
             - name: PAPERLESS_DBHOST
               value: postgres-postgresql.databases.svc.cluster.local
             - name: PAPERLESS_DBNAME
