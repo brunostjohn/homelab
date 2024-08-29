@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: octoprint-service
-  namespace: octoprint
+  namespace: 3dprint
 spec:
   selector:
     app: octoprint
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spoolman-service
-  namespace: octoprint
+  namespace: 3dprint
 spec:
   selector:
     app: spoolman
