@@ -23,7 +23,7 @@ spec:
             claimName: octoprint-pvc
       containers:
         - name: octoprint
-          image: octoprint/octoprint:minimal
+          image: octoprint/octoprint
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
