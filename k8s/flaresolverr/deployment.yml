@@ -15,6 +15,7 @@ spec:
       containers:
         - name: flaresolverr
           image: ghcr.io/flaresolverr/flaresolverr
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "1Gi"

@@ -26,6 +26,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name: hassioproxy
+          imagePullPolicy: IfNotPresent
           image: caddy
           ports:
             - containerPort: 2137

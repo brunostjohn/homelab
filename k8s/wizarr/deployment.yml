@@ -22,6 +22,7 @@ spec:
       containers:
         - name: wizarr
           image: ghcr.io/wizarrrr/wizarr:beta
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

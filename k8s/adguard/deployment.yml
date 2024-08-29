@@ -23,6 +23,7 @@ spec:
       containers:
         - name: adguard-home
           image: adguard/adguardhome:latest
+          imagePullPolicy: IfNotPresent
           securityContext:
             privileged: false
             allowPrivilegeEscalation: false
@@ -61,10 +62,11 @@ spec:
               protocol: TCP
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
               memory: "256Mi"
+              cpu: "0.5"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
           env:
             - name: ADGUARD_SERVERS
               value: "http://localhost:3000"

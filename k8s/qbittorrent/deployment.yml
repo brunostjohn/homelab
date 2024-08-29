@@ -29,6 +29,7 @@ spec:
           - 8.8.8.8
       containers:
         - name: qbittorrent
+          imagePullPolicy: IfNotPresent
           image: ghcr.io/onedr0p/qbittorrent:4.6.6
           resources:
             requests:
@@ -105,6 +106,7 @@ spec:
     spec:
       containers:
         - name: qbittorrent-exporter
+          imagePullPolicy: IfNotPresent
           image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
           resources:
             limits:
@@ -168,6 +170,7 @@ spec:
             claimName: flood-config-pvc
       containers:
         - name: flood
+          imagePullPolicy: IfNotPresent
           image: jesec/flood
           resources:
             limits:

@@ -18,6 +18,7 @@ spec:
       containers:
         - name: unifi-poller
           image: ghcr.io/unpoller/unpoller:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9130
               name: metrics

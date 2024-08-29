@@ -28,6 +28,7 @@ spec:
             path: /mnt/jabberwock
       containers:
         - name: paperless
+          imagePullPolicy: IfNotPresent
           image: ghcr.io/paperless-ngx/paperless-ngx:latest
           resources:
             requests:
@@ -130,6 +131,7 @@ spec:
     spec:
       containers:
         - name: tika
+          imagePullPolicy: IfNotPresent
           image: docker.io/apache/tika:latest
           resources:
             requests:
@@ -181,6 +183,7 @@ spec:
       containers:
         - name: gotenberg
           image: docker.io/gotenberg/gotenberg:8.7
+          imagePullPolicy: IfNotPresent
           securityContext:
             privileged: false
             runAsUser: 1001

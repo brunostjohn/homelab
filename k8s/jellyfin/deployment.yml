@@ -30,6 +30,7 @@ spec:
       containers:
         - name: jellyfin
           image: jellyfin/jellyfin
+          imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true
           resources:

@@ -25,6 +25,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: manyfold
+          imagePullPolicy: IfNotPresent
           image: lscr.io/linuxserver/manyfold:latest
           resources:
             requests:

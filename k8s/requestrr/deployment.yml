@@ -22,6 +22,7 @@ spec:
       containers:
         - name: requestrr
           image: thomst08/requestrr
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

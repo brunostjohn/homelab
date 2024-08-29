@@ -27,6 +27,7 @@ spec:
       containers:
         - name: zigbee2mqtt
           image: koenkk/zigbee2mqtt:latest
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: zigbee2mqtt-data
               mountPath: /app/data

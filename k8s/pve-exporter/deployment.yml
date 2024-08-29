@@ -22,6 +22,7 @@ spec:
       containers:
         - name: pve-exporter
           image: prompve/prometheus-pve-exporter
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "64Mi"

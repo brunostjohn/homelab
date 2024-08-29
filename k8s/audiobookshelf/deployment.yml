@@ -27,6 +27,7 @@ spec:
       containers:
         - name: audiobookshelf
           image: ghcr.io/advplyr/audiobookshelf:2.8.1
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: "128Mi"

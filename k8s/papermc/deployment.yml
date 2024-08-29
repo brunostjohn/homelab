@@ -21,6 +21,7 @@ spec:
       containers:
         - name: papermc
           image: itzg/minecraft-server
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: "1Gi"
