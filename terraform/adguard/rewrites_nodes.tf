@@ -17,7 +17,9 @@ resource "adguard_rewrite" "k3s_ingress" {
     "lidarr.local",
     "prowlarr.local",
     "qbittorrent.local",
-    "alertmanager.local"
+    "alertmanager.local",
+    "octoprint.local",
+    "obico.local"
   ])
 
   domain = each.key

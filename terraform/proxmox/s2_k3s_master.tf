@@ -57,4 +57,8 @@ resource "proxmox_virtual_environment_vm" "s2_k3s_master" {
   operating_system {
     type = "l26"
   }
+
+  startup {
+    order = 2
+  }
 }
