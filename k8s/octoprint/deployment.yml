@@ -38,20 +38,20 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "250m"
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            timeoutSeconds: 1
-            periodSeconds: 10
-            failureThreshold: 3
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            timeoutSeconds: 1
-            periodSeconds: 10
-            failureThreshold: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   timeoutSeconds: 1
+          #   periodSeconds: 10
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   timeoutSeconds: 1
+          #   periodSeconds: 10
+          #   failureThreshold: 3
           startupProbe:
             httpGet:
               path: /
