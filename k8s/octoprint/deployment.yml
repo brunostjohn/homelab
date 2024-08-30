@@ -42,7 +42,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             timeoutSeconds: 1
             periodSeconds: 10
           volumeMounts:
