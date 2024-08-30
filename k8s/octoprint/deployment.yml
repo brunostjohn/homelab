@@ -42,10 +42,23 @@ spec:
             httpGet:
               path: /
               port: http
+            timeoutSeconds: 1
+            periodSeconds: 10
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /
               port: http
+            timeoutSeconds: 1
+            periodSeconds: 10
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 10
           volumeMounts:
             - name: octoprint-data
               mountPath: /octoprint
@@ -89,11 +102,24 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 8000
+              port: http
+            timeoutSeconds: 1
+            periodSeconds: 10
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /
-              port: 8000
+              port: http
+            timeoutSeconds: 1
+            periodSeconds: 10
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+            periodSeconds: 10
           volumeMounts:
             - name: spoolman-data
               mountPath: /home/app/.local/share/spoolman
