@@ -22,6 +22,17 @@ spec:
           persistentVolumeClaim:
             claimName: octoprint-pvc
       containers:
+        - name: janus
+          image: thespaghettidetective/janus:ubuntu-1.7
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "/opt/janus/bin/janus"]
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
         - name: octoprint
           image: octoprint/octoprint
           imagePullPolicy: IfNotPresent
@@ -48,6 +59,9 @@ spec:
           volumeMounts:
             - name: octoprint-data
               mountPath: /octoprint
+          env:
+            - name: JANUS_SERVER
+              value: localhost
 ---
 apiVersion: apps/v1
 kind: Deployment
