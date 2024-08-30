@@ -28,7 +28,7 @@ spec:
           securityContext:
             privileged: true
           ports:
-            - containerPort: 5000
+            - containerPort: 80
               name: http
               protocol: TCP
           resources:
@@ -41,7 +41,11 @@ spec:
           readinessProbe:
             httpGet:
               path: /
-              port: 5000
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
           volumeMounts:
             - name: octoprint-data
               mountPath: /octoprint
