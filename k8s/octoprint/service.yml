@@ -18,6 +18,8 @@ kind: Service
 metadata:
   name: spoolman-service
   namespace: 3dprint
+  labels:
+    app: spoolman
 spec:
   selector:
     app: spoolman
