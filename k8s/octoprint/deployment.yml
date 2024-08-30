@@ -136,7 +136,7 @@ spec:
               value: "5432"
             - name: SPOOLMAN_DB_NAME
               value: spoolman
-            - name: SPOOLMAN_DB_USER
+            - name: SPOOLMAN_DB_USERNAME
               value: postgres
             - name: SPOOLMAN_DB_PASSWORD
               value: postgres
