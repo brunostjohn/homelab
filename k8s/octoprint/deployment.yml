@@ -100,3 +100,19 @@ spec:
           env:
             - name: TZ
               value: "Europe/Dublin"
+            - name: SPOOLMAN_METRICS_ENABLED
+              value: "TRUE"
+            - name: SPOOLMAN_DB_TYPE
+              value: postgres
+            - name: SPOOLMAN_DB_HOST
+              value: postgres-postgresql.databases.svc.cluster.local
+            - name: SPOOLMAN_DB_PORT
+              value: "5432"
+            - name: SPOOLMAN_DB_NAME
+              value: spoolman
+            - name: SPOOLMAN_DB_USER
+              value: postgres
+            - name: SPOOLMAN_DB_PASSWORD
+              value: postgres
+            - name: SPOOLMAN_DB_NAME
+              value: spoolman

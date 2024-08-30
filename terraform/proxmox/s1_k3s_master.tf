@@ -33,7 +33,7 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
     iothread          = true
     path_in_datastore = "vm-101-disk-1"
     replicate         = true
-    size              = 102
+    size              = 152
     ssd               = false
   }
 

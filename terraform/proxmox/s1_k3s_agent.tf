@@ -34,7 +34,7 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_agent" {
     iothread          = true
     path_in_datastore = "vm-102-disk-1"
     replicate         = true
-    size              = 92
+    size              = 122
     ssd               = false
   }
 

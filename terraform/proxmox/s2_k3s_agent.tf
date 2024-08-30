@@ -32,7 +32,7 @@ resource "proxmox_virtual_environment_vm" "s2_k3s_agent" {
     interface    = "scsi0"
     iothread     = true
     replicate    = true
-    size         = 32
+    size         = 132
     ssd          = false
   }
 

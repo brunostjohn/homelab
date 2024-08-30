@@ -9,9 +9,11 @@ resource "proxmox_virtual_environment_download_file" "nixos_24_05" {
 }
 
 resource "proxmox_virtual_environment_download_file" "truenas_scale_24_04_2" {
+  for_each = toset([data.proxmox_virtual_environment_node.s1.node_name, data.proxmox_virtual_environment_node.s2.node_name])
+
   content_type = "iso"
   file_name    = "TrueNAS-SCALE-24.04.2.iso"
   url          = "https://download.sys.truenas.net/TrueNAS-SCALE-Dragonfish/24.04.2/TrueNAS-SCALE-24.04.2.iso"
-  node_name    = data.proxmox_virtual_environment_node.s1.node_name
+  node_name    = each.value
   datastore_id = "local"
 }
