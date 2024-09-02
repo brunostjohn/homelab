@@ -1,13 +1,10 @@
-resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
+resource "proxmox_virtual_environment_vm" "s1_truenas" {
   node_name = data.proxmox_virtual_environment_node.s1.node_name
 
-  name        = "s1.m-nodes.zefirscloud.local"
-  description = "K3S Master Node"
+  name        = "s1.truenas.zefirscloud.local"
+  description = "TrueNAS Scale"
   tags = [
-    "compute",
-    "kubernetes",
-    "nixos",
-    "control-plane",
+    "storage",
   ]
 
   bios            = "ovmf"
@@ -18,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 8
+    cores        = 1
     type         = "host"
     units        = 1024
   }
@@ -32,9 +29,9 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
     file_format       = "raw"
     interface         = "scsi0"
     iothread          = true
-    path_in_datastore = "vm-101-disk-1"
+    path_in_datastore = "vm-100-disk-0"
     replicate         = true
-    size              = 152
+    size              = 15
     ssd               = false
   }
 
@@ -46,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
   }
 
   memory {
-    dedicated = 31744
+    dedicated = 9216
   }
 
   network_device {
@@ -56,11 +53,27 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
     enabled  = true
   }
 
+  hostpci {
+    device = "hostpci0"
+    id     = "0000:09:00"
+    pcie   = false
+    rombar = true
+    xvga   = false
+  }
+
+  hostpci {
+    device = "hostpci1"
+    id     = "0000:0a:00"
+    pcie   = false
+    rombar = true
+    xvga   = false
+  }
+
   operating_system {
     type = "l26"
   }
 
   startup {
-    order = 2
+    order = 1
   }
 }

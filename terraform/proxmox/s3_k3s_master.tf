@@ -1,13 +1,13 @@
-resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
-  node_name = data.proxmox_virtual_environment_node.s1.node_name
+resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
+  node_name = data.proxmox_virtual_environment_node.s3.node_name
 
-  name        = "s1.m-nodes.zefirscloud.local"
+  name        = "s5.m-nodes.zefirscloud.local"
   description = "K3S Master Node"
   tags = [
     "compute",
     "kubernetes",
     "nixos",
-    "control-plane",
+    "control-plane"
   ]
 
   bios            = "ovmf"
@@ -18,24 +18,23 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 8
+    cores        = 16
     type         = "host"
     units        = 1024
   }
 
   disk {
-    aio               = "io_uring"
-    backup            = true
-    cache             = "none"
-    datastore_id      = "local-lvm"
-    discard           = "ignore"
-    file_format       = "raw"
-    interface         = "scsi0"
-    iothread          = true
-    path_in_datastore = "vm-101-disk-1"
-    replicate         = true
-    size              = 152
-    ssd               = false
+    aio          = "io_uring"
+    backup       = true
+    cache        = "none"
+    datastore_id = "local-lvm"
+    discard      = "ignore"
+    file_format  = "raw"
+    interface    = "scsi0"
+    iothread     = true
+    replicate    = true
+    size         = 40
+    ssd          = false
   }
 
   efi_disk {
@@ -46,7 +45,7 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
   }
 
   memory {
-    dedicated = 31744
+    dedicated = 30720
   }
 
   network_device {

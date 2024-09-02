@@ -1,7 +1,7 @@
-resource "proxmox_virtual_environment_vm" "truenas" {
-  node_name = data.proxmox_virtual_environment_node.s1.node_name
+resource "proxmox_virtual_environment_vm" "s2_truenas" {
+  node_name = data.proxmox_virtual_environment_node.s2.node_name
 
-  name        = "s1.truenas.zefirscloud.local"
+  name        = "s2.truenas.zefirscloud.local"
   description = "TrueNAS Scale"
   tags = [
     "storage",
@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "truenas" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 1
+    cores        = 2
     type         = "host"
     units        = 1024
   }
@@ -29,9 +29,9 @@ resource "proxmox_virtual_environment_vm" "truenas" {
     file_format       = "raw"
     interface         = "scsi0"
     iothread          = true
-    path_in_datastore = "vm-100-disk-0"
+    path_in_datastore = "vm-105-disk-1"
     replicate         = true
-    size              = 15
+    size              = 20
     ssd               = false
   }
 
@@ -43,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "truenas" {
   }
 
   memory {
-    dedicated = 9216
+    dedicated = 4096
   }
 
   network_device {
@@ -53,24 +53,16 @@ resource "proxmox_virtual_environment_vm" "truenas" {
     enabled  = true
   }
 
-  hostpci {
-    device = "hostpci0"
-    id     = "0000:09:00"
-    pcie   = false
-    rombar = true
-    xvga   = false
-  }
-
-  hostpci {
-    device = "hostpci1"
-    id     = "0000:0a:00"
-    pcie   = false
-    rombar = true
-    xvga   = false
-  }
-
   operating_system {
     type = "l26"
+  }
+
+  hostpci {
+    device = "hostpci0"
+    id     = "0000:03:00"
+    pcie   = false
+    rombar = true
+    xvga   = false
   }
 
   startup {

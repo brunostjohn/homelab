@@ -1,5 +1,9 @@
 resource "proxmox_virtual_environment_download_file" "nixos_24_05" {
-  for_each = toset([data.proxmox_virtual_environment_node.s1.node_name, data.proxmox_virtual_environment_node.s2.node_name])
+  for_each = toset([
+    data.proxmox_virtual_environment_node.s1.node_name,
+    data.proxmox_virtual_environment_node.s2.node_name,
+    data.proxmox_virtual_environment_node.s3.node_name
+  ])
 
   content_type = "iso"
   file_name    = "NixOS_24.05_Plasma.iso"
@@ -9,7 +13,11 @@ resource "proxmox_virtual_environment_download_file" "nixos_24_05" {
 }
 
 resource "proxmox_virtual_environment_download_file" "truenas_scale_24_04_2" {
-  for_each = toset([data.proxmox_virtual_environment_node.s1.node_name, data.proxmox_virtual_environment_node.s2.node_name])
+  for_each = toset([
+    data.proxmox_virtual_environment_node.s1.node_name,
+    data.proxmox_virtual_environment_node.s2.node_name,
+    data.proxmox_virtual_environment_node.s3.node_name,
+  ])
 
   content_type = "iso"
   file_name    = "TrueNAS-SCALE-24.04.2.iso"

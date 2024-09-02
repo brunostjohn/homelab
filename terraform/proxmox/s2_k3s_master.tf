@@ -6,7 +6,8 @@ resource "proxmox_virtual_environment_vm" "s2_k3s_master" {
   tags = [
     "compute",
     "kubernetes",
-    "nixos"
+    "nixos",
+    "control-plane"
   ]
 
   bios            = "ovmf"
