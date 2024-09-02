@@ -55,7 +55,8 @@ tolerations: []
 
 affinity: {}
 
-# extraSecretEnvs:
+extraSecretEnvs:
+  NC_DB: "postgresql://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/nocodb"
 #   NC_AUTH_JWT_SECRET: secretString
 #   NC_DB: "mysql2://mysql:3306?u=nocodb&p=secretPass&d=nocodb"
 
@@ -65,37 +66,37 @@ storage:
   storageClassName: nfs-jabberwock-subpath
 
 postgresql:
-  resources:
-    limits:
-      cpu: 250m
-      memory: 512Mi
-  metrics:
-    serviceMonitor:
-      enabled: true
-    prometheusRule:
-      enabled: true
-  enabled: true
-  auth:
-    database: nocodb
-    postgresPassword: postgres
-    enablePostgresUser: true
-  primary:
-    persistence:
-      enabled: true
-      accessMode: ReadWriteOnce
-      size: 3Gi
-      storageClass: nfs-jabberwock-subpath
-    podSecurityContext:
-      enabled: true
-      fsGroup: 1001
-      runAsUser: 1001
-      runAsGroup: 1001
-    containerSecurityContext:
-      enabled: true
-      runAsUser: 1001
-      runAsGroup: 1001
-    startupProbe:
-      enabled: true
+  enabled: false
+  # resources:
+  #   limits:
+  #     cpu: 250m
+  #     memory: 512Mi
+  # metrics:
+  #   serviceMonitor:
+  #     enabled: true
+  #   prometheusRule:
+  #     enabled: true
+  # auth:
+  #   database: nocodb
+  #   postgresPassword: postgres
+  #   enablePostgresUser: true
+  # primary:
+  #   persistence:
+  #     enabled: true
+  #     accessMode: ReadWriteOnce
+  #     size: 3Gi
+  #     storageClass: nfs-jabberwock-subpath
+  #   podSecurityContext:
+  #     enabled: true
+  #     fsGroup: 1001
+  #     runAsUser: 1001
+  #     runAsGroup: 1001
+  #   containerSecurityContext:
+  #     enabled: true
+  #     runAsUser: 1001
+  #     runAsGroup: 1001
+  #   startupProbe:
+  #     enabled: true
 
 mysql:
   enabled: false
