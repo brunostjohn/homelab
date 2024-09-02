@@ -47,8 +47,6 @@ spec:
               value: postgres
             - name: DB_PASS
               value: postgres
-            - name: DB_LOG_QUERIES
-              value: "true"
             - name: DB_NAME
               value: jellyseerr
           volumeMounts:

@@ -84,7 +84,6 @@ module "cluster_apps" {
   plex_claim                 = var.plex_claim
   tautulli_api_key           = var.tautulli_api_key
   qbittorrent_admin_password = var.qbittorrent_admin_password
-  overseerr_api_key          = var.overseerr_api_key
 
   linkwarden_authentik_client_id     = var.linkwarden_authentik_client_id
   linkwarden_authentik_client_secret = var.linkwarden_authentik_client_secret

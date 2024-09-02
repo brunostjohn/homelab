@@ -213,11 +213,6 @@ variable "qbittorrent_admin_password" {
   description = "Admin password for qBittorrent"
 }
 
-variable "overseerr_api_key" {
-  type        = string
-  description = "API key for Overseerr"
-}
-
 variable "linkwarden_nextauth_secret" {
   type        = string
   description = "NextAuth secret for Linkwarden"

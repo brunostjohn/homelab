@@ -53,7 +53,7 @@ module "jellyseerr_ingress" {
   depends_on = [argocd_application.qbittorrent]
 
   service   = "jellyseerr"
-  hosts     = ["js.${var.global_fqdn}"]
+  hosts     = ["den.${var.global_fqdn}"]
   namespace = kubernetes_namespace.entertainment.metadata[0].name
   port      = 5055
 }
