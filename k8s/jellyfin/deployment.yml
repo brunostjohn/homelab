@@ -40,7 +40,7 @@ spec:
             privileged: true
           resources:
             requests:
-              nvidia.com/gpu: "0.5"
+              nvidia.com/gpu: "1"
               memory: "512Mi"
               cpu: "500m"
             limits:
