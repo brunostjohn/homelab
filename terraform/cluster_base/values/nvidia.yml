@@ -1,3 +1,14 @@
+config:
+  map:
+    default: |-
+      version: v1
+      sharing:
+        timeSlicing:
+          renameByDefault: true
+          resources:
+            - name: nvidia.com/gpu
+              replicas: 10
+
 runtimeClassName: nvidia
 
 gfd:

@@ -40,7 +40,7 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "2"
-              nvidia.com/gpu: "1"
+              nvidia.com/gpu.shared: "5"
           ports:
             - containerPort: 32400
               name: http
