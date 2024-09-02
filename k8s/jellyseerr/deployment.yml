@@ -52,7 +52,6 @@ spec:
           volumeMounts:
             - name: jellyseerr-config
               mountPath: /app/config
-              subPath: casaos/js
           startupProbe:
             httpGet:
               path: /
