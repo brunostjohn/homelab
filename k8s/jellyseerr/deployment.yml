@@ -17,9 +17,8 @@ spec:
     spec:
       volumes:
         - name: jellyseerr-config
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+          persistentVolumeClaim:
+            claimName: jellyseerr-config
       containers:
         - name: jellyseerr
           imagePullPolicy: IfNotPresent

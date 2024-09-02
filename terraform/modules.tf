@@ -106,6 +106,8 @@ module "cluster_apps" {
   paperless_secret_key         = var.paperless_secret_key
   paperless_oidc_client_id     = var.paperless_oidc_client_id
   paperless_oidc_client_secret = var.paperless_oidc_client_secret
+
+  jellyseerr_api_key = var.jellyseerr_api_key
 }
 
 module "adguard" {

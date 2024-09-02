@@ -292,3 +292,8 @@ variable "paperless_oidc_client_secret" {
   type        = string
   description = "OIDC client secret for Paperless"
 }
+
+variable "jellyseerr_api_key" {
+  type        = string
+  description = "API key for Jellyseerr"
+}
