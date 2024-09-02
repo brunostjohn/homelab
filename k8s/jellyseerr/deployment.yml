@@ -22,7 +22,7 @@ spec:
       containers:
         - name: jellyseerr
           imagePullPolicy: IfNotPresent
-          image: ghcr.io/dr-carrot/jellyseerr-pgsql:v1.7.0-preview
+          image: drcarrot/jellyseerr-postgres:latest
           resources:
             requests:
               memory: "512Mi"
