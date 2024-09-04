@@ -18,7 +18,6 @@ ingress:
       paths:
         - /
 
-
 superuser:
   name: ${superuser_name}
   email: ${superuser_email}
