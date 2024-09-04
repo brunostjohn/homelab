@@ -1,12 +1,32 @@
+image:
+  repository: nextcloud
+  flavor: fpm 
+  pullPolicy: IfNotPresent
+
 ingress:
   enabled: true
 
+phpClientHttpsFix:
+  enabled: true
+  protocol: https
+
 persistence:
   enabled: true
-  storageClass: nfs-jabberwock-subpath
+  storageClass: longhorn
   nextcloudData:
     enabled: true
     storageClass: nfs-jabberwock-subpath
+
+nginx:
+  image:
+    repository: nginxinc/nginx-unprivileged
+  enabled: true
+  config:
+    default: true
+  containerPort: 80
+  extraEnv: 
+    - name: TRUSTED_PROXIES
+      value: traefik.kube-system
 
 startupProbe:
   enabled: true
@@ -16,6 +36,14 @@ readinessProbe:
   enabled: true
 
 nextcloud:
+  securityContext:
+    runAsUser: 33
+    runAsGroup: 33
+    fsGroup: 33
+  podSecurityContext:
+    runAsUser: 33
+    runAsGroup: 33
+    fsGroup: 33
   host: nextcloud.${global_fqdn}
   mail:
     enabled: true
@@ -63,11 +91,10 @@ externalDatabase:
   database: nextcloud
 
 cronjob:
-  enabled: true
+  enabled: false
 
 hpa:
-  enabled: true
-  maxPods: 3
+  enabled: false
 
 metrics:
   enabled: true

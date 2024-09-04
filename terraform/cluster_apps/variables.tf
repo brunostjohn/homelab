@@ -292,3 +292,28 @@ variable "jellyseerr_api_key" {
   type        = string
   description = "API key for Jellyseerr"
 }
+
+variable "netbox_superuser_email" {
+  type        = string
+  description = "Netbox superuser email"
+}
+
+variable "netbox_superuser_name" {
+  type        = string
+  description = "Netbox superuser name"
+}
+
+variable "netbox_superuser_password" {
+  type        = string
+  description = "Netbox superuser password"
+}
+
+variable "netbox_aws_access_key_id" {
+  type        = string
+  description = "Netbox AWS access key ID"
+}
+
+variable "netbox_aws_secret_access_key" {
+  type        = string
+  description = "Netbox AWS secret"
+}

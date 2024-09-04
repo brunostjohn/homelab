@@ -9,3 +9,15 @@ edgeNode:
 
 ingress:
   enabled: false
+
+global:
+  seleniumGrid:
+    ingress:
+      enabled: false
+
+tracing:
+  ingress:
+    enabled: false
+
+ingress-nginx:
+  enabled: false

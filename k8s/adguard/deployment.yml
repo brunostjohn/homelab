@@ -20,6 +20,15 @@ spec:
       labels:
         app: adguard
     spec:
+      tolerations:
+        - key: "node.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 20
+        - key: "node.kubernetes.io/not-ready"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 20
       containers:
         - name: adguard-home
           image: adguard/adguardhome:latest
@@ -42,7 +51,7 @@ spec:
           resources:
             requests:
               memory: "256Mi"
-              cpu: "250m"
+              cpu: "500m"
             limits:
               memory: "512Mi"
               cpu: "1"
@@ -62,11 +71,11 @@ spec:
               protocol: TCP
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "0.5"
+              memory: "128Mi"
+              cpu: "100m"
             limits:
-              memory: "512Mi"
-              cpu: "1"
+              memory: "256Mi"
+              cpu: "250m"
           env:
             - name: ADGUARD_SERVERS
               value: "http://localhost:3000"

@@ -29,7 +29,7 @@ spec:
             - manager
           env:
             - name: vip_arp
-              value: "true"
+              value: "false"
             - name: port
               value: "6443"
             - name: vip_interface
@@ -44,16 +44,18 @@ spec:
               value: "false"
             - name: svc_enable
               value: "true"
-            - name: vip_leaderelection
-              value: "true"
-            - name: vip_leaseduration
-              value: "5"
-            - name: vip_renewdeadline
-              value: "3"
-            - name: vip_retryperiod
-              value: "1"
             - name: address
               value: 10.0.2.22
+            - name: bgp_enable
+              value: "true"
+            - name: bgp_routerid
+              value: 10.0.0.1
+            - name: bgp_as
+              value: "65512"
+            - name: bgp_peeras
+              value: "65510"
+            - name: bgp_peeraddress
+              value: 10.0.0.1
           image: ghcr.io/kube-vip/kube-vip:v0.8.2
           imagePullPolicy: Always
           name: kube-vip

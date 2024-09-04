@@ -18,6 +18,15 @@ spec:
       labels:
         app: homeassistant
     spec:
+      tolerations:
+        - key: "node.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 20
+        - key: "node.kubernetes.io/not-ready"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 20
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000

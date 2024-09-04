@@ -107,6 +107,12 @@ module "cluster_apps" {
   paperless_oidc_client_secret = var.paperless_oidc_client_secret
 
   jellyseerr_api_key = var.jellyseerr_api_key
+
+  netbox_superuser_email       = var.netbox_superuser_email
+  netbox_superuser_name        = var.netbox_superuser_name
+  netbox_superuser_password    = var.netbox_superuser_password
+  netbox_aws_access_key_id     = var.netbox_aws_access_key_id
+  netbox_aws_secret_access_key = var.netbox_aws_secret_access_key
 }
 
 module "adguard" {
