@@ -63,7 +63,8 @@ spec:
               path: /
               port: http
             failureThreshold: 5
-            periodSeconds: 10
+            timeoutSeconds: 5
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /
