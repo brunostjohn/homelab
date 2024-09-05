@@ -13,6 +13,7 @@ resource "helm_release" "argocd" {
     global_fqdn        = var.global_fqdn
     oidc_client_id     = var.argocd_oidc_client_id
     oidc_client_secret = var.argocd_oidc_client_secret
+    personal_email = var.personal_email
   })]
 }
 
@@ -34,7 +35,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
 
   spec {
     rule {
-      host = "argocd.local"
+      host = "argocd.${var.global_fqdn}"
       http {
         path {
           backend {

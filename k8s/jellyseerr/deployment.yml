@@ -25,10 +25,10 @@ spec:
           image: drcarrot/jellyseerr-postgres:latest
           resources:
             requests:
-              memory: "512Mi"
+              memory: "1Gi"
               cpu: "250m"
             limits:
-              memory: "1Gi"
+              memory: "2Gi"
               cpu: "500m"
           ports:
             - containerPort: 5055

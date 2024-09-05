@@ -29,8 +29,6 @@ resource "argocd_application" "minio" {
 
       helm {
         values = templatefile("${path.module}/templates/minio.yml.tpl", {
-          username           = var.minio_username
-          password           = var.minio_password
           sc_name            = "nfs-jabberwock-subpath"
           size               = "100Gi"
           global_fqdn        = var.global_fqdn
@@ -63,7 +61,7 @@ resource "argocd_application" "minio" {
 module "minio_ingress" {
   source = "../ingress"
 
-  hosts     = ["minio.local"]
+  hosts     = ["minio.${var.global_fqdn}"]
   service   = "minio-console"
   namespace = kubernetes_namespace.minio.metadata[0].name
   port      = 9001

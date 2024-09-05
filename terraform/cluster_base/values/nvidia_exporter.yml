@@ -5,5 +5,5 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
         - matchExpressions:
-            - key: gpu
+            - key: nvidia.com/gpu.family
               operator: Exists

@@ -4,13 +4,19 @@ global:
   addPrometheusAnnotations: true
 
 configs:
-  url: http://argocd.local
+  url: https://argocd.${global_fqdn}
+  rbac:
+    policy.default: "role:readonly"
+    scopes: "[email]"
+    policy.csv: |-
+      g, ${personal_email}, role:admin
   cm:
+    url: https://argocd.${global_fqdn}
     dex.config: |
       connectors:
         - type: oidc
           id: oidc
-          name: OIDC
+          name: Zefir's Cloud
           config:
             issuer: https://auth.${global_fqdn}/application/o/argocd/
             clientID: ${oidc_client_id}

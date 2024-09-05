@@ -1,5 +1,5 @@
 global:
-  storageClass: nfs-jabberwock-subpath
+  storageClass: longhorn
   redis:
     password: redis
 
@@ -8,8 +8,19 @@ architecture: standalone
 master:
   persistence:
     enabled: true
+    size: 2Gi
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsUser: 1001
+    runAsGroup: 1001
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsGroup: 1001
 
 metrics:
+  enabled: true
   serviceMonitor:
     enabled: true
   prometheusRule:

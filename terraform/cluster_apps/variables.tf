@@ -13,16 +13,6 @@ variable "adguard_password" {
   description = "adguard password"
 }
 
-variable "minio_username" {
-  type        = string
-  description = "Minio username"
-}
-
-variable "minio_password" {
-  type        = string
-  description = "Minio password"
-}
-
 variable "authentik_secret_key" {
   type        = string
   description = "Authentik secret key"

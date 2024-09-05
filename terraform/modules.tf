@@ -34,6 +34,8 @@ module "cluster_base" {
   argocd_oidc_client_secret        = var.argocd_oidc_client_secret
   proxmox_service_account_username = var.proxmox_service_account_username
   proxmox_service_account_password = var.proxmox_service_account_password
+
+  personal_email = var.personal_email
 }
 
 module "cluster_apps" {
@@ -46,8 +48,6 @@ module "cluster_apps" {
   homelab_repo                     = module.cluster_base.homelab_repo
   adguard_username                 = var.adguard_username
   adguard_password                 = var.adguard_password
-  minio_username                   = var.minio_username
-  minio_password                   = var.minio_password
   minio_oidc_client_id             = var.minio_oidc_client_id
   minio_oidc_client_secret         = var.minio_oidc_client_secret
   minio_oidc_config_url            = var.minio_oidc_config_url

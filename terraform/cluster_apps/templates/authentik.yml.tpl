@@ -1,12 +1,25 @@
 global:
   addPrometheusAnnotations: true
+  env:
+    - name: AUTHENTIK_REDIS__HOST
+      value: redis-master.databases.svc.cluster.local
+    - name: AUTHENTIK_REDIS__PASSWORD
+      value: redis
+    - name: AUTHENTIK_REDIS__PORT
+      value: "6379"
+    - name: AUTHENTIK_REDIS__DB
+      value: "6"
 
 authentik:
   secret_key: ${secret_key}
   error_reporting:
     enabled: false
   postgresql:
+    host: postgres-postgresql.databases.svc.cluster.local
     password: ${postgres_password}
+  redis:
+    host: redis-master.databases.svc.cluster.local
+    password: redis
 
 server:
   metrics:
@@ -21,30 +34,10 @@ server:
       - authentik.local
 
 postgresql:
-  resources:
-    limits:
-      cpu: 500m
-      memory: 1Gi
-  enabled: true
-  architecture: standalone
-  auth:
-    password: ${postgres_password}
-  primary:
-    persistence:
-      enabled: true
-      storageClass: longhorn
-      accessModes:
-          - ReadWriteOnce
-      existingClaim: authentik-postgres-pvc
-    extendedConfiguration: |
-      max_connections = 500
+  enabled: false
 
 redis:
-  enabled: true
-  master:
-    persistence:
-      storageClass: longhorn
-      size: 2Gi
+  enabled: false
 
 email:
   host: ${smtp_host}

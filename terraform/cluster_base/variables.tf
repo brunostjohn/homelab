@@ -57,3 +57,8 @@ variable "proxmox_service_account_password" {
   type        = string
   description = "The password of the service account to use for Proxmox"
 }
+
+variable "personal_email" {
+  type = string
+  description = "The personal email address to use for various services"
+}

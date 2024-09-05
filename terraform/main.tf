@@ -98,8 +98,7 @@ provider "kubernetes" {
 
 provider "argocd" {
   grpc_web    = true
-  server_addr = "argocd.local"
-  insecure    = true
+  server_addr = "argocd.${var.global_fqdn}"
   username    = "admin"
   password    = var.argocd_password
 }

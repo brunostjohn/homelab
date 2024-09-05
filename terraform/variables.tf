@@ -79,16 +79,6 @@ variable "cluster_ipaddr" {
   description = "Cluster's IP address"
 }
 
-variable "minio_username" {
-  type        = string
-  description = "Minio username"
-}
-
-variable "minio_password" {
-  type        = string
-  description = "Minio password"
-}
-
 variable "minio_oidc_config_url" {
   type        = string
   description = "The OIDC config URL for Minio"

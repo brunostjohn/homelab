@@ -1,32 +1,30 @@
-global:
-  defaultStorageClass: nfs-jabberwock-subpath
-
 auth:
   database: postgres
   postgresPassword: postgres
   enablePostgresUser: true
 
+architecture: standalone
+
 metrics:
+  enabled: true
   serviceMonitor:
     enabled: true
   prometheusRule:
     enabled: true
 
 primary:
-  metrics:
-    serviceMonitor:
-      enabled: true
-    prometheusRule:
-      enabled: true
+  extendedConfiguration: |
+    max_connections = 500
   resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
     limits:
       cpu: 500m
       memory: 1Gi
   persistence:
     enabled: true
-    accessMode: ReadWriteOnce
-    size: 50Gi
-    storageClass: nfs-jabberwock-subpath
+    existingClaim: master-postgres-pvc
   podSecurityContext:
     enabled: true
     fsGroup: 1001
@@ -38,3 +36,7 @@ primary:
     runAsGroup: 1001
   startupProbe:
     enabled: true
+
+backup:
+  enabled: true
+  existingClaim: postgres-backup-pvc

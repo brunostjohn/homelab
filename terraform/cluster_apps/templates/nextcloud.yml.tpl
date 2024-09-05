@@ -14,8 +14,15 @@ persistence:
   enabled: true
   storageClass: longhorn
   nextcloudData:
-    enabled: true
-    storageClass: nfs-jabberwock-subpath
+    enabled: false
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+  limits:
+    cpu: "1"
+    memory: "2Gi"
 
 nginx:
   image:
@@ -39,7 +46,6 @@ nextcloud:
   securityContext:
     runAsUser: 33
     runAsGroup: 33
-    fsGroup: 33
   podSecurityContext:
     runAsUser: 33
     runAsGroup: 33
@@ -58,19 +64,48 @@ nextcloud:
   objectStore:
     s3:
       enabled: true
+      ssl: false
+      port: 9000
       accessKey: ${s3_access_key}
       secretKey: ${s3_secret_key}
       host: ${s3_host}
-      bucket: nextcloud-data
+      bucket: nextcloud
       usePathStyle: true
   defaultConfigs:
     redis.config.php: false
+  phpConfigs:
+    opcache.conf: |-
+      php_admin_value[memory_limit] = -1
+      php_admin_value[opcache.jit_buffer_size] = 8M
+      php_admin_value[opcache.interned_strings_buffer] = 64
+      php_admin_value[opcache.memory_consumption] = 1G
+      php_admin_value[opcache.max_accelerated_files] = 30000
+      php_admin_value[opcache.validate_timestamps] = 0
+      php_admin_value[opcache.revalidate_freq] = 60
+    zz-pm.ini: |-
+      pm.max_children=57
+      pm.start_servers=14
+      pm.min_spare_servers=14
+      pm.max_spare_servers=42
   configs:
+    oidc.config.php: |-
+      <?php
+        $CONFIG = array(
+          'user_oidc' => array(
+            'allow_multiple_user_backends' => false,
+          )
+        );
+    datadir.config.php: |-
+      <?php
+        $CONFIG = array (
+          'check_data_directory_permissions' => false,
+        );
     redis.config.php: |-
       <?php
         $CONFIG = array(
           'memcache.locking' => '\OC\Memcache\Redis',
           'memcache.distributed' => '\OC\Memcache\Redis',
+          'memcache.local' => '\OC\Memcache\APCu',
           'redis' => array(
             'host' => 'redis-master.databases.svc.cluster.local',
             'port' => 6379,
@@ -91,7 +126,7 @@ externalDatabase:
   database: nextcloud
 
 cronjob:
-  enabled: false
+  enabled: true
 
 hpa:
   enabled: false

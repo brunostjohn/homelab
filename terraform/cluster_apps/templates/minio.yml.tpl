@@ -1,6 +1,3 @@
-rootUser: ${username}
-rootPassword: ${password}
-
 resources:
   requests:
     memory: 2Gi
@@ -30,5 +27,5 @@ oidc:
   clientSecret: "${oidc_client_secret}"
   claimName: "policy"
   scopes: "openid profile email minio"
-  redirectUri: "http://minio.local/oauth_callback"
+  redirectUri: "https://minio.${global_fqdn}/oauth_callback"
   displayName: "Zefir's Cloud"
