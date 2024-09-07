@@ -13,7 +13,8 @@ loginRequired: true
 
 remoteAuth:
   enabled: true
-  backend: social_core.backends.open_id_connect.OpenIdConnectAuth
+  backends: 
+    - social_core.backends.open_id_connect.OpenIdConnectAuth
   autoCreateUser: true
 
 extraConfig:

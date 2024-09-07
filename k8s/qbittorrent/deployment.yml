@@ -74,6 +74,7 @@ spec:
               port: 8080
             failureThreshold: 30
             periodSeconds: 10
+            delaySeconds: 30
           livenessProbe:
             httpGet:
               path: /

@@ -38,3 +38,14 @@ resource "argocd_application" "truecommand" {
     }
   }
 }
+
+module "truecommand_ingress" {
+  depends_on = [argocd_application.truecommand]
+
+  source    = "../ingress"
+  namespace = kubernetes_namespace.truecommand.metadata[0].name
+
+  service = "truecommand"
+  port    = 80
+  hosts   = ["truecommand.${var.global_fqdn}"]
+}
