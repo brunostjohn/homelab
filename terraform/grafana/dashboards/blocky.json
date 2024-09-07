@@ -431,8 +431,16 @@
                 "value": null
               },
               {
+                "color": "blue",
+                "value": 10
+              },
+              {
+                "color": "light-orange",
+                "value": 20
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 50
               }
             ]
           },
@@ -1900,7 +1908,7 @@
       "type": "piechart"
     }
   ],
-  "refresh": true,
+  "refresh": "5s",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -1927,6 +1935,6 @@
   "timezone": "",
   "title": "Blocky - Overview",
   "uid": "JvOqE4gRk",
-  "version": 8,
+  "version": 12,
   "weekStart": ""
 }
