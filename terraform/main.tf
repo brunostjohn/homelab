@@ -163,8 +163,7 @@ provider "lidarr" {
 }
 
 provider "proxmox" {
-  endpoint = "https://${var.proxmox_s1_ip}:8006/"
-  insecure = true
-  username = var.proxmox_service_account_username
-  password = var.proxmox_service_account_password
+  endpoint  = "https://${var.proxmox_s1_ip}:8006/"
+  insecure  = true
+  api_token = var.proxmox_api_token
 }

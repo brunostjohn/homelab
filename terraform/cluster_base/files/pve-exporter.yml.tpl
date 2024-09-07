@@ -1,4 +1,5 @@
 default:
   user: ${username}
-  password: ${password}
+  token_name: token
+  token_value: ${token}
   verify_ssl: false

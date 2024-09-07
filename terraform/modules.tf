@@ -32,10 +32,8 @@ module "cluster_base" {
   cloudflare_ddns_api_token        = var.cloudflare_ddns_api_token
   argocd_oidc_client_id            = var.argocd_oidc_client_id
   argocd_oidc_client_secret        = var.argocd_oidc_client_secret
-  proxmox_service_account_username = var.proxmox_service_account_username
-  proxmox_service_account_password = var.proxmox_service_account_password
-
-  personal_email = var.personal_email
+  proxmox_api_token                = var.proxmox_api_token
+  personal_email                   = var.personal_email
 }
 
 module "cluster_apps" {

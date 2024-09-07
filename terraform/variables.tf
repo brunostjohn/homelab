@@ -1,11 +1,6 @@
-variable "proxmox_service_account_username" {
+variable "proxmox_api_token" {
   type        = string
-  description = "The username of the service account to use for Proxmox"
-}
-
-variable "proxmox_service_account_password" {
-  type        = string
-  description = "The password of the service account to use for Proxmox"
+  description = "The Proxmox API token"
 }
 
 variable "proxmox_s1_ip" {

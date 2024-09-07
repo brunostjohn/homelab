@@ -8,6 +8,7 @@ edgeNode:
   enabled: false
 
 ingress:
+  hostname: selenium.local
   enabled: false
 
 global:

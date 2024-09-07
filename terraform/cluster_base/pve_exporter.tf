@@ -12,8 +12,8 @@ resource "kubernetes_secret" "pve_exporter" {
 
   data = {
     "pve.yml" = templatefile("${path.module}/files/pve-exporter.yml.tpl", {
-      username = var.proxmox_service_account_username
-      password = var.proxmox_service_account_password
+      username = split("!", var.proxmox_api_token)[0]
+      token    = split("=", var.proxmox_api_token)[1]
     })
   }
 }
