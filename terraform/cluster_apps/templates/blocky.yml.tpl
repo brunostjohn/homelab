@@ -3,14 +3,14 @@ upstreams:
     strategy: fast
   groups:
     default:
-      - https://dns.google/dns-query
-      - https://cloudflare-dns.com/dns-query
-      - https://dns.quad9.net/dns-query
-      - tls://dns.google
-      - tls://cloudflare-dns.com
-      - https://wikimedia-dns.org/dns-query
-      - tls://wikimedia-dns.org
-      - tls://dnscrypt.uk
+      - https:dns.google.com/dns-query
+      - https:cloudflare-dns.com/dns-query
+      - https:dns.quad9.net/dns-query
+      - tcp-tls:dns.google:853
+      - tcp-tls:cloudflare-dns.com:853
+      - https:wikimedia-dns.org/dns-query
+      - tcp-tls:wikimedia-dns.org:853
+      - tcp-tls:dnscrypt.uk:853
   strategy: parallel_best
   timeout: 2s
 
@@ -116,7 +116,7 @@ bootstrapDns:
   - tcp-tls:9.9.9.9:853
   - tcp-tls:8.8.8.8:853
   - tcp-tls:8.8.4.4:853
-  - https://1.1.1.1/dns-query
+  - https:1.1.1.1/dns-query
 
 fqdnOnly:
   enable: false
