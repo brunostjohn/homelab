@@ -44,8 +44,6 @@ module "cluster_apps" {
   security_project                 = module.cluster_base.security_project
   storage_project                  = module.cluster_base.storage_project
   homelab_repo                     = module.cluster_base.homelab_repo
-  adguard_username                 = var.adguard_username
-  adguard_password                 = var.adguard_password
   minio_oidc_client_id             = var.minio_oidc_client_id
   minio_oidc_client_secret         = var.minio_oidc_client_secret
   minio_oidc_config_url            = var.minio_oidc_config_url
@@ -120,19 +118,6 @@ module "cluster_apps" {
   outline_secret_key            = var.outline_secret_key
   outline_utils_secret          = var.outline_utils_secret
   outline_oidc_client_id        = var.outline_oidc_client_id
-}
-
-module "adguard" {
-  source     = "./adguard"
-  depends_on = [module.cluster_apps]
-
-  meowbox_ipaddr       = module.unifi.meowbox_ipaddr
-  cluster_ipaddr       = var.cluster_ipaddr
-  node1_pi_ipaddr      = module.unifi.node1_pi_ipaddr
-  node2_pi_ipaddr      = module.unifi.node2_pi_ipaddr
-  node3_pi_ipaddr      = module.unifi.node3_pi_ipaddr
-  global_fqdn          = var.global_fqdn
-  control_plane_ipaddr = "10.0.2.22"
 }
 
 module "authentik" {

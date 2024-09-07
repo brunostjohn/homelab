@@ -47,9 +47,18 @@ spec:
               command:
                 - /app/blocky
                 - healthcheck
-            initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
+          startupProbe:
+            exec:
+              command:
+                - /app/blocky
+                - healthcheck
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            delaySeconds: 30
           volumeMounts:
             - name: blocky-config
               mountPath: /app/config.yml

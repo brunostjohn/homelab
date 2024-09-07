@@ -3,16 +3,6 @@ variable "homelab_repo" {
   description = "The URL of the homelab repository"
 }
 
-variable "adguard_username" {
-  type        = string
-  description = "adguard username"
-}
-
-variable "adguard_password" {
-  type        = string
-  description = "adguard password"
-}
-
 variable "authentik_secret_key" {
   type        = string
   description = "Authentik secret key"

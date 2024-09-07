@@ -38,7 +38,7 @@ resource "argocd_application" "blocky" {
 
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = kubernetes_namespace.adguard.metadata[0].name
+      namespace = kubernetes_namespace.blocky.metadata[0].name
     }
 
     sync_policy {

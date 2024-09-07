@@ -49,26 +49,6 @@ variable "unifi_wlan_home_ssid" {
   description = "SSID for the home WLAN"
 }
 
-variable "adguard_host" {
-  type        = string
-  description = "AdGuard host"
-}
-
-variable "adguard_username" {
-  type        = string
-  description = "AdGuard username"
-}
-
-variable "adguard_password" {
-  type        = string
-  description = "AdGuard password"
-}
-
-variable "adguard_scheme" {
-  type        = string
-  description = "HTTP or HTTPS"
-}
-
 variable "cluster_ipaddr" {
   type        = string
   description = "Cluster's IP address"

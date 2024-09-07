@@ -27,11 +27,6 @@ terraform {
       version = "3.0.2"
     }
 
-    adguard = {
-      source  = "gmichels/adguard"
-      version = "1.3.0"
-    }
-
     authentik = {
       source  = "goauthentik/authentik"
       version = "2024.6.1"
@@ -114,13 +109,6 @@ provider "unifi" {
   api_url        = var.unifi_api_url
   site           = var.unifi_site
   allow_insecure = true
-}
-
-provider "adguard" {
-  host     = var.adguard_host
-  username = var.adguard_username
-  password = var.adguard_password
-  scheme   = var.adguard_scheme
 }
 
 provider "authentik" {
