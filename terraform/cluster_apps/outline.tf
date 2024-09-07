@@ -18,7 +18,7 @@ resource "kubernetes_config_map" "outline" {
     "URL"                       = "https://docs.${var.global_fqdn}"
     "FILE_STORAGE"              = "s3"
     "AWS_REGION"                = "doesntmatter"
-    "AWS_S3_UPLOAD_BUCKET_URL"  = "http://minio-svc.minio.svc.cluster.local:9000"
+    "AWS_S3_UPLOAD_BUCKET_URL"  = "https://static.${var.global_fqdn}"
     "AWS_S3_UPLOAD_BUCKET_NAME" = "outline"
     "AWS_S3_FORCE_PATH_STYLE"   = "true"
     "AWS_S3_ACL"                = "private"
