@@ -35,6 +35,7 @@ resource "kubernetes_config_map" "outline" {
     "SMTP_FROM_EMAIL"           = "noreply@${var.global_fqdn}"
     "SMTP_SECURE"               = "false"
     "SMTP_TLS_CIPHERS"          = "TLSv1.2"
+    "FORCE_HTTPS"               = "false"
   }
 }
 
