@@ -412,6 +412,9 @@
       "description": "Average query response time for all query types",
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [
             {
               "options": {
@@ -432,15 +435,15 @@
               },
               {
                 "color": "blue",
-                "value": 10
+                "value": 0.01
               },
               {
                 "color": "light-orange",
-                "value": 20
+                "value": 0.02
               },
               {
                 "color": "red",
-                "value": 50
+                "value": 0.05
               }
             ]
           },
@@ -1935,6 +1938,6 @@
   "timezone": "",
   "title": "Blocky - Overview",
   "uid": "JvOqE4gRk",
-  "version": 12,
+  "version": 14,
   "weekStart": ""
 }
