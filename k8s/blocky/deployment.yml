@@ -43,15 +43,17 @@ spec:
               memory: "256Mi"
               cpu: "300m"
           livenessProbe:
-            command:
-              - /app/blocky
-              - healthcheck
+            exec:
+              command:
+                - /app/blocky
+                - healthcheck
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
           volumeMounts:
             - name: blocky-config
               mountPath: /app/config.yml
+              subPath: config.yml
           ports:
             - containerPort: 53
               name: dns

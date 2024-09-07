@@ -1,0 +1,140 @@
+upstreams:
+  init:
+    strategy: fast
+  groups:
+    default:
+      - https://dns.google/dns-query
+      - https://cloudflare-dns.com/dns-query
+      - https://dns.quad9.net/dns-query
+      - tls://dns.google
+      - tls://cloudflare-dns.com
+      - https://wikimedia-dns.org/dns-query
+      - tls://wikimedia-dns.org
+      - tls://dnscrypt.uk
+  strategy: parallel_best
+  timeout: 2s
+
+connectIPVersion: dual
+
+customDNS:
+  customTTL: 1h
+  filterUnmappedTypes: true
+  rewrite:
+  mapping:
+    traefik.local: 10.0.2.0
+    qbittorrent.local: 10.0.2.0
+    longhorn.local: 10.0.2.0
+    "*.${global_fqdn}": 10.0.2.0
+    ${global_fqdn}: 10.0.2.0
+    "*.static.${global_fqdn}": 10.0.2.0
+    radarr.local: 10.0.2.0
+    sonarr.local: 10.0.2.0
+    lidarr.local: 10.0.2.0
+    readarr.local: 10.0.2.0
+    prowlarr.local: 10.0.2.0
+    alertmanager.local: 10.0.2.0
+    cubes.${global_fqdn}: 10.0.2.25
+    klaudia-postgres.local: 10.0.3.11
+
+conditional:
+  fallbackUpstream: false
+  mapping:
+
+blocking:
+  denylists:
+    ads:
+      - https://raw.githubusercontent.com/FadeMind/hosts.extras/master/UncheckyAds/hosts
+      - https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+      - https://v.firebog.net/hosts/Easylist.txt
+      - https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+      - https://v.firebog.net/hosts/Admiral.txt
+      - https://v.firebog.net/hosts/AdguardDNS.txt
+      - https://adaway.org/hosts.txt
+      - https://www.github.developerdan.com/hosts/lists/hate-and-junk-extended.txt
+      - https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt
+      - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+      - https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
+      - https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
+  allowlists:
+    ads:
+      - ""
+  clientGroupsBlock:
+    default:
+      - ads
+  blockType: zeroIp
+  blockTTL: 1m
+  loading:
+    refreshPeriod: 24h
+    downloads:
+      timeout: 60s
+      attempts: 5
+      cooldown: 10s
+    concurrency: 16
+    strategy: failOnError
+    maxErrorsPerSource: 5
+
+caching:
+  minTime: 5m
+  maxTime: 30m
+  maxItemsCount: 0
+  prefetching: true
+  prefetchExpires: 2h
+  prefetchThreshold: 5
+  prefetchMaxItemsCount: 0
+  cacheTimeNegative: 30m
+
+clientLookup:
+  upstream: 10.0.0.1
+  singleNameOrder:
+    - 2
+    - 1
+  clients:
+
+prometheus:
+  enable: true
+  path: /metrics
+
+queryLog:
+  type: postgresql
+  target: postgres://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/blocky
+  logRetentionDays: 30
+  creationAttempts: 3
+  creationCooldown: 2s
+  flushInterval: 30s
+
+redis:
+  address: redis-master.databases.svc.cluster.local:6379
+  password: redis
+  database: 8
+  required: true
+  connectionAttempts: 3
+  connectionCooldown: 3s
+
+minTlsServeVersion: 1.3
+
+bootstrapDns:
+  - tcp-tls:9.9.9.9:853
+  - tcp-tls:8.8.8.8:853
+  - tcp-tls:8.8.4.4:853
+  - https://1.1.1.1/dns-query
+
+fqdnOnly:
+  enable: false
+
+ports:
+  dns: 53
+  tls: 853
+  https: 443
+  http: 4000
+
+log:
+  level: info
+  format: text
+  timestamp: true
+  privacy: false
+
+ede:
+  enable: false
+
+specialUseDomains:
+  rfc6762-appendixG: true
