@@ -58,7 +58,7 @@ spec:
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 5
-            initialDelaySeconds: 120
+            initialDelaySeconds: 240
           volumeMounts:
             - name: blocky-config
               mountPath: /app/config.yml

@@ -22,11 +22,6 @@ terraform {
       version = "2.14.0"
     }
 
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "3.0.2"
-    }
-
     authentik = {
       source  = "goauthentik/authentik"
       version = "2024.6.1"
@@ -98,11 +93,6 @@ provider "argocd" {
   password    = var.argocd_password
 }
 
-provider "docker" {
-  host     = "ssh://brunostjohn@10.0.0.2:22"
-  ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
-}
-
 provider "unifi" {
   username       = var.unifi_username
   password       = var.unifi_password
@@ -126,27 +116,27 @@ provider "cloudflare" {
 }
 
 provider "prowlarr" {
-  url     = "http://prowlarr.local"
+  url     = "https://prowlarr.${var.global_fqdn}"
   api_key = var.prowlarr_api_key
 }
 
 provider "radarr" {
-  url     = "http://radarr.local"
+  url     = "https://radarr.${var.global_fqdn}"
   api_key = var.radarr_api_key
 }
 
 provider "sonarr" {
-  url     = "http://sonarr.local"
+  url     = "https://sonarr.${var.global_fqdn}"
   api_key = var.sonarr_api_key
 }
 
 provider "readarr" {
-  url     = "http://readarr.local"
+  url     = "https://readarr.${var.global_fqdn}"
   api_key = var.readarr_api_key
 }
 
 provider "lidarr" {
-  url     = "http://lidarr.local"
+  url     = "https://lidarr.${var.global_fqdn}"
   api_key = var.lidarr_api_key
 }
 
