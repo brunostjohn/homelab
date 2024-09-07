@@ -55,9 +55,6 @@ blocking:
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
       - https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
       - https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
-  allowlists:
-    ads:
-      - ""
   clientGroupsBlock:
     default:
       - ads
