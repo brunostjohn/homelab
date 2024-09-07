@@ -62,6 +62,7 @@ spec:
             initialDelaySeconds: 960
             periodSeconds: 10
             timeoutSeconds: 5
+            failureThreshold: 5
           livenessProbe:
             httpGet:
               path: /health
@@ -69,6 +70,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
+            failureThreshold: 5
           readinessProbe:
             httpGet:
               path: /health
@@ -76,6 +78,7 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
+            failureThreshold: 5
           volumeMounts:
             - name: data
               mountPath: /libraries
