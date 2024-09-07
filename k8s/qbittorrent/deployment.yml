@@ -74,7 +74,7 @@ spec:
               port: 8080
             failureThreshold: 30
             periodSeconds: 10
-            delaySeconds: 30
+            initialDelaySeconds: 30
           livenessProbe:
             httpGet:
               path: /
@@ -114,8 +114,6 @@ spec:
               memory: "64Mi"
               cpu: "100m"
           env:
-            - name: DISABLE_AUTH
-              value: "true"
             - name: QBITTORRENT_PORT
               value: "8080"
             - name: QBITTORRENT_HOST
@@ -182,6 +180,17 @@ spec:
           env:
             - name: HOME
               value: "/config"
+            - name: FLOOD_OPTION_QBURL
+              value: http://qbittorrent.entertainment.svc.cluster.local:8080
+            - name: FLOOD_OPTION_AUTH
+              value: none
+            - name: FLOOD_OPTION_QBUSER
+              value: admin
+            - name: FLOOD_OPTION_QBPASS
+              valueFrom:
+                secretKeyRef:
+                  name: qbittorrent
+                  key: password
           volumeMounts:
             - name: flood-config
               mountPath: /config
