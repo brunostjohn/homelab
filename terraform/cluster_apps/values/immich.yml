@@ -1,5 +1,11 @@
+env:
+  REDIS_HOSTNAME: redis-master.databases.svc.cluster.local
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD: redis
+  REDIS_DBINDEX: "9"
+
 image:
-  tag: v1.112.1
+  tag: v1.114.0
 
 immich:
   metrics:
@@ -38,11 +44,7 @@ postgresql:
       enabled: true
 
 redis:
-  enabled: true
-  master:
-    persistence:
-      storageClass: longhorn
-      size: 2Gi
+  enabled: false
 
 server:
   enabled: true
