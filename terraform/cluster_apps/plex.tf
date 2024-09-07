@@ -57,5 +57,5 @@ module "plex_ingress" {
   namespace = "entertainment"
   port      = 32400
 
-  hosts = ["birds.${var.global_fqdn}"]
+  hosts = ["plex.${var.global_fqdn}"]
 }

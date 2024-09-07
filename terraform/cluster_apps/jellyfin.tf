@@ -42,7 +42,7 @@ module "jellyfin_ingress" {
   depends_on = [argocd_application.lidarr]
 
   service   = "jellyfin"
-  hosts     = ["jf.${var.global_fqdn}"]
+  hosts     = ["birds.${var.global_fqdn}"]
   namespace = kubernetes_namespace.entertainment.metadata[0].name
   port      = 8096
 }
