@@ -37,11 +37,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: "128Mi"
-              cpu: "150m"
-            limits:
               memory: "256Mi"
-              cpu: "300m"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           livenessProbe:
             exec:
               command:
