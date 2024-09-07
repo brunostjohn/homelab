@@ -114,6 +114,8 @@ spec:
               memory: "64Mi"
               cpu: "100m"
           env:
+            - name: DISABLE_AUTH
+              value: "true"
             - name: QBITTORRENT_PORT
               value: "8080"
             - name: QBITTORRENT_HOST
