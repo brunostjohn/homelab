@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: outline
-          image: docker.getoutline.com/outlinewiki/outline:latest
+          image: docker.getoutline.com/outlinewiki/outline
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: "256Mi"

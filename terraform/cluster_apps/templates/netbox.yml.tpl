@@ -11,6 +11,42 @@ storageConfig:
 
 loginRequired: true
 
+remoteAuth:
+  enabled: true
+  backend: social_core.backends.open_id_connect.OpenIdConnectAuth
+  autoCreateUser: true
+
+extraConfig:
+  - secret:
+      secretName: oidc-client
+  - values:
+      SOCIAL_AUTH_PIPELINE:
+        [
+          "social_core.pipeline.social_auth.social_details",
+          "social_core.pipeline.social_auth.social_uid",
+          "social_core.pipeline.social_auth.social_user",
+          "social_core.pipeline.user.get_username",
+          "social_core.pipeline.social_auth.associate_by_email",
+          "social_core.pipeline.user.create_user",
+          "social_core.pipeline.social_auth.associate_user",
+          "netbox.authentication.user_default_groups_handler",
+          "social_core.pipeline.social_auth.load_extra_data",
+          "social_core.pipeline.user.user_details",
+          "netbox.sso_pipeline_roles.add_groups",
+          "netbox.sso_pipeline_roles.remove_groups",
+          "netbox.sso_pipeline_roles.set_roles",
+        ]
+
+extraVolumes:
+  - name: sso-pipeline-roles
+    configMap:
+      name: sso-pipeline-roles
+extraVolumeMounts:
+  - name: sso-pipeline-roles
+    mountPath: /opt/netbox/netbox/netbox/sso_pipeline_roles.py
+    subPath: sso_pipeline_roles.py
+    readOnly: true
+
 ingress:
   enabled: true
   hosts:

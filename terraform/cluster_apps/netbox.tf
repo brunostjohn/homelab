@@ -1,5 +1,41 @@
+resource "kubernetes_namespace" "netbox" {
+  metadata {
+    name = "netbox"
+  }
+}
+
+resource "kubernetes_config_map" "netbox_sso_pipeline_roles" {
+  metadata {
+    name      = "sso-pipeline-roles"
+    namespace = kubernetes_namespace.netbox.metadata[0].name
+  }
+
+  data = {
+    "sso_pipeline_roles.py" = templatefile("${path.module}/templates/sso_pipeline_roles.py.tpl", {
+      oidc_client_id = var.netbox_oidc_client_id
+    })
+  }
+}
+
+resource "kubernetes_secret" "netbox_oidc_client" {
+  metadata {
+    name      = "oidc-client"
+    namespace = kubernetes_namespace.netbox.metadata[0].name
+  }
+
+  data = {
+    "oidc.yaml" = templatefile("${path.module}/templates/netbox-oidc.yml.tpl", {
+      client_id     = var.netbox_oidc_client_id
+      client_secret = var.netbox_oidc_client_secret
+      oidc_endpoint = "https://auth.${var.global_fqdn}/application/o/netbox/"
+      logout_url    = "https://auth.${var.global_fqdn}/application/o/netbox/end-session/"
+    })
+  }
+}
+
 module "netbox_helm" {
-  source = "../helm_deployment"
+  depends_on = [kubernetes_config_map.netbox_sso_pipeline_roles, kubernetes_secret.netbox_oidc_client]
+  source     = "../helm_deployment"
 
   chart           = "netbox"
   target_revision = "5.0.0-beta.82"
@@ -14,8 +50,8 @@ module "netbox_helm" {
   })
 
   name             = "netbox"
-  namespace        = "netbox"
-  create_namespace = true
+  namespace        = kubernetes_namespace.netbox.metadata[0].name
+  create_namespace = false
 
   create_ingress = false
 }

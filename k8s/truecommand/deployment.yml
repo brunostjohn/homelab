@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: truecommand
+  namespace: truecommand
+spec:
+  selector:
+    matchLabels:
+      app: truecommand
+  template:
+    metadata:
+      labels:
+        app: truecommand
+    spec:
+      volumes:
+        - name: truecommand-data
+          persistentVolumeClaim:
+            claimName: truecommand-data
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+      containers:
+        - name: truecommand
+          image: ixsystems/truecommand
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 1001
+            runAsGroup: 1001
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          volumeMounts:
+            - name: truecommand-data
+              mountPath: /data

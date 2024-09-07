@@ -113,6 +113,8 @@ module "cluster_apps" {
   netbox_superuser_password    = var.netbox_superuser_password
   netbox_aws_access_key_id     = var.netbox_aws_access_key_id
   netbox_aws_secret_access_key = var.netbox_aws_secret_access_key
+  netbox_oidc_client_id        = var.netbox_oidc_client_id
+  netbox_oidc_client_secret    = var.netbox_oidc_client_secret
 
   outline_aws_access_key_id     = var.outline_aws_access_key_id
   outline_aws_secret_access_key = var.outline_aws_secret_access_key
