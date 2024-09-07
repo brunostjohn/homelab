@@ -113,6 +113,13 @@ module "cluster_apps" {
   netbox_superuser_password    = var.netbox_superuser_password
   netbox_aws_access_key_id     = var.netbox_aws_access_key_id
   netbox_aws_secret_access_key = var.netbox_aws_secret_access_key
+
+  outline_aws_access_key_id     = var.outline_aws_access_key_id
+  outline_aws_secret_access_key = var.outline_aws_secret_access_key
+  outline_oidc_client_secret    = var.outline_oidc_client_secret
+  outline_secret_key            = var.outline_secret_key
+  outline_utils_secret          = var.outline_utils_secret
+  outline_oidc_client_id        = var.outline_oidc_client_id
 }
 
 module "adguard" {

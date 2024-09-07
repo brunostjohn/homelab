@@ -56,7 +56,7 @@ resource "kubernetes_persistent_volume_claim" "postgres" {
 }
 
 resource "kubernetes_persistent_volume_claim" "postgres_backup" {
-  depends_on = [ argocd_application.nfs_provisioner ]
+  depends_on = [argocd_application.nfs_provisioner]
 
   metadata {
     name      = "postgres-backup-pvc"

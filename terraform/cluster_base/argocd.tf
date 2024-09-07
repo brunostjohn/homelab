@@ -13,7 +13,7 @@ resource "helm_release" "argocd" {
     global_fqdn        = var.global_fqdn
     oidc_client_id     = var.argocd_oidc_client_id
     oidc_client_secret = var.argocd_oidc_client_secret
-    personal_email = var.personal_email
+    personal_email     = var.personal_email
   })]
 }
 

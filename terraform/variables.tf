@@ -488,3 +488,33 @@ variable "netbox_aws_secret_access_key" {
   type        = string
   description = "Netbox AWS secret"
 }
+
+variable "outline_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for Outline"
+}
+
+variable "outline_oidc_client_secret" {
+  type        = string
+  description = "OIDC client secret for Outline"
+}
+
+variable "outline_secret_key" {
+  type        = string
+  description = "Secret key for Outline"
+}
+
+variable "outline_utils_secret" {
+  type        = string
+  description = "Utils secret for Outline"
+}
+
+variable "outline_aws_access_key_id" {
+  type        = string
+  description = "AWS access key ID for Outline"
+}
+
+variable "outline_aws_secret_access_key" {
+  type        = string
+  description = "AWS secret access key for Outline"
+}

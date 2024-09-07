@@ -27,21 +27,21 @@ spec:
                 name: outline-config
             - secretRef:
                 name: outline-secrets
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 30
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 30
-          startupProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 30
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 30
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 30
+          # startupProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 30
           ports:
             - containerPort: 3000
               protocol: TCP

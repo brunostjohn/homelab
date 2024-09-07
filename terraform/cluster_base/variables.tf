@@ -59,6 +59,6 @@ variable "proxmox_service_account_password" {
 }
 
 variable "personal_email" {
-  type = string
+  type        = string
   description = "The personal email address to use for various services"
 }
