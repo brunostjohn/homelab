@@ -55,15 +55,7 @@ resource "proxmox_virtual_environment_vm" "s1_truenas" {
 
   hostpci {
     device = "hostpci0"
-    id     = "0000:09:00"
-    pcie   = false
-    rombar = true
-    xvga   = false
-  }
-
-  hostpci {
-    device = "hostpci1"
-    id     = "0000:0a:00"
+    id     = "0000:03:00"
     pcie   = false
     rombar = true
     xvga   = false

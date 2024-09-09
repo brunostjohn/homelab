@@ -57,3 +57,8 @@ variable "personal_email" {
   type        = string
   description = "The personal email address to use for various services"
 }
+
+variable "floof_api_key" {
+  type        = string
+  description = "API key for Floof truenas"
+}

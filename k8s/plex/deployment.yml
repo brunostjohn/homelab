@@ -22,11 +22,11 @@ spec:
         - name: plex-data
           hostPath:
             path: /mnt/jabberwock/entertainment
-      runtimeClassName: nvidia
-      tolerations:
-        - key: nvidia.com/gpu
-          operator: Exists
-          effect: NoSchedule
+      # runtimeClassName: nvidia
+      # tolerations:
+      #   - key: nvidia.com/gpu
+      #     operator: Exists
+      #     effect: NoSchedule
       securityContext:
         fsGroup: 1000
       containers:
@@ -40,16 +40,16 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "2"
-              nvidia.com/gpu.shared: "5"
+              # nvidia.com/gpu.shared: "5"
           ports:
             - containerPort: 32400
               name: http
               protocol: TCP
           env:
-            - name: NVIDIA_VISIBLE_DEVICES
-              value: all
-            - name: NVIDIA_DRIVER_CAPABILITIES
-              value: all
+            # - name: NVIDIA_VISIBLE_DEVICES
+            #   value: all
+            # - name: NVIDIA_DRIVER_CAPABILITIES
+            #   value: all
             - name: PGID
               value: "1000"
             - name: PUID

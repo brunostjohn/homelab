@@ -34,6 +34,7 @@ module "cluster_base" {
   argocd_oidc_client_secret        = var.argocd_oidc_client_secret
   proxmox_api_token                = var.proxmox_api_token
   personal_email                   = var.personal_email
+  floof_api_key                    = var.floof_api_key
 }
 
 module "cluster_apps" {

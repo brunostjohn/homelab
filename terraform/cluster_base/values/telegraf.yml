@@ -41,6 +41,7 @@ config:
         agents:
           - 10.0.211.116:161
           - 10.0.205.212:161
+          - 10.0.66.169:161
         version: 1
         community: public
         name: idrac-hosts

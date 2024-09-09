@@ -503,3 +503,8 @@ variable "netbox_oidc_client_secret" {
   type        = string
   description = "OIDC client secret for Netbox"
 }
+
+variable "floof_api_key" {
+  type        = string
+  description = "API key for Floof truenas"
+}
