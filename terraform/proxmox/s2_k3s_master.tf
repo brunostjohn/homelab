@@ -59,6 +59,12 @@ resource "proxmox_virtual_environment_vm" "s2_k3s_master" {
     type = "l26"
   }
 
+  agent {
+    enabled = true
+    timeout = "15m"
+    trim = true
+  }
+
   startup {
     order = 2
   }

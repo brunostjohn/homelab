@@ -57,6 +57,13 @@ resource "proxmox_virtual_environment_vm" "s2_truenas" {
     type = "l26"
   }
 
+  agent {
+    type = "virtio"
+    enabled = true
+    timeout = "15m"
+    trim = true
+  }
+
   hostpci {
     device = "hostpci0"
     id     = "0000:03:00"

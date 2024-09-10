@@ -45,7 +45,7 @@ resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
   }
 
   memory {
-    dedicated = 30720
+    dedicated = 16384
   }
 
   network_device {
@@ -57,6 +57,13 @@ resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
 
   operating_system {
     type = "l26"
+  }
+
+  agent {
+    type = "virtio"
+    enabled = true
+    timeout = "15m"
+    trim = true
   }
 
   startup {

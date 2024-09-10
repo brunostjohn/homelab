@@ -18,7 +18,7 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 8
+    cores        = 14
     type         = "host"
     units        = 1024
   }
@@ -46,7 +46,7 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
   }
 
   memory {
-    dedicated = 31744
+    dedicated = 57344
   }
 
   network_device {
@@ -58,6 +58,13 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
 
   operating_system {
     type = "l26"
+  }
+
+  agent {
+    type = "virtio"
+    enabled = true
+    timeout = "15m"
+    trim = true
   }
 
   startup {

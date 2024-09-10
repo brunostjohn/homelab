@@ -15,7 +15,7 @@ resource "proxmox_virtual_environment_vm" "s1_truenas" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 1
+    cores        = 4
     type         = "host"
     units        = 1024
   }
@@ -43,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "s1_truenas" {
   }
 
   memory {
-    dedicated = 9216
+    dedicated = 16384
   }
 
   network_device {
@@ -63,6 +63,13 @@ resource "proxmox_virtual_environment_vm" "s1_truenas" {
 
   operating_system {
     type = "l26"
+  }
+
+  agent {
+    type = "virtio"
+    enabled = true
+    timeout = "15m"
+    trim = true
   }
 
   startup {
