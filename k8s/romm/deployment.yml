@@ -61,6 +61,8 @@ spec:
               value: romm-user
             - name: DB_PASSWD
               value: romm
+            - name: DISABLE_CSRF_PROTECTION
+              value: "true"
           envFrom:
             - secretRef:
                 name: romm-secrets
