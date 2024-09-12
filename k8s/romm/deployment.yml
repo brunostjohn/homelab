@@ -139,13 +139,13 @@ spec:
               command:
                 - /bin/bash
                 - -c
-                - mariadb-admin ping -uroot -pmysqeual
+                - mariadb-admin ping -uroot
           livenessProbe:
             exec:
               command:
                 - /bin/bash
                 - -c
-                - mariadb-admin status -uroot -pmysqeual
+                - mariadb-admin status -uroot
           env:
             - name: MARIADB_ROOT_PASSWORD
               value: mysqueal
