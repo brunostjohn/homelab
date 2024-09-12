@@ -43,11 +43,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: "512Mi"
-              cpu: "150m"
+              memory: "256Mi"
+              cpu: "250m"
             limits:
-              memory: "1Gi"
-              cpu: "300m"
+              memory: "512Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -61,8 +61,6 @@ spec:
               value: romm-user
             - name: DB_PASSWD
               value: romm
-            - name: DISABLE_CSRF_PROTECTION
-              value: "true"
           envFrom:
             - secretRef:
                 name: romm-secrets
@@ -77,6 +75,19 @@ spec:
               mountPath: /romm/library
             - name: redis-data
               mountPath: /redis-data
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /api/heartbeat
+              port: http
+            initialDelaySeconds: 120
+          livenessProbe:
+            httpGet:
+              path: /api/heartbeat
+              port: http
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -123,6 +134,18 @@ spec:
             - containerPort: 3306
               protocol: TCP
               name: mysql
+          startupProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - mariadb-admin ping -uroot -pmysqeual
+          livenessProbe:
+            exec:
+              command:
+                - /bin/bash
+                - -c
+                - mariadb-admin status -uroot -pmysqeual
           env:
             - name: MARIADB_ROOT_PASSWORD
               value: mysqueal
