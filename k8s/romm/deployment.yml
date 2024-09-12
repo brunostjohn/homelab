@@ -4,6 +4,8 @@ metadata:
   name: romm
   namespace: romm
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: romm
@@ -12,6 +14,10 @@ spec:
       labels:
         app: romm
     spec:
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+        runAsGroup: 1001
       volumes:
         - name: resources
           persistentVolumeClaim:
@@ -30,6 +36,9 @@ spec:
             claimName: romm-redis-data
       containers:
         - name: romm
+          securityContext:
+            runAsGroup: 1001
+            runAsUser: 1001
           image: rommapp/romm:latest
           imagePullPolicy: IfNotPresent
           resources:
@@ -73,6 +82,8 @@ metadata:
   name: mariadb
   namespace: romm
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: mariadb
@@ -81,6 +92,10 @@ spec:
       labels:
         app: mariadb
     spec:
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+        runAsGroup: 1001
       volumes:
         - name: mariadb-pvc
           persistentVolumeClaim:
@@ -88,6 +103,9 @@ spec:
       containers:
         - name: mariadb
           image: mariadb
+          securityContext:
+            runAsGroup: 1001
+            runAsUser: 1001
           imagePullPolicy: IfNotPresent
           resources:
             requests:
