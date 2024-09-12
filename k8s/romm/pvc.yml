@@ -15,20 +15,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: romm-library
-  namespace: romm
-spec:
-  resources:
-    requests:
-      storage: 100Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: floof-iscsi-csi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: romm-assets
   namespace: romm
 spec:
