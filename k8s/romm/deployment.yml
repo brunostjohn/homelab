@@ -1,0 +1,115 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: romm
+  namespace: romm
+spec:
+  selector:
+    matchLabels:
+      app: romm
+  template:
+    metadata:
+      labels:
+        app: romm
+    spec:
+      volumes:
+        - name: resources
+          persistentVolumeClaim:
+            claimName: romm-resources
+        - name: config
+          persistentVolumeClaim:
+            claimName: romm-config
+        - name: assets
+          persistentVolumeClaim:
+            claimName: romm-assets
+        - name: library
+          persistentVolumeClaim:
+            claimName: romm-library
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: romm-redis-data
+      containers:
+        - name: romm
+          image: rommapp/romm:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "150m"
+            limits:
+              memory: "256Mi"
+              cpu: "300m"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          env:
+            - name: DB_HOST
+              value: mariadb.romm.svc.cluster.local
+            - name: DB_NAME
+              value: romm
+            - name: DB_USER
+              value: romm-user
+            - name: DB_PASSWD
+              value: room
+          envFrom:
+            - secretRef:
+                name: romm-secrets
+          volumeMounts:
+            - name: resources
+              mountPath: /romm/resources
+            - name: config
+              mountPath: /romm/config
+            - name: assets
+              mountPath: /romm/assets
+            - name: library
+              mountPath: /romm/library
+            - name: redis-data
+              mountPath: /redis-data
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  namespace: romm
+spec:
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      volumes:
+        - name: mariadb-pvc
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
+      containers:
+        - name: mariadb
+          image: mariadb
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "150m"
+            limits:
+              memory: "128Mi"
+              cpu: "300m"
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+              name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: mysqueal
+            - name: MYSQL_DATABASE
+              value: romm
+            - name: MYSQL_USER
+              value: romm-user
+            - name: MYSQL_PASSWORD
+              value: romm
+          volumeMounts:
+            - name: mariadb-pvc
+              mountPath: /var/lib/mysql
+
