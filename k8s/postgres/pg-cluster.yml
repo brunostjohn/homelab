@@ -1,0 +1,17 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  namespace: databases
+  name: postgres-cluster
+spec:
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.5
+
+  primaryUpdateStrategy: unsupervised
+
+  storage:
+    size: 8Gi
+    storageClassName: longhorn-unreplicated
+
+  monitoring:
+    enablePodMonitor: true

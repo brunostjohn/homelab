@@ -1,0 +1,35 @@
+auth:
+  rootPassword: mysqueal
+
+architecture: standalone
+
+# metrics:
+#   enabled: true
+#   serviceMonitor:
+#     enabled: true
+#   prometheusRule:
+#     enabled: true
+
+primary:
+  # resources:
+  #   requests:
+  #     cpu: 100m
+  #     memory: 256Mi
+  #   limits:
+  #     cpu: 250m
+  #     memory: 512Mi
+  persistence:
+    enabled: true
+    size: 2Gi
+    storageClass: floof-iscsi-csi
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+    runAsUser: 1001
+    runAsGroup: 1001
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsGroup: 1001
+  startupProbe:
+    enabled: true

@@ -1,0 +1,25 @@
+monitoring:
+  podMonitorEnabled: true
+
+replicaCount: 2
+
+tolerations:
+  - key: "node.kubernetes.io/unreachable"
+    operator: "Exists"
+    effect: "NoExecute"
+    tolerationSeconds: 20
+  - key: "node.kubernetes.io/not-ready"
+    operator: "Exists"
+    effect: "NoExecute"
+    tolerationSeconds: 20
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+        - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
