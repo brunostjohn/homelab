@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-cm
+  namespace: romm
+data:
+  my.cnf: |
+    [mysqld]
+    skip-networking=0
+    skip-bind-address
+  
+    [client-server]
+    socket = /run/mysqld/mysqld.sock
+
+    !includedir /etc/mysql/mariadb.conf.d/
+    !includedir /etc/mysql/conf.d/

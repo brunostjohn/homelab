@@ -58,9 +58,9 @@ spec:
             - name: DB_NAME
               value: romm
             - name: DB_USER
-              value: root
+              value: romm-user
             - name: DB_PASSWD
-              value: mysqueal
+              value: room
           envFrom:
             - secretRef:
                 name: romm-secrets
@@ -100,6 +100,9 @@ spec:
         - name: mariadb-pvc
           persistentVolumeClaim:
             claimName: mariadb-pvc
+        - name: my-cnf
+          configMap:
+            name: mariadb-cm
       containers:
         - name: mariadb
           image: mariadb
@@ -132,4 +135,7 @@ spec:
           volumeMounts:
             - name: mariadb-pvc
               mountPath: /var/lib/mysql
+            - name: my-cnf
+              mountPath: /etc/mysql/my.cnf
+              subPath: my.cnf
 
