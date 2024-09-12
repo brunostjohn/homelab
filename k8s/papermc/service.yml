@@ -10,5 +10,9 @@ spec:
       targetPort: 25565
       protocol: TCP
       name: minecraft
+    - port: 25049
+      targetPort: 25049
+      protocol: TCP
+      name: lod
   type: LoadBalancer
   loadBalancerIP: 10.0.2.25
