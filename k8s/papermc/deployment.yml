@@ -4,6 +4,8 @@ metadata:
   name: papermc
   namespace: minecraft
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: papermc
