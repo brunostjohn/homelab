@@ -8,9 +8,14 @@ data:
     [mysqld]
     skip-networking=0
     skip-bind-address
-  
+    character-set-server=utf8mb4
+    collation-server=utf8mb4_uca1400_nopad_as_cs
+
     [client-server]
     socket = /run/mysqld/mysqld.sock
+
+    [client]
+    default-character-set=utf8mb4
 
     !includedir /etc/mysql/mariadb.conf.d/
     !includedir /etc/mysql/conf.d/
