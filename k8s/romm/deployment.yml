@@ -58,9 +58,9 @@ spec:
             - name: DB_NAME
               value: romm
             - name: DB_USER
-              value: romm-user
+              value: root
             - name: DB_PASSWD
-              value: room
+              value: mysqueal
           envFrom:
             - secretRef:
                 name: romm-secrets
@@ -119,14 +119,16 @@ spec:
               protocol: TCP
               name: mysql
           env:
-            - name: MYSQL_ROOT_PASSWORD
+            - name: MARIADB_ROOT_PASSWORD
               value: mysqueal
-            - name: MYSQL_DATABASE
+            - name: MARIADB_DATABASE
               value: romm
-            - name: MYSQL_USER
+            - name: MARIADB_USER
               value: romm-user
-            - name: MYSQL_PASSWORD
+            - name: MARIADB_PASSWORD
               value: romm
+            - name: MARIADB_HEALTHCHECK_GRANTS
+              value: "true"
           volumeMounts:
             - name: mariadb-pvc
               mountPath: /var/lib/mysql
