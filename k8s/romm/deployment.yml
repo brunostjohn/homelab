@@ -29,8 +29,9 @@ spec:
           persistentVolumeClaim:
             claimName: romm-assets
         - name: library
-          persistentVolumeClaim:
-            claimName: romm-library
+          nfs:
+            server: 10.0.3.1
+            path: /mnt/jabberwock
         - name: redis-data
           persistentVolumeClaim:
             claimName: romm-redis-data
@@ -73,6 +74,7 @@ spec:
               mountPath: /romm/assets
             - name: library
               mountPath: /romm/library
+              subPath: romm-library
             - name: redis-data
               mountPath: /redis-data
           startupProbe:

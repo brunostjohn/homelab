@@ -19,7 +19,6 @@ connectIPVersion: dual
 customDNS:
   customTTL: 1h
   filterUnmappedTypes: true
-  rewrite:
   mapping:
     traefik.local: 10.0.2.0
     qbittorrent.local: 10.0.2.0
