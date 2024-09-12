@@ -84,11 +84,12 @@ spec:
             httpGet:
               path: /api/heartbeat
               port: http
-            initialDelaySeconds: 120
+            initialDelaySeconds: 240
           livenessProbe:
             httpGet:
               path: /api/heartbeat
               port: http
+            initialDelaySeconds: 240
 ---
 apiVersion: apps/v1
 kind: Deployment
