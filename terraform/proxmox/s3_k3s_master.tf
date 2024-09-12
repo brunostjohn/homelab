@@ -33,7 +33,7 @@ resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
     interface    = "scsi0"
     iothread     = true
     replicate    = true
-    size         = 40
+    size         = 140
     ssd          = false
   }
 
@@ -60,10 +60,10 @@ resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
   }
 
   agent {
-    type = "virtio"
+    type    = "virtio"
     enabled = true
     timeout = "15m"
-    trim = true
+    trim    = true
   }
 
   startup {

@@ -42,46 +42,46 @@ resource "kubernetes_config_map" "nocodb_config" {
   }
 }
 
-resource "argocd_application" "nocodb" {
-  depends_on = [kubernetes_namespace.nocodb, kubernetes_secret.nocodb_secrets, kubernetes_config_map.nocodb_config]
+# resource "argocd_application" "nocodb" {
+#   depends_on = [kubernetes_namespace.nocodb, kubernetes_secret.nocodb_secrets, kubernetes_config_map.nocodb_config]
 
-  metadata {
-    name      = "nocodb"
-    namespace = "argocd"
-  }
+#   metadata {
+#     name      = "nocodb"
+#     namespace = "argocd"
+#   }
 
-  spec {
-    source {
-      repo_url = var.homelab_repo
-      path     = "k8s/nocodb"
-    }
+#   spec {
+#     source {
+#       repo_url = var.homelab_repo
+#       path     = "k8s/nocodb"
+#     }
 
-    destination {
-      server    = "https://kubernetes.default.svc"
-      namespace = kubernetes_namespace.nocodb.metadata[0].name
-    }
+#     destination {
+#       server    = "https://kubernetes.default.svc"
+#       namespace = kubernetes_namespace.nocodb.metadata[0].name
+#     }
 
-    sync_policy {
-      automated {
-        prune     = true
-        self_heal = true
-      }
+#     sync_policy {
+#       automated {
+#         prune     = true
+#         self_heal = true
+#       }
 
-      retry {
-        limit = "5"
-        backoff {
-          duration     = "30s"
-          max_duration = "2m"
-          factor       = "2"
-        }
-      }
-    }
-  }
-}
+#       retry {
+#         limit = "5"
+#         backoff {
+#           duration     = "30s"
+#           max_duration = "2m"
+#           factor       = "2"
+#         }
+#       }
+#     }
+#   }
+# }
 
 module "nocodb_ingress" {
   source     = "../ingress"
-  depends_on = [argocd_application.nocodb]
+  # depends_on = [argocd_application.nocodb]
 
   service   = "nocodb-svc"
   hosts     = ["noco.${var.global_fqdn}"]

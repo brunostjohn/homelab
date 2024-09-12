@@ -1,6 +1,6 @@
 driver:
   config:
-    driver: freenas-api-iscsi
+    driver: freenas-api-nfs
     instance_id:
     httpConnection:
       protocol: http
@@ -12,45 +12,28 @@ driver:
       datasetProperties:
         "org.freenas:description": "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
 
-      datasetParentName: floofpool/block/vol
-      detachedSnapshotsDatasetParentName: floofpool/block/snap
+      datasetParentName: floofpool/object/vol
+      detachedSnapshotsDatasetParentName: floofpool/object/snap
       zvolCompression: ""
       zvolDedup: ""
+      datasetEnableQuotas: true
       zvolEnableReservation: false
       zvolBlocksize: 16K
-    iscsi:
-      targetPortal: 10.0.3.5:3260
-
-      nameTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
-      namePrefix: csi-
-      nameSuffix: "-zefircluster"
-
-      targetGroups:
-        # get the correct ID from the "portal" section in the UI
-        # https://github.com/democratic-csi/democratic-csi/issues/302
-        # NOTE: the ID in the UI does NOT always match the ID in the DB, you must use the DB value
-        - targetGroupPortalGroup: 1
-          # get the correct ID from the "initiators" section in the UI
-          targetGroupInitiatorGroup: 1
-          # None, CHAP, or CHAP Mutual
-          targetGroupAuthType: None
-          # get the correct ID from the "Authorized Access" section of the UI
-          # only required if using Chap
-          targetGroupAuthGroup:
-
-      extentCommentTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
-      extentInsecureTpc: true
-      extentXenCompat: false
-      extentDisablePhysicalBlocksize: true
-      extentBlocksize: 512
-      extentRpm: ""
-      extentAvailThreshold: 0
+    nfs:
+      shareHost: 10.0.3.5
+      shareAlldirs: false
+      shareAllowedHosts: []
+      shareAllowedNetworks: []
+      shareMaprootUser: root
+      shareMaprootGroup: root
+      shareMapallUser: ""
+      shareMapallGroup: ""
 
 csiDriver:
-  name: floof-iscsi-csi
+  name: floof-nfs-csi
 
 storageClasses:
-  - name: floof-iscsi-csi
+  - name: floof-nfs-csi
     defaultClass: false
     reclaimPolicy: Delete
     volumeBindingMode: Immediate

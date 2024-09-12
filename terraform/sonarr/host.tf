@@ -29,6 +29,6 @@ resource "sonarr_host" "host" {
   }
   update = {
     mechanism = "docker"
-    branch    = "master"
+    branch    = "main"
   }
 }

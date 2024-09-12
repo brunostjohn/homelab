@@ -61,10 +61,10 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_master" {
   }
 
   agent {
-    type = "virtio"
+    type    = "virtio"
     enabled = true
     timeout = "15m"
-    trim = true
+    trim    = true
   }
 
   startup {

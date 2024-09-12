@@ -66,10 +66,10 @@ resource "proxmox_virtual_environment_vm" "s1_truenas" {
   }
 
   agent {
-    type = "virtio"
+    type    = "virtio"
     enabled = true
     timeout = "15m"
-    trim = true
+    trim    = true
   }
 
   startup {

@@ -61,7 +61,7 @@ resource "proxmox_virtual_environment_vm" "s2_k3s_agent" {
   agent {
     enabled = true
     timeout = "15m"
-    trim = true
+    trim    = true
   }
 
   startup {

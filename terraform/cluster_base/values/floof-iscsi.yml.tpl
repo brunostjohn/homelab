@@ -26,16 +26,9 @@ driver:
       nameSuffix: "-zefircluster"
 
       targetGroups:
-        # get the correct ID from the "portal" section in the UI
-        # https://github.com/democratic-csi/democratic-csi/issues/302
-        # NOTE: the ID in the UI does NOT always match the ID in the DB, you must use the DB value
         - targetGroupPortalGroup: 1
-          # get the correct ID from the "initiators" section in the UI
-          targetGroupInitiatorGroup: 1
-          # None, CHAP, or CHAP Mutual
+          targetGroupInitiatorGroup: 7
           targetGroupAuthType: None
-          # get the correct ID from the "Authorized Access" section of the UI
-          # only required if using Chap
           targetGroupAuthGroup:
 
       extentCommentTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}/{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
@@ -43,11 +36,17 @@ driver:
       extentXenCompat: false
       extentDisablePhysicalBlocksize: true
       extentBlocksize: 512
-      extentRpm: ""
+      extentRpm: "SSD"
       extentAvailThreshold: 0
 
 csiDriver:
   name: floof-iscsi-csi
+
+node:
+  driver:
+    extraEnv:
+      - name: PATH
+        value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/run/wrappers/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin
 
 storageClasses:
   - name: floof-iscsi-csi

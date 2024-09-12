@@ -73,6 +73,21 @@ resource "kubernetes_persistent_volume_claim" "postgres_backup" {
     storage_class_name = "nfs-jabberwock-subpath"
   }
 }
+module "cloudnative_pg" {
+  # depends_on = [  ]
+  source = "../helm_deployment"
+
+  namespace        = kubernetes_namespace.databases.metadata[0].name
+  name             = "cloudnative-pg"
+  create_namespace = false
+  create_ingress   = false
+
+  chart             = "cloudnative-pg"
+  repo_url          = "https://cloudnative-pg.github.io/charts"
+  target_revision   = "0.22.0"
+  values            = file("${path.module}/values/cloudnative-pg.yml")
+  server_side_apply = true
+}
 
 module "postgres" {
   depends_on = [kubernetes_persistent_volume_claim.postgres, kubernetes_persistent_volume_claim.postgres_backup]
