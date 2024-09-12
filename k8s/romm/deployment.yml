@@ -79,6 +79,7 @@ spec:
             httpGet:
               path: /
               port: http
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /api/heartbeat
