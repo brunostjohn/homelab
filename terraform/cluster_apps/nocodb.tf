@@ -80,7 +80,7 @@ resource "kubernetes_config_map" "nocodb_config" {
 # }
 
 module "nocodb_ingress" {
-  source     = "../ingress"
+  source = "../ingress"
   # depends_on = [argocd_application.nocodb]
 
   service   = "nocodb-svc"

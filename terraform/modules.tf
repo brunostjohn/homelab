@@ -119,6 +119,12 @@ module "cluster_apps" {
   outline_secret_key            = var.outline_secret_key
   outline_utils_secret          = var.outline_utils_secret
   outline_oidc_client_id        = var.outline_oidc_client_id
+
+  romm_auth_secret_key     = var.romm_auth_secret_key
+  romm_igdb_client_id      = var.romm_igdb_client_id
+  romm_igdb_client_secret  = var.romm_igdb_client_secret
+  romm_mobygames_api_key   = var.romm_mobygames_api_key
+  romm_steamgriddb_api_key = var.romm_steamgriddb_api_key
 }
 
 module "authentik" {

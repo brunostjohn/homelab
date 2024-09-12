@@ -508,3 +508,28 @@ variable "floof_api_key" {
   type        = string
   description = "API key for Floof truenas"
 }
+
+variable "romm_auth_secret_key" {
+  type        = string
+  description = "Auth secret key for ROMM"
+}
+
+variable "romm_igdb_client_id" {
+  type        = string
+  description = "IGDB client ID for ROMM"
+}
+
+variable "romm_igdb_client_secret" {
+  type        = string
+  description = "IGDB client secret for ROMM"
+}
+
+variable "romm_mobygames_api_key" {
+  type        = string
+  description = "Mobygames API key for ROMM"
+}
+
+variable "romm_steamgriddb_api_key" {
+  type        = string
+  description = "Steamgriddb API key for ROMM"
+}

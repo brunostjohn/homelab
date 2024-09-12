@@ -1,5 +1,5 @@
 resource "argocd_application" "app" {
-  wait = true
+  wait = var.wait
 
   metadata {
     name      = var.name

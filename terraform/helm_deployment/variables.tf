@@ -76,3 +76,9 @@ variable "project" {
   description = "ArgoCD project"
   default     = null
 }
+
+variable "wait" {
+  type        = bool
+  description = "Wait for healthy status"
+  default     = true
+}
