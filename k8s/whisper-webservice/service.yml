@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: whisper-webservice
+  namespace: entertainment
+spec:
+  selector:
+    app: whisper-webservice
+  ports:
+    - port: 9000
+      targetPort: 9000
+      protocol: TCP
+      name: http

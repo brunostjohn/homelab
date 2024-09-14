@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whisper-webservice
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: whisper-webservice
+  template:
+    metadata:
+      labels:
+        app: whisper-webservice
+    spec:
+      volumes:
+        - name: whisper-modelcache
+          persistentVolumeClaim:
+            claimName: whisper-modelcache
+      containers:
+        - name: whisper-webservice
+          image: onerahmet/openai-whisper-asr-webservice:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: "2"
+            limits:
+              memory: 5Gi
+              cpu: "4"
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+              name: http
+          env:
+            - name: ASR_ENGINE
+              value: faster_whisper
+            - name: ASR_MODEL
+              value: large-v3
+          volumeMounts:
+            - name: whisper-modelcache
+              mountPath: /root/.cache/whisper
