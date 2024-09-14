@@ -43,7 +43,7 @@ spec:
             httpGet:
               path: /docs
               port: http
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 1
             successThreshold: 1
@@ -61,7 +61,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 10
             timeoutSeconds: 1
             successThreshold: 1
