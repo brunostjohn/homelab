@@ -32,9 +32,12 @@ spec:
             allowPrivilegeEscalation: false
             runAsUser: 0
           resources:
-            limits:
-              memory: "128Mi"
+            requests:
+              memory: "256Mi"
               cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           ports:
             - containerPort: 8787
               name: http
