@@ -1,13 +1,12 @@
-resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
+resource "proxmox_virtual_environment_vm" "s3_k3s_agent" {
   node_name = data.proxmox_virtual_environment_node.s3.node_name
 
-  name        = "s5.m-nodes.zefirscloud.local"
-  description = "K3S Master Node"
+  name        = "s6.m-nodes.zefirscloud.local"
+  description = "K3S Agent Node"
   tags = [
     "compute",
     "kubernetes",
-    "nixos",
-    "control-plane"
+    "nixos"
   ]
 
   bios            = "ovmf"
@@ -18,7 +17,7 @@ resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
 
   cpu {
     architecture = "x86_64"
-    cores        = 16
+    cores        = 8
     type         = "host"
     units        = 1024
   }
@@ -60,7 +59,6 @@ resource "proxmox_virtual_environment_vm" "s3_k3s_master" {
   }
 
   agent {
-    type    = "virtio"
     enabled = true
     timeout = "15m"
     trim    = true

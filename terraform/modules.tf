@@ -35,6 +35,7 @@ module "cluster_base" {
   proxmox_api_token                = var.proxmox_api_token
   personal_email                   = var.personal_email
   floof_api_key                    = var.floof_api_key
+  klaudia_email                    = var.klaudia_email
 }
 
 module "cluster_apps" {

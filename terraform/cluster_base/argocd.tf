@@ -14,6 +14,7 @@ resource "helm_release" "argocd" {
     oidc_client_id     = var.argocd_oidc_client_id
     oidc_client_secret = var.argocd_oidc_client_secret
     personal_email     = var.personal_email
+    klaudia_email      = var.klaudia_email
   })]
 }
 

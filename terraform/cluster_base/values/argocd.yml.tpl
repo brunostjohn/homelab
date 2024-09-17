@@ -10,6 +10,7 @@ configs:
     scopes: "[email]"
     policy.csv: |-
       g, ${personal_email}, role:admin
+      g, ${klaudia_email}, role:admin
   cm:
     url: https://argocd.${global_fqdn}
     dex.config: |

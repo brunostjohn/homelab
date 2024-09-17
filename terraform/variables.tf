@@ -533,3 +533,7 @@ variable "romm_steamgriddb_api_key" {
   type        = string
   description = "Steamgriddb API key for ROMM"
 }
+
+variable "klaudia_email" {
+  type = string
+}

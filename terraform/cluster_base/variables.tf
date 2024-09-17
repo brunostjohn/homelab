@@ -62,3 +62,7 @@ variable "floof_api_key" {
   type        = string
   description = "API key for Floof truenas"
 }
+
+variable "klaudia_email" {
+  type = string
+}
