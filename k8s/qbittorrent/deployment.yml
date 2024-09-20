@@ -33,11 +33,11 @@ spec:
           image: ghcr.io/onedr0p/qbittorrent:4.6.6
           resources:
             requests:
-              memory: "2Gi"
-              cpu: "1"
-            limits:
               memory: "4Gi"
               cpu: "2"
+            limits:
+              memory: "8Gi"
+              cpu: "4"
           env:
             - name: PUID
               value: "1000"
