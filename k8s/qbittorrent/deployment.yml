@@ -25,6 +25,7 @@ spec:
             path: /mnt/jabberwock
       dnsConfig:
         nameservers:
+          - 10.0.2.1
           - 1.1.1.1
           - 8.8.8.8
       containers:
