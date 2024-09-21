@@ -4,6 +4,8 @@ metadata:
   name: mealie
   namespace: mealie
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: mealie
