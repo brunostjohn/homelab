@@ -42,6 +42,10 @@ spec:
             - secretRef:
                 name: mealie-secrets
           env:
+            - name: THEME_DARK_PRIMARY
+              value: "#B72CDE"
+            - name: THEME_LIGHT_PRIMARY
+              value: "#B72CDE"
             - name: OIDC_USER_GROUP
               value: Mealie Users
             - name: OIDC_ADMIN_GROUP
