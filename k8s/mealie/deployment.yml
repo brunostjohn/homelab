@@ -31,7 +31,6 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 9000
-              targetPort: 9000
               protocol: TCP
               name: http
           volumeMounts:
