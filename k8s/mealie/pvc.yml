@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mealie-data
+  namespace: mealie
+spec:
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: floof-iscsi-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
