@@ -362,3 +362,8 @@ variable "romm_steamgriddb_api_key" {
   type        = string
   description = "Steamgriddb API key for ROMM"
 }
+
+variable "mealie_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for Mealie"
+}

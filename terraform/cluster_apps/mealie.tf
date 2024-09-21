@@ -4,7 +4,37 @@ resource "kubernetes_namespace" "mealie" {
   }
 }
 
+resource "kubernetes_config_map" "mealie" {
+  metadata {
+    name      = "mealie-config"
+    namespace = kubernetes_namespace.mealie.metadata[0].name
+  }
+
+  data = {
+    "BASE_URL"               = "https://mealie.${var.global_fqdn}"
+    "SMTP_HOST"              = var.smtp_host
+    "SMTP_PORT"              = var.smtp_port
+    "SMTP_FROM_EMAIL"        = var.smtp_from
+    "SMTP_USER"              = var.smtp_username
+    "OIDC_CONFIGURATION_URL" = "https://auth.${var.global_fqdn}/application/o/mealie/.well-known/openid-configuration"
+    "OIDC_CLIENT_ID"         = var.mealie_oidc_client_id
+  }
+}
+
+resource "kubernetes_secret" "mealie" {
+  metadata {
+    name      = "mealie-secrets"
+    namespace = kubernetes_namespace.mealie.metadata[0].name
+  }
+
+  data = {
+    "SMTP_PASSWORD" = var.smtp_password
+  }
+}
+
 resource "argocd_application" "mealie" {
+  depends_on = [kubernetes_config_map.mealie, kubernetes_secret.mealie]
+
   metadata {
     name      = "mealie"
     namespace = "argocd"

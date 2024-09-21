@@ -126,6 +126,8 @@ module "cluster_apps" {
   romm_igdb_client_secret  = var.romm_igdb_client_secret
   romm_mobygames_api_key   = var.romm_mobygames_api_key
   romm_steamgriddb_api_key = var.romm_steamgriddb_api_key
+
+  mealie_oidc_client_id = var.mealie_oidc_client_id
 }
 
 module "authentik" {

@@ -36,7 +36,24 @@ spec:
           volumeMounts:
             - name: mealie-data
               mountPath: /app/data
+          envFrom:
+            - configMapRef:
+                name: mealie-config
+            - secretRef:
+                name: mealie-secrets
           env:
+            - name: OIDC_PROVIDER_NAME
+              value: Zefir's Cloud
+            - name: OIDC_REMEMBER_ME
+              value: "true"
+            - name: OIDC_AUTO_REDIRECT
+              value: "true"
+            - name: OIDC_AUTH_ENABLED
+              value: "true"
+            - name: API_DOCS
+              value: "false"
+            - name: TZ
+              value: Europe/Dublin
             - name: DB_ENGINE
               value: postgres
             - name: POSTGRES_USER
