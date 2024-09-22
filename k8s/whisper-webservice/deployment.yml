@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: whisper-webservice
-  namespace: entertainment
+  namespace: ai
 spec:
   selector:
     matchLabels:

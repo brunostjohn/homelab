@@ -128,6 +128,9 @@ module "cluster_apps" {
   romm_steamgriddb_api_key = var.romm_steamgriddb_api_key
 
   mealie_oidc_client_id = var.mealie_oidc_client_id
+
+  ollama_oidc_client_id     = var.ollama_oidc_client_id
+  ollama_oidc_client_secret = var.ollama_oidc_client_secret
 }
 
 module "authentik" {

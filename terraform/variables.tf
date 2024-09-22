@@ -542,3 +542,13 @@ variable "mealie_oidc_client_id" {
   type        = string
   description = "OIDC client ID for Mealie"
 }
+
+variable "ollama_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for Ollama"
+}
+
+variable "ollama_oidc_client_secret" {
+  type        = string
+  description = "OIDC client secret for Ollama"
+}
