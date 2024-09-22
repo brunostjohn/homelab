@@ -1,3 +1,9 @@
+resource "kubernetes_namespace" "ai" {
+  metadata {
+    name = "ai"
+  }
+}
+
 resource "argocd_application" "whisper_webservice" {
   metadata {
     name      = "whisper-webservice"
@@ -12,7 +18,7 @@ resource "argocd_application" "whisper_webservice" {
 
     destination {
       server    = "https://kubernetes.default.svc"
-      namespace = kubernetes_namespace.entertainment.metadata[0].name
+      namespace = kubernetes_namespace.ai.metadata[0].name
     }
 
     sync_policy {

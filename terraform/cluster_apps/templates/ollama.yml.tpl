@@ -23,3 +23,21 @@ extraEnvVars:
     value: Zefir's Cloud
   - name: OPENID_PROVIDER_URL
     value: ${openid_provider_url}
+  - name: ENABLE_OPENAI_API
+    value: "False"
+  - name: ENABLE_IMAGE_GENERATION
+    value: "False"
+  - name: ENABLE_RAG_WEB_SEARCH
+    value: "True"
+  - name: ENABLE_SEARCH_QUERY
+    value: "True"
+  - name: RAG_WEB_SEARCH_ENGINE
+    value: google_pse
+  - name: GOOGLE_PSE_API_KEY
+    value: ${google_pse_api_key}
+  - name: GOOGLE_PSE_ENGINE_ID
+    value: ${google_pse_engine_id}
+    
+
+persistence:
+  storageClass: floof-iscsi-csi

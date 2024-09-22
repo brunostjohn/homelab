@@ -552,3 +552,13 @@ variable "ollama_oidc_client_secret" {
   type        = string
   description = "OIDC client secret for Ollama"
 }
+
+variable "ollama_google_pse_api_key" {
+  type        = string
+  description = "Google PSE API key for Ollama"
+}
+
+variable "ollama_google_pse_engine_id" {
+  type        = string
+  description = "Google PSE engine ID for Ollama"
+}

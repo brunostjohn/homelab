@@ -129,8 +129,10 @@ module "cluster_apps" {
 
   mealie_oidc_client_id = var.mealie_oidc_client_id
 
-  ollama_oidc_client_id     = var.ollama_oidc_client_id
-  ollama_oidc_client_secret = var.ollama_oidc_client_secret
+  ollama_oidc_client_id       = var.ollama_oidc_client_id
+  ollama_oidc_client_secret   = var.ollama_oidc_client_secret
+  ollama_google_pse_api_key   = var.ollama_google_pse_api_key
+  ollama_google_pse_engine_id = var.ollama_google_pse_engine_id
 }
 
 module "authentik" {
