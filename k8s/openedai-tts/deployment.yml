@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openedai-tts
+  namespace: ai
+spec:
+  selector:
+    matchLabels:
+      app: openedai-tts
+  template:
+    metadata:
+      labels:
+        app: openedai-tts
+    spec:
+      volumes:
+        - name: openedai-tts-configs
+          persistentVolumeClaim:
+            claimName: openedai-tts-configs
+        - name: openedai-tts-voices
+          persistentVolumeClaim:
+            claimName: openedai-tts-voices
+      containers:
+        - name: openedai-tts
+          image: ghcr.io/matatonic/openedai-speech-min
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "2"
+            limits:
+              memory: "4Gi"
+              cpu: "4"
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+              name: http
+          volumeMounts:
+            - name: openedai-tts-configs
+              mountPath: /app/configs
+            - name: openedai-tts-voices
+              mountPath: /app/voices
+          env:
+            - name: TTS_HOME
+              value: voices
+            - name: HF_HOME
+              value: voices

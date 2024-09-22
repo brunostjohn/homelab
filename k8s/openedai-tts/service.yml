@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: openedai-tts
+  namespace: ai
+spec:
+  selector:
+    app: openedai-tts
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
