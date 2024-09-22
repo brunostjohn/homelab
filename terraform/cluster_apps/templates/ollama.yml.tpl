@@ -1,4 +1,9 @@
 ollama:
+  gpu:
+    enabled: true
+    type: nvidia
+    number: 5
+    nvidiaResource: "nvidia.com/gpu.shared"
   persistentVolume:
     enabled: true
     size: 50Gi
@@ -37,6 +42,12 @@ extraEnvVars:
     value: ${google_pse_api_key}
   - name: GOOGLE_PSE_ENGINE_ID
     value: ${google_pse_engine_id}
+  - name: AUDIO_TTS_ENGINE
+    value: openai
+  - name: AUDIO_TTS_API_KEY
+    value: sk-111111111
+  - name: AUDIO_TTS_OPENAI_API_BASE_URL
+    value: http://openedai-tts.ai.svc.cluster.local:8000/v1
     
 
 persistence:
