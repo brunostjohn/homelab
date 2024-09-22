@@ -75,4 +75,11 @@ resource "proxmox_virtual_environment_vm" "s1_k3s_agent" {
     host = "1a86:7523"
     usb3 = false
   }
+
+  hostpci {
+    device = "hostpci0"
+    id     = "0000:42:00.0"
+    pcie   = true
+    rombar = true
+  }
 }
