@@ -5,7 +5,7 @@ metadata:
   name: postgres-cluster
 spec:
   instances: 3
-  imageName: ghcr.io/brunostjohn/cloudnative-pg/postgresql:main
+  imageName: ghcr.io/brunostjohn/cloudnative-pg/postgresql:15.5
 
   primaryUpdateStrategy: unsupervised
 
