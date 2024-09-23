@@ -81,3 +81,8 @@ variable "pg_superuser_password" {
   type        = string
   description = "The password for the PostgreSQL superuser"
 }
+
+variable "jabberwock_api_key" {
+  type        = string
+  description = "The API key for Jabberwock"
+}

@@ -6,7 +6,7 @@ ollama:
     gpu:
       enabled: true
       type: nvidia
-      number: 5
+      number: 3
       nvidiaResource: "nvidia.com/gpu.shared"
   persistentVolume:
     enabled: true

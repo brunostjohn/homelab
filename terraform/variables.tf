@@ -582,3 +582,8 @@ variable "immich_db_password" {
   type        = string
   description = "The password for the Immich database"
 }
+
+variable "jabberwock_api_key" {
+  type        = string
+  description = "The API key for Jabberwock"
+}

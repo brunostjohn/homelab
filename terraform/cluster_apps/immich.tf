@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "immich" {
 }
 
 resource "kubernetes_persistent_volume_claim" "immich_library" {
-    metadata {
+  metadata {
     name      = "immich-library"
     namespace = kubernetes_namespace.immich.metadata[0].name
   }

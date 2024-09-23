@@ -40,6 +40,8 @@ module "cluster_base" {
   pgadmin_username      = var.pgadmin_username
   pgadmin_password      = var.pgadmin_password
   pg_superuser_password = var.pg_superuser_password
+
+  jabberwock_api_key = var.jabberwock_api_key
 }
 
 module "cluster_apps" {
@@ -154,6 +156,7 @@ module "grafana" {
   client_id      = var.grafana_client_id
   client_secret  = var.grafana_client_secret
   personal_email = var.personal_email
+  klaudia_email  = var.klaudia_email
 }
 
 module "prowlarr" {
