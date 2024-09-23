@@ -136,6 +136,7 @@ spec:
               port: 8000
             failureThreshold: 30
             periodSeconds: 10
+            initialDelaySeconds: 30
           livenessProbe:
             httpGet:
               path: /metrics
