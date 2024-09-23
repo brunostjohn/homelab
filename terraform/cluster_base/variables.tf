@@ -66,3 +66,18 @@ variable "floof_api_key" {
 variable "klaudia_email" {
   type = string
 }
+
+variable "pgadmin_username" {
+  type        = string
+  description = "The username for the pgAdmin user"
+}
+
+variable "pgadmin_password" {
+  type        = string
+  description = "The password for the pgAdmin user"
+}
+
+variable "pg_superuser_password" {
+  type        = string
+  description = "The password for the PostgreSQL superuser"
+}

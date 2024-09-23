@@ -73,6 +73,7 @@ resource "kubernetes_persistent_volume_claim" "postgres_backup" {
     storage_class_name = "nfs-jabberwock-subpath"
   }
 }
+
 module "cloudnative_pg" {
   # depends_on = [  ]
   source = "../helm_deployment"
@@ -87,6 +88,70 @@ module "cloudnative_pg" {
   target_revision   = "0.22.0"
   values            = file("${path.module}/values/cloudnative-pg.yml")
   server_side_apply = true
+}
+
+resource "kubernetes_secret" "pgadmin_secrets" {
+  metadata {
+    name      = "postgres-cluster-pgadmin4"
+    namespace = "databases"
+  }
+
+  data = {
+    username = var.pgadmin_username
+    password = var.pgadmin_password
+  }
+}
+
+resource "kubernetes_secret" "pg_superuser" {
+  metadata {
+    name      = "postgres-cluster-superuser"
+    namespace = kubernetes_namespace.databases.metadata[0].name
+  }
+
+  type = "kubernetes.io/basic-auth"
+
+  data = {
+    username = "postgres"
+    password = var.pg_superuser_password
+  }
+}
+
+resource "argocd_application" "postgres" {
+  depends_on = [module.cloudnative_pg, kubernetes_secret.pgadmin_secrets, kubernetes_secret.pg_superuser]
+
+  metadata {
+    name      = "postgres-cluster"
+    namespace = "argocd"
+  }
+
+  spec {
+    source {
+      repo_url        = argocd_repository.homelab_github.repo
+      path            = "k8s/postgres"
+      target_revision = "main"
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = kubernetes_namespace.databases.metadata[0].name
+    }
+
+    sync_policy {
+      automated {
+        prune     = true
+        self_heal = true
+      }
+
+      retry {
+        limit = "5"
+        backoff {
+          duration     = "30s"
+          max_duration = "2m"
+          factor       = "2"
+        }
+      }
+    }
+  }
 }
 
 module "postgres" {
