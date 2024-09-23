@@ -38,8 +38,6 @@ storageClasses:
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
-    parameters:
-      fsType: ext4
 
     mountOptions: []
     secrets:

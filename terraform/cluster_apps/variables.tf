@@ -387,3 +387,8 @@ variable "ollama_google_pse_engine_id" {
   type        = string
   description = "Google PSE engine ID for Ollama"
 }
+
+variable "immich_db_password" {
+  type        = string
+  description = "The password for the Immich database"
+}

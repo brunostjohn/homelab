@@ -4,25 +4,25 @@ resource "kubernetes_namespace" "immich" {
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "immich_library_pvc" {
-  metadata {
-    name      = "immich-library-pvc"
+resource "kubernetes_persistent_volume_claim" "immich_library" {
+    metadata {
+    name      = "immich-library"
     namespace = kubernetes_namespace.immich.metadata[0].name
   }
 
   spec {
     access_modes       = ["ReadWriteOnce"]
-    storage_class_name = "nfs-jabberwock-subpath"
+    storage_class_name = "floof-nfs-csi"
     resources {
       requests = {
-        storage = "100Gi"
+        storage = "400Gi"
       }
     }
   }
 }
 
 module "immich_helm" {
-  depends_on = [kubernetes_persistent_volume_claim.immich_library_pvc]
+  depends_on = [kubernetes_persistent_volume_claim.immich_library]
 
   source           = "../helm_deployment"
   namespace        = kubernetes_namespace.immich.metadata[0].name
@@ -37,5 +37,7 @@ module "immich_helm" {
   chart           = "immich"
   repo_url        = "https://immich-app.github.io/immich-charts"
   target_revision = "0.7.1"
-  values          = file("${path.module}/values/immich.yml")
+  values = templatefile("${path.module}/templates/immich.yml.tpl", {
+    db_password = var.immich_db_password
+  })
 }

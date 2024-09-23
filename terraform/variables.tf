@@ -577,3 +577,8 @@ variable "pg_superuser_password" {
   type        = string
   description = "The password for the PostgreSQL superuser"
 }
+
+variable "immich_db_password" {
+  type        = string
+  description = "The password for the Immich database"
+}

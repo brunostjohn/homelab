@@ -137,6 +137,8 @@ module "cluster_apps" {
   ollama_oidc_client_secret   = var.ollama_oidc_client_secret
   ollama_google_pse_api_key   = var.ollama_google_pse_api_key
   ollama_google_pse_engine_id = var.ollama_google_pse_engine_id
+
+  immich_db_password = var.immich_db_password
 }
 
 module "authentik" {
