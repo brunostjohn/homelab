@@ -9,9 +9,3 @@ resource "grafana_dashboard" "argocd" {
   org_id      = grafana_organization.zefirs_cloud.id
   folder      = grafana_folder.apps.id
 }
-
-resource "grafana_dashboard" "postgres" {
-  config_json = file("${path.module}/dashboards/postgres.json")
-  org_id      = grafana_organization.zefirs_cloud.id
-  folder      = grafana_folder.apps.id
-}
