@@ -36,6 +36,8 @@ server:
   enabled: true
 
 machine-learning:
+  image:
+    tag: v1.115.0-cuda
   resources:
     requests:
       nvidia.com/gpu.shared: "1"
