@@ -22,5 +22,5 @@ spec:
     - postgres-cluster-r.databases.svc.cluster.local
   issuerRef:
     name: selfsigned
-    kind: Issuer
+    kind: ClusterIssuer
     group: cert-manager.io
