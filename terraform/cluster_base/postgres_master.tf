@@ -116,8 +116,26 @@ resource "kubernetes_secret" "pg_superuser" {
   }
 }
 
+resource "kubernetes_secret" "pg_backup_minio" {
+  metadata {
+    name      = "postgres-cluster-backup-minio"
+    namespace = kubernetes_namespace.databases.metadata[0].name
+  }
+
+  data = {
+    "MINIO_ACCESS_KEY" = var.pg_backup_minio_access_key
+    "MINIO_SECRET_KEY" = var.pg_backup_minio_secret_key
+  }
+}
+
 resource "argocd_application" "postgres" {
-  depends_on = [module.cloudnative_pg, kubernetes_secret.pgadmin_secrets, kubernetes_secret.pg_superuser]
+  depends_on = [
+    module.cloudnative_pg,
+    kubernetes_secret.pgadmin_secrets,
+    kubernetes_secret.pg_superuser,
+    kubernetes_secret.pg_backup_minio,
+    kubernetes_manifest.selfsigned_issuer
+  ]
 
   metadata {
     name      = "postgres-cluster"

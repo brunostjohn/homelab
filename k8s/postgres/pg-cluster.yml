@@ -31,3 +31,24 @@ spec:
   postgresql:
     shared_preload_libraries:
       - "vectors.so"
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://posgres-cluster-backups/
+      endpointURL: http://minio-svc.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: postgres-cluster-backup-minio
+          key: MINIO_ACCESS_KEY
+        secretAccessKey:
+          name: postgres-cluster-backup-minio
+          key: MINIO_SECRET_KEY
+      tags:
+        backupRetentionPolicy: "expire"
+      historyTags:
+        backupRetentionPolicy: "keep"
+    retentionPolicy: "14d"
+
+  certificates:
+    serverTLSSecret: postgres-cluster-cert-secret
+    serverCASecret: postgres-cluster-cert-secret

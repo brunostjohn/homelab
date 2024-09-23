@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: postgres-cluster-cert
+  namespace: databases
+spec:
+  secretName: postgres-cluster-cert-secret
+  usages:
+    - server auth
+  dnsNames:
+    - postgres-cluster-rw
+    - postgres-cluster-ro
+    - postgres-cluster-r
+    - postgres-cluster-rw.databases
+    - postgres-cluster-ro.databases
+    - postgres-cluster-r.databases
+    - postgres-cluster-rw.databases.svc
+    - postgres-cluster-ro.databases.svc
+    - postgres-cluster-r.databases.svc
+    - postgres-cluster-rw.databases.svc.cluster.local
+    - postgres-cluster-ro.databases.svc.cluster.local
+    - postgres-cluster-r.databases.svc.cluster.local
+  issuerRef:
+    name: selfsigned
+    kind: Issuer
+    group: cert-manager.io

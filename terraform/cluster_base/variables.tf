@@ -86,3 +86,13 @@ variable "jabberwock_api_key" {
   type        = string
   description = "The API key for Jabberwock"
 }
+
+variable "pg_backup_minio_access_key" {
+  type        = string
+  description = "The access key for the MinIO instance used for PostgreSQL backups"
+}
+
+variable "pg_backup_minio_secret_key" {
+  type        = string
+  description = "The secret key for the MinIO instance used for PostgreSQL backups"
+}

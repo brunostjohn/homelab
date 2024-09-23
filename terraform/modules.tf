@@ -37,9 +37,11 @@ module "cluster_base" {
   floof_api_key                    = var.floof_api_key
   klaudia_email                    = var.klaudia_email
 
-  pgadmin_username      = var.pgadmin_username
-  pgadmin_password      = var.pgadmin_password
-  pg_superuser_password = var.pg_superuser_password
+  pgadmin_username           = var.pgadmin_username
+  pgadmin_password           = var.pgadmin_password
+  pg_superuser_password      = var.pg_superuser_password
+  pg_backup_minio_access_key = var.pg_backup_minio_access_key
+  pg_backup_minio_secret_key = var.pg_backup_minio_secret_key
 
   jabberwock_api_key = var.jabberwock_api_key
 }
