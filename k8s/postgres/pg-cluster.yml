@@ -11,7 +11,7 @@ spec:
 
   storage:
     size: 8Gi
-    storageClassName: longhorn-unreplicated
+    storageClass: longhorn-unreplicated
 
   monitoring:
     enablePodMonitor: true

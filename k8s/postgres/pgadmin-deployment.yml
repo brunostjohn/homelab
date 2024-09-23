@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-cluster-pgadmin4
+  namespace: databases
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-cluster-pgadmin4
+  template:
+    metadata:
+      labels:
+        app: postgres-cluster-pgadmin4
+    spec:
+      containers:
+        - env:
+            - name: PGADMIN_SERVER_JSON_FILE
+              value: /config/servers.json
+            - name: PGADMIN_CONFIG_SERVER_MODE
+              value: "True"
+            - name: PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED
+              value: "False"
+            - name: PGADMIN_DEFAULT_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: postgres-cluster-pgadmin4
+            - name: PGADMIN_DEFAULT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: postgres-cluster-pgadmin4
+            - name: PGADMIN_DISABLE_POSTFIX
+              value: "True"
+          image: dpage/pgadmin4:latest
+          name: pgadmin4
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          resources: {}
+          volumeMounts:
+            - mountPath: /config
+              name: pgadmin-cfg
+            - mountPath: /secret
+              name: app-secret
+      volumes:
+        - configMap:
+            name: postgres-cluster-pgadmin4
+          name: pgadmin-cfg
+        - name: app-secret
+          secret:
+            secretName: postgres-cluster-app
