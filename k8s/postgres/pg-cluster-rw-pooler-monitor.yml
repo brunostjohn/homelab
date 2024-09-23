@@ -5,6 +5,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      cnpg.io/poolerName: pg-cluster-rw-pooler
+      cnpg.io/poolerName: postgres-cluster-rw-pooler
   podMetricsEndpoints:
     - port: metrics

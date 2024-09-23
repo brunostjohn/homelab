@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Pooler
 metadata:
-  name: pg-cluster-rw-pooler
+  name: postgres-cluster-rw-pooler
   namespace: databases
 spec:
   cluster:
