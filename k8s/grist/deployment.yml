@@ -79,9 +79,3 @@ spec:
             limits:
               cpu: "200m"
               memory: "256Mi"
-          readinessProbe:
-            tcpSocket:
-              port: 8484
-          livenessProbe:
-            tcpSocket:
-              port: 8484
