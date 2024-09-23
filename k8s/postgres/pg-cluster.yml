@@ -5,11 +5,16 @@ metadata:
   name: postgres-cluster
 spec:
   instances: 3
-  imageName: ghcr.io/cloudnative-pg/postgresql:15.5
+  imageName: ghcr.io/brunostjohn/cloudnative-pg/postgresql:main
 
   primaryUpdateStrategy: unsupervised
 
   enableSuperuserAccess: true
+
+  bootstrap:
+    initdb:
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
 
   storage:
     size: 8Gi
@@ -20,3 +25,7 @@ spec:
 
   superuserSecret:
     name: postgres-cluster-superuser
+
+  postgresql:
+    shared_preload_libraries:
+      - "vectors.so"
