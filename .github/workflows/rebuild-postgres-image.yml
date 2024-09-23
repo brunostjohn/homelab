@@ -33,6 +33,8 @@ jobs:
         uses: docker/metadata-action@v5.5.1
         with:
           images: ghcr.io/brunostjohn/cloudnative-pg/postgresql
+          tags: |
+            type=semver,pattern={{major}}.{{minor}},value=v15.5.0
       - name: Build and push Docker image
         id: build-and-push
         uses: docker/build-push-action@v6.5.0
