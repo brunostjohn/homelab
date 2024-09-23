@@ -41,7 +41,7 @@ jobs:
             CNPG_TAG=15.5
             PGVECTORS_TAG=v0.3.0
           platforms: linux/amd64,linux/arm64
-          context: k8s/klipper/image
+          context: k8s/postgres
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
