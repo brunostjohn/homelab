@@ -1,0 +1,10 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: postgres-cluster-rw-pooler-monitor
+spec:
+  selector:
+    matchLabels:
+      cnpg.io/poolerName: pg-cluster-rw-pooler
+  podMetricsEndpoints:
+    - port: metrics
