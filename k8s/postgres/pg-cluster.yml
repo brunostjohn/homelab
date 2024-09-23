@@ -15,6 +15,8 @@ spec:
     initdb:
       postInitApplicationSQL:
         - CREATE EXTENSION IF NOT EXISTS "vectors";
+        - CREATE EXTENSION IF NOT EXISTS "cube";
+        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
 
   storage:
     size: 8Gi
