@@ -143,12 +143,14 @@ spec:
               port: 8000
             failureThreshold: 5
             periodSeconds: 10
+            initialDelaySeconds: 50
           readinessProbe:
             httpGet:
               path: /metrics
               port: 8000
             failureThreshold: 3
             periodSeconds: 10
+            initialDelaySeconds: 40
 ---
 apiVersion: apps/v1
 kind: Deployment
