@@ -31,7 +31,7 @@
           system = "x86_64-linux";
           modules = [
             ./nix/s2/hardware-configuration.nix
-            (import ./nix/clusterNode { inherit nixpkgs; node = { ipAddress = "10.0.3.3"; macAddress = "bc:24:11:fa:16:37"; }; })
+            (import ./nix/modules/clusterNode { inherit nixpkgs; node = { ipAddress = "10.0.3.3"; macAddress = "bc:24:11:fa:16:37"; }; })
           ];
         };
 
