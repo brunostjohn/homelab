@@ -152,6 +152,8 @@ module "cluster_apps" {
   mealie_db_password     = var.mealie_db_password
   jellyseerr_db_password = var.jellyseerr_db_password
   windmill_db_password   = var.windmill_db_password
+  rally_db_password = var.rally_db_password
+  outline_db_password = var.outline_db_password
 }
 
 module "authentik" {

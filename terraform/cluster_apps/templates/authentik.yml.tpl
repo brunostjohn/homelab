@@ -15,6 +15,7 @@ authentik:
   error_reporting:
     enabled: false
   postgresql:
+    name: authentik
     user: authentik
     host: postgres-cluster-rw-pooler.databases.svc.cluster.local
     password: ${postgres_password}

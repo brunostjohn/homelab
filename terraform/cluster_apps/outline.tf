@@ -12,7 +12,6 @@ resource "kubernetes_config_map" "outline" {
 
   data = {
     "NODE_ENV"                  = "production"
-    "DATABASE_URL"              = "postgres://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/outline"
     "PGSSLMODE"                 = "disable"
     "REDIS_URL"                 = "redis://:redis@redis-master.databases.svc.cluster.local:6379/7"
     "URL"                       = "https://docs.${var.global_fqdn}"
@@ -52,6 +51,7 @@ resource "kubernetes_secret" "outline" {
     "AWS_SECRET_ACCESS_KEY" = var.outline_aws_secret_access_key
     "OIDC_CLIENT_SECRET"    = var.outline_oidc_client_secret
     "SMTP_PASSWORD"         = var.smtp_password
+    "DATABASE_URL"              = "postgres://outline:${urlencode(var.outline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/outline"
   }
 }
 

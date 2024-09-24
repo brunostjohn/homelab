@@ -437,3 +437,13 @@ variable "blocky_db_password" {
   type        = string
   description = "The password for the Outline database"
 }
+
+variable "rally_db_password" {
+  type        = string
+  description = "The password for the Rally database"
+}
+
+variable "outline_db_password" {
+  type        = string
+  description = "The password for the Outline database"
+}

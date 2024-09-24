@@ -16,6 +16,7 @@ resource "kubernetes_secret" "rally_secrets" {
     "client_secret"   = var.rally_client_secret
     "secret_password" = var.rally_secret_password
     "smtp_password"   = var.smtp_password
+    "database_url"     = "postgres://rally:${urlencode(var.rally_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/rally"
   }
 }
 
