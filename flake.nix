@@ -29,26 +29,15 @@
 
         s2 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          node = {
+            ipAddress = "10.0.3.3";
+            macAddress = "bc:24:11:fa:16:37";
+            hostname = "s2";
+          };
           modules = [
             ./nix/s2/hardware-configuration.nix
-            (
-              import ./nix/modules/clusterNode {
-                pkgs = nixpkgs;
-                node = {
-                  ipAddress = "10.0.3.3";
-                  macAddress = "bc:24:11:fa:16:37";
-                  hostname = "s2";
-                };
-              }
-            )
-            (
-              import ./nix/modules/k3sAgent {
-                pkgs = nixpkgs;
-                node = {
-                  hostname = "s2";
-                };
-              }
-            )
+            ./nix/modules/clusterNode
+            ./nix/modules/k3sAgent
             ./nix/modules/nvidiaGpu
           ];
         };
