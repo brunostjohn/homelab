@@ -22,9 +22,15 @@
       nixosConfigurations = {
         s1 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs.node = {
+            ipAddress = "10.0.0.2";
+            macAddress = "bc:24:11:de:e6:94";
+            hostname = "s1";
+          };
           modules = [
-            ./nix/s1/configuration.nix
-          ];
+            ./nix/hosts/s1
+            ./nix/modules/k3sInitiator
+          ] ++ globalModulesMNode;
         };
 
         s2 = nixpkgs.lib.nixosSystem {
@@ -43,9 +49,15 @@
 
         s3 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs.node = {
+            ipAddress = "10.0.0.6";
+            macAddress = "bc:24:11:c0:02:b1";
+            hostname = "s3";
+          };
           modules = [
-            ./nix/s3/configuration.nix
-          ];
+            ./nix/hosts/s3
+            ./nix/modules/k3sMaster
+          ] ++ globalModulesMNode;
         };
 
         s4 = nixpkgs.lib.nixosSystem {
@@ -63,9 +75,15 @@
 
         s5 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs.node = {
+            ipAddress = "10.0.0.8";
+            macAddress = "bc:24:11:b8:f7:09";
+            hostname = "s5";
+          };
           modules = [
-            ./nix/s5/configuration.nix
-          ];
+            ./nix/hosts/s5
+            ./nix/modules/k3sMaster
+          ] ++ globalModulesMNode;
         };
 
         s6 = nixpkgs.lib.nixosSystem {
