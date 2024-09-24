@@ -1,11 +1,16 @@
 - name: Rollout NixOS configuration to all hosts
   hosts: nixos
   tasks:
-    - name: Reset repository to HEAD
-      shell: cd /deploy/homelab && git reset --hard HEAD
     - name: Pull latest changes
-      shell: cd /deploy/homelab && git pull
+      git:
+        repo: https://github.com/brunostjohn/homelab.git
+        update: yes
+        force: yes
+        dest: /deploy/homelab
+    - name: Check whether the configuration will change the system
+      shell: cd /deploy/homelab && sudo nixos-rebuild dry-run --flake . | grep "these [0-9]* derivations will be built" || true
+      register: nixos_rebuild_dry_run_will_change
+      changed_when: nixos_rebuild_dry_run_will_change.stdout != ""
     - name: Switch to new configuration
-      shell: cd /deploy/homelab && sudo nixos-rebuild switch
-      become_user: root
-      become_method: sudo
+      shell: cd /deploy/homelab && sudo nixos-rebuild switch --flake .
+      changed_when: nixos_rebuild_dry_run_will_change.stdout != ""

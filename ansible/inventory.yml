@@ -28,7 +28,7 @@ nixos:
     s6.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
 
-k3s-masters-nixos:
+k3s_masters_nixos:
   hosts:
     s1.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
@@ -37,7 +37,7 @@ k3s-masters-nixos:
     s6.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
 
-k3s-workers-nixos:
+k3s_workers_nixos:
   hosts:
     s2.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
