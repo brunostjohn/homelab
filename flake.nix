@@ -10,7 +10,7 @@
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, systems, ... }@inputs:
+  outputs = { self, nixpkgs, nix-darwin, home-manager, systems, config, ... }@inputs:
     let
       globalModules = [ ];
       globalModulesNixOS = globalModules ++ [ ];
@@ -31,7 +31,7 @@
           system = "x86_64-linux";
           modules = [
             ./nix/s2/hardware-configuration.nix
-            (import ./nix/modules/clusterNode { inherit nixpkgs; node = { ipAddress = "10.0.3.3"; macAddress = "bc:24:11:fa:16:37"; }; })
+            (import ./nix/modules/clusterNode { inherit nixpkgs; inherit config; node = { ipAddress = "10.0.3.3"; macAddress = "bc:24:11:fa:16:37"; }; })
           ];
         };
 
