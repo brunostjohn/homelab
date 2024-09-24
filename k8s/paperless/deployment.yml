@@ -69,7 +69,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 120
+            initialDelaySeconds: 240
             periodSeconds: 10
             timeoutSeconds: 5
           env:
@@ -151,7 +151,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 120
+            initialDelaySeconds: 50
             periodSeconds: 10
             timeoutSeconds: 5
           readinessProbe:
