@@ -12,4 +12,6 @@
       prefixLength = 16;
     }
   ];
+  networking.hostName = node.hostname;
+  boot.kernel.sysctl."kernel.hostname" = "${node.hostname}.m-nodes.zefirscloud.local";
 }
