@@ -47,7 +47,10 @@ spec:
             failureThreshold: 3
           env:
             - name: DATABASE_URL
-              value: "postgres://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/rally"
+              valueFrom:
+                secretKeyRef:
+                  name: rally-secrets
+                  key: database_url
             - name: OIDC_NAME
               value: "Zefir's Cloud"
             - name: OIDC_DISCOVERY_URL
