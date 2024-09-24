@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lidarr-config
+  namespace: entertainment
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: floof-nfs-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
