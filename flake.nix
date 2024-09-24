@@ -35,7 +35,7 @@
             hostname = "s2";
           };
           modules = [
-            ./nix/hosts/s2/hardware-configuration.nix
+            ./nix/hosts/s2
             ./nix/modules/k3sAgent
             ./nix/modules/nvidiaGpu
           ] ++ globalModulesMNode;
@@ -56,7 +56,7 @@
             hostname = "s2";
           };
           modules = [
-            ./nix/hosts/s4/hardware-configuration.nix
+            ./nix/hosts/s4
             ./nix/modules/k3sAgent
           ] ++ globalModulesMNode;
         };
@@ -76,7 +76,7 @@
             hostname = "s2";
           };
           modules = [
-            ./nix/hosts/s6/hardware-configuration.nix
+            ./nix/hosts/s6
             ./nix/modules/k3sAgent
           ] ++ globalModulesMNode;
         };
