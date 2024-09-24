@@ -53,7 +53,7 @@
           specialArgs.node = {
             ipAddress = "10.0.0.7";
             macAddress = "bc:24:11:27:1f:e1";
-            hostname = "s2";
+            hostname = "s4";
           };
           modules = [
             ./nix/hosts/s4
@@ -73,7 +73,7 @@
           specialArgs.node = {
             ipAddress = "10.0.0.9";
             macAddress = "bc:24:11:ba:82:94";
-            hostname = "s2";
+            hostname = "s6";
           };
           modules = [
             ./nix/hosts/s6
