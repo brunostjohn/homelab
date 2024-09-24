@@ -57,7 +57,7 @@
     role = "agent";
     tokenFile = /deploy/clustertoken;
     serverAddr = "https://10.0.0.2:6443";
-    extraFlags = "--node-name s2.m-nodes.zefirscloud.local";
+    extraFlags = "--node-name ${config.networking.hostName}.${config.networking.domain}";
   };
 
   i18n.defaultLocale = "en_IE.UTF-8";
