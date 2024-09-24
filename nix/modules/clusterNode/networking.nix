@@ -1,7 +1,7 @@
 { node, ... }:
 
 {
-  networking.domain = "m-nodes.zefirscloud.internal";
+  networking.domain = "m-nodes.zefirscloud.local";
   networking.defaultGateway = "10.0.0.1";
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.networkmanager.enable = true;

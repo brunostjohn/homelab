@@ -24,11 +24,11 @@
 
   services.openiscsi = {
     enable = true;
-    name = "${node.hostname}.m-nodes.zefirscloud.internal-initiatorhost";
+    name = "${node.hostname}.m-nodes.zefirscloud.local-initiatorhost";
   };
 
   environment.variables = {
-    K3S_NODE_NAME = "${node.hostname}.m-nodes.zefirscloud.internal";
+    K3S_NODE_NAME = "${node.hostname}.m-nodes.zefirscloud.local";
   };
 
   security.sudo.wheelNeedsPassword = false;
