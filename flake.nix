@@ -33,7 +33,7 @@
             ./nix/s2/hardware-configuration.nix
             (
               import ./nix/modules/clusterNode {
-                inherit nixpkgs;
+                pkgs = nixpkgs;
                 node = {
                   ipAddress = "10.0.3.3";
                   macAddress = "bc:24:11:fa:16:37";
@@ -43,7 +43,7 @@
             )
             (
               import ./nix/modules/k3sAgent {
-                inherit nixpkgs;
+                pkgs = nixpkgs;
                 node = {
                   hostname = "s2";
                 };
