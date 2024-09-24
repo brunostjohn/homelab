@@ -15,7 +15,7 @@
       globalModules = [ ];
       globalModulesNixOS = globalModules ++ [ ];
       globalModulesDarwin = globalModules ++ [ ];
-      globalModulesMNode = globalModules ++ [ ];
+      globalModulesMNode = globalModulesNixOS ++ [ ./nix/modules/clusterNode ];
       eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f (import nixpkgs { inherit system; config.allowUnfree = true; }));
     in
     {
@@ -35,11 +35,10 @@
             hostname = "s2";
           };
           modules = [
-            ./nix/s2/hardware-configuration.nix
-            ./nix/modules/clusterNode
+            ./nix/hosts/s2/hardware-configuration.nix
             ./nix/modules/k3sAgent
             ./nix/modules/nvidiaGpu
-          ];
+          ] ++ globalModulesMNode;
         };
 
         s3 = nixpkgs.lib.nixosSystem {
@@ -51,9 +50,15 @@
 
         s4 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs.node = {
+            ipAddress = "10.0.0.7";
+            macAddress = "bc:24:11:27:1f:e1";
+            hostname = "s2";
+          };
           modules = [
-            ./nix/s4/configuration.nix
-          ];
+            ./nix/hosts/s4/hardware-configuration.nix
+            ./nix/modules/k3sAgent
+          ] ++ globalModulesMNode;
         };
 
         s5 = nixpkgs.lib.nixosSystem {
@@ -65,11 +70,18 @@
 
         s6 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs.node = {
+            ipAddress = "10.0.0.9";
+            macAddress = "bc:24:11:ba:82:94";
+            hostname = "s2";
+          };
           modules = [
-            ./nix/s6/configuration.nix
-          ];
+            ./nix/hosts/s6/hardware-configuration.nix
+            ./nix/modules/k3sAgent
+          ] ++ globalModulesMNode;
         };
       };
+
       darwinConfigurations = { };
 
       # Dev Shell for this repo
