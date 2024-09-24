@@ -7,7 +7,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: nfs-jabberwock-subpath
+  storageClassName: floof-iscsi-csi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -21,7 +21,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: nfs-jabberwock-subpath
+  storageClassName: floof-iscsi-csi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
@@ -35,7 +35,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: nfs-jabberwock-subpath
+  storageClassName: floof-iscsi-csi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
