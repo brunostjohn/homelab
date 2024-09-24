@@ -13,15 +13,55 @@
   outputs = { self, nixpkgs, nix-darwin, home-manager, systems, ... }@inputs:
     let
       globalModules = [ ];
-      globalModulesNixOS = globalModules ++ [
-        (import ./nix/nodes/base-linux/default.nix { inherit nixpkgs; })
-      ];
+      globalModulesNixOS = globalModules ++ [ ];
       globalModulesDarwin = globalModules ++ [ ];
       globalModulesMNode = globalModules ++ [ ];
       eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f (import nixpkgs { inherit system; config.allowUnfree = true; }));
     in
     {
-      nixosConfigurations = { };
+      nixosConfigurations = {
+        s1 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/s1/configuration.nix
+          ];
+        };
+
+        s2 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/s2/configuration.nix
+          ];
+        };
+
+        s3 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/s3/configuration.nix
+          ];
+        };
+
+        s4 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/s4/configuration.nix
+          ];
+        };
+
+        s5 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/s5/configuration.nix
+          ];
+        };
+
+        s6 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/s6/configuration.nix
+          ];
+        };
+      };
       darwinConfigurations = { };
 
       # Dev Shell for this repo
