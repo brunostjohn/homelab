@@ -135,13 +135,13 @@ GRANT rally_role TO rally;
 -- LIDARR
 CREATE ROLE lidarr_role;
 \c lidarr-logs
-GRANT ALL PRIVILEGES ON DATABASE lidarr-logs TO lidarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "lidarr-logs" TO lidarr_role;
 GRANT ALL ON SCHEMA public TO lidarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO lidarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to lidarr_role;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to lidarr_role;
 \c lidarr-main
-GRANT ALL PRIVILEGES ON DATABASE lidarr-main TO lidarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "lidarr-main" TO lidarr_role;
 GRANT ALL ON SCHEMA public TO lidarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO lidarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to lidarr_role;
@@ -152,13 +152,13 @@ GRANT lidarr_role TO lidarr;
 -- PROWLARR
 CREATE ROLE prowlarr_role;
 \c prowlarr-logs
-GRANT ALL PRIVILEGES ON DATABASE prowlarr-logs TO prowlarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "prowlarr-logs" TO prowlarr_role;
 GRANT ALL ON SCHEMA public TO prowlarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO prowlarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to prowlarr_role;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to prowlarr_role;
 \c prowlarr-main
-GRANT ALL PRIVILEGES ON DATABASE prowlarr-main TO prowlarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "prowlarr-main" TO prowlarr_role;
 GRANT ALL ON SCHEMA public TO prowlarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO prowlarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to prowlarr_role;
@@ -169,13 +169,13 @@ GRANT prowlarr_role TO prowlarr;
 -- RADARR
 CREATE ROLE radarr_role;
 \c radarr-logs
-GRANT ALL PRIVILEGES ON DATABASE radarr-logs TO radarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "radarr-logs" TO radarr_role;
 GRANT ALL ON SCHEMA public TO radarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO radarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to radarr_role;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to radarr_role;
 \c radarr-main
-GRANT ALL PRIVILEGES ON DATABASE radarr-main TO radarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "radarr-main" TO radarr_role;
 GRANT ALL ON SCHEMA public TO radarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO radarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to radarr_role;
@@ -186,13 +186,19 @@ GRANT radarr_role TO radarr;
 -- READARR
 CREATE ROLE readarr_role;
 \c readarr-logs
-GRANT ALL PRIVILEGES ON DATABASE readarr-logs TO readarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "readarr-logs" TO readarr_role;
 GRANT ALL ON SCHEMA public TO readarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO readarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to readarr_role;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to readarr_role;
 \c readarr-main
-GRANT ALL PRIVILEGES ON DATABASE readarr-main TO readarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "readarr-main" TO readarr_role;
+GRANT ALL ON SCHEMA public TO readarr_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO readarr_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to readarr_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to readarr_role;
+\c readarr-cache
+GRANT ALL PRIVILEGES ON DATABASE "readarr-cache" TO readarr_role;
 GRANT ALL ON SCHEMA public TO readarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO readarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to readarr_role;
@@ -203,13 +209,13 @@ GRANT readarr_role TO readarr;
 -- SONARR
 CREATE ROLE sonarr_role;
 \c sonarr-logs
-GRANT ALL PRIVILEGES ON DATABASE sonarr-logs TO sonarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "sonarr-logs" TO sonarr_role;
 GRANT ALL ON SCHEMA public TO sonarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sonarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to sonarr_role;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to sonarr_role;
 \c sonarr-main
-GRANT ALL PRIVILEGES ON DATABASE sonarr-main TO sonarr_role;
+GRANT ALL PRIVILEGES ON DATABASE "sonarr-main" TO sonarr_role;
 GRANT ALL ON SCHEMA public TO sonarr_role;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sonarr_role;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public to sonarr_role;

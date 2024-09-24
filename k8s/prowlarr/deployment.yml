@@ -18,9 +18,8 @@ spec:
     spec:
       volumes:
         - name: prowlarr-config
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+          persistentVolumeClaim:
+            claimName: prowlarr-config
       containers:
         - name: prowlarr
           image: linuxserver/prowlarr

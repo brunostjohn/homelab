@@ -17,9 +17,8 @@ spec:
     spec:
       volumes:
         - name: radarr-config
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+          persistentVolumeClaim:
+            claimName: radarr-config
         - name: radarr-data
           nfs:
             server: 10.0.3.1

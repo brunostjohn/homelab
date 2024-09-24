@@ -17,9 +17,8 @@ spec:
     spec:
       volumes:
         - name: sonarr-config
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+          persistentVolumeClaim:
+            claimName: sonarr-config
         - name: sonarr-data
           nfs:
             server: 10.0.3.1

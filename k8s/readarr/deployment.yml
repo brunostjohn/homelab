@@ -17,9 +17,8 @@ spec:
     spec:
       volumes:
         - name: readarr-config
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+          persistentVolumeClaim:
+            claimName: readarr-config
         - name: readarr-data
           nfs:
             server: 10.0.3.1

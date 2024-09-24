@@ -17,9 +17,8 @@ spec:
     spec:
       volumes:
         - name: bazarr-config
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+          persistentVolumeClaim:
+            claimName: bazarr-config
         - name: bazarr-data
           nfs:
             server: 10.0.3.1
