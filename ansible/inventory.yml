@@ -10,6 +10,8 @@ ungrouped:
       ansible_user: brunostjohn
     s5.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
+    s6.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
 
 nixos:
   hosts:
@@ -18,6 +20,26 @@ nixos:
     s2.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
     s3.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s4.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s5.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s6.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+
+k3s-masters-nixos:
+  hosts:
+    s1.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s3.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s6.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+
+k3s-workers-nixos:
+  hosts:
+    s2.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
     s4.m-nodes.zefirscloud.internal:
       ansible_user: brunostjohn
