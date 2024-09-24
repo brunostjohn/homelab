@@ -25,7 +25,7 @@
   services.k3s = {
     enable = true;
     role = "server";
-    extraFlags = "--disable servicelb --tls-san 10.0.2.22 --tls-san control-plane.k3s.local --etcd-expose-metrics true --node-name ${config.networking.hostName}.${config.networking.domain} --etcd-arg '--listen-peer-urls https://10.0.0.2:2380 --listen-client-urls https://10.0.0.2:2380'";
+    extraFlags = "--disable servicelb --tls-san 10.0.2.22 --tls-san control-plane.k3s.local --etcd-expose-metrics true --node-name ${config.networking.hostName}.${config.networking.domain} --etcd-arg '--listen-peer-urls https://10.0.0.2:2380' --etcd-arg '--listen-client-urls https://10.0.0.2:2380' --etcd-arg '--initial-advertise-peer-urls https://10.0.0.2:2380'";
   };
 
   boot.loader.systemd-boot.enable = true;
