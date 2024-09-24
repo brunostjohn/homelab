@@ -18,6 +18,7 @@ module "nextcloud_helm" {
     s3_access_key = var.nextcloud_s3_access_key
     s3_secret_key = var.nextcloud_s3_secret_key
     s3_host       = "minio-svc.minio.svc.cluster.local"
+    db_password   = var.nextcloud_db_password
   })
 
   create_ingress = false

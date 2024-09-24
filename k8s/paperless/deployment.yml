@@ -78,13 +78,16 @@ spec:
             - name: PAPERLESS_REDIS
               value: redis://:redis@redis-master.databases.svc.cluster.local:6379/2
             - name: PAPERLESS_DBHOST
-              value: postgres-postgresql.databases.svc.cluster.local
+              value: postgres-cluster-rw-pooler.databases.svc.cluster.local
             - name: PAPERLESS_DBNAME
               value: paperless
             - name: PAPERLESS_DBUSER
-              value: postgres
+              value: paperless
             - name: PAPERLESS_DBPASS
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  key: pg_password
+                  name: paperless-secrets
             - name: PAPERLESS_TIKA_ENABLED
               value: "1"
             - name: PAPERLESS_TIKA_GOTENBERG_ENDPOINT
@@ -198,7 +201,12 @@ spec:
             - containerPort: 3000
               name: http
               protocol: TCP
-          command: ["gotenberg", "--chromium-disable-javascript=true", "--chromium-allow-list=file:///tmp/.*"]
+          command:
+            [
+              "gotenberg",
+              "--chromium-disable-javascript=true",
+              "--chromium-allow-list=file:///tmp/.*",
+            ]
           livenessProbe:
             httpGet:
               path: /health

@@ -43,7 +43,10 @@ spec:
             - name: PUID
               value: "1001"
             - name: DATABASE_URL
-              value: postgresql://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/manyfold
+              valueFrom:
+                secretKeyRef:
+                  name: manyfold
+                  key: database_url
             - name: REDIS_URL
               value: redis://redis@redis-master.databases.svc.cluster.local:6379/0
             - name: SECRET_KEY_BASE

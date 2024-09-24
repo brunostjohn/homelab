@@ -92,7 +92,7 @@ prometheus:
 
 queryLog:
   type: postgresql
-  target: postgres://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/blocky
+  target: postgres://blocky:${db_password}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/blocky
   logRetentionDays: 30
   creationAttempts: 3
   creationCooldown: 2s

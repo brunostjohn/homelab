@@ -13,6 +13,7 @@ resource "kubernetes_secret" "linkwarden_secrets" {
   data = {
     "nextauth-secret"         = var.linkwarden_nextauth_secret
     "authentik-client-secret" = var.linkwarden_authentik_client_secret
+    "database-url"            = "value: postgresql://linkwarden:${var.linkwarden_db_password}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/linkwarden"
   }
 }
 

@@ -597,3 +597,48 @@ variable "pg_backup_minio_secret_key" {
   type        = string
   description = "The secret key for the MinIO instance used for PostgreSQL backups"
 }
+
+variable "jellyseerr_db_password" {
+  type        = string
+  description = "The password for the Jellyseerr database"
+}
+
+variable "linkwarden_db_password" {
+  type        = string
+  description = "The password for the Linkwarden database"
+}
+
+variable "manyfold_db_password" {
+  type        = string
+  description = "The password for the Manyfold database"
+}
+
+variable "mealie_db_password" {
+  type        = string
+  description = "The password for the Mealie database"
+}
+
+variable "netbox_db_password" {
+  type        = string
+  description = "The password for the Netbox database"
+}
+
+variable "paperless_db_password" {
+  type        = string
+  description = "The password for the Paperless database"
+}
+
+variable "windmill_db_password" {
+  type        = string
+  description = "The password for the ROMM database"
+}
+
+variable "nextcloud_db_password" {
+  type        = string
+  description = "The password for the ROMM database"
+}
+
+variable "blocky_db_password" {
+  type        = string
+  description = "The password for the Outline database"
+}

@@ -12,6 +12,7 @@ resource "kubernetes_secret" "manyfold" {
 
   data = {
     "secret_key_base" = var.manyfold_secret_key_base
+    "database_url"    = "postgresql://manyfold:${var.manyfold_db_password}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/manyfold"
   }
 }
 

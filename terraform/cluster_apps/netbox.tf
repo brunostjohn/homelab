@@ -47,6 +47,7 @@ module "netbox_helm" {
     aws_access_key_id     = var.netbox_aws_access_key_id
     aws_secret_access_key = var.netbox_aws_secret_access_key
     global_fqdn           = var.global_fqdn
+    db_password           = var.netbox_db_password
   })
 
   name             = "netbox"

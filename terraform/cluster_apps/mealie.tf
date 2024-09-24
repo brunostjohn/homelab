@@ -28,7 +28,8 @@ resource "kubernetes_secret" "mealie" {
   }
 
   data = {
-    "SMTP_PASSWORD" = var.smtp_password
+    "SMTP_PASSWORD"     = var.smtp_password
+    "POSTGRES_PASSWORD" = var.mealie_db_password
   }
 }
 

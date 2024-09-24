@@ -86,11 +86,11 @@ postgresql:
 
 externalDatabase:
   enabled: true
-  host: postgres-postgresql.databases.svc.cluster.local
+  host: postgres-cluster-rw-pooler.databases.svc.cluster.local
   port: 5432
   database: netbox
-  username: postgres
-  password: postgres
+  username: netbox
+  password: ${db_password}
 
 redis:
   enabled: false

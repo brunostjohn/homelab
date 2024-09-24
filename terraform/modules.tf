@@ -142,7 +142,16 @@ module "cluster_apps" {
   ollama_google_pse_api_key   = var.ollama_google_pse_api_key
   ollama_google_pse_engine_id = var.ollama_google_pse_engine_id
 
-  immich_db_password = var.immich_db_password
+  immich_db_password     = var.immich_db_password
+  blocky_db_password     = var.blocky_db_password
+  netbox_db_password     = var.netbox_db_password
+  paperless_db_password  = var.paperless_db_password
+  linkwarden_db_password = var.linkwarden_db_password
+  nextcloud_db_password  = var.nextcloud_db_password
+  manyfold_db_password   = var.manyfold_db_password
+  mealie_db_password     = var.mealie_db_password
+  jellyseerr_db_password = var.jellyseerr_db_password
+  windmill_db_password   = var.windmill_db_password
 }
 
 module "authentik" {

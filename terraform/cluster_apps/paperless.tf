@@ -39,6 +39,7 @@ resource "kubernetes_secret" "paperless" {
       }
     })
     "PAPERLESS_SECRET_KEY" = var.paperless_secret_key
+    "pg_password"          = var.paperless_db_password
   }
 }
 

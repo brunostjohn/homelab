@@ -73,11 +73,9 @@ spec:
             - name: DB_ENGINE
               value: postgres
             - name: POSTGRES_USER
-              value: postgres
-            - name: POSTGRES_PASSWORD
-              value: postgres
+              value: mealie
             - name: POSTGRES_SERVER
-              value: postgres-postgresql.databases.svc.cluster.local
+              value: postgres-cluster-rw-pooler.databases.svc.cluster.local
             - name: POSTGRES_PORT
               value: "5432"
             - name: POSTGRES_DB

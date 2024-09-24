@@ -40,7 +40,10 @@ spec:
             - name: YARN_CACHE_FOLDER
               value: /data/data/yarn-cache
             - name: DATABASE_URL
-              value: postgresql://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/linkwarden
+              valueFrom:
+                secretKeyRef:
+                  name: linkwarden-secrets
+                  key: database-url
             - name: NEXTAUTH_SECRET
               valueFrom:
                 secretKeyRef:

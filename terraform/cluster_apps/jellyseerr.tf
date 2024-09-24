@@ -9,8 +9,19 @@ resource "kubernetes_secret" "jellyseerr_exporter_secret" {
   }
 }
 
+resource "kubernetes_secret" "jellyseerr_pg" {
+  metadata {
+    name      = "jellyseerr-pg"
+    namespace = kubernetes_namespace.entertainment.metadata[0].name
+  }
+
+  data = {
+    "password" = var.jellyseerr_db_password
+  }
+}
+
 resource "argocd_application" "jellyseerr" {
-  depends_on = [kubernetes_namespace.entertainment, kubernetes_secret.jellyseerr_exporter_secret]
+  depends_on = [kubernetes_namespace.entertainment, kubernetes_secret.jellyseerr_exporter_secret, kubernetes_secret.jellyseerr_pg]
 
   metadata {
     name      = "jellyseerr"

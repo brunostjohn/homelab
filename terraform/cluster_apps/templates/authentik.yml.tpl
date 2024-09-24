@@ -15,7 +15,8 @@ authentik:
   error_reporting:
     enabled: false
   postgresql:
-    host: postgres-postgresql.databases.svc.cluster.local
+    user: authentik
+    host: postgres-cluster-rw-pooler.databases.svc.cluster.local
     password: ${postgres_password}
   redis:
     host: redis-master.databases.svc.cluster.local

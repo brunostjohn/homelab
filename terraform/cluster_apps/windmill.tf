@@ -17,6 +17,7 @@ module "windmill_helm" {
   repo_url        = "https://windmill-labs.github.io/windmill-helm-charts/"
   values = templatefile("${path.module}/templates/windmill.yml.tpl", {
     "global_fqdn" = var.global_fqdn
+    "db_password" = var.windmill_db_password
   })
 
   create_ingress = false

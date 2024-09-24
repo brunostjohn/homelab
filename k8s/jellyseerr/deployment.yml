@@ -40,13 +40,16 @@ spec:
             - name: DB_TYPE
               value: postgres
             - name: DB_HOST
-              value: postgres-postgresql.databases.svc.cluster.local
+              value: postgres-cluster-rw-pooler.databases.svc.cluster.local
             - name: DB_PORT
               value: "5432"
             - name: DB_USER
-              value: postgres
+              value: jellyseerr
             - name: DB_PASS
-              value: postgres
+              valueFrom:
+                secretKeyRef:
+                  name: jellyseerr-pg
+                  key: password
             - name: DB_NAME
               value: jellyseerr
           volumeMounts:

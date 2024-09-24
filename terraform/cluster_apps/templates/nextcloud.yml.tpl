@@ -120,9 +120,9 @@ internalDatabase:
 externalDatabase:
   enabled: true
   type: postgresql
-  host: postgres-postgresql.databases.svc.cluster.local
-  user: postgres
-  password: postgres
+  host: postgres-cluster-rw-pooler.databases.svc.cluster.local
+  user: nextcloud
+  password: ${db_password}
   database: nextcloud
 
 cronjob:
