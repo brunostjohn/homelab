@@ -29,15 +29,13 @@
 
         s2 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = [
-            {
-              node = {
-                ipAddress = "10.0.3.3";
-                macAddress = "bc:24:11:fa:16:37";
-                hostname = "s2";
-              };
-            }
-          ];
+          specialArgs = {
+            node = {
+              ipAddress = "10.0.3.3";
+              macAddress = "bc:24:11:fa:16:37";
+              hostname = "s2";
+            };
+          };
           modules = [
             ./nix/s2/hardware-configuration.nix
             ./nix/modules/clusterNode
