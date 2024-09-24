@@ -1,4 +1,4 @@
-{ pkgs, config, node, ... }:
+{ pkgs, node, ... }:
 
 {
   imports = [
@@ -24,11 +24,11 @@
 
   services.openiscsi = {
     enable = true;
-    name = "${config.networking.hostName}.${config.networking.domain}-initiatorhost";
+    name = "${node.hostname}.m-nodes.zefirscloud.internal-initiatorhost";
   };
 
   environment.variables = {
-    K3S_NODE_NAME = "${config.networking.hostName}.${config.networking.domain}";
+    K3S_NODE_NAME = "${node.hostname}.m-nodes.zefirscloud.internal";
   };
 
   security.sudo.wheelNeedsPassword = false;

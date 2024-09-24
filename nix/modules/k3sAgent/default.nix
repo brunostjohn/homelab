@@ -1,4 +1,4 @@
-{ config, ... }:
+{ node, ... }:
 
 {
   services.k3s = {
@@ -6,6 +6,6 @@
     role = "agent";
     tokenFile = /deploy/clustertoken;
     serverAddr = "https://10.0.2.22:6443";
-    extraFlags = "--node-name ${config.networking.hostName}.${config.networking.domain}";
+    extraFlags = "--node-name ${node.hostname}.m-nodes.zefirscloud.internal";
   };
 }
