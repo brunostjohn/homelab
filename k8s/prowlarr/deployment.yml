@@ -45,7 +45,6 @@ spec:
           volumeMounts:
             - name: prowlarr-config
               mountPath: /config
-              subPath: casaos/prowlarr/
           startupProbe:
             httpGet:
               path: /ping

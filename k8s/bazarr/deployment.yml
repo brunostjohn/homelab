@@ -51,7 +51,6 @@ spec:
           volumeMounts:
             - name: bazarr-config
               mountPath: /config
-              subPath: casaos/bazarr/
             - name: bazarr-data
               mountPath: /data
               subPath: entertainment/

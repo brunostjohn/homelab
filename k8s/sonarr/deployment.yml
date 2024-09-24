@@ -50,7 +50,6 @@ spec:
           volumeMounts:
             - name: sonarr-config
               mountPath: /config
-              subPath: casaos/sonarr/
             - name: sonarr-data
               mountPath: /data
               subPath: entertainment/

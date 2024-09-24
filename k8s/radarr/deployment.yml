@@ -50,7 +50,6 @@ spec:
           volumeMounts:
             - name: radarr-config
               mountPath: /config
-              subPath: casaos/radarr/
             - name: radarr-data
               mountPath: /data
               subPath: entertainment/

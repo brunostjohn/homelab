@@ -51,7 +51,6 @@ spec:
           volumeMounts:
             - name: lidarr-config
               mountPath: /config
-              subPath: casaos/lidarr/
             - name: lidarr-data
               mountPath: /data
               subPath: entertainment/
