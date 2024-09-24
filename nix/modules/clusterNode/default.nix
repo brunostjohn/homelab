@@ -18,6 +18,7 @@
     runc
     nfs-utils
     openiscsi
+    python3
   ];
 
   virtualisation.docker.enable = true;

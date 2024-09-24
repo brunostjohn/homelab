@@ -20,3 +20,8 @@ tasks:
     description: "Upgrade hosts"
     cmds:
       - ansible all -m apt -a "upgrade=yes update_cache=yes" -b
+
+  nixos-full-rollout:
+    description: "Rollout NixOS configuration to all hosts"
+    cmds:
+      - ansible-playbook playbooks/nixos-full-rollout.yml

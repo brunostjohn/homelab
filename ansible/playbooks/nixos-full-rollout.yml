@@ -1,0 +1,11 @@
+- name: Rollout NixOS configuration to all hosts
+  hosts: nixos
+  tasks:
+    - name: Reset repository to HEAD
+      shell: cd /deploy/homelab && git reset --hard HEAD
+    - name: Pull latest changes
+      shell: cd /deploy/homelab && git pull
+    - name: Switch to new configuration
+      shell: cd /deploy/homelab && sudo nixos-rebuild switch
+      become_user: root
+      become_method: sudo
