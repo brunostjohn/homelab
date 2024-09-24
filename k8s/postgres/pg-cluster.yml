@@ -29,6 +29,9 @@ spec:
     name: postgres-cluster-superuser
 
   postgresql:
+    parameters:
+      max_connections: "300"
+      shared_buffers: 80MB
     shared_preload_libraries:
       - "vectors.so"
 
