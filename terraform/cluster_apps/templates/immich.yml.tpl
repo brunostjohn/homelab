@@ -3,7 +3,7 @@ env:
   REDIS_PORT: "6379"
   REDIS_PASSWORD: redis
   REDIS_DBINDEX: "9"
-  DB_HOSTNAME: postgres-cluster-rw.databases.svc.cluster.local
+  DB_HOSTNAME: postgres-cluster-rw-pooler.databases.svc.cluster.local
   DB_USERNAME: immich
   DB_DATABASE_NAME: immich
   DB_PASSWORD: ${db_password}
