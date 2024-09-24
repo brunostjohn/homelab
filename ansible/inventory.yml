@@ -1,35 +1,25 @@
 ungrouped:
   hosts:
-    node1.zefirscloud.local:
-      ansible_user: root
-    node2.zefirscloud.local:
-      ansible_user: root
-    node3.zefirscloud.local:
-      ansible_user: root
+    s1.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s2.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s3.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s4.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s5.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
 
-apt:
+nixos:
   hosts:
-    node1.zefirscloud.local:
-      ansible_user: root
-    node2.zefirscloud.local:
-      ansible_user: root
-    node3.zefirscloud.local:
-      ansible_user: root
-
-raspberrypi:
-  hosts:
-    node1.zefirscloud.local:
-      ansible_user: root
-    node2.zefirscloud.local:
-      ansible_user: root
-    node3.zefirscloud.local:
-      ansible_user: root
-
-k3snodes:
-  hosts:
-    node1.zefirscloud.local:
-      ansible_user: root
-    node2.zefirscloud.local:
-      ansible_user: root
-    node3.zefirscloud.local:
-      ansible_user: root
+    s1.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s2.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s3.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s4.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
+    s5.m-nodes.zefirscloud.internal:
+      ansible_user: brunostjohn
