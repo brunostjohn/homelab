@@ -25,17 +25,3 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: paperless-export
-  namespace: paperless
-spec:
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: floof-iscsi-csi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
