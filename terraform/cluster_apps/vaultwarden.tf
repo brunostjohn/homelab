@@ -11,7 +11,7 @@ resource "kubernetes_config_map" "vaultwarden" {
   }
 
   data = {
-    "DOMAIN"               = "passwords.${var.global_fqdn}"
+    "DOMAIN"               = "https://passwords.${var.global_fqdn}"
     "PUSH_INSTALLATION_ID" = var.vaultwarden_installation_id
     "SMTP_HOST"            = var.smtp_host
     "SMTP_FROM"            = var.smtp_from

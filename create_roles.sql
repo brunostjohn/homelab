@@ -144,8 +144,11 @@ GRANT memos_role TO memos;
 -- VAULTWARDEN
 CREATE ROLE vaultwarden_role;
 \c vaultwarden
-GRANT ALL ON DATABASE vaultwarden TO vaultwarden_role;
-GRANT all privileges ON database vaultwarden TO vaultwarden_role;
+GRANT ALL PRIVILEGES ON DATABASE vaultwarden TO vaultwarden_role;
+GRANT ALL ON SCHEMA public TO vaultwarden_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO vaultwarden_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to vaultwarden_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to vaultwarden_role;
 CREATE USER vaultwarden WITH ENCRYPTED PASSWORD '<password>';
 GRANT vaultwarden_role TO vaultwarden;
 
