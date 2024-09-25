@@ -7,6 +7,6 @@ spec:
     requests:
       storage: 200Gi
   volumeMode: Filesystem
-  storageClassName: jabberwock-iscsi-nfs
+  storageClassName: jabberwock-iscsi-csi
   accessModes:
     - ReadWriteOnce
