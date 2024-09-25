@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingvin-share
+  namespace: pingvin-share
+spec:
+  selector:
+    matchLabels:
+      app: pingvin-share
+  template:
+    metadata:
+      labels:
+        app: pingvin-share
+    spec:
+      volumes:
+        - name: pingvin-share
+          persistentVolumeClaim:
+            claimName: pingvin-share-pvc
+      containers:
+        - name: pingvin-share
+          image: stonith404/pingvin-share
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: pingvin-share
+              mountPath: /opt/app/backend/data
+              subPath: backend
+            - name: pingvin-share
+              mountPath: /opt/app/frontend/public/img
+              subPath: frontend-images
+          env:
+            - name: TRUST_PROXY
+              value: "true"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10

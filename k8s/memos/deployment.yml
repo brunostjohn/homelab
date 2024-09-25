@@ -41,3 +41,15 @@ spec:
                 secretKeyRef:
                   name: memos-secrets
                   key: db_connection_url
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
