@@ -56,7 +56,7 @@ module "memos_ingress" {
   depends_on = [argocd_application.memos]
   source     = "../ingress"
 
-  hosts     = ["memos.zefirsroyal.cloud"]
+  hosts     = ["memos.${var.global_fqdn}"]
   service   = "memos"
   namespace = kubernetes_namespace.memos.metadata[0].name
   port      = 5230

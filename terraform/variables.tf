@@ -672,3 +672,13 @@ variable "vaultwarden_installation_id" {
   type        = string
   description = "The installation ID for Vaultwarden"
 }
+
+variable "opengist_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for OpenGist"
+}
+
+variable "opengist_oidc_client_secret" {
+  type        = string
+  description = "OIDC client secret for OpenGist"
+}

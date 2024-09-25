@@ -159,6 +159,9 @@ module "cluster_apps" {
 
   vaultwarden_installation_id  = var.vaultwarden_installation_id
   vaultwarden_installation_key = var.vaultwarden_installation_key
+
+  opengist_oidc_client_id     = var.opengist_oidc_client_id
+  opengist_oidc_client_secret = var.opengist_oidc_client_secret
 }
 
 module "authentik" {

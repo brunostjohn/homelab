@@ -74,7 +74,7 @@ module "mealie_ingress" {
   depends_on = [argocd_application.mealie]
   source     = "../ingress"
 
-  hosts     = ["mealie.zefirsroyal.cloud"]
+  hosts     = ["mealie.${var.global_fqdn}"]
   service   = "mealie"
   namespace = kubernetes_namespace.mealie.metadata[0].name
   port      = 9000
