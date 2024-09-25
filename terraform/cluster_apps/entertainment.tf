@@ -1,6 +1,6 @@
 resource "kubernetes_persistent_volume_claim" "entertainment_content" {
   metadata {
-    name = "entertainment-content-pvc"
+    name      = "entertainment-content-pvc"
     namespace = kubernetes_namespace.entertainment.metadata[0].name
   }
   spec {
@@ -11,6 +11,6 @@ resource "kubernetes_persistent_volume_claim" "entertainment_content" {
       }
     }
     storage_class_name = "jabberwock-nfs-csi"
-    volume_mode = "Filesystem"
+    volume_mode        = "Filesystem"
   }
 }

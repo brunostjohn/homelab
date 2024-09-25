@@ -130,6 +130,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to rally_role;
 CREATE USER rally WITH PASSWORD '<password>';
 GRANT rally_role TO rally;
 
+-- MEMOS
+CREATE ROLE memos_role;
+\c memos
+GRANT ALL PRIVILEGES ON DATABASE memos TO memos_role;
+GRANT ALL ON SCHEMA public TO memos_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO memos_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to memos_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to memos_role;
+CREATE USER memos WITH PASSWORD '<password>';
+GRANT memos_role TO memos;
+
 -- MEDIA STACK --
 
 -- LIDARR

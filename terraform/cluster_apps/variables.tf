@@ -447,3 +447,8 @@ variable "outline_db_password" {
   type        = string
   description = "The password for the Outline database"
 }
+
+variable "memos_db_password" {
+  type        = string
+  description = "The password for the Memos database"
+}

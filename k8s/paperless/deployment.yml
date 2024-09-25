@@ -201,12 +201,7 @@ spec:
             - containerPort: 3000
               name: http
               protocol: TCP
-          command:
-            [
-              "gotenberg",
-              "--chromium-disable-javascript=true",
-              "--chromium-allow-list=file:///tmp/.*",
-            ]
+          command: ["gotenberg", "--chromium-disable-javascript=true", "--chromium-allow-list=file:///tmp/.*"]
           livenessProbe:
             httpGet:
               path: /health

@@ -51,7 +51,7 @@ resource "kubernetes_secret" "outline" {
     "AWS_SECRET_ACCESS_KEY" = var.outline_aws_secret_access_key
     "OIDC_CLIENT_SECRET"    = var.outline_oidc_client_secret
     "SMTP_PASSWORD"         = var.smtp_password
-    "DATABASE_URL"              = "postgres://outline:${urlencode(var.outline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/outline"
+    "DATABASE_URL"          = "postgres://outline:${urlencode(var.outline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/outline"
   }
 }
 
