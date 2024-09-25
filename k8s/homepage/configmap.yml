@@ -20,7 +20,7 @@ data:
             - abbr: GH
               href: https://github.com/
   services.yaml: |
-    - My First Group:
+    - My First GroupTest:
         - My First Service:
             href: http://localhost/
             description: Homepage is awesome
