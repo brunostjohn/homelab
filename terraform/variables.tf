@@ -657,3 +657,18 @@ variable "memos_db_password" {
   type        = string
   description = "The password for the Memos database"
 }
+
+variable "vaultwarden_db_password" {
+  type        = string
+  description = "The password for the vaultwarden database"
+}
+
+variable "vaultwarden_installation_key" {
+  type        = string
+  description = "The installation key for Vaultwarden"
+}
+
+variable "vaultwarden_installation_id" {
+  type        = string
+  description = "The installation ID for Vaultwarden"
+}

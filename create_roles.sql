@@ -141,6 +141,14 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to memos_role;
 CREATE USER memos WITH PASSWORD '<password>';
 GRANT memos_role TO memos;
 
+-- VAULTWARDEN
+CREATE ROLE vaultwarden_role;
+\c vaultwarden
+GRANT ALL ON DATABASE vaultwarden TO vaultwarden_role;
+GRANT all privileges ON database vaultwarden TO vaultwarden_role;
+CREATE USER vaultwarden WITH ENCRYPTED PASSWORD '<password>';
+GRANT vaultwarden_role TO vaultwarden;
+
 -- MEDIA STACK --
 
 -- LIDARR
