@@ -38,6 +38,10 @@ spec:
               value: main
             - name: OG_SSH_GIT_ENABLED
               value: "false"
+            - name: OG_CUSTOM_LOGO
+              value: server-icon.png
+            - name: OG_CUSTOM_FAVICON
+              value: server-icon.png
           envFrom:
             - configMapRef:
                 name: opengist-config
