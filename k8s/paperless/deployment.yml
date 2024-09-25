@@ -117,8 +117,6 @@ spec:
               value: "true"
             - name: PAPERLESS_REDIRECT_LOGIN_TO_SSO
               value: "true"
-            - name: PAPERLESS_OCR_LANGUAGE
-              value: eng+pol
 ---
 apiVersion: apps/v1
 kind: Deployment
