@@ -44,4 +44,7 @@ data:
           label: "Cluster"
         nodes:
           show: false
+    - longhorn:
+        expanded: true
+        total: true
   docker.yaml: ""
