@@ -33,6 +33,8 @@ spec:
               name: http
           env:
             - name: SIGNUPS_ALLOWED
+              value: "false"
+            - name: DISABLE_ADMIN_TOKEN
               value: "true"
             - name: PUSH_ENABLED
               value: "true"
