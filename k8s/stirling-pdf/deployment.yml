@@ -36,8 +36,18 @@ spec:
               value: "en_GB"
             - name: DOCKER_ENABLE_SECURITY
               value: "true"
-            - name: SECURITY_ENABLE_LOGIN
+            - name: SECURITY_ENABLELOGIN
               value: "true"
+            - name: SECURITY_LOGINMETHOD
+              value: "oauth2"
+            - name: SECURITY_OAUTH2_ENABLED
+              value: "true"
+            - name: SECURITY_OAUTH2_AUTOCREATEUSER
+              value: "true"
+            - name: SECURITY_OAUTH2_PROVIDER
+              value: "Zefir's Cloud"
+            - name: UI_APPNAME
+              value: "Zefir's PDFs"
           envFrom:
             - configMapRef:
                 name: stirling-pdf-config
