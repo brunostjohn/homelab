@@ -24,7 +24,8 @@ resource "kubernetes_manifest" "root_cert_prod" {
       dnsNames = [
         var.global_fqdn,
         "*.${var.global_fqdn}",
-        "*.static.${var.global_fqdn}"
+        "*.static.${var.global_fqdn}",
+        "*.envs.${var.global_fqdn}"
       ]
     }
   }
@@ -56,7 +57,8 @@ resource "kubernetes_manifest" "root_cert_staging" {
       dnsNames = [
         var.global_fqdn,
         "*.${var.global_fqdn}",
-        "*.static.${var.global_fqdn}"
+        "*.static.${var.global_fqdn}",
+        "*.envs.${var.global_fqdn}"
       ]
     }
   }

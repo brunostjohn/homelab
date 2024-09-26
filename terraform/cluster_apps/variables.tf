@@ -482,3 +482,23 @@ variable "coder_db_password" {
   type        = string
   description = "The password for the Coder database"
 }
+
+variable "coder_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for Coder"
+}
+
+variable "coder_oidc_client_secret" {
+  type        = string
+  description = "OIDC client secret for Coder"
+}
+
+variable "stirling_pdf_oidc_client_id" {
+  type        = string
+  description = "OIDC client ID for Stirling PDF"
+}
+
+variable "stirling_pdf_oidc_client_secret" {
+  type        = string
+  description = "OIDC client secret for Stirling PDF"
+}

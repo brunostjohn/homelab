@@ -163,6 +163,12 @@ module "cluster_apps" {
 
   opengist_oidc_client_id     = var.opengist_oidc_client_id
   opengist_oidc_client_secret = var.opengist_oidc_client_secret
+
+  coder_oidc_client_id     = var.coder_oidc_client_id
+  coder_oidc_client_secret = var.coder_oidc_client_secret
+
+  stirling_pdf_oidc_client_id     = var.stirling_pdf_oidc_client_id
+  stirling_pdf_oidc_client_secret = var.stirling_pdf_oidc_client_secret
 }
 
 module "authentik" {

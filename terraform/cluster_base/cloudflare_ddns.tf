@@ -11,8 +11,8 @@ resource "kubernetes_config_map" "cloudflare_ddns" {
   }
 
   data = {
-    domains = "${var.global_fqdn},*.${var.global_fqdn},*.static.${var.global_fqdn},corner.${var.global_fqdn},cubes.${var.global_fqdn},carrier.${var.global_fqdn}"
-    proxied = "!(is(corner.${var.global_fqdn}) || is(cubes.${var.global_fqdn}) || is(carrier.${var.global_fqdn}))"
+    domains = "${var.global_fqdn},*.${var.global_fqdn},*.static.${var.global_fqdn},corner.${var.global_fqdn},cubes.${var.global_fqdn},carrier.${var.global_fqdn},*.envs.${var.global_fqdn}"
+    proxied = "!(is(corner.${var.global_fqdn}) || is(cubes.${var.global_fqdn}) || is(carrier.${var.global_fqdn}) || is(*.static.${var.global_fqdn}) || is(*.envs.${var.global_fqdn}))"
   }
 }
 

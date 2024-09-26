@@ -1,0 +1,58 @@
+global:
+  redis:
+    host: redis-master.databases.svc.cluster.local
+    auth:
+      secret: gitlab-secrets
+      key: redis-auth
+  minio:
+    enabled: false
+  registry:
+    bucket: gitlab-registry-storage
+  appConfig:
+    lfs:
+      bucket: gitlab-lfs-storage
+      connection:
+        secret: objectstore-lfs
+        key: connection
+    artifacts:
+      bucket: gitlab-artifacts-storage
+      connection:
+        secret: objectstore-artifacts
+        key: connection
+    uploads:
+      bucket: gitlab-uploads-storage
+      connection:
+        secret: objectstore-uploads
+        key: connection
+    packages:
+      bucket: gitlab-packages-storage
+      connection:
+        secret: objectstore-packages
+        key: connection
+    backups:
+      bucket: gitlab-backup-storage
+      tmpBucket: gitlab-tmp-storage
+  psql:
+    host: postgres-cluster-rw-pooler.databases.svc.cluster.local
+    username: gitlab
+    password:
+      secret: gitlab-secrets
+      key: psql-password
+
+gitlab:
+  toolbox:
+    backups:
+      objectStorage:
+        config:
+          secret: s3cmd-config
+          key: config
+registry:
+  storage:
+    secret: registry-storage
+    key: config
+
+postgresql:
+  install: false
+
+redis:
+  install: false

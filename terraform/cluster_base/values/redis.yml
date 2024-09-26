@@ -17,6 +17,7 @@ master:
       ephemeral-storage: 2Gi
   persistence:
     enabled: true
+    storageClass: longhorn
     size: 2Gi
   podSecurityContext:
     enabled: true

@@ -1,0 +1,11 @@
+- name: Forecefully free disk space
+  hosts: nixos
+  tasks:
+    - name: Remove old generations
+      shell: sudo nix-collect-garbage -d
+    - name: Remove unused containerd images
+      shell: sudo k3s crictl rmi --prune
+    - name: Remove unused docker trash
+      shell: sudo docker system prune -fa
+    - name: Purge journal logs
+      shell: sudo journalctl --vacuum-time=1d
