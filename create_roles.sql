@@ -152,6 +152,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to vaultwarden_role;
 CREATE USER vaultwarden WITH ENCRYPTED PASSWORD '<password>';
 GRANT vaultwarden_role TO vaultwarden;
 
+-- CODER
+CREATE ROLE coder_role;
+\c coder
+GRANT ALL PRIVILEGES ON DATABASE coder TO coder_role;
+GRANT ALL ON SCHEMA public TO coder_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO coder_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to coder_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to coder_role;
+CREATE USER coder WITH PASSWORD '<password>';
+GRANT coder_role TO coder;
+
 -- MEDIA STACK --
 
 -- LIDARR

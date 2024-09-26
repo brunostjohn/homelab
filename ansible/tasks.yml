@@ -25,3 +25,8 @@ tasks:
     description: "Rollout NixOS configuration to all hosts"
     cmds:
       - ansible-playbook playbooks/nixos-full-rollout.yml
+
+  disk-space-hack:
+    description: "Forecefully free disk space"
+    cmds:
+      - ansible-playbook playbooks/disk-space-hack.yml

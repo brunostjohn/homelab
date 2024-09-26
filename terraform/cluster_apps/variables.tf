@@ -477,3 +477,8 @@ variable "opengist_oidc_client_secret" {
   type        = string
   description = "OIDC client secret for OpenGist"
 }
+
+variable "coder_db_password" {
+  type        = string
+  description = "The password for the Coder database"
+}
