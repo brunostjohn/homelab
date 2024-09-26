@@ -58,7 +58,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             periodSeconds: 10
             timeoutSeconds: 5
             successThreshold: 1
@@ -67,7 +67,7 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 50
+            initialDelaySeconds: 110
             periodSeconds: 10
             timeoutSeconds: 5
             successThreshold: 1
