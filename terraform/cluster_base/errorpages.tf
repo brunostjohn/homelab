@@ -1,11 +1,11 @@
 resource "kubernetes_config_map" "errorpages" {
   metadata {
-    name = "errorpages-config"
+    name      = "errorpages-config"
     namespace = "kube-system"
   }
 
   data = {
-    "PUBLIC_STATIC_URL" = "https://homepage-assets.static.${var.global_fqdn}"
+    "PUBLIC_STATIC_URL"   = "https://homepage-assets.static.${var.global_fqdn}"
     "PUBLIC_HOMEPAGE_URL" = "https://${var.global_fqdn}"
   }
 }
