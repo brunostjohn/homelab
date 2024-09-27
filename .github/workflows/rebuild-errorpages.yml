@@ -5,6 +5,7 @@ on: # yamllint disable-line rule:truthy
     paths:
       - projects/errorpages/Dockerfile
       - projects/errorpages/*
+      - projects/errorpages/**/*
       - .github/workflows/rebuild-errorpages.yml
     branches:
       - main
