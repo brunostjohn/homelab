@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200..900");
+
+body {
+	height: 100vh;
+	width: 100vw;
+	padding: 0;
+	margin: 0;
+	background-color: black;
+	color: white;
+	font-family: "Inter Tight", sans-serif;
+}
