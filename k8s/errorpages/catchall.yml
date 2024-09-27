@@ -5,12 +5,11 @@ metadata:
   namespace: kube-system
 spec:
   entryPoints:
-    - https
+    - websecure
   routes:
     - match: "PathPrefix(`/`)"
       kind: Rule
       priority: 1
       services:
         - name: errorpages
-          kind: Service
           port: 80
