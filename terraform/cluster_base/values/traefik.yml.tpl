@@ -9,11 +9,14 @@ ports:
   traefik:
     port: 9000
     expose: true
-  #web:
-    #middlewares:
+  web:
+    middlewares:
+      - https-middleware@kubernetescrd
+      - errorpages@kubernetescrd
       #- kube-system-bouncer@kubernetescrd
-  #websecure:
-    #middlewares:
+  websecure:
+    middlewares:
+      - errorpages@kubernetescrd
       #- kube-system-bouncer@kubernetescrd
 
 experimental:
