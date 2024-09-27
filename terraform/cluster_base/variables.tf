@@ -96,3 +96,8 @@ variable "pg_backup_minio_secret_key" {
   type        = string
   description = "The secret key for the MinIO instance used for PostgreSQL backups"
 }
+
+variable "crowdsec_db_password" {
+  type        = string
+  description = "The password for the CrowdSec database"
+}

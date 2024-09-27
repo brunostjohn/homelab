@@ -44,6 +44,8 @@ module "cluster_base" {
   pg_backup_minio_secret_key = var.pg_backup_minio_secret_key
 
   jabberwock_api_key = var.jabberwock_api_key
+
+  crowdsec_db_password = var.crowdsec_db_password
 }
 
 module "cluster_apps" {

@@ -15,6 +15,7 @@ module "crowdsec" {
   values = templatefile("${path.module}/values/crowdsec.yml.tpl", {
     enroll_key          = var.crowdsec_enroll_key
     bouncer_key_traefik = var.crowdsec_bouncer_key_traefik
+    db_password = var.crowdsec_db_password
   })
 
   create_ingress = false

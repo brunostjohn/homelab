@@ -163,6 +163,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to coder_role;
 CREATE USER coder WITH PASSWORD '<password>';
 GRANT coder_role TO coder;
 
+-- CROWDSEC
+CREATE ROLE crowdsec_role;
+\c crowdsec
+GRANT ALL PRIVILEGES ON DATABASE crowdsec TO crowdsec_role;
+GRANT ALL ON SCHEMA public TO crowdsec_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO crowdsec_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to crowdsec_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to crowdsec_role;
+CREATE USER crowdsec WITH PASSWORD '<password>';
+GRANT crowdsec_role TO crowdsec;
+
 -- MEDIA STACK --
 
 -- LIDARR

@@ -6,6 +6,11 @@ tls:
     reflector:
       namespaces: ["kube-system"]
 
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+
 agent:
   metrics:
     enabled: true
@@ -40,3 +45,13 @@ lapi:
       value: "k8s"
     - name: BOUNCER_KEY_traefik
       value: "${bouncer_key_traefik}"
+
+config:
+  "config.yaml.local": |
+    db_config:
+      type: postgresql
+      user: crowdsec
+      password: ${db_password}
+      db_name: crowdsec
+      host: postgres-cluster-rw-pooler.databases.svc.cluster.local
+      port: 5432

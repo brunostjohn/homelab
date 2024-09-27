@@ -707,3 +707,8 @@ variable "stirling_pdf_oidc_client_secret" {
   type        = string
   description = "OIDC client secret for Stirling PDF"
 }
+
+variable "crowdsec_db_password" {
+  type        = string
+  description = "The password for the CrowdSec database"
+}
