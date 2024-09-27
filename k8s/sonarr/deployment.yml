@@ -19,10 +19,9 @@ spec:
         - name: sonarr-config
           persistentVolumeClaim:
             claimName: sonarr-config
-        - name: sonarr-data
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       containers:
         - name: sonarr
           image: ghcr.io/hotio/sonarr:release-4.0.8.1874
@@ -50,9 +49,8 @@ spec:
           volumeMounts:
             - name: sonarr-config
               mountPath: /config
-            - name: sonarr-data
+            - name: entertainment-content
               mountPath: /data
-              subPath: entertainment/
           startupProbe:
             httpGet:
               path: /ping

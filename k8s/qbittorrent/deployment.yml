@@ -19,10 +19,9 @@ spec:
         - name: qbittorrent-config
           persistentVolumeClaim:
             claimName: qbittorrent-config-pvc
-        - name: downloads
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       dnsConfig:
         nameservers:
           - 10.0.2.1
@@ -66,9 +65,8 @@ spec:
           volumeMounts:
             - name: qbittorrent-config
               mountPath: /config
-            - name: downloads
+            - name: entertainment-content
               mountPath: /data
-              subPath: entertainment/
           startupProbe:
             httpGet:
               path: /

@@ -19,10 +19,9 @@ spec:
         - name: bazarr-config
           persistentVolumeClaim:
             claimName: bazarr-config
-        - name: bazarr-data
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       containers:
         - name: bazarr
           image: linuxserver/bazarr
@@ -51,9 +50,8 @@ spec:
           volumeMounts:
             - name: bazarr-config
               mountPath: /config
-            - name: bazarr-data
+            - name: entertainment-content
               mountPath: /data
-              subPath: entertainment/
           startupProbe:
             httpGet:
               path: /api

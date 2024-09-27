@@ -17,13 +17,11 @@ spec:
     spec:
       volumes:
         - name: lidarr-config
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
-        - name: lidarr-data
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+          persistentVolumeClaim:
+            claimName: lidarr-config
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       containers:
         - name: lidarr
           image: ghcr.io/hotio/lidarr:release-2.4.3.4248
@@ -51,9 +49,8 @@ spec:
           volumeMounts:
             - name: lidarr-config
               mountPath: /config
-            - name: lidarr-data
+            - name: entertainment-content
               mountPath: /data
-              subPath: entertainment/
           startupProbe:
             httpGet:
               path: /ping

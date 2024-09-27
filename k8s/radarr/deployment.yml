@@ -19,10 +19,9 @@ spec:
         - name: radarr-config
           persistentVolumeClaim:
             claimName: radarr-config
-        - name: radarr-data
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       containers:
         - name: radarr
           image: linuxserver/radarr:5.2.6
@@ -50,9 +49,8 @@ spec:
           volumeMounts:
             - name: radarr-config
               mountPath: /config
-            - name: radarr-data
+            - name: entertainment-content
               mountPath: /data
-              subPath: entertainment/
           startupProbe:
             httpGet:
               path: /ping

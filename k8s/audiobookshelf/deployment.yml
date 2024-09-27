@@ -20,10 +20,9 @@ spec:
           nfs:
             server: 10.0.3.1
             path: /mnt/jabberwock
-        - name: audiobookshelf-data
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       containers:
         - name: audiobookshelf
           image: ghcr.io/advplyr/audiobookshelf:2.8.1
@@ -36,9 +35,8 @@ spec:
             - name: audiobookshelf-config
               mountPath: /config
               subPath: casaos/audiobookshelf/
-            - name: audiobookshelf-data
+            - name: entertainment-content
               mountPath: /data
-              subPath: entertainment/
           ports:
             - containerPort: 80
               name: http

@@ -31,10 +31,9 @@ spec:
         - name: jellyfin-cache
           persistentVolumeClaim:
             claimName: jellyfin-cache-pvc
-        - name: jellyfin-media
-          nfs:
-            server: 10.0.3.1
-            path: /mnt/jabberwock
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       containers:
         - name: jellyfin
           image: jellyfin/jellyfin
@@ -66,9 +65,8 @@ spec:
               mountPath: /config
             - name: jellyfin-cache
               mountPath: /cache
-            - name: jellyfin-media
+            - name: entertainment-content
               mountPath: /media
-              subPath: entertainment/
           startupProbe:
             httpGet:
               path: /
