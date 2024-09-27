@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: errorpages
+  namespace: kube-system
+spec:
+  errors:
+    status:
+      - "500-599"
+      - "400-499"
+    query: /{status}.html
+    service:
+      name: errorpages
+      port: 80
