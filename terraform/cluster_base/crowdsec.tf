@@ -8,14 +8,15 @@ module "crowdsec" {
   name            = "crowdsec"
   chart           = "crowdsec"
   repo_url        = "https://crowdsecurity.github.io/helm-charts"
-  target_revision = "0.11.0"
+  target_revision = "0.13.0"
 
   project = argocd_project.security.metadata[0].name
 
   values = templatefile("${path.module}/values/crowdsec.yml.tpl", {
     enroll_key          = var.crowdsec_enroll_key
     bouncer_key_traefik = var.crowdsec_bouncer_key_traefik
-    db_password = var.crowdsec_db_password
+    db_password         = var.crowdsec_db_password
+    webhook_url         = var.crowdsec_webhook_url
   })
 
   create_ingress = false

@@ -46,6 +46,7 @@ module "cluster_base" {
   jabberwock_api_key = var.jabberwock_api_key
 
   crowdsec_db_password = var.crowdsec_db_password
+  crowdsec_webhook_url = var.crowdsec_webhook_url
 }
 
 module "cluster_apps" {

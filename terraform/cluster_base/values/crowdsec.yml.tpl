@@ -55,3 +55,22 @@ config:
       db_name: crowdsec
       host: postgres-cluster-rw-pooler.databases.svc.cluster.local
       port: 5432
+  notifications:
+    slack.yaml: |
+      type: slack
+
+      name: slack_default
+      log_level: info
+
+      format: |
+        {{range . -}}
+        {{$alert := . -}}
+        {{range .Decisions -}}
+        {{if $alert.Source.Cn -}}
+        :flag-{{$alert.Source.Cn}}: <https://www.whois.com/whois/{{.Value}}|{{.Value}}> will get {{.Type}} for next {{.Duration}} for triggering {{.Scenario}} on machine '{{$alert.MachineID}}'. <https://www.shodan.io/host/{{.Value}}|Shodan>{{end}}
+        {{if not $alert.Source.Cn -}}
+        :pirate_flag: <https://www.whois.com/whois/{{.Value}}|{{.Value}}> will get {{.Type}} for next {{.Duration}} for triggering {{.Scenario}} on machine '{{$alert.MachineID}}'.  <https://www.shodan.io/host/{{.Value}}|Shodan>{{end}}
+        {{end -}}
+        {{end -}}
+
+      webhook: ${webhook_url}

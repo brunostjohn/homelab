@@ -712,3 +712,8 @@ variable "crowdsec_db_password" {
   type        = string
   description = "The password for the CrowdSec database"
 }
+
+variable "crowdsec_webhook_url" {
+  type        = string
+  description = "The webhook URL for CrowdSec"
+}
