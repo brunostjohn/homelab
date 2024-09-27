@@ -2,6 +2,10 @@ resource "kubernetes_manifest" "traefik_https_redirect" {
   manifest = yamldecode(file("${path.module}/files/https-middleware.yml"))
 }
 
+resource "kubernetes_manifest" "all_middlewares" {
+  manifest = yamldecode(file("${path.module}/files/all-middlewares.yml"))
+}
+
 resource "kubernetes_manifest" "helm_chart_config_traefik" {
   depends_on = [module.crowdsec]
 

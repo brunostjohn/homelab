@@ -11,4 +11,5 @@ spec:
     query: /{status}.html
     service:
       name: errorpages
+      kind: Service
       port: 80

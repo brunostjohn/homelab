@@ -11,13 +11,10 @@ ports:
     expose: true
   web:
     middlewares:
-      - https-middleware@kubernetescrd
-      - errorpages@kubernetescrd
-      #- kube-system-bouncer@kubernetescrd
+      - kube-system-all-middlewares@kubernetescrd
   websecure:
     middlewares:
-      - errorpages@kubernetescrd
-      #- kube-system-bouncer@kubernetescrd
+      - kube-system-all-middlewares@kubernetescrd
 
 experimental:
   plugins:
