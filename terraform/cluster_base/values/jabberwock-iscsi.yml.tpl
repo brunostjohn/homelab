@@ -27,7 +27,7 @@ driver:
 
       targetGroups:
         - targetGroupPortalGroup: 1
-          targetGroupInitiatorGroup: 7
+          targetGroupInitiatorGroup: 1
           targetGroupAuthType: None
           targetGroupAuthGroup:
 
