@@ -40,5 +40,5 @@
   };
 
   hardware.amdgpu.opencl.enable = true;
-  hardware.amdgpu.loadInInitrd = true;
+  hardware.amdgpu.initrd.enable = true;
 }
