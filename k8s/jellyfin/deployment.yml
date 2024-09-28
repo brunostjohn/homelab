@@ -42,10 +42,12 @@ spec:
             privileged: true
           resources:
             requests:
-              # nvidia.com/gpu.shared: "5"
+              amd.com/gpu: "0"
               memory: "512Mi"
               cpu: "500m"
+              # nvidia.com/gpu.shared: "5"
             limits:
+              amd.com/gpu: "0"
               memory: "2Gi"
               cpu: "1"
               # nvidia.com/gpu.shared: "5"
