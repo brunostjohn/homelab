@@ -31,9 +31,17 @@ spec:
               containerPort: 3000
               protocol: TCP
           resources:
-            limits:
+            requests:
               memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
               cpu: "250m"
+          envFrom:
+            - configMapRef:
+                name: homepage-config
+            - secretRef:
+                name: homepage-secrets
           volumeMounts:
             - mountPath: /app/config
               name: homepage-config

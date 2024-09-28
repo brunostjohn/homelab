@@ -4,8 +4,31 @@ resource "kubernetes_namespace" "homepage" {
   }
 }
 
+resource "kubernetes_config_map" "homepage" {
+  metadata {
+    name      = "homepage-config"
+    namespace = kubernetes_namespace.homepage.metadata[0].name
+  }
+
+  data = {
+    "HOMEPAGE_VAR_GLOBAL_FQDN"    = var.global_fqdn
+    "HOMEPAGE_VAR_UNIFI_USERNAME" = var.unifi_username
+  }
+}
+
+resource "kubernetes_secret" "homepage" {
+  metadata {
+    name      = "homepage-secrets"
+    namespace = kubernetes_namespace.homepage.metadata[0].name
+  }
+
+  data = {
+    "HOMEPAGE_VAR_UNIFI_PASSWORD" = var.unifi_password
+  }
+}
+
 resource "argocd_application" "homepage" {
-  depends_on = [kubernetes_namespace.homepage]
+  depends_on = [kubernetes_namespace.homepage, kubernetes_config_map.homepage, kubernetes_secret.homepage]
 
   metadata {
     name      = "homepage"
