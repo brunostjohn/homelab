@@ -32,7 +32,6 @@
     rocmPackages_5.rocminfo
     rocmPackages_5.rocm-runtime
     rocmPackages_5.rocm-smi
-    rocm-runtime
     rocm-opencl-runtime
     rocm-device-libs
   ];
