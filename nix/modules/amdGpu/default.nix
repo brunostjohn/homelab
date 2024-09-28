@@ -10,23 +10,23 @@
     driSupport = true;
     driSupport32Bit = true;
 
-    # extraPackages = with pkgs; [
-    #   rocmPackages.clr.icd
-    #   rocmPackages.clr
-    # ];
+    extraPackages = with pkgs; [
+      rocmPackages_5.clr.icd
+      rocmPackages_5.clr
+    ];
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # systemd.tmpfiles.rules = [
-  #   "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-  # ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
+  ];
 
   environment.systemPackages = with pkgs; [
     clinfo
-    # rocmPackages.rocminfo
-    # rocmPackages.rocm-runtime
-    # rocmPackages.rocm-smi
+    rocmPackages_5.rocminfo
+    rocmPackages_5.rocm-runtime
+    rocmPackages_5.rocm-smi
   ];
 
   environment.variables = {
@@ -34,5 +34,5 @@
   };
 
   hardware.amdgpu.opencl.enable = true;
-  # hardware.amdgpu.initrd.enable = true;
+  hardware.amdgpu.initrd.enable = true;
 }
