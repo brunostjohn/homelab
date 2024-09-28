@@ -502,3 +502,23 @@ variable "stirling_pdf_oidc_client_secret" {
   type        = string
   description = "OIDC client secret for Stirling PDF"
 }
+
+variable "jabberwock_api_key" {
+  type        = string
+  description = "API key for Jabberwock"
+}
+
+variable "lookingglass_api_key" {
+  type        = string
+  description = "API key for Looking Glass"
+}
+
+variable "floof_api_key" {
+  type        = string
+  description = "API key for Floof"
+}
+
+variable "jellyfin_api_key" {
+  type        = string
+  description = "API key for Jellyfin"
+}

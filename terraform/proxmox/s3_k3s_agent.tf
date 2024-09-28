@@ -16,9 +16,9 @@ resource "proxmox_virtual_environment_vm" "s3_k3s_agent" {
   keyboard_layout = "en-us"
 
   cpu {
-    cores        = 8
-    type         = "host"
-    units        = 1024
+    cores = 8
+    type  = "host"
+    units = 1024
   }
 
   disk {

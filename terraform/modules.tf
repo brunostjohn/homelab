@@ -172,6 +172,12 @@ module "cluster_apps" {
 
   stirling_pdf_oidc_client_id     = var.stirling_pdf_oidc_client_id
   stirling_pdf_oidc_client_secret = var.stirling_pdf_oidc_client_secret
+
+  jabberwock_api_key   = var.jabberwock_api_key
+  lookingglass_api_key = var.lookingglass_api_key
+  floof_api_key        = var.floof_api_key
+
+  jellyfin_api_key = var.jellyfin_api_key
 }
 
 module "authentik" {

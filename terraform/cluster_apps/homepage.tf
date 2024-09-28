@@ -23,7 +23,12 @@ resource "kubernetes_secret" "homepage" {
   }
 
   data = {
-    "HOMEPAGE_VAR_UNIFI_PASSWORD" = var.unifi_password
+    "HOMEPAGE_VAR_UNIFI_PASSWORD"       = var.unifi_password
+    "HOMEPAGE_VAR_JABBERWOCK_API_KEY"   = var.jabberwock_api_key
+    "HOMEPAGE_VAR_LOOKINGGLASS_API_KEY" = var.lookingglass_api_key
+    "HOMEPAGE_VAR_FLOOF_API_KEY"        = var.floof_api_key
+    "HOMEPAGE_VAR_JELLYFIN_API_KEY"     = var.jellyfin_api_key
+    "HOMEPAGE_VAR_JELLYSEERR_API_KEY"   = var.jellyseerr_api_key
   }
 }
 

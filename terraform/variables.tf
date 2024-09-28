@@ -717,3 +717,13 @@ variable "crowdsec_webhook_url" {
   type        = string
   description = "The webhook URL for CrowdSec"
 }
+
+variable "lookingglass_api_key" {
+  type        = string
+  description = "API key for Looking Glass"
+}
+
+variable "jellyfin_api_key" {
+  type        = string
+  description = "API key for Jellyfin"
+}

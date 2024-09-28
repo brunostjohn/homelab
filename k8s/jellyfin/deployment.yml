@@ -15,11 +15,11 @@ spec:
       labels:
         app: jellyfin
     spec:
-      runtimeClassName: nvidia
-      tolerations:
-        - key: "nvidia.com/gpu"
-          operator: "Exists"
-          effect: "NoSchedule"
+      # runtimeClassName: nvidia
+      # tolerations:
+      #   - key: "nvidia.com/gpu"
+      #     operator: "Exists"
+      #     effect: "NoSchedule"
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
@@ -42,22 +42,22 @@ spec:
             privileged: true
           resources:
             requests:
-              nvidia.com/gpu.shared: "5"
+              # nvidia.com/gpu.shared: "5"
               memory: "512Mi"
               cpu: "500m"
             limits:
               memory: "2Gi"
               cpu: "1"
-              nvidia.com/gpu.shared: "5"
+              # nvidia.com/gpu.shared: "5"
           ports:
             - containerPort: 8096
               protocol: TCP
               name: http
           env:
-            - name: NVIDIA_VISIBLE_DEVICES
-              value: all
-            - name: NVIDIA_DRIVER_CAPABILITIES
-              value: all
+            # - name: NVIDIA_VISIBLE_DEVICES
+            #   value: all
+            # - name: NVIDIA_DRIVER_CAPABILITIES
+            #   value: all
             - name: TZ
               value: "Europe/Dublin"
           volumeMounts:

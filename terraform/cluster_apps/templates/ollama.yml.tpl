@@ -1,13 +1,13 @@
 ollama:
   nodeSelector:
     kubernetes.io/hostname: s2.m-nodes.zefirscloud.local
-  runtimeClassName: nvidia
+  # runtimeClassName: nvidia
   ollama:
     gpu:
-      enabled: true
-      type: nvidia
-      number: 3
-      nvidiaResource: "nvidia.com/gpu.shared"
+      enabled: false
+      # type: nvidia
+      # number: 3
+      # nvidiaResource: "nvidia.com/gpu.shared"
   persistentVolume:
     enabled: true
     size: 50Gi
