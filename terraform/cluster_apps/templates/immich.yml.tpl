@@ -33,6 +33,11 @@ server:
   #   limits:
   #     nvidia.com/gpu.shared: "1"
   # runtimeClassName: nvidia
+  resources:
+    requests:
+      amd.com/gpu: "0"
+    limits:
+      amd.com/gpu: "0"
   enabled: true
 
 machine-learning:
