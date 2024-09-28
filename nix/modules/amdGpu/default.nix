@@ -15,6 +15,7 @@
       rocmPackages_5.clr
       rocmPackages_5.rocminfo
       rocmPackages_5.rocm-runtime
+      rocmPackages_5.rocm-smi
     ];
   };
 
@@ -30,6 +31,10 @@
     rocmPackages_5.clr
     rocmPackages_5.rocminfo
     rocmPackages_5.rocm-runtime
+    rocmPackages_5.rocm-smi
+    rocm-runtime
+    rocm-opencl-runtime
+    rocm-device-libs
   ];
 
   environment.variables = {
