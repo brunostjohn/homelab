@@ -1,0 +1,10 @@
+nfd:
+  enabled: true
+
+labeller:
+  enabled: true
+
+node_selector_enabled: true
+node_selector:
+  feature.node.kubernetes.io/pci-0300_1002.present: "true"
+  kubernetes.io/arch: amd64
