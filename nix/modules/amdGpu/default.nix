@@ -33,7 +33,6 @@
     rocmPackages_5.rocm-runtime
     rocmPackages_5.rocm-smi
     rocm-opencl-runtime
-    rocm-device-libs
   ];
 
   environment.variables = {
