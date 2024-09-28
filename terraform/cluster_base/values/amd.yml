@@ -1,9 +1,9 @@
 nfd:
-  enabled: true
+  enabled: false
 
 labeller:
   enabled: true
 
-node_selector_enabled: true
+node_selector_enabled: false
 node_selector:
   beta.kubernetes.io/arch: amd64

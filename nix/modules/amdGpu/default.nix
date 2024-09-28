@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./boot.nix
   ];
 
   hardware.opengl = {
@@ -10,10 +9,10 @@
     driSupport = true;
     driSupport32Bit = true;
 
-    extraPackages = with pkgs; [
-      rocmPackages.clr.icd
-      rocmPackages.clr
-    ];
+    # extraPackages = with pkgs; [
+    #   rocmPackages.clr.icd
+    #   rocmPackages.clr
+    # ];
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -24,9 +23,9 @@
 
   environment.systemPackages = with pkgs; [
     clinfo
-    rocmPackages.rocminfo
-    rocmPackages.rocm-runtime
-    rocmPackages.rocm-smi
+    # rocmPackages.rocminfo
+    # rocmPackages.rocm-runtime
+    # rocmPackages.rocm-smi
   ];
 
   environment.variables = {
@@ -34,5 +33,5 @@
   };
 
   hardware.amdgpu.opencl.enable = true;
-  hardware.amdgpu.initrd.enable = true;
+  # hardware.amdgpu.initrd.enable = true;
 }
