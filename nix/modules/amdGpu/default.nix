@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./boot.nix
   ];
 
   hardware.opengl = {
@@ -17,9 +18,9 @@
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  # ];
 
   environment.systemPackages = with pkgs; [
     clinfo
