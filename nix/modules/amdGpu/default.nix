@@ -39,6 +39,6 @@
     ROC_ENABLE_PRE_VEGA = "1";
   };
 
-  hardware.amdgpu.opencl = true;
+  hardware.amdgpu.opencl.enable = true;
   hardware.amdgpu.loadInInitrd = true;
 }
