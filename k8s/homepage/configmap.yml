@@ -15,15 +15,16 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
-    - Developer:
+    - Developer:nn
         - Github:
             - abbr: GH
               href: https://github.com/
   services.yaml: |
-    - My First GroupTest:
+    - My First Group:
         - My First Service:
             href: http://localhost/
-            description: Homepage is awesome
+            description: Homepage is awesomen-c
+             
 
     - My Second Group:
         - My Second Service:
