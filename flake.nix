@@ -43,7 +43,7 @@
           modules = [
             ./nix/hosts/s2
             ./nix/modules/k3sAgent
-            ./nix/modules/nvidiaGpu
+            ./nix/modules/amdGpu
           ] ++ globalModulesMNode;
         };
 

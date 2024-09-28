@@ -1,0 +1,3 @@
+{
+  boot.initrd.kernelModules = [ "amdgpu" ];
+}
