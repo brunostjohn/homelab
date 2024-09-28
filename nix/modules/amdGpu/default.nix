@@ -26,7 +26,10 @@
 
   environment.systemPackages = with pkgs; [
     clinfo
+    rocmPackages_5.clr.icd
+    rocmPackages_5.clr
     rocmPackages_5.rocminfo
+    rocmPackages_5.rocm-runtime
   ];
 
   environment.variables = {
