@@ -9,16 +9,19 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+
+    extraPackages = with pkgs; [
+      rocmPackages_5.clr.icd
+      rocmPackages_5.clr
+      rocmPackages_5.rocminfo
+      rocmPackages_5.rocm-runtime
+    ];
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  hardware.opengl.extraPackages = with pkgs; [
-    rocmPackages.clr.icd
-  ];
-
   systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
   ];
 
   environment.systemPackages = with pkgs; [

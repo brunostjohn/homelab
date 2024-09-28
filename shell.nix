@@ -9,7 +9,7 @@ pkgs.mkShell {
 
   packages = with pkgs; [
     ansible
-    terraform
+    # terraform
     nil
     nixfmt-classic
     go-task
@@ -22,13 +22,13 @@ pkgs.mkShell {
     cmctl
     argocd
     python311Packages.kubernetes
-    (wrapHelm kubernetes-helm {
-      plugins = with pkgs.kubernetes-helmPlugins; [
-        helm-secrets
-        helm-diff
-        helm-s3
-        helm-git
-      ];
-    })
+    # (wrapHelm kubernetes-helm {
+    #   plugins = with pkgs.kubernetes-helmPlugins; [
+    #     helm-secrets
+    #     helm-diff
+    #     helm-s3
+    #     helm-git
+    #   ];
+    # })
   ];
 }

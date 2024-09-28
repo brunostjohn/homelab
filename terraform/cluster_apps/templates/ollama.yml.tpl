@@ -4,10 +4,10 @@ ollama:
   # runtimeClassName: nvidia
   ollama:
     gpu:
-      enabled: false
-      # type: nvidia
-      # number: 3
-      # nvidiaResource: "nvidia.com/gpu.shared"
+      enabled: true
+      type: amd
+      number: 0
+      nvidiaResource: amd.com/gpu
   persistentVolume:
     enabled: true
     size: 50Gi
