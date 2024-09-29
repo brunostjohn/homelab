@@ -1,8 +1,0 @@
-serviceAccount:
-  create: true
-
-volume:
-  storageClassName: longhorn
-
-serviceMonitor:
-  enabled: true

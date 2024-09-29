@@ -196,6 +196,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to plane_role;
 CREATE USER plane WITH PASSWORD '<password>';
 GRANT plane_role TO plane;
 
+-- ONEUPTIME
+CREATE ROLE oneuptime_role;
+\c oneuptime
+GRANT ALL PRIVILEGES ON DATABASE oneuptime TO oneuptime_role;
+GRANT ALL ON SCHEMA public TO oneuptime_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO oneuptime_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to oneuptime_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to oneuptime_role;
+CREATE USER oneuptime WITH PASSWORD '<password>';
+GRANT oneuptime_role TO oneuptime;
+
 -- MEDIA STACK --
 
 -- LIDARR

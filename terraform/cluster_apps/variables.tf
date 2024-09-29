@@ -562,3 +562,8 @@ variable "plane_secret_key" {
   type        = string
   description = "The secret key for Plane"
 }
+
+variable "oneuptime_db_password" {
+  type        = string
+  description = "The password for the Oneuptime database"
+}

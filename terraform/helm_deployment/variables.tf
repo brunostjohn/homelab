@@ -82,3 +82,9 @@ variable "wait" {
   description = "Wait for healthy status"
   default     = true
 }
+
+variable "auto_sync" {
+  type        = bool
+  description = "Auto sync"
+  default     = true
+}

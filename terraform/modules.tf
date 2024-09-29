@@ -161,6 +161,7 @@ module "cluster_apps" {
   vaultwarden_db_password = var.vaultwarden_db_password
   coder_db_password       = var.coder_db_password
   nocodb_db_password      = var.nocodb_db_password
+  oneuptime_db_password   = var.oneuptime_db_password
 
   vaultwarden_installation_id  = var.vaultwarden_installation_id
   vaultwarden_installation_key = var.vaultwarden_installation_key

@@ -25,10 +25,13 @@ resource "argocd_application" "app" {
     }
 
     sync_policy {
-      automated {
-        self_heal   = true
-        prune       = true
-        allow_empty = true
+      dynamic "automated" {
+        for_each = var.auto_sync ? [true] : []
+        content {
+          prune       = true
+          self_heal   = true
+          allow_empty = true
+        }
       }
 
       sync_options = var.server_side_apply ? ["ServerSideApply=true"] : []
