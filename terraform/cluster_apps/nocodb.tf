@@ -43,6 +43,7 @@ resource "kubernetes_config_map" "nocodb_config" {
     "NC_S3_ENDPOINT"        = "static.${var.global_fqdn}"
     "NC_S3_ACCESS_KEY"      = var.nocodb_s3_access_key
     "NC_SECURE_ATTACHMENTS" = "true"
+    "NC_KEEP_CACHE"         = "true"
   }
 }
 
