@@ -74,4 +74,8 @@ spec:
         - name: {{ include "nocodb.fullname" . }}
           persistentVolumeClaim:
             claimName: {{ include "nocodb.fullname" . }}
+      {{- else -}}
+      volumes:
+        - name: {{ include "nocodb.fullname" . }}
+          emptyDir: {}
       {{- end }}
