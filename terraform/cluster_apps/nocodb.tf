@@ -35,7 +35,7 @@ resource "kubernetes_config_map" "nocodb_config" {
     "NC_SMTP_USERNAME"      = var.smtp_username
     "NC_SMTP_SECURE"        = "true"
     "NC_SSO"                = "OIDC"
-    "NC_DISABLE_EMAIL_AUTH" = "true"
+    # "NC_DISABLE_EMAIL_AUTH" = "true"
     "NC_ADMIN_EMAIL"        = var.nocodb_admin_email
     "NC_REDIS_URL"          = "redis://:redis@redis-master.databases.svc.cluster.local:6379/10"
     "NC_S3_BUCKET_NAME"     = "nocodb-attachments"
