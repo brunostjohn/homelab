@@ -6,18 +6,18 @@ metadata:
 data:
   services.yaml: |
     - Zefir's Cloud:
-    - Authentication:
-        href: https://auth.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
-        description: Change your password & manage 2FA methods.
-        icon: sh-authentik
-    - Documentation:
-        href: https://docs.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
-        description: Get answers to common questions, find out more about this cloud.
-        icon: sh-outline
-    - Status:
-        href: https://status.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
-        description: Check if everything is working correctly.
-        icon: sh-uptime-kuma
+      - Authentication:
+          href: https://auth.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+          description: Change your password & manage 2FA methods.
+          icon: sh-authentik
+      - Documentation:
+          href: https://docs.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+          description: Get answers to common questions, find out more about this cloud.
+          icon: sh-outline
+      - Status:
+          href: https://status.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+          description: Check if everything is working correctly.
+          icon: sh-uptime-kuma
     - Smart Home:
         - Home Assistant:
             href: https://thekingdom.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
