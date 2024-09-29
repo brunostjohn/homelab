@@ -10,7 +10,6 @@ data:
     favicon: https://homepage-assets.static.{{HOMEPAGE_VAR_GLOBAL_FQDN}}/images/server-favicon.ico
     background:
       image: https://homepage-assets.static.{{HOMEPAGE_VAR_GLOBAL_FQDN}}/images/bg-dark.jpg
-      #brightness: 50
     theme: dark
     color: zinc
     headerStyle: boxedWidgets
