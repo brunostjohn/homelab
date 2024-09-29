@@ -183,6 +183,11 @@ module "cluster_apps" {
   nocodb_admin_email      = var.nocodb_admin_email
   nocodb_s3_access_key    = var.nocodb_s3_access_key
   nocodb_s3_access_secret = var.nocodb_s3_access_secret
+
+  plane_aws_access_key_id     = var.plane_aws_access_key_id
+  plane_aws_secret_access_key = var.plane_aws_secret_access_key
+  plane_db_password           = var.plane_db_password
+  plane_secret_key            = var.plane_secret_key
 }
 
 module "authentik" {

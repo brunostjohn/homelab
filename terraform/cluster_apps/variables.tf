@@ -542,3 +542,23 @@ variable "nocodb_s3_access_secret" {
   type        = string
   description = "The access secret for the NocoDB S3 bucket"
 }
+
+variable "plane_db_password" {
+  type        = string
+  description = "The password for the Plane database"
+}
+
+variable "plane_aws_access_key_id" {
+  type        = string
+  description = "The AWS access key ID for Plane"
+}
+
+variable "plane_aws_secret_access_key" {
+  type        = string
+  description = "The AWS secret access key for Plane"
+}
+
+variable "plane_secret_key" {
+  type        = string
+  description = "The secret key for Plane"
+}

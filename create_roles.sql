@@ -185,6 +185,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to nocodb_role;
 CREATE USER nocodb WITH PASSWORD '<password>';
 GRANT nocodb_role TO nocodb;
 
+-- PLANE
+CREATE ROLE plane_role;
+\c plane
+GRANT ALL PRIVILEGES ON DATABASE plane TO plane_role;
+GRANT ALL ON SCHEMA public TO plane_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO plane_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to plane_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to plane_role;
+CREATE USER plane WITH PASSWORD '<password>';
+GRANT plane_role TO plane;
+
 -- MEDIA STACK --
 
 -- LIDARR
