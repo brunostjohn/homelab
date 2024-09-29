@@ -27,6 +27,7 @@ agent:
       value: "crowdsecurity/cri-logs"
 
 lapi:
+  replicas: 3
   metrics:
     enabled: true
     serviceMonitor:
@@ -34,6 +35,8 @@ lapi:
   dashboard:
     enabled: false
   persistentVolume:
+    data:
+      enabled: false
     config:
       enabled: false
   env:

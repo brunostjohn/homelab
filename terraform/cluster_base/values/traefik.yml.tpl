@@ -5,6 +5,9 @@ ingressRoute:
 service:
   loadBalancerIP: ${cluster_ip}
 
+deployment:
+  replicas: 3
+
 ports:
   traefik:
     port: 9000
