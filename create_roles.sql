@@ -174,6 +174,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to crowdsec_role;
 CREATE USER crowdsec WITH PASSWORD '<password>';
 GRANT crowdsec_role TO crowdsec;
 
+-- NOCODB
+CREATE ROLE nocodb_role;
+\c nocodb
+GRANT ALL PRIVILEGES ON DATABASE nocodb TO nocodb_role;
+GRANT ALL ON SCHEMA public TO nocodb_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO nocodb_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to nocodb_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to nocodb_role;
+CREATE USER nocodb WITH PASSWORD '<password>';
+GRANT nocodb_role TO nocodb;
+
 -- MEDIA STACK --
 
 -- LIDARR

@@ -160,6 +160,7 @@ module "cluster_apps" {
   memos_db_password       = var.memos_db_password
   vaultwarden_db_password = var.vaultwarden_db_password
   coder_db_password       = var.coder_db_password
+  nocodb_db_password      = var.nocodb_db_password
 
   vaultwarden_installation_id  = var.vaultwarden_installation_id
   vaultwarden_installation_key = var.vaultwarden_installation_key
@@ -178,6 +179,10 @@ module "cluster_apps" {
   floof_api_key        = var.floof_api_key
 
   jellyfin_api_key = var.jellyfin_api_key
+
+  nocodb_admin_email      = var.nocodb_admin_email
+  nocodb_s3_access_key    = var.nocodb_s3_access_key
+  nocodb_s3_access_secret = var.nocodb_s3_access_secret
 }
 
 module "authentik" {

@@ -727,3 +727,23 @@ variable "jellyfin_api_key" {
   type        = string
   description = "API key for Jellyfin"
 }
+
+variable "nocodb_admin_email" {
+  type        = string
+  description = "Admin email for NocoDB"
+}
+
+variable "nocodb_db_password" {
+  type        = string
+  description = "The password for the NocoDB database"
+}
+
+variable "nocodb_s3_access_key" {
+  type        = string
+  description = "The access key for the NocoDB S3 bucket"
+}
+
+variable "nocodb_s3_access_secret" {
+  type        = string
+  description = "The access secret for the NocoDB S3 bucket"
+}
