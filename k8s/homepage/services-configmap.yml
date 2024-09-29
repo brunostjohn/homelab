@@ -1,0 +1,236 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-services
+  namespace: homepage
+data:
+  services.yaml: |
+    - Zefir's Cloud:
+    - Authentication:
+        href: https://auth.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+        description: Change your password & manage 2FA methods.
+        icon: sh-authentik
+    - Documentation:
+        href: https://docs.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+        description: Get answers to common questions, find out more about this cloud.
+        icon: sh-outline
+    - Status:
+        href: https://status.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+        description: Check if everything is working correctly.
+        icon: sh-uptime-kuma
+    - Smart Home:
+        - Home Assistant:
+            href: https://thekingdom.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Turn lights on & off, set up automations, check sensors.
+            icon: sh-home-assistant
+        - Mealie:
+            href: https://mealie.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Store recipes, plan meals, create shopping lists.
+            icon: sh-mealie
+        - Paperless:
+            href: https://paperless.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Store important documents, search them fast.
+            icon: sh-paperless-ngx
+        - UniFi NVR:
+            href: https://10.0.0.10
+            description: View camera feeds, recordings & change settings.
+            icon: https://ui.com/microsite/static/media/protect.e39b8ff9.png
+    - Personal Cloud:
+        - Immich:
+            href: https://window.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Sync your photos & videos to this cloud. Use AI to search them quickly.
+            icon: sh-immich
+        - Nextcloud:
+            href: https://nextcloud.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Like Google's productivity suite, but hosted on this cloud.
+            icon: sh-nextcloud
+        - Vaultwarden:
+            href: https://passwords.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Password manager.
+            icon: sh-vaultwarden
+        - Pingvin Share:
+            href: https://share.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Share files with other people using links or e-mail.
+            icon: sh-pingvin-share
+    - Productivity:
+        - Plane:
+            href: https://plane.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Beautiful project management software.
+            icon: sh-plane
+        - Ollama:
+            href: https://ollama.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Talk to LLMs, use Python tools with them, and interact with their APIs.
+            icon: https://github.com/open-webui/open-webui/blob/main/static/favicon.png?raw=true
+        - Linkwarden:
+            href: https://linkwarden.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Brain dump website links into collections, share with friends.
+            icon: sh-linkwarden
+        - Manyfold:
+            href: https://manyfold.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: 3D printing model storage.
+            icon: sh-manyfold
+        - Grist:
+            href: https://grist.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Create superpowered relational spreadsheets using a UI or Python.
+            icon: sh-grist
+        - Memos:
+            href: https://memos.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Write memos to yourself with pictures, code, and attachements.
+            icon: sh-memos
+        - Windmill:
+            href: https://windmill.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Write simple automations & internal tools using languages you know with little overhead.
+            icon: mdi-qrcode-#ffffff
+        - NocoDB:
+            href: https://noco.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: No code database for contacts, comparing products, and more.
+            icon: sh-nocodb
+        - Rally:
+            href: https://rally.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Event attendance pools to figure out when to meet people.
+            icon: sh-rallly
+        - Stirling PDF:
+            href: https://pdftools.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Manipulate PDFs with ease and privacy.
+            icon: sh-stirling-pdf
+        - IT Tools:
+            href: https://ittools.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Perform common IT operations.
+            icon: mdi-toolbox-#ffffff
+    - Entertainment:
+        - Jellyfin:
+            href: https://birds.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Watch movies & shows, listen to music, and more.
+            icon: sh-jellyfin
+            widget:
+              type: jellyfin
+              url: http://jellyfin.entertainment.svc.cluster.local:8096
+              key: {{HOMEPAGE_VAR_JELLYFIN_API_KEY}}
+        - Jellyseerr:
+            href: https://den.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Request movies & shows, check their download status, report issues.
+            icon: sh-jellyseerr
+            widget:
+              type: jellyseerr
+              url: http://jellyseerr.entertainment.svc.cluster.local:5055
+              key: {{HOMEPAGE_VAR_JELLYSEERR_API_KEY}}
+        - Audiobookshelf:
+            href: https://audiobookshelf.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Listen to audiobooks & podcasts.
+            icon: sh-audiobookshelf
+        - Romm:
+            href: https://romm.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Collect & download game console ROMs.
+            icon: sh-romm
+    - Media Downloaders:
+        - QBitTorrent:
+            href: https://fetching.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Web UI for our torrent client.
+            icon: sh-qbittorrent
+        - Prowlarr:
+            href: https://prowlarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Torrent indexer manager & cacher.
+            icon: sh-prowlarr
+        - Radarr:
+            href: https://radarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Movie download manager.
+            icon: sh-radarr
+        - Sonarr:
+            href: https://sonarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Series download manager.
+            icon: sh-sonarr
+        - Bazarr:
+            href: https://bazarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Subtitle download manager.
+            icon: sh-bazarr
+        - Lidarr:
+            href: https://lidarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Music download manager.
+            icon: sh-lidarr
+        - Readarr:
+            href: https://readarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Book, audiobook & podcast download manager.
+            icon: sh-readarr
+    - Data Storage:
+        - TrueCommand:
+            href: https://truecommand.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Manager for all the storage servers.
+            icon: sh-truenas-scale
+        - "TrueNAS (jabberwock)":
+            href: http://10.0.3.1
+            icon: sh-truenas-core
+            widget:
+              type: truenas
+              url: http://10.0.3.1
+              key: {{HOMEPAGE_VAR_JABBERWOCK_API_KEY}}
+              enablePools: true
+        - "TrueNAS (lookingglass)":
+            href: http://10.0.3.2
+            icon: sh-truenas-core
+            widget:
+              type: truenas
+              url: http://10.0.3.2
+              key: {{HOMEPAGE_VAR_LOOKINGGLASS_API_KEY}}
+              enablePools: false
+        - "TrueNAS (floof)":
+            href: http://10.0.3.5
+            icon: sh-truenas-core
+            widget:
+              type: truenas
+              url: http://10.0.3.5
+              key: {{HOMEPAGE_VAR_FLOOF_API_KEY}}
+              enablePools: true
+    - Coding:
+        - GitLab:
+            href: https://git.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Code storage, CI system, and more.
+            icon: sh-gitlab
+        - Gist:
+            href: https://gist.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Send short code fragments using a link. Save snippets for later.
+            icon: mdi-code-array-#ffffff
+        - Coder:
+            href: https://envs.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Instantly provision development environments. Write code remotely.
+            icon: sh-coder
+    - Management:
+        - Netbox:
+            href: https://netbox.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Find out what hardware is where, what it's connected to, and more.
+            icon: mdi-server-outline-#ffffff
+        - Grafana:
+            href: https://grafana.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Various observability metrics graphed in informative dashboards.
+            icon: sh-grafana
+        - Minio:
+            href: https://minio.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: S3 compatible object storage.
+            icon: sh-minio
+        - UniFi Network:
+            href: https://10.0.0.1
+            description: Manage networking, APs, and more.
+            icon: sh-ubiquiti-unifi
+        - Proxmox:
+            href: https://10.0.0.11:8006
+            description: Manage virtual machines & their hosts.
+            icon: sh-proxmox
+        - S1 iDRAC:
+            href: https://10.0.66.169
+            description: Manage S1's hardware.
+            icon: mdi-server-network-outline-#ffffff
+        - S2 iDRAC:
+            href: https://10.0.211.116
+            description: Manage S2's hardware.
+            icon: mdi-server-network-outline-#ffffff
+        - S3 iDRAC:
+            href: https://10.0.205.212
+            description: Manage S3's hardware.
+            icon: mdi-server-network-outline-#ffffff
+        - Wizarr:
+            href: https://hellothere.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Invite people to use the entertainment stack.
+            icon: sh-wizarr
+        - Traefik Dashboard:
+            href: http://10.0.2.0:9000/dashboard/#/
+            description: View information about routes, middlewares, and more.
+            icon: sh-traefik

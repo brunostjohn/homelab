@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-settings
+  namespace: homepage
+data:
+  settings.yaml: |
+    title: Zefir's Cloud
+    startUrl: https://{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+    favicon: https://homepage-assets.static.{{HOMEPAGE_VAR_GLOBAL_FQDN}}/images/server-favicon.ico
+    background:
+      image: https://homepage-assets.static.{{HOMEPAGE_VAR_GLOBAL_FQDN}}/images/bg-dark.jpg
+      #brightness: 50
+    theme: dark
+    color: zinc
+    headerStyle: boxedWidgets
+    quicklaunch:
+      searchDescriptions: true
+      hideInternetSearch: true
+      showSearchSuggestions: true
+      hideVisitURL: true
+      provider: google
+    useEqualHeights: true
+    hideVersion: true
+    layout:
+      - Zefir's Cloud:
+          icon: mdi-cat-#ffffff
+          style: row
+          columns: 3
+      - Entertainment:
+          icon: mdi-filmstrip-#ffffff
+          style: row
+          columns: 4
+      - Personal Cloud:
+          style: row
+          columns: 4
+          icon: mdi-cloud-outline-#ffffff
+      - Smart Home:
+          icon: mdi-home-analytics-#ffffff
+          style: row
+          columns: 4
+      - Productivity:
+          icon: mdi-pen-#ffffff
+          style: row
+          columns: 4
+      - Coding:
+          icon: mdi-code-block-braces-#ffffff
+          style: row
+          columns: 3
+      - Media Downloaders:
+          icon: mdi-download-circle-outline-#ffffff
+          style: row
+          columns: 4
+      - Data Storage:
+          icon: mdi-tape-drive-#ffffff
+          columns: 4
+          rows: 1
+          style: row
+      - Management:
+          icon: mdi-toolbox-outline-#ffffff
+          columns: 5
+          style: row
+    providers:
+      longhorn:
+        url: http://longhorn-backend.longhorn-system.svc.cluster.local:9500
