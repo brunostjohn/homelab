@@ -7,10 +7,10 @@ resource "kubernetes_secret" "nocodb_secrets" {
   data = {
     "NC_OIDC_CLIENT_ID"     = var.nocodb_oidc_client_id
     "NC_OIDC_CLIENT_SECRET" = var.nocodb_oidc_client_secret
-    "NC_SMTP_PASSWORD"      = var.smtp_password
     "NC_AUTH_JWT_SECRET"    = var.nocodb_auth_secret
     "NC_DB"                 = "pg://postgres-cluster-rw-pooler.databases.svc.cluster.local:5432?u=nocodb&p=${urlencode(var.nocodb_db_password)}&d=nocodb"
     "NC_S3_ACCESS_SECRET"   = var.nocodb_s3_access_secret
+    "NC_SMTP_PASSWORD"      = var.smtp_password
   }
 }
 
@@ -34,8 +34,9 @@ resource "kubernetes_config_map" "nocodb_config" {
     "NC_SMTP_PORT"          = var.smtp_port
     "NC_SMTP_USERNAME"      = var.smtp_username
     "NC_SMTP_SECURE"        = "true"
+    "NC_SMTP_IGNORE_TLS"    = "false"
     "NC_SSO"                = "OIDC"
-    # "NC_DISABLE_EMAIL_AUTH" = "true"
+    "NC_DISABLE_EMAIL_AUTH" = "true"
     "NC_ADMIN_EMAIL"        = var.nocodb_admin_email
     "NC_REDIS_URL"          = "redis://:redis@redis-master.databases.svc.cluster.local:6379/10"
     "NC_S3_BUCKET_NAME"     = "nocodb-attachments"
