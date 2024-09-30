@@ -10,6 +10,10 @@ data:
           href: https://auth.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
           description: Change your password & manage 2FA methods.
           icon: sh-authentik
+          widget:
+            type: authentik
+            url: https://auth.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            key: {{HOMEPAGE_VAR_AUTHENTIK_API_KEY}}
       - Documentation:
           href: https://docs.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
           description: Get answers to common questions, find out more about this cloud.
@@ -23,14 +27,26 @@ data:
             href: https://thekingdom.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Turn lights on & off, set up automations, check sensors.
             icon: sh-home-assistant
+            widget:
+              type: homeassistant
+              url: http://homeassistant-svc.homeassistant.svc.cluster.local:2137
+              key: {{HOMEPAGE_VAR_HOMEASSISTANT_API_KEY}}
         - Mealie:
             href: https://mealie.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Store recipes, plan meals, create shopping lists.
             icon: sh-mealie
+            widget:
+              type: mealie
+              url: http://mealie.mealie.svc.cluster.local:9000
+              key: {{HOMEPAGE_VAR_MEALIE_API_KEY}}
         - Paperless:
             href: https://paperless.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Store important documents, search them fast.
             icon: sh-paperless-ngx
+            widget:
+              type: paperless
+              url: http://paperless.paperless.svc.cluster.local:8000
+              key: {{HOMEPAGE_VAR_PAPERLESS_API_KEY}}
         - UniFi NVR:
             href: https://10.0.0.10
             description: View camera feeds, recordings & change settings.
@@ -40,10 +56,18 @@ data:
             href: https://window.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Sync your photos & videos to this cloud. Use AI to search them quickly.
             icon: sh-immich
+            widget:
+              type: immich
+              url: https://window.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+              key: {{HOMEPAGE_VAR_IMMICH_API_KEY}}
         - Nextcloud:
             href: https://nextcloud.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Like Google's productivity suite, but hosted on this cloud.
             icon: sh-nextcloud
+            widget:
+              type: nextcloud
+              url: https://nextcloud.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+              key: {{HOMEPAGE_VAR_NEXTCLOUD_API_KEY}}
         - Vaultwarden:
             href: https://passwords.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Password manager.
@@ -62,9 +86,13 @@ data:
             description: Talk to LLMs, use Python tools with them, and interact with their APIs.
             icon: https://github.com/open-webui/open-webui/blob/main/static/favicon.png?raw=true
         - Linkwarden:
-            href: https://linkwarden.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            href: https://links.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Brain dump website links into collections, share with friends.
             icon: sh-linkwarden
+            widget:
+              type: linkwarden
+              url: http://linkwarden.linkwarden.svc.cluster.local:3000
+              key: {{HOMEPAGE_VAR_LINKWARDEN_API_KEY}}
         - Manyfold:
             href: https://manyfold.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: 3D printing model storage.
@@ -118,39 +146,78 @@ data:
             href: https://audiobookshelf.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Listen to audiobooks & podcasts.
             icon: sh-audiobookshelf
+            widget:
+              type: audiobookshelf
+              url: http://audiobookshelf.entertainment.svc.cluster.local
+              key: {{HOMEPAGE_VAR_AUDIOBOOKSHELF_API_KEY}}
         - Romm:
             href: https://romm.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Collect & download game console ROMs.
             icon: sh-romm
+            widget:
+              type: romm
+              url: http://romm.romm.svc.cluster.local:8080
+              username: {{HOMEPAGE_VAR_ROMM_USERNAME}}
+              password: {{HOMEPAGE_VAR_ROMM_PASSWORD}}
+              fields: ["platforms", "totalRoms", "saves", "states"]
     - Media Downloaders:
         - QBitTorrent:
             href: https://fetching.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Web UI for our torrent client.
             icon: sh-qbittorrent
+            widget:
+              type: qbittorrent
+              url: http://qbittorrent.entertainment.svc.cluster.local:8080
+              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
         - Prowlarr:
             href: https://prowlarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Torrent indexer manager & cacher.
             icon: sh-prowlarr
+            widget:
+              type: prowlarr
+              url: http://prowlarr.entertainment.svc.cluster.local:9696
+              key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
         - Radarr:
             href: https://radarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Movie download manager.
             icon: sh-radarr
+            widget:
+              type: radarr
+              url: http://radarr.entertainment.svc.cluster.local:7878
+              key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
         - Sonarr:
             href: https://sonarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Series download manager.
             icon: sh-sonarr
+            widget:
+              type: sonarr
+              url: http://sonarr.entertainment.svc.cluster.local:8989
+              key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
         - Bazarr:
             href: https://bazarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Subtitle download manager.
             icon: sh-bazarr
+            widget:
+              type: bazarr
+              url: http://bazarr.entertainment.svc.cluster.local:6767
+              key: {{HOMEPAGE_VAR_BAZARR_API_KEY}}
         - Lidarr:
             href: https://lidarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Music download manager.
             icon: sh-lidarr
+            widget:
+              type: lidarr
+              url: http://lidarr.entertainment.svc.cluster.local:8686
+              key: {{HOMEPAGE_VAR_LIDARR_API_KEY}}
         - Readarr:
             href: https://readarr.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Book, audiobook & podcast download manager.
             icon: sh-readarr
+            widget:
+              type: readarr
+              url: http://readarr.entertainment.svc.cluster.local:8787
+              key: {{HOMEPAGE_VAR_READARR_API_KEY}}
     - Data Storage:
         - TrueCommand:
             href: https://truecommand.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
@@ -202,6 +269,11 @@ data:
             href: https://grafana.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Various observability metrics graphed in informative dashboards.
             icon: sh-grafana
+            widget:
+              type: grafana
+              url: https://grafana.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+              username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
+              password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
         - Minio:
             href: https://minio.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: S3 compatible object storage.
@@ -214,6 +286,11 @@ data:
             href: https://10.0.0.11:8006
             description: Manage virtual machines & their hosts.
             icon: sh-proxmox
+            widget:
+              type: proxmox
+              url: https://10.0.0.11:8006
+              username: {{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}
+              password: {{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}
         - S1 iDRAC:
             href: https://10.0.66.169
             description: Manage S1's hardware.
@@ -234,3 +311,6 @@ data:
             href: http://10.0.2.0:9000/dashboard/#/
             description: View information about routes, middlewares, and more.
             icon: sh-traefik
+            widget:
+              type: traefik
+              url: http://10.0.2.0:9000/dashboard/

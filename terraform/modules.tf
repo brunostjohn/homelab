@@ -189,6 +189,23 @@ module "cluster_apps" {
   plane_aws_secret_access_key = var.plane_aws_secret_access_key
   plane_db_password           = var.plane_db_password
   plane_secret_key            = var.plane_secret_key
+
+  nextcloud_api_key        = var.nextcloud_api_key
+  romm_username            = var.romm_username
+  romm_password            = var.romm_password
+  proxmox_api_token_id     = var.proxmox_api_token_id
+  proxmox_api_token_secret = var.proxmox_api_token_secret
+  authentik_api_key        = var.authentik_api_key
+  immich_api_key           = var.immich_api_key
+  homeassistant_api_key    = var.homeassistant_api_key
+  mealie_api_key           = var.mealie_api_key
+  paperless_api_key        = var.paperless_api_key
+  linkwarden_api_key       = var.linkwarden_api_key
+  grafana_username         = var.grafana_username
+  grafana_password         = var.grafana_password
+  qbittorrent_username     = var.qbittorrent_username
+  qbittorrent_password     = var.qbittorrent_password
+  audiobookshelf_api_key   = var.audiobookshelf_api_key
 }
 
 module "authentik" {

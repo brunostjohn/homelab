@@ -772,3 +772,67 @@ variable "oneuptime_db_password" {
   type        = string
   description = "The password for the Oneuptime database"
 }
+
+variable "romm_username" {
+  type = string
+}
+
+variable "romm_password" {
+  type = string
+}
+
+variable "qbittorrent_username" {
+  type = string
+}
+
+variable "qbittorrent_password" {
+  type = string
+}
+
+variable "grafana_username" {
+  type = string
+}
+
+variable "grafana_password" {
+  type = string
+}
+
+variable "proxmox_api_token_id" {
+  type = string
+}
+
+variable "proxmox_api_token_secret" {
+  type = string
+}
+
+variable "audiobookshelf_api_key" {
+  type = string
+}
+
+variable "authentik_api_key" {
+  type = string
+}
+
+variable "immich_api_key" {
+  type = string
+}
+
+variable "nextcloud_api_key" {
+  type = string
+}
+
+variable "homeassistant_api_key" {
+  type = string
+}
+
+variable "mealie_api_key" {
+  type = string
+}
+
+variable "paperless_api_key" {
+  type = string
+}
+
+variable "linkwarden_api_key" {
+  type = string
+}
