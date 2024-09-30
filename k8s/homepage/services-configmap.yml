@@ -313,4 +313,4 @@ data:
             icon: sh-traefik
             widget:
               type: traefik
-              url: http://10.0.2.0:9000/dashboard/
+              url: http://traefik.kube-system.svc.cluster.local:9000
