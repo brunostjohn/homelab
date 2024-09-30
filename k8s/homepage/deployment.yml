@@ -9,7 +9,7 @@ metadata:
     reloader.stakater.com/auto: "true"
 spec:
   revisionHistoryLimit: 1
-  replicas: 2
+  replicas: 1
   strategy:
     type: RollingUpdate
   selector:
