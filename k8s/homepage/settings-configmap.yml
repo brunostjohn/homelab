@@ -57,7 +57,7 @@ data:
           style: row
       - Management:
           icon: mdi-toolbox-outline-#ffffff
-          columns: 5
+          columns: 4
           style: row
     providers:
       longhorn:
