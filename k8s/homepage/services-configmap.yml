@@ -278,10 +278,13 @@ data:
             href: https://minio.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: S3 compatible object storage.
             icon: sh-minio
-        - UniFi Network:
-            href: https://10.0.0.1
-            description: Manage networking, APs, and more.
-            icon: sh-ubiquiti-unifi
+        - Traefik Dashboard:
+            href: http://10.0.2.0:9000/dashboard/#/
+            description: View information about routes, middlewares, and more.
+            icon: sh-traefik
+            widget:
+              type: traefik
+              url: http://traefik.kube-system.svc.cluster.local:9000
         - Proxmox:
             href: https://10.0.0.11:8006
             description: Manage virtual machines & their hosts.
@@ -291,6 +294,10 @@ data:
               url: https://10.0.0.11:8006
               username: {{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}
               password: {{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}
+        - UniFi Network:
+            href: https://10.0.0.1
+            description: Manage networking, APs, and more.
+            icon: sh-ubiquiti-unifi
         - S1 iDRAC:
             href: https://10.0.66.169
             description: Manage S1's hardware.
@@ -307,10 +314,3 @@ data:
             href: https://hellothere.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Invite people to use the entertainment stack.
             icon: sh-wizarr
-        - Traefik Dashboard:
-            href: http://10.0.2.0:9000/dashboard/#/
-            description: View information about routes, middlewares, and more.
-            icon: sh-traefik
-            widget:
-              type: traefik
-              url: http://traefik.kube-system.svc.cluster.local:9000
