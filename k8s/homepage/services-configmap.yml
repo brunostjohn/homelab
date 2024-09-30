@@ -44,7 +44,7 @@ data:
             description: Store important documents, search them fast.
             icon: sh-paperless-ngx
             widget:
-              type: paperless
+              type: paperlessngx
               url: http://paperless.paperless.svc.cluster.local:8000
               key: {{HOMEPAGE_VAR_PAPERLESS_API_KEY}}
         - UniFi NVR:
