@@ -44,7 +44,9 @@ data:
       .information-widget-logo {
         margin-right: auto !important;
       }
+    }
 
+    @media screen and (max-width: 605px) {
       .information-widget-kubernetes, .information-widget-longhorn-node, .information-widget-unifi-console {
         display: none !important;
       }
