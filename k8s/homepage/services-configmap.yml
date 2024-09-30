@@ -58,7 +58,7 @@ data:
             icon: sh-immich
             widget:
               type: immich
-              url: https://window.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+              url: http://immich-server.immich.svc.cluster.local:3001
               key: {{HOMEPAGE_VAR_IMMICH_API_KEY}}
         - Nextcloud:
             href: https://nextcloud.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
