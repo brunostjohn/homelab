@@ -44,6 +44,10 @@ data:
       .information-widget-logo {
         margin-right: auto !important;
       }
+
+      .information-widget-kubernetes, .information-widget-longhorn-node, .information-widget-unifi-console {
+        display: none !important;
+      }
     }
 
     .information-widget-logo .resolved {
