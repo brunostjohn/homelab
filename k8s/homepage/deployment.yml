@@ -5,6 +5,8 @@ metadata:
   namespace: homepage
   labels:
     app.kubernetes.io/name: homepage
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   revisionHistoryLimit: 3
   replicas: 1

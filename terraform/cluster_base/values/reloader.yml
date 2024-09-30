@@ -1,0 +1,6 @@
+reloader:
+  watchGlobally: true
+  serviceMonitor:
+    enabled: true
+  podMonitor:
+    enabled: true
