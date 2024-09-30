@@ -97,3 +97,7 @@ data:
       margin-top: auto !important;
       margin-bottom: auto !important;
     }
+
+    #revalidate {
+      display: none !important;
+    }
