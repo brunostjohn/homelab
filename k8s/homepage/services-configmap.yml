@@ -12,7 +12,7 @@ data:
           icon: sh-authentik
           widget:
             type: authentik
-            url: https://auth.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            url: http://authentik-server.authentik.svc.cluster.local
             key: {{HOMEPAGE_VAR_AUTHENTIK_API_KEY}}
       - Documentation:
           href: https://docs.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
@@ -261,23 +261,15 @@ data:
             description: Instantly provision development environments. Write code remotely.
             icon: sh-coder
     - Management:
-        - Netbox:
-            href: https://netbox.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
-            description: Find out what hardware is where, what it's connected to, and more.
-            icon: mdi-server-outline-#ffffff
         - Grafana:
             href: https://grafana.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
             description: Various observability metrics graphed in informative dashboards.
             icon: sh-grafana
             widget:
               type: grafana
-              url: https://grafana.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+              url: http://monitoring-grafana.monitoring.svc.cluster.local
               username: {{HOMEPAGE_VAR_GRAFANA_USERNAME}}
               password: {{HOMEPAGE_VAR_GRAFANA_PASSWORD}}
-        - Minio:
-            href: https://minio.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
-            description: S3 compatible object storage.
-            icon: sh-minio
         - Traefik Dashboard:
             href: http://10.0.2.0:9000/dashboard/#/
             description: View information about routes, middlewares, and more.
@@ -294,6 +286,14 @@ data:
               url: https://10.0.0.11:8006
               username: {{HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID}}
               password: {{HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET}}
+        - Netbox:
+            href: https://netbox.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: Find out what hardware is where, what it's connected to, and more.
+            icon: mdi-server-outline-#ffffff
+        - Minio:
+            href: https://minio.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+            description: S3 compatible object storage.
+            icon: sh-minio
         - UniFi Network:
             href: https://10.0.0.1
             description: Manage networking, APs, and more.
