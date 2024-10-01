@@ -66,7 +66,7 @@ data:
             icon: sh-nextcloud
             widget:
               type: nextcloud
-              url: https://nextcloud.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
+              url: http://nextcloud.nextcloud.svc.cluster.local:8080
               key: {{HOMEPAGE_VAR_NEXTCLOUD_API_KEY}}
         - Vaultwarden:
             href: https://passwords.{{HOMEPAGE_VAR_GLOBAL_FQDN}}
