@@ -18,10 +18,10 @@ persistence:
 
 resources:
   requests:
-    cpu: "500m"
+    cpu: "1"
     memory: "1Gi"
   limits:
-    cpu: "1"
+    cpu: "2"
     memory: "2Gi"
 
 nginx:
@@ -36,11 +36,11 @@ nginx:
       value: traefik.kube-system
 
 startupProbe:
-  enabled: true
+  enabled: false
 livenessProbe:
-  enabled: true
+  enabled: false
 readinessProbe:
-  enabled: true
+  enabled: false
 
 nextcloud:
   securityContext:
@@ -75,19 +75,32 @@ nextcloud:
     redis.config.php: false
   phpConfigs:
     opcache.conf: |-
-      php_admin_value[memory_limit] = -1
-      php_admin_value[opcache.jit_buffer_size] = 8M
-      php_admin_value[opcache.interned_strings_buffer] = 64
-      php_admin_value[opcache.memory_consumption] = 1G
-      php_admin_value[opcache.max_accelerated_files] = 30000
-      php_admin_value[opcache.validate_timestamps] = 0
-      php_admin_value[opcache.revalidate_freq] = 60
+      memory_limit = -1
+      opcache.interned_strings_buffer = 64
+      opcache.memory_consumption = 1G
+      opcache.max_accelerated_files = 30000
+      opcache.validate_timestamps = 0
+      opcache.revalidate_freq = 60
+      opcache.jit = 1255
+      opcache.jit_buffer_size = 128M
     zz-pm.ini: |-
       pm.max_children=57
       pm.start_servers=14
       pm.min_spare_servers=14
       pm.max_spare_servers=42
   configs:
+    replicas.config.php: |-
+      <?php
+        $CONFIG = array(
+          'dbreplica' => [
+            [
+              'user' => 'nextcloud',
+              'password' => '${db_password}',
+              'host' => 'postgres-cluster-ro-pooler.databases.svc.cluster.local',
+              'dbname' => 'nextcloud'
+            ],
+          ],
+        );
     oidc.config.php: |-
       <?php
         $CONFIG = array(
@@ -113,6 +126,20 @@ nextcloud:
             'dbindex' => 1,
           ),
         );
+    previews.config.php: |-
+      <?php
+        $CONFIG = array(
+          'preview_format' => 'webp',
+          'enabledPreviewProviders' => [
+            'OC\Preview\MP3',
+            'OC\Preview\TXT',
+            'OC\Preview\MarkDown',
+            'OC\Preview\OpenDocument',
+            'OC\Preview\Krita',
+            'OC\Preview\Imaginary',
+          ],
+          'preview_imaginary_url' => 'http://imaginary.nextcloud.svc.cluster.local:9000',
+        );
 
 internalDatabase:
   enabled: false
@@ -127,6 +154,9 @@ externalDatabase:
 
 cronjob:
   enabled: true
+  securityContext:
+    allowPrivilegeEscalation: false
+    runAsUser: 0
 
 hpa:
   enabled: false

@@ -7,7 +7,7 @@ module "nextcloud_helm" {
 
   repo_url        = "https://nextcloud.github.io/helm/"
   chart           = "nextcloud"
-  target_revision = "5.5.3"
+  target_revision = "6.0.3"
 
   values = templatefile("${path.module}/templates/nextcloud.yml.tpl", {
     global_fqdn   = var.global_fqdn
@@ -22,4 +22,41 @@ module "nextcloud_helm" {
   })
 
   create_ingress = false
+}
+
+resource "argocd_application" "imaginary" {
+  depends_on = [ module.nextcloud_helm ]
+
+  metadata {
+    name      = "imaginary"
+    namespace = "argocd"
+  }
+
+  spec {
+    source {
+      repo_url = var.homelab_repo
+      path     = "k8s/imaginary"
+    }
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "nextcloud"
+    }
+
+    sync_policy {
+      automated {
+        prune     = true
+        self_heal = true
+      }
+
+      retry {
+        limit = "5"
+        backoff {
+          duration     = "30s"
+          max_duration = "2m"
+          factor       = "2"
+        }
+      }
+    }
+  }
 }
