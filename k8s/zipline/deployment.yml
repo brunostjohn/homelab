@@ -28,6 +28,8 @@ spec:
         - name: zipline
           image: ghcr.io/diced/zipline:v4
           imagePullPolicy: IfNotPresent
+          command: ["/bin/sh"]
+          args: ["-c", "pnpm db:prototype"]
           resources:
             requests:
               memory: "512Mi"
