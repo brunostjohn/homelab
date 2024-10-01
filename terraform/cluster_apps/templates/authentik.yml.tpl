@@ -2,7 +2,7 @@ global:
   addPrometheusAnnotations: true
   env:
     - name: AUTHENTIK_REDIS__HOST
-      value: redis.databases.svc.cluster.local
+      value: redis-master.databases.svc.cluster.local
     - name: AUTHENTIK_REDIS__PASSWORD
       value: redis
     - name: AUTHENTIK_REDIS__PORT
@@ -20,7 +20,7 @@ authentik:
     host: postgres-cluster-rw-pooler.databases.svc.cluster.local
     password: ${postgres_password}
   redis:
-    host: redis.databases.svc.cluster.local
+    host: redis-master.databases.svc.cluster.local
     password: redis
 
 server:

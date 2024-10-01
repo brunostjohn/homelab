@@ -32,7 +32,7 @@ redis:
   enabled: false
 
 externalRedis:
-  host: redis.databases.svc.cluster.local
+  host: redis-master.databases.svc.cluster.local
   port: 6379
   existingSecret:
     name: oneuptime-redis

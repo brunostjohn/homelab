@@ -1,5 +1,5 @@
 env:
-  REDIS_HOSTNAME: redis.databases.svc.cluster.local
+  REDIS_HOSTNAME: redis-master.databases.svc.cluster.local
   REDIS_PORT: "6379"
   REDIS_PASSWORD: redis
   REDIS_DBINDEX: "9"

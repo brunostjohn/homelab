@@ -76,7 +76,7 @@ spec:
             - name: PAPERLESS_PORT
               value: "8000"
             - name: PAPERLESS_REDIS
-              value: redis://:redis@redis.databases.svc.cluster.local:6379/2
+              value: redis://:redis@redis-master.databases.svc.cluster.local:6379/2
             - name: PAPERLESS_DBHOST
               value: postgres-cluster-rw-pooler.databases.svc.cluster.local
             - name: PAPERLESS_DBNAME

@@ -13,7 +13,7 @@ resource "kubernetes_config_map" "outline" {
   data = {
     "NODE_ENV"                  = "production"
     "PGSSLMODE"                 = "disable"
-    "REDIS_URL"                 = "redis://:redis@redis.databases.svc.cluster.local:6379/7"
+    "REDIS_URL"                 = "redis://:redis@redis-master.databases.svc.cluster.local:6379/7"
     "URL"                       = "https://docs.${var.global_fqdn}"
     "FILE_STORAGE"              = "s3"
     "AWS_REGION"                = "doesntmatter"

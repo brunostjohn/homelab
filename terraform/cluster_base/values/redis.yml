@@ -6,7 +6,7 @@ global:
 architecture: replication
 
 sentinel:
-  enabled: true
+  enabled: false
 
 master:
   resources:

@@ -120,7 +120,7 @@ nextcloud:
           'memcache.distributed' => '\OC\Memcache\Redis',
           'memcache.local' => '\OC\Memcache\APCu',
           'redis' => array(
-            'host' => 'redis.databases.svc.cluster.local',
+            'host' => 'redis-master.databases.svc.cluster.local',
             'port' => 6379,
             'password' => 'redis',
             'dbindex' => 1,

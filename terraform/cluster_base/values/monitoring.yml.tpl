@@ -92,7 +92,7 @@ grafana:
       password: $__file{/etc/secrets/grafana-secrets/db_password}
     remote_caching:
       type: redis
-      connstr: addr=redis.databases.svc.cluster.local:6379,pool_size=100,db=13,ssl=false
+      connstr: addr=redis-master.databases.svc.cluster.local:6379,pool_size=100,db=13,ssl=false
 
 kubeEtcd:
   enabled: true

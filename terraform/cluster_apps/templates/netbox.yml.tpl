@@ -96,13 +96,13 @@ redis:
   enabled: false
 
 tasksRedis:
-  host: redis.databases.svc.cluster.local
+  host: redis-master.databases.svc.cluster.local
   port: 6379
   password: redis
   database: 4
 
 cachingRedis:
-  host: redis.databases.svc.cluster.local
+  host: redis-master.databases.svc.cluster.local
   port: 6379
   password: redis
   database: 5

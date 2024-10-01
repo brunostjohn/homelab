@@ -32,7 +32,7 @@ beatworker:
 env:
   pgdb_remote_url: postgresql://plane:${db_password}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/plane
 
-  remote_redis_url: redis://:redis@redis.databases.svc.cluster.local:6379/11
+  remote_redis_url: redis://:redis@redis-master.databases.svc.cluster.local:6379/11
 
   docstore_bucket: plane-uploads
   doc_upload_size_limit: "5242880"
