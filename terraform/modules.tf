@@ -22,7 +22,9 @@ module "cluster_base" {
   source     = "./cluster_base"
   depends_on = [module.unifi, module.cloudflare, module.proxmox]
 
-  global_fqdn                      = var.global_fqdn
+  global_fqdn = var.global_fqdn
+  second_fqdn = var.second_fqdn
+
   alertmanager_discord_webhook_url = var.alertmanager_discord_webhook_url
   crowdsec_enroll_key              = var.crowdsec_enroll_key
   crowdsec_bouncer_key_traefik     = var.crowdsec_bouncer_key_traefik

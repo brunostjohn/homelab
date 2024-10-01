@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: cloudflare-ddns
   namespace: cloudflare-ddns
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   strategy:

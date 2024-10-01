@@ -840,3 +840,7 @@ variable "linkwarden_api_key" {
 variable "grafana_db_password" {
   type = string
 }
+
+variable "second_fqdn" {
+  type = string
+}

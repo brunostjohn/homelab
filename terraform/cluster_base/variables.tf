@@ -110,3 +110,7 @@ variable "crowdsec_webhook_url" {
 variable "grafana_db_password" {
   type = string
 }
+
+variable "second_fqdn" {
+  type = string
+}
