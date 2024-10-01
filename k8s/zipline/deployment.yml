@@ -18,9 +18,14 @@ spec:
         - name: zipline-public
           persistentVolumeClaim:
             claimName: zipline-public-pvc
+        - name: zipline-themes
+          persistentVolumeClaim:
+            claimName: zipline-themes-pvc
       containers:
         - name: zipline
           image: ghcr.io/diced/zipline:v4
+          command: ["/bin/sh"]
+          args: ["-c", "pnpm db:prototype"]
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -34,6 +39,8 @@ spec:
           volumeMounts:
             - name: zipline-public
               mountPath: /zipline/public
+            - name: zipline-themes
+              mountPath: /zipline/themes
           ports:
             - containerPort: 3000
               protocol: TCP
@@ -43,27 +50,27 @@ spec:
                 name: zipline-secrets
             - configMapRef:
                 name: zipline-config
-          startupProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 1
-            failureThreshold: 3
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 80
-            periodSeconds: 10
-            timeoutSeconds: 1
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: 70
-            periodSeconds: 10
-            timeoutSeconds: 1
-            failureThreshold: 3
+          # startupProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 80
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   failureThreshold: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   initialDelaySeconds: 70
+          #   periodSeconds: 10
+          #   timeoutSeconds: 1
+          #   failureThreshold: 3
