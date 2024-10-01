@@ -27,7 +27,7 @@ resource "kubernetes_secret" "zipline" {
   data = {
     "OAUTH_OIDC_CLIENT_SECRET" = var.zipline_oidc_client_secret
     "CORE_SECRET"              = var.zipline_core_secret
-    "DATABASE_URL"             = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/zipline?schema=public"
+    "DATABASE_URL"             = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/zipline"
   }
 }
 
