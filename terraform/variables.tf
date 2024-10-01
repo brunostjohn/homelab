@@ -836,3 +836,7 @@ variable "paperless_api_key" {
 variable "linkwarden_api_key" {
   type = string
 }
+
+variable "grafana_db_password" {
+  type = string
+}

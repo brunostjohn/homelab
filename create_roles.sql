@@ -207,6 +207,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to oneuptime_role;
 CREATE USER oneuptime WITH PASSWORD '<password>';
 GRANT oneuptime_role TO oneuptime;
 
+-- GRAFANA
+CREATE ROLE grafana_role;
+\c grafana
+GRANT ALL PRIVILEGES ON DATABASE grafana TO grafana_role;
+GRANT ALL ON SCHEMA public TO grafana_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grafana_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to grafana_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to grafana_role;
+CREATE USER grafana WITH PASSWORD '<password>';
+GRANT grafana_role TO grafana;
+
 -- MEDIA STACK --
 
 -- LIDARR

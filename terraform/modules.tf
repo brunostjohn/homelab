@@ -47,6 +47,8 @@ module "cluster_base" {
 
   crowdsec_db_password = var.crowdsec_db_password
   crowdsec_webhook_url = var.crowdsec_webhook_url
+
+  grafana_db_password = var.grafana_db_password
 }
 
 module "cluster_apps" {

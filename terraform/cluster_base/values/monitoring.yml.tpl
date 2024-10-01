@@ -8,43 +8,43 @@ alertmanager:
       resolve_timeout: 5m
     inhibit_rules:
       - source_matchers:
-          - 'severity = critical'
+          - "severity = critical"
         target_matchers:
-          - 'severity =~ warning|info'
+          - "severity =~ warning|info"
         equal:
-          - 'namespace'
-          - 'alertname'
+          - "namespace"
+          - "alertname"
       - source_matchers:
-          - 'severity = warning'
+          - "severity = warning"
         target_matchers:
-          - 'severity = info'
+          - "severity = info"
         equal:
-          - 'namespace'
-          - 'alertname'
+          - "namespace"
+          - "alertname"
       - source_matchers:
-          - 'alertname = InfoInhibitor'
+          - "alertname = InfoInhibitor"
         target_matchers:
-          - 'severity = info'
+          - "severity = info"
         equal:
-          - 'namespace'
+          - "namespace"
       - target_matchers:
-          - 'alertname = InfoInhibitor'
+          - "alertname = InfoInhibitor"
     route:
-      group_by: ['namespace']
+      group_by: ["namespace"]
       group_wait: 30s
       group_interval: 5m
       repeat_interval: 12h
       receiver: discord
       routes:
-      - receiver: discord
-        matchers:
-          - alertname = "Watchdog"
+        - receiver: discord
+          matchers:
+            - alertname = "Watchdog"
     receivers:
-    - name: discord
-      discord_configs:
-      - webhook_url: ${discord_webhook_url}
+      - name: discord
+        discord_configs:
+          - webhook_url: ${discord_webhook_url}
     templates:
-    - '/etc/alertmanager/config/*.tmpl'
+      - "/etc/alertmanager/config/*.tmpl"
   storage:
     volumeClaimTemplate:
       storageClassName: nfs-jabberwock-subpath
@@ -53,6 +53,8 @@ alertmanager:
           storage: 512Mi
 
 grafana:
+  imageRenderer:
+    enabled: true
   initChownData:
     enabled: false
   defaultDashboardsEnabled: false
@@ -62,9 +64,7 @@ grafana:
     hosts:
       - grafana.${global_fqdn}
   persistence:
-    enabled: true
-    storageClassName: nfs-jabberwock-subpath
-    size: 1Gi
+    enabled: false
   securityContext:
     fsGroup: 1001
     runAsGroup: 1001
@@ -72,9 +72,27 @@ grafana:
     runAsUser: 1001
     seccompProfile:
       type: RuntimeDefault
+  extraSecretMounts:
+    - name: grafana-secrets
+      secretName: grafana-secrets
+      defaultMode: 0440
+      mountPath: /etc/secrets/grafana-secrets
+      readOnly: true
   grafana.ini:
     server:
       root_url: https://grafana.${global_fqdn}
+    analytics:
+      reporting_enabled: false
+      feedback_links_enabled: false
+    database:
+      type: postgres
+      host: postgres-cluster-rw-pooler.databases.svc.cluster.local
+      name: grafana
+      user: grafana
+      password: $__file{/etc/secrets/grafana-secrets/db_password}
+    remote_caching:
+      type: redis
+      connstr: addr=redis-master.databases.svc.cluster.local:6379,pool_size=100,db=13,ssl=false
 
 kubeEtcd:
   enabled: true

@@ -22,3 +22,16 @@ module "kube_prometheus_helm" {
 
   create_ingress = false
 }
+
+resource "kubernetes_secret" "grafana" {
+  metadata {
+    name      = "grafana-secrets"
+    namespace = "monitoring"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "db_password" = var.grafana_db_password
+  }
+}

@@ -106,3 +106,7 @@ variable "crowdsec_webhook_url" {
   type        = string
   description = "The webhook URL for CrowdSec"
 }
+
+variable "grafana_db_password" {
+  type = string
+}
