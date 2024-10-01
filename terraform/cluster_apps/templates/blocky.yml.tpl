@@ -26,6 +26,7 @@ customDNS:
     "*.${global_fqdn}": 10.0.2.0
     ${global_fqdn}: 10.0.2.0
     "*.static.${global_fqdn}": 10.0.2.0
+    "*.${second_fqdn}": 10.0.2.0
     radarr.local: 10.0.2.0
     sonarr.local: 10.0.2.0
     lidarr.local: 10.0.2.0

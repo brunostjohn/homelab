@@ -13,6 +13,7 @@ resource "kubernetes_config_map" "blocky" {
   data = {
     "config.yml" = templatefile("${path.module}/templates/blocky.yml.tpl", {
       global_fqdn = var.global_fqdn
+      second_fqdn = var.second_fqdn
       db_password = var.blocky_db_password
     })
   }
