@@ -99,7 +99,7 @@ queryLog:
   flushInterval: 30s
 
 redis:
-  address: redis-master.databases.svc.cluster.local:6379
+  address: redis.databases.svc.cluster.local:6379
   password: redis
   database: 8
   required: true

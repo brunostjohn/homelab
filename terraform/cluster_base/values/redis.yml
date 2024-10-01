@@ -3,17 +3,20 @@ global:
   redis:
     password: redis
 
-architecture: standalone
+architecture: replication
+
+sentinel:
+  enabled: true
 
 master:
   resources:
     requests:
-      cpu: 150m
-      memory: 512Mi
+      cpu: 500m
+      memory: 1Gi
       ephemeral-storage: 50Mi
     limits:
-      cpu: 250m
-      memory: 1Gi
+      cpu: "1"
+      memory: 2Gi
       ephemeral-storage: 2Gi
   persistence:
     enabled: true

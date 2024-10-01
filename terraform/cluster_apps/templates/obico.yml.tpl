@@ -11,7 +11,7 @@ server:
     ACCOUNT_ALLOW_SIGN_UP: "False"
     SOCIAL_LOGIN: "True"
     OCTOPRINT_TUNNEL_PORT_RANGE: "0-0"
-    REDIS_URL: redis://:redis@redis-master.databases.svc.cluster.local:6379/3
+    REDIS_URL: redis://:redis@redis.databases.svc.cluster.local:6379/3
     DATABASE_URL: postgresql://postgres:postgres@postgres-postgresql.databases.svc.cluster.local:5432/obico
     # TELEGRAM_BOT_TOKEN:
     # TWILIO_ACCOUNT_SID:

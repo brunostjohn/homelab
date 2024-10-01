@@ -7,6 +7,6 @@ module "redis" {
 
   chart           = "redis"
   repo_url        = "https://charts.bitnami.com/bitnami"
-  target_revision = "20.0.3"
+  target_revision = "20.1.5"
   values          = file("${path.module}/values/redis.yml")
 }
