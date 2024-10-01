@@ -26,7 +26,7 @@ spec:
             claimName: zipline-uploads-pvc
       initContainers:
         - name: db-migrate
-          image: ghcr.io/diced/zipline:v4-7eb4575
+          image: ghcr.io/diced/zipline:v4
           imagePullPolicy: IfNotPresent
           command: ["pnpm", "db:prototype"]
           envFrom:
@@ -36,7 +36,7 @@ spec:
                 name: zipline-config
       containers:
         - name: zipline
-          image: ghcr.io/diced/zipline:v4-7eb4575
+          image: ghcr.io/diced/zipline:v4
           imagePullPolicy: IfNotPresent
           resources:
             requests:
