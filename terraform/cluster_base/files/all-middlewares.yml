@@ -8,4 +8,3 @@ spec:
     middlewares:
       - name: https-middleware
       - name: bouncer
-      - name: errorpages
