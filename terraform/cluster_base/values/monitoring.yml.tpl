@@ -92,7 +92,7 @@ grafana:
       password: $__file{/etc/secrets/grafana-secrets/db_password}
     remote_caching:
       type: redis
-      connstr: addr=redis-master.databases.svc.cluster.local:6379,pool_size=100,db=13,ssl=false
+      connstr: addr=redis.databases.svc.cluster.local:6379,pool_size=100,db=13,ssl=false
 
 kubeEtcd:
   enabled: true
@@ -114,19 +114,19 @@ prometheusOperator:
 prometheus:
   prometheusSpec:
     ruleNamespaceSelector: {}
-    ruleSelectorNilUsesHelmValues: false
-    ruleSelector: {}
-    serviceMonitorSelectorNilUsesHelmValues: false
-    serviceMonitorSelector: {}
+    ruleSelector:
+      matchLabels: null
+    serviceMonitorSelector:
+      matchLabels: null
     serviceMonitorNamespaceSelector: {}
-    podMonitorSelectorNilUsesHelmValues: false
-    podMonitorSelector: {}
+    podMonitorSelector:
+      matchLabels: null
     podMonitorNamespaceSelector: {}
-    probeSelectorNilUsesHelmValues: false
-    probeSelector: {}
+    probeSelector:
+      matchLabels: null
     probeNamespaceSelector: {}
-    scrapeConfigSelectorNilUsesHelmValues: false
-    scrapeConfigSelector: {}
+    scrapeConfigSelector:
+      matchLabels: null
     scrapeConfigNamespaceSelector: {}
     securityContext:
       runAsGroup: 1001
