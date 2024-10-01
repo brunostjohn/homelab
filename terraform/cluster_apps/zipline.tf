@@ -5,18 +5,16 @@ resource "kubernetes_config_map" "zipline" {
   }
 
   data = {
-    "DATASOURCE_S3_ACCESS_KEY_ID" = var.zipline_s3_access_key_id
-    "DATASOURCE_S3_ENDPOINT"      = "minio-svc.minio.svc.cluster.local"
-    "DATASOURCE_S3_PORT"          = "9000"
-    "DATASOURCE_S3_BUCKET"        = "zipline-uploads"
-    "DATASOURCE_S3_FORCE_S3_PATH" = "true"
-    "DATASOURCE_S3_USE_SSL"       = "false"
     "FEATURES_INVITES"            = "false"
-    # "FEATURES_OAUTH_REGISTRATION" = "true"
-    # "FEATURES_OAUTH_LOGIN_ONLY" = "true"
-    # "FEATURES_USER_REGISTRATION" = "false"
-    "FEATURES_ROBOTS_TXT" = "true"
-    # "OAUTH_BYPASS_LOCAL_LOGIN" = "true"
+    "DATASOURCE_TYPE"             = "local"
+    "DATASOURCE_LOCAL_DIRECTORY"  = "./uploads"
+    "FEATURES_ROBOTS_TXT"         = "true"
+    "OAUTH_OIDC_CLIENT_ID"        = var.zipline_oidc_client_id
+    "OAUTH_OIDC_AUTHORIZE_URL"    = "https://auth.${var.global_fqdn}/application/o/authorize/"
+    "OAUTH_OIDC_USERINFO_URL"     = "https://auth.${var.global_fqdn}/application/o/userinfo/"
+    "OAUTH_OIDC_TOKEN_URL"        = "https://auth.${var.global_fqdn}/application/o/token/"
+    "FEATURES_OAUTH_REGISTRATION" = "true"
+    "FEATURES_USER_REGISTRATION"  = "false"
   }
 }
 
@@ -27,9 +25,9 @@ resource "kubernetes_secret" "zipline" {
   }
 
   data = {
-    "DATASOURCE_S3_SECRET_ACCESS_KEY" = var.zipline_s3_secret_access_key
-    "CORE_SECRET"                     = var.zipline_core_secret
-    "DATABASE_URL"               = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/zipline"
+    "OAUTH_OIDC_CLIENT_SECRET" = var.zipline_oidc_client_secret
+    "CORE_SECRET"              = var.zipline_core_secret
+    "DATABASE_URL"             = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/zipline"
   }
 }
 

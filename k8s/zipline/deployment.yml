@@ -21,6 +21,9 @@ spec:
         - name: zipline-themes
           persistentVolumeClaim:
             claimName: zipline-themes-pvc
+        - name: zipline-uploads
+          persistentVolumeClaim:
+            claimName: zipline-uploads-pvc
       containers:
         - name: zipline
           image: ghcr.io/diced/zipline:v4
@@ -39,6 +42,8 @@ spec:
               mountPath: /zipline/public
             - name: zipline-themes
               mountPath: /zipline/themes
+            - name: zipline-uploads
+              mountPath: /zipline/uploads
           ports:
             - containerPort: 3000
               protocol: TCP

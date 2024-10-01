@@ -213,9 +213,9 @@ module "cluster_apps" {
   qbittorrent_password     = var.qbittorrent_password
   audiobookshelf_api_key   = var.audiobookshelf_api_key
 
-  zipline_core_secret          = var.zipline_core_secret
-  zipline_s3_access_key_id     = var.zipline_s3_access_key_id
-  zipline_s3_secret_access_key = var.zipline_s3_secret_access_key
+  zipline_core_secret        = var.zipline_core_secret
+  zipline_oidc_client_id     = var.zipline_oidc_client_id
+  zipline_oidc_client_secret = var.zipline_oidc_client_secret
 }
 
 module "authentik" {

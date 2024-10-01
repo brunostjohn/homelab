@@ -24,3 +24,17 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zipline-uploads-pvc
+  namespace: productivity
+spec:
+  resources:
+    requests:
+      storage: 80Gi
+  storageClassName: jabberwock-nfs-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
