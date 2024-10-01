@@ -631,3 +631,23 @@ variable "paperless_api_key" {
 variable "linkwarden_api_key" {
   type = string
 }
+
+variable "zipline_s3_access_key_id" {
+  type = string
+}
+
+variable "zipline_s3_secret_access_key" {
+  type = string
+}
+
+variable "zipline_core_secret" {
+  type = string
+}
+
+variable "zipline_db_password" {
+  type = string
+}
+
+variable "second_fqdn" {
+  type = string
+}

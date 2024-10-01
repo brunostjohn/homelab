@@ -218,6 +218,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to grafana_role;
 CREATE USER grafana WITH PASSWORD '<password>';
 GRANT grafana_role TO grafana;
 
+-- ZIPLINE
+CREATE ROLE zipline_role;
+\c zipline
+GRANT ALL PRIVILEGES ON DATABASE zipline TO zipline_role;
+GRANT ALL ON SCHEMA public TO zipline_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO zipline_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to zipline_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to zipline_role;
+CREATE USER zipline WITH PASSWORD '<password>';
+GRANT zipline_role TO zipline;
+
 -- MEDIA STACK --
 
 -- LIDARR

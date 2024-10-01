@@ -57,6 +57,7 @@ module "cluster_apps" {
   source     = "./cluster_apps"
   depends_on = [module.cluster_base]
 
+  second_fqdn                      = var.second_fqdn
   networking_project               = module.cluster_base.networking_project
   security_project                 = module.cluster_base.security_project
   storage_project                  = module.cluster_base.storage_project
@@ -166,6 +167,7 @@ module "cluster_apps" {
   coder_db_password       = var.coder_db_password
   nocodb_db_password      = var.nocodb_db_password
   oneuptime_db_password   = var.oneuptime_db_password
+  zipline_db_password     = var.zipline_db_password
 
   vaultwarden_installation_id  = var.vaultwarden_installation_id
   vaultwarden_installation_key = var.vaultwarden_installation_key
@@ -210,6 +212,10 @@ module "cluster_apps" {
   qbittorrent_username     = var.qbittorrent_username
   qbittorrent_password     = var.qbittorrent_password
   audiobookshelf_api_key   = var.audiobookshelf_api_key
+
+  zipline_core_secret          = var.zipline_core_secret
+  zipline_s3_access_key_id     = var.zipline_s3_access_key_id
+  zipline_s3_secret_access_key = var.zipline_s3_secret_access_key
 }
 
 module "authentik" {

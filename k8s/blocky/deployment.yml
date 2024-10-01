@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: blocky
   namespace: blocky
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 2
   strategy:

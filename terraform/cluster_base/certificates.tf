@@ -32,7 +32,7 @@ resource "kubernetes_manifest" "root_cert_prod" {
 }
 
 resource "kubernetes_manifest" "second_cert_prod" {
-  depends_on = [ kubernetes_manifest.letsencrypt_prod_issuer ]
+  depends_on = [kubernetes_manifest.letsencrypt_prod_issuer]
 
   manifest = {
     apiVersion = "cert-manager.io/v1"
@@ -96,7 +96,7 @@ resource "kubernetes_manifest" "root_cert_staging" {
 }
 
 resource "kubernetes_manifest" "second_cert_staging" {
-  depends_on = [ kubernetes_manifest.letsencrypt_staging_issuer ]
+  depends_on = [kubernetes_manifest.letsencrypt_staging_issuer]
 
   manifest = {
     apiVersion = "cert-manager.io/v1"
