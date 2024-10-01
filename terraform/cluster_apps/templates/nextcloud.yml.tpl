@@ -83,11 +83,26 @@ nextcloud:
       php_admin_value[opcache.revalidate_freq] = 60
       php_admin_value[opcache.jit] = 1255
       php_admin_value[opcache.jit_buffer_size] = 128M
-    zz-pm.ini: |-
-      pm.max_children=57
-      pm.start_servers=14
-      pm.min_spare_servers=14
-      pm.max_spare_servers=42
+    zz-pm.conf: |-
+      [www]
+      user = www-data
+      group = www-data
+      listen = 127.0.0.1:9000
+      pm = dynamic
+      pm.max_children = 57
+      pm.start_servers = 14
+      pm.min_spare_servers = 14
+      pm.max_spare_servers = 42
+    opcache.ini: |-
+      [opcache]
+      opcache.enable=1
+      opcache.revalidate_freq=0
+      opcache.validate_timestamps=1
+      opcache.max_accelerated_files=10000
+      opcache.memory_consumption=192
+      opcache.max_wasted_percentage=10
+      opcache.interned_strings_buffer=16
+      opcache.fast_shutdown=1
   configs:
     replicas.config.php: |-
       <?php
