@@ -15,6 +15,7 @@ resource "kubernetes_config_map" "zipline" {
     "OAUTH_OIDC_TOKEN_URL"        = "https://auth.${var.global_fqdn}/application/o/token/"
     "FEATURES_OAUTH_REGISTRATION" = "true"
     "FEATURES_USER_REGISTRATION"  = "false"
+    "CORE_HOSTNAME"               = "0.0.0.0"
   }
 }
 
@@ -27,7 +28,7 @@ resource "kubernetes_secret" "zipline" {
   data = {
     "OAUTH_OIDC_CLIENT_SECRET" = var.zipline_oidc_client_secret
     "CORE_SECRET"              = var.zipline_core_secret
-    "DATABASE_URL"             = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/zipline"
+    "DATABASE_URL"             = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw.databases.svc.cluster.local:5432/zipline?sslmode=disable"
   }
 }
 
