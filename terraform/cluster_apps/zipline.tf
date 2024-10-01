@@ -29,7 +29,7 @@ resource "kubernetes_secret" "zipline" {
   data = {
     "DATASOURCE_S3_SECRET_ACCESS_KEY" = var.zipline_s3_secret_access_key
     "CORE_SECRET"                     = var.zipline_core_secret
-    "CORE_DATABASE_URL"               = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/zipline"
+    "DATABASE_URL"               = "postgres://zipline:${urlencode(var.zipline_db_password)}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/zipline"
   }
 }
 
