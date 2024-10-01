@@ -8,7 +8,7 @@ module "kube_prometheus_helm" {
   name            = "monitoring"
   chart           = "kube-prometheus-stack"
   repo_url        = "https://prometheus-community.github.io/helm-charts"
-  target_revision = "61.7.0"
+  target_revision = "63.1.0"
 
   server_side_apply = true
 

@@ -107,7 +107,7 @@ provider "authentik" {
 }
 
 provider "grafana" {
-  url  = "http://grafana.${var.global_fqdn}"
+  url  = "https://grafana.${var.global_fqdn}"
   auth = var.grafana_auth
 }
 
