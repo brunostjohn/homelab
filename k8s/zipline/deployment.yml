@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipline
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: zipline
+  template:
+    metadata:
+      labels:
+        app: zipline
+    spec:
+      volumes:
+        - name: zipline-public
+          persistentVolumeClaim:
+            claimName: zipline-public-pvc
+      containers:
+        - name: zipline
+          image: ghcr.io/diced/zipline
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          volumeMounts:
+            - name: zipline-public
+              mountPath: /zipline/public
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          envFrom:
+            - secretRef:
+                name: zipline-secrets
+            - configMapRef:
+                name: zipline-config
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 80
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 70
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
