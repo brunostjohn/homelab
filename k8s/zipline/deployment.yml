@@ -25,7 +25,7 @@ spec:
           persistentVolumeClaim:
             claimName: zipline-uploads-pvc
       initContainers:
-        - name: db_migrate
+        - name: db-migrate
           image: ghcr.io/diced/zipline:v4
           imagePullPolicy: IfNotPresent
           command: ["pnpm", "db:prototype"]
