@@ -74,15 +74,15 @@ nextcloud:
   defaultConfigs:
     redis.config.php: false
   phpConfigs:
-    opcache.conf: |-
-      memory_limit = -1
-      opcache.interned_strings_buffer = 64
-      opcache.memory_consumption = 1G
-      opcache.max_accelerated_files = 30000
-      opcache.validate_timestamps = 0
-      opcache.revalidate_freq = 60
-      opcache.jit = 1255
-      opcache.jit_buffer_size = 128M
+    zz-opcache.conf: |-
+      php_admin_value[memory_limit] = -1
+      php_admin_value[opcache.interned_strings_buffer] = 64
+      php_admin_value[opcache.memory_consumption] = 1G
+      php_admin_value[opcache.max_accelerated_files] = 30000
+      php_admin_value[opcache.validate_timestamps] = 0
+      php_admin_value[opcache.revalidate_freq] = 60
+      php_admin_value[opcache.jit] = 1255
+      php_admin_value[opcache.jit_buffer_size] = 128M
     zz-pm.ini: |-
       pm.max_children=57
       pm.start_servers=14

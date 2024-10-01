@@ -25,7 +25,7 @@ module "nextcloud_helm" {
 }
 
 resource "argocd_application" "imaginary" {
-  depends_on = [ module.nextcloud_helm ]
+  depends_on = [module.nextcloud_helm]
 
   metadata {
     name      = "imaginary"
