@@ -84,6 +84,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.47)
+      filesize:
+        specifier: ^10.1.6
+        version: 10.1.6
       lucide-svelte:
         specifier: ^0.447.0
         version: 0.447.0(svelte@5.0.0-next.260)
@@ -1039,6 +1042,10 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  filesize@10.1.6:
+    resolution: {integrity: sha512-sJslQKU2uM33qH5nqewAwVB2QgR6w1aMNsYUp3aN5rMRyXEwJGmZvaWzeJFNTOXWlHQyBFCWrdj3fV/fsTOX8w==}
+    engines: {node: '>= 10.4.0'}
 
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
@@ -2771,6 +2778,8 @@ snapshots:
   fdir@6.4.0(picomatch@2.3.1):
     optionalDependencies:
       picomatch: 2.3.1
+
+  filesize@10.1.6: {}
 
   fill-range@7.1.1:
     dependencies:

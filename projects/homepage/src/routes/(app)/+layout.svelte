@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Separator } from "$lib/components";
-	import { SidebarLink } from "$lib/components/sidebar";
+	import { KubeStats, SidebarLink } from "$lib/components/sidebar";
 	import type { LayoutServerData } from "./$types";
 	import { LogOut, BookOpenText, Fingerprint, KeyRound } from "lucide-svelte";
 	import type { Snippet } from "svelte";
@@ -18,13 +18,15 @@
 	<title>Zefir&apos;s Cloud</title>
 </svelte:head>
 
-<div class="mx-auto flex h-full w-full max-w-screen-xl">
+<div class="mx-auto flex h-full w-full max-w-screen-xl overflow-hidden">
 	<div class="my-6 flex">
 		<aside class="flex w-72 flex-col py-4">
-			<div class="align-center flex items-center">
+			<div class="align-center mb-4 flex items-center">
 				<enhanced:img src="$lib/assets/icon.png" class="w-16 pr-2" alt="Server Logo" />
 				<h1 class="text-2xl font-semibold">Zefir&apos;s Cloud</h1>
 			</div>
+
+			<KubeStats />
 
 			<ul class="mt-auto flex flex-col gap-1">
 				<SidebarLink href="https://{domain}/signout">
@@ -60,7 +62,7 @@
 		<Separator orientation="vertical" />
 	</div>
 
-	<main class="w-full">
+	<main class="h-full w-full overflow-y-auto overflow-x-hidden">
 		{@render children()}
 	</main>
 </div>

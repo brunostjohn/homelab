@@ -1,8 +1,9 @@
-import type { Context } from "$lib/trpc/context";
-import { initTRPC } from "@trpc/server";
-export const t = initTRPC.context<Context>().create();
+import { kubeRouter } from "./routers";
+import t from "./t";
 
-export const router = t.router({});
+export const router = t.router({
+	kube: kubeRouter,
+});
 
 export const createCaller = t.createCallerFactory(router);
 
