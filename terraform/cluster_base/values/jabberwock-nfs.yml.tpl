@@ -38,8 +38,9 @@ storageClasses:
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
-
-    mountOptions: []
+    mountOptions: [nfsvers=4.1, async, nodiratime, noatime]
+    parameters:
+      fsType: nfs
     secrets:
       provisioner-secret:
       controller-publish-secret:

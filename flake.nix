@@ -30,6 +30,7 @@
           modules = [
             ./nix/hosts/s1
             ./nix/modules/k3sInitiator
+            ./nix/modules/10gbit
           ] ++ globalModulesMNode;
         };
 
@@ -44,6 +45,7 @@
             ./nix/hosts/s2
             ./nix/modules/k3sAgent
             ./nix/modules/amdGpu
+            ./nix/modules/10gbit
           ] ++ globalModulesMNode;
         };
 
@@ -83,6 +85,7 @@
           modules = [
             ./nix/hosts/s5
             ./nix/modules/k3sMaster
+            ./nix/modules/10gbit
           ] ++ globalModulesMNode;
         };
 
@@ -96,6 +99,7 @@
           modules = [
             ./nix/hosts/s6
             ./nix/modules/k3sAgent
+            ./nix/modules/10gbit
           ] ++ globalModulesMNode;
         };
       };
