@@ -62,7 +62,7 @@
 		<Separator orientation="vertical" />
 	</div>
 
-	<main class="h-full w-full overflow-y-auto overflow-x-hidden">
+	<main class="h-full w-full overflow-y-auto overflow-x-hidden px-20 pt-8">
 		{@render children()}
 	</main>
 </div>
