@@ -4,6 +4,9 @@ metadata:
   name: sabnzbd
   namespace: entertainment
 spec:
+  strategy:
+    type: Recreate
+  replicas: 1
   selector:
     matchLabels:
       app: sabnzbd
