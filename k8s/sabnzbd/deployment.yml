@@ -24,6 +24,8 @@ spec:
           - 10.0.2.1
           - 1.1.1.1
           - 8.8.8.8
+      securityContext:
+        fsGroup: 1001
       containers:
         - name: sabnzbd
           image: lscr.io/linuxserver/sabnzbd:latest
@@ -49,8 +51,8 @@ spec:
               mountPath: /config
           env:
             - name: PUID
-              value: "1000"
+              value: "1001"
             - name: PGID
-              value: "1000"
+              value: "1001"
             - name: TZ
               value: "Europe/Dublin"
