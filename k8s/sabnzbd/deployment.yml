@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: sabnzbd
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+    spec:
+      volumes:
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
+        - name: sabnzbd-config
+          persistentVolumeClaim:
+            claimName: sabnzbd-config-pvc
+      dnsConfig:
+        nameservers:
+          - 10.0.2.1
+          - 1.1.1.1
+          - 8.8.8.8
+      containers:
+        - name: sabnzbd
+          image: lscr.io/linuxserver/sabnzbd:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: "2"
+            limits:
+              memory: 4Gi
+              cpu: "4"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: entertainment-content
+              mountPath: /downloads
+            - name: sabnzbd-config
+              mountPath: /config
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Dublin"
