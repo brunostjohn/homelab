@@ -16,7 +16,7 @@ resource "radarr_host" "host" {
     analytics_enabled = false
     log_level         = "info"
     console_log_level = "info"
-    log_size_limit    = 10
+    log_size_limit    = 0
   }
   backup = {
     folder    = "Backups"

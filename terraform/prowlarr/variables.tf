@@ -37,3 +37,7 @@ variable "discord_webhook_url" {
   type        = string
   description = "Discord webhook URL"
 }
+
+variable "sabnzbd_api_key" {
+  type = string
+}

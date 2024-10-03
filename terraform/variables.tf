@@ -860,3 +860,7 @@ variable "zipline_oidc_client_id" {
 variable "zipline_oidc_client_secret" {
   type = string
 }
+
+variable "sabnzbd_api_key" {
+  type = string
+}

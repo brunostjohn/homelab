@@ -5,13 +5,13 @@ resource "kubernetes_config_map" "zipline" {
   }
 
   data = {
-    "DATASOURCE_TYPE"             = "local"
-    "DATASOURCE_LOCAL_DIRECTORY"  = "./uploads"
-    "OAUTH_OIDC_CLIENT_ID"        = var.zipline_oidc_client_id
-    "OAUTH_OIDC_AUTHORIZE_URL"    = "https://auth.${var.global_fqdn}/application/o/authorize/"
-    "OAUTH_OIDC_USERINFO_URL"     = "https://auth.${var.global_fqdn}/application/o/userinfo/"
-    "OAUTH_OIDC_TOKEN_URL"        = "https://auth.${var.global_fqdn}/application/o/token/"
-    "CORE_HOSTNAME"               = "0.0.0.0"
+    "DATASOURCE_TYPE"            = "local"
+    "DATASOURCE_LOCAL_DIRECTORY" = "./uploads"
+    "OAUTH_OIDC_CLIENT_ID"       = var.zipline_oidc_client_id
+    "OAUTH_OIDC_AUTHORIZE_URL"   = "https://auth.${var.global_fqdn}/application/o/authorize/"
+    "OAUTH_OIDC_USERINFO_URL"    = "https://auth.${var.global_fqdn}/application/o/userinfo/"
+    "OAUTH_OIDC_TOKEN_URL"       = "https://auth.${var.global_fqdn}/application/o/token/"
+    "CORE_HOSTNAME"              = "0.0.0.0"
   }
 }
 

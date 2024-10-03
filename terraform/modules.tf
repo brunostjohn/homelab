@@ -246,6 +246,7 @@ module "prowlarr" {
   auth_username              = var.prowlarr_auth_username
   auth_password              = var.prowlarr_auth_password
   discord_webhook_url        = var.prowlarr_discord_webhook_url
+  sabnzbd_api_key            = var.sabnzbd_api_key
 }
 
 module "lidarr" {
@@ -256,6 +257,7 @@ module "lidarr" {
   auth_username        = var.lidarr_auth_username
   auth_password        = var.lidarr_auth_password
   discord_webhook_url  = var.lidarr_discord_webhook_url
+  sabnzbd_api_key      = var.sabnzbd_api_key
 }
 
 module "radarr" {
@@ -266,6 +268,7 @@ module "radarr" {
   discord_webhook_url  = var.radarr_discord_webhook_url
   auth_username        = var.radarr_auth_username
   auth_password        = var.radarr_auth_password
+  sabnzbd_api_key      = var.sabnzbd_api_key
 }
 
 module "sonarr" {
@@ -276,6 +279,7 @@ module "sonarr" {
   discord_webhook_url  = var.sonarr_discord_webhook_url
   auth_username        = var.sonarr_auth_username
   auth_password        = var.sonarr_auth_password
+  sabnzbd_api_key      = var.sabnzbd_api_key
 }
 
 module "readarr" {
@@ -284,4 +288,5 @@ module "readarr" {
 
   qbittorrent_password = var.qbittorrent_admin_password
   discord_webhook_url  = var.readarr_discord_webhook_url
+  sabnzbd_api_key      = var.sabnzbd_api_key
 }

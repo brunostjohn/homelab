@@ -17,3 +17,7 @@ variable "auth_password" {
   type        = string
   description = "The password for basic authentication"
 }
+
+variable "sabnzbd_api_key" {
+  type = string
+}
