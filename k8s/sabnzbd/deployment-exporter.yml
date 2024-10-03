@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd-exporter
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: sabnzbd-exporter
+  template:
+    metadata:
+      labels:
+        app: sabnzbd-exporter
+    spec:
+      containers:
+        - name: sabnzbd-exporter
+          image: msroest/sabnzbd_exporter
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 9387
+              name: metrics
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 10
+          envFrom:
+            - secretRef:
+                name: sabnzbd-exporter-secrets
+          env:
+            - name: SABNZBD_BASEURLS
+              value: http://sabnzbd.entertainment.svc.cluster.local:8080
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            initialDelaySeconds: 5

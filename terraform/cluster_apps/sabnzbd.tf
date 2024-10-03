@@ -1,4 +1,19 @@
+resource "kubernetes_secret" "sabnzbd_exporter" {
+  metadata {
+    name      = "sabnzbd-exporter-secrets"
+    namespace = kubernetes_namespace.entertainment.metadata[0].name
+  }
+
+  data = {
+    "SABNZBD_APIKEYS" = var.sabnzbd_api_key
+  }
+}
+
 resource "argocd_application" "sabnzbd" {
+  depends_on = [
+    kubernetes_secret.sabnzbd_exporter
+  ]
+
   metadata {
     name      = "sabnzbd"
     namespace = "argocd"
