@@ -4,18 +4,6 @@ metadata:
   name: sabnzbd
   namespace: entertainment
 spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                  - s1
-                  - s2.m-nodes.zefirscloud.local
-                  - s5
-                  - s6.m-nodes.zefirscloud.local
   strategy:
     type: Recreate
   replicas: 1
@@ -27,6 +15,18 @@ spec:
       labels:
         app: sabnzbd
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - s1
+                      - s2.m-nodes.zefirscloud.local
+                      - s5
+                      - s6.m-nodes.zefirscloud.local
       volumes:
         - name: entertainment-content
           persistentVolumeClaim:
