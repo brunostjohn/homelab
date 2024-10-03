@@ -39,8 +39,6 @@ storageClasses:
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
     mountOptions: [nfsvers=4.1, async, nodiratime, noatime]
-    parameters:
-      fsType: nfs
     secrets:
       provisioner-secret:
       controller-publish-secret:
