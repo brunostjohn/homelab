@@ -33,3 +33,9 @@ resource "grafana_dashboard" "flaresolverr" {
   folder      = grafana_folder.entertainment.id
   org_id      = grafana_organization.zefirs_cloud.id
 }
+
+resource "grafana_dashboard" "sabnzbd" {
+  config_json = file("${path.module}/dashboards/sabnzbd.json")
+  folder      = grafana_folder.entertainment.id
+  org_id      = grafana_organization.zefirs_cloud.id
+}
