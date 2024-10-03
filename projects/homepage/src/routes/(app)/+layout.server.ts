@@ -7,6 +7,7 @@ const getDomain = () => {
 	return initialValue;
 };
 
-export const load: LayoutServerLoad = () => ({
+export const load: LayoutServerLoad = ({ request: { headers } }) => ({
 	domain: getDomain(),
+	username: import.meta.env.DEV ? "bruno" : headers.get("X-authentik-username"),
 });

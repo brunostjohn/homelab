@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { trpc } from "$lib/trpc";
 	import KubeResourceUsage from "./KubeResourceUsage.svelte";
+	import KubeResourceUsageSkeleton from "./KubeResourceUsageSkeleton.svelte";
 	import NodeList from "./NodeList.svelte";
+	import NodeListSkeleton from "./NodeListSkeleton.svelte";
 
 	const kubeStats = trpc()?.kube.metrics.createQuery(undefined, {
 		refetchInterval: 1000,
@@ -21,5 +23,6 @@
 		)}
 	/>
 {:else}
-	<p>lading</p>
+	<KubeResourceUsageSkeleton />
+	<NodeListSkeleton />
 {/if}

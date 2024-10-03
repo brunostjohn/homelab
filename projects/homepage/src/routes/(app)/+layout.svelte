@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Separator } from "$lib/components";
-	import { KubeStats, SidebarLink } from "$lib/components/sidebar";
+	import { KubeStats, NetworkStats, SidebarLink, StorageStats } from "$lib/components/sidebar";
 	import type { LayoutServerData } from "./$types";
 	import { LogOut, BookOpenText, Fingerprint, KeyRound } from "lucide-svelte";
 	import type { Snippet } from "svelte";
@@ -20,7 +20,7 @@
 
 <div class="mx-auto flex h-full w-full max-w-screen-xl overflow-hidden">
 	<div class="my-6 flex">
-		<aside class="flex w-72 flex-col py-4 pr-8">
+		<aside class="flex w-72 flex-col overflow-y-auto py-4 pr-8">
 			<div class="align-center mb-4 flex items-center">
 				<enhanced:img src="$lib/assets/icon.png" class="w-16 pr-2" alt="Server Logo" />
 				<h1 class="text-2xl font-semibold">Zefir&apos;s Cloud</h1>
@@ -28,7 +28,11 @@
 
 			<KubeStats />
 
-			<ul class="mt-auto flex flex-col gap-1">
+			<NetworkStats />
+
+			<StorageStats />
+
+			<ul class="mt-auto flex flex-col gap-1 pt-4">
 				<SidebarLink href="https://{domain}/signout">
 					{#snippet icon(className: string)}
 						<LogOut class={className} />
@@ -62,7 +66,7 @@
 		<Separator orientation="vertical" />
 	</div>
 
-	<main class="h-full w-full overflow-y-auto overflow-x-hidden px-20 pt-8">
+	<main class="h-full w-full overflow-y-auto overflow-x-hidden px-20 py-8">
 		{@render children()}
 	</main>
 </div>

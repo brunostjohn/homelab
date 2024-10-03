@@ -4,12 +4,11 @@ import { error } from "@sveltejs/kit";
 import { Jellyfin } from "@jellyfin/sdk";
 import { env } from "$env/dynamic/private";
 import { hostname } from "os";
-import { getImageApi } from "@jellyfin/sdk/lib/utils/api/image-api";
 import type { ImageType } from "@jellyfin/sdk/lib/generated-client/models";
 
 const schema = z.object({
 	itemId: z.string(),
-	imageType: z.enum(["Primary", "Backdrop", "Thumb", "Banner", "Logo"]),
+	imageType: z.enum(["Primary", "Backdrop", "Thumb", "Banner", "Logo", "Box"]),
 });
 
 const jellyfin = new Jellyfin({

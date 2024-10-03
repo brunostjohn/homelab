@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Carousel } from "$lib/components/ui";
+	import { Carousel, Card } from "$lib/components/ui";
 	import { trpc } from "$lib/trpc";
 	import { Popcorn, ChevronRight } from "lucide-svelte";
 	import Autoplay from "embla-carousel-autoplay";
@@ -47,6 +47,18 @@
 			{#each $jfData.data as item}
 				<JellyfinCarouselCard {item} {serverPublicUrl} />
 			{/each}
+		</Carousel.Content>
+		<Carousel.Previous />
+		<Carousel.Next />
+	</Carousel.Root>
+{:else}
+	<Carousel.Root class="mx-auto w-full">
+		<Carousel.Content>
+			<Carousel.Item>
+				<Card.Root class="bg-muted animate-pulse">
+					<Card.Content class="flex h-96 min-h-96 items-end justify-start p-6"></Card.Content>
+				</Card.Root>
+			</Carousel.Item>
 		</Carousel.Content>
 		<Carousel.Previous />
 		<Carousel.Next />
