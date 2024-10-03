@@ -98,10 +98,11 @@
 							{downloads.filter((download) => download.sizeLeft !== 0).length} downloads in progress
 						</p>
 					{:else if downloads.length === 1 && status !== JellyseerrMediaStatus.AVAILABLE && downloads[0].sizeLeft !== 0}
-						<p class="text-primary/50 mb-1 mt-auto text-xs">
-							{filesize(downloads[0].sizeLeft)} left - Available {moment(
-								downloads[0].estimatedCompletionTime
-							).fromNow()}
+						<p class="text-primary/50 mt-auto text-xs">
+							{filesize(downloads[0].sizeLeft)} left
+						</p>
+						<p class="text-primary/50 mb-1 text-xs">
+							Available {moment(downloads[0].estimatedCompletionTime).fromNow()}
 						</p>
 						<div class="bg-muted/30 h-3 w-full overflow-hidden rounded-full">
 							<div

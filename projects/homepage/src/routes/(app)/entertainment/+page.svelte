@@ -108,3 +108,7 @@
 	</a>
 </div>
 <JellyseerrRequests {domain} />
+
+<h2 class="align-center mb-2 mt-8 flex items-center gap-2 text-3xl font-semibold">
+	Media Downloaders
+</h2>
