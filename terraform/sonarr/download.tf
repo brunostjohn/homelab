@@ -6,7 +6,7 @@ resource "sonarr_download_client_qbittorrent" "qbittorrent" {
   username                   = "admin"
   password                   = var.qbittorrent_password
   enable                     = true
-  priority                   = 1
+  priority                   = 2
   initial_state              = 0
   remove_completed_downloads = true
   remove_failed_downloads    = true
@@ -22,7 +22,7 @@ resource "sonarr_download_client_sabnzbd" "sabnzbd" {
   port                       = 8080
   api_key                    = var.sabnzbd_api_key
   enable                     = true
-  priority                   = 2
+  priority                   = 1
   remove_completed_downloads = true
   remove_failed_downloads    = true
   tv_category                = "shows"

@@ -6,7 +6,7 @@ resource "prowlarr_download_client_qbittorrent" "qbittorrent" {
   port          = 8080
   use_ssl       = false
   enable        = true
-  priority      = 1
+  priority      = 2
   initial_state = 0
   category      = "prowlarr"
 }
@@ -27,5 +27,5 @@ resource "prowlarr_download_client_sabnzbd" "sabnzbd" {
   api_key  = var.sabnzbd_api_key
   category = "prowlarr"
   enable   = true
-  priority = 2
+  priority = 1
 }

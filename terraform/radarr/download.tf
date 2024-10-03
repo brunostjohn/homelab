@@ -5,7 +5,7 @@ resource "radarr_download_client_qbittorrent" "qbittorrent" {
   username                   = "admin"
   password                   = var.qbittorrent_password
   enable                     = true
-  priority                   = 1
+  priority                   = 2
   movie_category             = "movies"
   movie_imported_category    = "movies-imported"
   initial_state              = 0
@@ -21,7 +21,7 @@ resource "radarr_download_client_sabnzbd" "sabnzbd" {
   port                       = 8080
   api_key                    = var.sabnzbd_api_key
   enable                     = true
-  priority                   = 2
+  priority                   = 1
   movie_category             = "movies"
   recent_movie_priority      = 1
   remove_completed_downloads = true
