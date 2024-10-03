@@ -17,7 +17,7 @@
 
 <p class="text-muted-foreground mb-1 text-base font-semibold">Resources</p>
 
-<div class="mb-4 flex flex-col gap-2 pr-8">
+<div class="mb-4 flex flex-col gap-2">
 	<div class="flex items-center gap-2">
 		<p
 			class="text-muted-foreground align-center flex w-16 min-w-16 max-w-16 items-center gap-1 text-sm"

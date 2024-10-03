@@ -30,6 +30,7 @@
 		"prettier-plugin-tailwindcss": "^0.6.5",
 		"svelte": "^5.0.0-next.1",
 		"svelte-check": "^4.0.0",
+		"svelte-interactions": "^0.2.0",
 		"tailwindcss": "^3.4.9",
 		"trpc-svelte-query-adapter": "^2.3.14",
 		"typescript": "^5.0.0",

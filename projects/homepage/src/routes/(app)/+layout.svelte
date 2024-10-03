@@ -20,7 +20,7 @@
 
 <div class="mx-auto flex h-full w-full max-w-screen-xl overflow-hidden">
 	<div class="my-6 flex">
-		<aside class="flex w-72 flex-col py-4">
+		<aside class="flex w-72 flex-col py-4 pr-8">
 			<div class="align-center mb-4 flex items-center">
 				<enhanced:img src="$lib/assets/icon.png" class="w-16 pr-2" alt="Server Logo" />
 				<h1 class="text-2xl font-semibold">Zefir&apos;s Cloud</h1>

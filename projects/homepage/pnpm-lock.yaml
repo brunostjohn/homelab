@@ -111,6 +111,9 @@ importers:
       svelte-check:
         specifier: ^4.0.0
         version: 4.0.4(picomatch@2.3.1)(svelte@5.0.0-next.260)(typescript@5.6.2)
+      svelte-interactions:
+        specifier: ^0.2.0
+        version: 0.2.0(svelte@5.0.0-next.260)
       tailwindcss:
         specifier: ^3.4.9
         version: 3.4.13
@@ -1719,6 +1722,11 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
+
+  svelte-interactions@0.2.0:
+    resolution: {integrity: sha512-jGgZgdfSFnBzIs5j058T/XqHCEXHVpob31dkTwMu4KZyUSt2prozXoK/vKmN1eOyTaEIqALX20aLkYlbbapLPA==}
+    peerDependencies:
+      svelte: ^4.0.0
 
   svelte-parse-markup@0.1.5:
     resolution: {integrity: sha512-T6mqZrySltPCDwfKXWQ6zehipVLk4GWfH1zCMGgRtLlOIFPuw58ZxVYxVvotMJgJaurKi1i14viB2GIRKXeJTQ==}
@@ -3431,6 +3439,10 @@ snapshots:
       typescript: 5.6.2
     transitivePeerDependencies:
       - picomatch
+
+  svelte-interactions@0.2.0(svelte@5.0.0-next.260):
+    dependencies:
+      svelte: 5.0.0-next.260
 
   svelte-parse-markup@0.1.5(svelte@5.0.0-next.260):
     dependencies:

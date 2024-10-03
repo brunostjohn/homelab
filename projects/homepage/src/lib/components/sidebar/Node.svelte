@@ -3,6 +3,7 @@
 	import { Tooltip } from "$lib/components";
 	import { filesize } from "filesize";
 	import { Cpu, MemoryStick } from "lucide-svelte";
+	import { fly } from "svelte/transition";
 
 	interface Node {
 		name: string;
@@ -13,9 +14,10 @@
 
 	interface Props {
 		node: Node;
+		expanded: boolean;
 	}
 
-	const { node }: Props = $props();
+	const { node, expanded }: Props = $props();
 </script>
 
 <li>
@@ -41,12 +43,15 @@
 
 		<p class="text-sm font-semibold">{node.name}</p>
 	</div>
-	<div class="flex items-center gap-4">
-		<p class="text-muted-foreground align-center inline-flex items-center gap-1 text-sm">
-			<Cpu class="h-4 w-4" />{node.cpu}
-		</p>
-		<p class="text-muted-foreground align-center inline-flex items-center gap-1 text-sm">
-			<MemoryStick class="h-4 w-4" />{filesize(node.memory)}
-		</p>
-	</div>
+
+	{#if expanded}
+		<div class="flex items-center gap-4" transition:fly={{ y: -5 }}>
+			<p class="text-muted-foreground align-center inline-flex items-center gap-1 text-sm">
+				<Cpu class="h-4 w-4" />{node.cpu}
+			</p>
+			<p class="text-muted-foreground align-center inline-flex items-center gap-1 text-sm">
+				<MemoryStick class="h-4 w-4" />{filesize(node.memory)}
+			</p>
+		</div>
+	{/if}
 </li>

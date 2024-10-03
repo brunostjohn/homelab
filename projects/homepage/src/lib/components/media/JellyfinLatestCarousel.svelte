@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Carousel } from "$lib/components/ui";
 	import { trpc } from "$lib/trpc";
-	import { Popcorn } from "lucide-svelte";
+	import { Popcorn, ChevronRight } from "lucide-svelte";
 	import Autoplay from "embla-carousel-autoplay";
 	import JellyfinCarouselCard from "./JellyfinCarouselCard.svelte";
+	import { JellyfinIcon } from "../icons";
 
 	interface Props {
 		serverPublicUrl: string;
@@ -14,10 +15,22 @@
 	const jfData = trpc()?.jellyfin.latestMedia.createQuery();
 </script>
 
-<h1 class="align-center mb-4 flex items-center gap-2 text-4xl font-semibold">
-	<Popcorn class="h-8 w-8" />
-	Latest Movies & Shows
-</h1>
+<div class="align-center mb-4 flex items-center justify-center">
+	<h1 class="align-center flex items-center gap-2 text-4xl font-semibold">
+		<Popcorn class="h-8 w-8" />
+		Latest Movies & Shows
+	</h1>
+
+	<a
+		href={serverPublicUrl}
+		target="_blank"
+		class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center text-sm transition-all"
+	>
+		See more on <JellyfinIcon class="ml-2 mr-1 h-4 w-4 rounded-sm" />Jellyfin <ChevronRight
+			class="h-4 w-4"
+		/>
+	</a>
+</div>
 {#if $jfData?.data}
 	<Carousel.Root
 		class="mx-auto w-full"
