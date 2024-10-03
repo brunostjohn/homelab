@@ -99,7 +99,7 @@
 						</p>
 					{:else if downloads.length === 1 && status !== JellyseerrMediaStatus.AVAILABLE && downloads[0].sizeLeft !== 0}
 						<p class="text-primary/50 mb-1 mt-auto text-xs">
-							{filesize(downloads[0].sizeLeft)} left - {moment(
+							{filesize(downloads[0].sizeLeft)} left - Available {moment(
 								downloads[0].estimatedCompletionTime
 							).fromNow()}
 						</p>
