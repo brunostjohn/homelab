@@ -22,7 +22,7 @@ importers:
         version: 10.45.2
       bits-ui:
         specifier: ^0.21.15
-        version: 0.21.15(svelte@5.0.0-next.260)
+        version: 0.21.16(svelte@5.0.0-next.260)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -833,8 +833,8 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
-  bits-ui@0.21.15:
-    resolution: {integrity: sha512-+m5WSpJnFdCcNdXSTIVC1WYBozipO03qRh03GFWgrdxoHiolCfwW71EYG4LPCWYPG6KcTZV0Cj6iHSiZ7cdKdg==}
+  bits-ui@0.21.16:
+    resolution: {integrity: sha512-XFZ7/bK7j/K+5iktxX/ZpmoFHjYjpPzP5EOO/4bWiaFg5TG1iMcfjDhlBTQnJxD6BoVoHuqeZPHZvaTgF4Iv3Q==}
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.118
 
@@ -2603,7 +2603,7 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
-  bits-ui@0.21.15(svelte@5.0.0-next.260):
+  bits-ui@0.21.16(svelte@5.0.0-next.260):
     dependencies:
       '@internationalized/date': 3.5.6
       '@melt-ui/svelte': 0.76.2(svelte@5.0.0-next.260)
@@ -2668,7 +2668,7 @@ snapshots:
 
   cmdk-sv@0.0.18(svelte@5.0.0-next.260):
     dependencies:
-      bits-ui: 0.21.15(svelte@5.0.0-next.260)
+      bits-ui: 0.21.16(svelte@5.0.0-next.260)
       nanoid: 5.0.7
       svelte: 5.0.0-next.260
 
@@ -3624,7 +3624,7 @@ snapshots:
 
   vaul-svelte@0.3.2(svelte@5.0.0-next.260):
     dependencies:
-      bits-ui: 0.21.15(svelte@5.0.0-next.260)
+      bits-ui: 0.21.16(svelte@5.0.0-next.260)
       svelte: 5.0.0-next.260
 
   verror@1.10.0:
