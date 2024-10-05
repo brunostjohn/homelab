@@ -25,17 +25,3 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: canon-consume-pvc
-  namespace: paperless
-spec:
-  resources:
-    requests:
-      storage: 2Gi
-  storageClassName: longhorn-unreplicated
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
