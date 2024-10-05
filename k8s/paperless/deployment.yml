@@ -270,6 +270,7 @@ spec:
           volumeMounts:
             - name: consume
               mountPath: /media/consume
+              subPath: consume/
           env:
             - name: NETBIOS_NAME
               value: paperless_smb
