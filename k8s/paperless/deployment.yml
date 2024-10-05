@@ -23,10 +23,10 @@ spec:
           nfs:
             server: 10.0.3.5
             path: /mnt/floofpool/paperless/export
-        - name: paperless-consume
-          nfs:
-            server: 10.0.3.5
-            path: /mnt/floofpool/paperless/consume
+        # - name: paperless-consume
+        #   nfs:
+        #     server: 10.0.3.5
+        #     path: /mnt/floofpool/paperless/consume
       containers:
         - name: paperless
           imagePullPolicy: IfNotPresent
@@ -49,8 +49,8 @@ spec:
               mountPath: /usr/src/paperless/data
             - name: paperless-export
               mountPath: /usr/src/paperless/export
-            - name: paperless-consume
-              mountPath: /usr/src/paperless/consume
+            # - name: paperless-consume
+            #   mountPath: /usr/src/paperless/consume
           readinessProbe:
             httpGet:
               path: /
