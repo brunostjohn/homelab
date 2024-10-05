@@ -252,8 +252,6 @@ spec:
           persistentVolumeClaim:
             claimName: canon-consume-pvc
       securityContext:
-        runAsUser: 1001
-        runAsGroup: 1001
         fsGroup: 1001
       containers:
         - name: canon-scan-ingest
