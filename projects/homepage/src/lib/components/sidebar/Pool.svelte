@@ -12,7 +12,7 @@
 	}
 
 	const { pool }: Props = $props();
-	const { name, allocated, size, status } = $derived(pool);
+	const { name, allocated, size } = $derived(pool);
 	const percent = $derived(Math.round((allocated / size) * 100));
 </script>
 

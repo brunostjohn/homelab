@@ -36,7 +36,7 @@
 {#snippet cardContent()}
 	{@render icon("h-10 w-10 my-auto rounded-md")}
 	<div>
-		<h2 class="text-xl font-medium">{name}</h2>
+		<h2 class="text-lg font-medium">{name}</h2>
 		<p class="text-muted-foreground text-sm">
 			{description}
 		</p>

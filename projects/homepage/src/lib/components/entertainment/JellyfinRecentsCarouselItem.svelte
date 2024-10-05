@@ -23,7 +23,7 @@
 		UserData,
 		SeriesId,
 	} = $derived(item);
-	$inspect(item);
+
 	const backdropBlurHash = $derived(ImageBlurHashes?.Backdrop);
 	const playedPercentage = $derived(UserData?.PlayedPercentage);
 

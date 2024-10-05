@@ -4,3 +4,4 @@ export * from "./unifi";
 export * from "./truenas";
 export * from "./jellyseerr";
 export * from "./downloadClients";
+export * from "./mediaFetchers";

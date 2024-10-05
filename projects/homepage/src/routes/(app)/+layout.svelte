@@ -2,7 +2,7 @@
 	import { Separator } from "$lib/components";
 	import { KubeStats, NetworkStats, SidebarLink, StorageStats } from "$lib/components/sidebar";
 	import type { LayoutServerData } from "./$types";
-	import { LogOut, BookOpenText, Fingerprint, KeyRound } from "lucide-svelte";
+	import { LogOut, BookOpenText, Fingerprint, KeyRound, Cable } from "lucide-svelte";
 	import type { Snippet } from "svelte";
 
 	interface Props {
@@ -38,6 +38,12 @@
 						<LogOut class={className} />
 					{/snippet}
 					Sign out
+				</SidebarLink>
+				<SidebarLink href="https://status.{domain}">
+					{#snippet icon(className: string)}
+						<Cable class={className} />
+					{/snippet}
+					Uptime status
 				</SidebarLink>
 				<SidebarLink href="https://docs.{domain}">
 					{#snippet icon(className: string)}

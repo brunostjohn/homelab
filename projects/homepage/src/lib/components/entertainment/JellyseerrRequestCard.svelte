@@ -69,6 +69,12 @@
 				return "bg-gray-300";
 		}
 	});
+
+	const eta = $derived(
+		moment(downloads[0].estimatedCompletionTime).fromNow() === "Invalid date"
+			? null
+			: moment(downloads[0].estimatedCompletionTime).fromNow()
+	);
 </script>
 
 <li>
@@ -101,9 +107,11 @@
 						<p class="text-primary/50 mt-auto text-xs">
 							{filesize(downloads[0].sizeLeft)} left
 						</p>
-						<p class="text-primary/50 mb-1 text-xs">
-							Available {moment(downloads[0].estimatedCompletionTime).fromNow()}
-						</p>
+						{#if eta}
+							<p class="text-primary/50 mb-1 text-xs">
+								Available {eta}
+							</p>
+						{/if}
 						<div class="bg-muted/30 h-3 w-full overflow-hidden rounded-full">
 							<div
 								class="bg-primary/50 h-full animate-pulse rounded-full"

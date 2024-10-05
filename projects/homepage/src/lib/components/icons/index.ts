@@ -10,3 +10,6 @@ export { default as ProwlarrIcon } from "./Prowlarr.svelte";
 export { default as BazarrIcon } from "./Bazarr.svelte";
 export { default as QBitTorrentIcon } from "./QBitTorrent.svelte";
 export { default as SABnzbdIcon } from "./SABnzbd.svelte";
+export { default as NextcloudIcon } from "./Nextcloud.svelte";
+export { default as ImmichIcon } from "./Immich.svelte";
+export { default as VaultwardenIcon } from "./Vaultwarden.svelte";

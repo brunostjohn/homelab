@@ -3,6 +3,7 @@ import {
 	jellyfinRouter,
 	jellyseerrRouter,
 	kubeRouter,
+	mediaFetcherRouter,
 	truenasRouter,
 	unifiRouter,
 } from "./routers";
@@ -15,6 +16,7 @@ export const router = t.router({
 	jellyseerr: jellyseerrRouter,
 	trueNas: truenasRouter,
 	downloadClients: downloadClientsRouter,
+	mediaFetchers: mediaFetcherRouter,
 });
 
 export const createCaller = t.createCallerFactory(router);
