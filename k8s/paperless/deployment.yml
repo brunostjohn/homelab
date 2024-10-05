@@ -273,6 +273,12 @@ spec:
             - containerPort: 445
               name: smb
               protocol: TCP
+            - containerPort: 139
+              name: smb-udp
+              protocol: UDP
+            - containerPort: 139
+              name: smb-tcp
+              protocol: TCP
             - containerPort: 3702
               name: netbios-udp
               protocol: UDP

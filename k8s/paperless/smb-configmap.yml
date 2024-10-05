@@ -15,6 +15,8 @@ data:
       - "force user = printer"
       - "force group = printer"
       - "server max protocol = SMB3"
+      - "server min protocol = SMB2"
+      - "log level = 1"
 
     share:
       - name: consume
