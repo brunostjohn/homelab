@@ -4,6 +4,9 @@ metadata:
   name: paperless
   namespace: paperless
 spec:
+  strategy:
+    type: Recreate
+  replicas: 1
   selector:
     matchLabels:
       app: paperless
@@ -233,6 +236,9 @@ metadata:
   name: canon-scan-ingest
   namespace: paperless
 spec:
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: canon-scan-ingest
@@ -245,6 +251,10 @@ spec:
         - name: consume
           persistentVolumeClaim:
             claimName: canon-consume-pvc
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
       containers:
         - name: canon-scan-ingest
           image: ghcr.io/mhelff/maxify-smbv1:latest
