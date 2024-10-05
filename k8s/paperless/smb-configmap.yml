@@ -45,7 +45,7 @@ data:
             "ntlm auth": "yes",
             "workgroup": "WORKGROUP",
             "netbios name": "SAMBA",
-            "passdb backend": "tdbsam",
+            "passdb backend": "tdbsam"
           }
         }
       },
