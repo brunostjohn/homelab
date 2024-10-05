@@ -268,8 +268,20 @@ spec:
               memory: "128Mi"
               cpu: "250m"
           ports:
-            - containerPort: 139
+            - containerPort: 445
               name: smb
+              protocol: TCP
+            - containerPort: 3702
+              name: netbios-udp
+              protocol: UDP
+            - containerPort: 3702
+              name: netbios-tcp
+              protocol: TCP
+            - containerPort: 5355
+              name: netbios-udp-2
+              protocol: UDP
+            - containerPort: 5355
+              name: netbios-tcp-2
               protocol: TCP
           volumeMounts:
             - name: consume
