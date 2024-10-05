@@ -22,7 +22,7 @@
 	<ul class="mt-2 grid grid-cols-2 gap-2" style="grid-auto-rows: 1fr;">
 		<AppCard
 			name="Jellyfin"
-			description="Watch movies & shows, listen to music, and more."
+			description="Watch movies & shows, listen to music."
 			gradientColours={["#020b23", "#1f52aa", "#226e80"]}
 			href={publicJellyfinUrl}
 		>

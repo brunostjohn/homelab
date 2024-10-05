@@ -47,6 +47,7 @@ export const jellyfinRouter = t.router({
 			enableImages: true,
 			includeItemTypes: ["Movie", "Series"],
 		});
+
 		return userLibrary;
 	}),
 
@@ -64,6 +65,7 @@ export const jellyfinRouter = t.router({
 			enableImages: true,
 			enableUserData: true,
 		});
+
 		return Items;
 	}),
 });

@@ -14,8 +14,8 @@ resource "unifi_network" "default" {
   name             = "Default"
   purpose          = "corporate"
   multicast_dns    = true
-  subnet           = "10.0.0.0/16"
-  dhcp_start       = "10.0.10.0"
+  subnet           = "10.1.0.0/16"
+  dhcp_start       = "10.1.0.1"
   dhcp_stop        = "10.0.255.254"
   dhcp_enabled     = true
   domain_name      = "localdomain"

@@ -1,14 +1,26 @@
 <script lang="ts">
-	import { ChevronLeft, ChevronRight } from "lucide-svelte";
+	import { ChevronLeft } from "lucide-svelte";
 	import type { PageServerData } from "./$types";
 	import { AppCard } from "$lib/components/app";
 	import {
 		AudiobookshelfIcon,
+		BazarrIcon,
 		JellyfinIcon,
 		JellyseerrIcon,
+		LidarrIcon,
+		ProwlarrIcon,
+		QBitTorrentIcon,
+		RadarrIcon,
+		ReadarrIcon,
 		RommIcon,
+		SABnzbdIcon,
+		SonarrIcon,
 	} from "$lib/components/icons";
-	import { JellyfinRecentsCarousel, JellyseerrRequests } from "$lib/components/entertainment";
+	import {
+		JellyfinRecentsCarousel,
+		JellyseerrRequests,
+		InProgressDownloads,
+	} from "$lib/components/entertainment";
 
 	interface Props {
 		data: PageServerData;
@@ -30,7 +42,7 @@
 <ul class="mb-4 mt-2 grid grid-cols-2 gap-2" style="grid-auto-rows: 1fr;">
 	<AppCard
 		name="Jellyfin"
-		description="Watch movies & shows, listen to music, and more."
+		description="Watch movies & shows, listen to music."
 		gradientColours={["#020b23", "#1f52aa", "#226e80"]}
 		href="https://birds.{domain}"
 	>
@@ -66,18 +78,7 @@
 	</AppCard>
 </ul>
 
-<div class="align-center mb-2 flex items-center">
-	<h2 class="align-center flex items-center gap-2 text-xl font-semibold">
-		<JellyfinIcon class="h-8 w-8 rounded-md" />Continue Watching
-	</h2>
-	<a
-		href="https://birds.{domain}"
-		class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center transition-all"
-	>
-		View all <ChevronRight class="h-4 w-4" />
-	</a>
-</div>
-<JellyfinRecentsCarousel serverPublicUrl="https://birds.{domain}" />
+<JellyfinRecentsCarousel serverPublicUrl="https://birds.{domain}" {domain} />
 
 <h2 class="align-center mb-2 mt-8 flex items-center gap-2 text-3xl font-semibold">Request Media</h2>
 <AppCard
@@ -93,22 +94,119 @@
 		</div>
 	{/snippet}
 </AppCard>
-<div class="align-center mb-2 mt-6 flex items-center">
-	<h2 class="align-center flex items-center gap-2 text-xl font-semibold">
-		<div class="h-8 w-8 rounded-md bg-white p-1">
-			<JellyseerrIcon class="h-full w-full" />
-		</div>
-		Your Recent Requests
-	</h2>
-	<a
-		href="https://den.{domain}/requests"
-		class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center transition-all"
-	>
-		View all <ChevronRight class="h-4 w-4" />
-	</a>
-</div>
+
 <JellyseerrRequests {domain} />
+
+<h2 class="align-center mb-2 mt-8 flex items-center gap-2 text-3xl font-semibold">
+	Media Fetchers
+</h2>
+<ul class="mb-4 mt-2 grid grid-cols-2 gap-2" style="grid-auto-rows: 1fr;">
+	<AppCard
+		name="Prowlarr"
+		description="Torrent & Usenet indexer aggregator."
+		gradientColours={["#7e2b1b", "#e4630d", "#fba37b"]}
+		href="https://prowlarr.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<div class="rounded-md bg-white p-1 {className}">
+				<ProwlarrIcon class="h-full w-full" />
+			</div>
+		{/snippet}
+	</AppCard>
+
+	<AppCard
+		name="Radarr"
+		description="Movie fetcher & manager."
+		gradientColours={["#242c2c", "#fbc42c", "#f6dba0"]}
+		href="https://radarr.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<div class="rounded-md bg-white p-1 {className}">
+				<RadarrIcon class="h-full w-full" />
+			</div>
+		{/snippet}
+	</AppCard>
+
+	<AppCard
+		name="Sonarr"
+		description="Show fetcher & manager."
+		gradientColours={["#3c3c54", "#3c3c54", "#04cbfb"]}
+		href="https://sonarr.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<div class="rounded-md bg-white p-1 {className}">
+				<SonarrIcon class="h-full w-full" />
+			</div>
+		{/snippet}
+	</AppCard>
+
+	<AppCard
+		name="Lidarr"
+		description="Music fetcher & manager."
+		gradientColours={["#049454", "#afc0b4", "#b5cdbf"]}
+		href="https://lidarr.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<div class="rounded-md bg-white p-1 {className}">
+				<LidarrIcon class="h-full w-full" />
+			</div>
+		{/snippet}
+	</AppCard>
+
+	<AppCard
+		name="Readarr"
+		description="Book fetcher & manager."
+		gradientColours={["#742c2c", "#bc847c", "#d4b4ac"]}
+		href="https://readarr.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<div class="rounded-md bg-white p-1 {className}">
+				<ReadarrIcon class="h-full w-full" />
+			</div>
+		{/snippet}
+	</AppCard>
+
+	<AppCard
+		name="Bazarr"
+		description="Subtitle fetcher & manager."
+		gradientColours={["#000000", "#000000", "#ffffff"]}
+		href="https://bazarr.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<div class="rounded-md bg-white p-1 {className}">
+				<BazarrIcon class="h-full w-full" />
+			</div>
+		{/snippet}
+	</AppCard>
+</ul>
 
 <h2 class="align-center mb-2 mt-8 flex items-center gap-2 text-3xl font-semibold">
 	Media Downloaders
 </h2>
+<ul class="mb-4 mt-2 grid grid-cols-2 gap-2" style="grid-auto-rows: 1fr;">
+	<AppCard
+		name="QBitTorrent"
+		description="Torrent client."
+		gradientColours={["#407bc9", "#64a4ec", "#a2ccf4"]}
+		href="https://fetching.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<QBitTorrentIcon class={className} />
+		{/snippet}
+	</AppCard>
+
+	<AppCard
+		name="SABnzbd"
+		description="Usenet client."
+		gradientColours={["#8c620c", "#b6810b", "#fbc116"]}
+		href="https://sabnzbd.{domain}"
+	>
+		{#snippet icon(className: string)}
+			<div class="rounded-[8px] bg-white p-1 {className}">
+				<SABnzbdIcon class="relative h-full w-full" />
+			</div>
+		{/snippet}
+	</AppCard>
+</ul>
+
+<InProgressDownloads />
