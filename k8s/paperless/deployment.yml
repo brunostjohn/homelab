@@ -253,14 +253,11 @@ spec:
         - name: consume
           persistentVolumeClaim:
             claimName: canon-consume-pvc
-        - name: canon-scan-ingest-config
-          configMap:
-            name: canon-scan-ingest-config
       securityContext:
         fsGroup: 1001
       containers:
         - name: canon-scan-ingest
-          image: quay.io/samba.org/samba-server:latest
+          image: ghcr.io/mhelff/maxify-smbv1:latest
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -270,14 +267,11 @@ spec:
               memory: "512Mi"
               cpu: "500m"
           env:
-            - name: SAMBACC_CONFIG
-              value: /etc/samba-container/config.json
-            - name: SAMBA_CONTAINER_ID
-              value: canon-scan-ingest
+            - name: SHARE1
+              value: consume
+            - name: SHARE1_COMMENT
+              value: "Canon Scan Ingest"
           ports:
-            - containerPort: 445
-              name: smb
-              protocol: TCP
             - containerPort: 139
               name: smb-udp
               protocol: UDP
@@ -286,8 +280,5 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: consume
-              mountPath: /share
+              mountPath: /media/consume
               subPath: consume/
-            - name: canon-scan-ingest-config
-              mountPath: /etc/samba-container/config.json
-              subPath: config.json
