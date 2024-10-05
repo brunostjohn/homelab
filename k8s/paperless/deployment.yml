@@ -235,6 +235,8 @@ kind: Deployment
 metadata:
   name: canon-scan-ingest
   namespace: paperless
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   strategy:
