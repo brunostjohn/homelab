@@ -32,6 +32,7 @@ data:
             "force group": "printer",
             "force create mode": "0777",
             "force directory mode": "0777",
+            "create mask": "0770",
             "public": "yes"
           }
         }
@@ -40,13 +41,11 @@ data:
         "default": {
           "options": {
             "security": "user",
-            "server min protocol": "SMB2",
-            "server max protocol": "SMB3",
-            "load printers": "no",
-            "printing": "bsd",
-            "printcap name": "/dev/null",
-            "disable spoolss": "yes",
-            "guest ok": "no"
+            "min protocol": "CORE",
+            "ntlm auth": "yes",
+            "workgroup": "WORKGROUP",
+            "netbios name": "SAMBA",
+            "passdb backend": "tdbsam",
           }
         }
       },
