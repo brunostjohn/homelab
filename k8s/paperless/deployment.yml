@@ -221,3 +221,49 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             timeoutSeconds: 5
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: canon-scan-ingest
+  namespace: paperless
+spec:
+  selector:
+    matchLabels:
+      app: canon-scan-ingest
+  template:
+    metadata:
+      labels:
+        app: canon-scan-ingest
+    spec:
+      volumes:
+        - name: paperless-consume
+          nfs:
+            server: 10.0.3.5
+            path: /mnt/floofpool/paperless/consume
+      containers:
+        - name: canon-scan-ingest
+          image: ghcr.io/mhelff/maxify-smbv1:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
+          ports:
+            - containerPort: 139
+              name: smb
+              protocol: TCP
+          volumeMounts:
+            - name: paperless-consume
+              mountPath: /media/consume
+          env:
+            - name: NETBIOS_NAME
+              value: paperless_smb
+            - name: WORKGROUP
+              value: WORKGROUP
+            - name: SHARE1
+              value: consume
+            - name: SHARE1_COMMENT
+              value: Paperless consume smbv1 share

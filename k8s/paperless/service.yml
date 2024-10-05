@@ -36,3 +36,19 @@ spec:
     - port: 3000
       targetPort: 3000
       protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: canon-scan-ingest
+  namespace: paperless
+spec:
+  selector:
+    app: canon-scan-ingest
+  ports:
+    - port: 139
+      targetPort: 139
+      protocol: TCP
+      name: smb
+  type: LoadBalancer
+  loadBalancerIP: 10.0.4.0
