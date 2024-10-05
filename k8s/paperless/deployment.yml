@@ -251,11 +251,15 @@ spec:
         - name: consume
           persistentVolumeClaim:
             claimName: canon-consume-pvc
+        - name: canon-scan-ingest-config
+          configMap:
+            name: canon-scan-ingest-config
       securityContext:
         fsGroup: 1001
       containers:
         - name: canon-scan-ingest
-          image: ghcr.io/mhelff/maxify-smbv1:latest
+          image: ghcr.io/crazy-max/samba
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: "64Mi"
@@ -269,10 +273,8 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: consume
-              mountPath: /media/consume
+              mountPath: /samba/consume
               subPath: consume/
-          env:
-            - name: SHARE1
-              value: consume
-            - name: SHARE1_COMMENT
-              value: Paperless consume smbv1 share
+            - name: canon-scan-ingest-config
+              mountPath: /data/config.yml
+              subPath: config.yml
