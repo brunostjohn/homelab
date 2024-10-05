@@ -17,6 +17,9 @@ data:
       - "server max protocol = SMB3"
       - "server min protocol = SMB2"
       - "log level = 1"
+      - "directory mask = 0777"
+      - "force create mode = 0777"
+      - "force directory mode = 0777"
 
     share:
       - name: consume
