@@ -22,7 +22,17 @@ data:
         "consume": {
           "options": {
             "path": "/share",
-            "valid users": "printer"
+            "valid users": "printer",
+            "read only": "no",
+            "browseable": "yes",
+            "writable": "yes",
+            "create mask": "0777",
+            "directory mask": "0777",
+            "force user": "printer",
+            "force group": "printer",
+            "force create mode": "0777",
+            "force directory mode": "0777",
+            "public": "yes"
           }
         }
       },
