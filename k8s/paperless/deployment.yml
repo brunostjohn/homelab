@@ -259,13 +259,6 @@ spec:
         - name: canon-scan-ingest
           image: ghcr.io/mhelff/maxify-smbv1:latest
           imagePullPolicy: IfNotPresent
-          resources:
-            requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
-              cpu: "500m"
           env:
             - name: SHARE1
               value: consume
