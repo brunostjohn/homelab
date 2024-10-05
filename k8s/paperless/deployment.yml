@@ -272,10 +272,6 @@ spec:
               mountPath: /media/consume
               subPath: consume/
           env:
-            - name: NETBIOS_NAME
-              value: paperless_smb
-            - name: WORKGROUP
-              value: WORKGROUP
             - name: SHARE1
               value: consume
             - name: SHARE1_COMMENT
