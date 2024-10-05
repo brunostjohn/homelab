@@ -8,7 +8,7 @@ data:
     {
       "samba-container-config": "v0",
       "configs": {
-        "demo": {
+        "canon-scan-ingest": {
           "shares": [
             "share"
           ],
