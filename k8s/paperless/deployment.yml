@@ -260,7 +260,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: canon-scan-ingest
-          image: ghcr.io/crazy-max/samba
+          image: quay.io/samba.org/samba-server:latest
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -269,6 +269,11 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "250m"
+          env:
+            - name: SAMBACC_CONFIG
+              value: /etc/samba-container/config.json
+            - name: SAMBA_CONTAINER_ID
+              value: canon-scan-ingest
           ports:
             - containerPort: 445
               name: smb
@@ -279,22 +284,10 @@ spec:
             - containerPort: 139
               name: smb-tcp
               protocol: TCP
-            - containerPort: 3702
-              name: netbios-udp
-              protocol: UDP
-            - containerPort: 3702
-              name: netbios-tcp
-              protocol: TCP
-            - containerPort: 5355
-              name: netbios-udp-2
-              protocol: UDP
-            - containerPort: 5355
-              name: netbios-tcp-2
-              protocol: TCP
           volumeMounts:
             - name: consume
-              mountPath: /samba/consume
+              mountPath: /share
               subPath: consume/
             - name: canon-scan-ingest-config
-              mountPath: /data/config.yml
-              subPath: config.yml
+              mountPath: /etc/samba-container/config.json
+              subPath: config.json

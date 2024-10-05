@@ -58,21 +58,5 @@ spec:
       targetPort: 139
       name: netbios-udp
       protocol: UDP
-    - port: 3702
-      targetPort: 3702
-      name: netbios-udp
-      protocol: UDP
-    - port: 3702
-      targetPort: 3702
-      name: netbios-tcp
-      protocol: TCP
-    - port: 5355
-      targetPort: 5355
-      name: netbios-udp-2
-      protocol: UDP
-    - port: 5355
-      targetPort: 5355
-      name: netbios-tcp-2
-      protocol: TCP
   type: LoadBalancer
   loadBalancerIP: 10.0.4.0

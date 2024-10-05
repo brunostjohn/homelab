@@ -4,23 +4,48 @@ metadata:
   name: canon-scan-ingest-config
   namespace: paperless
 data:
-  config.yml: |
-    auth:
-      - user: printer
-        group: printer
-        password: printer
-        uid: 1000
-        gid: 1000
-    global:
-      - "force user = printer"
-      - "force group = printer"
-      - "server max protocol = SMB3"
-      - "server min protocol = SMB2"
-      - "log level = 1"
-      - "directory mask = 0777"
-      - "force create mode = 0777"
-      - "force directory mode = 0777"
-
-    share:
-      - name: consume
-        path: /samba/consume
+  config.json: |
+    {
+      "samba-container-config": "v0",
+      "configs": {
+        "demo": {
+          "shares": [
+            "share"
+          ],
+          "globals": [
+            "default"
+          ],
+          "instance_name": "SAMBA"
+        }
+      },
+      "shares": {
+        "share": {
+          "options": {
+            "path": "/share",
+            "valid users": "sambauser"
+          }
+        }
+      },
+      "globals": {
+        "default": {
+          "options": {
+            "security": "user",
+            "server min protocol": "SMB2",
+            "load printers": "no",
+            "printing": "bsd",
+            "printcap name": "/dev/null",
+            "disable spoolss": "yes",
+            "guest ok": "no"
+          }
+        }
+      },
+      "users": {
+        "all_entries": [
+          {
+            "name": "printer",
+            "password": "printer"
+          }
+        ]
+      },
+      "_footer": 1
+    }
