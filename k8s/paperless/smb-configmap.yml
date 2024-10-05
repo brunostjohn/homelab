@@ -5,19 +5,15 @@ metadata:
   namespace: paperless
 data:
   config.yml: |
+    auth:
+      - user: printer
+        group: printer
+        password: printer
+        uid: 1000
+        gid: 1000
     global:
-      - "workgroup = WORKGROUP"
-      - "server string = Samba Server"
-      - "log level = 1"
-      - "keepalive = 0"
-      - "writeable = yes"
-      - "browsable = yes"
-      - "read only = no"
-      - "map to guest = Bad User"
-      - "security = user"
-      - "guest ok = yes"
-      - "guest only = yes"
-      - "force user = smb"
+      - "force user = printer"
+      - "force group = printer"
 
     share:
       - name: consume
