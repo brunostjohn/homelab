@@ -23,10 +23,13 @@ spec:
           nfs:
             server: 10.0.3.5
             path: /mnt/floofpool/paperless/export
-        # - name: paperless-consume
-        #   nfs:
-        #     server: 10.0.3.5
-        #     path: /mnt/floofpool/paperless/consume
+        - name: paperless-consume
+          nfs:
+            server: 10.0.3.5
+            path: /mnt/floofpool/paperless/consume
+        - name: paperless-canon-consume
+          persistentVolumeClaim:
+            claimName: canon-consume-pvc
       containers:
         - name: paperless
           imagePullPolicy: IfNotPresent
@@ -49,8 +52,10 @@ spec:
               mountPath: /usr/src/paperless/data
             - name: paperless-export
               mountPath: /usr/src/paperless/export
-            # - name: paperless-consume
-            #   mountPath: /usr/src/paperless/consume
+            - name: paperless-consume
+              mountPath: /usr/src/paperless/consume/remoteconsume
+            - name: paperless-canon-consume
+              mountPath: /usr/src/paperless/consume/canonconsume
           readinessProbe:
             httpGet:
               path: /
@@ -237,10 +242,9 @@ spec:
         app: canon-scan-ingest
     spec:
       volumes:
-        - name: paperless-consume
-          nfs:
-            server: 10.0.3.5
-            path: /mnt/floofpool/paperless/consume
+        - name: consume
+          persistentVolumeClaim:
+            claimName: canon-consume-pvc
       containers:
         - name: canon-scan-ingest
           image: ghcr.io/mhelff/maxify-smbv1:latest
@@ -256,7 +260,7 @@ spec:
               name: smb
               protocol: TCP
           volumeMounts:
-            - name: paperless-consume
+            - name: consume
               mountPath: /media/consume
           env:
             - name: NETBIOS_NAME
