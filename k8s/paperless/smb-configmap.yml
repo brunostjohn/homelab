@@ -10,7 +10,7 @@ data:
       "configs": {
         "canon-scan-ingest": {
           "shares": [
-            "paperless-consume"
+            "consume"
           ],
           "globals": [
             "default"
@@ -19,7 +19,7 @@ data:
         }
       },
       "shares": {
-        "paperless-consume": {
+        "consume": {
           "options": {
             "path": "/share",
             "valid users": "printer"
@@ -31,6 +31,7 @@ data:
           "options": {
             "security": "user",
             "server min protocol": "SMB2",
+            "server max protocol": "SMB3",
             "load printers": "no",
             "printing": "bsd",
             "printcap name": "/dev/null",
