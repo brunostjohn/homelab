@@ -10,7 +10,7 @@ data:
       "configs": {
         "canon-scan-ingest": {
           "shares": [
-            "share"
+            "paperless-consume"
           ],
           "globals": [
             "default"
@@ -19,10 +19,10 @@ data:
         }
       },
       "shares": {
-        "share": {
+        "paperless-consume": {
           "options": {
             "path": "/share",
-            "valid users": "sambauser"
+            "valid users": "printer"
           }
         }
       },
