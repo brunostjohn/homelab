@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { ChevronLeft } from "lucide-svelte";
 	import type { PageServerData } from "./$types";
 	import {
 		JellyfinRecentsCarousel,
@@ -20,6 +19,7 @@
 		SABnzbdAppCard,
 		SonarrAppCard,
 	} from "$lib/components/appCards";
+	import { AppCardList, AppCardListTitle, PageTitle } from "$lib/components/app";
 
 	interface Props {
 		data: PageServerData;
@@ -29,47 +29,32 @@
 	const { domain } = $derived(data);
 </script>
 
-<a
-	href="/"
-	class="align-center text-muted-foreground hover:text-primary -ml-2 mb-1 flex items-center transition-all"
->
-	<ChevronLeft />Go back home
-</a>
-<h1 class="align-center mb-6 flex items-center gap-2 text-4xl font-semibold">Entertainment</h1>
+<PageTitle showBackButton>Entertainment</PageTitle>
 
-<h2 class="text-3xl font-semibold">Watch Media</h2>
-<ul class="mb-4 mt-2 grid grid-cols-2 gap-2" style="grid-auto-rows: 1fr;">
+<AppCardList title="Watch Media">
 	<JellyfinAppCard {domain} />
-
 	<RommAppCard {domain} />
-
 	<AudiobookshelfAppCard {domain} />
-</ul>
+</AppCardList>
 
 <JellyfinRecentsCarousel serverPublicUrl="https://birds.{domain}" {domain} />
 
-<h2 class="align-center mb-2 mt-8 flex items-center gap-2 text-3xl font-semibold">Request Media</h2>
+<AppCardListTitle>Request Media</AppCardListTitle>
 <JellyseerrAppCard {domain} notInList />
 <JellyseerrRequests {domain} />
 
-<h2 class="align-center mb-2 mt-8 flex items-center gap-2 text-3xl font-semibold">
-	Media Fetchers
-</h2>
-<ul class="mb-4 mt-2 grid grid-cols-2 gap-2" style="grid-auto-rows: 1fr;">
+<AppCardList title="Media Fetchers">
 	<ProwlarrAppCard {domain} />
 	<RadarrAppCard {domain} />
 	<SonarrAppCard {domain} />
 	<LidarrAppCard {domain} />
 	<ReadarrAppCard {domain} />
 	<BazarrAppCard {domain} />
-</ul>
+</AppCardList>
 
-<h2 class="align-center mb-2 mt-8 flex items-center gap-2 text-3xl font-semibold">
-	Media Downloaders
-</h2>
-<ul class="mb-4 mt-2 grid grid-cols-2 gap-2" style="grid-auto-rows: 1fr;">
+<AppCardList title="Media Downloaders">
 	<QBitTorrentAppCard {domain} />
 	<SABnzbdAppCard {domain} />
-</ul>
+</AppCardList>
 
 <InProgressDownloads />
