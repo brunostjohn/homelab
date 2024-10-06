@@ -11,7 +11,13 @@
 	const { children, titleIcon, class: className }: Props = $props();
 </script>
 
-<h1 class={cn("align-center flex items-center gap-2 text-4xl font-semibold", className)}>
+<h1
+	class={cn(
+		"text-4xl font-semibold",
+		titleIcon ? "align-center flex items-center gap-2" : "",
+		className
+	)}
+>
 	{#if titleIcon}
 		{@render titleIcon("h-8 w-8")}
 	{/if}

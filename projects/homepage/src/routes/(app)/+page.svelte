@@ -42,7 +42,7 @@
 	<SeeMoreApps description="Request media, check on your downloads." href="/entertainment" />
 </AppCardList>
 
-<HomepageSectionTitle title="RecentFiles">
+<HomepageSectionTitle title="Recent Files">
 	{#snippet titleIcon(className: string)}
 		<Cloud class={className} />
 	{/snippet}
