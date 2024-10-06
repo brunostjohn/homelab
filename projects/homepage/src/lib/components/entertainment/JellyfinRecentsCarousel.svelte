@@ -6,13 +6,12 @@
 	import JellyfinRecentsCarouselItem from "./JellyfinRecentsCarouselItem.svelte";
 
 	interface Props {
-		serverPublicUrl: string;
 		domain: string;
 	}
 
 	const resumeItems = trpc()?.jellyfin.resume.createQuery();
 
-	const { serverPublicUrl, domain }: Props = $props();
+	const { domain }: Props = $props();
 </script>
 
 {#if $resumeItems?.data && $resumeItems.data.length > 0}
@@ -30,7 +29,7 @@
 	<Carousel.Root>
 		<Carousel.Content>
 			{#each $resumeItems?.data as item (item.Id)}
-				<JellyfinRecentsCarouselItem {item} {serverPublicUrl} />
+				<JellyfinRecentsCarouselItem {item} serverPublicUrl={`https://birds.${domain}`} />
 			{/each}
 		</Carousel.Content>
 		<Carousel.Previous />

@@ -37,7 +37,7 @@
 	<AudiobookshelfAppCard {domain} />
 </AppCardList>
 
-<JellyfinRecentsCarousel serverPublicUrl="https://birds.{domain}" {domain} />
+<JellyfinRecentsCarousel {domain} />
 
 <AppCardListTitle>Request Media</AppCardListTitle>
 <JellyseerrAppCard {domain} notInList />
