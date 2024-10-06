@@ -3,3 +3,4 @@ export { default as AppCardList } from "./AppCardList.svelte";
 export { default as AppCardListTitle } from "./AppCardListTitle.svelte";
 export { default as PageTitle } from "./PageTitle.svelte";
 export { default as SeeMoreApps } from "./SeeMoreApps.svelte";
+export { default as HomepageSectionTitle } from "./HomepageSectionTitle.svelte";

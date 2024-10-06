@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { JellyfinLatestCarousel } from "$lib/components/media";
 	import type { PageServerData } from "./$types";
-	import { Cloud } from "lucide-svelte";
+	import { Cloud, Popcorn } from "lucide-svelte";
 	import {
 		AudiobookshelfAppCard,
 		ImmichAppCard,
@@ -10,7 +10,8 @@
 		VaultwardenAppCard,
 		NextcloudAppCard,
 	} from "$lib/components/appCards";
-	import { AppCardList, SeeMoreApps } from "$lib/components/app";
+	import { AppCardList, HomepageSectionTitle, SeeMoreApps } from "$lib/components/app";
+	import { JellyfinIcon } from "$lib/components/icons";
 
 	interface Props {
 		data: PageServerData;
@@ -20,8 +21,20 @@
 	const { domain } = $derived(data);
 </script>
 
-<JellyfinLatestCarousel {domain} />
+<HomepageSectionTitle
+	title="Latest Movies & Shows"
+	seeMoreAppName="Jellyfin"
+	seeMoreHref={`https://birds.${domain}`}
+>
+	{#snippet titleIcon(className: string)}
+		<Popcorn class={className} />
+	{/snippet}
 
+	{#snippet seeMoreIcon(className: string)}
+		<JellyfinIcon class={className} />
+	{/snippet}
+</HomepageSectionTitle>
+<JellyfinLatestCarousel {domain} />
 <AppCardList title="Entertainment Apps" onHome>
 	<JellyfinAppCard {domain} />
 	<RommAppCard {domain} />
@@ -29,11 +42,11 @@
 	<SeeMoreApps description="Request media, check on your downloads." href="/entertainment" />
 </AppCardList>
 
-<h1 class="align-center mt-8 flex items-center gap-2 text-4xl font-semibold">
-	<Cloud class="h-8 w-8" />
-	Recent Files
-</h1>
-
+<HomepageSectionTitle title="RecentFiles">
+	{#snippet titleIcon(className: string)}
+		<Cloud class={className} />
+	{/snippet}
+</HomepageSectionTitle>
 <AppCardList title="Personal Cloud Apps" onHome>
 	<ImmichAppCard {domain} />
 	<VaultwardenAppCard {domain} />
