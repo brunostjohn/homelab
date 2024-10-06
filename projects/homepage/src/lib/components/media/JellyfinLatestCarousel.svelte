@@ -14,7 +14,7 @@
 </script>
 
 <Carousel.Root
-	class="mx-auto w-full"
+	class="mx-auto mb-2 w-full"
 	opts={$jfData?.data
 		? {
 				loop: true,

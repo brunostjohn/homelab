@@ -38,7 +38,7 @@
 		<HomepageSectionSeeMore href={seeMoreHref} {seeMoreIcon} {seeMoreAppName} />
 	</div>
 {:else}
-	<HomepageSectionTitleHeading {titleIcon} class="mt-8">
+	<HomepageSectionTitleHeading {titleIcon} class="mb-4 mt-8">
 		{title}
 	</HomepageSectionTitleHeading>
 {/if}
