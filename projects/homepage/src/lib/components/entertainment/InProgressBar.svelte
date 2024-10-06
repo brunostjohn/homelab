@@ -16,9 +16,13 @@
 <div class="flex flex-col">
 	{#if sizeBytes}
 		<p class="text-muted-foreground text-xs">
-			{filesize(downloadedBytes)} / {filesize(sizeBytes)}{#if downloadSpeedBytes}
-				- {filesize(downloadSpeedBytes)}/s{/if}
+			{filesize(downloadedBytes)} / {filesize(sizeBytes)}
 		</p>
+		{#if downloadSpeedBytes}
+			<p class="text-muted-foreground text-xs">
+				{filesize(downloadSpeedBytes)}/s
+			</p>
+		{/if}
 	{/if}
 	<div class="flex items-center gap-1">
 		<div class="bg-muted h-2 w-24 overflow-clip rounded-full">

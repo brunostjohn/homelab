@@ -43,13 +43,13 @@ spec:
           resources:
             requests:
               amd.com/gpu: "0"
-              memory: "512Mi"
-              cpu: "500m"
+              memory: "2Gi"
+              cpu: "1"
               # nvidia.com/gpu.shared: "5"
             limits:
               amd.com/gpu: "0"
-              memory: "2Gi"
-              cpu: "1"
+              memory: "4Gi"
+              cpu: "2"
               # nvidia.com/gpu.shared: "5"
           ports:
             - containerPort: 8096

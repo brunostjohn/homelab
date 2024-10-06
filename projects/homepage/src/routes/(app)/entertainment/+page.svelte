@@ -39,11 +39,11 @@
 
 <JellyfinRecentsCarousel {domain} />
 
-<AppCardListTitle>Request Media</AppCardListTitle>
+<AppCardListTitle class="mt-6">Request Media</AppCardListTitle>
 <JellyseerrAppCard {domain} notInList />
 <JellyseerrRequests {domain} />
 
-<AppCardList title="Media Fetchers">
+<AppCardList title="Media Fetchers" titleClass="mt-6">
 	<ProwlarrAppCard {domain} />
 	<RadarrAppCard {domain} />
 	<SonarrAppCard {domain} />
@@ -52,7 +52,7 @@
 	<BazarrAppCard {domain} />
 </AppCardList>
 
-<AppCardList title="Media Downloaders">
+<AppCardList title="Media Downloaders" titleClass="mt-6">
 	<QBitTorrentAppCard {domain} />
 	<SABnzbdAppCard {domain} />
 </AppCardList>

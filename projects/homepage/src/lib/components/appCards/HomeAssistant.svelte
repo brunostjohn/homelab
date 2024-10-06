@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppCard } from "../app";
-	import { ImmichIcon } from "../icons";
+	import { HomeAssistantIcon } from "../icons";
 
 	interface Props {
 		domain: string;
@@ -12,16 +12,16 @@
 </script>
 
 <AppCard
-	name="Immich"
-	description="Watch movies & shows, listen to music."
-	gradientColours={["#ec7cb4", "#fb2b23", "#1bc34b"]}
-	href={`https://window.${domain}`}
+	name="Home Assistant"
+	description="Control our home, set up automations."
+	href="https://thekingdom.{domain}"
+	gradientColours={["#1cbcf4", "#67ccf4", "#edf2fb"]}
 	class={className}
 	{notInList}
 >
 	{#snippet icon(className: string)}
 		<div class="aspect-square bg-white p-1 {className}">
-			<ImmichIcon />
+			<HomeAssistantIcon />
 		</div>
 	{/snippet}
 </AppCard>

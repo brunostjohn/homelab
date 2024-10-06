@@ -10,10 +10,10 @@
 	const { description, href }: Props = $props();
 </script>
 
-<Button variant="ghost" class="group h-full gap-6" {href}>
+<Button variant="ghost" class="group h-full gap-6 px-8" {href}>
 	<div class="text-left">
 		<p class="text-lg">See more apps</p>
 		<p class="text-muted-foreground">{description}</p>
 	</div>
-	<ChevronRight class="h-6 w-6 transition-all group-hover:translate-x-1" />
+	<ChevronRight class="ml-auto h-6 w-6 transition-all group-hover:translate-x-1" />
 </Button>

@@ -1,0 +1,29 @@
+<script lang="ts">
+	import type { SVGAttributes } from "svelte/elements";
+
+	interface Props extends SVGAttributes<SVGSVGElement> {}
+
+	const { ...rest }: Props = $props();
+</script>
+
+<svg {...rest} version="1.1" viewBox="0 0 900 900">
+	<defs id="defs3927" />
+	<g transform="matrix(10.638298,0,0,10.638298,106.38298,-206.38301)" id="g3921">
+		<defs id="SvgjsDefs1018" />
+		<g id="SvgjsG1019" style="fill:#ffffff" />
+		<g
+			id="SvgjsG1020"
+			transform="matrix(0.10341565,0,0,0.10341565,-11.43874,18.048418)"
+			style="fill:#17541f"
+		>
+			<defs id="defs3911" />
+			<g id="g3915">
+				<path
+					d="M 231,798 C 227,779 219,741 218,741 49,640 69,465 125,365 c 12,126 235,213 105,367 -1,2 6,26 12,48 26,-44 65,-97 63,-102 C 145,288 645,258 749,16 c 47,234 -24,596 -426,688 -2,1 -73,126 -76,127 0,-2 -30,-1 -26,-11 2,-6 6,-14 10,-22 z M 330,625 C 267,476 452,312 544,271 356,439 324,564 330,625 Z m -104,79 c 51,-59 -9,-160 -45,-193 61,105 57,166 45,193 z"
+					style="fill:#17541f"
+					id="path3913"
+				/>
+			</g>
+		</g>
+	</g>
+</svg>

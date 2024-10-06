@@ -15,15 +15,15 @@
 	name="Nextcloud"
 	description="Listen to audiobooks & podcasts."
 	href="https://nextcloud.{domain}"
-	gradientColours={["#8b622b", "#a07333", "#c89c53"]}
+	gradientColours={["#053e64", "#05598a", "#047abb"]}
 	class={className}
 	{notInList}
 >
 	{#snippet icon(className: string)}
 		<div
-			class="align-center jusitfy-center flex aspect-square items-center bg-white p-1 {className}"
+			class="align-center jusitfy-center flex aspect-square items-center bg-[#17a6f4] p-1 {className}"
 		>
-			<NextcloudIcon />
+			<NextcloudIcon class="" />
 		</div>
 	{/snippet}
 </AppCard>

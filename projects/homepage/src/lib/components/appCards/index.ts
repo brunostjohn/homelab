@@ -13,3 +13,8 @@ export { default as RadarrAppCard } from "./Radarr.svelte";
 export { default as ReadarrAppCard } from "./Readarr.svelte";
 export { default as QBitTorrentAppCard } from "./QBitTorrent.svelte";
 export { default as SABnzbdAppCard } from "./SABnzbd.svelte";
+export { default as HomeAssistantAppCard } from "./HomeAssistant.svelte";
+export { default as MealieAppCard } from "./Mealie.svelte";
+export { default as PaperlessAppCard } from "./Paperless.svelte";
+export { default as UniFiNVRAppCard } from "./UniFiNVR.svelte";
+export { default as OllamaAppCard } from "./Ollama.svelte";

@@ -8,13 +8,14 @@
 		children: Snippet;
 		onHome?: boolean;
 		class?: string;
+		titleClass?: string;
 	}
 
-	const { title, children, onHome, class: className }: Props = $props();
+	const { title, children, onHome, class: className, titleClass }: Props = $props();
 </script>
 
 {#if title}
-	<AppCardListTitle {onHome}>
+	<AppCardListTitle {onHome} class={titleClass}>
 		{title}
 	</AppCardListTitle>
 {/if}

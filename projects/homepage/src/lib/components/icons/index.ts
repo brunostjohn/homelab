@@ -13,3 +13,8 @@ export { default as SABnzbdIcon } from "./SABnzbd.svelte";
 export { default as NextcloudIcon } from "./Nextcloud.svelte";
 export { default as ImmichIcon } from "./Immich.svelte";
 export { default as VaultwardenIcon } from "./Vaultwarden.svelte";
+export { default as HomeAssistantIcon } from "./HomeAssistant.svelte";
+export { default as MealieIcon } from "./Mealie.svelte";
+export { default as PaperlessIcon } from "./Paperless.svelte";
+export { default as UniFiProtectIcon } from "./UniFiProtect.svelte";
+export { default as OpenWebUIIcon } from "./OpenWebUI.svelte";

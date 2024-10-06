@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppCard } from "../app";
-	import { ImmichIcon } from "../icons";
+	import { AudiobookshelfIcon, MealieIcon } from "../icons";
 
 	interface Props {
 		domain: string;
@@ -12,16 +12,16 @@
 </script>
 
 <AppCard
-	name="Immich"
-	description="Watch movies & shows, listen to music."
-	gradientColours={["#ec7cb4", "#fb2b23", "#1bc34b"]}
-	href={`https://window.${domain}`}
+	name="Mealie"
+	description="Stash recipes, plan meals."
+	href="https://mealie.{domain}"
+	gradientColours={["#e88424", "#e88424", "#c89c53"]}
 	class={className}
 	{notInList}
 >
 	{#snippet icon(className: string)}
 		<div class="aspect-square bg-white p-1 {className}">
-			<ImmichIcon />
+			<MealieIcon />
 		</div>
 	{/snippet}
 </AppCard>
