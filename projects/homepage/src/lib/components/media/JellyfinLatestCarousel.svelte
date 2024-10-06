@@ -7,10 +7,10 @@
 	import { JellyfinIcon } from "../icons";
 
 	interface Props {
-		serverPublicUrl: string;
+		domain: string;
 	}
 
-	const { serverPublicUrl }: Props = $props();
+	const { domain }: Props = $props();
 
 	const jfData = trpc()?.jellyfin.latestMedia.createQuery();
 </script>
@@ -22,7 +22,7 @@
 	</h1>
 
 	<a
-		href={serverPublicUrl}
+		href={`https://birds.${domain}`}
 		target="_blank"
 		class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center text-sm transition-all"
 	>
@@ -45,7 +45,7 @@
 	>
 		<Carousel.Content>
 			{#each $jfData.data as item}
-				<JellyfinCarouselCard {item} {serverPublicUrl} />
+				<JellyfinCarouselCard {item} {domain} />
 			{/each}
 		</Carousel.Content>
 		<Carousel.Previous />

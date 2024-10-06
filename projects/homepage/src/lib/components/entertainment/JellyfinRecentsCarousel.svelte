@@ -29,7 +29,7 @@
 	<Carousel.Root>
 		<Carousel.Content>
 			{#each $resumeItems?.data as item (item.Id)}
-				<JellyfinRecentsCarouselItem {item} serverPublicUrl={`https://birds.${domain}`} />
+				<JellyfinRecentsCarouselItem {item} {domain} />
 			{/each}
 		</Carousel.Content>
 		<Carousel.Previous />

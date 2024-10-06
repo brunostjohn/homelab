@@ -17,10 +17,10 @@
 	}
 
 	const { data }: Props = $props();
-	const { publicJellyfinUrl, rootDomain: domain } = $derived(data);
+	const { domain } = $derived(data);
 </script>
 
-<JellyfinLatestCarousel serverPublicUrl={publicJellyfinUrl} />
+<JellyfinLatestCarousel {domain} />
 
 <AppCardList title="Entertainment Apps" onHome>
 	<JellyfinAppCard {domain} />

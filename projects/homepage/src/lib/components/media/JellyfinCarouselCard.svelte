@@ -9,10 +9,10 @@
 
 	interface Props {
 		item: BaseItemDto;
-		serverPublicUrl: string;
+		domain: string;
 	}
 
-	const { item, serverPublicUrl }: Props = $props();
+	const { item, domain }: Props = $props();
 	const { Name, OriginalTitle, Id, ServerId, Type, CriticRating, ProductionYear, ImageBlurHashes } =
 		$derived(item);
 	const backdropBlurHash = $derived(ImageBlurHashes?.Backdrop);
@@ -28,7 +28,7 @@
 	};
 
 	const getItemLink = (itemId?: string, serverId?: string | null) => {
-		return `${serverPublicUrl}/web/index.html#/details?id=${encodeURIComponent(itemId ?? "")}&serverId=${encodeURIComponent(serverId ?? "")}`;
+		return `https://birds.${domain}/web/index.html#/details?id=${encodeURIComponent(itemId ?? "")}&serverId=${encodeURIComponent(serverId ?? "")}`;
 	};
 
 	let isBackdropLoaded = $state(false);
