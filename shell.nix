@@ -8,6 +8,8 @@ pkgs.mkShell {
   '';
 
   packages = with pkgs; [
+    corepack
+    nodejs_22
     ansible
     terraform
     nil
