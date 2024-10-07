@@ -864,3 +864,23 @@ variable "zipline_oidc_client_secret" {
 variable "sabnzbd_api_key" {
   type = string
 }
+
+variable "infisical_auth_secret" {
+  type = string
+}
+
+variable "infisical_encryption_key" {
+  type = string
+}
+
+variable "infisical_db_password" {
+  type = string
+}
+
+variable "infisical_google_client_id" {
+  type = string
+}
+
+variable "infisical_google_client_secret" {
+  type = string
+}

@@ -10,6 +10,7 @@ FROM base AS prod-deps
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod
 
 FROM base AS build
+RUN apt update && apt install -y openjdk-11-jre-headless
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 RUN pnpm run build
 

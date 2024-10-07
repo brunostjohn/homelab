@@ -229,6 +229,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to zipline_role;
 CREATE USER zipline WITH PASSWORD '<password>';
 GRANT zipline_role TO zipline;
 
+-- INFISICAL
+CREATE ROLE infisical_role;
+\c infisical
+GRANT ALL PRIVILEGES ON DATABASE infisical TO infisical_role;
+GRANT ALL ON SCHEMA public TO infisical_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO infisical_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to infisical_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to infisical_role;
+CREATE USER infisical WITH PASSWORD '<password>';
+GRANT infisical_role TO infisical;
+
 -- MEDIA STACK --
 
 -- LIDARR

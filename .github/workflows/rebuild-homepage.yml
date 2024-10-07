@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.5.1
         with:
-          images: ghcr.io/brunostjohn/homelab/homeepage
+          images: ghcr.io/brunostjohn/homelab/homepage
           tags: |
             type=semver,pattern={{major}}.{{minor}},value=v1.0.0
       - name: Build and push Docker image

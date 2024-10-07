@@ -26,8 +26,8 @@ spec:
       enableServiceLinks: true
       containers:
         - name: homepage
-          image: "ghcr.io/gethomepage/homepage:latest"
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/brunostjohn/homelab/homepage:latest
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 3000
@@ -44,45 +44,3 @@ spec:
                 name: homepage-config
             - secretRef:
                 name: homepage-secrets
-          volumeMounts:
-            - mountPath: /app/config/custom.js
-              name: homepage-baseconfig
-              subPath: custom.js
-            - mountPath: /app/config/custom.css
-              name: homepage-customcss
-              subPath: custom.css
-            - mountPath: /app/config/bookmarks.yaml
-              name: homepage-baseconfig
-              subPath: bookmarks.yaml
-            - mountPath: /app/config/kubernetes.yaml
-              name: homepage-baseconfig
-              subPath: kubernetes.yaml
-            - mountPath: /app/config/services.yaml
-              name: homepage-services
-              subPath: services.yaml
-            - mountPath: /app/config/settings.yaml
-              name: homepage-settings
-              subPath: settings.yaml
-            - mountPath: /app/config/widgets.yaml
-              name: homepage-widgets
-              subPath: widgets.yaml
-            - mountPath: /app/config/logs
-              name: logs
-      volumes:
-        - name: homepage-baseconfig
-          configMap:
-            name: homepage-baseconfig
-        - name: homepage-customcss
-          configMap:
-            name: homepage-customcss
-        - name: homepage-services
-          configMap:
-            name: homepage-services
-        - name: homepage-settings
-          configMap:
-            name: homepage-settings
-        - name: homepage-widgets
-          configMap:
-            name: homepage-widgets
-        - name: logs
-          emptyDir: {}

@@ -1,29 +1,16 @@
-module "unifi" {
-  source             = "./unifi"
-  wlan_home_password = var.unifi_wlan_home_password
-  wlan_home_ssid     = var.unifi_wlan_home_ssid
-  cluster_ip         = var.cluster_ipaddr
-}
-
-module "proxmox" {
-  source = "./proxmox"
-}
-
-module "cloudflare" {
-  depends_on = [module.unifi]
-
-  global_fqdn = var.global_fqdn
-  account_id  = var.cloudflare_account_id
-
-  source = "./cloudflare"
-}
-
 module "cluster_base" {
-  source     = "./cluster_base"
-  depends_on = [module.unifi, module.cloudflare, module.proxmox]
+  source = "./cluster_base"
 
   global_fqdn = var.global_fqdn
   second_fqdn = var.second_fqdn
+
+  smtp_host     = var.smtp_host
+  smtp_port     = var.smtp_port
+  smtp_from     = var.smtp_from
+  smtp_username = var.smtp_username
+  smtp_password = var.smtp_password
+  smtp_use_ssl  = var.smtp_use_ssl
+  smtp_use_tls  = var.smtp_use_tls
 
   alertmanager_discord_webhook_url = var.alertmanager_discord_webhook_url
   crowdsec_enroll_key              = var.crowdsec_enroll_key
@@ -51,6 +38,12 @@ module "cluster_base" {
   crowdsec_webhook_url = var.crowdsec_webhook_url
 
   grafana_db_password = var.grafana_db_password
+
+  infisical_auth_secret          = var.infisical_auth_secret
+  infisical_encryption_key       = var.infisical_encryption_key
+  infisical_db_password          = var.infisical_db_password
+  infisical_google_client_id     = var.infisical_google_client_id
+  infisical_google_client_secret = var.infisical_google_client_secret
 }
 
 module "cluster_apps" {
@@ -220,75 +213,12 @@ module "cluster_apps" {
   sabnzbd_api_key = var.sabnzbd_api_key
 }
 
-module "authentik" {
-  source     = "./authentik"
-  depends_on = [module.cluster_apps]
-}
-
 module "grafana" {
-  source     = "./grafana"
-  depends_on = [module.authentik]
+  source = "./grafana"
 
   global_fqdn    = var.global_fqdn
   client_id      = var.grafana_client_id
   client_secret  = var.grafana_client_secret
   personal_email = var.personal_email
   klaudia_email  = var.klaudia_email
-}
-
-module "prowlarr" {
-  depends_on = [module.authentik]
-  source     = "./prowlarr"
-
-  sonarr_api_key             = var.sonarr_api_key
-  radarr_api_key             = var.radarr_api_key
-  lidarr_api_key             = var.lidarr_api_key
-  readarr_api_key            = var.readarr_api_key
-  qbittorrent_admin_password = var.qbittorrent_admin_password
-  auth_username              = var.prowlarr_auth_username
-  auth_password              = var.prowlarr_auth_password
-  discord_webhook_url        = var.prowlarr_discord_webhook_url
-  sabnzbd_api_key            = var.sabnzbd_api_key
-}
-
-module "lidarr" {
-  depends_on = [module.authentik]
-  source     = "./lidarr"
-
-  qbittorrent_password = var.qbittorrent_admin_password
-  auth_username        = var.lidarr_auth_username
-  auth_password        = var.lidarr_auth_password
-  discord_webhook_url  = var.lidarr_discord_webhook_url
-  sabnzbd_api_key      = var.sabnzbd_api_key
-}
-
-module "radarr" {
-  depends_on = [module.authentik]
-  source     = "./radarr"
-
-  qbittorrent_password = var.qbittorrent_admin_password
-  discord_webhook_url  = var.radarr_discord_webhook_url
-  auth_username        = var.radarr_auth_username
-  auth_password        = var.radarr_auth_password
-  sabnzbd_api_key      = var.sabnzbd_api_key
-}
-
-module "sonarr" {
-  depends_on = [module.authentik]
-  source     = "./sonarr"
-
-  qbittorrent_password = var.qbittorrent_admin_password
-  discord_webhook_url  = var.sonarr_discord_webhook_url
-  auth_username        = var.sonarr_auth_username
-  auth_password        = var.sonarr_auth_password
-  sabnzbd_api_key      = var.sabnzbd_api_key
-}
-
-module "readarr" {
-  depends_on = [module.authentik]
-  source     = "./readarr"
-
-  qbittorrent_password = var.qbittorrent_admin_password
-  discord_webhook_url  = var.readarr_discord_webhook_url
-  sabnzbd_api_key      = var.sabnzbd_api_key
 }

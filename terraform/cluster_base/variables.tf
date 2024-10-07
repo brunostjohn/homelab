@@ -114,3 +114,58 @@ variable "grafana_db_password" {
 variable "second_fqdn" {
   type = string
 }
+
+variable "infisical_auth_secret" {
+  type = string
+}
+
+variable "infisical_encryption_key" {
+  type = string
+}
+
+variable "infisical_db_password" {
+  type = string
+}
+
+variable "smtp_host" {
+  type        = string
+  description = "The SMTP host"
+}
+
+variable "smtp_port" {
+  type        = number
+  description = "The SMTP port"
+}
+
+variable "smtp_username" {
+  type        = string
+  description = "The SMTP username"
+}
+
+variable "smtp_password" {
+  type        = string
+  description = "The SMTP password"
+}
+
+variable "smtp_from" {
+  type        = string
+  description = "The SMTP from address"
+}
+
+variable "smtp_use_tls" {
+  type        = bool
+  description = "Whether to use TLS for SMTP"
+}
+
+variable "smtp_use_ssl" {
+  type        = bool
+  description = "Whether to use SSL for SMTP"
+}
+
+variable "infisical_google_client_id" {
+  type = string
+}
+
+variable "infisical_google_client_secret" {
+  type = string
+}
