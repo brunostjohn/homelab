@@ -61,7 +61,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: entertainment-content
-              mountPath: /downloads
+              mountPath: /data
             - name: sabnzbd-config
               mountPath: /config
           env:
