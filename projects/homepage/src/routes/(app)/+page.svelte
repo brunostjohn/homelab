@@ -16,6 +16,9 @@
 		OllamaAppCard,
 		LinkwardenAppCard,
 		MemosAppCard,
+		GrafanaAppCard,
+		MinioAppCard,
+		NetboxAppCard,
 	} from "$lib/components/appCards";
 	import { AppCardList, HomepageSectionTitle, SeeMoreApps } from "$lib/components/app";
 	import { JellyfinIcon } from "$lib/components/icons";
@@ -90,8 +93,8 @@
 	{/snippet}
 </HomepageSectionTitle>
 <AppCardList title="Management Apps" onHome>
-	<ImmichAppCard {domain} />
-	<VaultwardenAppCard {domain} />
-	<NextcloudAppCard {domain} />
+	<GrafanaAppCard {domain} />
+	<MinioAppCard {domain} />
+	<NetboxAppCard {domain} />
 	<SeeMoreApps description="Check metrics, monitor cluster health." href="/serverManagement" />
 </AppCardList>

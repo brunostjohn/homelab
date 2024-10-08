@@ -20,3 +20,6 @@ export { default as UniFiProtectIcon } from "./UniFiProtect.svelte";
 export { default as OpenWebUIIcon } from "./OpenWebUI.svelte";
 export { default as LinkwardenIcon } from "./Linkwarden.svelte";
 export { default as MemosIcon } from "./Memos.svelte";
+export { default as GrafanaIcon } from "./Grafana.svelte";
+export { default as NetboxIcon } from "./Netbox.svelte";
+export { default as MinioIcon } from "./Minio.svelte";

@@ -18,7 +18,7 @@ resource "kubernetes_config_map" "homepage" {
     "TRUENAS_FLOOF"        = "http://10.0.3.5"
     "TRUENAS_JABBERWOCK"   = "http://10.0.3.1"
     "TRUENAS_LOOKINGGLASS" = "http://10.0.3.2"
-    "JELLYSEERR_BASE_URL"  = "http://jellyseerr.entertainment.svc.cluster.local:5000"
+    "JELLYSEERR_BASE_URL"  = "http://jellyseerr.entertainment.svc.cluster.local:5055"
     "QBITTORRENT_URL"      = "http://qbittorrent.entertainment.svc.cluster.local:8080"
     "QBITTORRENT_USERNAME" = var.qbittorrent_username
     "SABNZBD_URL"          = "http://sabnzbd.entertainment.svc.cluster.local:8080"

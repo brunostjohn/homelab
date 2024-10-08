@@ -20,3 +20,6 @@ export { default as UniFiNVRAppCard } from "./UniFiNVR.svelte";
 export { default as OllamaAppCard } from "./Ollama.svelte";
 export { default as LinkwardenAppCard } from "./Linkwarden.svelte";
 export { default as MemosAppCard } from "./Memos.svelte";
+export { default as GrafanaAppCard } from "./Grafana.svelte";
+export { default as NetboxAppCard } from "./Netbox.svelte";
+export { default as MinioAppCard } from "./Minio.svelte";
