@@ -10,10 +10,14 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check .",
 		"format": "prettier --write .",
-		"api:generate": "pnpm api:prowlarr:generate",
-		"api:prowlarr:generate": "rm -rf ./src/lib/generatedApiClients/prowlarr && mkdir -p ./src/lib/generatedApiClients/prowlarr && openapi-generator-cli generate -i https://raw.githubusercontent.com/Prowlarr/Prowlarr/develop/src/Prowlarr.Api.V1/openapi.json -g typescript-fetch -o ./src/lib/generatedApiClients/prowlarr --additional-properties=supportsES6=true,typescriptThreePlus=true"
+		"api:generate": "pnpm api:prowlarr:generate && pnpm api:openwebui:generate && pnpm api:authentik:generate",
+		"api:prowlarr:generate": "rm -rf ./src/lib/generatedApiClients/prowlarr && mkdir -p ./src/lib/generatedApiClients/prowlarr && openapi-generator-cli generate -i https://raw.githubusercontent.com/Prowlarr/Prowlarr/develop/src/Prowlarr.Api.V1/openapi.json -g typescript-fetch -o ./src/lib/generatedApiClients/prowlarr --additional-properties=supportsES6=true,typescriptThreePlus=true",
+		"api:openwebui:generate": "rm -rf ./src/lib/generatedApiClients/open-webui && mkdir -p ./src/lib/generatedApiClients/open-webui && npx @hey-api/openapi-ts -i ./src/lib/apiSpecs/open-webui.json -o ./src/lib/generatedApiClients/open-webui -c @hey-api/client-fetch",
+		"api:authentik:generate": "rm -rf ./src/lib/generatedApiClients/prowlarr && mkdir -p ./src/lib/generatedApiClients/prowlarr && openapi-generator-cli generate -i ./src/lib/apiSpecs/authentik.yaml -g typescript-fetch -o ./src/lib/generatedApiClients/authentik --additional-properties=supportsES6=true,typescriptThreePlus=true"
 	},
 	"devDependencies": {
+		"@hey-api/client-fetch": "^0.4.0",
+		"@hey-api/openapi-ts": "^0.53.8",
 		"@openapitools/openapi-generator-cli": "^2.13.13",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-node": "^5.2.5",

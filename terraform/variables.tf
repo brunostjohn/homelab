@@ -884,3 +884,7 @@ variable "infisical_google_client_id" {
 variable "infisical_google_client_secret" {
   type = string
 }
+
+variable "openwebui_api_key" {
+  type = string
+}

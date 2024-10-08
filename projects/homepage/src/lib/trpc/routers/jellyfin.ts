@@ -28,9 +28,7 @@ export const jellyfinRouter = t.router({
 				data: { Id: newId },
 			} = await getUserApi(api).getCurrentUser();
 			id = newId;
-		} catch (e) {
-			console.warn("no one owns this session");
-		}
+		} catch (e) {}
 
 		if (!id || id === "") {
 			const { data: users } = await getUserApi(api).getUsers();

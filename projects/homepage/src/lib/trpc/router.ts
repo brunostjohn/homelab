@@ -4,6 +4,7 @@ import {
 	jellyseerrRouter,
 	kubeRouter,
 	mediaFetcherRouter,
+	openwebuiRouter,
 	truenasRouter,
 	unifiRouter,
 } from "./routers";
@@ -17,6 +18,7 @@ export const router = t.router({
 	trueNas: truenasRouter,
 	downloadClients: downloadClientsRouter,
 	mediaFetchers: mediaFetcherRouter,
+	openwebui: openwebuiRouter,
 });
 
 export const createCaller = t.createCallerFactory(router);

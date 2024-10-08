@@ -210,7 +210,8 @@ module "cluster_apps" {
   zipline_oidc_client_id     = var.zipline_oidc_client_id
   zipline_oidc_client_secret = var.zipline_oidc_client_secret
 
-  sabnzbd_api_key = var.sabnzbd_api_key
+  sabnzbd_api_key   = var.sabnzbd_api_key
+  openwebui_api_key = var.openwebui_api_key
 }
 
 module "grafana" {

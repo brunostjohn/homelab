@@ -22,6 +22,8 @@ resource "kubernetes_config_map" "homepage" {
     "QBITTORRENT_URL"      = "http://qbittorrent.entertainment.svc.cluster.local:8080"
     "QBITTORRENT_USERNAME" = var.qbittorrent_username
     "SABNZBD_URL"          = "http://sabnzbd.entertainment.svc.cluster.local:8080"
+    "OPENWEBUI_URL"        = "http://open-webui.ai.svc.cluster.local"
+    "AUTHENTIK_URL"        = "http://authentik-server.authentik.svc.cluster.local"
   }
 }
 
@@ -40,6 +42,8 @@ resource "kubernetes_secret" "homepage" {
     "JELLYSEERR_API_KEY"           = var.jellyseerr_api_key
     "QBITTORRENT_PASSWORD"         = var.qbittorrent_password
     "SABNZBD_API_KEY"              = var.sabnzbd_api_key
+    "OPENWEBUI_API_KEY"            = var.openwebui_api_key
+    "AUTHENTIK_API_KEY"            = var.authentik_api_key
   }
 }
 

@@ -1,0 +1,4371 @@
+{
+	"openapi": "3.1.0",
+	"info": { "title": "FastAPI", "version": "0.1.0" },
+	"servers": [{ "url": "/api/v1" }],
+	"paths": {
+		"/configs/import": {
+			"post": {
+				"tags": ["configs"],
+				"summary": "Import Config",
+				"operationId": "import_config_configs_import_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/ImportConfigForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"title": "Response Import Config Configs Import Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/configs/export": {
+			"get": {
+				"tags": ["configs"],
+				"summary": "Export Config",
+				"operationId": "export_config_configs_export_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "type": "object", "title": "Response Export Config Configs Export Get" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/configs/default/models": {
+			"post": {
+				"tags": ["configs"],
+				"summary": "Set Global Default Models",
+				"operationId": "set_global_default_models_configs_default_models_post",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/SetDefaultModelsForm" }
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string",
+									"title": "Response Set Global Default Models Configs Default Models Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/configs/default/suggestions": {
+			"post": {
+				"tags": ["configs"],
+				"summary": "Set Global Default Suggestions",
+				"operationId": "set_global_default_suggestions_configs_default_suggestions_post",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/SetDefaultSuggestionsForm" }
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/PromptSuggestion" },
+									"type": "array",
+									"title": "Response Set Global Default Suggestions Configs Default Suggestions Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/configs/banners": {
+			"get": {
+				"tags": ["configs"],
+				"summary": "Get Banners",
+				"operationId": "get_banners_configs_banners_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/BannerModel" },
+									"type": "array",
+									"title": "Response Get Banners Configs Banners Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			},
+			"post": {
+				"tags": ["configs"],
+				"summary": "Set Banners",
+				"operationId": "set_banners_configs_banners_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/SetBannersForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/BannerModel" },
+									"type": "array",
+									"title": "Response Set Banners Configs Banners Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/auths/": {
+			"get": {
+				"tags": ["auths"],
+				"summary": "Get Session User",
+				"operationId": "get_session_user_auths__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/open_webui__apps__webui__models__auths__UserResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/auths/update/profile": {
+			"post": {
+				"tags": ["auths"],
+				"summary": "Update Profile",
+				"operationId": "update_profile_auths_update_profile_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/UpdateProfileForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/open_webui__apps__webui__models__auths__UserResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/auths/update/password": {
+			"post": {
+				"tags": ["auths"],
+				"summary": "Update Password",
+				"operationId": "update_password_auths_update_password_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/UpdatePasswordForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Update Password Auths Update Password Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/auths/signin": {
+			"post": {
+				"tags": ["auths"],
+				"summary": "Signin",
+				"operationId": "signin_auths_signin_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/SigninForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": { "schema": { "$ref": "#/components/schemas/SigninResponse" } }
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auths/signup": {
+			"post": {
+				"tags": ["auths"],
+				"summary": "Signup",
+				"operationId": "signup_auths_signup_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/SignupForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": { "schema": { "$ref": "#/components/schemas/SigninResponse" } }
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auths/add": {
+			"post": {
+				"tags": ["auths"],
+				"summary": "Add User",
+				"operationId": "add_user_auths_add_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/AddUserForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": { "schema": { "$ref": "#/components/schemas/SigninResponse" } }
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/auths/admin/details": {
+			"get": {
+				"tags": ["auths"],
+				"summary": "Get Admin Details",
+				"operationId": "get_admin_details_auths_admin_details_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/auths/admin/config": {
+			"get": {
+				"tags": ["auths"],
+				"summary": "Get Admin Config",
+				"operationId": "get_admin_config_auths_admin_config_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			},
+			"post": {
+				"tags": ["auths"],
+				"summary": "Update Admin Config",
+				"operationId": "update_admin_config_auths_admin_config_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/AdminConfig" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/auths/api_key": {
+			"get": {
+				"tags": ["auths"],
+				"summary": "Get Api Key",
+				"operationId": "get_api_key_auths_api_key_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": { "schema": { "$ref": "#/components/schemas/ApiKey" } }
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			},
+			"post": {
+				"tags": ["auths"],
+				"summary": "Create Api Key ",
+				"operationId": "create_api_key__auths_api_key_post",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": { "schema": { "$ref": "#/components/schemas/ApiKey" } }
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			},
+			"delete": {
+				"tags": ["auths"],
+				"summary": "Delete Api Key",
+				"operationId": "delete_api_key_auths_api_key_delete",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Api Key Auths Api Key Delete"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/users/": {
+			"get": {
+				"tags": ["users"],
+				"summary": "Get Users",
+				"operationId": "get_users_users__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "skip",
+						"in": "query",
+						"required": false,
+						"schema": { "type": "integer", "default": 0, "title": "Skip" }
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"required": false,
+						"schema": { "type": "integer", "default": 50, "title": "Limit" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": { "$ref": "#/components/schemas/UserModel" },
+									"title": "Response Get Users Users  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/permissions/user": {
+			"get": {
+				"tags": ["users"],
+				"summary": "Get User Permissions",
+				"operationId": "get_user_permissions_users_permissions_user_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			},
+			"post": {
+				"tags": ["users"],
+				"summary": "Update User Permissions",
+				"operationId": "update_user_permissions_users_permissions_user_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "type": "object", "title": "Form Data" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/users/update/role": {
+			"post": {
+				"tags": ["users"],
+				"summary": "Update User Role",
+				"operationId": "update_user_role_users_update_role_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/UserRoleUpdateForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/UserModel" }, { "type": "null" }],
+									"title": "Response Update User Role Users Update Role Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/users/user/settings": {
+			"get": {
+				"tags": ["users"],
+				"summary": "Get User Settings By Session User",
+				"operationId": "get_user_settings_by_session_user_users_user_settings_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/UserSettings" }, { "type": "null" }],
+									"title": "Response Get User Settings By Session User Users User Settings Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/users/user/settings/update": {
+			"post": {
+				"tags": ["users"],
+				"summary": "Update User Settings By Session User",
+				"operationId": "update_user_settings_by_session_user_users_user_settings_update_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/UserSettings" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": { "schema": { "$ref": "#/components/schemas/UserSettings" } }
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/users/user/info": {
+			"get": {
+				"tags": ["users"],
+				"summary": "Get User Info By Session User",
+				"operationId": "get_user_info_by_session_user_users_user_info_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get User Info By Session User Users User Info Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/users/user/info/update": {
+			"post": {
+				"tags": ["users"],
+				"summary": "Update User Info By Session User",
+				"operationId": "update_user_info_by_session_user_users_user_info_update_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "type": "object", "title": "Form Data" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Update User Info By Session User Users User Info Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/users/{user_id}": {
+			"get": {
+				"tags": ["users"],
+				"summary": "Get User By Id",
+				"operationId": "get_user_by_id_users__user_id__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "user_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "User Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/open_webui__apps__webui__routers__users__UserResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["users"],
+				"summary": "Delete User By Id",
+				"operationId": "delete_user_by_id_users__user_id__delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "user_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "User Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete User By Id Users  User Id  Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/{user_id}/update": {
+			"post": {
+				"tags": ["users"],
+				"summary": "Update User By Id",
+				"operationId": "update_user_by_id_users__user_id__update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "user_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "User Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/UserUpdateForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/UserModel" }, { "type": "null" }],
+									"title": "Response Update User By Id Users  User Id  Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/list": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get Session User Chat List",
+				"operationId": "get_session_user_chat_list_chats_list_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "page",
+						"in": "query",
+						"required": false,
+						"schema": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Page" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": { "$ref": "#/components/schemas/ChatTitleIdResponse" },
+									"title": "Response Get Session User Chat List Chats List Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get Session User Chat List",
+				"operationId": "get_session_user_chat_list_chats__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "page",
+						"in": "query",
+						"required": false,
+						"schema": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "Page" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": { "$ref": "#/components/schemas/ChatTitleIdResponse" },
+									"title": "Response Get Session User Chat List Chats  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["chats"],
+				"summary": "Delete All User Chats",
+				"operationId": "delete_all_user_chats_chats__delete",
+				"security": [{ "HTTPBearer": [] }],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete All User Chats Chats  Delete"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/list/user/{user_id}": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get User Chat List By User Id",
+				"operationId": "get_user_chat_list_by_user_id_chats_list_user__user_id__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "user_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "User Id" }
+					},
+					{
+						"name": "skip",
+						"in": "query",
+						"required": false,
+						"schema": { "type": "integer", "default": 0, "title": "Skip" }
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"required": false,
+						"schema": { "type": "integer", "default": 50, "title": "Limit" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": { "$ref": "#/components/schemas/ChatTitleIdResponse" },
+									"title": "Response Get User Chat List By User Id Chats List User  User Id  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/new": {
+			"post": {
+				"tags": ["chats"],
+				"summary": "Create New Chat",
+				"operationId": "create_new_chat_chats_new_post",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/open_webui__apps__webui__models__chats__ChatForm"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatResponse" }, { "type": "null" }],
+									"title": "Response Create New Chat Chats New Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/chats/all": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get User Chats",
+				"operationId": "get_user_chats_chats_all_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/ChatResponse" },
+									"type": "array",
+									"title": "Response Get User Chats Chats All Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/chats/all/archived": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get User Archived Chats",
+				"operationId": "get_user_archived_chats_chats_all_archived_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/ChatResponse" },
+									"type": "array",
+									"title": "Response Get User Archived Chats Chats All Archived Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/chats/all/db": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get All User Chats In Db",
+				"operationId": "get_all_user_chats_in_db_chats_all_db_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/ChatResponse" },
+									"type": "array",
+									"title": "Response Get All User Chats In Db Chats All Db Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/chats/archived": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get Archived Session User Chat List",
+				"operationId": "get_archived_session_user_chat_list_chats_archived_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "skip",
+						"in": "query",
+						"required": false,
+						"schema": { "type": "integer", "default": 0, "title": "Skip" }
+					},
+					{
+						"name": "limit",
+						"in": "query",
+						"required": false,
+						"schema": { "type": "integer", "default": 50, "title": "Limit" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": { "$ref": "#/components/schemas/ChatTitleIdResponse" },
+									"title": "Response Get Archived Session User Chat List Chats Archived Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/archive/all": {
+			"post": {
+				"tags": ["chats"],
+				"summary": "Archive All Chats",
+				"operationId": "archive_all_chats_chats_archive_all_post",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Archive All Chats Chats Archive All Post"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/chats/share/{share_id}": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get Shared Chat By Id",
+				"operationId": "get_shared_chat_by_id_chats_share__share_id__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "share_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Share Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatResponse" }, { "type": "null" }],
+									"title": "Response Get Shared Chat By Id Chats Share  Share Id  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/tags": {
+			"post": {
+				"tags": ["chats"],
+				"summary": "Get User Chat List By Tag Name",
+				"operationId": "get_user_chat_list_by_tag_name_chats_tags_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/TagNameForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/ChatTitleIdResponse" },
+									"type": "array",
+									"title": "Response Get User Chat List By Tag Name Chats Tags Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/chats/tags/all": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get All Tags",
+				"operationId": "get_all_tags_chats_tags_all_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/TagModel" },
+									"type": "array",
+									"title": "Response Get All Tags Chats Tags All Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/chats/{id}": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get Chat By Id",
+				"operationId": "get_chat_by_id_chats__id__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatResponse" }, { "type": "null" }],
+									"title": "Response Get Chat By Id Chats  Id  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["chats"],
+				"summary": "Update Chat By Id",
+				"operationId": "update_chat_by_id_chats__id__post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/open_webui__apps__webui__models__chats__ChatForm"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatResponse" }, { "type": "null" }],
+									"title": "Response Update Chat By Id Chats  Id  Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["chats"],
+				"summary": "Delete Chat By Id",
+				"operationId": "delete_chat_by_id_chats__id__delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Chat By Id Chats  Id  Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/{id}/clone": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Clone Chat By Id",
+				"operationId": "clone_chat_by_id_chats__id__clone_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatResponse" }, { "type": "null" }],
+									"title": "Response Clone Chat By Id Chats  Id  Clone Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/{id}/archive": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Archive Chat By Id",
+				"operationId": "archive_chat_by_id_chats__id__archive_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatResponse" }, { "type": "null" }],
+									"title": "Response Archive Chat By Id Chats  Id  Archive Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/{id}/share": {
+			"post": {
+				"tags": ["chats"],
+				"summary": "Share Chat By Id",
+				"operationId": "share_chat_by_id_chats__id__share_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatResponse" }, { "type": "null" }],
+									"title": "Response Share Chat By Id Chats  Id  Share Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["chats"],
+				"summary": "Delete Shared Chat By Id",
+				"operationId": "delete_shared_chat_by_id_chats__id__share_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "boolean" }, { "type": "null" }],
+									"title": "Response Delete Shared Chat By Id Chats  Id  Share Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/{id}/tags": {
+			"get": {
+				"tags": ["chats"],
+				"summary": "Get Chat Tags By Id",
+				"operationId": "get_chat_tags_by_id_chats__id__tags_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": { "$ref": "#/components/schemas/TagModel" },
+									"title": "Response Get Chat Tags By Id Chats  Id  Tags Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["chats"],
+				"summary": "Add Chat Tag By Id",
+				"operationId": "add_chat_tag_by_id_chats__id__tags_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/ChatIdTagForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ChatIdTagModel" }, { "type": "null" }],
+									"title": "Response Add Chat Tag By Id Chats  Id  Tags Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["chats"],
+				"summary": "Delete Chat Tag By Id",
+				"operationId": "delete_chat_tag_by_id_chats__id__tags_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/ChatIdTagForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "boolean" }, { "type": "null" }],
+									"title": "Response Delete Chat Tag By Id Chats  Id  Tags Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/chats/{id}/tags/all": {
+			"delete": {
+				"tags": ["chats"],
+				"summary": "Delete All Chat Tags By Id",
+				"operationId": "delete_all_chat_tags_by_id_chats__id__tags_all_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "boolean" }, { "type": "null" }],
+									"title": "Response Delete All Chat Tags By Id Chats  Id  Tags All Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/documents/": {
+			"get": {
+				"tags": ["documents"],
+				"summary": "Get Documents",
+				"operationId": "get_documents_documents__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/DocumentResponse" },
+									"type": "array",
+									"title": "Response Get Documents Documents  Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/documents/create": {
+			"post": {
+				"tags": ["documents"],
+				"summary": "Create New Doc",
+				"operationId": "create_new_doc_documents_create_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/DocumentForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{ "$ref": "#/components/schemas/DocumentResponse" },
+										{ "type": "null" }
+									],
+									"title": "Response Create New Doc Documents Create Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/documents/doc": {
+			"get": {
+				"tags": ["documents"],
+				"summary": "Get Doc By Name",
+				"operationId": "get_doc_by_name_documents_doc_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "name",
+						"in": "query",
+						"required": true,
+						"schema": { "type": "string", "title": "Name" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{ "$ref": "#/components/schemas/DocumentResponse" },
+										{ "type": "null" }
+									],
+									"title": "Response Get Doc By Name Documents Doc Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/documents/doc/tags": {
+			"post": {
+				"tags": ["documents"],
+				"summary": "Tag Doc By Name",
+				"operationId": "tag_doc_by_name_documents_doc_tags_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/TagDocumentForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{ "$ref": "#/components/schemas/DocumentResponse" },
+										{ "type": "null" }
+									],
+									"title": "Response Tag Doc By Name Documents Doc Tags Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/documents/doc/update": {
+			"post": {
+				"tags": ["documents"],
+				"summary": "Update Doc By Name",
+				"operationId": "update_doc_by_name_documents_doc_update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "name",
+						"in": "query",
+						"required": true,
+						"schema": { "type": "string", "title": "Name" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/DocumentUpdateForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{ "$ref": "#/components/schemas/DocumentResponse" },
+										{ "type": "null" }
+									],
+									"title": "Response Update Doc By Name Documents Doc Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/documents/doc/delete": {
+			"delete": {
+				"tags": ["documents"],
+				"summary": "Delete Doc By Name",
+				"operationId": "delete_doc_by_name_documents_doc_delete_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "name",
+						"in": "query",
+						"required": true,
+						"schema": { "type": "string", "title": "Name" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Doc By Name Documents Doc Delete Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/models/": {
+			"get": {
+				"tags": ["models"],
+				"summary": "Get Model By Id",
+				"operationId": "get_model_by_id_models__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "query",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ModelModel" }, { "type": "null" }],
+									"title": "Response Get Model By Id Models  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/models/add": {
+			"post": {
+				"tags": ["models"],
+				"summary": "Add New Model",
+				"operationId": "add_new_model_models_add_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/ModelForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ModelModel" }, { "type": "null" }],
+									"title": "Response Add New Model Models Add Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/models/update": {
+			"post": {
+				"tags": ["models"],
+				"summary": "Update Model By Id",
+				"operationId": "update_model_by_id_models_update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "query",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/ModelForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ModelModel" }, { "type": "null" }],
+									"title": "Response Update Model By Id Models Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/models/delete": {
+			"delete": {
+				"tags": ["models"],
+				"summary": "Delete Model By Id",
+				"operationId": "delete_model_by_id_models_delete_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "query",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Model By Id Models Delete Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/prompts/": {
+			"get": {
+				"tags": ["prompts"],
+				"summary": "Get Prompts",
+				"operationId": "get_prompts_prompts__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/PromptModel" },
+									"type": "array",
+									"title": "Response Get Prompts Prompts  Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/prompts/create": {
+			"post": {
+				"tags": ["prompts"],
+				"summary": "Create New Prompt",
+				"operationId": "create_new_prompt_prompts_create_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/PromptForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/PromptModel" }, { "type": "null" }],
+									"title": "Response Create New Prompt Prompts Create Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/prompts/command/{command}": {
+			"get": {
+				"tags": ["prompts"],
+				"summary": "Get Prompt By Command",
+				"operationId": "get_prompt_by_command_prompts_command__command__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "command",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Command" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/PromptModel" }, { "type": "null" }],
+									"title": "Response Get Prompt By Command Prompts Command  Command  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/prompts/command/{command}/update": {
+			"post": {
+				"tags": ["prompts"],
+				"summary": "Update Prompt By Command",
+				"operationId": "update_prompt_by_command_prompts_command__command__update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "command",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Command" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/PromptForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/PromptModel" }, { "type": "null" }],
+									"title": "Response Update Prompt By Command Prompts Command  Command  Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/prompts/command/{command}/delete": {
+			"delete": {
+				"tags": ["prompts"],
+				"summary": "Delete Prompt By Command",
+				"operationId": "delete_prompt_by_command_prompts_command__command__delete_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "command",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Command" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Prompt By Command Prompts Command  Command  Delete Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/memories/ef": {
+			"get": {
+				"tags": ["memories"],
+				"summary": "Get Embeddings",
+				"operationId": "get_embeddings_memories_ef_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				}
+			}
+		},
+		"/memories/": {
+			"get": {
+				"tags": ["memories"],
+				"summary": "Get Memories",
+				"operationId": "get_memories_memories__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/MemoryModel" },
+									"type": "array",
+									"title": "Response Get Memories Memories  Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/memories/add": {
+			"post": {
+				"tags": ["memories"],
+				"summary": "Add Memory",
+				"operationId": "add_memory_memories_add_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/AddMemoryForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/MemoryModel" }, { "type": "null" }],
+									"title": "Response Add Memory Memories Add Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/memories/query": {
+			"post": {
+				"tags": ["memories"],
+				"summary": "Query Memory",
+				"operationId": "query_memory_memories_query_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/QueryMemoryForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/memories/reset": {
+			"post": {
+				"tags": ["memories"],
+				"summary": "Reset Memory From Vector Db",
+				"operationId": "reset_memory_from_vector_db_memories_reset_post",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Reset Memory From Vector Db Memories Reset Post"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/memories/delete/user": {
+			"delete": {
+				"tags": ["memories"],
+				"summary": "Delete Memory By User Id",
+				"operationId": "delete_memory_by_user_id_memories_delete_user_delete",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Memory By User Id Memories Delete User Delete"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/memories/{memory_id}/update": {
+			"post": {
+				"tags": ["memories"],
+				"summary": "Update Memory By Id",
+				"operationId": "update_memory_by_id_memories__memory_id__update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "memory_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Memory Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/MemoryUpdateModel" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/MemoryModel" }, { "type": "null" }],
+									"title": "Response Update Memory By Id Memories  Memory Id  Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/memories/{memory_id}": {
+			"delete": {
+				"tags": ["memories"],
+				"summary": "Delete Memory By Id",
+				"operationId": "delete_memory_by_id_memories__memory_id__delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "memory_id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Memory Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Memory By Id Memories  Memory Id  Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/files/": {
+			"get": {
+				"tags": ["files"],
+				"summary": "List Files",
+				"operationId": "list_files_files__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/FileModel" },
+									"type": "array",
+									"title": "Response List Files Files  Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			},
+			"post": {
+				"tags": ["files"],
+				"summary": "Upload File",
+				"operationId": "upload_file_files__post",
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": { "$ref": "#/components/schemas/Body_upload_file_files__post" }
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/files/all": {
+			"delete": {
+				"tags": ["files"],
+				"summary": "Delete All Files",
+				"operationId": "delete_all_files_files_all_delete",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/files/{id}": {
+			"get": {
+				"tags": ["files"],
+				"summary": "Get File By Id",
+				"operationId": "get_file_by_id_files__id__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/FileModel" }, { "type": "null" }],
+									"title": "Response Get File By Id Files  Id  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["files"],
+				"summary": "Delete File By Id",
+				"operationId": "delete_file_by_id_files__id__delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/files/{id}/content": {
+			"get": {
+				"tags": ["files"],
+				"summary": "Get File Content By Id",
+				"operationId": "get_file_content_by_id_files__id__content_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/FileModel" }, { "type": "null" }],
+									"title": "Response Get File Content By Id Files  Id  Content Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/": {
+			"get": {
+				"tags": ["tools"],
+				"summary": "Get Toolkits",
+				"operationId": "get_toolkits_tools__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/ToolResponse" },
+									"type": "array",
+									"title": "Response Get Toolkits Tools  Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/tools/export": {
+			"get": {
+				"tags": ["tools"],
+				"summary": "Get Toolkits",
+				"operationId": "get_toolkits_tools_export_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/ToolModel" },
+									"type": "array",
+									"title": "Response Get Toolkits Tools Export Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/tools/create": {
+			"post": {
+				"tags": ["tools"],
+				"summary": "Create New Toolkit",
+				"operationId": "create_new_toolkit_tools_create_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/ToolForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ToolResponse" }, { "type": "null" }],
+									"title": "Response Create New Toolkit Tools Create Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/tools/id/{id}": {
+			"get": {
+				"tags": ["tools"],
+				"summary": "Get Toolkit By Id",
+				"operationId": "get_toolkit_by_id_tools_id__id__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ToolModel" }, { "type": "null" }],
+									"title": "Response Get Toolkit By Id Tools Id  Id  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/update": {
+			"post": {
+				"tags": ["tools"],
+				"summary": "Update Toolkit By Id",
+				"operationId": "update_toolkit_by_id_tools_id__id__update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/ToolForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/ToolModel" }, { "type": "null" }],
+									"title": "Response Update Toolkit By Id Tools Id  Id  Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/delete": {
+			"delete": {
+				"tags": ["tools"],
+				"summary": "Delete Toolkit By Id",
+				"operationId": "delete_toolkit_by_id_tools_id__id__delete_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Toolkit By Id Tools Id  Id  Delete Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/valves": {
+			"get": {
+				"tags": ["tools"],
+				"summary": "Get Toolkit Valves By Id",
+				"operationId": "get_toolkit_valves_by_id_tools_id__id__valves_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Toolkit Valves By Id Tools Id  Id  Valves Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/valves/spec": {
+			"get": {
+				"tags": ["tools"],
+				"summary": "Get Toolkit Valves Spec By Id",
+				"operationId": "get_toolkit_valves_spec_by_id_tools_id__id__valves_spec_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Toolkit Valves Spec By Id Tools Id  Id  Valves Spec Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/valves/update": {
+			"post": {
+				"tags": ["tools"],
+				"summary": "Update Toolkit Valves By Id",
+				"operationId": "update_toolkit_valves_by_id_tools_id__id__valves_update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "type": "object", "title": "Form Data" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Update Toolkit Valves By Id Tools Id  Id  Valves Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/valves/user": {
+			"get": {
+				"tags": ["tools"],
+				"summary": "Get Toolkit User Valves By Id",
+				"operationId": "get_toolkit_user_valves_by_id_tools_id__id__valves_user_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Toolkit User Valves By Id Tools Id  Id  Valves User Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/valves/user/spec": {
+			"get": {
+				"tags": ["tools"],
+				"summary": "Get Toolkit User Valves Spec By Id",
+				"operationId": "get_toolkit_user_valves_spec_by_id_tools_id__id__valves_user_spec_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Toolkit User Valves Spec By Id Tools Id  Id  Valves User Spec Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/tools/id/{id}/valves/user/update": {
+			"post": {
+				"tags": ["tools"],
+				"summary": "Update Toolkit User Valves By Id",
+				"operationId": "update_toolkit_user_valves_by_id_tools_id__id__valves_user_update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "type": "object", "title": "Form Data" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Update Toolkit User Valves By Id Tools Id  Id  Valves User Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/": {
+			"get": {
+				"tags": ["functions"],
+				"summary": "Get Functions",
+				"operationId": "get_functions_functions__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/FunctionResponse" },
+									"type": "array",
+									"title": "Response Get Functions Functions  Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/functions/export": {
+			"get": {
+				"tags": ["functions"],
+				"summary": "Get Functions",
+				"operationId": "get_functions_functions_export_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": { "$ref": "#/components/schemas/FunctionModel" },
+									"type": "array",
+									"title": "Response Get Functions Functions Export Get"
+								}
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/functions/create": {
+			"post": {
+				"tags": ["functions"],
+				"summary": "Create New Function",
+				"operationId": "create_new_function_functions_create_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/FunctionForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{ "$ref": "#/components/schemas/FunctionResponse" },
+										{ "type": "null" }
+									],
+									"title": "Response Create New Function Functions Create Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/functions/id/{id}": {
+			"get": {
+				"tags": ["functions"],
+				"summary": "Get Function By Id",
+				"operationId": "get_function_by_id_functions_id__id__get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/FunctionModel" }, { "type": "null" }],
+									"title": "Response Get Function By Id Functions Id  Id  Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/toggle": {
+			"post": {
+				"tags": ["functions"],
+				"summary": "Toggle Function By Id",
+				"operationId": "toggle_function_by_id_functions_id__id__toggle_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/FunctionModel" }, { "type": "null" }],
+									"title": "Response Toggle Function By Id Functions Id  Id  Toggle Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/toggle/global": {
+			"post": {
+				"tags": ["functions"],
+				"summary": "Toggle Global By Id",
+				"operationId": "toggle_global_by_id_functions_id__id__toggle_global_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/FunctionModel" }, { "type": "null" }],
+									"title": "Response Toggle Global By Id Functions Id  Id  Toggle Global Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/update": {
+			"post": {
+				"tags": ["functions"],
+				"summary": "Update Function By Id",
+				"operationId": "update_function_by_id_functions_id__id__update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/FunctionForm" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "$ref": "#/components/schemas/FunctionModel" }, { "type": "null" }],
+									"title": "Response Update Function By Id Functions Id  Id  Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/delete": {
+			"delete": {
+				"tags": ["functions"],
+				"summary": "Delete Function By Id",
+				"operationId": "delete_function_by_id_functions_id__id__delete_delete",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "boolean",
+									"title": "Response Delete Function By Id Functions Id  Id  Delete Delete"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/valves": {
+			"get": {
+				"tags": ["functions"],
+				"summary": "Get Function Valves By Id",
+				"operationId": "get_function_valves_by_id_functions_id__id__valves_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Function Valves By Id Functions Id  Id  Valves Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/valves/spec": {
+			"get": {
+				"tags": ["functions"],
+				"summary": "Get Function Valves Spec By Id",
+				"operationId": "get_function_valves_spec_by_id_functions_id__id__valves_spec_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Function Valves Spec By Id Functions Id  Id  Valves Spec Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/valves/update": {
+			"post": {
+				"tags": ["functions"],
+				"summary": "Update Function Valves By Id",
+				"operationId": "update_function_valves_by_id_functions_id__id__valves_update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "type": "object", "title": "Form Data" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Update Function Valves By Id Functions Id  Id  Valves Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/valves/user": {
+			"get": {
+				"tags": ["functions"],
+				"summary": "Get Function User Valves By Id",
+				"operationId": "get_function_user_valves_by_id_functions_id__id__valves_user_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Function User Valves By Id Functions Id  Id  Valves User Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/valves/user/spec": {
+			"get": {
+				"tags": ["functions"],
+				"summary": "Get Function User Valves Spec By Id",
+				"operationId": "get_function_user_valves_spec_by_id_functions_id__id__valves_user_spec_get",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Get Function User Valves Spec By Id Functions Id  Id  Valves User Spec Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/functions/id/{id}/valves/user/update": {
+			"post": {
+				"tags": ["functions"],
+				"summary": "Update Function User Valves By Id",
+				"operationId": "update_function_user_valves_by_id_functions_id__id__valves_user_update_post",
+				"security": [{ "HTTPBearer": [] }],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": { "type": "string", "title": "Id" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": { "schema": { "type": "object", "title": "Form Data" } }
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [{ "type": "object" }, { "type": "null" }],
+									"title": "Response Update Function User Valves By Id Functions Id  Id  Valves User Update Post"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/utils/gravatar": {
+			"get": {
+				"tags": ["utils"],
+				"summary": "Get Gravatar",
+				"operationId": "get_gravatar_utils_gravatar_get",
+				"parameters": [
+					{
+						"name": "email",
+						"in": "query",
+						"required": true,
+						"schema": { "type": "string", "title": "Email" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/utils/code/format": {
+			"post": {
+				"tags": ["utils"],
+				"summary": "Format Code",
+				"operationId": "format_code_utils_code_format_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/CodeFormatRequest" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/utils/markdown": {
+			"post": {
+				"tags": ["utils"],
+				"summary": "Get Html From Markdown",
+				"operationId": "get_html_from_markdown_utils_markdown_post",
+				"requestBody": {
+					"content": {
+						"application/json": { "schema": { "$ref": "#/components/schemas/MarkdownForm" } }
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/utils/pdf": {
+			"post": {
+				"tags": ["utils"],
+				"summary": "Download Chat As Pdf",
+				"operationId": "download_chat_as_pdf_utils_pdf_post",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/open_webui__apps__webui__routers__utils__ChatForm"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/utils/db/download": {
+			"get": {
+				"tags": ["utils"],
+				"summary": "Download Db",
+				"operationId": "download_db_utils_db_download_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/utils/litellm/config": {
+			"get": {
+				"tags": ["utils"],
+				"summary": "Download Litellm Config Yaml",
+				"operationId": "download_litellm_config_yaml_utils_litellm_config_get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				},
+				"security": [{ "HTTPBearer": [] }]
+			}
+		},
+		"/": {
+			"get": {
+				"summary": "Get Status",
+				"operationId": "get_status__get",
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"AddMemoryForm": {
+				"properties": { "content": { "type": "string", "title": "Content" } },
+				"type": "object",
+				"required": ["content"],
+				"title": "AddMemoryForm"
+			},
+			"AddUserForm": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"email": { "type": "string", "title": "Email" },
+					"password": { "type": "string", "title": "Password" },
+					"profile_image_url": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Profile Image Url",
+						"default": "/user.png"
+					},
+					"role": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Role",
+						"default": "pending"
+					}
+				},
+				"type": "object",
+				"required": ["name", "email", "password"],
+				"title": "AddUserForm"
+			},
+			"AdminConfig": {
+				"properties": {
+					"SHOW_ADMIN_DETAILS": { "type": "boolean", "title": "Show Admin Details" },
+					"ENABLE_SIGNUP": { "type": "boolean", "title": "Enable Signup" },
+					"DEFAULT_USER_ROLE": { "type": "string", "title": "Default User Role" },
+					"JWT_EXPIRES_IN": { "type": "string", "title": "Jwt Expires In" },
+					"ENABLE_COMMUNITY_SHARING": { "type": "boolean", "title": "Enable Community Sharing" },
+					"ENABLE_MESSAGE_RATING": { "type": "boolean", "title": "Enable Message Rating" }
+				},
+				"type": "object",
+				"required": [
+					"SHOW_ADMIN_DETAILS",
+					"ENABLE_SIGNUP",
+					"DEFAULT_USER_ROLE",
+					"JWT_EXPIRES_IN",
+					"ENABLE_COMMUNITY_SHARING",
+					"ENABLE_MESSAGE_RATING"
+				],
+				"title": "AdminConfig"
+			},
+			"ApiKey": {
+				"properties": {
+					"api_key": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Api Key" }
+				},
+				"type": "object",
+				"title": "ApiKey"
+			},
+			"BannerModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"type": { "type": "string", "title": "Type" },
+					"title": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Title" },
+					"content": { "type": "string", "title": "Content" },
+					"dismissible": { "type": "boolean", "title": "Dismissible" },
+					"timestamp": { "type": "integer", "title": "Timestamp" }
+				},
+				"type": "object",
+				"required": ["id", "type", "content", "dismissible", "timestamp"],
+				"title": "BannerModel"
+			},
+			"Body_upload_file_files__post": {
+				"properties": { "file": { "type": "string", "format": "binary", "title": "File" } },
+				"type": "object",
+				"required": ["file"],
+				"title": "Body_upload_file_files__post"
+			},
+			"ChatIdTagForm": {
+				"properties": {
+					"tag_name": { "type": "string", "title": "Tag Name" },
+					"chat_id": { "type": "string", "title": "Chat Id" }
+				},
+				"type": "object",
+				"required": ["tag_name", "chat_id"],
+				"title": "ChatIdTagForm"
+			},
+			"ChatIdTagModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"tag_name": { "type": "string", "title": "Tag Name" },
+					"chat_id": { "type": "string", "title": "Chat Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"timestamp": { "type": "integer", "title": "Timestamp" }
+				},
+				"type": "object",
+				"required": ["id", "tag_name", "chat_id", "user_id", "timestamp"],
+				"title": "ChatIdTagModel"
+			},
+			"ChatResponse": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"title": { "type": "string", "title": "Title" },
+					"chat": { "type": "object", "title": "Chat" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" },
+					"share_id": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Share Id" },
+					"archived": { "type": "boolean", "title": "Archived" }
+				},
+				"type": "object",
+				"required": ["id", "user_id", "title", "chat", "updated_at", "created_at", "archived"],
+				"title": "ChatResponse"
+			},
+			"ChatTitleIdResponse": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"title": { "type": "string", "title": "Title" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": ["id", "title", "updated_at", "created_at"],
+				"title": "ChatTitleIdResponse"
+			},
+			"CodeFormatRequest": {
+				"properties": { "code": { "type": "string", "title": "Code" } },
+				"type": "object",
+				"required": ["code"],
+				"title": "CodeFormatRequest"
+			},
+			"DocumentForm": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"title": { "type": "string", "title": "Title" },
+					"collection_name": { "type": "string", "title": "Collection Name" },
+					"filename": { "type": "string", "title": "Filename" },
+					"content": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Content" }
+				},
+				"type": "object",
+				"required": ["name", "title", "collection_name", "filename"],
+				"title": "DocumentForm"
+			},
+			"DocumentResponse": {
+				"properties": {
+					"collection_name": { "type": "string", "title": "Collection Name" },
+					"name": { "type": "string", "title": "Name" },
+					"title": { "type": "string", "title": "Title" },
+					"filename": { "type": "string", "title": "Filename" },
+					"content": { "anyOf": [{ "type": "object" }, { "type": "null" }], "title": "Content" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"timestamp": { "type": "integer", "title": "Timestamp" }
+				},
+				"type": "object",
+				"required": ["collection_name", "name", "title", "filename", "user_id", "timestamp"],
+				"title": "DocumentResponse"
+			},
+			"DocumentUpdateForm": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"title": { "type": "string", "title": "Title" }
+				},
+				"type": "object",
+				"required": ["name", "title"],
+				"title": "DocumentUpdateForm"
+			},
+			"FileModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"filename": { "type": "string", "title": "Filename" },
+					"meta": { "type": "object", "title": "Meta" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": ["id", "user_id", "filename", "meta", "created_at"],
+				"title": "FileModel"
+			},
+			"FunctionForm": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"name": { "type": "string", "title": "Name" },
+					"content": { "type": "string", "title": "Content" },
+					"meta": { "$ref": "#/components/schemas/FunctionMeta" }
+				},
+				"type": "object",
+				"required": ["id", "name", "content", "meta"],
+				"title": "FunctionForm"
+			},
+			"FunctionMeta": {
+				"properties": {
+					"description": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Description"
+					},
+					"manifest": {
+						"anyOf": [{ "type": "object" }, { "type": "null" }],
+						"title": "Manifest",
+						"default": {}
+					}
+				},
+				"type": "object",
+				"title": "FunctionMeta"
+			},
+			"FunctionModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"name": { "type": "string", "title": "Name" },
+					"type": { "type": "string", "title": "Type" },
+					"content": { "type": "string", "title": "Content" },
+					"meta": { "$ref": "#/components/schemas/FunctionMeta" },
+					"is_active": { "type": "boolean", "title": "Is Active", "default": false },
+					"is_global": { "type": "boolean", "title": "Is Global", "default": false },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": [
+					"id",
+					"user_id",
+					"name",
+					"type",
+					"content",
+					"meta",
+					"updated_at",
+					"created_at"
+				],
+				"title": "FunctionModel"
+			},
+			"FunctionResponse": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"type": { "type": "string", "title": "Type" },
+					"name": { "type": "string", "title": "Name" },
+					"meta": { "$ref": "#/components/schemas/FunctionMeta" },
+					"is_active": { "type": "boolean", "title": "Is Active" },
+					"is_global": { "type": "boolean", "title": "Is Global" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": [
+					"id",
+					"user_id",
+					"type",
+					"name",
+					"meta",
+					"is_active",
+					"is_global",
+					"updated_at",
+					"created_at"
+				],
+				"title": "FunctionResponse"
+			},
+			"HTTPValidationError": {
+				"properties": {
+					"detail": {
+						"items": { "$ref": "#/components/schemas/ValidationError" },
+						"type": "array",
+						"title": "Detail"
+					}
+				},
+				"type": "object",
+				"title": "HTTPValidationError"
+			},
+			"ImportConfigForm": {
+				"properties": { "config": { "type": "object", "title": "Config" } },
+				"type": "object",
+				"required": ["config"],
+				"title": "ImportConfigForm"
+			},
+			"MarkdownForm": {
+				"properties": { "md": { "type": "string", "title": "Md" } },
+				"type": "object",
+				"required": ["md"],
+				"title": "MarkdownForm"
+			},
+			"MemoryModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"content": { "type": "string", "title": "Content" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": ["id", "user_id", "content", "updated_at", "created_at"],
+				"title": "MemoryModel"
+			},
+			"MemoryUpdateModel": {
+				"properties": {
+					"content": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Content" }
+				},
+				"type": "object",
+				"title": "MemoryUpdateModel"
+			},
+			"ModelForm": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"base_model_id": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Base Model Id"
+					},
+					"name": { "type": "string", "title": "Name" },
+					"meta": { "$ref": "#/components/schemas/ModelMeta" },
+					"params": { "$ref": "#/components/schemas/ModelParams" }
+				},
+				"type": "object",
+				"required": ["id", "name", "meta", "params"],
+				"title": "ModelForm"
+			},
+			"ModelMeta": {
+				"properties": {
+					"profile_image_url": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Profile Image Url",
+						"default": "/static/favicon.png"
+					},
+					"description": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Description"
+					},
+					"capabilities": {
+						"anyOf": [{ "type": "object" }, { "type": "null" }],
+						"title": "Capabilities"
+					}
+				},
+				"additionalProperties": true,
+				"type": "object",
+				"title": "ModelMeta"
+			},
+			"ModelModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"base_model_id": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Base Model Id"
+					},
+					"name": { "type": "string", "title": "Name" },
+					"params": { "$ref": "#/components/schemas/ModelParams" },
+					"meta": { "$ref": "#/components/schemas/ModelMeta" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": ["id", "user_id", "name", "params", "meta", "updated_at", "created_at"],
+				"title": "ModelModel"
+			},
+			"ModelParams": {
+				"properties": {},
+				"additionalProperties": true,
+				"type": "object",
+				"title": "ModelParams"
+			},
+			"ModelResponse": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"name": { "type": "string", "title": "Name" },
+					"meta": { "$ref": "#/components/schemas/ModelMeta" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": ["id", "name", "meta", "updated_at", "created_at"],
+				"title": "ModelResponse"
+			},
+			"PromptForm": {
+				"properties": {
+					"command": { "type": "string", "title": "Command" },
+					"title": { "type": "string", "title": "Title" },
+					"content": { "type": "string", "title": "Content" }
+				},
+				"type": "object",
+				"required": ["command", "title", "content"],
+				"title": "PromptForm"
+			},
+			"PromptModel": {
+				"properties": {
+					"command": { "type": "string", "title": "Command" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"title": { "type": "string", "title": "Title" },
+					"content": { "type": "string", "title": "Content" },
+					"timestamp": { "type": "integer", "title": "Timestamp" }
+				},
+				"type": "object",
+				"required": ["command", "user_id", "title", "content", "timestamp"],
+				"title": "PromptModel"
+			},
+			"PromptSuggestion": {
+				"properties": {
+					"title": { "items": { "type": "string" }, "type": "array", "title": "Title" },
+					"content": { "type": "string", "title": "Content" }
+				},
+				"type": "object",
+				"required": ["title", "content"],
+				"title": "PromptSuggestion"
+			},
+			"QueryMemoryForm": {
+				"properties": {
+					"content": { "type": "string", "title": "Content" },
+					"k": { "anyOf": [{ "type": "integer" }, { "type": "null" }], "title": "K", "default": 1 }
+				},
+				"type": "object",
+				"required": ["content"],
+				"title": "QueryMemoryForm"
+			},
+			"SetBannersForm": {
+				"properties": {
+					"banners": {
+						"items": { "$ref": "#/components/schemas/BannerModel" },
+						"type": "array",
+						"title": "Banners"
+					}
+				},
+				"type": "object",
+				"required": ["banners"],
+				"title": "SetBannersForm"
+			},
+			"SetDefaultModelsForm": {
+				"properties": { "models": { "type": "string", "title": "Models" } },
+				"type": "object",
+				"required": ["models"],
+				"title": "SetDefaultModelsForm"
+			},
+			"SetDefaultSuggestionsForm": {
+				"properties": {
+					"suggestions": {
+						"items": { "$ref": "#/components/schemas/PromptSuggestion" },
+						"type": "array",
+						"title": "Suggestions"
+					}
+				},
+				"type": "object",
+				"required": ["suggestions"],
+				"title": "SetDefaultSuggestionsForm"
+			},
+			"SigninForm": {
+				"properties": {
+					"email": { "type": "string", "title": "Email" },
+					"password": { "type": "string", "title": "Password" }
+				},
+				"type": "object",
+				"required": ["email", "password"],
+				"title": "SigninForm"
+			},
+			"SigninResponse": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"email": { "type": "string", "title": "Email" },
+					"name": { "type": "string", "title": "Name" },
+					"role": { "type": "string", "title": "Role" },
+					"profile_image_url": { "type": "string", "title": "Profile Image Url" },
+					"token": { "type": "string", "title": "Token" },
+					"token_type": { "type": "string", "title": "Token Type" }
+				},
+				"type": "object",
+				"required": ["id", "email", "name", "role", "profile_image_url", "token", "token_type"],
+				"title": "SigninResponse"
+			},
+			"SignupForm": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"email": { "type": "string", "title": "Email" },
+					"password": { "type": "string", "title": "Password" },
+					"profile_image_url": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Profile Image Url",
+						"default": "/user.png"
+					}
+				},
+				"type": "object",
+				"required": ["name", "email", "password"],
+				"title": "SignupForm"
+			},
+			"TagDocumentForm": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"tags": { "items": { "type": "object" }, "type": "array", "title": "Tags" }
+				},
+				"type": "object",
+				"required": ["name", "tags"],
+				"title": "TagDocumentForm"
+			},
+			"TagModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"name": { "type": "string", "title": "Name" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"data": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Data" }
+				},
+				"type": "object",
+				"required": ["id", "name", "user_id"],
+				"title": "TagModel"
+			},
+			"TagNameForm": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"skip": {
+						"anyOf": [{ "type": "integer" }, { "type": "null" }],
+						"title": "Skip",
+						"default": 0
+					},
+					"limit": {
+						"anyOf": [{ "type": "integer" }, { "type": "null" }],
+						"title": "Limit",
+						"default": 50
+					}
+				},
+				"type": "object",
+				"required": ["name"],
+				"title": "TagNameForm"
+			},
+			"ToolForm": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"name": { "type": "string", "title": "Name" },
+					"content": { "type": "string", "title": "Content" },
+					"meta": { "$ref": "#/components/schemas/ToolMeta" }
+				},
+				"type": "object",
+				"required": ["id", "name", "content", "meta"],
+				"title": "ToolForm"
+			},
+			"ToolMeta": {
+				"properties": {
+					"description": {
+						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"title": "Description"
+					},
+					"manifest": {
+						"anyOf": [{ "type": "object" }, { "type": "null" }],
+						"title": "Manifest",
+						"default": {}
+					}
+				},
+				"type": "object",
+				"title": "ToolMeta"
+			},
+			"ToolModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"name": { "type": "string", "title": "Name" },
+					"content": { "type": "string", "title": "Content" },
+					"specs": { "items": { "type": "object" }, "type": "array", "title": "Specs" },
+					"meta": { "$ref": "#/components/schemas/ToolMeta" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": [
+					"id",
+					"user_id",
+					"name",
+					"content",
+					"specs",
+					"meta",
+					"updated_at",
+					"created_at"
+				],
+				"title": "ToolModel"
+			},
+			"ToolResponse": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"user_id": { "type": "string", "title": "User Id" },
+					"name": { "type": "string", "title": "Name" },
+					"meta": { "$ref": "#/components/schemas/ToolMeta" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" }
+				},
+				"type": "object",
+				"required": ["id", "user_id", "name", "meta", "updated_at", "created_at"],
+				"title": "ToolResponse"
+			},
+			"UpdatePasswordForm": {
+				"properties": {
+					"password": { "type": "string", "title": "Password" },
+					"new_password": { "type": "string", "title": "New Password" }
+				},
+				"type": "object",
+				"required": ["password", "new_password"],
+				"title": "UpdatePasswordForm"
+			},
+			"UpdateProfileForm": {
+				"properties": {
+					"profile_image_url": { "type": "string", "title": "Profile Image Url" },
+					"name": { "type": "string", "title": "Name" }
+				},
+				"type": "object",
+				"required": ["profile_image_url", "name"],
+				"title": "UpdateProfileForm"
+			},
+			"UserModel": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"name": { "type": "string", "title": "Name" },
+					"email": { "type": "string", "title": "Email" },
+					"role": { "type": "string", "title": "Role", "default": "pending" },
+					"profile_image_url": { "type": "string", "title": "Profile Image Url" },
+					"last_active_at": { "type": "integer", "title": "Last Active At" },
+					"updated_at": { "type": "integer", "title": "Updated At" },
+					"created_at": { "type": "integer", "title": "Created At" },
+					"api_key": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Api Key" },
+					"settings": {
+						"anyOf": [{ "$ref": "#/components/schemas/UserSettings" }, { "type": "null" }]
+					},
+					"info": { "anyOf": [{ "type": "object" }, { "type": "null" }], "title": "Info" },
+					"oauth_sub": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Oauth Sub" }
+				},
+				"type": "object",
+				"required": [
+					"id",
+					"name",
+					"email",
+					"profile_image_url",
+					"last_active_at",
+					"updated_at",
+					"created_at"
+				],
+				"title": "UserModel"
+			},
+			"UserRoleUpdateForm": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"role": { "type": "string", "title": "Role" }
+				},
+				"type": "object",
+				"required": ["id", "role"],
+				"title": "UserRoleUpdateForm"
+			},
+			"UserSettings": {
+				"properties": {
+					"ui": {
+						"anyOf": [{ "type": "object" }, { "type": "null" }],
+						"title": "Ui",
+						"default": {}
+					}
+				},
+				"additionalProperties": true,
+				"type": "object",
+				"title": "UserSettings"
+			},
+			"UserUpdateForm": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"email": { "type": "string", "title": "Email" },
+					"profile_image_url": { "type": "string", "title": "Profile Image Url" },
+					"password": { "anyOf": [{ "type": "string" }, { "type": "null" }], "title": "Password" }
+				},
+				"type": "object",
+				"required": ["name", "email", "profile_image_url"],
+				"title": "UserUpdateForm"
+			},
+			"ValidationError": {
+				"properties": {
+					"loc": {
+						"items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+						"type": "array",
+						"title": "Location"
+					},
+					"msg": { "type": "string", "title": "Message" },
+					"type": { "type": "string", "title": "Error Type" }
+				},
+				"type": "object",
+				"required": ["loc", "msg", "type"],
+				"title": "ValidationError"
+			},
+			"open_webui__apps__webui__models__auths__UserResponse": {
+				"properties": {
+					"id": { "type": "string", "title": "Id" },
+					"email": { "type": "string", "title": "Email" },
+					"name": { "type": "string", "title": "Name" },
+					"role": { "type": "string", "title": "Role" },
+					"profile_image_url": { "type": "string", "title": "Profile Image Url" }
+				},
+				"type": "object",
+				"required": ["id", "email", "name", "role", "profile_image_url"],
+				"title": "UserResponse"
+			},
+			"open_webui__apps__webui__models__chats__ChatForm": {
+				"properties": { "chat": { "type": "object", "title": "Chat" } },
+				"type": "object",
+				"required": ["chat"],
+				"title": "ChatForm"
+			},
+			"open_webui__apps__webui__routers__users__UserResponse": {
+				"properties": {
+					"name": { "type": "string", "title": "Name" },
+					"profile_image_url": { "type": "string", "title": "Profile Image Url" }
+				},
+				"type": "object",
+				"required": ["name", "profile_image_url"],
+				"title": "UserResponse"
+			},
+			"open_webui__apps__webui__routers__utils__ChatForm": {
+				"properties": {
+					"title": { "type": "string", "title": "Title" },
+					"messages": { "items": { "type": "object" }, "type": "array", "title": "Messages" }
+				},
+				"type": "object",
+				"required": ["title", "messages"],
+				"title": "ChatForm"
+			}
+		},
+		"securitySchemes": { "HTTPBearer": { "type": "http", "scheme": "bearer" } }
+	}
+}

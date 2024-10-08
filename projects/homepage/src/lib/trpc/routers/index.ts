@@ -5,3 +5,4 @@ export * from "./truenas";
 export * from "./jellyseerr";
 export * from "./downloadClients";
 export * from "./mediaFetchers";
+export * from "./openwebui";

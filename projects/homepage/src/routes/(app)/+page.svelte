@@ -22,6 +22,7 @@
 	} from "$lib/components/appCards";
 	import { AppCardList, HomepageSectionTitle, SeeMoreApps } from "$lib/components/app";
 	import { JellyfinIcon } from "$lib/components/icons";
+	import { RecentChatsWithAI } from "$lib/components/ai";
 
 	interface Props {
 		data: PageServerData;
@@ -80,6 +81,7 @@
 		<Sparkles class={className} />
 	{/snippet}
 </HomepageSectionTitle>
+<RecentChatsWithAI {domain} />
 <AppCardList title="Productivity Apps" onHome>
 	<OllamaAppCard {domain} />
 	<LinkwardenAppCard {domain} />

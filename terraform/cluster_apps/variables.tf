@@ -655,3 +655,7 @@ variable "zipline_oidc_client_secret" {
 variable "sabnzbd_api_key" {
   type = string
 }
+
+variable "openwebui_api_key" {
+  type = string
+}

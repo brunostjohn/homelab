@@ -15,5 +15,7 @@
 		<p class="text-lg">See more apps</p>
 		<p class="text-muted-foreground">{description}</p>
 	</div>
-	<ChevronRight class="ml-auto h-6 w-6 transition-all group-hover:translate-x-1" />
+	<ChevronRight
+		class="text-muted-foreground group-hover:text-primary ml-auto h-6 w-6 transition-all group-hover:translate-x-1"
+	/>
 </Button>
