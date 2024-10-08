@@ -10,7 +10,7 @@
 
 <a href="https://ollama.{domain}" class="group contents">
 	<div
-		class="align-center group-hover:bg-muted flex items-center justify-center p-6 transition-all"
+		class="align-center group-hover:bg-muted flex items-center justify-center p-4 transition-all"
 	>
 		<div>
 			<p class="font-semibold">See more</p>
