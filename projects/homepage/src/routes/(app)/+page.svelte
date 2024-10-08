@@ -14,6 +14,8 @@
 		PaperlessAppCard,
 		UniFiNVRAppCard,
 		OllamaAppCard,
+		LinkwardenAppCard,
+		MemosAppCard,
 	} from "$lib/components/appCards";
 	import { AppCardList, HomepageSectionTitle, SeeMoreApps } from "$lib/components/app";
 	import { JellyfinIcon } from "$lib/components/icons";
@@ -77,8 +79,8 @@
 </HomepageSectionTitle>
 <AppCardList title="Productivity Apps" onHome>
 	<OllamaAppCard {domain} />
-	<VaultwardenAppCard {domain} />
-	<NextcloudAppCard {domain} />
+	<LinkwardenAppCard {domain} />
+	<MemosAppCard {domain} />
 	<SeeMoreApps description="Manage your life, keep track of things." href="/productivity" />
 </AppCardList>
 

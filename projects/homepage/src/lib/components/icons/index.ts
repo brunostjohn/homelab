@@ -18,3 +18,5 @@ export { default as MealieIcon } from "./Mealie.svelte";
 export { default as PaperlessIcon } from "./Paperless.svelte";
 export { default as UniFiProtectIcon } from "./UniFiProtect.svelte";
 export { default as OpenWebUIIcon } from "./OpenWebUI.svelte";
+export { default as LinkwardenIcon } from "./Linkwarden.svelte";
+export { default as MemosIcon } from "./Memos.svelte";

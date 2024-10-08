@@ -11,12 +11,17 @@ resource "kubernetes_config_map" "homepage" {
   }
 
   data = {
-    "HOMEPAGE_VAR_GLOBAL_FQDN"          = var.global_fqdn
-    "HOMEPAGE_VAR_UNIFI_USERNAME"       = var.unifi_username
-    "HOMEPAGE_VAR_ROMM_USERNAME"        = var.romm_username
-    "HOMEPAGE_VAR_QBITTORRENT_USERNAME" = var.qbittorrent_username
-    "HOMEPAGE_VAR_GRAFANA_USERNAME"     = var.grafana_username
-    "HOMEPAGE_VAR_PROXMOX_API_TOKEN_ID" = var.proxmox_api_token_id
+    "PUBLIC_DOMAIN"        = var.global_fqdn
+    "JELLYFIN_URL"         = "http://jellyfin.entertainment.svc.cluster.local:8096"
+    "UNIFI_URL"            = "https://10.0.0.1"
+    "UNIFI_USERNAME"       = var.unifi_username
+    "TRUENAS_FLOOF"        = "http://10.0.3.5"
+    "TRUENAS_JABBERWOCK"   = "http://10.0.3.1"
+    "TRUENAS_LOOKINGGLASS" = "http://10.0.3.2"
+    "JELLYSEERR_BASE_URL"  = "http://jellyseerr.entertainment.svc.cluster.local:5000"
+    "QBITTORRENT_URL"      = "http://qbittorrent.entertainment.svc.cluster.local:8080"
+    "QBITTORRENT_USERNAME" = var.qbittorrent_username
+    "SABNZBD_URL"          = "http://sabnzbd.entertainment.svc.cluster.local:8080"
   }
 }
 
@@ -27,30 +32,14 @@ resource "kubernetes_secret" "homepage" {
   }
 
   data = {
-    "HOMEPAGE_VAR_UNIFI_PASSWORD"           = var.unifi_password
-    "HOMEPAGE_VAR_JABBERWOCK_API_KEY"       = var.jabberwock_api_key
-    "HOMEPAGE_VAR_LOOKINGGLASS_API_KEY"     = var.lookingglass_api_key
-    "HOMEPAGE_VAR_FLOOF_API_KEY"            = var.floof_api_key
-    "HOMEPAGE_VAR_JELLYFIN_API_KEY"         = var.jellyfin_api_key
-    "HOMEPAGE_VAR_JELLYSEERR_API_KEY"       = var.jellyseerr_api_key
-    "HOMEPAGE_VAR_AUDIOBOOKSHELF_API_KEY"   = var.audiobookshelf_api_key
-    "HOMEPAGE_VAR_ROMM_PASSWORD"            = var.romm_password
-    "HOMEPAGE_VAR_AUTHENTIK_API_KEY"        = var.authentik_api_key
-    "HOMEPAGE_VAR_IMMICH_API_KEY"           = var.immich_api_key
-    "HOMEPAGE_VAR_NEXTCLOUD_API_KEY"        = var.nextcloud_api_key
-    "HOMEPAGE_VAR_HOMEASSISTANT_API_KEY"    = var.homeassistant_api_key
-    "HOMEPAGE_VAR_MEALIE_API_KEY"           = var.mealie_api_key
-    "HOMEPAGE_VAR_PAPERLESS_API_KEY"        = var.paperless_api_key
-    "HOMEPAGE_VAR_LINKWARDEN_API_KEY"       = var.linkwarden_api_key
-    "HOMEPAGE_VAR_QBITTORRENT_PASSWORD"     = var.qbittorrent_password
-    "HOMEPAGE_VAR_PROWLARR_API_KEY"         = var.prowlarr_api_key
-    "HOMEPAGE_VAR_RADARR_API_KEY"           = var.radarr_api_key
-    "HOMEPAGE_VAR_SONARR_API_KEY"           = var.sonarr_api_key
-    "HOMEPAGE_VAR_BAZARR_API_KEY"           = var.bazarr_api_key
-    "HOMEPAGE_VAR_LIDARR_API_KEY"           = var.lidarr_api_key
-    "HOMEPAGE_VAR_READARR_API_KEY"          = var.readarr_api_key
-    "HOMEPAGE_VAR_GRAFANA_PASSWORD"         = var.grafana_password
-    "HOMEPAGE_VAR_PROXMOX_API_TOKEN_SECRET" = var.proxmox_api_token_secret
+    "JELLYFIN_TOKEN"               = var.jellyfin_api_key
+    "UNIFI_PASSWORD"               = var.unifi_password
+    "TRUENAS_FLOOF_API_KEY"        = var.floof_api_key
+    "TRUENAS_JABBERWOCK_API_KEY"   = var.jabberwock_api_key
+    "TRUENAS_LOOKINGGLASS_API_KEY" = var.lookingglass_api_key
+    "JELLYSEERR_API_KEY"           = var.jellyseerr_api_key
+    "QBITTORRENT_PASSWORD"         = var.qbittorrent_password
+    "SABNZBD_API_KEY"              = var.sabnzbd_api_key
   }
 }
 
