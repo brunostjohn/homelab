@@ -30,8 +30,8 @@ spec:
 
   postgresql:
     parameters:
-      max_connections: "300"
-      shared_buffers: 80MB
+      max_connections: "600"
+      shared_buffers: 160MB
     shared_preload_libraries:
       - "vectors.so"
 
