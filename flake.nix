@@ -3,14 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs?ref=nixpkgs-24.05-darwin";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-24.05-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     systems.url = "github:nix-systems/default";
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, systems, ... }@inputs:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, nixpkgs-darwin, systems, ... }:
     let
       globalModules = [ ];
       globalModulesNixOS = globalModules ++ [ ];
@@ -104,7 +106,27 @@
         };
       };
 
-      darwinConfigurations = { };
+      darwinConfigurations = {
+        "Brunos-MacBook-Pro" =
+          let
+            system = "aarch64-darwin";
+            overlays = [
+              (final: prev: {
+                unstable = inputs.nixpkgs-darwin.legacyPackages.aarch64-darwin;
+              })
+            ];
+            pkgs = (import nixpkgs-darwin { inherit system; config.allowUnfree = true; }).pkgs;
+          in
+          nix-darwin.lib.darwinSystem {
+            inherit inputs system pkgs;
+            specialArgs = { inherit nix-darwin system overlays pkgs; };
+            modules = [
+              ./nix/modules/darwin
+            ];
+          };
+      };
+
+      darwinPackages = self.darwinConfigurations."Brunos-MacBook-Pro".pkgs;
 
       # Dev Shell for this repo
       devShells = eachSystem
