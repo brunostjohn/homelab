@@ -40,10 +40,10 @@
 <a href="https://ollama.{domain}/c/{id}" class="group contents">
 	<div
 		class={cn(
-			"flex gap-2 px-4 py-4",
-			"group-hover:bg-muted transition-all",
-			isOdd ? "border-r" : "",
-			isLastRow ? "" : "border-b",
+			"relative flex gap-2 px-4 py-4 backdrop-blur-lg backdrop-brightness-50 backdrop-saturate-150",
+			"group-hover:bg-muted/30 transition-all group-hover:backdrop-brightness-[60%]",
+			isOdd ? "border-muted-foreground/20 border-r" : "",
+			isLastRow ? "" : "border-muted-foreground/20 border-b",
 			isFirstRow && isOdd ? "rounded-tl-md" : "",
 			isFirstRow && !isOdd ? "rounded-tr-md" : "",
 			isLastRow && isOdd ? "rounded-bl-md" : "",
