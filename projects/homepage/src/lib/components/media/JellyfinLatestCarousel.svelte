@@ -35,7 +35,7 @@
 			{/each}
 		{:else}
 			<Carousel.Item>
-				<Card.Root class="bg-muted animate-pulse">
+				<Card.Root class="animate-pulse bg-muted">
 					<Card.Content class="flex h-96 min-h-96 items-end justify-start p-6"></Card.Content>
 				</Card.Root>
 			</Carousel.Item>

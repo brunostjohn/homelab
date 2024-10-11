@@ -51,7 +51,7 @@
 <Carousel.Item class="">
 	<div class="p-1">
 		<a href={getItemLink(Id, ServerId)} class="contents" target="_blank">
-			<Card.Root class="hover:border-primary/30 relative transition-all">
+			<Card.Root class="relative transition-all hover:border-primary/30">
 				<canvas
 					bind:this={blurhashCanvas}
 					class="absolute left-0 top-0 h-full w-full rounded-lg"
@@ -90,23 +90,23 @@
 							<p class="mb-4 max-w-[36rem] text-4xl">{Name ?? OriginalTitle}</p>
 						{/if}
 						<div class="align-center flex items-center gap-4">
-							<p class="align-center text-muted-foreground flex items-center text-sm">
+							<p class="align-center flex items-center text-sm text-muted-foreground">
 								<Calendar class="mr-1 inline-block h-4 w-4" />
 								{ProductionYear}
 							</p>
 							{#if Type === "Movie"}
-								<p class="align-center text-muted-foreground flex items-center text-sm">
+								<p class="align-center flex items-center text-sm text-muted-foreground">
 									<Clapperboard class="mr-1 inline-block h-4 w-4" />
 									Movie
 								</p>
 							{:else if Type === "Series"}
-								<p class="align-center text-muted-foreground flex items-center text-sm">
+								<p class="align-center flex items-center text-sm text-muted-foreground">
 									<Drama class="mr-1 inline-block h-4 w-4" />
 									Series
 								</p>
 							{/if}
 							{#if CriticRating}
-								<p class="align-center text-muted-foreground flex items-center text-sm">
+								<p class="align-center flex items-center text-sm text-muted-foreground">
 									<span class="mr-1 inline-block h-4 w-4">🍅</span>
 									{CriticRating}
 								</p>
@@ -114,7 +114,7 @@
 						</div>
 					</div>
 					<p
-						class="align-center text-muted-foreground ml-auto flex items-center justify-center gap-1 text-sm font-semibold uppercase"
+						class="align-center ml-auto flex items-center justify-center gap-1 text-sm font-semibold uppercase text-muted-foreground"
 					>
 						Stream now
 						<ArrowRightIcon class="h-4 w-4" />

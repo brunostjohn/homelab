@@ -83,7 +83,7 @@
 		href={`https://den.${domain}/${type}/${type === "movie" ? tmdbId : tvdbId}`}
 		target="_blank"
 	>
-		<Card.Root class="group-hover:border-muted-foreground relative overflow-hidden transition-all">
+		<Card.Root class="relative overflow-hidden transition-all group-hover:border-muted-foreground">
 			<img
 				src={backdrop}
 				aria-hidden="true"
@@ -100,21 +100,21 @@
 					<p class="text-lg font-semibold text-white">{originalTitle}</p>
 					<Badge class="mt-1 w-max {badgeColour}">{badgeText}</Badge>
 					{#if downloads.length > 1 && status !== JellyseerrMediaStatus.AVAILABLE}
-						<p class="text-muted-foreground mt-auto text-sm">
+						<p class="mt-auto text-sm text-muted-foreground">
 							{downloads.filter((download) => download.sizeLeft !== 0).length} downloads in progress
 						</p>
 					{:else if downloads.length === 1 && status !== JellyseerrMediaStatus.AVAILABLE && downloads[0].sizeLeft !== 0}
-						<p class="text-primary/50 mt-auto text-xs">
+						<p class="mt-auto text-xs text-primary/50">
 							{filesize(downloads[0].sizeLeft)} left
 						</p>
 						{#if eta}
-							<p class="text-primary/50 mb-1 text-xs">
+							<p class="mb-1 text-xs text-primary/50">
 								Available {eta}
 							</p>
 						{/if}
-						<div class="bg-muted/30 h-3 w-full overflow-hidden rounded-full">
+						<div class="h-3 w-full overflow-hidden rounded-full bg-muted/30">
 							<div
-								class="bg-primary/50 h-full animate-pulse rounded-full"
+								class="h-full animate-pulse rounded-full bg-primary/50"
 								style={`width: ${downloads[0].sizeLeft / downloads[0].size}%`}
 							></div>
 						</div>

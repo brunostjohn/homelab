@@ -21,7 +21,7 @@
 		</h2>
 		<a
 			href="https://birds.{domain}"
-			class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center transition-all"
+			class="align-center ml-auto flex items-center text-muted-foreground transition-all hover:text-primary"
 		>
 			View all <ChevronRight class="h-4 w-4" />
 		</a>
@@ -42,7 +42,7 @@
 		</h2>
 		<a
 			href="https://birds.{domain}"
-			class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center transition-all"
+			class="align-center ml-auto flex items-center text-muted-foreground transition-all hover:text-primary"
 		>
 			View all <ChevronRight class="h-4 w-4" />
 		</a>
@@ -51,7 +51,7 @@
 		<Carousel.Content>
 			{#each Array.from({ length: 7 }) as _}
 				<Carousel.Item class="basis-1/4">
-					<Card.Root class="bg-muted aspect-[3/4] animate-pulse"></Card.Root>
+					<Card.Root class="aspect-[3/4] animate-pulse bg-muted"></Card.Root>
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>

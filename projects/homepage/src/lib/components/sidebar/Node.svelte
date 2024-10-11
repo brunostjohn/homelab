@@ -46,10 +46,10 @@
 
 	{#if expanded}
 		<div class="flex items-center gap-4" transition:fly={{ y: -5 }}>
-			<p class="text-muted-foreground align-center inline-flex items-center gap-1 text-sm">
+			<p class="align-center inline-flex items-center gap-1 text-sm text-muted-foreground">
 				<Cpu class="h-4 w-4" />{node.cpu}
 			</p>
-			<p class="text-muted-foreground align-center inline-flex items-center gap-1 text-sm">
+			<p class="align-center inline-flex items-center gap-1 text-sm text-muted-foreground">
 				<MemoryStick class="h-4 w-4" />{filesize(node.memory)}
 			</p>
 		</div>

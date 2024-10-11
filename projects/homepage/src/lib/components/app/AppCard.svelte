@@ -37,7 +37,7 @@
 	{@render icon("h-10 w-10 my-auto rounded-md")}
 	<div>
 		<h2 class="text-lg font-medium">{name}</h2>
-		<p class="text-muted-foreground text-sm">
+		<p class="text-sm text-muted-foreground">
 			{description}
 		</p>
 	</div>
@@ -48,7 +48,7 @@
 	<a {href} class="contents">
 		<Card.Root
 			class={cn(
-				"hover:border-muted-foreground group transition-all",
+				"group transition-all hover:border-muted-foreground",
 				notInList ? "" : "h-full",
 				className
 			)}

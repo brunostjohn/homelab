@@ -14,7 +14,7 @@
 <a
 	{href}
 	target="_blank"
-	class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center text-sm transition-all"
+	class="align-center ml-auto flex items-center text-sm text-muted-foreground transition-all hover:text-primary"
 >
 	See more on {@render seeMoreIcon("ml-2 mr-1 h-4 w-4")}{seeMoreAppName}
 	<ChevronRight class="h-4 w-4" />

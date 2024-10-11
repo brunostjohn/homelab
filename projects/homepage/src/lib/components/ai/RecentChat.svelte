@@ -41,9 +41,9 @@
 	<div
 		class={cn(
 			"relative flex gap-2 px-4 py-4 backdrop-blur-lg backdrop-brightness-50 backdrop-saturate-150",
-			"group-hover:bg-muted/30 transition-all group-hover:backdrop-brightness-[60%]",
-			isOdd ? "border-muted-foreground/20 border-r" : "",
-			isLastRow ? "" : "border-muted-foreground/20 border-b",
+			"transition-all group-hover:bg-muted/30 group-hover:backdrop-brightness-[60%]",
+			isOdd ? "border-r border-muted-foreground/20" : "",
+			isLastRow ? "" : "border-b border-muted-foreground/20",
 			isFirstRow && isOdd ? "rounded-tl-md" : "",
 			isFirstRow && !isOdd ? "rounded-tr-md" : "",
 			isLastRow && isOdd ? "rounded-bl-md" : "",
@@ -51,12 +51,12 @@
 		)}
 	>
 		<div class="overflow-hidden">
-			<p class="text-muted-foreground text-xs font-semibold">
+			<p class="text-xs font-semibold text-muted-foreground">
 				{moment(updated_at * 1000).fromNow()}
 			</p>
 			<p class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-nowrap">{title}</p>
 			{#if lastMessage}
-				<div class="text-muted-foreground align-center flex items-center gap-1">
+				<div class="align-center flex items-center gap-1 text-muted-foreground">
 					<p class="w-fit text-nowrap text-xs font-semibold">
 						{lastMessage.role === "user" ? "You" : lastMessage.modelName}:
 					</p>
@@ -67,7 +67,7 @@
 			{/if}
 		</div>
 		<ChevronRight
-			class="text-muted-foreground group-hover:text-primary my-auto ml-auto h-6 min-h-6 w-6 min-w-6 transition-all group-hover:translate-x-1"
+			class="my-auto ml-auto h-6 min-h-6 w-6 min-w-6 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary"
 		/>
 	</div>
 </a>

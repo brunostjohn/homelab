@@ -89,7 +89,7 @@
 						<p class="text-lg font-semibold">{SeriesName ?? Name ?? OriginalTitle}</p>
 					{/if}
 					{#if SeriesName}
-						<p class="text-muted-foreground text-sm">
+						<p class="text-sm text-muted-foreground">
 							{#if EpisodeTitle}
 								{EpisodeTitle}
 							{:else}

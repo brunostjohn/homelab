@@ -24,7 +24,7 @@
 		</h2>
 		<a
 			href="https://den.{domain}/requests"
-			class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center transition-all"
+			class="align-center ml-auto flex items-center text-muted-foreground transition-all hover:text-primary"
 		>
 			View all <ChevronRight class="h-4 w-4" />
 		</a>
@@ -44,7 +44,7 @@
 		</h2>
 		<a
 			href="https://den.{domain}/requests"
-			class="align-center text-muted-foreground hover:text-primary ml-auto flex items-center transition-all"
+			class="align-center ml-auto flex items-center text-muted-foreground transition-all hover:text-primary"
 		>
 			View all <ChevronRight class="h-4 w-4" />
 		</a>

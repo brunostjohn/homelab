@@ -6,7 +6,7 @@
 	const poolStats = trpc()?.trueNas.poolStats.createQuery();
 </script>
 
-<p class="text-muted-foreground mb-1 mt-4 text-base font-semibold">Storage</p>
+<p class="mb-1 mt-4 text-base font-semibold text-muted-foreground">Storage</p>
 {#if $poolStats?.data}
 	{#each $poolStats.data as pool (pool.name)}
 		<Pool {pool} />

@@ -15,26 +15,26 @@
 
 <div class="flex flex-col">
 	{#if sizeBytes}
-		<p class="text-muted-foreground text-xs">
+		<p class="text-xs text-muted-foreground">
 			{filesize(downloadedBytes)} / {filesize(sizeBytes)}
 		</p>
 		{#if downloadSpeedBytes}
-			<p class="text-muted-foreground text-xs">
+			<p class="text-xs text-muted-foreground">
 				{filesize(downloadSpeedBytes)}/s
 			</p>
 		{/if}
 	{/if}
 	<div class="flex items-center gap-1">
-		<div class="bg-muted h-2 w-24 overflow-clip rounded-full">
+		<div class="h-2 w-24 overflow-clip rounded-full bg-muted">
 			<div
-				class="bg-muted-foreground h-2 animate-pulse rounded-full"
+				class="h-2 animate-pulse rounded-full bg-muted-foreground"
 				style="width: {progress}%"
 			></div>
 		</div>
-		<p class="text-muted-foreground text-xs font-semibold">{Math.round(progress * 10) / 10}%</p>
+		<p class="text-xs font-semibold text-muted-foreground">{Math.round(progress * 10) / 10}%</p>
 	</div>
 	{#if etaSeconds && etaSeconds < 60 * 60 * 24 * 7}
-		<p class="text-muted-foreground text-xs">
+		<p class="text-xs text-muted-foreground">
 			Done in {moment().add({ seconds: etaSeconds }).fromNow()}
 		</p>
 	{/if}

@@ -6,3 +6,4 @@ export * from "./jellyseerr";
 export * from "./downloadClients";
 export * from "./mediaFetchers";
 export * from "./openwebui";
+export * from "./mealie";
