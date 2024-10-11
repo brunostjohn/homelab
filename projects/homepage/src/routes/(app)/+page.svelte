@@ -23,6 +23,7 @@
 	import { AppCardList, HomepageSectionTitle, SeeMoreApps } from "$lib/components/app";
 	import { JellyfinIcon } from "$lib/components/icons";
 	import { RecentChatsWithAI } from "$lib/components/ai";
+	import { RecentRecipesCarousel } from "$lib/components/recipes";
 
 	interface Props {
 		data: PageServerData;
@@ -69,6 +70,7 @@
 		<House class={className} />
 	{/snippet}
 </HomepageSectionTitle>
+<RecentRecipesCarousel {domain} />
 <AppCardList title="Smart Home Apps" onHome>
 	<HomeAssistantAppCard {domain} />
 	<MealieAppCard {domain} />
