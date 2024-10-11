@@ -31,7 +31,7 @@ importers:
         version: 5.0.0-next.260
       svelte-check:
         specifier: ^4.0.0
-        version: 4.0.3(picomatch@2.3.1)(svelte@5.0.0-next.260)(typescript@5.6.2)
+        version: 4.0.5(picomatch@2.3.1)(svelte@5.0.0-next.260)(typescript@5.6.2)
       typescript:
         specifier: ^5.0.0
         version: 5.6.2
@@ -430,6 +430,14 @@ packages:
       picomatch:
         optional: true
 
+  fdir@6.4.0:
+    resolution: {integrity: sha512-3oB133prH1o4j/L5lLW7uOCF1PlD+/It2L0eL/iAqWMB91RBbqTewABqxhj0ibBd90EEmWZq7ntIWzVaWcXTGQ==}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -515,8 +523,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  readdirp@4.0.1:
-    resolution: {integrity: sha512-GkMg9uOTpIWWKbSsgwb5fA4EavTR+SG/PMPoAY8hkhHfEEY0/vqljY+XHqtDf2cr2IJtoNRDbrrEpZUiZCkYRw==}
+  readdirp@4.0.2:
+    resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==}
     engines: {node: '>= 14.16.0'}
 
   resolve@1.22.8:
@@ -547,8 +555,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  svelte-check@4.0.3:
-    resolution: {integrity: sha512-V2eqOEuNrPi1jGf307opR1JZ+ITP6/7R8ALKSw4Uw3NWp6GfA+fe7tYtEvZc7QHCavYKBizCK4JFwYjbuPCeXQ==}
+  svelte-check@4.0.5:
+    resolution: {integrity: sha512-icBTBZ3ibBaywbXUat3cK6hB5Du+Kq9Z8CRuyLmm64XIe2/r+lQcbuBx/IQgsbrC+kT2jQ0weVpZSSRIPwB6jQ==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
     peerDependencies:
@@ -863,7 +871,7 @@ snapshots:
 
   chokidar@4.0.1:
     dependencies:
-      readdirp: 4.0.1
+      readdirp: 4.0.2
 
   commondir@1.0.1: {}
 
@@ -913,6 +921,10 @@ snapshots:
   estree-walker@2.0.2: {}
 
   fdir@6.3.0(picomatch@2.3.1):
+    optionalDependencies:
+      picomatch: 2.3.1
+
+  fdir@6.4.0(picomatch@2.3.1):
     optionalDependencies:
       picomatch: 2.3.1
 
@@ -980,7 +992,7 @@ snapshots:
 
   prettier@3.3.3: {}
 
-  readdirp@4.0.1: {}
+  readdirp@4.0.2: {}
 
   resolve@1.22.8:
     dependencies:
@@ -1026,11 +1038,11 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.0.3(picomatch@2.3.1)(svelte@5.0.0-next.260)(typescript@5.6.2):
+  svelte-check@4.0.5(picomatch@2.3.1)(svelte@5.0.0-next.260)(typescript@5.6.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 4.0.1
-      fdir: 6.3.0(picomatch@2.3.1)
+      fdir: 6.4.0(picomatch@2.3.1)
       picocolors: 1.1.0
       sade: 1.8.1
       svelte: 5.0.0-next.260
