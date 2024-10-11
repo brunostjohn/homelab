@@ -26,6 +26,7 @@ pkgs.mkShell {
     python311Packages.kubernetes
     infisical
     kubectl-cnpg
+    jdk22
     (wrapHelm kubernetes-helm {
       plugins = with pkgs.kubernetes-helmPlugins; [
         helm-secrets

@@ -21,6 +21,11 @@ terraform {
       source  = "grafana/grafana"
       version = "3.7.0"
     }
+
+    infisical = {
+      source = "Infisical/infisical"
+      version = "0.11.6"
+    }
   }
 
   backend "kubernetes" {
@@ -51,4 +56,10 @@ provider "argocd" {
 provider "grafana" {
   url  = "https://grafana.${var.global_fqdn}"
   auth = var.grafana_auth
+}
+
+provider "infisical" {
+  host = "https://secrets.${var.global_fqdn}"
+  client_id = var.infisical_client_id
+  client_secret = var.infisical_client_secret
 }
