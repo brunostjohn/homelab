@@ -67,7 +67,7 @@ spec:
             - name: OIDC_AUTH_ENABLED
               value: "true"
             - name: API_DOCS
-              value: "false"
+              value: "true"
             - name: TZ
               value: Europe/Dublin
             - name: DB_ENGINE
