@@ -1,0 +1,18 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: silly-bot
+  labels:
+    app.kubernetes.io/name: silly-bot
+rules:
+  - apiGroups:
+      - apps
+      - extensions
+    resources:
+      - deployments/silly-bot
+    resourceNames: ["silly-bot"]
+    verbs:
+      - get
+      - list
+      - patch
+      - update
