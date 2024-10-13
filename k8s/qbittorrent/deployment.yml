@@ -109,9 +109,12 @@ spec:
           imagePullPolicy: IfNotPresent
           image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
           resources:
-            limits:
+            requests:
               memory: "64Mi"
               cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
           env:
             - name: QBITTORRENT_PORT
               value: "8080"
@@ -134,21 +137,21 @@ spec:
               port: 8000
             failureThreshold: 30
             periodSeconds: 10
-            initialDelaySeconds: 30
+            initialDelaySeconds: 40
           livenessProbe:
             httpGet:
               path: /metrics
               port: 8000
             failureThreshold: 5
             periodSeconds: 10
-            initialDelaySeconds: 50
+            initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /metrics
               port: 8000
             failureThreshold: 3
             periodSeconds: 10
-            initialDelaySeconds: 40
+            initialDelaySeconds: 50
 ---
 apiVersion: apps/v1
 kind: Deployment
