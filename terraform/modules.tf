@@ -212,6 +212,10 @@ module "cluster_apps" {
 
   sabnzbd_api_key   = data.infisical_secrets.cluster.secrets["sabnzbd_api_key"].value
   openwebui_api_key = data.infisical_secrets.cluster.secrets["openwebui_api_key"].value
+
+  silly_bot_infisical_client_id     = data.infisical_secrets.cluster.secrets["silly_bot_infisical_client_id"].value
+  silly_bot_infisical_client_secret = data.infisical_secrets.cluster.secrets["silly_bot_infisical_client_secret"].value
+  silly_bot_infisical_project_id    = data.infisical_secrets.cluster.secrets["silly_bot_infisical_project_id"].value
 }
 
 module "grafana" {

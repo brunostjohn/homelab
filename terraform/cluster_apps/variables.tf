@@ -659,3 +659,15 @@ variable "sabnzbd_api_key" {
 variable "openwebui_api_key" {
   type = string
 }
+
+variable "silly_bot_infisical_client_id" {
+  type = string
+}
+
+variable "silly_bot_infisical_client_secret" {
+  type = string
+}
+
+variable "silly_bot_infisical_project_id" {
+  type = string
+}

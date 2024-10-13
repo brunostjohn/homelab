@@ -240,6 +240,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to infisical_role;
 CREATE USER infisical WITH PASSWORD '<password>';
 GRANT infisical_role TO infisical;
 
+-- SILLY BOT
+CREATE ROLE sillybot_role;
+\c sillybot
+GRANT ALL PRIVILEGES ON DATABASE sillybot TO sillybot_role;
+GRANT ALL ON SCHEMA public TO sillybot_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sillybot_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to sillybot_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to sillybot_role;
+CREATE USER sillybot WITH PASSWORD '<password>';
+GRANT sillybot_role TO sillybot;
+
 -- MEDIA STACK --
 
 -- LIDARR
