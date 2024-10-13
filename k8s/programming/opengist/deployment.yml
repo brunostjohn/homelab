@@ -1,24 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vaultwarden
-  namespace: vaultwarden
+  name: opengist
 spec:
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
-      app: vaultwarden
+      app: opengist
   template:
     metadata:
       labels:
-        app: vaultwarden
+        app: opengist
     spec:
       volumes:
-        - name: vaultwarden-data
+        - name: opengist-data
           persistentVolumeClaim:
-            claimName: vaultwarden-data
+            claimName: opengist-data
       containers:
-        - name: vaultwarden
-          image: vaultwarden/server:latest
+        - name: opengist
+          image: ghcr.io/thomiceli/opengist
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -28,43 +30,39 @@ spec:
               memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 80
+            - containerPort: 6157
               protocol: TCP
               name: http
           env:
-            - name: SIGNUPS_ALLOWED
+            - name: OG_GIT_DEFAULT_BRANCH
+              value: main
+            - name: OG_SSH_GIT_ENABLED
               value: "false"
-            - name: DISABLE_ADMIN_TOKEN
-              value: "true"
-            - name: PUSH_ENABLED
-              value: "true"
-            - name: PUSH_RELAY_URI
-              value: https://api.bitwarden.eu
-            - name: PUSH_IDENTITY_URI
-              value: https://identity.bitwarden.eu
+            - name: OG_CUSTOM_LOGO
+              value: server-icon.png
+            - name: OG_CUSTOM_FAVICON
+              value: server-icon.png
           envFrom:
             - configMapRef:
-                name: vaultwarden-config
+                name: opengist-config
             - secretRef:
-                name: vaultwarden-secrets
+                name: opengist-secrets
           volumeMounts:
-            - name: vaultwarden-data
-              mountPath: /vw-data
+            - name: opengist-data
+              mountPath: /opengist
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthcheck
               port: http
             initialDelaySeconds: 30
             periodSeconds: 30
             timeoutSeconds: 5
             successThreshold: 1
-            failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: /
+              path: /healthcheck
               port: http
             initialDelaySeconds: 30
             periodSeconds: 30
             timeoutSeconds: 5
             successThreshold: 1
-            failureThreshold: 3

@@ -39,7 +39,7 @@ resource "argocd_application" "opengist" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/opengist"
+      path     = "k8s/programming/opengist"
     }
 
     destination {

@@ -31,7 +31,7 @@ resource "argocd_application" "romm" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/romm"
+      path     = "k8s/entertainment/romm"
     }
 
     destination {
