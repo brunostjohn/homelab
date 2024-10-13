@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipline
+  namespace: productivity
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  selector:
+    matchLabels:
+      app: zipline
+  template:
+    metadata:
+      labels:
+        app: zipline
+    spec:
+      volumes:
+        - name: zipline-public
+          persistentVolumeClaim:
+            claimName: zipline-public-pvc
+        - name: zipline-themes
+          persistentVolumeClaim:
+            claimName: zipline-themes-pvc
+        - name: zipline-uploads
+          persistentVolumeClaim:
+            claimName: zipline-uploads-pvc
+      containers:
+        - name: zipline
+          image: ghcr.io/diced/zipline:v4
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+              ephemeral-storage: "1Gi"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+              ephemeral-storage: "2Gi"
+          volumeMounts:
+            - name: zipline-public
+              mountPath: /zipline/public
+            - name: zipline-themes
+              mountPath: /zipline/themes
+            - name: zipline-uploads
+              mountPath: /zipline/uploads
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          envFrom:
+            - secretRef:
+                name: zipline-secrets
+            - configMapRef:
+                name: zipline-config
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 80
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 70
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3

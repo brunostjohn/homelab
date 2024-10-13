@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zipline-public-pvc
+  namespace: productivity
+spec:
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: jabberwock-nfs-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zipline-themes-pvc
+spec:
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: jabberwock-nfs-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zipline-uploads-pvc
+  namespace: productivity
+spec:
+  resources:
+    requests:
+      storage: 80Gi
+  storageClassName: jabberwock-nfs-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

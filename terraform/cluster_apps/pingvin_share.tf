@@ -18,7 +18,7 @@ resource "argocd_application" "pingvin_share" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/pingvin-share"
+      path     = "k8s/personal-cloud/pingvin-share"
 
     }
 

@@ -40,7 +40,7 @@ resource "argocd_application" "grist" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/grist"
+      path     = "k8s/productivity/grist"
     }
 
     destination {

@@ -54,7 +54,7 @@ resource "argocd_application" "paperless" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/paperless"
+      path     = "k8s/personal-cloud/paperless"
     }
 
     destination {

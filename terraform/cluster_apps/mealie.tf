@@ -44,7 +44,7 @@ resource "argocd_application" "mealie" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/mealie"
+      path     = "k8s/personal-cloud/mealie"
     }
 
     destination {

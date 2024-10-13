@@ -37,7 +37,7 @@ resource "argocd_application" "zipline" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/zipline"
+      path     = "k8s/personal-cloud/zipline"
     }
 
     destination {

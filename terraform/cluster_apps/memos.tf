@@ -26,7 +26,7 @@ resource "argocd_application" "memos" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/memos"
+      path     = "k8s/personal-cloud/memos"
     }
 
     destination {

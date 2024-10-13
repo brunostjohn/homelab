@@ -45,7 +45,7 @@ resource "argocd_application" "vaultwarden" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/vaultwarden"
+      path     = "k8s/personal-cloud/vaultwarden"
     }
 
     destination {
