@@ -35,3 +35,5 @@ spec:
               value: production
             - name: INFLUXDB_URL
               value: http://influxdb.monitoring.svc.cluster.local:8086
+            - name: REDIS_URL
+              value: redis://:redis@redis-master.databases.svc.cluster.local:6379/16

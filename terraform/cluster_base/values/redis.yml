@@ -8,7 +8,13 @@ architecture: replication
 sentinel:
   enabled: false
 
+replica:
+  configuration: |
+    databases 32
+
 master:
+  configuration: |
+    databases 32
   resources:
     requests:
       cpu: 500m
