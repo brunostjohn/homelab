@@ -16,7 +16,7 @@ spec:
         kubernetes.io/arch: amd64
       containers:
         - name: silly-bot
-          image: ghcr.io/brunostjohn/refund-bot
+          image: ghcr.io/brunostjohn/refund-bot:latest
           imagePullPolicy: Always
           resources:
             requests:
