@@ -134,21 +134,21 @@ spec:
           startupProbe:
             httpGet:
               path: /metrics
-              port: 8000
+              port: metrics
             failureThreshold: 30
             periodSeconds: 10
             initialDelaySeconds: 40
           livenessProbe:
             httpGet:
               path: /metrics
-              port: 8000
+              port: metrics
             failureThreshold: 5
             periodSeconds: 10
             initialDelaySeconds: 60
           readinessProbe:
             httpGet:
               path: /metrics
-              port: 8000
+              port: metrics
             failureThreshold: 3
             periodSeconds: 10
             initialDelaySeconds: 50
