@@ -19,7 +19,7 @@ resource "argocd_application" "zigbee2mqtt" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/zigbee2mqtt"
+      path     = "k8s/smarthome/zigbee2mqtt"
     }
 
     destination {

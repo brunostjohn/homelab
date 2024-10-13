@@ -30,7 +30,7 @@ resource "argocd_application" "homeassistant" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/home-assistant"
+      path     = "k8s/smarthome/home-assistant"
     }
 
     destination {
