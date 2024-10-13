@@ -35,7 +35,7 @@ resource "argocd_application" "imaginary" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/imaginary"
+      path     = "k8s/productivity/imaginary"
     }
 
     destination {
