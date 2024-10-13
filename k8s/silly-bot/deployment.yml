@@ -15,6 +15,7 @@ spec:
       containers:
         - name: silly-bot
           image: ghcr.io/brunostjohn/refund-bot
+          imagePullPolicy: Always
           resources:
             requests:
               memory: "256Mi"
