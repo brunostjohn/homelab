@@ -12,6 +12,8 @@ spec:
       labels:
         app: silly-bot
     spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
       containers:
         - name: silly-bot
           image: ghcr.io/brunostjohn/refund-bot
