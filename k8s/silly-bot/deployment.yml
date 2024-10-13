@@ -27,6 +27,15 @@ spec:
             - containerPort: 3000
               protocol: TCP
               name: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
           envFrom:
             - secretRef:
                 name: silly-bot-secrets
