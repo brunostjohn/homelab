@@ -9,7 +9,7 @@ resource "argocd_application" "wizarr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/wizarr"
+      path     = "k8s/entertainment/wizarr"
     }
 
     destination {

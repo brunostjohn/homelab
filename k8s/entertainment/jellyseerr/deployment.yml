@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyseerr
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jellyseerr
+  template:
+    metadata:
+      labels:
+        app: jellyseerr
+    spec:
+      volumes:
+        - name: jellyseerr-config
+          persistentVolumeClaim:
+            claimName: jellyseerr-config
+      containers:
+        - name: jellyseerr
+          imagePullPolicy: IfNotPresent
+          image: drcarrot/jellyseerr-postgres:latest
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 5055
+              protocol: TCP
+              name: http
+          env:
+            - name: TZ
+              value: Europe/Dublin
+            - name: DB_TYPE
+              value: postgres
+            - name: DB_HOST
+              value: postgres-cluster-rw-pooler.databases.svc.cluster.local
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: jellyseerr
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: jellyseerr-pg
+                  key: password
+            - name: DB_NAME
+              value: jellyseerr
+          volumeMounts:
+            - name: jellyseerr-config
+              mountPath: /app/config
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            timeoutSeconds: 5
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyseerr-exporter
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jellyseerr-exporter
+  template:
+    metadata:
+      labels:
+        app: jellyseerr-exporter
+    spec:
+      containers:
+        - name: jellyseerr-exporter
+          imagePullPolicy: IfNotPresent
+          image: ghcr.io/willfantom/overseerr-exporter
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 9850
+              protocol: TCP
+              name: metrics
+          env:
+            - name: OVERSEERR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jellyseerr-exporter
+                  key: api-key
+          command:
+            - /bin/sh
+            - -c
+            - cd /exporter && ./overseerr-exporter --overseerr.address="http://jellyseerr.entertainment.svc.cluster.local:5055" --overseerr.api-key=$OVERSEERR_API_KEY --web.listen-address=:9850
+          startupProbe:
+            httpGet:
+              path: /
+              port: metrics
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: metrics
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: metrics
+            failureThreshold: 5
+            periodSeconds: 10

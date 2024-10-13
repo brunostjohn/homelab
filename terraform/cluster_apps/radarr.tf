@@ -22,7 +22,7 @@ resource "argocd_application" "radarr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/radarr"
+      path     = "k8s/entertainment/radarr"
     }
 
     destination {

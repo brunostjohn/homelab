@@ -22,7 +22,7 @@ resource "argocd_application" "qbittorrent" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/qbittorrent"
+      path     = "k8s/entertainment/qbittorrent"
     }
 
     destination {

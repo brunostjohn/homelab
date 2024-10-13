@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: requestrr
+  namespace: entertainment
+  labels:
+    app: requestrr
+spec:
+  selector:
+    app: requestrr
+  ports:
+    - protocol: TCP
+      port: 4545
+      targetPort: 4545
+      name: http
+  type: ClusterIP

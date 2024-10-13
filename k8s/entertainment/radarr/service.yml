@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  namespace: entertainment
+  labels:
+    app: radarr
+spec:
+  selector:
+    app: radarr
+  ports:
+    - port: 7878
+      targetPort: 7878
+      name: http
+      protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr-exporter
+  namespace: entertainment
+  labels:
+    app: radarr-exporter
+spec:
+  selector:
+    app: radarr-exporter
+  ports:
+    - port: 9707
+      targetPort: 9707
+      name: monitoring
+      protocol: TCP
+  type: ClusterIP

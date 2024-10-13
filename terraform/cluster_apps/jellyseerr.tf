@@ -33,7 +33,7 @@ resource "argocd_application" "jellyseerr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/jellyseerr"
+      path     = "k8s/entertainment/jellyseerr"
     }
 
     destination {

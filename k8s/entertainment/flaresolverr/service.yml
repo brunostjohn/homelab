@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flaresolverr
+  namespace: entertainment
+  labels:
+    app: flaresolverr
+spec:
+  selector:
+    app: flaresolverr
+  ports:
+    - port: 8191
+      targetPort: 8191
+      name: http
+      protocol: TCP
+    - port: 2112
+      targetPort: 2112
+      name: metrics
+      protocol: TCP
+  type: ClusterIP

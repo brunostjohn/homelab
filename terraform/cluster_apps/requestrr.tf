@@ -11,7 +11,7 @@
 
 #     source {
 #       repo_url = var.homelab_repo
-#       path     = "k8s/requestrr"
+#       path     = "k8s/entertainment/requestrr"
 #     }
 
 #     destination {

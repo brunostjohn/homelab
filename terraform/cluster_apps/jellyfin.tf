@@ -11,7 +11,7 @@ resource "argocd_application" "jellyfin" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/jellyfin"
+      path     = "k8s/entertainment/jellyfin"
     }
 
     destination {

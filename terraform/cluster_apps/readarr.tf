@@ -22,7 +22,7 @@ resource "argocd_application" "readarr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/readarr"
+      path     = "k8s/entertainment/readarr"
     }
 
     destination {

@@ -28,7 +28,7 @@ resource "argocd_application" "sonarr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/sonarr"
+      path     = "k8s/entertainment/sonarr"
     }
 
     destination {

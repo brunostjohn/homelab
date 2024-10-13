@@ -11,7 +11,7 @@ resource "argocd_application" "flaresolverr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/flaresolverr"
+      path     = "k8s/entertainment/flaresolverr"
     }
 
     destination {

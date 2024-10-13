@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sabnzbd-exporter
+  namespace: entertainment
+  labels: {}
+spec:
+  selector:
+    matchLabels:
+      app: sabnzbd-exporter
+  endpoints:
+    - port: metrics
+      interval: 15s
+      scrapeTimeout: 10s
+      path: /metrics

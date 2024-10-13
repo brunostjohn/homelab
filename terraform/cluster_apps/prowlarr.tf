@@ -22,7 +22,7 @@ resource "argocd_application" "prowlarr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/prowlarr"
+      path     = "k8s/entertainment/prowlarr"
     }
 
     destination {

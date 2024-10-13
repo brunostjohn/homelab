@@ -27,7 +27,7 @@ resource "argocd_application" "sabnzbd" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/sabnzbd"
+      path     = "k8s/entertainment/sabnzbd"
 
     }
 

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sabnzbd-exporter
+  namespace: entertainment
+  labels:
+    app: sabnzbd-exporter
+spec:
+  selector:
+    app: sabnzbd-exporter
+  ports:
+    - port: 9387
+      targetPort: 9387
+      protocol: TCP
+      name: metrics

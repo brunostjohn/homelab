@@ -1,0 +1,223 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      volumes:
+        - name: qbittorrent-config
+          persistentVolumeClaim:
+            claimName: qbittorrent-config-pvc
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
+      dnsConfig:
+        nameservers:
+          - 10.0.2.1
+          - 1.1.1.1
+          - 8.8.8.8
+      containers:
+        - name: qbittorrent
+          imagePullPolicy: IfNotPresent
+          image: ghcr.io/onedr0p/qbittorrent:4.6.6
+          resources:
+            requests:
+              memory: "4Gi"
+              cpu: "2"
+            limits:
+              memory: "8Gi"
+              cpu: "4"
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Dublin"
+            - name: WEBUI_PORT
+              value: "8080"
+            - name: TORRENTING_PORT
+              value: "6881"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
+          ports:
+            - containerPort: 8080
+              name: web
+              protocol: TCP
+            - containerPort: 6881
+              name: p2p
+              protocol: TCP
+            - containerPort: 6881
+              name: p2p-udp
+              protocol: UDP
+          volumeMounts:
+            - name: qbittorrent-config
+              mountPath: /config
+            - name: entertainment-content
+              mountPath: /data
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 12
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            failureThreshold: 3
+            periodSeconds: 10
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent-exporter
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qbittorrent-exporter
+  template:
+    metadata:
+      labels:
+        app: qbittorrent-exporter
+    spec:
+      containers:
+        - name: qbittorrent-exporter
+          imagePullPolicy: IfNotPresent
+          image: ghcr.io/esanchezm/prometheus-qbittorrent-exporter
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          env:
+            - name: QBITTORRENT_PORT
+              value: "8080"
+            - name: QBITTORRENT_HOST
+              value: "qbittorrent.entertainment.svc.cluster.local"
+            - name: QBITTORRENT_USER
+              value: "admin"
+            - name: QBITTORRENT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: qbittorrent
+                  key: password
+          ports:
+            - containerPort: 8000
+              name: metrics
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            failureThreshold: 30
+            periodSeconds: 10
+            initialDelaySeconds: 40
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            failureThreshold: 5
+            periodSeconds: 10
+            initialDelaySeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 50
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flood
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: flood
+  template:
+    metadata:
+      labels:
+        app: flood
+    spec:
+      volumes:
+        - name: flood-config
+          persistentVolumeClaim:
+            claimName: flood-config-pvc
+      containers:
+        - name: flood
+          imagePullPolicy: IfNotPresent
+          image: jesec/flood
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "100m"
+          env:
+            - name: HOME
+              value: "/config"
+            - name: FLOOD_OPTION_QBURL
+              value: http://qbittorrent.entertainment.svc.cluster.local:8080
+            - name: FLOOD_OPTION_AUTH
+              value: none
+            - name: FLOOD_OPTION_QBUSER
+              value: admin
+            - name: FLOOD_OPTION_QBPASS
+              valueFrom:
+                secretKeyRef:
+                  name: qbittorrent
+                  key: password
+          volumeMounts:
+            - name: flood-config
+              mountPath: /config
+          ports:
+            - containerPort: 3000
+              name: flood
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            failureThreshold: 3
+            periodSeconds: 10

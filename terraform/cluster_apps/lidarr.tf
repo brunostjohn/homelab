@@ -22,7 +22,7 @@ resource "argocd_application" "lidarr" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/lidarr"
+      path     = "k8s/entertainment/lidarr"
     }
 
     destination {
