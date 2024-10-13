@@ -1,5 +1,5 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
   name: silly-bot
   labels:
@@ -9,8 +9,7 @@ rules:
       - apps
       - extensions
     resources:
-      - deployments/silly-bot
-    resourceNames: ["silly-bot"]
+      - deployments
     verbs:
       - get
       - list
