@@ -1,225 +1,224 @@
 module "cluster_base" {
   source = "./cluster_base"
 
-  global_fqdn = var.global_fqdn
-  second_fqdn = var.second_fqdn
+  global_fqdn = nonsensitive(data.infisical_secrets.cluster.secrets["global_fqdn"].value)
+  second_fqdn = nonsensitive(data.infisical_secrets.cluster.secrets["second_fqdn"].value)
 
-  smtp_host     = var.smtp_host
-  smtp_port     = var.smtp_port
-  smtp_from     = var.smtp_from
-  smtp_username = var.smtp_username
-  smtp_password = var.smtp_password
-  smtp_use_ssl  = var.smtp_use_ssl
-  smtp_use_tls  = var.smtp_use_tls
+  smtp_host     = data.infisical_secrets.cluster.secrets["smtp_host"].value
+  smtp_port     = data.infisical_secrets.cluster.secrets["smtp_port"].value
+  smtp_from     = data.infisical_secrets.cluster.secrets["smtp_from"].value
+  smtp_username = data.infisical_secrets.cluster.secrets["smtp_username"].value
+  smtp_password = data.infisical_secrets.cluster.secrets["smtp_password"].value
+  smtp_use_ssl  = data.infisical_secrets.cluster.secrets["smtp_use_ssl"].value
+  smtp_use_tls  = data.infisical_secrets.cluster.secrets["smtp_use_tls"].value
 
-  alertmanager_discord_webhook_url = var.alertmanager_discord_webhook_url
-  crowdsec_enroll_key              = var.crowdsec_enroll_key
-  crowdsec_bouncer_key_traefik     = var.crowdsec_bouncer_key_traefik
-  letsencrypt_email                = var.letsencrypt_email
-  letsencrypt_cloudflare_api_token = var.letsencrypt_cloudflare_api_token
-  cluster_loadbalancer_ip          = var.cluster_ipaddr
-  cloudflare_ddns_api_token        = var.cloudflare_ddns_api_token
-  argocd_oidc_client_id            = var.argocd_oidc_client_id
-  argocd_oidc_client_secret        = var.argocd_oidc_client_secret
-  proxmox_api_token                = var.proxmox_api_token
-  personal_email                   = var.personal_email
-  floof_api_key                    = var.floof_api_key
-  klaudia_email                    = var.klaudia_email
+  alertmanager_discord_webhook_url = data.infisical_secrets.cluster.secrets["alertmanager_discord_webhook_url"].value
+  crowdsec_enroll_key              = data.infisical_secrets.cluster.secrets["crowdsec_enroll_key"].value
+  crowdsec_bouncer_key_traefik     = data.infisical_secrets.cluster.secrets["crowdsec_bouncer_key_traefik"].value
+  letsencrypt_email                = data.infisical_secrets.cluster.secrets["letsencrypt_email"].value
+  letsencrypt_cloudflare_api_token = data.infisical_secrets.cluster.secrets["letsencrypt_cloudflare_api_token"].value
+  cluster_loadbalancer_ip          = data.infisical_secrets.cluster.secrets["CLUSTER_LOADBALANCER_IP"].value
+  cloudflare_ddns_api_token        = data.infisical_secrets.cluster.secrets["cloudflare_ddns_api_token"].value
+  argocd_oidc_client_id            = data.infisical_secrets.cluster.secrets["argocd_oidc_client_id"].value
+  argocd_oidc_client_secret        = data.infisical_secrets.cluster.secrets["argocd_oidc_client_secret"].value
+  proxmox_api_token                = data.infisical_secrets.cluster.secrets["proxmox_api_token"].value
+  personal_email                   = data.infisical_secrets.cluster.secrets["personal_email"].value
+  floof_api_key                    = data.infisical_secrets.cluster.secrets["floof_api_key"].value
+  klaudia_email                    = data.infisical_secrets.cluster.secrets["klaudia_email"].value
 
-  pgadmin_username           = var.pgadmin_username
-  pgadmin_password           = var.pgadmin_password
-  pg_superuser_password      = var.pg_superuser_password
-  pg_backup_minio_access_key = var.pg_backup_minio_access_key
-  pg_backup_minio_secret_key = var.pg_backup_minio_secret_key
+  pgadmin_username           = data.infisical_secrets.cluster.secrets["pgadmin_username"].value
+  pgadmin_password           = data.infisical_secrets.cluster.secrets["pgadmin_password"].value
+  pg_superuser_password      = data.infisical_secrets.cluster.secrets["pg_superuser_password"].value
+  pg_backup_minio_access_key = data.infisical_secrets.cluster.secrets["pg_backup_minio_access_key"].value
+  pg_backup_minio_secret_key = data.infisical_secrets.cluster.secrets["pg_backup_minio_secret_key"].value
 
-  jabberwock_api_key = var.jabberwock_api_key
+  jabberwock_api_key = data.infisical_secrets.cluster.secrets["jabberwock_api_key"].value
 
-  crowdsec_db_password = var.crowdsec_db_password
-  crowdsec_webhook_url = var.crowdsec_webhook_url
+  crowdsec_db_password = data.infisical_secrets.cluster.secrets["crowdsec_db_password"].value
+  crowdsec_webhook_url = data.infisical_secrets.cluster.secrets["crowdsec_webhook_url"].value
 
-  grafana_db_password = var.grafana_db_password
+  grafana_db_password = data.infisical_secrets.cluster.secrets["grafana_db_password"].value
 
-  infisical_auth_secret          = var.infisical_auth_secret
-  infisical_encryption_key       = var.infisical_encryption_key
-  infisical_db_password          = var.infisical_db_password
-  infisical_google_client_id     = var.infisical_google_client_id
-  infisical_google_client_secret = var.infisical_google_client_secret
+  infisical_auth_secret          = data.infisical_secrets.cluster.secrets["infisical_auth_secret"].value
+  infisical_encryption_key       = data.infisical_secrets.cluster.secrets["infisical_encryption_key"].value
+  infisical_db_password          = data.infisical_secrets.cluster.secrets["infisical_db_password"].value
+  infisical_google_client_id     = data.infisical_secrets.cluster.secrets["infisical_google_client_id"].value
+  infisical_google_client_secret = data.infisical_secrets.cluster.secrets["infisical_google_client_secret"].value
 }
 
 module "cluster_apps" {
   source     = "./cluster_apps"
   depends_on = [module.cluster_base]
 
-  second_fqdn                      = var.second_fqdn
+  second_fqdn                      = nonsensitive(data.infisical_secrets.cluster.secrets["second_fqdn"].value)
   networking_project               = module.cluster_base.networking_project
   security_project                 = module.cluster_base.security_project
   storage_project                  = module.cluster_base.storage_project
   homelab_repo                     = module.cluster_base.homelab_repo
-  minio_oidc_client_id             = var.minio_oidc_client_id
-  minio_oidc_client_secret         = var.minio_oidc_client_secret
-  minio_oidc_config_url            = var.minio_oidc_config_url
-  authentik_postgres_password      = var.authentik_postgres_password
-  authentik_secret_key             = var.authentik_secret_key
-  global_fqdn                      = var.global_fqdn
-  smtp_host                        = var.smtp_host
-  smtp_port                        = var.smtp_port
-  smtp_from                        = var.smtp_from
-  smtp_username                    = var.smtp_username
-  smtp_password                    = var.smtp_password
-  smtp_use_ssl                     = var.smtp_use_ssl
-  smtp_use_tls                     = var.smtp_use_tls
-  mqtt_homeassistant_password_hash = var.mqtt_homeassistant_password_hash
-  mqtt_zigbee2mqtt_password_hash   = var.mqtt_zigbee2mqtt_password_hash
-  mqtt_octoprint_password_hash     = var.mqtt_octoprint_password_hash
-  grist_session_secret             = var.grist_session_secret
-  grist_oidc_client_id             = var.grist_oidc_client_id
-  grist_oidc_client_secret         = var.grist_oidc_client_secret
-  grist_oidc_idp_issuer            = var.grist_oidc_idp_issuer
-  mqtt_exporter_password_hash      = var.mqtt_exporter_password_hash
-  mqtt_exporter_password           = var.mqtt_exporter_password
-  hassio_token                     = var.hassio_token
-  unifi_username                   = var.unifi_username
-  unifi_password                   = var.unifi_password
+  global_fqdn                      = nonsensitive(data.infisical_secrets.cluster.secrets["global_fqdn"].value)
+  minio_oidc_client_id             = data.infisical_secrets.cluster.secrets["minio_oidc_client_id"].value
+  minio_oidc_client_secret         = data.infisical_secrets.cluster.secrets["minio_oidc_client_secret"].value
+  minio_oidc_config_url            = data.infisical_secrets.cluster.secrets["minio_oidc_config_url"].value
+  authentik_postgres_password      = data.infisical_secrets.cluster.secrets["authentik_postgres_password"].value
+  authentik_secret_key             = data.infisical_secrets.cluster.secrets["authentik_secret_key"].value
+  smtp_host                        = data.infisical_secrets.cluster.secrets["smtp_host"].value
+  smtp_port                        = data.infisical_secrets.cluster.secrets["smtp_port"].value
+  smtp_from                        = data.infisical_secrets.cluster.secrets["smtp_from"].value
+  smtp_username                    = data.infisical_secrets.cluster.secrets["smtp_username"].value
+  smtp_password                    = data.infisical_secrets.cluster.secrets["smtp_password"].value
+  smtp_use_ssl                     = data.infisical_secrets.cluster.secrets["smtp_use_ssl"].value
+  smtp_use_tls                     = data.infisical_secrets.cluster.secrets["smtp_use_tls"].value
+  mqtt_homeassistant_password_hash = data.infisical_secrets.cluster.secrets["mqtt_homeassistant_password_hash"].value
+  mqtt_zigbee2mqtt_password_hash   = data.infisical_secrets.cluster.secrets["mqtt_zigbee2mqtt_password_hash"].value
+  mqtt_octoprint_password_hash     = data.infisical_secrets.cluster.secrets["mqtt_octoprint_password_hash"].value
+  grist_session_secret             = data.infisical_secrets.cluster.secrets["grist_session_secret"].value
+  grist_oidc_client_id             = data.infisical_secrets.cluster.secrets["grist_oidc_client_id"].value
+  grist_oidc_client_secret         = data.infisical_secrets.cluster.secrets["grist_oidc_client_secret"].value
+  grist_oidc_idp_issuer            = data.infisical_secrets.cluster.secrets["grist_oidc_idp_issuer"].value
+  mqtt_exporter_password_hash      = data.infisical_secrets.cluster.secrets["mqtt_exporter_password_hash"].value
+  mqtt_exporter_password           = data.infisical_secrets.cluster.secrets["mqtt_exporter_password"].value
+  hassio_token                     = data.infisical_secrets.cluster.secrets["hassio_token"].value
+  unifi_username                   = data.infisical_secrets.cluster.secrets["unifi_username"].value
+  unifi_password                   = data.infisical_secrets.cluster.secrets["unifi_password"].value
 
-  sonarr_api_key             = var.sonarr_api_key
-  radarr_api_key             = var.radarr_api_key
-  lidarr_api_key             = var.lidarr_api_key
-  bazarr_api_key             = var.bazarr_api_key
-  prowlarr_api_key           = var.prowlarr_api_key
-  readarr_api_key            = var.readarr_api_key
-  plex_token                 = var.plex_token
-  plex_claim                 = var.plex_claim
-  tautulli_api_key           = var.tautulli_api_key
-  qbittorrent_admin_password = var.qbittorrent_admin_password
+  sonarr_api_key             = data.infisical_secrets.cluster.secrets["sonarr_api_key"].value
+  radarr_api_key             = data.infisical_secrets.cluster.secrets["radarr_api_key"].value
+  lidarr_api_key             = data.infisical_secrets.cluster.secrets["lidarr_api_key"].value
+  bazarr_api_key             = data.infisical_secrets.cluster.secrets["bazarr_api_key"].value
+  prowlarr_api_key           = data.infisical_secrets.cluster.secrets["prowlarr_api_key"].value
+  readarr_api_key            = data.infisical_secrets.cluster.secrets["readarr_api_key"].value
+  plex_token                 = data.infisical_secrets.cluster.secrets["plex_token"].value
+  plex_claim                 = data.infisical_secrets.cluster.secrets["plex_claim"].value
+  tautulli_api_key           = data.infisical_secrets.cluster.secrets["tautulli_api_key"].value
+  qbittorrent_admin_password = data.infisical_secrets.cluster.secrets["qbittorrent_admin_password"].value
 
-  linkwarden_authentik_client_id     = var.linkwarden_authentik_client_id
-  linkwarden_authentik_client_secret = var.linkwarden_authentik_client_secret
-  linkwarden_nextauth_secret         = var.linkwarden_nextauth_secret
+  linkwarden_authentik_client_id     = data.infisical_secrets.cluster.secrets["linkwarden_authentik_client_id"].value
+  linkwarden_authentik_client_secret = data.infisical_secrets.cluster.secrets["linkwarden_authentik_client_secret"].value
+  linkwarden_nextauth_secret         = data.infisical_secrets.cluster.secrets["linkwarden_nextauth_secret"].value
 
-  nocodb_oidc_client_id     = var.nocodb_oidc_client_id
-  nocodb_oidc_client_secret = var.nocodb_oidc_client_secret
-  nocodb_auth_secret        = var.nocodb_auth_secret
+  nocodb_oidc_client_id     = data.infisical_secrets.cluster.secrets["nocodb_oidc_client_id"].value
+  nocodb_oidc_client_secret = data.infisical_secrets.cluster.secrets["nocodb_oidc_client_secret"].value
+  nocodb_auth_secret        = data.infisical_secrets.cluster.secrets["nocodb_auth_secret"].value
 
-  rally_client_id       = var.rally_client_id
-  rally_client_secret   = var.rally_client_secret
-  rally_secret_password = var.rally_secret_password
+  rally_client_id       = data.infisical_secrets.cluster.secrets["rally_client_id"].value
+  rally_client_secret   = data.infisical_secrets.cluster.secrets["rally_client_secret"].value
+  rally_secret_password = data.infisical_secrets.cluster.secrets["rally_secret_password"].value
 
-  manyfold_secret_key_base = var.manyfold_secret_key_base
+  manyfold_secret_key_base = data.infisical_secrets.cluster.secrets["manyfold_secret_key_base"].value
 
-  nextcloud_s3_access_key = var.nextcloud_s3_access_key
-  nextcloud_s3_secret_key = var.nextcloud_s3_secret_key
+  nextcloud_s3_access_key = data.infisical_secrets.cluster.secrets["nextcloud_s3_access_key"].value
+  nextcloud_s3_secret_key = data.infisical_secrets.cluster.secrets["nextcloud_s3_secret_key"].value
 
-  paperless_secret_key         = var.paperless_secret_key
-  paperless_oidc_client_id     = var.paperless_oidc_client_id
-  paperless_oidc_client_secret = var.paperless_oidc_client_secret
+  paperless_secret_key         = data.infisical_secrets.cluster.secrets["paperless_secret_key"].value
+  paperless_oidc_client_id     = data.infisical_secrets.cluster.secrets["paperless_oidc_client_id"].value
+  paperless_oidc_client_secret = data.infisical_secrets.cluster.secrets["paperless_oidc_client_secret"].value
 
-  jellyseerr_api_key = var.jellyseerr_api_key
+  jellyseerr_api_key = data.infisical_secrets.cluster.secrets["jellyseerr_api_key"].value
 
-  netbox_superuser_email       = var.netbox_superuser_email
-  netbox_superuser_name        = var.netbox_superuser_name
-  netbox_superuser_password    = var.netbox_superuser_password
-  netbox_aws_access_key_id     = var.netbox_aws_access_key_id
-  netbox_aws_secret_access_key = var.netbox_aws_secret_access_key
-  netbox_oidc_client_id        = var.netbox_oidc_client_id
-  netbox_oidc_client_secret    = var.netbox_oidc_client_secret
+  netbox_superuser_email       = data.infisical_secrets.cluster.secrets["netbox_superuser_email"].value
+  netbox_superuser_name        = data.infisical_secrets.cluster.secrets["netbox_superuser_name"].value
+  netbox_superuser_password    = data.infisical_secrets.cluster.secrets["netbox_superuser_password"].value
+  netbox_aws_access_key_id     = data.infisical_secrets.cluster.secrets["netbox_aws_access_key_id"].value
+  netbox_aws_secret_access_key = data.infisical_secrets.cluster.secrets["netbox_aws_secret_access_key"].value
+  netbox_oidc_client_id        = data.infisical_secrets.cluster.secrets["netbox_oidc_client_id"].value
+  netbox_oidc_client_secret    = data.infisical_secrets.cluster.secrets["netbox_oidc_client_secret"].value
 
-  outline_aws_access_key_id     = var.outline_aws_access_key_id
-  outline_aws_secret_access_key = var.outline_aws_secret_access_key
-  outline_oidc_client_secret    = var.outline_oidc_client_secret
-  outline_secret_key            = var.outline_secret_key
-  outline_utils_secret          = var.outline_utils_secret
-  outline_oidc_client_id        = var.outline_oidc_client_id
+  outline_aws_access_key_id     = data.infisical_secrets.cluster.secrets["outline_aws_access_key_id"].value
+  outline_aws_secret_access_key = data.infisical_secrets.cluster.secrets["outline_aws_secret_access_key"].value
+  outline_oidc_client_secret    = data.infisical_secrets.cluster.secrets["outline_oidc_client_secret"].value
+  outline_secret_key            = data.infisical_secrets.cluster.secrets["outline_secret_key"].value
+  outline_utils_secret          = data.infisical_secrets.cluster.secrets["outline_utils_secret"].value
+  outline_oidc_client_id        = data.infisical_secrets.cluster.secrets["outline_oidc_client_id"].value
 
-  romm_auth_secret_key     = var.romm_auth_secret_key
-  romm_igdb_client_id      = var.romm_igdb_client_id
-  romm_igdb_client_secret  = var.romm_igdb_client_secret
-  romm_mobygames_api_key   = var.romm_mobygames_api_key
-  romm_steamgriddb_api_key = var.romm_steamgriddb_api_key
+  romm_auth_secret_key     = data.infisical_secrets.cluster.secrets["romm_auth_secret_key"].value
+  romm_igdb_client_id      = data.infisical_secrets.cluster.secrets["romm_igdb_client_id"].value
+  romm_igdb_client_secret  = data.infisical_secrets.cluster.secrets["romm_igdb_client_secret"].value
+  romm_mobygames_api_key   = data.infisical_secrets.cluster.secrets["romm_mobygames_api_key"].value
+  romm_steamgriddb_api_key = data.infisical_secrets.cluster.secrets["romm_steamgriddb_api_key"].value
 
-  mealie_oidc_client_id = var.mealie_oidc_client_id
+  mealie_oidc_client_id = data.infisical_secrets.cluster.secrets["mealie_oidc_client_id"].value
 
-  ollama_oidc_client_id       = var.ollama_oidc_client_id
-  ollama_oidc_client_secret   = var.ollama_oidc_client_secret
-  ollama_google_pse_api_key   = var.ollama_google_pse_api_key
-  ollama_google_pse_engine_id = var.ollama_google_pse_engine_id
+  ollama_oidc_client_id       = data.infisical_secrets.cluster.secrets["ollama_oidc_client_id"].value
+  ollama_oidc_client_secret   = data.infisical_secrets.cluster.secrets["ollama_oidc_client_secret"].value
+  ollama_google_pse_api_key   = data.infisical_secrets.cluster.secrets["ollama_google_pse_api_key"].value
+  ollama_google_pse_engine_id = data.infisical_secrets.cluster.secrets["ollama_google_pse_engine_id"].value
 
-  immich_db_password      = var.immich_db_password
-  blocky_db_password      = var.blocky_db_password
-  netbox_db_password      = var.netbox_db_password
-  paperless_db_password   = var.paperless_db_password
-  linkwarden_db_password  = var.linkwarden_db_password
-  nextcloud_db_password   = var.nextcloud_db_password
-  manyfold_db_password    = var.manyfold_db_password
-  mealie_db_password      = var.mealie_db_password
-  jellyseerr_db_password  = var.jellyseerr_db_password
-  windmill_db_password    = var.windmill_db_password
-  rally_db_password       = var.rally_db_password
-  outline_db_password     = var.outline_db_password
-  memos_db_password       = var.memos_db_password
-  vaultwarden_db_password = var.vaultwarden_db_password
-  coder_db_password       = var.coder_db_password
-  nocodb_db_password      = var.nocodb_db_password
-  oneuptime_db_password   = var.oneuptime_db_password
-  zipline_db_password     = var.zipline_db_password
+  immich_db_password      = data.infisical_secrets.cluster.secrets["immich_db_password"].value
+  blocky_db_password      = data.infisical_secrets.cluster.secrets["blocky_db_password"].value
+  netbox_db_password      = data.infisical_secrets.cluster.secrets["netbox_db_password"].value
+  paperless_db_password   = data.infisical_secrets.cluster.secrets["paperless_db_password"].value
+  linkwarden_db_password  = data.infisical_secrets.cluster.secrets["linkwarden_db_password"].value
+  nextcloud_db_password   = data.infisical_secrets.cluster.secrets["nextcloud_db_password"].value
+  manyfold_db_password    = data.infisical_secrets.cluster.secrets["manyfold_db_password"].value
+  mealie_db_password      = data.infisical_secrets.cluster.secrets["mealie_db_password"].value
+  jellyseerr_db_password  = data.infisical_secrets.cluster.secrets["jellyseerr_db_password"].value
+  windmill_db_password    = data.infisical_secrets.cluster.secrets["windmill_db_password"].value
+  rally_db_password       = data.infisical_secrets.cluster.secrets["rally_db_password"].value
+  outline_db_password     = data.infisical_secrets.cluster.secrets["outline_db_password"].value
+  memos_db_password       = data.infisical_secrets.cluster.secrets["memos_db_password"].value
+  vaultwarden_db_password = data.infisical_secrets.cluster.secrets["vaultwarden_db_password"].value
+  coder_db_password       = data.infisical_secrets.cluster.secrets["coder_db_password"].value
+  nocodb_db_password      = data.infisical_secrets.cluster.secrets["nocodb_db_password"].value
+  oneuptime_db_password   = data.infisical_secrets.cluster.secrets["oneuptime_db_password"].value
+  zipline_db_password     = data.infisical_secrets.cluster.secrets["zipline_db_password"].value
 
-  vaultwarden_installation_id  = var.vaultwarden_installation_id
-  vaultwarden_installation_key = var.vaultwarden_installation_key
+  vaultwarden_installation_id  = data.infisical_secrets.cluster.secrets["vaultwarden_installation_id"].value
+  vaultwarden_installation_key = data.infisical_secrets.cluster.secrets["vaultwarden_installation_key"].value
 
-  opengist_oidc_client_id     = var.opengist_oidc_client_id
-  opengist_oidc_client_secret = var.opengist_oidc_client_secret
+  opengist_oidc_client_id     = data.infisical_secrets.cluster.secrets["opengist_oidc_client_id"].value
+  opengist_oidc_client_secret = data.infisical_secrets.cluster.secrets["opengist_oidc_client_secret"].value
 
-  coder_oidc_client_id     = var.coder_oidc_client_id
-  coder_oidc_client_secret = var.coder_oidc_client_secret
+  coder_oidc_client_id     = data.infisical_secrets.cluster.secrets["coder_oidc_client_id"].value
+  coder_oidc_client_secret = data.infisical_secrets.cluster.secrets["coder_oidc_client_secret"].value
 
-  stirling_pdf_oidc_client_id     = var.stirling_pdf_oidc_client_id
-  stirling_pdf_oidc_client_secret = var.stirling_pdf_oidc_client_secret
+  stirling_pdf_oidc_client_id     = data.infisical_secrets.cluster.secrets["stirling_pdf_oidc_client_id"].value
+  stirling_pdf_oidc_client_secret = data.infisical_secrets.cluster.secrets["stirling_pdf_oidc_client_secret"].value
 
-  jabberwock_api_key   = var.jabberwock_api_key
-  lookingglass_api_key = var.lookingglass_api_key
-  floof_api_key        = var.floof_api_key
+  jabberwock_api_key   = data.infisical_secrets.cluster.secrets["jabberwock_api_key"].value
+  lookingglass_api_key = data.infisical_secrets.cluster.secrets["lookingglass_api_key"].value
+  floof_api_key        = data.infisical_secrets.cluster.secrets["floof_api_key"].value
 
-  jellyfin_api_key = var.jellyfin_api_key
+  jellyfin_api_key = data.infisical_secrets.cluster.secrets["jellyfin_api_key"].value
 
-  nocodb_admin_email      = var.nocodb_admin_email
-  nocodb_s3_access_key    = var.nocodb_s3_access_key
-  nocodb_s3_access_secret = var.nocodb_s3_access_secret
+  nocodb_admin_email      = data.infisical_secrets.cluster.secrets["nocodb_admin_email"].value
+  nocodb_s3_access_key    = data.infisical_secrets.cluster.secrets["nocodb_s3_access_key"].value
+  nocodb_s3_access_secret = data.infisical_secrets.cluster.secrets["nocodb_s3_access_secret"].value
 
-  plane_aws_access_key_id     = var.plane_aws_access_key_id
-  plane_aws_secret_access_key = var.plane_aws_secret_access_key
-  plane_db_password           = var.plane_db_password
-  plane_secret_key            = var.plane_secret_key
+  plane_aws_access_key_id     = data.infisical_secrets.cluster.secrets["plane_aws_access_key_id"].value
+  plane_aws_secret_access_key = data.infisical_secrets.cluster.secrets["plane_aws_secret_access_key"].value
+  plane_db_password           = data.infisical_secrets.cluster.secrets["plane_db_password"].value
+  plane_secret_key            = data.infisical_secrets.cluster.secrets["plane_secret_key"].value
 
-  nextcloud_api_key        = var.nextcloud_api_key
-  romm_username            = var.romm_username
-  romm_password            = var.romm_password
-  proxmox_api_token_id     = var.proxmox_api_token_id
-  proxmox_api_token_secret = var.proxmox_api_token_secret
-  authentik_api_key        = var.authentik_api_key
-  immich_api_key           = var.immich_api_key
-  homeassistant_api_key    = var.homeassistant_api_key
-  mealie_api_key           = var.mealie_api_key
-  paperless_api_key        = var.paperless_api_key
-  linkwarden_api_key       = var.linkwarden_api_key
-  grafana_username         = var.grafana_username
-  grafana_password         = var.grafana_password
-  qbittorrent_username     = var.qbittorrent_username
-  qbittorrent_password     = var.qbittorrent_password
-  audiobookshelf_api_key   = var.audiobookshelf_api_key
+  nextcloud_api_key        = data.infisical_secrets.cluster.secrets["nextcloud_api_key"].value
+  romm_username            = data.infisical_secrets.cluster.secrets["romm_username"].value
+  romm_password            = data.infisical_secrets.cluster.secrets["romm_password"].value
+  proxmox_api_token_id     = data.infisical_secrets.cluster.secrets["proxmox_api_token_id"].value
+  proxmox_api_token_secret = data.infisical_secrets.cluster.secrets["proxmox_api_token_secret"].value
+  authentik_api_key        = data.infisical_secrets.cluster.secrets["authentik_api_key"].value
+  immich_api_key           = data.infisical_secrets.cluster.secrets["immich_api_key"].value
+  homeassistant_api_key    = data.infisical_secrets.cluster.secrets["homeassistant_api_key"].value
+  mealie_api_key           = data.infisical_secrets.cluster.secrets["mealie_api_key"].value
+  paperless_api_key        = data.infisical_secrets.cluster.secrets["paperless_api_key"].value
+  linkwarden_api_key       = data.infisical_secrets.cluster.secrets["linkwarden_api_key"].value
+  grafana_username         = data.infisical_secrets.cluster.secrets["grafana_username"].value
+  grafana_password         = data.infisical_secrets.cluster.secrets["grafana_password"].value
+  qbittorrent_username     = data.infisical_secrets.cluster.secrets["qbittorrent_username"].value
+  qbittorrent_password     = data.infisical_secrets.cluster.secrets["qbittorrent_password"].value
+  audiobookshelf_api_key   = data.infisical_secrets.cluster.secrets["audiobookshelf_api_key"].value
 
-  zipline_core_secret        = var.zipline_core_secret
-  zipline_oidc_client_id     = var.zipline_oidc_client_id
-  zipline_oidc_client_secret = var.zipline_oidc_client_secret
+  zipline_core_secret        = data.infisical_secrets.cluster.secrets["zipline_core_secret"].value
+  zipline_oidc_client_id     = data.infisical_secrets.cluster.secrets["zipline_oidc_client_id"].value
+  zipline_oidc_client_secret = data.infisical_secrets.cluster.secrets["zipline_oidc_client_secret"].value
 
-  sabnzbd_api_key   = var.sabnzbd_api_key
-  openwebui_api_key = var.openwebui_api_key
+  sabnzbd_api_key   = data.infisical_secrets.cluster.secrets["sabnzbd_api_key"].value
+  openwebui_api_key = data.infisical_secrets.cluster.secrets["openwebui_api_key"].value
 }
 
 module "grafana" {
-  source = "./grafana"
+  depends_on = [module.cluster_base]
+  source     = "./grafana"
 
   global_fqdn    = var.global_fqdn
-  client_id      = var.grafana_client_id
-  client_secret  = var.grafana_client_secret
-  personal_email = var.personal_email
-  klaudia_email  = var.klaudia_email
+  personal_email = data.infisical_secrets.cluster.secrets["personal_email"].value
+  klaudia_email  = data.infisical_secrets.cluster.secrets["klaudia_email"].value
 }

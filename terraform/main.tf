@@ -23,7 +23,7 @@ terraform {
     }
 
     infisical = {
-      source = "Infisical/infisical"
+      source  = "Infisical/infisical"
       version = "0.11.6"
     }
   }
@@ -41,6 +41,11 @@ provider "helm" {
   }
 }
 
+data "infisical_secrets" "cluster" {
+  env_slug     = "dev"
+  folder_path  = "/"
+  workspace_id = var.infisical_workspace_id
+}
 
 provider "kubernetes" {
   config_path = "~/.kube/config"
@@ -48,18 +53,18 @@ provider "kubernetes" {
 
 provider "argocd" {
   grpc_web    = true
-  server_addr = "argocd.${var.global_fqdn}"
+  server_addr = "argocd.${data.infisical_secrets.cluster.secrets["global_fqdn"].value}"
   username    = "admin"
-  password    = var.argocd_password
+  password    = data.infisical_secrets.cluster.secrets["argocd_password"].value
 }
 
 provider "grafana" {
-  url  = "https://grafana.${var.global_fqdn}"
-  auth = var.grafana_auth
+  url  = "https://grafana.${data.infisical_secrets.cluster.secrets["global_fqdn"].value}"
+  auth = data.infisical_secrets.cluster.secrets["grafana_auth"].value
 }
 
 provider "infisical" {
-  host = "https://secrets.${var.global_fqdn}"
-  client_id = var.infisical_client_id
+  host          = "https://secrets.${var.global_fqdn}"
+  client_id     = var.infisical_client_id
   client_secret = var.infisical_client_secret
 }

@@ -94,6 +94,7 @@ provider "registry.terraform.io/infisical/infisical" {
   version     = "0.11.6"
   constraints = "0.11.6"
   hashes = [
+    "h1:U+renOfVD6suMUF1bBx9dzHAO7ro0u3BtVEXHfSCILE=",
     "h1:xSZvF6ZsPSsZMt8nlDDhgQcajrcJXG0gtDHAy7q0WU0=",
     "zh:1a2c92b4b73367a8ad9c90e1e3e9d5c04a3a0463d8f43fdbecc758527576b2a1",
     "zh:40fc15343273b9dcf02c906a914359f734c59119bcd8029cb5541df3327e7b3f",
