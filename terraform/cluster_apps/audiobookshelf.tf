@@ -11,7 +11,7 @@ resource "argocd_application" "audiobookshelf" {
 
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/audiobookshelf"
+      path     = "k8s/entertainment/audiobookshelf"
     }
 
     destination {
