@@ -47,7 +47,7 @@ resource "argocd_application" "rally" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/rally"
+      path     = "k8s/productivity/rally"
     }
 
     destination {

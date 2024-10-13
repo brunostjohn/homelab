@@ -7,7 +7,7 @@ resource "argocd_application" "it_tools" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/it-tools"
+      path     = "k8s/productivity/it-tools"
     }
 
     destination {

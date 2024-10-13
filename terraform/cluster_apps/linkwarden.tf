@@ -43,7 +43,7 @@ resource "argocd_application" "linkwarden" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/linkwarden"
+      path     = "k8s/productivity/linkwarden"
     }
 
     destination {

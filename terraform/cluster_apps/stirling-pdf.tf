@@ -22,7 +22,7 @@ resource "argocd_application" "stirling_pdf" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/stirling-pdf"
+      path     = "k8s/productivity/stirling-pdf"
     }
 
     destination {

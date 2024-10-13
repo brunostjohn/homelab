@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 0.100.2
+dependencies:
+  - condition: postgresql.enabled
+    name: postgresql
+    repository: https://charts.bitnami.com/bitnami
+    version: ~15.5.21
+  - condition: mysql.enabled
+    name: mysql
+    repository: https://charts.bitnami.com/bitnami
+    version: ~11.1.0
+description: A Helm chart for Kubernetes
+maintainers: []
+name: nocodb
+type: application
+version: 0.3.0

@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stirling-pdf
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: stirling-pdf
+  template:
+    metadata:
+      labels:
+        app: stirling-pdf
+    spec:
+      volumes:
+        - name: trainingdata
+          persistentVolumeClaim:
+            claimName: stirling-pdf-trainingdata
+      containers:
+        - name: stirling-pdf
+          image: frooodle/s-pdf:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          env:
+            - name: LANGS
+              value: "en_GB"
+            - name: DOCKER_ENABLE_SECURITY
+              value: "true"
+            - name: SECURITY_ENABLELOGIN
+              value: "true"
+            - name: SECURITY_LOGINMETHOD
+              value: "oauth2"
+            - name: SECURITY_OAUTH2_ENABLED
+              value: "true"
+            - name: SECURITY_OAUTH2_AUTOCREATEUSER
+              value: "true"
+            - name: SECURITY_OAUTH2_PROVIDER
+              value: "Zefir's Cloud"
+            - name: UI_APPNAME
+              value: "Zefir's PDFs"
+          envFrom:
+            - configMapRef:
+                name: stirling-pdf-config
+          volumeMounts:
+            - name: trainingdata
+              mountPath: /usr/share/tessdata
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 110
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3

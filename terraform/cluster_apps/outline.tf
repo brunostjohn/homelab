@@ -66,7 +66,7 @@ resource "argocd_application" "outline" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/outline"
+      path     = "k8s/productivity/outline"
     }
 
     destination {

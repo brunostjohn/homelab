@@ -59,7 +59,7 @@ resource "argocd_application" "nocodb" {
   spec {
     source {
       repo_url = var.homelab_repo
-      path     = "k8s/nocodb"
+      path     = "k8s/productivity/nocodb"
     }
 
     destination {
