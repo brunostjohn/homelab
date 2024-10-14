@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: silly-bot
+  namespace: default
+spec:
+  endpoints:
+    - interval: 15s
+      port: http
+      scrapeTimeout: 10s
+      path: /metrics
+  selector:
+    matchLabels:
+      app: silly-bot
