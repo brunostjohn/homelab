@@ -6,7 +6,7 @@ metadata:
 spec:
   revisionHistoryLimit: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
   replicas: 1
   selector:
     matchLabels:
