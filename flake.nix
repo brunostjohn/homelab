@@ -49,7 +49,7 @@
             ./nix/hosts/s2
             ./nix/modules/k3sAgent
             {
-              nixpkgs.overlays = [ nvidia-patch ];
+              nixpkgs.overlays = [ (import nvidia-patch) ];
             }
             ./nix/modules/nvidiaGpu
             ./nix/modules/10gbit
