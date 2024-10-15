@@ -6,7 +6,7 @@ ollama:
     gpu:
       enabled: true
       type: amd
-      number: 0
+      number: 1
       nvidiaResource: amd.com/gpu
   persistentVolume:
     enabled: true
