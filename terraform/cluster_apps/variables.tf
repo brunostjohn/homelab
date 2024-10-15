@@ -671,3 +671,15 @@ variable "silly_bot_infisical_client_secret" {
 variable "silly_bot_infisical_project_id" {
   type = string
 }
+
+variable "ollama_db_password" {
+  type = string
+}
+
+variable "chromadb_auth_token" {
+  type = string
+}
+
+variable "ollama_webui_secret_key" {
+  type = string
+}

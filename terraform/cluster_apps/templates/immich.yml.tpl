@@ -7,11 +7,11 @@ env:
   DB_USERNAME: immich
   DB_DATABASE_NAME: immich
   DB_PASSWORD: ${db_password}
-  # NVIDIA_VISIBLE_DEVICES: all
-  # NVIDIA_DRIVER_CAPABILITIES: "compute,video,utility"
+  NVIDIA_VISIBLE_DEVICES: all
+  NVIDIA_DRIVER_CAPABILITIES: "compute,video,utility"
 
 image:
-  tag: v1.115.0
+  tag: v1.118.1
 
 immich:
   metrics:
@@ -27,28 +27,23 @@ redis:
   enabled: false
 
 server:
-  # resources:
-  #   requests:
-  #     nvidia.com/gpu.shared: "1"
-  #   limits:
-  #     nvidia.com/gpu.shared: "1"
-  # runtimeClassName: nvidia
   resources:
     requests:
-      amd.com/gpu: "0"
+      nvidia.com/gpu.shared: "1"
     limits:
-      amd.com/gpu: "0"
+      nvidia.com/gpu.shared: "1"
+  runtimeClassName: nvidia
   enabled: true
 
 machine-learning:
-  # image:
-  #   tag: v1.115.0-cuda
-  # resources:
-  #   requests:
-  #     nvidia.com/gpu.shared: "1"
-  #   limits:
-  #     nvidia.com/gpu.shared: "1"
-  # runtimeClassName: nvidia
+  image:
+    tag: v1.118.1-cuda
+  resources:
+    requests:
+      nvidia.com/gpu.shared: "1"
+    limits:
+      nvidia.com/gpu.shared: "1"
+  runtimeClassName: nvidia
   enabled: true
   persistence:
     cache:

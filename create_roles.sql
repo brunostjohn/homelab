@@ -251,6 +251,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to sillybot_role;
 CREATE USER sillybot WITH PASSWORD '<password>';
 GRANT sillybot_role TO sillybot;
 
+-- OPEN-WEBUI
+CREATE ROLE openwebui_role;
+\c openwebui
+GRANT ALL PRIVILEGES ON DATABASE openwebui TO openwebui_role;
+GRANT ALL ON SCHEMA public TO openwebui_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO openwebui_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to openwebui_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to openwebui_role;
+CREATE USER openwebui WITH PASSWORD '<password>';
+GRANT openwebui_role TO openwebui;
+
 -- MEDIA STACK --
 
 -- LIDARR

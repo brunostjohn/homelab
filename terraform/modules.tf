@@ -161,6 +161,10 @@ module "cluster_apps" {
   nocodb_db_password      = data.infisical_secrets.cluster.secrets["nocodb_db_password"].value
   oneuptime_db_password   = data.infisical_secrets.cluster.secrets["oneuptime_db_password"].value
   zipline_db_password     = data.infisical_secrets.cluster.secrets["zipline_db_password"].value
+  ollama_db_password      = data.infisical_secrets.cluster.secrets["ollama_db_password"].value
+
+  chromadb_auth_token     = data.infisical_secrets.cluster.secrets["chromadb_auth_token"].value
+  ollama_webui_secret_key = data.infisical_secrets.cluster.secrets["ollama_webui_secret_key"].value
 
   vaultwarden_installation_id  = data.infisical_secrets.cluster.secrets["vaultwarden_installation_id"].value
   vaultwarden_installation_key = data.infisical_secrets.cluster.secrets["vaultwarden_installation_key"].value

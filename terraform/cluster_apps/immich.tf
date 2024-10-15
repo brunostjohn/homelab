@@ -36,7 +36,7 @@ module "immich_helm" {
 
   chart           = "immich"
   repo_url        = "https://immich-app.github.io/immich-charts"
-  target_revision = "0.7.1"
+  target_revision = "0.8.2"
   values = templatefile("${path.module}/templates/immich.yml.tpl", {
     db_password = var.immich_db_password
   })

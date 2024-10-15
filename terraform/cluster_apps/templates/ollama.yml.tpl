@@ -1,16 +1,13 @@
 ollama:
   nodeSelector:
     kubernetes.io/hostname: s2.m-nodes.zefirscloud.local
-  # runtimeClassName: nvidia
+  runtimeClassName: nvidia
   ollama:
-    extraEnv:
-      - name: ROC_ENABLE_PRE_VEGA
-        value: "1"
     gpu:
       enabled: true
-      type: amd
-      number: 1
-      nvidiaResource: amd.com/gpu
+      type: nvidia
+      number: "1"
+      nvidiaResource: nvidia.com/gpu.shared
   persistentVolume:
     enabled: true
     size: 50Gi
@@ -21,6 +18,28 @@ ingress:
   host: ollama.${global_fqdn}
 
 extraEnvVars:
+  - name: WEBUI_URL
+    value: https://ollama.${global_fqdn}
+  - name: ENABLE_MESSAGE_RATING
+    value: "True"
+  - name: WEBUI_SECRET_KEY
+    value: ${webui_secret_key}
+  - name: PDF_EXTRACT_IMAGES
+    value: "True"
+  - name: VECTOR_DB
+    value: chroma
+  - name: CHROMA_HTTP_HOST
+    value: chromadb.ai.svc.cluster.local
+  - name: CHROMA_HTTP_HEADERS
+    value: Authorization=Bearer ${chromadb_auth_token},User-Agent=OpenWebUI
+  - name: DATABASE_URL
+    value: postgresql://openwebui:${db_password}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/openwebui
+  - name: WHISPER_MODEL_AUTO_UPDATE
+    value: "True"
+  - name: SEARCH_QUERY_GENERATION_PROMPT_TEMPLATE
+    value: "Assess the need for a web search based on the current question and prior interactions, but lean towards suggesting a Google search query if uncertain. Generate a Google search query even when the answer might be straightforward, as additional information may enhance comprehension or provide updated data. If absolutely certain that no further information is required, return an empty string. Default to a search query if unsure or in doubt. ONLY respond with the search query. DO NOT respond with anything else. Today's date is {{CURRENT_DATE}}.\n\nCurrent Question:\n{{prompt:end:4000}}\n\nInteraction History:\n{{MESSAGES:END:6}}"
+  - name: WEBUI_NAME
+    value: Zefir's AI
   - name: ENABLE_OAUTH_SIGNUP
     value: "True"
   - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
@@ -55,7 +74,6 @@ extraEnvVars:
     value: sk-111111111
   - name: AUDIO_TTS_OPENAI_API_BASE_URL
     value: http://openedai-tts.ai.svc.cluster.local:8000/v1
-    
 
 persistence:
   storageClass: floof-iscsi-csi
