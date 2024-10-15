@@ -3,6 +3,9 @@ ollama:
     kubernetes.io/hostname: s2.m-nodes.zefirscloud.local
   # runtimeClassName: nvidia
   ollama:
+    extraEnv:
+      - name: ROC_ENABLE_PRE_VEGA
+        value: "1"
     gpu:
       enabled: true
       type: amd

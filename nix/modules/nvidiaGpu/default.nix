@@ -1,3 +1,8 @@
+{ pkgs, config, ... }:
+
+let
+  package = config.boot.kernelPackages.nvidiaPackages.stable;
+in
 {
   imports = [
     ./boot.nix
@@ -13,5 +18,6 @@
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
+    package = pkgs.nvidia-patch.patch-nvenc (pkgs.nvidia-patch.patch-fbc package);
   };
 }
