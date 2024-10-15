@@ -5,8 +5,8 @@ metadata:
   namespace: default
 spec:
   endpoints:
-    - interval: 15s
-      port: http
+    - interval: 10s
+      port: metrics
       scrapeTimeout: 10s
       path: /metrics
   selector:

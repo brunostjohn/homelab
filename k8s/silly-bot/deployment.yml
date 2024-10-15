@@ -36,6 +36,9 @@ spec:
             - containerPort: 3000
               protocol: TCP
               name: http
+            - containerPort: 9000
+              protocol: TCP
+              name: metrics
           readinessProbe:
             httpGet:
               path: /healthz
