@@ -59,3 +59,5 @@ spec:
               value: http://influxdb.monitoring.svc.cluster.local:8086
             - name: REDIS_URL
               value: redis://:redis@redis-master.databases.svc.cluster.local:6379/16
+            - name: OLLAMA_URL
+              value: http://open-webui-ollama.ai.svc.cluster.local:11434
