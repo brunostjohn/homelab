@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stable-diffusion
+  namespace: ai
+spec:
+  selector:
+    matchLabels:
+      app: stable-diffusion
+  template:
+    metadata:
+      labels:
+        app: stable-diffusion
+    spec:
+      volumes:
+        - name: stable-diffusion-data
+          persistentVolumeClaim:
+            claimName: stable-diffusion-data-pvc
+      runtimeClassName: nvidia
+      containers:
+        - name: stable-diffusion
+          image: universonic/stable-diffusion-webui:full
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "2"
+              nvidia.com/gpu.shared: "1"
+            limits:
+              memory: "4Gi"
+              cpu: "4"
+              nvidia.com/gpu.shared: "1"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          volumeMounts:
+            - name: stable-diffusion-data
+              mountPath: /app/stable-diffusion-webui/extensions
+              subPath: extensions/
+            - name: stable-diffusion-data
+              mountPath: /app/stable-diffusion-webui/models
+              subPath: models/
+            - name: stable-diffusion-data
+              mountPath: /app/stable-diffusion-webui/outputs
+              subPath: outputs/
+            - name: stable-diffusion-data
+              mountPath: /app/stable-diffusion-webui/localizations
+              subPath: localizations/
