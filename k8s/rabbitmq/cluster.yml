@@ -5,6 +5,31 @@ metadata:
   namespace: databases
 spec:
   replicas: 3
+  override:
+    service:
+      spec:
+        ports:
+          - name: mqtt
+            protocol: TCP
+            port: 1883
+            targetPort: 1883
+          - name: mqtt-tls
+            protocol: TCP
+            port: 8883
+            targetPort: 8883
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: rabbitmq
+                ports:
+                  - containerPort: 1883
+                    name: mqtt
+                    protocol: TCP
+                  - containerPort: 8883
+                    name: mqtt-tls
+                    protocol: TCP
   resources:
     requests:
       cpu: 250m
@@ -13,6 +38,8 @@ spec:
       cpu: 500m
       memory: 1Gi
   rabbitmq:
+    additionalPlugins:
+      - rabbitmq_mqtt
     additionalConfig: |
       cluster_partition_handling = pause_minority
       disk_free_limit.relative = 1.0
