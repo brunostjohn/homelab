@@ -19,6 +19,8 @@ spec:
       runtimeClassName: nvidia
       securityContext:
         fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
         - name: stable-diffusion
           image: universonic/stable-diffusion-webui:full
