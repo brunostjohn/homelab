@@ -1,13 +1,11 @@
 ollama:
-  nodeSelector:
-    kubernetes.io/hostname: s2.m-nodes.zefirscloud.local
   runtimeClassName: nvidia
   ollama:
     gpu:
       enabled: true
       type: nvidia
       number: "1"
-      nvidiaResource: nvidia.com/gpu.shared
+      nvidiaResource: "nvidia.com/gpu.shared"
   persistentVolume:
     enabled: true
     size: 50Gi
@@ -18,6 +16,12 @@ ingress:
   host: ollama.${global_fqdn}
 
 extraEnvVars:
+  - name: ENABLE_IMAGE_GENERATION
+    value: "False"
+  - name: IMAGE_GENERATION_ENGINE
+    value: automatic1111
+  - name: AUTOMATIC1111_BASE_URL
+    value: http://stable-diffusion.ai.svc.cluster.local:8080
   - name: WEBUI_URL
     value: https://ollama.${global_fqdn}
   - name: ENABLE_MESSAGE_RATING

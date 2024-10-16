@@ -10,11 +10,9 @@
     nix-darwin.inputs.nixpkgs.url = "github:nixos/nixpkgs?ref=nixpkgs-24.05-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
     systems.url = "github:nix-systems/default";
-    nvidia-patch.url = "github:icewind1991/nvidia-patch-nixos";
-    nvidia-patch.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, nixpkgs-darwin, systems, nvidia-patch, ... }:
+  outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager, nixpkgs-darwin, systems, ... }:
     let
       globalModules = [ ];
       globalModulesNixOS = globalModules ++ [ ];
@@ -48,9 +46,6 @@
           modules = [
             ./nix/hosts/s2
             ./nix/modules/k3sAgent
-            {
-              nixpkgs.overlays = [ nvidia-patch.overlays.default ];
-            }
             ./nix/modules/nvidiaGpu
             ./nix/modules/10gbit
           ] ++ globalModulesMNode;
