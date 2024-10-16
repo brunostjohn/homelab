@@ -1,0 +1,16 @@
+global:
+  storageClass: longhorn
+
+clusterOperator:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+msgTopologyOperator:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+useCertManager: true
