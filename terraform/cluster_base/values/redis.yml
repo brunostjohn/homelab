@@ -9,6 +9,15 @@ sentinel:
   enabled: false
 
 replica:
+  resources:
+    requests:
+      cpu: 500m
+      memory: 4Gi
+      ephemeral-storage: 50Mi
+    limits:
+      cpu: "1"
+      memory: 5Gi
+      ephemeral-storage: 2Gi
   configuration: |
     databases 32
 
@@ -18,11 +27,11 @@ master:
   resources:
     requests:
       cpu: 500m
-      memory: 1Gi
+      memory: 2Gi
       ephemeral-storage: 50Mi
     limits:
       cpu: "1"
-      memory: 2Gi
+      memory: 3Gi
       ephemeral-storage: 2Gi
   persistence:
     enabled: true
