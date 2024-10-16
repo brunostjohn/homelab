@@ -17,6 +17,8 @@ spec:
           persistentVolumeClaim:
             claimName: stable-diffusion-data-pvc
       runtimeClassName: nvidia
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: stable-diffusion
           image: universonic/stable-diffusion-webui:full
