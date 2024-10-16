@@ -1,4 +1,9 @@
 ollama:
+  extraEnv:
+    - name: NVIDIA_DRIVER_CAPABILITIES
+      value: all
+    - name: NVIDIA_VISIBLE_DEVICES
+      value: all
   runtimeClassName: nvidia
   ollama:
     gpu:

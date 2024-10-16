@@ -34,6 +34,11 @@ spec:
             - containerPort: 8080
               protocol: TCP
               name: http
+          env:
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: all
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
           volumeMounts:
             - name: stable-diffusion-data
               mountPath: /app/stable-diffusion-webui/extensions
