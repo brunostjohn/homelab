@@ -8,6 +8,7 @@
     (import ./users.nix { inherit pkgs; })
     ./i18n.nix
     ./mounts.nix
+    ./boot.nix
   ];
 
   services.openssh.enable = true;
