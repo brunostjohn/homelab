@@ -683,3 +683,7 @@ variable "chromadb_auth_token" {
 variable "ollama_webui_secret_key" {
   type = string
 }
+
+variable "silly_bot_database_password" {
+  type = string
+}
