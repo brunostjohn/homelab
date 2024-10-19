@@ -44,7 +44,6 @@ spec:
       cluster_partition_handling = pause_minority
       disk_free_limit.relative = 1.0
       collect_statistics_interval = 10000
-      mqtt.listeners.tcp.default = 1883
       mqtt.vhost            = /
       mqtt.exchange         = amq.topic
       mqtt.prefetch         = 10
