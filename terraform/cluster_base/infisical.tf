@@ -45,10 +45,16 @@ module "infisical_helm" {
   create_ingress = false
 }
 
+resource "kubernetes_namespace" "infisical_secrets_operator" {
+  metadata {
+    name = "infisical-operator-system"
+  }
+}
+
 resource "kubernetes_config_map" "infisical_secrets_operator" {
   metadata {
     name      = "infisical-config"
-    namespace = kubernetes_namespace.infisical.metadata[0].name
+    namespace = kubernetes_namespace.infisical_secrets_operator.metadata[0].name
   }
 
   data = {

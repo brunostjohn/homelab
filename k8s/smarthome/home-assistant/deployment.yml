@@ -39,6 +39,10 @@ spec:
         - name: prepare-secrets-yaml
           image: alpine:3.12
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            privileged: true
           command:
             [
               "/bin/sh",
