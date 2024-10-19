@@ -169,3 +169,11 @@ variable "infisical_google_client_id" {
 variable "infisical_google_client_secret" {
   type = string
 }
+
+variable "infisical_secrets_operator_machine_id" {
+  type = string
+}
+
+variable "infisical_secrets_operator_machine_secret" {
+  type = string
+}

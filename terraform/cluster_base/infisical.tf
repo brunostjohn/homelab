@@ -44,3 +44,40 @@ module "infisical_helm" {
 
   create_ingress = false
 }
+
+resource "kubernetes_config_map" "infisical_secrets_operator" {
+  metadata {
+    name      = "infisical-config"
+    namespace = kubernetes_namespace.infisical.metadata[0].name
+  }
+
+  data = {
+    hostAPI = "https://secrets.${var.global_fqdn}/api"
+  }
+}
+
+resource "kubernetes_secret" "infisical_machine_id" {
+  metadata {
+    name      = "infisical-machine-id"
+    namespace = kubernetes_namespace.infisical.metadata[0].name
+  }
+
+  data = {
+    clientId     = var.infisical_secrets_operator_machine_id
+    clientSecret = var.infisical_secrets_operator_machine_secret
+  }
+}
+
+module "infisical_operator_helm" {
+  source = "../helm_deployment"
+
+  name            = "infisical-operator"
+  chart           = "secrets-operator"
+  repo_url        = "https://dl.cloudsmith.io/public/infisical/helm-charts/helm/charts/"
+  target_revision = "0.7.2"
+
+  namespace        = kubernetes_namespace.infisical.metadata[0].name
+  create_namespace = false
+
+  create_ingress = false
+}

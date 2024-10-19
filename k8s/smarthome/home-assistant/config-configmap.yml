@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homeassistant-config
+  namespace: homeassistant
+data:
+  configuration.yaml: |
+    default_config:
+    frontend:
+      themes: !include_dir_merge_named themes
+
+    automation: !include automations.yaml
+    script: !include scripts.yaml
+    scene: !include scenes.yaml
+
+    http:
+      use_x_forwarded_for: true
+      trusted_proxies:
+        - 10.0.0.0/16
+        - 10.1.0.0/16
+        - 10.42.0.0/16
+        - 10.43.0.0/16
+      ip_ban_enabled: false
+      login_attempts_threshold: 5
+
+    recorder:
+      auto_purge: false
+      purge_keep_days: 4000
+      db_url: !secret database_url
+      db_retry_wait: 15
+
+    prometheus:
+      namespace: homeassistant
+
+    auth_header:
+      username_header: X-Authentik-username
+
+    logger:
+      default: info

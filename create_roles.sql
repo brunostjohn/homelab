@@ -262,6 +262,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to openwebui_role;
 CREATE USER openwebui WITH PASSWORD '<password>';
 GRANT openwebui_role TO openwebui;
 
+-- HOME ASSISTANT
+CREATE ROLE homeassistant_role;
+\c homeassistant
+GRANT ALL PRIVILEGES ON DATABASE homeassistant TO homeassistant_role;
+GRANT ALL ON SCHEMA public TO homeassistant_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO homeassistant_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to homeassistant_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to homeassistant_role;
+CREATE USER homeassistant WITH PASSWORD '<password>';
+GRANT homeassistant_role TO homeassistant;
+
 -- MEDIA STACK --
 
 -- LIDARR

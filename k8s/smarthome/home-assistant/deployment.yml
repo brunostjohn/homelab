@@ -5,6 +5,8 @@ metadata:
     app: homeassistant
   name: homeassistant
   namespace: homeassistant
+  annotations:
+    secrets.infisical.com/auto-reload: "true"
 spec:
   revisionHistoryLimit: 3
   replicas: 1
@@ -33,6 +35,24 @@ spec:
         fsGroup: 1000
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      initContainers:
+        - name: prepare-secrets-yaml
+          image: alpine:3.12
+          imagePullPolicy: IfNotPresent
+          command:
+            [
+              "/bin/sh",
+              "-c",
+              "apk update && apk add envsubst && rm -rf /config/secrets.yaml && envsubst < /secrets.yaml > /config/secrets.yaml",
+            ]
+          volumeMounts:
+            - name: ha-config
+              mountPath: /config
+            - name: ha-secrets-template
+              mountPath: /secrets.yaml
+          envFrom:
+            - secretRef:
+                name: hassio-secrets
       containers:
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:stable
@@ -78,8 +98,17 @@ spec:
           volumeMounts:
             - name: ha-config
               mountPath: /config
+            - name: ha-configmap
+              mountPath: /config/configuration.yaml
+              subPath: configuration.yaml
       restartPolicy: Always
       volumes:
         - name: ha-config
           persistentVolumeClaim:
             claimName: homeassistant-pvc
+        - name: ha-configmap
+          configMap:
+            name: homeassistant-config
+        - name: ha-secrets-template
+          configMap:
+            name: hassio-secrets-template

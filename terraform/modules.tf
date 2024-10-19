@@ -44,6 +44,9 @@ module "cluster_base" {
   infisical_db_password          = data.infisical_secrets.cluster.secrets["infisical_db_password"].value
   infisical_google_client_id     = data.infisical_secrets.cluster.secrets["infisical_google_client_id"].value
   infisical_google_client_secret = data.infisical_secrets.cluster.secrets["infisical_google_client_secret"].value
+
+  infisical_secrets_operator_machine_id     = data.infisical_secrets.cluster.secrets["INFISICAL-OPERATOR-CLIENT-ID"].value
+  infisical_secrets_operator_machine_secret = data.infisical_secrets.cluster.secrets["INFISICAL-OPERATOR-CLIENT-SECRET"].value
 }
 
 module "cluster_apps" {
