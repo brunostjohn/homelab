@@ -37,7 +37,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       initContainers:
         - name: prepare-secrets-yaml
-          image: alpine:3.12
+          image: suzukishunsuke/alpine-envsubst
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 0
@@ -47,7 +47,7 @@ spec:
             [
               "/bin/sh",
               "-c",
-              "apk update && apk add envsubst && rm -rf /config/secrets.yaml && envsubst < /secrets.yaml > /config/secrets.yaml",
+              rm -rf /config/secrets.yaml && envsubst < /secrets.yaml > /config/secrets.yaml",
             ]
           volumeMounts:
             - name: ha-config
