@@ -34,20 +34,6 @@ spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-        - name: hassioproxy
-          imagePullPolicy: IfNotPresent
-          image: caddy
-          ports:
-            - containerPort: 2137
-              name: http
-              protocol: TCP
-          command:
-            - caddy
-            - reverse-proxy
-            - --from
-            - :2137
-            - --to
-            - localhost:8123
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:stable
           imagePullPolicy: IfNotPresent
@@ -64,10 +50,10 @@ spec:
           resources:
             requests:
               memory: "512Mi"
-              cpu: "100m"
+              cpu: "250m"
             limits:
               memory: "1Gi"
-              cpu: "200m"
+              cpu: "500m"
           livenessProbe:
             tcpSocket:
               port: 8123

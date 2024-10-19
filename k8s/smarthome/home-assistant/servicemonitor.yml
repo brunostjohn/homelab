@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: homeassistant
   endpoints:
-    - port: http-hassio
+    - port: http
       interval: 15s
       scrapeTimeout: 10s
       path: /api/prometheus
