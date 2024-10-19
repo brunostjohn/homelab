@@ -8,7 +8,7 @@ resource "kubernetes_secret" "silly_bot" {
     "INFISICAL_CLIENT_ID"     = var.silly_bot_infisical_client_id
     "INFISICAL_CLIENT_SECRET" = var.silly_bot_infisical_client_secret
     "INFISICAL_PROJECT_ID"    = var.silly_bot_infisical_project_id
-    "DATABASE_URL"            = "postgresql://sillybot:${var.silly_bot_database_password}@postgres-cluster-rw-pooler.svc.cluster.local:5432/sillybot"
+    "DATABASE_URL"            = "postgresql://sillybot:${var.silly_bot_database_password}@postgres-cluster-rw-pooler.databases.svc.cluster.local:5432/sillybot"
   }
 }
 
