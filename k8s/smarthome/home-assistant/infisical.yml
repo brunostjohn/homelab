@@ -17,4 +17,4 @@ spec:
   managedSecretReference:
     secretName: hassio-secrets
     secretNamespace: homeassistant
-    creationPolicy: Orphan
+    creationPolicy: Owner
