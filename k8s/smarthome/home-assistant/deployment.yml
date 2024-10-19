@@ -48,13 +48,14 @@ spec:
               "/bin/sh",
               "-c",
 
-              "rm -rf /config/secrets.yaml && envsubst < /secrets.yaml > /config/secrets.yaml",
+              "rm -rf /config/secrets.yaml && envsubst < /secrets-template.yaml > /config/secrets.yaml",
             ]
           volumeMounts:
             - name: ha-config
               mountPath: /config
             - name: ha-secrets-template
-              mountPath: /secrets.yaml
+              mountPath: /secrets-template.yaml
+              subPath: secrets-template.yaml
           envFrom:
             - secretRef:
                 name: hassio-secrets
