@@ -24,9 +24,11 @@ spec:
             requests:
               memory: "1Gi"
               cpu: "2"
+              nvidia.com/gpu.shared: "1"
             limits:
               memory: "4Gi"
               cpu: "4"
+              nvidia.com/gpu.shared: "1"
           ports:
             - containerPort: 8000
               protocol: TCP

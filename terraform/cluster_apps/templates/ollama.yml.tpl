@@ -18,7 +18,7 @@ ollama:
 
 ingress:
   enabled: true
-  host: ollama.${global_fqdn}
+  host: chat.${global_fqdn}
 
 extraEnvVars:
   - name: ENABLE_IMAGE_GENERATION
@@ -28,7 +28,7 @@ extraEnvVars:
   - name: AUTOMATIC1111_BASE_URL
     value: http://stable-diffusion.ai.svc.cluster.local:8080
   - name: WEBUI_URL
-    value: https://ollama.${global_fqdn}
+    value: https://chat.${global_fqdn}
   - name: ENABLE_MESSAGE_RATING
     value: "True"
   - name: WEBUI_SECRET_KEY
