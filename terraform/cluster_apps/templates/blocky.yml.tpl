@@ -33,7 +33,9 @@ customDNS:
     readarr.local: 10.0.2.0
     prowlarr.local: 10.0.2.0
     alertmanager.local: 10.0.2.0
-    cubes.${global_fqdn}: 10.0.2.25
+    cubes.${global_fqdn}: 10.0.5.5
+    mc.${global_fqdn}: 10.0.5.5
+    steveis.${second_fqdn}: 10.0.5.5
     klaudia-postgres.local: 10.0.3.11
 
 conditional:
