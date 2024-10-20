@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infrared
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: minecraft
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: k8s/infrared
+    repoURL: https://github.com/brunostjohn/homelab.git

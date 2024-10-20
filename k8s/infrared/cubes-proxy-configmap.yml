@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: infrared-cubes-proxy-config
+  namespace: minecraft
+data:
+  cubes.yml: |
+    domains:
+      - cubes.zefirsroyal.cloud
+    addresses:
+      - papermc.minecraft.svc.cluster.local:25565

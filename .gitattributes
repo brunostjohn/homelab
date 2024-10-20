@@ -3,3 +3,5 @@
 *.sops.* diff=sopsdiffer
 *.sops.toml linguist-language=JSON
 terraform/grafana/dashboards/*.json linguist-vendored
+projects/homepage/src/lib/apiSpecs/*.json linguist-vendored
+projects/homepage/src/lib/apiSpecs/*.yaml linguist-vendored
