@@ -13,12 +13,9 @@ spec:
         app: openedai-tts
     spec:
       volumes:
-        - name: openedai-tts-configs
+        - name: openedai-tts
           persistentVolumeClaim:
-            claimName: openedai-tts-configs
-        - name: openedai-tts-voices
-          persistentVolumeClaim:
-            claimName: openedai-tts-voices
+            claimName: openedai-tts-pvc
       containers:
         - name: openedai-tts
           image: ghcr.io/matatonic/openedai-speech-min
@@ -35,10 +32,12 @@ spec:
               protocol: TCP
               name: http
           volumeMounts:
-            - name: openedai-tts-configs
+            - name: openedai-tts
               mountPath: /app/configs
-            - name: openedai-tts-voices
+              subPath: configs/
+            - name: openedai-tts
               mountPath: /app/voices
+              subPath: voices/
           env:
             - name: TTS_HOME
               value: voices
