@@ -7,7 +7,7 @@ spec:
   resources:
     requests:
       storage: 20Gi
-  storageClassName: jabberwock-nfs-csi
+  storageClassName: floof-nfs-csi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
