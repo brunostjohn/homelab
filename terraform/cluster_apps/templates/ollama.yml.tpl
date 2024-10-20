@@ -81,6 +81,10 @@ extraEnvVars:
     value: openai
   - name: AUDIO_TTS_API_KEY
     value: sk-111111111
+  - name: AUDIO_TTS_MODEL
+    value: tts-1-hd
+  - name: AUDIO_TTS_VOICE
+    value: gordon
   - name: AUDIO_TTS_OPENAI_API_BASE_URL
     value: http://openedai-tts.ai.svc.cluster.local:8000/v1
 

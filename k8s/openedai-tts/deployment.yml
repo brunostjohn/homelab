@@ -12,6 +12,7 @@ spec:
       labels:
         app: openedai-tts
     spec:
+      runtimeClassName: nvidia
       volumes:
         - name: openedai-tts
           persistentVolumeClaim:
