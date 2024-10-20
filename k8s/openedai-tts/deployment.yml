@@ -46,3 +46,5 @@ spec:
               value: voices
             - name: HF_HOME
               value: voices
+            - name: UNLOAD_TIMER
+              value: "30"
