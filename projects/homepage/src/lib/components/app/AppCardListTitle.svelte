@@ -14,8 +14,8 @@
 <h2
 	class={cn(
 		onHome
-			? "align-center flex items-center gap-2 text-2xl font-medium"
-			: "align-center mb-2 flex items-center gap-2 text-3xl font-semibold",
+			? "align-center flex items-center gap-2 text-lg font-medium md:text-2xl"
+			: "align-center mb-1 flex items-center gap-2 font-semibold md:mb-2 md:text-3xl",
 		className
 	)}
 >

@@ -30,7 +30,7 @@
 </script>
 
 {#if seeMoreHref && seeMoreIcon && seeMoreAppName}
-	<div class="align-center mb-4 flex items-center justify-center">
+	<div class="align-center mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-center">
 		<HomepageSectionTitleHeading {titleIcon}>
 			{title}
 		</HomepageSectionTitleHeading>

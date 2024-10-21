@@ -4,6 +4,8 @@
 	import Autoplay from "embla-carousel-autoplay";
 	import RecentRecipesCarouselItem from "./RecentRecipesCarouselItem.svelte";
 	import RecentRecipesCarouselItemSkeleton from "./RecentRecipesCarouselItemSkeleton.svelte";
+	import { onDestroy } from "svelte";
+	import { createMediaStore } from "svelte-media-queries";
 
 	interface Props {
 		domain: string;
@@ -12,6 +14,9 @@
 	const { domain }: Props = $props();
 
 	const recentRecipes = trpc()?.mealie.newestRecipes.createQuery();
+
+	const matches = createMediaStore("(min-width: 768px)");
+	onDestroy(() => matches.destroy());
 </script>
 
 <Carousel.Root

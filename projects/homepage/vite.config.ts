@@ -4,4 +4,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	plugins: [enhancedImages(), sveltekit()],
+	optimizeDeps: {
+		include: ["./src/lib/components/ui/*", "lucide-svelte", "./node_modules/*"],
+	},
 });

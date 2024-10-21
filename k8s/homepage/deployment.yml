@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: homepage
   annotations:
-    reloader.stakater.com/auto: "true"
+    secrets.infisical.com/auto-reload: "true"
 spec:
   revisionHistoryLimit: 1
   replicas: 1
@@ -40,7 +40,5 @@ spec:
               memory: "2Gi"
               cpu: "2"
           envFrom:
-            - configMapRef:
-                name: homepage-config
             - secretRef:
                 name: homepage-secrets

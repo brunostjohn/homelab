@@ -53,7 +53,7 @@
 	});
 </script>
 
-<Carousel.Item class="basis-1/4">
+<Carousel.Item class="basis-1/3 sm:basis-1/4">
 	<a href={getItemLink(Id, ServerId)} class="group contents">
 		<Card.Root class="aspect-[3/4]">
 			<div class="relative h-full w-full overflow-hidden rounded-lg">
@@ -89,7 +89,7 @@
 						<p class="text-lg font-semibold">{SeriesName ?? Name ?? OriginalTitle}</p>
 					{/if}
 					{#if SeriesName}
-						<p class="text-sm text-muted-foreground">
+						<p class="text-muted-foreground text-sm">
 							{#if EpisodeTitle}
 								{EpisodeTitle}
 							{:else}

@@ -34,10 +34,10 @@
 </script>
 
 {#snippet cardContent()}
-	{@render icon("h-10 w-10 my-auto rounded-md")}
+	{@render icon("h-8 w-8 md:h-10 md:w-10 my-auto rounded-md")}
 	<div>
-		<h2 class="text-lg font-medium">{name}</h2>
-		<p class="text-sm text-muted-foreground">
+		<h2 class="text-sm font-medium md:text-lg">{name}</h2>
+		<p class="text-muted-foreground text-xs md:text-sm">
 			{description}
 		</p>
 	</div>
@@ -48,13 +48,15 @@
 	<a {href} class="contents">
 		<Card.Root
 			class={cn(
-				"group transition-all hover:border-muted-foreground",
+				"hover:border-muted-foreground group transition-all",
 				notInList ? "" : "h-full",
 				className
 			)}
 			{style}
 		>
-			<Card.Content class="align-center flex h-full items-center gap-4 p-4">
+			<Card.Content
+				class="align-center flex h-full items-center gap-3 p-3 sm:p-2 sm:py-3 md:gap-4 md:p-4"
+			>
 				{#if children}
 					<div class="flex h-full flex-col">
 						{@render cardContent()}

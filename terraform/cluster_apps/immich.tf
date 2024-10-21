@@ -31,7 +31,7 @@ module "immich_helm" {
 
   create_ingress = true
   service_name   = "immich-server"
-  service_port   = 3001
+  service_port   = 2283
   hosts          = ["window.${var.global_fqdn}"]
 
   chart           = "immich"

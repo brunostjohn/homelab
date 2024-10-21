@@ -21,7 +21,7 @@
 		NetboxAppCard,
 	} from "$lib/components/appCards";
 	import { AppCardList, HomepageSectionTitle, SeeMoreApps } from "$lib/components/app";
-	import { JellyfinIcon } from "$lib/components/icons";
+	import { JellyfinIcon, MealieIcon, OpenWebUIIcon } from "$lib/components/icons";
 	import { RecentChatsWithAI } from "$lib/components/ai";
 	import { RecentRecipesCarousel } from "$lib/components/recipes";
 
@@ -65,9 +65,19 @@
 	<NextcloudAppCard {domain} />
 </AppCardList>
 
-<HomepageSectionTitle title="Your Newest Recipes">
+<HomepageSectionTitle
+	title="Your Newest Recipes"
+	seeMoreAppName="Mealie"
+	seeMoreHref="https://mealie.{domain}"
+>
 	{#snippet titleIcon(className: string)}
 		<House class={className} />
+	{/snippet}
+
+	{#snippet seeMoreIcon(className: string)}
+		<div class="aspect-square rounded-sm bg-white p-0.5 {className}">
+			<MealieIcon />
+		</div>
 	{/snippet}
 </HomepageSectionTitle>
 <RecentRecipesCarousel {domain} />
@@ -78,9 +88,19 @@
 	<UniFiNVRAppCard />
 </AppCardList>
 
-<HomepageSectionTitle title="Recent Chats with AI">
+<HomepageSectionTitle
+	title="Recent Chats with AI"
+	seeMoreAppName="Ollama"
+	seeMoreHref="https://chat.{domain}"
+>
 	{#snippet titleIcon(className: string)}
 		<Sparkles class={className} />
+	{/snippet}
+
+	{#snippet seeMoreIcon(className: string)}
+		<div class="aspect-square rounded-sm bg-white p-0.5 {className}">
+			<OpenWebUIIcon />
+		</div>
 	{/snippet}
 </HomepageSectionTitle>
 <RecentChatsWithAI {domain} />

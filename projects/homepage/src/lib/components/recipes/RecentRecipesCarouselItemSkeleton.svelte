@@ -3,7 +3,7 @@
 	import { Timer } from "lucide-svelte";
 </script>
 
-<Carousel.Item class="basis-1/3">
+<Carousel.Item class="sm:basis-1/2 md:basis-1/3">
 	<Card.Root class="max-h-72 min-h-72 overflow-hidden">
 		<div class="bg-muted h-32 w-full animate-pulse" aria-hidden="true"></div>
 		<div class="p-4">

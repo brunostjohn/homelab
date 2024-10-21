@@ -21,6 +21,7 @@ export const router = t.router({
 	mediaFetchers: mediaFetcherRouter,
 	openwebui: openwebuiRouter,
 	mealie: mealieRouter,
+	user: t.procedure.query(({ ctx: { user } }) => user),
 });
 
 export const createCaller = t.createCallerFactory(router);

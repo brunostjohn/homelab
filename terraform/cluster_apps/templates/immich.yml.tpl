@@ -11,7 +11,7 @@ env:
   NVIDIA_DRIVER_CAPABILITIES: "compute,video,utility"
 
 image:
-  tag: v1.118.1
+  tag: v1.118.2
 
 immich:
   metrics:
@@ -37,7 +37,7 @@ server:
 
 machine-learning:
   image:
-    tag: v1.118.1-cuda
+    tag: v1.118.2-cuda
   resources:
     requests:
       nvidia.com/gpu.shared: "1"

@@ -3,6 +3,8 @@
 	import { trpc } from "$lib/trpc";
 	import Autoplay from "embla-carousel-autoplay";
 	import JellyfinCarouselCard from "./JellyfinCarouselCard.svelte";
+	import { onDestroy } from "svelte";
+	import { createMediaStore } from "svelte-media-queries";
 
 	interface Props {
 		domain: string;
@@ -11,6 +13,9 @@
 	const { domain }: Props = $props();
 
 	const jfData = trpc()?.jellyfin.latestMedia.createQuery();
+
+	const matches = createMediaStore("(min-width: 768px)");
+	onDestroy(() => matches.destroy());
 </script>
 
 <Carousel.Root
@@ -35,12 +40,14 @@
 			{/each}
 		{:else}
 			<Carousel.Item>
-				<Card.Root class="animate-pulse bg-muted">
+				<Card.Root class="bg-muted animate-pulse">
 					<Card.Content class="flex h-96 min-h-96 items-end justify-start p-6"></Card.Content>
 				</Card.Root>
 			</Carousel.Item>
 		{/if}
 	</Carousel.Content>
-	<Carousel.Previous />
-	<Carousel.Next />
+	{#if $matches}
+		<Carousel.Previous />
+		<Carousel.Next />
+	{/if}
 </Carousel.Root>

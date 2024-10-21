@@ -13,13 +13,13 @@
 
 <h1
 	class={cn(
-		"text-4xl font-semibold",
+		"text-2xl font-semibold md:text-4xl",
 		titleIcon ? "align-center flex items-center gap-2" : "",
 		className
 	)}
 >
 	{#if titleIcon}
-		{@render titleIcon("h-8 w-8")}
+		{@render titleIcon("md:h-8 md:w-8 h-6 w-6")}
 	{/if}
 	{@render children()}
 </h1>

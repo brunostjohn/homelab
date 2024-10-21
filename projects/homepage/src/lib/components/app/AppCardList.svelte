@@ -19,6 +19,9 @@
 		{title}
 	</AppCardListTitle>
 {/if}
-<ul class={cn("mb-4 mt-2 grid grid-cols-2 gap-2", className)} style="grid-auto-rows: 1fr;">
+<ul
+	class={cn("mb-4 mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:mb-8", className)}
+	style="grid-auto-rows: 1fr;"
+>
 	{@render children()}
 </ul>

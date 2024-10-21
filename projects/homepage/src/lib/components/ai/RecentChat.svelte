@@ -40,10 +40,10 @@
 <a href="https://ollama.{domain}/c/{id}" class="group contents">
 	<div
 		class={cn(
-			"relative flex gap-2 px-4 py-4 backdrop-blur-lg backdrop-brightness-50 backdrop-saturate-150",
-			"transition-all group-hover:bg-muted/30 group-hover:backdrop-brightness-[60%]",
-			isOdd ? "border-r border-muted-foreground/20" : "",
-			isLastRow ? "" : "border-b border-muted-foreground/20",
+			"relative flex gap-2 p-3 backdrop-blur-lg backdrop-brightness-50 backdrop-saturate-150 md:p-4",
+			"group-hover:bg-muted/30 transition-all group-hover:backdrop-brightness-[60%]",
+			isOdd ? "border-muted-foreground/20 border-r" : "",
+			isLastRow ? "" : "border-muted-foreground/20 border-b",
 			isFirstRow && isOdd ? "rounded-tl-md" : "",
 			isFirstRow && !isOdd ? "rounded-tr-md" : "",
 			isLastRow && isOdd ? "rounded-bl-md" : "",
@@ -51,12 +51,16 @@
 		)}
 	>
 		<div class="overflow-hidden">
-			<p class="text-xs font-semibold text-muted-foreground">
+			<p class="text-muted-foreground text-xs font-semibold">
 				{moment(updated_at * 1000).fromNow()}
 			</p>
-			<p class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-nowrap">{title}</p>
+			<p
+				class="max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-nowrap text-sm md:text-base"
+			>
+				{title}
+			</p>
 			{#if lastMessage}
-				<div class="align-center flex items-center gap-1 text-muted-foreground">
+				<div class="align-center text-muted-foreground flex items-center gap-1">
 					<p class="w-fit text-nowrap text-xs font-semibold">
 						{lastMessage.role === "user" ? "You" : lastMessage.modelName}:
 					</p>
@@ -67,7 +71,7 @@
 			{/if}
 		</div>
 		<ChevronRight
-			class="my-auto ml-auto h-6 min-h-6 w-6 min-w-6 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary"
+			class="text-muted-foreground group-hover:text-primary my-auto ml-auto h-6 min-h-6 w-6 min-w-6 transition-all group-hover:translate-x-1"
 		/>
 	</div>
 </a>

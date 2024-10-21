@@ -13,11 +13,11 @@
 {#if showBackButton}
 	<a
 		href="/"
-		class="align-center -ml-2 mb-1 flex items-center text-muted-foreground transition-all hover:text-primary"
+		class="align-center text-muted-foreground hover:text-primary -ml-2 mb-1 flex items-center text-sm transition-all md:text-base"
 	>
 		<ChevronLeft />Go back home
 	</a>
 {/if}
-<h1 class="align-center mb-8 flex items-center gap-2 text-4xl font-semibold">
+<h1 class="align-center mb-8 flex items-center gap-2 text-2xl font-semibold md:text-4xl">
 	{@render children()}
 </h1>

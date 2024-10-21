@@ -83,7 +83,7 @@
 		href={`https://den.${domain}/${type}/${type === "movie" ? tmdbId : tvdbId}`}
 		target="_blank"
 	>
-		<Card.Root class="relative overflow-hidden transition-all group-hover:border-muted-foreground">
+		<Card.Root class="group-hover:border-muted-foreground relative overflow-hidden transition-all">
 			<img
 				src={backdrop}
 				aria-hidden="true"
@@ -91,30 +91,32 @@
 				loading="lazy"
 				class="absolute inset-0 h-full w-full object-cover blur-2xl brightness-50 saturate-150"
 			/>
-			<Card.Content class="flex gap-4 p-4">
-				<div class="relative z-0 aspect-[2/3] h-full max-h-48 min-h-48 overflow-hidden rounded-md">
+			<Card.Content class="flex gap-2 p-2 md:gap-4 md:p-4">
+				<div
+					class="relative z-0 aspect-[2/3] h-full max-h-32 min-h-32 overflow-hidden rounded-md md:max-h-48 md:min-h-48"
+				>
 					<img src={poster} alt="{originalTitle} Poster" class="absolute h-full" loading="lazy" />
 				</div>
 				<div class="z-10 flex w-full flex-col">
-					<p class="text-sm">{yearReleased}</p>
-					<p class="text-lg font-semibold text-white">{originalTitle}</p>
+					<p class="text-xs md:text-sm">{yearReleased}</p>
+					<p class="text-base font-semibold text-white md:text-lg">{originalTitle}</p>
 					<Badge class="mt-1 w-max {badgeColour}">{badgeText}</Badge>
 					{#if downloads.length > 1 && status !== JellyseerrMediaStatus.AVAILABLE}
-						<p class="mt-auto text-sm text-muted-foreground">
+						<p class="text-muted-foreground mt-auto text-sm">
 							{downloads.filter((download) => download.sizeLeft !== 0).length} downloads in progress
 						</p>
 					{:else if downloads.length === 1 && status !== JellyseerrMediaStatus.AVAILABLE && downloads[0].sizeLeft !== 0}
-						<p class="mt-auto text-xs text-primary/50">
+						<p class="text-primary/50 mt-auto text-xs">
 							{filesize(downloads[0].sizeLeft)} left
 						</p>
 						{#if eta}
-							<p class="mb-1 text-xs text-primary/50">
+							<p class="text-primary/50 mb-1 text-xs">
 								Available {eta}
 							</p>
 						{/if}
-						<div class="h-3 w-full overflow-hidden rounded-full bg-muted/30">
+						<div class="bg-muted/30 h-3 w-full overflow-hidden rounded-full">
 							<div
-								class="h-full animate-pulse rounded-full bg-primary/50"
+								class="bg-primary/50 h-full animate-pulse rounded-full"
 								style={`width: ${downloads[0].sizeLeft / downloads[0].size}%`}
 							></div>
 						</div>

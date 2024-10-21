@@ -24,7 +24,7 @@
 	let backgroundFailedToLoad = $state(false);
 </script>
 
-<Carousel.Item class="basis-1/3">
+<Carousel.Item class="sm:basis-1/2 md:basis-1/3">
 	<a href="https://mealie.{domain}/g/{groupSlug}/r/{slug}" class="group contents">
 		<Card.Root
 			class="group-hover:border-muted-foreground relative max-h-72 min-h-72 overflow-hidden transition-all"

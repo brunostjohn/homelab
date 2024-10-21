@@ -34,8 +34,12 @@ export const mealieRouter = t.router({
 			},
 		}) => {
 			const { data: userData, error: userError } = await getAllApiAdminUsersGet({ client });
-			if (userError || !userData) {
-				throw new Error(userError?.detail?.join(" ") ?? "Failed to fetch user data");
+			if (userError) {
+				// @ts-expect-error - this is fine
+				throw new Error(userError.detail);
+			}
+			if (!userData) {
+				throw new Error("No user data");
 			}
 			const { items: users } = userData;
 			const user = users.find((u) => u.email === email);
