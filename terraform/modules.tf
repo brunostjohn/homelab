@@ -196,6 +196,7 @@ module "cluster_apps" {
   plane_aws_secret_access_key = data.infisical_secrets.cluster.secrets["plane_aws_secret_access_key"].value
   plane_db_password           = data.infisical_secrets.cluster.secrets["plane_db_password"].value
   plane_secret_key            = data.infisical_secrets.cluster.secrets["plane_secret_key"].value
+  plane_rabbitmq_password     = data.infisical_secrets.cluster.secrets["plane_rabbitmq_password"].value
 
   nextcloud_api_key        = data.infisical_secrets.cluster.secrets["nextcloud_api_key"].value
   romm_username            = data.infisical_secrets.cluster.secrets["romm_username"].value

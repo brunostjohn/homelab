@@ -687,3 +687,7 @@ variable "ollama_webui_secret_key" {
 variable "silly_bot_database_password" {
   type = string
 }
+
+variable "plane_rabbitmq_password" {
+  type = string
+}

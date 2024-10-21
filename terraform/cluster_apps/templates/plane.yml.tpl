@@ -11,6 +11,10 @@ postgres:
 minio:
   local_setup: false
 
+rabbitmq:
+  local_setup: false
+  external_rabbitmq_url: amqp://plane:${rabbitmq_password}@rabbitmq-cluster.databases.svc.cluster.local/plane
+
 web:
   image: ghcr.io/torbenraab/plane/plane-frontend
 
