@@ -29,19 +29,16 @@ spec:
               memory: 2Gi
               cpu: "2"
           startupProbe:
-            httpGet:
-              port: http
-              path: /v1/api/info
+            exec:
+              command: ["rest-cli", "info"]
             failureThreshold: 30
             periodSeconds: 10
           readinessProbe:
-            httpGet:
-              port: http
-              path: /v1/api/info
+            exec:
+              command: ["rest-cli", "info"]
           livenessProbe:
-            httpGet:
-              port: http
-              path: /v1/api/info
+            exec:
+              command: ["rest-cli", "info"]
           ports:
             - containerPort: 8211
               name: server
