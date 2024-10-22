@@ -38,7 +38,7 @@ spec:
             - name: RCON_HOST
               value: palworld.game-servers.svc.cluster.local
             - name: RCON_PORT
-              value: "27015"
+              value: "25575"
             - name: RCON_PASSWORD
               valueFrom:
                 secretKeyRef:

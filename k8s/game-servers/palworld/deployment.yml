@@ -36,9 +36,13 @@ spec:
           readinessProbe:
             exec:
               command: ["rest-cli", "info"]
+            periodSeconds: 10
+            failureThreshold: 2
           livenessProbe:
             exec:
               command: ["rest-cli", "info"]
+            periodSeconds: 30
+            failureThreshold: 2
           ports:
             - containerPort: 8211
               name: server
@@ -49,6 +53,9 @@ spec:
             - containerPort: 27015
               name: query
               protocol: UDP
+            - containerPort: 25575
+              name: rcon
+              protocol: TCP
           envFrom:
             - configMapRef:
                 name: palworld-config
