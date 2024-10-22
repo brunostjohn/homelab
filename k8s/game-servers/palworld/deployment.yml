@@ -32,6 +32,8 @@ spec:
             httpGet:
               port: http
               path: /v1/api/info
+            failureThreshold: 30
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               port: http
