@@ -7,7 +7,7 @@ metadata:
   namespace: game-servers
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: floof-nfs-csi
   resources:
     requests:
