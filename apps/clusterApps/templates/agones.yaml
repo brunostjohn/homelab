@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infrared
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: minecraft
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: agones
+    repoURL: https://agones.dev/chart/stable
+    helm:
+      valuesObject:
+        gameservers:
+          namespaces:
+            - shulker-system
+            - minecraft
+            - game-servers
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
