@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: minecraft
+    namespace: game-servers
     server: https://kubernetes.default.svc
   project: default
   source:
@@ -20,6 +20,12 @@ spec:
           namespaces:
             - minecraft
             - game-servers
+        agones:
+          ping:
+            http:
+              loadBalancerIP: 10.0.6.1
+            udp:
+              loadBalancerIP: 10.0.6.2
   syncPolicy:
     syncOptions:
       - ServerSideApply=true
