@@ -26,6 +26,9 @@ spec:
               loadBalancerIP: 10.0.6.1
             udp:
               loadBalancerIP: 10.0.6.2
+          allocator:
+            service:
+              loadBalancerIP: 10.0.6.3
   syncPolicy:
     syncOptions:
       - ServerSideApply=true
