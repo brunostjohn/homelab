@@ -12,7 +12,7 @@ data:
   RCON_ENABLED: "true"
   RCON_PORT: "25575"
   TZ: Europe/Dublin
-  COMMUNITY: "false"
+  COMMUNITY: "true"
   SERVER_NAME: "Zefir's Pals"
-  SERVER_DESCRIPTION: ""
+  SERVER_DESCRIPTION: "kittyyyyy :3"
   REST_API_ENABLED: "true"
