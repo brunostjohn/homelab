@@ -18,7 +18,6 @@ spec:
       valuesObject:
         gameservers:
           namespaces:
-            - shulker-system
             - minecraft
             - game-servers
   syncPolicy:
