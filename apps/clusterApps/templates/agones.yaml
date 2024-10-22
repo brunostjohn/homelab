@@ -22,11 +22,17 @@ spec:
             - game-servers
         agones:
           ping:
+            replicas: 1
             http:
               loadBalancerIP: 10.0.6.1
             udp:
               loadBalancerIP: 10.0.6.2
+          extensions:
+            replicas: 1
+          controller:
+            replicas: 1
           allocator:
+            replicas: 1
             service:
               loadBalancerIP: 10.0.6.3
   syncPolicy:
