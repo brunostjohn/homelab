@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: palworld-exporter
   namespace: game-servers
+  annotations:
+    secrets.infisical.com/auto-reload: "true"
 spec:
   replicas: 1
   strategy:

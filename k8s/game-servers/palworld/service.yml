@@ -15,6 +15,10 @@ spec:
       port: 27015
       protocol: UDP
       targetPort: query
+    - name: rcon
+      port: 25575
+      protocol: TCP
+      targetPort: rcon
   selector:
     app: palworld
   type: LoadBalancer
