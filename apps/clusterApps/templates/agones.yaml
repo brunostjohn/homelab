@@ -33,6 +33,8 @@ spec:
             replicas: 1
           allocator:
             replicas: 1
+            service:
+              loadBalancerIP: 10.0.6.3
   syncPolicy:
     syncOptions:
       - ServerSideApply=true
