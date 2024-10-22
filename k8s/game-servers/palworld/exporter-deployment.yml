@@ -4,6 +4,9 @@ metadata:
   name: palworld-exporter
   namespace: game-servers
 spec:
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: palworld-exporter

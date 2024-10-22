@@ -5,6 +5,8 @@ metadata:
     app: palworld
   name: palworld
   namespace: game-servers
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   strategy:
