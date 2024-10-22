@@ -49,6 +49,8 @@ spec:
                 secretKeyRef:
                   name: palworld-secrets
                   key: ADMIN_PASSWORD
+            - name: SAVE_DIRECTORY
+              value: /palworld
           volumeMounts:
             - mountPath: /palworld
               name: datadir
