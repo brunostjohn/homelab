@@ -49,3 +49,10 @@ spec:
                 secretKeyRef:
                   name: palworld-secrets
                   key: ADMIN_PASSWORD
+          volumeMounts:
+            - mountPath: /palworld
+              name: datadir
+      volumes:
+        - name: datadir
+          persistentVolumeClaim:
+            claimName: palworld-server-pvc
