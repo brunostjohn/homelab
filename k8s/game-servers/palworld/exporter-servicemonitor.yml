@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: palworld-exporter
+  namespace: game-servers
+  labels: {}
+spec:
+  selector:
+    matchLabels:
+      app: palworld-exporter
+  endpoints:
+    - port: metrics
