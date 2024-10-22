@@ -16,6 +16,8 @@ spec:
     directory:
       include: "stable-with-prometheus.yaml"
   syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
