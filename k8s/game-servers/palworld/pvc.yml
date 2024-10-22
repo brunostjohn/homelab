@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: palworld
+  name: palworld-server-pvc
+  namespace: game-servers
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: floof-nfs-csi
+  resources:
+    requests:
+      storage: 12Gi

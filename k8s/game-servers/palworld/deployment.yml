@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: palworld
+  name: palworld
+  namespace: game-servers
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: palworld
+  template:
+    metadata:
+      labels:
+        app: palworld
+    spec:
+      containers:
+        - name: server
+          image: thijsvanloef/palworld-server-docker
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: "1"
+            limits:
+              memory: 2Gi
+              cpu: "2"
+          startupProbe:
+            httpGet:
+              port: http
+              path: /v1/api/info
+          readinessProbe:
+            httpGet:
+              port: http
+              path: /v1/api/info
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /v1/api/info
+          ports:
+            - containerPort: 8211
+              name: server
+              protocol: UDP
+            - containerPort: 8212
+              name: http
+              protocol: TCP
+            - containerPort: 27015
+              name: query
+              protocol: UDP
+          envFrom:
+            - configMapRef:
+                name: palworld-config
+            - secretRef:
+                name: palworld-secrets
+          volumeMounts:
+            - mountPath: /palworld
+              name: datadir
+      volumes:
+        - name: datadir
+          persistentVolumeClaim:
+            claimName: palworld-server-pvc
