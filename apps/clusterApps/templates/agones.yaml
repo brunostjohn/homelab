@@ -13,6 +13,7 @@ spec:
   source:
     chart: agones
     repoURL: https://agones.dev/chart/stable
+    targetRevision: 1.44.0
     helm:
       valuesObject:
         gameservers:
