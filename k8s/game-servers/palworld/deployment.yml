@@ -34,7 +34,7 @@ spec:
           startupProbe:
             exec:
               command: ["rest-cli", "info"]
-            failureThreshold: 30
+            failureThreshold: 50
             periodSeconds: 10
           readinessProbe:
             exec:
