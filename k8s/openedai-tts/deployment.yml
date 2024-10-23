@@ -19,13 +19,8 @@ spec:
             claimName: openedai-tts-pvc
       containers:
         - name: openedai-tts
-          image: ghcr.io/matatonic/openedai-speech
+          image: ghcr.io/matatonic/openedai-speech-min
           imagePullPolicy: IfNotPresent
-          resources:
-            requests:
-              nvidia.com/gpu.shared: "1"
-            limits:
-              nvidia.com/gpu.shared: "1"
           ports:
             - containerPort: 8000
               protocol: TCP
@@ -38,10 +33,6 @@ spec:
               mountPath: /app/voices
               subPath: voices/
           env:
-            - name: NVIDIA_VISIBLE_DEVICES
-              value: all
-            - name: NVIDIA_DRIVER_CAPABILITIES
-              value: all
             - name: TTS_HOME
               value: voices
             - name: HF_HOME
