@@ -26,11 +26,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: 10Gi
-              cpu: "4"
-            limits:
-              memory: 16Gi
+              memory: 20Gi
               cpu: "6"
+            limits:
+              memory: 28Gi
+              cpu: "8"
           startupProbe:
             exec:
               command: ["rest-cli", "info"]
