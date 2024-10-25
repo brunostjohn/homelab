@@ -126,7 +126,7 @@
               ./nix/modules/clusterNode/i18n.nix
               ./nix/modules/clusterNode/nixSettings.nix
               ./nix/modules/clusterNode/users.nix
-              chaotic.nixosModules.default
+              # chaotic.nixosModules.default
             ];
           };
       };

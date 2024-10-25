@@ -19,7 +19,7 @@
     enable = true;
     enable32Bit = true;
   };
-  chaotic.hdr.enable = true;
+  # chaotic.hdr.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.amdgpu.initrd.enable = true;
