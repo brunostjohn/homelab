@@ -38,11 +38,31 @@
   environment.systemPackages = with pkgs; [
     gh
     git
+    mangohud
   ];
+
+  environment.loginShellInit = ''
+    export MANGOHUD=1
+    export MANGOHUD_CONFIG="$(IFS=,; echo "cpu_temp gpu_temp ram vram")"
+
+    gamescope --adaptive-sync --hdr-enabled --mangoapp --rt --steam -- steam "-pipewire-dmabuf -tenfoot"
+  '';
 
   services.openssh.enable = true;
 
   networking.firewall.enable = false;
+
+  boot.kernelPackages = pkgs.linuxPackages;
+
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
 
   system.stateVersion = "24.05";
 }
