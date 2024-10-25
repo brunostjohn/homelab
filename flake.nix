@@ -108,18 +108,8 @@
         };
 
         kittycon =
-          let
-            system = "x86_64-linux";
-            overlays = [
-              (final: prev: {
-                unstable = inputs.nixpkgs-unstable.legacyPackages.x86_64-linux;
-              })
-            ];
-            pkgs = (import nixpkgs-unstable { inherit system; config.allowUnfree = true; }).pkgs;
-          in
           nixpkgs.lib.nixosSystem {
-            inherit system pkgs;
-            specialArgs = { inherit system overlays pkgs; };
+            system = "x86_64-linux";
             modules = [
               ./nix/hosts/kittycon
               ./nix/modules/gamingPc
