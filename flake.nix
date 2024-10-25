@@ -104,6 +104,17 @@
             ./nix/modules/10gbit
           ] ++ globalModulesMNode;
         };
+
+        kittycon = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./nix/hosts/kittycon
+            ./nix/modules/gamingPc
+            ./nix/modules/clusterNode/i18n.nix
+            ./nix/modules/clusterNode/nixSettings.nix
+            ./nix/modules/clusterNode/users.nix
+          ];
+        };
       };
 
       darwinConfigurations = {
