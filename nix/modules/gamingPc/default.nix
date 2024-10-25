@@ -51,9 +51,9 @@
 
   environment.loginShellInit = ''
     export MANGOHUD=1
-    export MANGOHUD_CONFIG="$(IFS=,; echo "cpu_temp gpu_temp ram vram")"
+    export MANGOHUD_CONFIG="$(IFS=,; echo "cpu_temp,gpu_temp,ram,vram")"
 
-    [[ "$(tty)" = "/dev/tty1" ]] && gamescope --adaptive-sync --hdr-enabled --mangoapp --rt --steam -- steam "-pipewire-dmabuf -tenfoot"
+    [[ "$(tty)" = "/dev/tty1" ]] && gamescope --mangoapp --rt --steam -- steam "-pipewire-dmabuf -tenfoot"
   '';
 
   services.openssh.enable = true;
