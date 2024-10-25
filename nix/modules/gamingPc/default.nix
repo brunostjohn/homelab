@@ -12,8 +12,6 @@
 
   services.xserver.enable = true;
   security.sudo.wheelNeedsPassword = false;
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
 
   hardware.opengl = {
     enable = true;
@@ -39,8 +37,7 @@
     pulse.enable = true;
   };
 
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "brunostjohn";
+  services.getty.autologinUser = "brunostjohn";
 
   programs.firefox.enable = true;
 
@@ -56,7 +53,7 @@
     export MANGOHUD=1
     export MANGOHUD_CONFIG="$(IFS=,; echo "cpu_temp gpu_temp ram vram")"
 
-    gamescope --adaptive-sync --hdr-enabled --mangoapp --rt --steam -- steam "-pipewire-dmabuf -tenfoot"
+    [[ "$(tty)" = "/dev/tty1" ]] && gamescope --adaptive-sync --hdr-enabled --mangoapp --rt --steam -- steam "-pipewire-dmabuf -tenfoot"
   '';
 
   services.openssh.enable = true;
