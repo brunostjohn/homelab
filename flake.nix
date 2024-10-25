@@ -118,8 +118,8 @@
             pkgs = (import nixpkgs-unstable { inherit system; config.allowUnfree = true; }).pkgs;
           in
           nixpkgs.lib.nixosSystem {
-            inherit inputs system pkgs;
-            specialArgs = { inherit nixpkgs system overlays pkgs; };
+            inherit system pkgs;
+            specialArgs = { inherit system overlays pkgs; };
             modules = [
               ./nix/hosts/kittycon
               ./nix/modules/gamingPc
