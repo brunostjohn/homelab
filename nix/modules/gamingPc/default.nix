@@ -53,7 +53,7 @@
     export MANGOHUD=1
     export MANGOHUD_CONFIG="$(IFS=,; echo "cpu_temp,gpu_temp,ram,vram")"
 
-    [[ "$(tty)" = "/dev/tty1" ]] && gamescope --mangoapp --rt --steam -- steam "-pipewire-dmabuf -tenfoot"
+    [[ "$(tty)" = "/dev/tty1" ]] && gamescope --mangoapp --rt --steam -- steam "-pipewire-dmabuf -tenfoot -steam-deck"
   '';
 
   services.openssh.enable = true;
