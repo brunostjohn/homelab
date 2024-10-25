@@ -15,10 +15,12 @@
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  hardware.graphics = {
+  hardware.opengl = {
     enable = true;
-    enable32Bit = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
+
   # chaotic.hdr.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" ];
