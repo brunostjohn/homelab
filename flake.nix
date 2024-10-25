@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-darwin.url = "github:nixos/nixpkgs?ref=nixpkgs-24.05-darwin";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
