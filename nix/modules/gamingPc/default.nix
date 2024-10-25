@@ -12,7 +12,6 @@
 
   services.xserver.enable = true;
 
-  services.xserver.displayManager.lightdm.enable = true;
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
