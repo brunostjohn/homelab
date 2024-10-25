@@ -51,9 +51,10 @@
 
   environment.loginShellInit = ''
     export MANGOHUD=1
+    export STEAM_MULTIPLE_XWAYLANDS=1
     export MANGOHUD_CONFIG="$(IFS=,; echo "cpu_temp,gpu_temp,ram,vram")"
 
-    [[ "$(tty)" = "/dev/tty1" ]] && gamescope --steam -- steam "-pipewire-dmabuf -tenfoot"
+    [[ "$(tty)" = "/dev/tty1" ]] && gamescope --xwayland-count 2 --adaptive-sync -- steam -gamepadui -steamdeck"
   '';
 
   services.openssh.enable = true;
