@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   boot.loader.systemd-boot.enable = true;
@@ -11,9 +11,20 @@
   time.timeZone = "Europe/Dublin";
 
   services.xserver.enable = true;
-
+  security.sudo.wheelNeedsPassword = false;
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  chaotic.hdr.enable = true;
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.amdgpu.initrd.enable = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  hardware.enableRedistributableFirmware = lib.mkDefault true;
 
   services.printing.enable = true;
 
