@@ -3,7 +3,7 @@ module "ollama_helm" {
 
   repo_url         = "https://helm.openwebui.com/"
   chart            = "open-webui"
-  target_revision  = "3.3.2"
+  target_revision  = "3.4.0"
   namespace        = kubernetes_namespace.ai.metadata[0].name
   name             = "ollama"
   create_namespace = false

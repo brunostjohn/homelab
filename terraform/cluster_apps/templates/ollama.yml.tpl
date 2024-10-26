@@ -16,9 +16,17 @@ ollama:
     size: 50Gi
     storageClass: local-path
 
+image:
+  repository: ghcr.io/open-webui/open-webui
+  tag: latest
+  pullPolicy: "IfNotPresent"
+
 ingress:
   enabled: true
   host: chat.${global_fqdn}
+
+ollamaUrls:
+  - http://10.1.18.78:11434
 
 extraEnvVars:
   - name: ENABLE_IMAGE_GENERATION
