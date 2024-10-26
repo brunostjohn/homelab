@@ -1,15 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grist-deployment
-  namespace: grist
+  name: grist
+  namespace: productivity
 spec:
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 0
-  replicas: 1
   selector:
     matchLabels:
       app: grist
@@ -18,14 +12,6 @@ spec:
       labels:
         app: grist
     spec:
-      securityContext:
-        fsGroup: 1001
-        runAsUser: 1001
-        runAsGroup: 1001
-      volumes:
-        - name: grist-data
-          persistentVolumeClaim:
-            claimName: grist-data-pvc
       containers:
         - name: grist
           image: gristlabs/grist:latest
@@ -38,44 +24,44 @@ spec:
             - containerPort: 8484
               name: http
               protocol: TCP
-          volumeMounts:
-            - name: grist-data
-              mountPath: /persist
+          envFrom:
+            - secretRef:
+                name: grist-secrets
           env:
-            - name: GRIST_SESSION_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: grist-secrets
-                  key: GRIST_SESSION_SECRET
+            - name: TYPEORM_TYPE
+              value: postgres
+            - name: TYPEORM_HOST
+              value: postgres-cluster-rw-pooler.databases.svc.cluster.local
+            - name: TYPEORM_DATABASE
+              value: grist
+            - name: TYPEORM_USERNAME
+              value: grist
+            - name: TYPEORM_PORT
+              value: "5432"
+            - name: GRIST_TELEMETRY_LEVEL
+              value: "off"
+            - name: REDIS_URL
+              value: redis://:redis@redis-master.databases.svc.cluster.local:6379/17
             - name: GRIST_SANDBOX_FLAVOR
               value: unsandboxed
             - name: GRIST_FORCE_LOGIN
               value: "true"
             - name: APP_HOME_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: grist-fqdn
-                  key: GRIST_FQDN
-            - name: DEBUG
-              value: "true"
-            - name: GRIST_OIDC_IDP_ISSUER
-              valueFrom:
-                secretKeyRef:
-                  name: grist-secrets
-                  key: GRIST_OIDC_IDP_ISSUER
-            - name: GRIST_OIDC_IDP_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: grist-secrets
-                  key: GRIST_OIDC_CLIENT_ID
-            - name: GRIST_OIDC_IDP_CLIENT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: grist-secrets
-                  key: GRIST_OIDC_CLIENT_SECRET
+              value: https://grist.zefirsroyal.cloud
             - name: GRIST_OIDC_IDP_SCOPES
               value: "openid email profile"
+            - name: GRIST_DOCS_MINIO_ENDPOINT
+              value: minio-svc.minio.svc.cluster.local
+            - name: GRIST_DOCS_MINIO_USE_SSL
+              value: "0"
+            - name: GRIST_DOCS_MINIO_BUCKET
+              value: grist-docs
+            - name: GRIST_DOCS_MINIO_PORT
+              value: "9000"
           resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
             limits:
-              cpu: "200m"
-              memory: "256Mi"
+              cpu: "2"
+              memory: "2Gi"

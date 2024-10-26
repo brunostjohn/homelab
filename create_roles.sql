@@ -240,6 +240,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to infisical_role;
 CREATE USER infisical WITH PASSWORD '<password>';
 GRANT infisical_role TO infisical;
 
+-- GRIST
+CREATE ROLE grist_role;
+\c grist
+GRANT ALL PRIVILEGES ON DATABASE grist TO grist_role;
+GRANT ALL ON SCHEMA public TO grist_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grist_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to grist_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to grist_role;
+CREATE USER grist WITH PASSWORD '<password>';
+GRANT grist_role TO grist;
+
 -- SILLY BOT
 CREATE ROLE sillybot_role;
 \c sillybot
