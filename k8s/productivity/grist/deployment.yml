@@ -32,6 +32,12 @@ spec:
               path: /
               port: 8484
             initialDelaySeconds: 20
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8484
+            failureThreshold: 30
+            periodSeconds: 10
           ports:
             - containerPort: 8484
               name: http
