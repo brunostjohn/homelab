@@ -66,7 +66,7 @@ spec:
             - name: REDIS_URL
               value: redis://:redis@redis-master.databases.svc.cluster.local:6379/17
             - name: GRIST_SANDBOX_FLAVOR
-              value: gvisor
+              value: unsandboxed
             - name: GRIST_FORCE_LOGIN
               value: "true"
             - name: APP_HOME_URL
@@ -86,7 +86,7 @@ spec:
             - name: ASSISTANT_CHAT_COMPLETION_ENDPOINT
               value: http://open-webui.ai.svc.cluster.local/api/chat/completions
             - name: ASSISTANT_MODEL
-              value: starcoder2:7b
+              value: codellama:latest
           resources:
             requests:
               cpu: "500m"
