@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: grist
   namespace: productivity
+  annotations:
+    secrets.infisical.com/auto-reload: "true"
 spec:
   selector:
     matchLabels:
@@ -43,7 +45,7 @@ spec:
             - name: REDIS_URL
               value: redis://:redis@redis-master.databases.svc.cluster.local:6379/17
             - name: GRIST_SANDBOX_FLAVOR
-              value: unsandboxed
+              value: gvisor
             - name: GRIST_FORCE_LOGIN
               value: "true"
             - name: APP_HOME_URL
