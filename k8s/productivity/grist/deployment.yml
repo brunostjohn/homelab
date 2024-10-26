@@ -25,11 +25,11 @@ spec:
                 - SYS_PTRACE
           livenessProbe:
             httpGet:
-              path: /
+              path: /status
               port: 8484
           readinessProbe:
             httpGet:
-              path: /
+              path: /status
               port: 8484
             initialDelaySeconds: 20
           startupProbe:
