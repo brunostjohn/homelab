@@ -86,7 +86,7 @@ spec:
             - name: ASSISTANT_CHAT_COMPLETION_ENDPOINT
               value: http://open-webui.ai.svc.cluster.local/api/chat/completions
             - name: ASSISTANT_MODEL
-              value: codellama:latest
+              value: "llama3.1:latest"
           resources:
             requests:
               cpu: "500m"
