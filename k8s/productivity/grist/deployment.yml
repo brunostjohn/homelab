@@ -6,6 +6,7 @@ metadata:
   annotations:
     secrets.infisical.com/auto-reload: "true"
 spec:
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: grist
@@ -22,14 +23,28 @@ spec:
             capabilities:
               add:
                 - SYS_PTRACE
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8484
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8484
+            initialDelaySeconds: 20
           ports:
             - containerPort: 8484
               name: http
+              protocol: TCP
+            - containerPort: 9090
+              name: metrics
               protocol: TCP
           envFrom:
             - secretRef:
                 name: grist-secrets
           env:
+            - name: GRIST_HIDE_UI_ELEMENTS
+              value: helpCenter,billing,supportGrist
             - name: TYPEORM_TYPE
               value: postgres
             - name: TYPEORM_HOST
@@ -60,6 +75,12 @@ spec:
               value: grist-docs
             - name: GRIST_DOCS_MINIO_PORT
               value: "9000"
+            - name: GRIST_PROMCLIENT_PORT
+              value: "9090"
+            - name: ASSISTANT_CHAT_COMPLETION_ENDPOINT
+              value: http://open-webui.ai.svc.cluster.local:8000/api/chat/completions
+            - name: ASSISTANT_MODEL
+              value: starcoder2:7b
           resources:
             requests:
               cpu: "500m"

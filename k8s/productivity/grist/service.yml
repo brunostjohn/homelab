@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: grist
   namespace: productivity
+  labels:
+    app: grist
 spec:
   selector:
     app: grist
@@ -11,3 +13,7 @@ spec:
       port: 8484
       targetPort: 8484
       name: http
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+      name: metrics
