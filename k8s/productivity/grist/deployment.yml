@@ -84,7 +84,7 @@ spec:
             - name: GRIST_PROMCLIENT_PORT
               value: "9090"
             - name: ASSISTANT_CHAT_COMPLETION_ENDPOINT
-              value: http://open-webui.ai.svc.cluster.local:8000/api/chat/completions
+              value: http://open-webui.ai.svc.cluster.local/api/chat/completions
             - name: ASSISTANT_MODEL
               value: starcoder2:7b
           resources:
