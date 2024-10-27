@@ -16,9 +16,6 @@ spec:
         - name: perplexica-backend-datastore
           persistentVolumeClaim:
             claimName: perplexica-backend
-        - name: perplexica-config
-          configMap:
-            name: perplexica-config
       containers:
         - name: perplexica-backend
           image: ghcr.io/brunostjohn/homelab/perplexica-backend:latest
@@ -29,9 +26,6 @@ spec:
           volumeMounts:
             - name: perplexica-backend-datastore
               mountPath: /home/perplexica/data
-            - name: perplexica-config
-              mountPath: /home/perplexica/config.toml
-              subPath: config.toml
           resources:
             requests:
               memory: 512Mi
