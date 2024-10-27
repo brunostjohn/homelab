@@ -77,6 +77,9 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: "."
           file: app.dockerfile
+          build-args: |
+            NEXT_PUBLIC_API_URL=https://perplexity.zefirsroyal.cloud/api
+            NEXT_PUBLIC_WS_URL=https://perplexity.zefirsroyal.cloud/api
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
