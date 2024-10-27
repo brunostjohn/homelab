@@ -45,15 +45,15 @@ spec:
               name: http
           livenessProbe:
             httpGet:
-              path: /
+              path: /api
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /api
               port: http
           startupProbe:
             httpGet:
-              path: /
+              path: /api
               port: http
             failureThreshold: 30
             periodSeconds: 10
