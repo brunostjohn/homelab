@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: searxng
   namespace: productivity
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:

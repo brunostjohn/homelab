@@ -19,6 +19,9 @@ data:
       safe_search: 0
       autocomplete: google
       favicon_resolver: google
+      formats:
+        - html
+        - json
     server:
       limiter: false
       image_proxy: true
