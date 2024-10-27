@@ -23,7 +23,7 @@ data:
       autocomplete: google
       favicon_resolver: google
     server:
-      limiter: true
+      limiter: false
       image_proxy: true
     ui:
       static_use_hash: true
