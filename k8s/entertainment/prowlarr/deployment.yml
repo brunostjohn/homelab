@@ -29,11 +29,11 @@ spec:
             runAsUser: 0
           resources:
             requests:
-              memory: "512Mi"
-              cpu: "250m"
-            limits:
               memory: "2Gi"
-              cpu: "500m"
+              cpu: "1"
+            limits:
+              memory: "4Gi"
+              cpu: "4"
           ports:
             - containerPort: 9696
               name: http
