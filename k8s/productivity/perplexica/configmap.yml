@@ -4,19 +4,6 @@ metadata:
   name: perplexica-config
   namespace: productivity
 data:
-  config.toml: |
-    [GENERAL]
-    PORT = 3001
-    SIMILARITY_MEASURE = "cosine"
-
-    [API_KEYS]
-    OPENAI = ""
-    GROQ = ""
-    ANTHROPIC = ""
-
-    [API_ENDPOINTS]
-    SEARXNG = "http://searxng.productivity.svc.cluster.local:8080"
-    OLLAMA = "http://open-webui-ollama.ai.svc.cluster.local:11434"
   Caddyfile: |
     :2222 {
       respond "Hello, world!"

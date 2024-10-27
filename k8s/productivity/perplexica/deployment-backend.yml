@@ -26,6 +26,10 @@ spec:
           volumeMounts:
             - name: perplexica-backend-datastore
               mountPath: /home/perplexica/data
+              subPath: data
+            - name: perplexica-backend-datastore
+              mountPath: /home/perplexica/config.toml
+              subPath: config/config.toml
           resources:
             requests:
               memory: 512Mi
