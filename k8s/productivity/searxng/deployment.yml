@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searxng
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: searxng
+  template:
+    metadata:
+      labels:
+        app: searxng
+    spec:
+      volumes:
+        - name: searxng-config
+          configMap:
+            name: searxng
+      containers:
+        - name: searxng
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - CHOWN
+                - SETGID
+                - SETUID
+          image: docker.io/searxng/searxng:latest
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: "1"
+            limits:
+              memory: 1Gi
+              cpu: "2"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          volumeMounts:
+            - name: searxng-config
+              mountPath: /etc/searxng
+          envFrom:
+            - secretRef:
+                name: searxng-secrets
+          env:
+            - name: SEARXNG_BASE_URL
+              value: https://searxng.zefirsroyal.cloud
+            - name: UWSGI_WORKERS
+              value: "4"
+            - name: UWSGI_THREADS
+              value: "4"

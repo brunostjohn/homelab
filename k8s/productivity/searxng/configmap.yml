@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: searxng
+  namespace: productivity
+data:
+  limiter.toml: |
+    [botdetection.ip_limit]
+    link_token = true
+  settings.yml: |
+    use_default_settings: true
+    general:
+      instance_name: "Zefir's Search"
+    search:
+      safe_search: 0
+      autocomplete: google
+      favicon_resolver: google
+    server:
+      limiter: true
+      image_proxy: true
+    ui:
+      static_use_hash: true
+    redis:
+      url: redis://:redis@redis-master.databases.svc.cluster.local:6379/18
+    enabled_plugins:
+      - 'Hash plugin'
+      - 'Self Informations'
+      - 'Tracker URL remover'
+      - 'Ahmia blacklist'
