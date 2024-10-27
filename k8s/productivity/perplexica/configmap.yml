@@ -17,3 +17,19 @@ data:
     [API_ENDPOINTS]
     SEARXNG = "http://searxng.productivity.svc.cluster.local:8080"
     OLLAMA = "http://open-webui-ollama.ai.svc.cluster.local:11434"
+  Caddyfile: |
+    :2222 {
+      respond "Hello, world!"
+    }
+
+    :80 {
+      @websockets {
+        header Connection *Upgrade*
+        header Upgrade    websocket
+      }
+      
+      reverse_proxy @websockets perplexica-backend.productivity.svc.cluster.local:3001
+      reverse_proxy /api/* perplexica-backend.productivity.svc.cluster.local:3001
+      reverse_proxy /api perplexica-backend.productivity.svc.cluster.local:3001
+      reverse_proxy perplexica-backend.productivity.svc.cluster.local:3001
+    }

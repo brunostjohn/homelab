@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perplexica-proxy
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: perplexica-proxy
+  template:
+    metadata:
+      labels:
+        app: perplexica-proxy
+    spec:
+      volumes:
+        - name: perplexica-config
+          configMap:
+            name: perplexica-config
+      containers:
+        - name: perplexica-proxy
+          image: caddy
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+            - containerPort: 2222
+              protocol: TCP
+              name: health
+          volumeMounts:
+            - name: perplexica-config
+              mountPath: /etc/caddy/Caddyfile
+              subPath: Caddyfile
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: health
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: health
