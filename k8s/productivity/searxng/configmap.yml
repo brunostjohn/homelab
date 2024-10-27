@@ -4,9 +4,6 @@ metadata:
   name: searxng
   namespace: productivity
 data:
-  limiter.toml: |
-    [botdetection.ip_limit]
-    link_token = true
   favicons.toml: |
     [favicons]
     cfg_schema = 1
