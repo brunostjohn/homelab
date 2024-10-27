@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perplexica-backend
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: perplexica-backend
+  template:
+    metadata:
+      labels:
+        app: perplexica-backend
+    spec:
+      volumes:
+        - name: perplexica-backend-datastore
+          persistentVolumeClaim:
+            claimName: perplexica-backend
+        - name: perplexica-config
+          configMap:
+            name: perplexica-config
+      containers:
+        - name: perplexica-backend
+          image: ghcr.io/brunostjohn/homelab/perplexica-backend:latest
+          imagePullPolicy: Always
+          env:
+            - name: SEARXNG_API_URL
+              value: http://searxng.productivity.svc.cluster.local:8080
+          volumeMounts:
+            - name: perplexica-backend-datastore
+              mountPath: /home/perplexica/data
+            - name: perplexica-config
+              mountPath: /home/perplexica/config.toml
+              subPath: config.toml
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: "500m"
+            limits:
+              memory: 1Gi
+              cpu: "1"
+          ports:
+            - containerPort: 3001
+              protocol: TCP
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10

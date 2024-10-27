@@ -7,10 +7,17 @@ data:
   limiter.toml: |
     [botdetection.ip_limit]
     link_token = true
+  favicons.toml: |
+    [favicons]
+    cfg_schema = 1
+    [favicons.cache]
+    db_url = "/tmp/favicon_cache.db"
+    LIMIT_TOTAL_BYTES = 2147483648
   settings.yml: |
     use_default_settings: true
     general:
       instance_name: "Zefir's Search"
+      enable_metrics: true
     search:
       safe_search: 0
       autocomplete: google

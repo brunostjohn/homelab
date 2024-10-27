@@ -29,11 +29,27 @@ spec:
           image: docker.io/searxng/searxng:latest
           resources:
             requests:
-              memory: 512Mi
-              cpu: "1"
-            limits:
               memory: 1Gi
               cpu: "2"
+              ephemeral-storage: 1Gi
+            limits:
+              memory: 3Gi
+              cpu: "4"
+              ephemeral-storage: 2Gi
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -45,12 +61,15 @@ spec:
             - name: searxng-config
               mountPath: /etc/searxng/limiter.toml
               subPath: limiter.toml
+            - name: searxng-config
+              mountPath: /etc/searxng/favicons.toml
+              subPath: favicons.toml
           envFrom:
             - secretRef:
                 name: searxng-secrets
           env:
             - name: SEARXNG_BASE_URL
-              value: https://searxng.zefirsroyal.cloud
+              value: https://search.zefirsroyal.cloud
             - name: UWSGI_WORKERS
               value: "4"
             - name: UWSGI_THREADS

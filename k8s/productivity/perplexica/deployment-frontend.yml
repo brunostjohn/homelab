@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perplexica-frontend
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: perplexica-frontend
+  template:
+    metadata:
+      labels:
+        app: perplexica-frontend
+    spec:
+      containers:
+        - name: perplexica-frontend
+          image: ghcr.io/brunostjohn/homelab/perplexica-frontend:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: "500m"
+            limits:
+              memory: 1Gi
+              cpu: "1"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
