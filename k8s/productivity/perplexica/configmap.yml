@@ -27,9 +27,9 @@ data:
         header Connection *Upgrade*
         header Upgrade    websocket
       }
-      
+
       reverse_proxy @websockets perplexica-backend.productivity.svc.cluster.local:3001
       reverse_proxy /api/* perplexica-backend.productivity.svc.cluster.local:3001
       reverse_proxy /api perplexica-backend.productivity.svc.cluster.local:3001
-      reverse_proxy perplexica-backend.productivity.svc.cluster.local:3001
+      reverse_proxy perplexica-frontend.productivity.svc.cluster.local:3000
     }
