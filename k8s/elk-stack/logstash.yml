@@ -20,27 +20,6 @@ spec:
         }
 
         filter {
-          if [kubernetes][labels][app_kubernetes_io/instance] != "jabberwock-iscsi" and [kubernetes][labels][app_kubernetes_io/instance] != "floof-iscsi" and [kubernetes][labels][app_kubernetes_io/instance] != "jabberwock-nfs" and [kubernetes][labels][app_kubernetes_io/instance] != "floof-nfs" and [message] != "" and [message] != "\n" and [message] != " " {
-            json {
-              source => "message"
-              skip_on_invalid_json => true
-            }
-          }
-
-          if [kubernetes][labels][app] == "longhorn-manager" {
-            kv {
-              source => "message"
-              field_split => " "
-              value_split => "="
-            }
-
-            mutate {
-              add_field => {
-                "service.name" => "longhorn-manager"
-              }
-            }
-          }
-
           mutate {
             rename => {
               "level" => "log.level"
@@ -86,12 +65,41 @@ spec:
             }
           }
 
-          date {
-            match => [ "timestamp", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+          if [kubernetes][labels][app_kubernetes_io/instance] != "jabberwock-iscsi" and [kubernetes][labels][app_kubernetes_io/instance] != "floof-iscsi" and [kubernetes][labels][app_kubernetes_io/instance] != "jabberwock-nfs" and [kubernetes][labels][app_kubernetes_io/instance] != "floof-nfs" and [message] != "" and [message] != "\n" and [message] != " " {
+            json {
+              source => "message"
+              skip_on_invalid_json => true
+            }
+
+            date {
+              match => [ "timestamp", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+            }
+
+            date {
+              match => [ "ts", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+            }
           }
 
-          date {
-            match => [ "ts", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+          if [kubernetes][labels][app] == "longhorn-manager" {
+            kv {
+              source => "message"
+              field_split => " "
+              value_split => "="
+            }
+
+            mutate {
+              add_field => {
+                "service.name" => "longhorn-manager"
+              }
+            }
+
+            date {
+              match => [ "timestamp", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+            }
+
+            date {
+              match => [ "ts", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+            }
           }
         }
 
