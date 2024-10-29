@@ -11,6 +11,7 @@ spec:
       selfSignedCertificate:
         disabled: true
   config:
+    server.publicBaseUrl: https://kibana.zefirsroyal.cloud
     xpack.security.authc.providers:
       oidc.oidc1:
         order: 0
