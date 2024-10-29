@@ -19,10 +19,10 @@ spec:
         }
         output {
           elasticsearch {
-            hosts => [ "${QS_ES_HOSTS}" ]
-            user => "${QS_ES_USER}"
-            password => "${QS_ES_PASSWORD}"
-            ssl_certificate_authorities => "${QS_ES_SSL_CERTIFICATE_AUTHORITY}"
+            hosts => [ "${ELASTICSEARCH_HOSTS}" ]
+            user => "${ELASTICSEARCH_USER}"
+            password => "${ELASTICSEARCH_PASSWORD}"
+            ssl_certificate_authorities => "${ELASTICSEARCH_SSL_CERTIFICATE_AUTHORITY}"
           }
         }
   services:
