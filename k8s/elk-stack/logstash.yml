@@ -7,7 +7,8 @@ spec:
   count: 1
   elasticsearchRefs:
     - name: elasticsearch
-      clusterName: elasticsearch
+      namespace: monitoring
+      clusterName: es
   version: 8.15.3
   pipelines:
     - pipeline.id: main
@@ -19,10 +20,10 @@ spec:
         }
         output {
           elasticsearch {
-            hosts => [ "${ELASTICSEARCH_HOSTS}" ]
-            user => "${ELASTICSEARCH_USER}"
-            password => "${ELASTICSEARCH_PASSWORD}"
-            ssl_certificate_authorities => "${ELASTICSEARCH_SSL_CERTIFICATE_AUTHORITY}"
+            hosts => [ "${ES_ES_HOSTS}" ]
+            user => "${ES_ES_USER}"
+            password => "${ES_ES_PASSWORD}"
+            ssl_certificate_authorities => "${ES_ES_SSL_CERTIFICATE_AUTHORITY}"
           }
         }
   services:
