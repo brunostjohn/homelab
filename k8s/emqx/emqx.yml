@@ -41,16 +41,6 @@ spec:
       extraVolumeMounts:
         - name: emqx-tls
           mountPath: /mounted/cert
-  replicantTemplate:
-    spec:
-      replicas: 1
-      extraVolumes:
-        - name: emqx-tls
-          secret:
-            secretName: emqx-tls
-      extraVolumeMounts:
-        - name: emqx-tls
-          mountPath: /mounted/cert
   dashboardServiceTemplate:
     spec:
       type: LoadBalancer
