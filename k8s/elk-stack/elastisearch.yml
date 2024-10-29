@@ -22,3 +22,6 @@ spec:
             storageClassName: local-path
       config:
         node.store.allow_mmap: false
+        xpack.security.auth.realms:
+          file.file1.order: 1
+          native.native1.order: 0
