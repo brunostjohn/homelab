@@ -24,10 +24,6 @@ spec:
             source => "message"
             skip_on_invalid_json => true
           }
-
-          kv {
-            source => "message"
-          }
         }
 
         output {
