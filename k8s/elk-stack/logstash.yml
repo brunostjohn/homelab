@@ -24,6 +24,10 @@ spec:
             source => "message"
             skip_on_invalid_json => true
           }
+
+          mutate {
+            lowercase => ["loglevel", "log.level"]
+          }
         }
 
         output {
