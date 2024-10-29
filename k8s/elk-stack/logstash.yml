@@ -20,7 +20,7 @@ spec:
         }
 
         filter {
-          if [kubernetes][labels][app_kubernetes_io/instance] !== "jabberwock-iscsi" && [kubernetes][labels][app_kubernetes_io/instance] !== "floof-iscsi"[kubernetes][labels][app_kubernetes_io/instance] !== "jabberwock-nfs" && [kubernetes][labels][app_kubernetes_io/instance] !== "floof-nfs" {
+          if [kubernetes][labels][app_kubernetes_io/instance] !== "jabberwock-iscsi" && [kubernetes][labels][app_kubernetes_io/instance] !== "floof-iscsi" && [kubernetes][labels][app_kubernetes_io/instance] !== "jabberwock-nfs" && [kubernetes][labels][app_kubernetes_io/instance] !== "floof-nfs" {
             json {
               source => "message"
               skip_on_invalid_json => true
