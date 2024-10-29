@@ -1,0 +1,56 @@
+apiVersion: apps.emqx.io/v2beta1
+kind: EMQX
+metadata:
+  name: emqx
+  namespace: databases
+spec:
+  image: emqx:5
+  updateStrategy:
+    evacuationStrategy:
+      connEvictRate: 1000
+      sessEvictRate: 1000
+      waitTakeover: 10
+    initialDelaySeconds: 10
+    type: Recreate
+  config:
+    data: |
+      listeners.ssl.default {
+        bind = "0.0.0.0:8883"
+        ssl_options {
+          cacertfile = "/mounted/cert/ca.crt"
+          certfile = "/mounted/cert/tls.crt"
+          keyfile = "/mounted/cert/tls.key"
+          gc_after_handshake = true
+          handshake_timeout = 5s
+        }
+      }
+  coreTemplate:
+    spec:
+      volumeClaimTemplates:
+        storageClassName: longhorn-unreplicated
+        resources:
+          requests:
+            storage: 1Gi
+        accessModes:
+          - ReadWriteOnce
+      replicas: 3
+      extraVolumes:
+        - name: emqx-tls
+          secret:
+            secretName: emqx-tls
+      extraVolumeMounts:
+        - name: emqx-tls
+          mountPath: /mounted/cert
+  replicantTemplate:
+    spec:
+      replicas: 1
+      extraVolumes:
+        - name: emqx-tls
+          secret:
+            secretName: emqx-tls
+      extraVolumeMounts:
+        - name: emqx-tls
+          mountPath: /mounted/cert
+  dashboardServiceTemplate:
+    spec:
+      type: LoadBalancer

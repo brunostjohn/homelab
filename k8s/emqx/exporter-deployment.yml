@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emqx-exporter
+  namespace: databases
+  labels:
+    app: emqx-exporter
+spec:
+  selector:
+    matchLabels:
+      app: emqx-exporter
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: emqx-exporter
+    spec:
+      securityContext:
+        runAsUser: 1000
+      containers:
+        - name: exporter
+          image: emqx-exporter:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - --emqx.nodes=${emqx-dashboard-service-name}:18083
+            - --emqx.auth-username=${paste_your_new_api_key_here}
+            - --emqx.auth-password=${paste_your_new_secret_here}
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+          ports:
+            - containerPort: 8085
+              name: metrics
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 20Mi

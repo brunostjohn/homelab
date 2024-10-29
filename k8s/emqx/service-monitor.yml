@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: emqx-exporter
+  namespace: databases
+  labels:
+    app: emqx-exporter
+spec:
+  selector:
+    matchLabels:
+      app: emqx-exporter
+  endpoints:
+    - port: metrics
+      interval: 5s
+      path: /metrics
+      relabelings:
+        - action: replace
+          replacement: emqx5
+          targetLabel: cluster
+        - action: replace
+          replacement: exporter
+          targetLabel: from
+        - action: replace
+          sourceLabels: ["pod"]
+          regex: "(.*)-.*-.*"
+          replacement: $1
+          targetLabel: "instance"
+        - action: labeldrop
+          regex: "pod"
+  namespaceSelector:
+    matchNames:
+      - databases
