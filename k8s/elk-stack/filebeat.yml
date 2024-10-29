@@ -22,7 +22,7 @@ spec:
                 - logs_path:
                     logs_path: "/var/log/containers/"
     output.logstash:
-      hosts: ["logstash.logging.svc:5044"]
+      hosts: ["logstash.monitoring.svc.cluster.local:5044"]
   daemonSet:
     podTemplate:
       spec:
