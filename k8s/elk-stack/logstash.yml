@@ -52,7 +52,7 @@ spec:
             }
           }
 
-          if [kubernetes][labels][app] == "" {          
+          if "app" not in [kubernetes][labels] {          
             mutate {
               copy => {
                 "[kubernetes][labels][app_kubernetes_io/instance]" => "service.name"
