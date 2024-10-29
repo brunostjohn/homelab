@@ -64,7 +64,7 @@ spec:
 
           if "cnpg_io/cluster" in [kubernetes][labels] {
             mutate {
-              rename => {
+              copy => {
                 "[kubernetes][labels][cnpg_io/cluster]" => "service.name"
               }
             }
@@ -72,7 +72,7 @@ spec:
 
           if "k8s-app" in [kubernetes][labels] {
             mutate {
-              rename => {
+              copy => {
                 "[kubernetes][labels][k8s-app]" => "service.name"
               }
             }
