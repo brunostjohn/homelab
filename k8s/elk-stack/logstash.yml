@@ -65,6 +65,15 @@ spec:
             date {
               match => [ "time", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
             }
+
+            mutate {
+              rename => {
+                "ts" => "timestamp"
+              }
+              rename => {
+                "time" => "timestamp"
+              }
+            }
           }
 
           if [kubernetes][labels][app] == "longhorn-manager" {
@@ -86,6 +95,15 @@ spec:
 
             date {
               match => [ "ts", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+            }
+
+            mutate {
+              rename => {
+                "ts" => "timestamp"
+              }
+              rename => {
+                "time" => "timestamp"
+              }
             }
           }
         }
