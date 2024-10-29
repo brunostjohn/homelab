@@ -23,22 +23,22 @@ spec:
       config:
         node.store.allow_mmap: false
         xpack:
-        security:
-          enabled: true
-          authc:
-            token.enabled: true
-            realms:
-              oidc:
-                oidc1:
-                  order: 2
-                  rp.response_type: "code"
-                  rp.requested_scopes: ["openid", "email", "profile"]
-                  rp.redirect_uri: https://kibana.zefirsroyal.cloud/api/security/v1/oidc
-                  op.issuer: https://auth.zefirsroyal.cloud/application/o/elastic/
-                  op.authorization_endpoint: https://auth.zefirsroyal.cloud/application/o/authorize/
-                  op.token_endpoint: https://auth.zefirsroyal.cloud/application/o/token/
-                  op.userinfo_endpoint: https://auth.zefirsroyal.cloud/application/o/userinfo/
-                  op.endsession_endpoint: https://auth.zefirsroyal.cloud/application/o/elastic/end-session/
-                  op.jwkset_path: https://auth.zefirsroyal.cloud/application/o/elastic/jwks/
-                  rp.post_logout_redirect_uri: https://kibana.zefirsroyal.cloud/security/logged_out
-                  claims.principal: preferred_username
+          security:
+            enabled: true
+            authc:
+              token.enabled: true
+              realms:
+                oidc:
+                  oidc1:
+                    order: 2
+                    rp.response_type: "code"
+                    rp.requested_scopes: ["openid", "email", "profile"]
+                    rp.redirect_uri: https://kibana.zefirsroyal.cloud/api/security/v1/oidc
+                    op.issuer: https://auth.zefirsroyal.cloud/application/o/elastic/
+                    op.authorization_endpoint: https://auth.zefirsroyal.cloud/application/o/authorize/
+                    op.token_endpoint: https://auth.zefirsroyal.cloud/application/o/token/
+                    op.userinfo_endpoint: https://auth.zefirsroyal.cloud/application/o/userinfo/
+                    op.endsession_endpoint: https://auth.zefirsroyal.cloud/application/o/elastic/end-session/
+                    op.jwkset_path: https://auth.zefirsroyal.cloud/application/o/elastic/jwks/
+                    rp.post_logout_redirect_uri: https://kibana.zefirsroyal.cloud/security/logged_out
+                    claims.principal: preferred_username
