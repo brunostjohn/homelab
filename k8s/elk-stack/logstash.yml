@@ -69,6 +69,14 @@ spec:
               }
             }
           }
+
+          date {
+            match => [ "timestamp", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+          }
+
+          date {
+            match => [ "ts", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+          }
         }
 
         output {
