@@ -12,12 +12,5 @@ spec:
         disabled: true
   config:
     server.publicBaseUrl: https://kibana.zefirsroyal.cloud
-    xpack.security.authc.providers:
-      oidc.oidc1:
-        order: 0
-        realm: oidc1
-        description: "Log in with Zefir's Cloud"
-      basic.basic1:
-        order: 1
   elasticsearchRef:
     name: elasticsearch
