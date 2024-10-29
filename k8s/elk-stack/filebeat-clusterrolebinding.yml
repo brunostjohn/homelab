@@ -5,7 +5,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: filebeat
-    namespace: elk-test
+    namespace: monitoring
 roleRef:
   kind: ClusterRole
   name: filebeat

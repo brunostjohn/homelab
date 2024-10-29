@@ -6,8 +6,6 @@ metadata:
 spec:
   type: filebeat
   version: 8.13.4
-  # elasticsearchRef:
-  #   name: elasticsearch
   kibanaRef:
     name: kibana
   config:
