@@ -78,6 +78,10 @@ spec:
             date {
               match => [ "ts", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
             }
+
+            date {
+              match => [ "time", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+            }
           }
 
           if [kubernetes][labels][app] == "longhorn-manager" {
@@ -99,6 +103,18 @@ spec:
 
             date {
               match => [ "ts", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
+            }
+          }
+
+          mutate {
+            copy => {
+              "[kubernetes][namespace]" => "orchestrator.namespace"
+            }  
+          }
+
+          mutate {
+            copy => {
+              "[kubernetes][container][name]" => "container.name"
             }
           }
         }
