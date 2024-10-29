@@ -54,3 +54,4 @@ spec:
   dashboardServiceTemplate:
     spec:
       type: LoadBalancer
+      loadBalancerIP: 10.0.2.27
