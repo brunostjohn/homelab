@@ -46,7 +46,7 @@ spec:
           mutate {
             lowercase => ["loglevel", "log.level"]
             copy => {
-              "kubernetes.labels.app" => "service.name"
+              "[kubernetes][labels][app]" => "service.name"
             }
           }
         }
