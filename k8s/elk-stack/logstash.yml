@@ -25,6 +25,20 @@ spec:
             skip_on_invalid_json => true
           }
 
+          if [kubernetes][labels][app] == "longhorn-manager" {
+            kv {
+              source => "message"
+              field_split => " "
+              value_split => "="
+            }
+
+            mutate {
+              rename => {
+                "level" => "log.level"
+              }
+            }
+          }
+
           mutate {
             lowercase => ["loglevel", "log.level"]
           }
