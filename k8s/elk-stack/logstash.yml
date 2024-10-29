@@ -35,13 +35,15 @@ spec:
             }
 
             mutate {
-              rename => {
-                "level" => "log.level"
-              }
-
               add_field => {
                 "service.name" => "longhorn-manager"
               }
+            }
+          }
+
+          mutate {
+            rename => {
+              "level" => "log.level"
             }
           }
 
