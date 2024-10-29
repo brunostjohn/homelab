@@ -1,0 +1,22 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+  namespace: monitoring
+spec:
+  version: 8.15.3
+  nodeSets:
+    - name: default
+      count: 1
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 15Gi
+            storageClassName: floof-iscsi-csi
+      config:
+        node.store.allow_mmap: false
