@@ -18,6 +18,18 @@ spec:
             port => 5044
           }
         }
+
+        filter {
+          json {
+            source => "message"
+            skip_on_invalid_json => true
+          }
+
+          kv {
+            source => "message"
+          }
+        }
+
         output {
           elasticsearch {
             hosts => [ "${ES_ES_HOSTS}" ]
