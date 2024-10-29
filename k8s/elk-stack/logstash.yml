@@ -61,6 +61,14 @@ spec:
               }
             }
           }
+
+          if "cnpg_io/cluster" in [kubernetes][labels] {
+            mutate {
+              rename => {
+                "[kubernetes][labels][cnpg_io/cluster]" => "service.name"
+              }
+            }
+          }
         }
 
         output {
