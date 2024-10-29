@@ -70,6 +70,14 @@ spec:
             }
           }
 
+          if "cnpg_io/poolerName" in [kubernetes][labels] {
+            mutate {
+              copy => {
+                "[kubernetes][labels][cnpg_io/poolerName]" => "service.name"
+              }
+            }
+          }
+
           if "k8s-app" in [kubernetes][labels] {
             mutate {
               copy => {
