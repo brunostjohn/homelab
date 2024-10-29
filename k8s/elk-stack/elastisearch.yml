@@ -10,13 +10,13 @@ spec:
       count: 1
       volumeClaimTemplates:
         - metadata:
-            name: esd
+            name: elasticsearch-data
           spec:
             accessModes:
               - ReadWriteOnce
             resources:
               requests:
                 storage: 15Gi
-            storageClassName: floof-iscsi-csi
+            storageClassName: local-path
       config:
         node.store.allow_mmap: false
