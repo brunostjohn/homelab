@@ -31,6 +31,7 @@ spec:
                 oidc:
                   oidc1:
                     order: 2
+                    rp.client_id: UB0a83ntoulftE9OMMeVKoxSA4qKi9YT14OySA5F
                     rp.response_type: "code"
                     rp.requested_scopes: ["openid", "email", "profile"]
                     rp.redirect_uri: https://kibana.zefirsroyal.cloud/api/security/v1/oidc
