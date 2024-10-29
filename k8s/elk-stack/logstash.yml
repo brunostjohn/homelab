@@ -51,6 +51,14 @@ spec:
               "[kubernetes][labels][app]" => "service.name"
             }
           }
+
+          if [kubernetes][labels][app] == "" {          
+            mutate {
+              copy => {
+                "[kubernetes][labels][app_kubernetes_io/instance]" => "service.name"
+              }
+            }
+          }
         }
 
         output {
