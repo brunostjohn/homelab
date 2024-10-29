@@ -11,3 +11,4 @@ spec:
   issuerRef:
     name: selfsigned
     kind: ClusterIssuer
+  commonName: emqx
