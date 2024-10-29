@@ -70,6 +70,14 @@ spec:
             }
           }
 
+          if "k8s-app" in [kubernetes][labels] {
+            mutate {
+              rename => {
+                "[kubernetes][labels][k8s-app]" => "service.name"
+              }
+            }
+          }
+
           date {
             match => [ "timestamp", "ISO8601", "MMM dd yyyy HH:mm:ss", "UNIX", "UNIX_MS", "TAI64N" ]
           }
