@@ -6,6 +6,10 @@ metadata:
 spec:
   version: 8.15.3
   count: 1
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
   config:
     xpack.security.authc.providers:
       oidc.oidc1:
