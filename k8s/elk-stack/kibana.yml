@@ -12,5 +12,6 @@ spec:
         disabled: true
   config:
     server.publicBaseUrl: https://kibana.zefirsroyal.cloud
+    xpack.security.authc.http.schemes: [apikey, bearer, basic]
   elasticsearchRef:
     name: elasticsearch
