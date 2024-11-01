@@ -20,6 +20,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to outline_role;
 CREATE USER outline WITH PASSWORD '<password>';
 GRANT outline_role TO outline;
 
+-- EMQX-AUTHENTICATION
+CREATE ROLE emqxauth_role;
+\c emqxauth
+GRANT ALL PRIVILEGES ON DATABASE emqxauth TO emqxauth_role;
+GRANT ALL ON SCHEMA public TO emqxauth_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO emqxauth_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to emqxauth_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to emqxauth_role;
+CREATE USER emqxauth WITH PASSWORD '<password>';
+GRANT emqxauth_role TO emqxauth;
+
 -- AUTHENTIK
 CREATE ROLE authentik_role;
 \c authentik
