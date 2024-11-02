@@ -21,7 +21,7 @@ spec:
             claimName: jellyseerr-config
       containers:
         - name: jellyseerr
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           image: drcarrot/jellyseerr-postgres:latest
           resources:
             requests:
@@ -55,25 +55,25 @@ spec:
           volumeMounts:
             - name: jellyseerr-config
               mountPath: /app/config
-          startupProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            timeoutSeconds: 5
-            periodSeconds: 20
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
+          # startupProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   failureThreshold: 30
+          #   periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   failureThreshold: 5
+          #   timeoutSeconds: 5
+          #   periodSeconds: 20
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   failureThreshold: 5
+          #   periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
