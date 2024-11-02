@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: suggestarr
+  namespace: entertainment
+spec:
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: suggestarr
+  template:
+    metadata:
+      labels:
+        app: suggestarr
+    spec:
+      volumes:
+        - name: suggestarr-config
+          persistentVolumeClaim:
+            claimName: suggestarr-config-pvc
+      containers:
+        - name: suggestarr
+          image: ciuse99/suggestarr:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 512Mi
+              cpu: 500m
+          ports:
+            - containerPort: 5000
+              protocol: TCP
+              name: http
+          volumeMounts:
+            - name: suggestarr-config
+              mountPath: /app/config/config_files
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http

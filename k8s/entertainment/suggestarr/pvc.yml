@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: suggestarr-config-pvc
+  namespace: entertainment
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: floof-nfs-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
