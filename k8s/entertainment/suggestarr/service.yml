@@ -5,7 +5,7 @@ metadata:
   namespace: entertainment
 spec:
   selector:
-    app: myapp
+    app: suggestarr
   ports:
     - port: 5000
       targetPort: 5000
