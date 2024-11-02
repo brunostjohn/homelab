@@ -41,9 +41,7 @@
 	<div
 		class={cn(
 			"relative flex gap-2 p-3 backdrop-blur-lg backdrop-brightness-50 backdrop-saturate-150 md:p-4",
-			"group-hover:bg-muted/30 transition-all group-hover:backdrop-brightness-[60%]",
-			isOdd ? "border-muted-foreground/20 border-r" : "",
-			isLastRow ? "" : "border-muted-foreground/20 border-b",
+			"group-hover:bg-muted/30 border-muted-foreground/20 transition-all group-hover:backdrop-brightness-[60%]",
 			isFirstRow && isOdd ? "rounded-tl-md" : "",
 			isFirstRow && !isOdd ? "rounded-tr-md" : "",
 			isLastRow && isOdd ? "rounded-bl-md" : "",

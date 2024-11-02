@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppCard } from "../app";
-	import { NextcloudIcon, OpenWebUIIcon } from "../icons";
+	import { OpenGistIcon } from "../icons";
 
 	interface Props {
 		domain: string;
@@ -12,9 +12,9 @@
 </script>
 
 <AppCard
-	name="Chat"
-	description="Talk to LLMs, run custom tools."
-	href="https://chat.{domain}"
+	name="Gist"
+	description="Share code snippets."
+	href="https://gist.{domain}"
 	gradientColours={["#053e64", "#05598a", "#047abb"]}
 	class={className}
 	{notInList}
@@ -23,7 +23,7 @@
 		<div
 			class="align-center jusitfy-center flex aspect-square items-center bg-white p-1 {className}"
 		>
-			<OpenWebUIIcon class="" />
+			<OpenGistIcon class="h-full w-full" />
 		</div>
 	{/snippet}
 </AppCard>

@@ -41,7 +41,7 @@
 		{:else}
 			<Carousel.Item>
 				<Card.Root class="bg-muted animate-pulse">
-					<Card.Content class="flex h-96 min-h-96 items-end justify-start p-6"></Card.Content>
+					<Card.Content class="flex h-64 min-h-64 sm:h-80 sm:min-h-80 md:h-96 md:min-h-96 items-end justify-start p-6"></Card.Content>
 				</Card.Root>
 			</Carousel.Item>
 		{/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppCard } from "../app";
-	import { NextcloudIcon, OpenWebUIIcon } from "../icons";
+	import { SearXNGIcon } from "../icons";
 
 	interface Props {
 		domain: string;
@@ -12,9 +12,9 @@
 </script>
 
 <AppCard
-	name="Chat"
-	description="Talk to LLMs, run custom tools."
-	href="https://chat.{domain}"
+	name="Search"
+	description="Search the internet."
+	href="https://search.{domain}"
 	gradientColours={["#053e64", "#05598a", "#047abb"]}
 	class={className}
 	{notInList}
@@ -23,7 +23,7 @@
 		<div
 			class="align-center jusitfy-center flex aspect-square items-center bg-white p-1 {className}"
 		>
-			<OpenWebUIIcon class="" />
+			<SearXNGIcon class="" />
 		</div>
 	{/snippet}
 </AppCard>

@@ -25,7 +25,20 @@ export type HostedApp =
 	| "sabnzbd"
 	| "sonarr"
 	| "unifinvr"
-	| "vaultwarden";
+	| "vaultwarden"
+	| "perplexity"
+	| "grist"
+	| "nocodb"
+	| "rally"
+	| "stirlingpdf"
+	| "ittools"
+	| "searxng"
+	| "manyfold"
+	| "plane"
+	| "windmill"
+	| "coder"
+	| "opengist"
+	| "kibana";
 
 export type AppCategory =
 	| "entertainment"

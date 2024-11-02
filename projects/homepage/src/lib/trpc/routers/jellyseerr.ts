@@ -29,6 +29,7 @@ export const jellyseerrRouter = t.router({
 				(user) => user.jellyfinUsername === username || user.email === username
 			)?.id;
 			if (!userId) {
+				console.warn("No Jellyseerr user found for", username);
 				return [];
 			}
 

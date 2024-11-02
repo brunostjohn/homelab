@@ -51,7 +51,7 @@
 <Carousel.Item class="">
 	<div class="p-1">
 		<a href={getItemLink(Id, ServerId)} class="contents" target="_blank">
-			<Card.Root class="hover:border-primary/30 relative transition-all">
+			<Card.Root class="hover:border-primary/30 relative overflow-hidden transition-all">
 				<canvas
 					bind:this={blurhashCanvas}
 					class="absolute left-0 top-0 h-full w-full rounded-lg"
@@ -74,7 +74,7 @@
 					class="absolute left-0 top-0 h-full w-full rounded-lg backdrop-blur-md backdrop-brightness-[25%]"
 				></div>
 				<Card.Content
-					class="relative flex h-96 min-h-96 flex-col items-start justify-end p-4 md:flex-row md:items-end md:justify-start md:p-6"
+					class="relative flex h-64 min-h-64 flex-col items-start justify-end p-4 sm:h-80 sm:min-h-80 md:h-96 md:min-h-96 md:flex-row md:items-end md:justify-start md:p-6"
 				>
 					<div class="overflow-hidden">
 						{#if !failedImageLoad}
