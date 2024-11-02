@@ -23,7 +23,7 @@ spec:
       containers:
         - name: jellyseerr
           imagePullPolicy: Always
-          image: drcarrot/jellyseerr-postgres:latest
+          image: fallenbagel/jellyseerr
           resources:
             requests:
               memory: "2Gi"
@@ -38,43 +38,43 @@ spec:
           env:
             - name: TZ
               value: Europe/Dublin
-            - name: DB_TYPE
-              value: postgres
-            - name: DB_HOST
-              value: postgres-cluster-rw-pooler.databases.svc.cluster.local
-            - name: DB_PORT
-              value: "5432"
-            - name: DB_USER
-              value: jellyseerr
-            - name: DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: jellyseerr-pg
-                  key: password
-            - name: DB_NAME
-              value: jellyseerr
+            # - name: DB_TYPE
+            #   value: postgres
+            # - name: DB_HOST
+            #   value: postgres-cluster-rw-pooler.databases.svc.cluster.local
+            # - name: DB_PORT
+            #   value: "5432"
+            # - name: DB_USER
+            #   value: jellyseerr
+            # - name: DB_PASS
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: jellyseerr-pg
+            #       key: password
+            # - name: DB_NAME
+            #   value: jellyseerr
           volumeMounts:
             - name: jellyseerr-config
               mountPath: /app/config
-          # startupProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          #   failureThreshold: 30
-          #   periodSeconds: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          #   failureThreshold: 5
-          #   timeoutSeconds: 5
-          #   periodSeconds: 20
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          #   failureThreshold: 5
-          #   periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            timeoutSeconds: 5
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment

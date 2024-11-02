@@ -6,8 +6,8 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 10Gi
-  storageClassName: nfs-jabberwock-subpath
+      storage: 1Gi
+  storageClassName: floof-iscsi-csi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
