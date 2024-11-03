@@ -13,7 +13,7 @@
 {#if showBackButton}
 	<a
 		href="/"
-		class="align-center text-muted-foreground hover:text-primary -ml-2 mb-1 flex items-center text-sm transition-all md:text-base"
+		class="align-center text-muted-foreground hover:text-primary -ml-2 mb-1 flex w-max items-center text-sm transition-all md:text-base"
 	>
 		<ChevronLeft />Go back home
 	</a>

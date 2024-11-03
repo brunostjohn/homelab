@@ -7,14 +7,6 @@
 </script>
 
 <svg {...rest} version="1.1" id="svg10" width="1024" height="1024" viewBox="0 0 1024 1024"
-	><metadata id="metadata16"
-		><rdf:RDF
-			><cc:Work rdf:about=""
-				><dc:format>image/svg+xml</dc:format><dc:type
-					rdf:resource="http://purl.org/dc/dcmitype/StillImage"
-				/><dc:title></dc:title></cc:Work
-			></rdf:RDF
-		></metadata
 	><defs id="defs14"
 		><clipPath clipPathUnits="userSpaceOnUse" id="clipPath510"
 			><path

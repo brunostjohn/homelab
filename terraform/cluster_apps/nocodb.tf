@@ -41,7 +41,7 @@ resource "kubernetes_config_map" "nocodb_config" {
     "NC_REDIS_URL"          = "redis://:redis@redis-master.databases.svc.cluster.local:6379/10"
     "NC_S3_BUCKET_NAME"     = "nocodb-attachments"
     "NC_S3_REGION"          = "irrelevant"
-    "NC_S3_ENDPOINT"        = "static.${var.global_fqdn}"
+    "NC_S3_ENDPOINT"        = "https://static.${var.global_fqdn}"
     "NC_S3_ACCESS_KEY"      = var.nocodb_s3_access_key
     "NC_SECURE_ATTACHMENTS" = "true"
     "NC_KEEP_CACHE"         = "true"

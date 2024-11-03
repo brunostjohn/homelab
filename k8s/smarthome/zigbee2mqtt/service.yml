@@ -13,4 +13,5 @@ spec:
       targetPort: 8080
   selector:
     app: zigbee2mqtt
-  type: ClusterIP
+  type: LoadBalancer
+  loadBalancerIP: 10.0.2.28

@@ -4,6 +4,8 @@
 	import { onMount } from "svelte";
 	import UserMenuDropdownContent from "./UserMenuDropdownContent.svelte";
 	import UserMenuSkeleton from "./UserMenuSkeleton.svelte";
+	import { ChevronDown } from "lucide-svelte";
+	import { cn } from "$lib/utils";
 
 	const userQuery = trpc()?.user.createQuery();
 
@@ -53,6 +55,12 @@
 								{$userQuery.data.email}
 							</p>
 						</div>
+						<ChevronDown
+							class={cn(
+								"text-muted-foreground ml-auto hidden size-5 transition-all xl:block",
+								open ? "rotate-180" : ""
+							)}
+						/>
 					</button>
 				</Tooltip.Trigger>
 				<Tooltip.Content class="z-[48]">

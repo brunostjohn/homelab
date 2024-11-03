@@ -17,6 +17,8 @@ spec:
             protocol: TCP
             port: 8883
             targetPort: 8883
+        type: LoadBalancer
+        loadBalancerIP: 10.0.2.29
     statefulSet:
       spec:
         template:

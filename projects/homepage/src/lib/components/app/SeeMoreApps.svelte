@@ -16,6 +16,6 @@
 		<p class="text-muted-foreground text-xs lg:text-base">{description}</p>
 	</div>
 	<ChevronRight
-		class="text-muted-foreground group-hover:text-primary ml-auto h-6 w-6 transition-all group-hover:translate-x-1"
+		class="text-muted-foreground group-hover:text-primary ml-auto h-6 min-h-6 w-6 min-w-6 transition-all group-hover:translate-x-1"
 	/>
 </Button>
