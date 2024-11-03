@@ -20,7 +20,7 @@
 	{notInList}
 >
 	{#snippet icon(className: string)}
-		<div class="rounded-md bg-white p-1 {className}">
+		<div class="overflow-hidden rounded-md bg-white {className}">
 			<GristIcon class="h-full w-full" />
 		</div>
 	{/snippet}

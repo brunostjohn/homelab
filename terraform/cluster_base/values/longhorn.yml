@@ -4,3 +4,8 @@ preUpgradeChecker:
 metrics:
   serviceMonitor:
     enabled: true
+
+service:
+  ui:
+    type: LoadBalancer
+    loadBalancerIP: 10.0.2.29

@@ -10,5 +10,6 @@ const getDomain = () => {
 
 export const load: LayoutServerLoad = ({ request: { headers } }) => ({
 	domain: getDomain(),
+	secondDomain: env.PUBLIC_SECOND_DOMAIN ?? "localhost:5174",
 	username: import.meta.env.DEV ? envPrivate.DEVELOPMENT_USER : headers.get("X-authentik-username"),
 });

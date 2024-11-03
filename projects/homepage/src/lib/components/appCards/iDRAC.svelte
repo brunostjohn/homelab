@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { MultiInstanceAppCard } from "../app";
-	import { TrueNASScaleIcon } from "../icons";
+	import { iDRACIcon as IDRACIcon } from "../icons";
 
 	interface Props {
 		notInList?: boolean;
@@ -10,15 +10,15 @@
 	const { notInList, class: className }: Props = $props();
 
 	const instances = [
-		{ name: "Jabberwock", href: "http://10.0.3.1" },
-		{ name: "Lookingglass", href: "http://10.0.3.3" },
-		{ name: "Floofpool", href: "http://10.0.3.5" },
+		{ name: "S1", href: "https://10.0.134.225" },
+		{ name: "S2", href: "https://10.0.247.252" },
+		{ name: "S3", href: "https://10.0.76.215" },
 	];
 </script>
 
 <MultiInstanceAppCard
-	name="TrueNAS"
-	description="Access our TrueNAS dashboards."
+	name="iDRAC"
+	description="Manage our Dell servers."
 	gradientColours={["#04265b", "#043ca0", "#0451c4"]}
 	class={className}
 	{instances}
@@ -28,7 +28,7 @@
 		<div
 			class="align-center jusitfy-center flex aspect-square items-center bg-white p-1 {className}"
 		>
-			<TrueNASScaleIcon class="" />
+			<IDRACIcon class="" />
 		</div>
 	{/snippet}
 </MultiInstanceAppCard>

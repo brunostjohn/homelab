@@ -16,6 +16,8 @@
 		StirlingPDFAppCard,
 		WindmillAppCard,
 		OpenGistAppCard,
+		ShareXAppCard,
+		PingvinShareAppCard,
 	} from "$lib/components/appCards";
 	import type { PageServerData } from "./$types";
 
@@ -24,7 +26,7 @@
 	}
 
 	const { data }: Props = $props();
-	const { domain } = $derived(data);
+	const { domain, secondDomain } = $derived(data);
 </script>
 
 <PageTitle showBackButton>Productivity</PageTitle>
@@ -51,6 +53,11 @@
 	<StirlingPDFAppCard {domain} />
 	<ITToolsAppCard {domain} />
 	<SearXNGAppCard {domain} />
+</AppCardList>
+
+<AppCardList title="File Sharing">
+	<ShareXAppCard domain={secondDomain} />
+	<PingvinShareAppCard {domain} />
 </AppCardList>
 
 <AppCardList title="Programming & Automation">
