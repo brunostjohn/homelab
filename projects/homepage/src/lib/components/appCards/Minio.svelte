@@ -13,7 +13,7 @@
 
 <AppCard
 	name="Minio"
-	description="Watch movies & shows, listen to music."
+	description="Manage object storage."
 	gradientColours={["#c42c4c", "#de8494", "#dc8c94"]}
 	href={`https://window.${domain}`}
 	class={className}

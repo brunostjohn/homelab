@@ -13,7 +13,7 @@
 
 <AppCard
 	name="Netbox"
-	description="Watch movies & shows, listen to music."
+	description="View information about our infrastructure."
 	gradientColours={["#1484fb", "#74b4fc", "#bed9f5"]}
 	href={`https://window.${domain}`}
 	class={className}

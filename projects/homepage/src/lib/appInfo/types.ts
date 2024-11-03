@@ -70,6 +70,8 @@ export interface AppInfo {
 	keywords: string[];
 	category: AppCategory;
 	iconComponent: Component<{ class: string }>;
+	iconPadding?: "s" | "m";
+	iconFill?: boolean;
 }
 
 export type AppInfoMap = Record<HostedApp, AppInfo>;

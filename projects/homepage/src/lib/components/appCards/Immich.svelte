@@ -13,7 +13,7 @@
 
 <AppCard
 	name="Immich"
-	description="Watch movies & shows, listen to music."
+	description="View and sync your photos."
 	gradientColours={["#ec7cb4", "#fb2b23", "#1bc34b"]}
 	href={`https://window.${domain}`}
 	class={className}

@@ -13,7 +13,7 @@
 
 <AppCard
 	name="Grafana"
-	description="Watch movies & shows, listen to music."
+	description="View metrics & their visualisations."
 	gradientColours={["#ef5a27", "#f58324", "#fac20f"]}
 	href={`https://window.${domain}`}
 	class={className}

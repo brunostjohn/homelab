@@ -13,7 +13,7 @@
 
 <AppCard
 	name="Nextcloud"
-	description="Listen to audiobooks & podcasts."
+	description="File storage, contacts, calendar & more."
 	href="https://nextcloud.{domain}"
 	gradientColours={["#053e64", "#05598a", "#047abb"]}
 	class={className}

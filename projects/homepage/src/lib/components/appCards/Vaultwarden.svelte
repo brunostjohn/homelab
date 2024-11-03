@@ -13,7 +13,7 @@
 
 <AppCard
 	name="Vaultwarden"
-	description="Collect & download game console roms."
+	description="Manage your passwords."
 	href="https://passwords.{domain}"
 	gradientColours={["#000000", "#333333", "#aaaaaa"]}
 	class={className}
