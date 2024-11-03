@@ -38,7 +38,21 @@ export type HostedApp =
 	| "windmill"
 	| "coder"
 	| "opengist"
-	| "kibana";
+	| "kibana"
+	| "authentik"
+	| "emqx"
+	| "zigbee2mqtt"
+	| "rabbitmq"
+	| "truecommand"
+	| "truenasscale"
+	| "proxmox"
+	| "unifinetwork"
+	| "traefik"
+	| "idrac"
+	| "longhorn"
+	| "infisical"
+	| "sharex"
+	| "pingvinshare";
 
 export type AppCategory =
 	| "entertainment"
