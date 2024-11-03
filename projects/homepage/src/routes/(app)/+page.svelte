@@ -90,7 +90,7 @@
 
 <HomepageSectionTitle
 	title="Recent Chats with AI"
-	seeMoreAppName="Ollama"
+	seeMoreAppName="Chat"
 	seeMoreHref="https://chat.{domain}"
 >
 	{#snippet titleIcon(className: string)}
