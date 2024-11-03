@@ -13,7 +13,7 @@
 		"api:generate": "pnpm api:prowlarr:generate && pnpm api:openwebui:generate && pnpm api:authentik:generate && pnpm api:mealie:generate",
 		"api:prowlarr:generate": "rm -rf ./src/lib/generatedApiClients/prowlarr && mkdir -p ./src/lib/generatedApiClients/prowlarr && openapi-generator-cli generate -i https://raw.githubusercontent.com/Prowlarr/Prowlarr/develop/src/Prowlarr.Api.V1/openapi.json -g typescript-fetch -o ./src/lib/generatedApiClients/prowlarr --additional-properties=supportsES6=true,typescriptThreePlus=true",
 		"api:openwebui:generate": "rm -rf ./src/lib/generatedApiClients/open-webui && mkdir -p ./src/lib/generatedApiClients/open-webui && npx @hey-api/openapi-ts -i ./src/lib/apiSpecs/open-webui.json -o ./src/lib/generatedApiClients/open-webui -c @hey-api/client-fetch",
-		"api:authentik:generate": "rm -rf ./src/lib/generatedApiClients/prowlarr && mkdir -p ./src/lib/generatedApiClients/prowlarr && openapi-generator-cli generate -i ./src/lib/apiSpecs/authentik.yaml -g typescript-fetch -o ./src/lib/generatedApiClients/authentik --additional-properties=supportsES6=true,typescriptThreePlus=true",
+		"api:authentik:generate": "rm -rf ./src/lib/generatedApiClients/authentik && mkdir -p ./src/lib/generatedApiClients/authentik && openapi-generator-cli generate -i ./src/lib/apiSpecs/authentik.yaml -g typescript-fetch -o ./src/lib/generatedApiClients/authentik --additional-properties=supportsES6=true,typescriptThreePlus=true",
 		"api:mealie:generate": "rm -rf ./src/lib/generatedApiClients/mealie && mkdir -p ./src/lib/generatedApiClients/mealie && npx @hey-api/openapi-ts -i ./src/lib/apiSpecs/mealie.json -o ./src/lib/generatedApiClients/mealie -c @hey-api/client-fetch"
 	},
 	"devDependencies": {
