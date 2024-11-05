@@ -15,7 +15,7 @@
 	name="NocoDB"
 	description="Airtable alternative."
 	href="https://noco.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#3330bd", "#3c3ecf", "#4049df"]}
 	class={className}
 	{notInList}
 >

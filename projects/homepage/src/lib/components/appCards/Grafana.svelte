@@ -14,8 +14,8 @@
 <AppCard
 	name="Grafana"
 	description="View metrics & their visualisations."
-	gradientColours={["#ef5a27", "#f58324", "#fac20f"]}
-	href={`https://window.${domain}`}
+	gradientColours={["#ef5a27", "#ef5a27", "#f58324"]}
+	href={`https://grafana.${domain}`}
 	class={className}
 	{notInList}
 >

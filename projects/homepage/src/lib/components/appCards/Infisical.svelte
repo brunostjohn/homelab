@@ -15,7 +15,7 @@
 	name="Infisical"
 	description="Secrets management."
 	href="https://secrets.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#c6d14c", "#bbcc48", "#b3bd45"]}
 	class={className}
 	{notInList}
 >

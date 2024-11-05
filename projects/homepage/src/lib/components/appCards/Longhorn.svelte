@@ -14,7 +14,7 @@
 	name="Longhorn"
 	description="Cloud-native distributed block storage."
 	href="http://10.0.2.9/"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#743c64", "#794866", "#84536c"]}
 	class={className}
 	{notInList}
 >

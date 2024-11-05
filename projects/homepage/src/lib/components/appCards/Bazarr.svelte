@@ -14,7 +14,7 @@
 <AppCard
 	name="Bazarr"
 	description="Subtitle fetcher & manager."
-	gradientColours={["#000000", "#000000", "#ffffff"]}
+	gradientColours={["#000000", "#444444", "#777777"]}
 	href="https://bazarr.{domain}"
 	class={className}
 	{notInList}

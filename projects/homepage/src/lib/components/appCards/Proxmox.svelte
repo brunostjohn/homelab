@@ -19,7 +19,7 @@
 <MultiInstanceAppCard
 	name="Proxmox"
 	description="Create and manage virtual machines."
-	gradientColours={["#04265b", "#043ca0", "#0451c4"]}
+	gradientColours={["#e46c04", "#e46c04", "#e38029"]}
 	class={className}
 	{instances}
 	{notInList}

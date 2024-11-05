@@ -14,7 +14,7 @@
 <AppCard
 	name="Prowlarr"
 	description="Torrent & Usenet indexer aggregator."
-	gradientColours={["#7e2b1b", "#e4630d", "#fba37b"]}
+	gradientColours={["#e4630d", "#e4630d", "#e4630d"]}
 	href="https://prowlarr.{domain}"
 	class={className}
 	{notInList}

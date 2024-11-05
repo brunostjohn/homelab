@@ -14,7 +14,7 @@
 <AppCard
 	name="Coder"
 	description="Instantly provision a coding environment."
-	gradientColours={["#8b74ea", "#b099f7", "#cdaefa"]}
+	gradientColours={["#343434", "#414141", "#4c4c4c"]}
 	href="https://envs.{domain}"
 	class={className}
 	{notInList}

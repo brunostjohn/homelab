@@ -14,7 +14,7 @@
 <AppCard
 	name="Immich"
 	description="View and sync your photos."
-	gradientColours={["#fb2b23", "#fb2b23", "#ec7cb4"]}
+	gradientColours={["#fb2b23aa", "#fb2b23aa", "#ec7cb4aa"]}
 	href={`https://window.${domain}`}
 	class={className}
 	{notInList}

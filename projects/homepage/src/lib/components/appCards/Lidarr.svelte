@@ -14,7 +14,7 @@
 <AppCard
 	name="Lidarr"
 	description="Music fetcher & manager."
-	gradientColours={["#049454", "#afc0b4", "#b5cdbf"]}
+	gradientColours={["#049454", "#049454", "#049454"]}
 	href="https://lidarr.{domain}"
 	class={className}
 	{notInList}

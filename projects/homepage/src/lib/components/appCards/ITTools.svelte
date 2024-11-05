@@ -15,7 +15,7 @@
 	name="IT Tools"
 	description="Tools for IT professionals."
 	href="https://ittools.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#17a454", "#199c59", "#1da45c"]}
 	class={className}
 	{notInList}
 >

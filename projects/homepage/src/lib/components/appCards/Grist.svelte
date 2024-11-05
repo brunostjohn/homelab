@@ -14,7 +14,7 @@
 <AppCard
 	name="Grist"
 	description="Python-powered spreadsheets."
-	gradientColours={["#8b74ea", "#b099f7", "#cdaefa"]}
+	gradientColours={["#416c6c", "#416c6c", "#507878"]}
 	href="https://grist.{domain}"
 	class={className}
 	{notInList}

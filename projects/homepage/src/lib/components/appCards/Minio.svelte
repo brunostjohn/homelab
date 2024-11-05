@@ -14,7 +14,7 @@
 <AppCard
 	name="Minio"
 	description="Manage object storage."
-	gradientColours={["#c42c4c", "#de8494", "#dc8c94"]}
+	gradientColours={["#c42c4c", "#c42c4c", "#c42c4c"]}
 	href={`https://window.${domain}`}
 	class={className}
 	{notInList}

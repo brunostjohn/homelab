@@ -15,7 +15,7 @@
 	name="Vaultwarden"
 	description="Manage your passwords."
 	href="https://passwords.{domain}"
-	gradientColours={["#000000", "#333333", "#aaaaaa"]}
+	gradientColours={["#111111", "#333333", "#444444"]}
 	class={className}
 	{notInList}
 >

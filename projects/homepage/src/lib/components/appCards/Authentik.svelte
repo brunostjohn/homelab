@@ -15,7 +15,7 @@
 	name="Authentik"
 	description="Identity & access management."
 	href="https://auth.{domain}"
-	gradientColours={["#8b622b", "#a07333", "#c89c53"]}
+	gradientColours={["#fc5434", "#fc593e", "#fc6444"]}
 	class={className}
 	{notInList}
 >

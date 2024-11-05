@@ -14,7 +14,7 @@
 <AppCard
 	name="Radarr"
 	description="Movie fetcher & manager."
-	gradientColours={["#242c2c", "#fbc42c", "#f6dba0"]}
+	gradientColours={["#fbc42caa", "#fbc42caa", "#fbc42caa"]}
 	href="https://radarr.{domain}"
 	class={className}
 	{notInList}

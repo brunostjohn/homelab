@@ -14,7 +14,7 @@
 <AppCard
 	name="Sonarr"
 	description="Show fetcher & manager."
-	gradientColours={["#3c3c54", "#3c3c54", "#04cbfb"]}
+	gradientColours={["#3c3c54", "#3c3c54", "#3c3c54"]}
 	href="https://sonarr.{domain}"
 	class={className}
 	{notInList}

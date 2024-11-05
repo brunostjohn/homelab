@@ -14,7 +14,7 @@
 	name="Traefik"
 	description="Reverse proxy & load balancer."
 	href="https://10.0.2.0/dashboard/"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#3ca4c4", "#28a4c4", "#28a4c4"]}
 	class={className}
 	{notInList}
 >

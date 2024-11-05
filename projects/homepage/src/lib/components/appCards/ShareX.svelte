@@ -15,7 +15,7 @@
 	name="Zipline"
 	description="ShareX file sharing."
 	href="https://iam.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#042434", "#042434", "#042434"]}
 	class={className}
 	{notInList}
 >

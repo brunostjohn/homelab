@@ -15,7 +15,7 @@
 	name="Plane"
 	description="Project management & robust to-do."
 	href="https://plane.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#3c74fc", "#4474fc", "#4c7efc"]}
 	class={className}
 	{notInList}
 >

@@ -15,7 +15,7 @@
 	name="Mealie"
 	description="Stash recipes, plan meals."
 	href="https://mealie.{domain}"
-	gradientColours={["#e88424", "#e88424", "#c89c53"]}
+	gradientColours={["#e88424", "#e88424", "#e88424"]}
 	class={className}
 	{notInList}
 >

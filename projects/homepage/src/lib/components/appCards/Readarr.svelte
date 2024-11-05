@@ -14,7 +14,7 @@
 <AppCard
 	name="Readarr"
 	description="Book fetcher & manager."
-	gradientColours={["#742c2c", "#bc847c", "#d4b4ac"]}
+	gradientColours={["#742c2c", "#742c2c", "#742c2c"]}
 	href="https://readarr.{domain}"
 	class={className}
 	{notInList}

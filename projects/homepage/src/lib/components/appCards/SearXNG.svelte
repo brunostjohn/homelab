@@ -15,7 +15,7 @@
 	name="Search"
 	description="Search the internet."
 	href="https://search.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#3454fc", "#3c5cfc", "#4662fc"]}
 	class={className}
 	{notInList}
 >

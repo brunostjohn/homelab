@@ -15,7 +15,7 @@
 	name="Home Assistant"
 	description="Control our home, set up automations."
 	href="https://thekingdom.{domain}"
-	gradientColours={["#1cbcf4", "#67ccf4", "#edf2fb"]}
+	gradientColours={["#1cbcf4", "#1cbcf4", "#1cbcf4"]}
 	class={className}
 	{notInList}
 >

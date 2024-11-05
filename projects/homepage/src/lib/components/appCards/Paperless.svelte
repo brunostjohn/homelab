@@ -14,8 +14,8 @@
 <AppCard
 	name="Paperless"
 	description="Manage documents, categorise them."
-	href="https://audiobookshelf.{domain}"
-	gradientColours={["#1c541c", "#7c9a7c", "#819c84"]}
+	href="https://paperless.{domain}"
+	gradientColours={["#1c541c", "#1c541c", "#1c541c"]}
 	class={className}
 	{notInList}
 >

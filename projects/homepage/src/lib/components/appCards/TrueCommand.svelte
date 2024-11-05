@@ -15,7 +15,7 @@
 	name="TrueCommand"
 	description="Manage our TrueNAS servers."
 	href="https://truecommand.{domain}"
-	gradientColours={["#04265b", "#043ca0", "#0451c4"]}
+	gradientColours={["#0594d1", "#2c9dc3", "#189ed2"]}
 	class={className}
 	{notInList}
 >

@@ -14,7 +14,7 @@
 	name="EMQX"
 	description="MQTT broker."
 	href="http://10.0.2.27:18083}"
-	gradientColours={["#8b622b", "#a07333", "#c89c53"]}
+	gradientColours={["#04b484", "#08b474", "#08b474"]}
 	class={className}
 	{notInList}
 >

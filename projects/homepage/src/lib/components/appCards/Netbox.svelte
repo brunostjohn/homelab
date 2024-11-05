@@ -14,7 +14,7 @@
 <AppCard
 	name="Netbox"
 	description="View information about our infrastructure."
-	gradientColours={["#1484fb", "#74b4fc", "#bed9f5"]}
+	gradientColours={["#1484fb", "#1484fb", "#74b4fc"]}
 	href={`https://window.${domain}`}
 	class={className}
 	{notInList}

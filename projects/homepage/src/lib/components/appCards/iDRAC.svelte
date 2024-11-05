@@ -19,7 +19,7 @@
 <MultiInstanceAppCard
 	name="iDRAC"
 	description="Manage our Dell servers."
-	gradientColours={["#04265b", "#043ca0", "#0451c4"]}
+	gradientColours={["#087cbc", "#087cbc", "#087cbc"]}
 	class={className}
 	{instances}
 	{notInList}

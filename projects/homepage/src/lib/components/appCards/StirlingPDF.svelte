@@ -15,7 +15,7 @@
 	name="PDF Tools"
 	description="Convert, merge, split, and more."
 	href="https://pdftools.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#41262a", "#652424", "#bb2424"]}
 	class={className}
 	{notInList}
 >

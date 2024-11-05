@@ -19,7 +19,7 @@
 <MultiInstanceAppCard
 	name="TrueNAS"
 	description="Access our TrueNAS dashboards."
-	gradientColours={["#04265b", "#043ca0", "#0451c4"]}
+	gradientColours={["#0c9cc4", "#1699d6", "#2a9cd7"]}
 	class={className}
 	{instances}
 	{notInList}

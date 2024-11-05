@@ -15,7 +15,7 @@
 	name="Pingvin Share"
 	description="File sharing."
 	href="https://share.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#44539b", "#6067a1", "#6971b4"]}
 	class={className}
 	{notInList}
 >

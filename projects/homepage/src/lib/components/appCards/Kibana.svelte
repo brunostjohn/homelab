@@ -14,7 +14,7 @@
 <AppCard
 	name="Kibana"
 	description="View logs and metrics."
-	gradientColours={["#8b74ea", "#b099f7", "#cdaefa"]}
+	gradientColours={["#4f4f4f", "#2f2f2f", "#1f1f1f"]}
 	href="https://kibana.{domain}"
 	class={className}
 	{notInList}

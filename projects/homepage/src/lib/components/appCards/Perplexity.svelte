@@ -15,7 +15,7 @@
 	name="Perplexity"
 	description="Let AI do research for you."
 	href="https://perplexity.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#343434", "#414141", "#4c4c4c"]}
 	class={className}
 	{notInList}
 >

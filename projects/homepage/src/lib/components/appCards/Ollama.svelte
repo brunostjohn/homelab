@@ -15,7 +15,7 @@
 	name="Chat"
 	description="Talk to LLMs, run custom tools."
 	href="https://chat.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#4f4f4f", "#2f2f2f", "#1f1f1f"]}
 	class={className}
 	{notInList}
 >

@@ -14,7 +14,7 @@
 <AppCard
 	name="Manyfold"
 	description="Store & categorise 3D print files."
-	gradientColours={["#1484fb", "#74b4fc", "#bed9f5"]}
+	gradientColours={["#220826", "#3c0e4c", "#592e7d"]}
 	href={`https://manyfold.${domain}`}
 	class={className}
 	{notInList}

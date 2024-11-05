@@ -15,7 +15,7 @@
 	name="Rally"
 	description="Schedule events with ease."
 	href="https://rally.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#6464f4", "#6c64f8", "#6c64f8"]}
 	class={className}
 	{notInList}
 >

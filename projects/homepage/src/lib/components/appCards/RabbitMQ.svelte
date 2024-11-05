@@ -14,7 +14,7 @@
 	name="RabbitMQ"
 	description="AMQP message broker."
 	href="http://10.0.2.28:15692}"
-	gradientColours={["#8b622b", "#a07333", "#c89c53"]}
+	gradientColours={["#fc6404", "#fc6404", "#fc6404"]}
 	class={className}
 	{notInList}
 >

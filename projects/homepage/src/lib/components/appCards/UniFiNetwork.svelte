@@ -14,7 +14,7 @@
 	name="UniFi Network"
 	description="Manage your network."
 	href="https://10.0.0.1"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#012d66", "#004096", "#0165eb"]}
 	class={className}
 	{notInList}
 >

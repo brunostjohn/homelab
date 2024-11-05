@@ -14,7 +14,7 @@
 	name="Zigbee2MQTT"
 	description="Bridge Zigbee devices and MQTT."
 	href="http://10.0.2.28:8080"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#bc8c2c", "#bc8c2c", "#bc8c2c"]}
 	class={className}
 	{notInList}
 >

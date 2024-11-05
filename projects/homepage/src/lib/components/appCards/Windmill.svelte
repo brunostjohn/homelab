@@ -15,7 +15,7 @@
 	name="Windmill"
 	description="Create apps & automations."
 	href="https://windmill.{domain}"
-	gradientColours={["#053e64", "#05598a", "#047abb"]}
+	gradientColours={["#3c84f4", "#4484f4", "#4e8cf4"]}
 	class={className}
 	{notInList}
 >
