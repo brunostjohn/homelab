@@ -83,7 +83,7 @@
 								alt={Name ?? OriginalTitle}
 								onerror={handleImageLoadError}
 								onload={() => (imageLoaded = true)}
-								class="mb-2 max-w-full sm:max-w-80 md:mb-4"
+								class="mb-2 max-h-[90%] max-w-full sm:max-w-80 md:mb-4"
 								loading="lazy"
 							/>
 						{/if}
