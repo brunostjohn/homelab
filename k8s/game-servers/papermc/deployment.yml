@@ -43,6 +43,10 @@ spec:
               value: Europe/Dublin
             - name: USE_AIKAR_FLAGS
               value: "true"
+            - name: INIT_MEMORY
+              value: 8G
+            - name: MAX_MEMORY
+              value: 16G
             - name: TYPE
               value: paper
             - name: VERSION
