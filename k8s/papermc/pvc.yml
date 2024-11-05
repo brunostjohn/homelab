@@ -4,7 +4,7 @@ metadata:
   name: papermc
   namespace: minecraft
 spec:
-  storageClassName: nfs-jabberwock-subpath
+  storageClassName: floof-nfs-csi
   accessModes:
     - ReadWriteOnce
   resources:

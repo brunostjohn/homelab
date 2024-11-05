@@ -26,18 +26,15 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "1"
+              memory: "4Gi"
+              cpu: "4"
             limits:
-              memory: "2Gi"
-              cpu: "2"
+              memory: "8Gi"
+              cpu: "8"
           ports:
             - containerPort: 25565
               protocol: TCP
               name: minecraft
-            - containerPort: 25049
-              protocol: TCP
-              name: lod
           volumeMounts:
             - name: papermc
               mountPath: /data
@@ -51,7 +48,7 @@ spec:
             - name: TYPE
               value: paper
             - name: VERSION
-              value: "1.20.4"
+              value: "1.21.1"
             - name: ONLINE_MODE
               value: "false"
           readinessProbe:
