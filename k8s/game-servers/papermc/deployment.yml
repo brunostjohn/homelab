@@ -51,6 +51,14 @@ spec:
               value: "1.21.1"
             - name: ONLINE_MODE
               value: "false"
+          startupProbe:
+            exec:
+              command:
+                - mcstatus
+                - 127.0.0.1
+                - ping
+            failureThreshold: 30
+            periodSeconds: 10
           readinessProbe:
             exec:
               command:
