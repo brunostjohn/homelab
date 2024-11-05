@@ -14,8 +14,6 @@ spec:
       labels:
         app: papermc
     spec:
-      securityContext:
-        fsGroup: 1000
       volumes:
         - name: papermc
           persistentVolumeClaim:
