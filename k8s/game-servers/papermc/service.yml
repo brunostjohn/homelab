@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: papermc
   namespace: game-servers
+  labels:
+    app: papermc
 spec:
   selector:
     app: papermc
@@ -11,5 +13,9 @@ spec:
       targetPort: 25565
       protocol: TCP
       name: minecraft
+    - port: 9100
+      targetPort: 9100
+      protocol: TCP
+      name: metrics
   type: LoadBalancer
   loadBalancerIP: 10.0.2.25

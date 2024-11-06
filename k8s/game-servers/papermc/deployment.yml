@@ -33,6 +33,9 @@ spec:
             - containerPort: 25565
               protocol: TCP
               name: minecraft
+            - containerPort: 9100
+              protocol: TCP
+              name: metrics
           volumeMounts:
             - name: papermc
               mountPath: /data
