@@ -77,6 +77,7 @@ spec:
                 https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXProtect-2.20.1.jar
                 https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXSpawn-2.20.1.jar
                 https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXXMPP-2.20.1.jar
+                https://dev.bukkit.org/projects/bluemapskinsupport/files/latest
           startupProbe:
             exec:
               command:
