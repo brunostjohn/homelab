@@ -36,6 +36,9 @@ spec:
             - containerPort: 9100
               protocol: TCP
               name: metrics
+            - containerPort: 8100
+              protocol: TCP
+              name: map
           volumeMounts:
             - name: papermc
               mountPath: /data

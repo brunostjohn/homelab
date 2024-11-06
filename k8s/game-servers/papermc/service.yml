@@ -17,5 +17,9 @@ spec:
       targetPort: 9100
       protocol: TCP
       name: metrics
+    - port: 8100
+      targetPort: 8100
+      protocol: TCP
+      name: map
   type: LoadBalancer
   loadBalancerIP: 10.0.2.25
