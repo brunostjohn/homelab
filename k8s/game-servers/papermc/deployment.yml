@@ -60,6 +60,7 @@ spec:
                 https://gitlab.com/distant-horizons-team/distant-horizons-server-plugin/-/jobs/8146944392/artifacts/raw/DHS-0.6.1_for_MC-1.21.1.jar
                 https://cdn.modrinth.com/data/fALzjamp/versions/ytBhnGfO/Chunky-Bukkit-1.4.28.jar
                 https://hangarcdn.papermc.io/plugins/Flyte/PluginPortal/versions/2.0.4/PAPER/PluginPortal-2.0.4.jar
+                https://github.com/Cubxity/UnifiedMetrics/releases/download/v0.3.x-SNAPSHOT/unifiedmetrics-platform-bukkit-0.3.10-SNAPSHOT.jar
           startupProbe:
             exec:
               command:
