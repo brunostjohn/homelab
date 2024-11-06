@@ -67,6 +67,16 @@ spec:
                 https://cdn.modrinth.com/data/fALzjamp/versions/ytBhnGfO/Chunky-Bukkit-1.4.28.jar
                 https://hangarcdn.papermc.io/plugins/Flyte/PluginPortal/versions/2.0.4/PAPER/PluginPortal-2.0.4.jar
                 https://github.com/Cubxity/UnifiedMetrics/releases/download/v0.3.x-SNAPSHOT/unifiedmetrics-platform-bukkit-0.3.10-SNAPSHOT.jar
+                https://github.com/hyperdefined/ToolStats/releases/download/1.8.3/toolstats-1.8.3.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsX-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXAntiBuild-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXChat-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXDiscord-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXDiscordLink-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXGeoIP-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXProtect-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXSpawn-2.20.1.jar
+                https://github.com/EssentialsX/Essentials/releases/download/2.20.1/EssentialsXXMPP-2.20.1.jar
           startupProbe:
             exec:
               command:
