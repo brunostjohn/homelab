@@ -97,6 +97,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to manyfold_role;
 CREATE USER manyfold WITH PASSWORD '<password>';
 GRANT manyfold_role TO manyfold;
 
+-- PAPERMC
+CREATE ROLE papermc_role;
+\c papermc
+GRANT ALL PRIVILEGES ON DATABASE papermc TO papermc_role;
+GRANT ALL ON SCHEMA public TO papermc_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO papermc_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to papermc_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to papermc_role;
+CREATE USER papermc WITH PASSWORD '<password>';
+GRANT papermc_role TO papermc;
+
 -- MEALIE
 CREATE ROLE mealie_role;
 \c mealie

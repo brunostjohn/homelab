@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: infrared
+  namespace: game-servers
+spec:
+  selector:
+    matchLabels:
+      app: infrared
+  template:
+    metadata:
+      labels:
+        app: infrared
+    spec:
+      volumes:
+        - name: global-config
+          configMap:
+            name: infrared-global-config
+        - name: cubes-proxy-config
+          configMap:
+            name: infrared-cubes-proxy-config
+      containers:
+        - name: infrared
+          image: haveachin/infrared:latest
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 25565
+              protocol: UDP
+              name: minecraft
+          volumeMounts:
+            - name: global-config
+              mountPath: /etc/infrared/config.yml
+              subPath: config.yml
+              readOnly: true
+            - name: cubes-proxy-config
+              mountPath: /etc/infrared/proxies/cubes.yml
+              subPath: cubes.yml
+              readOnly: true
