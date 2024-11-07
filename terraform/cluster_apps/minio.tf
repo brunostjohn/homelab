@@ -25,7 +25,7 @@ resource "argocd_application" "minio" {
     source {
       repo_url        = "https://charts.min.io/"
       chart           = "minio"
-      target_revision = "5.2.0"
+      target_revision = "5.3.0"
 
       helm {
         values = templatefile("${path.module}/templates/minio.yml.tpl", {

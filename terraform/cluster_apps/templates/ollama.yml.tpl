@@ -5,6 +5,8 @@ ollama:
     - name: NVIDIA_VISIBLE_DEVICES
       value: all
   runtimeClassName: nvidia
+  image:
+    tag: latest
   ollama:
     gpu:
       enabled: true

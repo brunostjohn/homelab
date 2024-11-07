@@ -141,4 +141,4 @@ prometheus:
           storageClassName: nfs-jabberwock-subpath
           resources:
             requests:
-              storage: 4Gi
+              storage: 20Gi
