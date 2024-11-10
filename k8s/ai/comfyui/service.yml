@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: comfyui
+  namespace: ai
+spec:
+  selector:
+    app: comfyui
+  ports:
+    - port: 8188
+      targetPort: 8188
+      protocol: TCP
+      name: http

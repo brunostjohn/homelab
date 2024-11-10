@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comfyui
+  namespace: ai
+spec:
+  selector:
+    matchLabels:
+      app: comfyui
+  template:
+    metadata:
+      labels:
+        app: comfyui
+    spec:
+      runtimeClassName: nvidia
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Exists"
+          effect: "NoSchedule"
+      volumes:
+        - name: comfyui
+          persistentVolumeClaim:
+            claimName: comfyui
+      containers:
+        - name: comfyui
+          image: yanwk/comfyui-boot:cu121-megapak
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              nvidia.com/gpu.shared: "1"
+            limits:
+              nvidia.com/gpu.shared: "1"
+          ports:
+            - containerPort: 8188
+              protocol: TCP
+              name: http
+          volumeMounts:
+            - name: comfyui
+              mountPath: /home/runner
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: all
+            - name: CLI_ARGS
+              value: ""

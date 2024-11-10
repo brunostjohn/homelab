@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: comfyui
+  namespace: ai
+spec:
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: floof-nfs-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
