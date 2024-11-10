@@ -36,7 +36,7 @@ spec:
               name: http
           volumeMounts:
             - name: comfyui
-              mountPath: /home/runner
+              mountPath: /root
           env:
             - name: NVIDIA_VISIBLE_DEVICES
               value: all
