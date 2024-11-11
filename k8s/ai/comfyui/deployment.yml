@@ -25,6 +25,7 @@ spec:
         - name: comfyui
           image: yanwk/comfyui-boot:cu121-megapak
           imagePullPolicy: IfNotPresent
+          command: ["/bin/bash", "/runner-scripts/entrypoint.sh"]
           resources:
             requests:
               nvidia.com/gpu.shared: "1"
