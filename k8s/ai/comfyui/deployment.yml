@@ -23,7 +23,7 @@ spec:
             claimName: comfyui
       containers:
         - name: comfyui
-          image: yanwk/comfyui-boot:cu121-megapak
+          image: yanwk/comfyui-boot:cu121
           imagePullPolicy: IfNotPresent
           resources:
             requests:
