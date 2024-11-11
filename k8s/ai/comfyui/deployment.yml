@@ -28,8 +28,10 @@ spec:
           resources:
             requests:
               nvidia.com/gpu.shared: "1"
+              ephemeral-storage: 50Mi
             limits:
               nvidia.com/gpu.shared: "1"
+              ephemeral-storage: 2Gi
           ports:
             - containerPort: 8188
               protocol: TCP
