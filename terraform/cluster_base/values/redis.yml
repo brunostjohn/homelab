@@ -27,11 +27,11 @@ master:
   resources:
     requests:
       cpu: 500m
-      memory: 2Gi
+      memory: 5Gi
       ephemeral-storage: 50Mi
     limits:
       cpu: "1"
-      memory: 3Gi
+      memory: 6Gi
       ephemeral-storage: 2Gi
   persistence:
     enabled: true
