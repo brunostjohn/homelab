@@ -23,9 +23,8 @@ spec:
             claimName: comfyui
       containers:
         - name: comfyui
-          image: yanwk/comfyui-boot:cu121-megapak
+          image: yanwk/comfyui-boot:cu121
           imagePullPolicy: IfNotPresent
-          command: ["/bin/bash", "/runner-scripts/entrypoint.sh"]
           resources:
             requests:
               nvidia.com/gpu.shared: "1"
@@ -37,7 +36,7 @@ spec:
               name: http
           volumeMounts:
             - name: comfyui
-              mountPath: /root
+              mountPath: /home/runner
           env:
             - name: NVIDIA_VISIBLE_DEVICES
               value: all
