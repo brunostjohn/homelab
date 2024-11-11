@@ -25,6 +25,9 @@ spec:
         - name: comfyui
           image: yanwk/comfyui-boot:cu121-megapak
           imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+            runAsUser: 0
           resources:
             requests:
               nvidia.com/gpu.shared: "1"
