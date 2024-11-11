@@ -20,10 +20,10 @@ spec:
       volumes:
         - name: comfyui
           persistentVolumeClaim:
-            claimName: comfyui
+            claimName: comfyui-pvc
       containers:
         - name: comfyui
-          image: yanwk/comfyui-boot:cu121
+          image: yanwk/comfyui-boot:cu121-megapak
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -36,7 +36,7 @@ spec:
               name: http
           volumeMounts:
             - name: comfyui
-              mountPath: /home/runner
+              mountPath: /root
           env:
             - name: NVIDIA_VISIBLE_DEVICES
               value: all
