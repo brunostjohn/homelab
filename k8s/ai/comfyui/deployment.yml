@@ -23,7 +23,7 @@ spec:
             claimName: comfyui
       containers:
         - name: comfyui
-          image: yanwk/comfyui-boot:cu121
+          image: yanwk/comfyui-boot:cu121-megapak
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -43,4 +43,4 @@ spec:
             - name: NVIDIA_DRIVER_CAPABILITIES
               value: all
             - name: CLI_ARGS
-              value: ""
+              value: "--lowvram"
