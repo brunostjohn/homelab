@@ -55,4 +55,4 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: data-pvc
+            claimName: hoarder
