@@ -35,19 +35,19 @@ spec:
           ports:
             - containerPort: 9222
               protocol: TCP
-              name: remote-debugging
+              name: debug
           startupProbe:
             httpGet:
               path: /json/version
-              port: remote-debugging
+              port: debug
             failureThreshold: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /json/version
-              port: remote-debugging
+              port: debug
           livenessProbe:
             httpGet:
               path: /json/version
-              port: remote-debugging
+              port: debug
             failureThreshold: 10

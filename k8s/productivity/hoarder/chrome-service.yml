@@ -10,4 +10,4 @@ spec:
     - protocol: TCP
       port: 9222
       targetPort: 9222
-      name: remote-debugging
+      name: debug
