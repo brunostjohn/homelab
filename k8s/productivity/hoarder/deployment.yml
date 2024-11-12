@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: ghcr.io/hoarder-app/hoarder:latest
+          image: ghcr.io/hoarder-app/hoarder:0.19.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
