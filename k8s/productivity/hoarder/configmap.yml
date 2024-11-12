@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hoarder-config
+  namespace: productivity
+data:
+  NEXTAUTH_URL: https://marks.zefirsroyal.cloud
+  MEILI_ADDR: http://hoarder-meilisearch.productivity.svc.cluster.local:7700
+  DISABLE_PASSWORD_AUTH: "true"
+  OAUTH_PROVIDER_NAME: Zefir's Cloud
+  OLLAMA_BASE_URL: http://open-webui-ollama.ai.svc.cluster.local:11434
+  OLLAMA_KEEP_ALIVE: "1s"
+  INFERENCE_TEXT_MODEL: llama3.1:latest
+  INFERENCE_IMAGE_MODEL: llava
+  BROWSER_WEB_URL: http://hoarder-chrome.productivity.svc.cluster.local:9222
+  HOARDER_VERSION: release
+  INFERENCE_JOB_TIMEOUT_SEC: "380"
+  DATA_DIR: /data

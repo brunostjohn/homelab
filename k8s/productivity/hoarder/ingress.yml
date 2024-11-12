@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hoarder
+  namespace: productivity
+  labels:
+    name: hoarder
+spec:
+  rules:
+    - host: marks.zefirsroyal.cloud
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: hoarder-web
+                port:
+                  number: 3000

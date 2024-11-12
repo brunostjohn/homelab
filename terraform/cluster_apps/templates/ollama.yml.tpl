@@ -32,11 +32,11 @@ ollamaUrls:
 
 extraEnvVars:
   - name: ENABLE_IMAGE_GENERATION
-    value: "False"
+    value: "True"
   - name: IMAGE_GENERATION_ENGINE
-    value: automatic1111
-  - name: AUTOMATIC1111_BASE_URL
-    value: http://stable-diffusion.ai.svc.cluster.local:8080
+    value: comfyui
+  - name: COMFYUI_BASE_URL
+    value: http://10.0.3.3:8188
   - name: WEBUI_URL
     value: https://chat.${global_fqdn}
   - name: ENABLE_MESSAGE_RATING

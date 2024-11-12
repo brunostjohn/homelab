@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hoarder-chrome
+  namespace: productivity
+spec:
+  selector:
+    app: hoarder-chrome
+  ports:
+    - protocol: TCP
+      port: 9222
+      targetPort: 9222
+      name: remote-debugging

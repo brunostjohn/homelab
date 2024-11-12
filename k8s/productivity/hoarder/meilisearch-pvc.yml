@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hoarder-meilisearch
+  namespace: productivity
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: floof-iscsi-csi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce

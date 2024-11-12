@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hoarder-web
+  namespace: productivity
+  annotations:
+    secrets.infisical.com/auto-reload: "true"
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hoarder-web
+  template:
+    metadata:
+      labels:
+        app: hoarder-web
+    spec:
+      containers:
+        - name: web
+          image: ghcr.io/hoarder-app/hoarder:HOARDER_VERSION_PLACEHOLDER
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - mountPath: /data
+              name: data
+          envFrom:
+            - configMapRef:
+                name: hoarder-config
+            - secretRef:
+                name: hoarder-secrets
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 500m
+            limits:
+              memory: 2Gi
+              cpu: "1"
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-pvc
