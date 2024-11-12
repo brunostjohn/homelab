@@ -22,7 +22,7 @@ spec:
             - name: MEILI_MASTER_KEY
               valueFrom:
                 secretKeyRef:
-                  name: meilisearch-secrets
+                  name: hoarder-secrets
                   key: MEILI_MASTER_KEY
           ports:
             - containerPort: 7700

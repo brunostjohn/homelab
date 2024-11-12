@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
         - name: web
-          image: ghcr.io/hoarder-app/hoarder:HOARDER_VERSION_PLACEHOLDER
+          image: ghcr.io/hoarder-app/hoarder:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
               protocol: TCP
