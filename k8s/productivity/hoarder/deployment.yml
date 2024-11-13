@@ -38,6 +38,9 @@ spec:
             httpGet:
               path: /
               port: http
+            failureThreshold: 3
+            periodSeconds: 10
+            timeoutSeconds: 10
           volumeMounts:
             - mountPath: /data
               name: data
@@ -48,11 +51,11 @@ spec:
                 name: hoarder-secrets
           resources:
             requests:
-              memory: 1Gi
-              cpu: 500m
-            limits:
               memory: 2Gi
               cpu: "1"
+            limits:
+              memory: 3Gi
+              cpu: "2"
       volumes:
         - name: data
           persistentVolumeClaim:
