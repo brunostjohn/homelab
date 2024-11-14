@@ -22,6 +22,6 @@ data:
   LLM_EMOJI_MODEL: llama3.1:latest
   LLM_IMAGE_SEARCH_MODEL: llama3.1:latest
   LLM_VIDEO_SEARCH_MODEL: llama3.1:latest
-  LOG_LEVEL: info
+  LOG_LEVEL: trace
   LOG_MODE: json
   METRICS_PORT: "9001"
