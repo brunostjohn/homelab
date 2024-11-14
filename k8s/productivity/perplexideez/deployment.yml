@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: perplexideez
   namespace: productivity
+  annotations:
+    secrets.infisical.com/auto-reload: "true"
+    reloader.stakater.com/auto: "true"
 spec:
   selector:
     matchLabels:
