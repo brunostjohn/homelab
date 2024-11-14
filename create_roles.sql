@@ -306,6 +306,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to homeassistant_role;
 CREATE USER homeassistant WITH PASSWORD '<password>';
 GRANT homeassistant_role TO homeassistant;
 
+-- PERPLEXIDEEZ
+CREATE ROLE perplexideez_role;
+\c perplexideez
+GRANT ALL PRIVILEGES ON DATABASE perplexideez TO perplexideez_role;
+GRANT ALL ON SCHEMA public TO perplexideez_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO perplexideez_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to perplexideez_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to perplexideez_role;
+CREATE USER perplexideez WITH PASSWORD '<password>';
+GRANT perplexideez_role TO perplexideez;
+
 -- MEDIA STACK --
 
 -- LIDARR

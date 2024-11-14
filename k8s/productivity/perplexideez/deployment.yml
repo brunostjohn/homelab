@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: perplexideez
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: perplexideez
+  template:
+    metadata:
+      labels:
+        app: perplexideez
+    spec:
+      initContainers:
+        - name: db-migrate
+          image: ghcr.io/brunostjohn/perplexideez/migrate:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: perplexideez-secrets
+      containers:
+        - name: perplexideez
+          image: ghcr.io/brunostjohn/perplexideez/app:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: "1"
+            limits:
+              memory: 1Gi
+              cpu: "2"
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+            - containerPort: 9001
+              name: metrics
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 10
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            failureThreshold: 3
+          envFrom:
+            - secretRef:
+                name: perplexideez-secrets
+            - configMapRef:
+                name: perplexideez-config

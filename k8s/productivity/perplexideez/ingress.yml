@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: perplexideez
+  namespace: productivity
+  labels:
+    name: perplexideez
+spec:
+  rules:
+    - host: deez.zefirsroyal.cloud
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: perplexideez
+                port:
+                  number: 3000

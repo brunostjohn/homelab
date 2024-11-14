@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: perplexideez
+  namespace: productivity
+  labels: {}
+spec:
+  selector:
+    matchLabels:
+      app: perplexideez
+  endpoints:
+    - port: http

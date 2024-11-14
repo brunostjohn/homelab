@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: perplexideez-config
+  namespace: productivity
+data:
+  PUBLIC_BASE_URL: https://deez.zefirsroyal.cloud
+  NODE_ENV: production
+  DISABLE_PASSWORD_LOGIN: "true"
+  DISABLE_SIGN_UP: "true"
+  OIDC_SCOPES: openid email profile
+  PUBLIC_OIDC_NAME: Zefir's Cloud
+  LLM_MODE: ollama
+  OLLAMA_URL: http://open-webui-ollama.ai.svc.cluster.local:11434
+  SEARXNG_URL: http://searxng.productivity.svc.cluster.local:8080
+  LLM_SPEED_MODEL: gemma2:2b
+  LLM_BALANCED_MODEL: llama3.1:latest
+  LLM_QUALITY_MODEL: llama3.1:latest
+  LLM_EMBEDDINGS_MODEL: nomic-embed-text:latest
+  LLM_TITLE_MODEL: llama3.1:latest
+  LLM_EMOJI_MODEL: llama3.1:latest
+  LLM_IMAGE_SEARCH_MODEL: llama3.1:latest
+  LLM_VIDEO_SEARCH_MODEL: llama3.1:latest
+  LOG_LEVEL: info
+  LOG_MODE: json
+  METRICS_PORT: "9001"
