@@ -6,8 +6,8 @@ metadata:
 data:
   PUBLIC_BASE_URL: https://deez.zefirsroyal.cloud
   NODE_ENV: production
-  # DISABLE_PASSWORD_LOGIN: "true"
-  # DISABLE_SIGN_UP: "true"
+  DISABLE_PASSWORD_LOGIN: "true"
+  DISABLE_SIGN_UP: "true"
   OIDC_SCOPES: openid email profile
   PUBLIC_OIDC_NAME: Zefir's Cloud
   LLM_MODE: ollama
@@ -22,6 +22,6 @@ data:
   LLM_EMOJI_MODEL: llama3.1:latest
   LLM_IMAGE_SEARCH_MODEL: llama3.1:latest
   LLM_VIDEO_SEARCH_MODEL: llama3.1:latest
-  LOG_LEVEL: trace
+  LOG_LEVEL: info
   LOG_MODE: json
   METRICS_PORT: "9001"
