@@ -11,8 +11,8 @@ data:
   OIDC_SCOPES: openid email profile
   PUBLIC_OIDC_NAME: Zefir's Cloud
   LLM_MODE: ollama
-  # OLLAMA_URL: http://open-webui-ollama.ai.svc.cluster.local:11434
-  OLLAMA_URL: http://10.1.18.78:11434
+  OLLAMA_URL: http://open-webui-ollama.ai.svc.cluster.local:11434
+  # OLLAMA_URL: http://10.1.18.78:11434
   SEARXNG_URL: http://searxng.productivity.svc.cluster.local:8080
   LLM_SPEED_MODEL: gemma2:2b
   LLM_BALANCED_MODEL: llama3.1:latest
