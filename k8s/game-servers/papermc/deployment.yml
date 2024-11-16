@@ -14,12 +14,10 @@ spec:
       labels:
         app: papermc
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: s7.m-nodes.zefirscloud.local
       volumes:
         - name: papermc
-          hostPath:
-            path: /mc-world
+          persistentVolumeClaim:
+            claimName: papermc
       containers:
         - name: papermc
           image: itzg/minecraft-server
