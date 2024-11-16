@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bot-ig
+  namespace: silly-bot
+spec:
+  selector:
+    matchLabels:
+      app: bot-ig
+  template:
+    metadata:
+      labels:
+        app: bot-ig
+    spec:
+      containers:
+        - name: bot-ig
+          image: ghcr.io/wikidepia/instafix:main
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http

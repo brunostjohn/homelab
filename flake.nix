@@ -48,7 +48,6 @@
           modules = [
             ./nix/hosts/s2
             ./nix/modules/k3sAgent
-            ./nix/modules/nvidiaGpu
             ./nix/modules/10gbit
           ] ++ globalModulesMNode;
         };
@@ -104,6 +103,20 @@
             ./nix/hosts/s6
             ./nix/modules/k3sAgent
             ./nix/modules/10gbit
+          ] ++ globalModulesMNode;
+        };
+
+        s7 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs.node = {
+            ipAddress = "10.0.0.10";
+            macAddress = "04:d9:f5:d5:6e:0c";
+            hostname = "s7";
+          };
+          modules = [
+            ./nix/hosts/s7
+            ./nix/modules/k3sAgent
+            ./nix/modules/nvidiaGpu
           ] ++ globalModulesMNode;
         };
 
