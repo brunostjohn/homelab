@@ -1,26 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bot-ig
+  name: ig-cors
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: bot-ig
+      app: ig-cors
   template:
     metadata:
       labels:
-        app: bot-ig
+        app: ig-cors
     spec:
       containers:
-        - name: bot-ig
-          image: ghcr.io/wikidepia/instafix:main
-          command:
-            [
-              "/instafix",
-              "-video-proxy-addr",
-              "https://igcorsproxy.mattmaxx.ing",
-            ]
+        - name: ig-cors
+          image: ghcr.io/brunostjohn/instafix/warp-cors:main
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -29,15 +23,13 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
-          readinessProbe:
-            httpGet:
-              port: http
-              path: /
-          livenessProbe:
-            httpGet:
-              port: http
-              path: /
           ports:
-            - containerPort: 3000
+            - containerPort: 3030
               protocol: TCP
               name: http
+          readinessProbe:
+            tcpSocket:
+              port: http
+          livenessProbe:
+            tcpSocket:
+              port: http
