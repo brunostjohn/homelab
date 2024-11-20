@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bot-ig
-  namespace: silly-bot
+  namespace: default
 spec:
   selector:
     matchLabels:
