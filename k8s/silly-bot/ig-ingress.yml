@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bot-ig
+  namespace: default
+  labels:
+    name: bot-ig
+spec:
+  rules:
+    - host: instagramis.mattmaxx.ing
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: bot-ig
+                port:
+                  number: 3000
