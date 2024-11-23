@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wg-easy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: wg-easy
+  template:
+    metadata:
+      labels:
+        app: wg-easy
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: wg-easy
+      containers:
+        - name: wg-easy
+          image: ghcr.io/wg-easy/wg-easy:latest
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+                - SYS_MODULE
+                - NET_RAW
+            sysctls:
+              - name: net.ipv4.conf.all.src_valid_mark
+                value: "1"
+              - name: net.ipv4.ip_forward
+                value: "1"
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: "500m"
+            limits:
+              memory: 1Gi
+              cpu: "1"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: http
+            - containerPort: 51820
+              protocol: UDP
+              name: wireguard
+          env:
+            - name: LANG
+              value: en
+            - name: WG_HOST
+              value: wg.slightlysus.link
+            - name: PORT
+              value: "80"
+            - name: WG_PORT
+              value: "51820"
+          volumeMounts:
+            - name: data
+              mountPath: /etc/wireguard
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http

@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: wg-easy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: wg-easy
+  endpoints:
+    - port: http
