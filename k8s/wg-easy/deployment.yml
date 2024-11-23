@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: wg-easy
   namespace: default
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   strategy:
     type: Recreate
