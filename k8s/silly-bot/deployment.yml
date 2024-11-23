@@ -63,3 +63,5 @@ spec:
               value: http://open-webui-ollama.ai.svc.cluster.local:11434
             - name: IMAGE_GEN_SERVERS
               value: 10.1.18.78:8188,10.0.0.10:8188
+            - name: OLLAMA_URLS
+              value: 10.1.18.78:11434,open-webui-ollama.ai.svc.cluster.local:11434
