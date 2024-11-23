@@ -4,6 +4,8 @@ metadata:
   name: wg-easy
   namespace: default
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: wg-easy
