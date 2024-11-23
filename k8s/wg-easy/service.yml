@@ -17,20 +17,20 @@ spec:
       targetPort: 51820
       name: wireguard
       protocol: UDP
-    - port: 111
-      targetPort: 111
+    - port: 2111
+      targetPort: 2111
       name: ollama-1
       protocol: TCP
-    - port: 112
-      targetPort: 112
-      name: ollama-2
-      protocol: TCP
-    - port: 121
-      targetPort: 121
+    - port: 2112
+      targetPort: 2112
       name: comfyui-1
       protocol: TCP
-    - port: 122
-      targetPort: 122
+    - port: 2121
+      targetPort: 2121
+      name: ollama-2
+      protocol: TCP
+    - port: 2122
+      targetPort: 2122
       name: comfyui-2
       protocol: TCP
   type: LoadBalancer

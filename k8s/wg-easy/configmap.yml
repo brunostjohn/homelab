@@ -4,17 +4,15 @@ metadata:
   name: wg-easy-config
   namespace: default
 data:
-  WG_PRE_UP: >
-    iptables -A FORWARD -i wg0 -j ACCEPT;
-    iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE;
-    iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 111 -j DNAT --to-destination 10.8.0.2:11434;
-    iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 112 -j DNAT --to-destination 10.8.0.3:11434;
-    iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 121 -j DNAT --to-destination 10.8.0.2:8188;
-    iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 122 -j DNAT --to-destination 10.8.0.3:8188;
-  WG_PRE_DOWN: >
-    iptables -D FORWARD -i wg0 -j ACCEPT;
-    iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE;
-    iptables -D PREROUTING -t nat -i eth0 -p tcp --dport 111 -j DNAT --to-destination 10.8.0.2:11434;
-    iptables -D PREROUTING -t nat -i eth0 -p tcp --dport 112 -j DNAT --to-destination 10.8.0.3:11434;
-    iptables -D PREROUTING -t nat -i eth0 -p tcp --dport 121 -j DNAT --to-destination 10.8.0.2:8188;
-    iptables -D PREROUTING -t nat -i eth0 -p tcp --dport 122 -j DNAT --to-destination 10.8.0.3:8188;
+  WG_POST_UP: >
+    iptables -t nat -A PREROUTING -p tcp --dport 2111 -j DNAT --to-destination 10.8.0.2:11434
+    iptables -t nat -A PREROUTING -p tcp --dport 2112 -j DNAT --to-destination 10.8.0.2:8188
+    iptables -t nat -A PREROUTING -p tcp --dport 2121 -j DNAT --to-destination 10.8.0.3:11434
+    iptables -t nat -A PREROUTING -p tcp --dport 2122 -j DNAT --to-destination 10.8.0.3:8188
+    iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
+  WG_POST_DOWN: >
+    iptables -t nat -D PREROUTING -p tcp --dport 2111 -j DNAT --to-destination 10.8.0.2:11434
+    iptables -t nat -D PREROUTING -p tcp --dport 2112 -j DNAT --to-destination 10.8.0.2:8188
+    iptables -t nat -D PREROUTING -p tcp --dport 2121 -j DNAT --to-destination 10.8.0.3:11434
+    iptables -t nat -D PREROUTING -p tcp --dport 2122 -j DNAT --to-destination 10.8.0.3:8188
+    iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE

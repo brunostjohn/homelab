@@ -50,16 +50,16 @@ spec:
             - containerPort: 51820
               protocol: UDP
               name: wireguard
-            - containerPort: 111
+            - containerPort: 2111
               protocol: TCP
               name: ollama-1
-            - containerPort: 112
-              protocol: TCP
-              name: ollama-2
-            - containerPort: 121
+            - containerPort: 2112
               protocol: TCP
               name: comfyui-1
-            - containerPort: 122
+            - containerPort: 2121
+              protocol: TCP
+              name: ollama-2
+            - containerPort: 2122
               protocol: TCP
               name: comfyui-2
           envFrom:
