@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: snapp
+  namespace: productivity
+  labels:
+    name: snapp
+spec:
+  tls:
+    - hosts:
+        - slightlysus.link
+      secretName: third-cert-prod
+  rules:
+    - host: slightlysus.link
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: snapp
+                port:
+                  number: 3000

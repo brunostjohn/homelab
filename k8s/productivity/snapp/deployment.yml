@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snapp
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: snapp
+  template:
+    metadata:
+      labels:
+        app: snapp
+    spec:
+      containers:
+        - name: snapp
+          image: uraniadev/snapp:latest
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          env:
+            - name: DATABASE_PROVIDER
+              value: postgres
+            - name: ORIGIN
+              value: https://slightlysus.link
+          envFrom:
+            - secretRef:
+                name: snapp-secrets

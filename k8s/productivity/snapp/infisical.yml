@@ -1,0 +1,20 @@
+apiVersion: secrets.infisical.com/v1alpha1
+kind: InfisicalSecret
+metadata:
+  name: snapp-secrets-infisical
+  namespace: productivity
+spec:
+  authentication:
+    universalAuth:
+      secretsScope:
+        projectSlug: cluster-secrets-rgq1
+        envSlug: dev
+        secretsPath: /snapp
+        recursive: true
+      credentialsRef:
+        secretName: infisical-machine-id
+        secretNamespace: infisical
+  managedSecretReference:
+    secretName: snapp-secrets
+    secretNamespace: productivity
+    creationPolicy: Owner

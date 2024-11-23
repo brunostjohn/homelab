@@ -20,6 +20,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to outline_role;
 CREATE USER outline WITH PASSWORD '<password>';
 GRANT outline_role TO outline;
 
+-- SNAPP
+CREATE ROLE snapp_role;
+\c snapp
+GRANT ALL PRIVILEGES ON DATABASE snapp TO snapp_role;
+GRANT ALL ON SCHEMA public TO snapp_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO snapp_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to snapp_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to snapp_role;
+CREATE USER snapp WITH PASSWORD '<password>';
+GRANT snapp_role TO snapp;
+
 -- EMQX-AUTHENTICATION
 CREATE ROLE emqxauth_role;
 \c emqxauth
