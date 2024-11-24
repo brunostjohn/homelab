@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ap-inference
-  namespace: wg-easy
+  namespace: default
 spec:
   selector:
     app: wg-easy
