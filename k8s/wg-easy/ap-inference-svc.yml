@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ap-inference
+  namespace: wg-easy
+spec:
+  selector:
+    app: wg-easy
+  ports:
+    - port: 11434
+      targetPort: 2111
+      protocol: TCP
+      name: ollama
+    - port: 8488
+      targetPort: 2112
+      protocol: TCP
+      name: comfyui
