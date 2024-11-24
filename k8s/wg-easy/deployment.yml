@@ -22,7 +22,7 @@ spec:
             claimName: wg-easy
       containers:
         - name: wg-easy
-          image: ghcr.io/wg-easy/wg-easy:latest
+          image: ghcr.io/wg-easy/wg-easy:nightly
           imagePullPolicy: Always
           securityContext:
             capabilities:
@@ -41,9 +41,6 @@ spec:
             - containerPort: 80
               protocol: TCP
               name: http
-            - containerPort: 51821
-              protocol: TCP
-              name: metrics
             - containerPort: 51820
               protocol: UDP
               name: wireguard

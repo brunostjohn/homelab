@@ -8,4 +8,4 @@ spec:
     matchLabels:
       app: wg-easy
   endpoints:
-    - port: metrics
+    - port: http
