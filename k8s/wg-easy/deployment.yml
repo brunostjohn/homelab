@@ -41,6 +41,9 @@ spec:
             - containerPort: 80
               protocol: TCP
               name: http
+            - containerPort: 51821
+              protocol: TCP
+              name: metrics
             - containerPort: 51820
               protocol: UDP
               name: wireguard
