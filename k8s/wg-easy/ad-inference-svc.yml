@@ -11,7 +11,7 @@ spec:
       targetPort: 2121
       protocol: TCP
       name: ollama
-    - port: 8488
+    - port: 8188
       targetPort: 2122
       protocol: TCP
       name: comfyui
