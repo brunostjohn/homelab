@@ -16,3 +16,4 @@ data:
   SERVER_NAME: "Zefir's Pals"
   SERVER_DESCRIPTION: "kittyyyyy :3"
   REST_API_ENABLED: "true"
+  DEATH_PENALTY: "None"
