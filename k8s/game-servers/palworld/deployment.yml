@@ -20,17 +20,12 @@ spec:
       labels:
         app: palworld
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: s7.m-nodes.zefirscloud.local
       containers:
         - name: server
           image: thijsvanloef/palworld-server-docker
           imagePullPolicy: IfNotPresent
-          resources:
-            requests:
-              memory: 20Gi
-              cpu: "6"
-            limits:
-              memory: 28Gi
-              cpu: "8"
           startupProbe:
             exec:
               command: ["rest-cli", "info"]
@@ -69,5 +64,5 @@ spec:
               name: datadir
       volumes:
         - name: datadir
-          persistentVolumeClaim:
-            claimName: palworld-server-pvc
+          hostPath:
+            path: /palworld

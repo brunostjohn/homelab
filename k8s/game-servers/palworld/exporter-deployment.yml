@@ -17,6 +17,8 @@ spec:
       labels:
         app: palworld-exporter
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: s7.m-nodes.zefirscloud.local
       containers:
         - name: palworld-exporter
           image: docker.io/bostrt/palworld-exporter
@@ -56,5 +58,5 @@ spec:
               name: datadir
       volumes:
         - name: datadir
-          persistentVolumeClaim:
-            claimName: palworld-server-pvc
+          hostPath:
+            path: /palworld
