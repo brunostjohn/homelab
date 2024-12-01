@@ -65,6 +65,9 @@ spec:
             - list: trusted_k8s_api_container_images
               items:
                 - quay.io/argoproj/argocd
+                - ghcr.io/kyverno/cleanup-controller
+                - docker.io/infisical/kubernetes-operator
+                - docker.io/bitnami/rabbitmq-cluster-operator
             - macro: user_known_contact_k8s_api_server_activities
               condition: or container.image.repository in (trusted_k8s_api_container_images)
               override:
