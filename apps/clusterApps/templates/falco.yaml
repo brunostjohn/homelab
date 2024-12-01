@@ -67,6 +67,8 @@ spec:
                 - quay.io/argoproj/argocd
                 - ghcr.io/kyverno/cleanup-controller
                 - ghcr.io/kyverno/kyverno
+                - ghcr.io/tensorchord/cloudnative-pgvecto.rs
+                - docker.elastic.co/eck/eck-operator
                 - docker.io/infisical/kubernetes-operator
                 - docker.io/bitnami/rabbitmq-cluster-operator
             - macro: user_known_contact_k8s_api_server_activities
