@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: falco-system
+---
+apiVersion: secrets.infisical.com/v1alpha1
+kind: InfisicalSecret
+metadata:
+  name: falco-secrets-infisical
+  namespace: falco-system
+spec:
+  authentication:
+    universalAuth:
+      secretsScope:
+        projectSlug: cluster-secrets-rgq1
+        envSlug: dev
+        secretsPath: /falco
+        recursive: true
+      credentialsRef:
+        secretName: infisical-machine-id
+        secretNamespace: infisical
+  managedSecretReference:
+    secretName: falco-secrets
+    secretNamespace: falco-system
+    creationPolicy: Owner
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falco
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: falco-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: falco
+    targetRevision: 4.15.1
+    repoURL: https://falcosecurity.github.io/charts
+    helm:
+      valuesObject:
+        serviceMonitor:
+          create: true
+        metrics:
+          enabled: true
+        collectors:
+          containerd:
+            socket: /run/k3s/containerd/containerd.sock
+        falcosidekick:
+          enabled: true
+          config:
+            existingSecret: falco-secrets
+          serviceMonitor:
+            enabled: true
+          prometheusRules:
+            enabled: true
+          webui:
+            enabled: true
+            disableauth: true
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
