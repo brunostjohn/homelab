@@ -60,6 +60,15 @@ spec:
           webui:
             enabled: true
             disableauth: true
+        customRules:
+          shut-the-fuck-up.yaml: |
+            - list: trusted_k8s_api_container_images
+              items:
+                - quay.io/argoproj/argocd
+            - macro: user_known_contact_k8s_api_server_activities
+              condition: or container.image.repository in (trusted_k8s_api_container_images)
+              override:
+                condition: append
 
   syncPolicy:
     automated:
