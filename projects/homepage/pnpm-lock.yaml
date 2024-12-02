@@ -70,8 +70,8 @@ importers:
         version: 0.3.2(svelte@5.3.1)
     devDependencies:
       '@hey-api/client-fetch':
-        specifier: ^0.4.0
-        version: 0.4.4
+        specifier: ^0.5.0
+        version: 0.5.0
       '@hey-api/openapi-ts':
         specifier: ^0.58.0
         version: 0.58.0(typescript@5.6.2)
@@ -373,8 +373,8 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@hey-api/client-fetch@0.4.4':
-    resolution: {integrity: sha512-ebh1JjUdMAqes/Rg8OvbjDqGWGNhgHgmPtHlkIOUtj3y2mUXqX2g9sVoI/rSKW/FdADPng/90k5AL7bwT8W2lA==}
+  '@hey-api/client-fetch@0.5.0':
+    resolution: {integrity: sha512-dAgsc4ypMuA0tYZL+8Gz5Mpc3OE3+daIO8eCmfRDw2Tjt0G6CoNKIGTRxJQxBGro5m8Z3k2np0MUc8gzE9RIFQ==}
 
   '@hey-api/openapi-ts@0.58.0':
     resolution: {integrity: sha512-ynOsoDwtQ3wyknufMbjeOc6GgUfLN50o0y6rtMIWSggb9Rl5VJsqdQZs0b5Z9GW8MU8uYQO9b8gskR4dQ2gqLg==}
@@ -3194,7 +3194,7 @@ snapshots:
       '@hapi/hoek': 9.3.0
     optional: true
 
-  '@hey-api/client-fetch@0.4.4': {}
+  '@hey-api/client-fetch@0.5.0': {}
 
   '@hey-api/openapi-ts@0.58.0(typescript@5.6.2)':
     dependencies:
