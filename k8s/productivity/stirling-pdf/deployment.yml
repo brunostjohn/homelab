@@ -4,6 +4,8 @@ metadata:
   name: stirling-pdf
   namespace: productivity
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: stirling-pdf
