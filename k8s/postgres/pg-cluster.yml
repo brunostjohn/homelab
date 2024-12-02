@@ -19,7 +19,7 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
 
   storage:
-    size: 30Gi
+    size: 35Gi
     storageClass: longhorn-unreplicated
 
   monitoring:
