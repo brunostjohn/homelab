@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: snapp
-          image: uraniadev/snapp:latest
+          image: docker.io/uraniadev/snapp:0.8.7.5
           resources:
             requests:
               memory: "256Mi"

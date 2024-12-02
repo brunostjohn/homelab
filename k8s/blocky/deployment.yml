@@ -6,7 +6,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 2
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -35,7 +35,7 @@ spec:
           tolerationSeconds: 20
       containers:
         - name: blocky
-          image: ghcr.io/0xerr0r/blocky
+          image: ghcr.io/0xerr0r/blocky:v0.24
           imagePullPolicy: IfNotPresent
           resources:
             requests:

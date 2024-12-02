@@ -21,7 +21,7 @@ spec:
             name: infrared-cubes-proxy-config
       containers:
         - name: infrared
-          image: haveachin/infrared:latest
+          image: docker.io/haveachin/infrared:2.0.0-alpha.r2
           resources:
             requests:
               memory: "128Mi"

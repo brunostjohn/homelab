@@ -24,7 +24,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: readarr
-          image: ghcr.io/hotio/readarr:latest
+          image: ghcr.io/hotio/readarr:testing-0.4.4.2686
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false

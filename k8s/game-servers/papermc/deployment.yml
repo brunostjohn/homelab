@@ -22,7 +22,7 @@ spec:
             path: /mc-world
       containers:
         - name: papermc
-          image: itzg/minecraft-server
+          image: docker.io/itzg/minecraft-server:latest
           imagePullPolicy: IfNotPresent
           resources:
             requests:

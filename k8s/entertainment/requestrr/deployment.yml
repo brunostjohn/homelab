@@ -21,7 +21,7 @@ spec:
             claimName: requestrr-pvc
       containers:
         - name: requestrr
-          image: thomst08/requestrr
+          image: docker.io/thomst08/requestrr:v2.1.7
           imagePullPolicy: IfNotPresent
           resources:
             limits:

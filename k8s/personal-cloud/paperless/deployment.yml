@@ -33,7 +33,7 @@ spec:
       containers:
         - name: paperless
           imagePullPolicy: IfNotPresent
-          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5
           resources:
             requests:
               memory: "512Mi"

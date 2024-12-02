@@ -28,7 +28,7 @@ spec:
                 - CHOWN
                 - SETGID
                 - SETUID
-          image: docker.io/searxng/searxng:latest
+          image: docker.io/searxng/searxng:2024.12.1-0245e82bd
           resources:
             requests:
               memory: 1Gi

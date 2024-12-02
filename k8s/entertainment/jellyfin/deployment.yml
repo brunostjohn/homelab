@@ -36,7 +36,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: jellyfin
-          image: jellyfin/jellyfin
+          image: docker.io/jellyfin/jellyfin:10.10.3
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: true

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: outline
-          image: docker.getoutline.com/outlinewiki/outline
+          image: docker.getoutline.com/outlinewiki/outline:0.81.1
           imagePullPolicy: IfNotPresent
           resources:
             requests:

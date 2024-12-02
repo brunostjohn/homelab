@@ -18,7 +18,7 @@ spec:
             claimName: vaultwarden-data
       containers:
         - name: vaultwarden
-          image: vaultwarden/server:latest
+          image: docker.io/vaultwarden/server:1.32.5
           imagePullPolicy: IfNotPresent
           resources:
             requests:

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: grist
-          image: gristlabs/grist:latest
+          image: docker.io/gristlabs/grist:latest
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:

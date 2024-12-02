@@ -17,8 +17,29 @@ spec:
     spec:
       containers:
         - name: unifi-poller
-          image: ghcr.io/unpoller/unpoller:latest
+          image: ghcr.io/unpoller/unpoller:v2.11.2
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          startupProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+            failureThreshold: 30
+            periodSeconds: 10
           ports:
             - containerPort: 9130
               name: metrics

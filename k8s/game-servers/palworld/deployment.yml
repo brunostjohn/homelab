@@ -24,7 +24,7 @@ spec:
         kubernetes.io/hostname: s7.m-nodes.zefirscloud.local
       containers:
         - name: server
-          image: thijsvanloef/palworld-server-docker
+          image: docker.io/thijsvanloef/palworld-server-docker:v1.0.0
           imagePullPolicy: IfNotPresent
           startupProbe:
             exec:

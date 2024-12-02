@@ -18,7 +18,7 @@ spec:
             claimName: openedai-tts-pvc
       containers:
         - name: openedai-tts
-          image: ghcr.io/matatonic/openedai-speech-min
+          image: ghcr.io/matatonic/openedai-speech-min:0.18.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000

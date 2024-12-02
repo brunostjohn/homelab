@@ -24,7 +24,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: lidarr
-          image: ghcr.io/hotio/lidarr:release-2.4.3.4248
+          image: ghcr.io/hotio/lidarr:release-2.7.1.4417
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false

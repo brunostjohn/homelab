@@ -21,7 +21,7 @@ spec:
             claimName: wizarr-pvc
       containers:
         - name: wizarr
-          image: ghcr.io/wizarrrr/wizarr:beta
+          image: ghcr.io/wizarrrr/wizarr:4.2.0-beta.3
           imagePullPolicy: IfNotPresent
           resources:
             limits:

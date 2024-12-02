@@ -24,7 +24,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: bazarr
-          image: linuxserver/bazarr
+          image: docker.io/linuxserver/bazarr:1.4.5
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
