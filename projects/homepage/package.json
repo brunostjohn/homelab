@@ -68,7 +68,7 @@
 		"svelte-sonner": "^0.3.28",
 		"sveltekit-superforms": "^2.19.0",
 		"tailwind-merge": "^2.5.2",
-		"tailwind-variants": "^0.2.1",
+		"tailwind-variants": "^0.3.0",
 		"trpc-sveltekit": "^3.6.2",
 		"unifi-client": "^0.11.0",
 		"vaul-svelte": "^0.3.2"
