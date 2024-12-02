@@ -78,6 +78,7 @@ spec:
                 - registry.k8s.io/kube-state-metrics/kube-state-metrics
                 - docker.io/longhornio/longhorn-manager
                 - ghcr.io/kyverno/background-controller
+                - quay.io/kiwigrid/k8s-sidecar
             - macro: user_known_contact_k8s_api_server_activities
               condition: or container.image.repository in (trusted_k8s_api_container_images)
               override:
