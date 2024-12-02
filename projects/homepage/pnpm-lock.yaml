@@ -34,7 +34,7 @@ importers:
         version: 0.0.18(svelte@5.3.1)
       embla-carousel-svelte:
         specifier: ^8.3.0
-        version: 8.3.0(svelte@5.3.1)
+        version: 8.5.1(svelte@5.3.1)
       formsnap:
         specifier: ^1.0.1
         version: 1.0.1(svelte@5.3.1)(sveltekit-superforms@2.19.0(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.2(svelte@5.3.1)(vite@5.4.8(@types/node@22.7.4)))(svelte@5.3.1)(vite@5.4.8(@types/node@22.7.4)))(@types/json-schema@7.0.15)(svelte@5.3.1))
@@ -107,7 +107,7 @@ importers:
         version: 10.4.20(postcss@8.4.47)
       embla-carousel-autoplay:
         specifier: ^8.3.0
-        version: 8.3.0(embla-carousel@8.3.0)
+        version: 8.5.1(embla-carousel@8.5.1)
       fast-blurhash:
         specifier: ^1.1.4
         version: 1.1.4
@@ -1397,23 +1397,23 @@ packages:
   electron-to-chromium@1.5.31:
     resolution: {integrity: sha512-QcDoBbQeYt0+3CWcK/rEbuHvwpbT/8SV9T3OSgs6cX1FlcUAkgrkqbg9zLnDrMM/rLamzQwal4LYFCiWk861Tg==}
 
-  embla-carousel-autoplay@8.3.0:
-    resolution: {integrity: sha512-h7DFJLf9uQD+XDxr1NwA3/oFIjsnj/iED2RjET5u6/svMec46IbF1CYPhmB5Q/1Fc0WkcvhPpsEsrtVXQLxNzA==}
+  embla-carousel-autoplay@8.5.1:
+    resolution: {integrity: sha512-FnZklFpePfp8wbj177UwVaGFehgs+ASVcJvYLWTtHuYKURynCc3IdDn2qrn0E5Qpa3g9yeGwCS4p8QkrZmO8xg==}
     peerDependencies:
-      embla-carousel: 8.3.0
+      embla-carousel: 8.5.1
 
-  embla-carousel-reactive-utils@8.3.0:
-    resolution: {integrity: sha512-EYdhhJ302SC4Lmkx8GRsp0sjUhEN4WyFXPOk0kGu9OXZSRMmcBlRgTvHcq8eKJE1bXWBsOi1T83B+BSSVZSmwQ==}
+  embla-carousel-reactive-utils@8.5.1:
+    resolution: {integrity: sha512-n7VSoGIiiDIc4MfXF3ZRTO59KDp820QDuyBDGlt5/65+lumPHxX2JLz0EZ23hZ4eg4vZGUXwMkYv02fw2JVo/A==}
     peerDependencies:
-      embla-carousel: 8.3.0
+      embla-carousel: 8.5.1
 
-  embla-carousel-svelte@8.3.0:
-    resolution: {integrity: sha512-FW5fYpY8V2/2zkqaDv3v+Hw+c1tD0B00oK3YfZhnDggTwjt/rvv45muv2tbKrLkpLrW0+4s8UNAWscKiXJRETg==}
+  embla-carousel-svelte@8.5.1:
+    resolution: {integrity: sha512-sCQDCn+kyuLUysXFRCTboSTslI0LUV5OhVqBAXnSphJ/mYdlbYfMhk03MGck+Mogdgpf9zYrBocp2uF6qUBNAw==}
     peerDependencies:
       svelte: ^3.49.0 || ^4.0.0 || ^5.0.0
 
-  embla-carousel@8.3.0:
-    resolution: {integrity: sha512-Ve8dhI4w28qBqR8J+aMtv7rLK89r1ZA5HocwFz6uMB/i5EiC7bGI7y+AM80yAVUJw3qqaZYK7clmZMUR8kM3UA==}
+  embla-carousel@8.5.1:
+    resolution: {integrity: sha512-JUb5+FOHobSiWQ2EJNaueCNT/cQU9L6XWBbWmorWPQT9bkbk+fhsuLr8wWrzXKagO3oWszBO7MSx+GfaRk4E6A==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -4167,21 +4167,21 @@ snapshots:
 
   electron-to-chromium@1.5.31: {}
 
-  embla-carousel-autoplay@8.3.0(embla-carousel@8.3.0):
+  embla-carousel-autoplay@8.5.1(embla-carousel@8.5.1):
     dependencies:
-      embla-carousel: 8.3.0
+      embla-carousel: 8.5.1
 
-  embla-carousel-reactive-utils@8.3.0(embla-carousel@8.3.0):
+  embla-carousel-reactive-utils@8.5.1(embla-carousel@8.5.1):
     dependencies:
-      embla-carousel: 8.3.0
+      embla-carousel: 8.5.1
 
-  embla-carousel-svelte@8.3.0(svelte@5.3.1):
+  embla-carousel-svelte@8.5.1(svelte@5.3.1):
     dependencies:
-      embla-carousel: 8.3.0
-      embla-carousel-reactive-utils: 8.3.0(embla-carousel@8.3.0)
+      embla-carousel: 8.5.1
+      embla-carousel-reactive-utils: 8.5.1(embla-carousel@8.5.1)
       svelte: 5.3.1
 
-  embla-carousel@8.3.0: {}
+  embla-carousel@8.5.1: {}
 
   emoji-regex@8.0.0: {}
 
