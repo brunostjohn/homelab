@@ -81,6 +81,7 @@ spec:
                 - quay.io/kiwigrid/k8s-sidecar
                 - ghcr.io/cloudnative-pg/cloudnative-pg
                 - ghcr.io/goauthentik/server
+                - docker.io/longhornio/csi-attacher
             - macro: user_known_contact_k8s_api_server_activities
               condition: or container.image.repository in (trusted_k8s_api_container_images)
               override:
