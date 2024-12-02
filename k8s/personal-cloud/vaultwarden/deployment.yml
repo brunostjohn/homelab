@@ -4,6 +4,8 @@ metadata:
   name: vaultwarden
   namespace: vaultwarden
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: vaultwarden
