@@ -7,7 +7,7 @@ spec:
   version: 8.15.3
   nodeSets:
     - name: master
-      count: 1
+      count: 3
       volumeClaimTemplates:
         - metadata:
             name: elasticsearch-data
@@ -16,14 +16,14 @@ spec:
               - ReadWriteOnce
             resources:
               requests:
-                storage: 15Gi
+                storage: 5Gi
             storageClassName: local-path
       config:
         node.store.allow_mmap: false
         node.roles:
           - master
     - name: replicas
-      count: 1
+      count: 2
       volumeClaimTemplates:
         - metadata:
             name: elasticsearch-data
