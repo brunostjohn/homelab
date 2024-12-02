@@ -65,9 +65,12 @@ spec:
             - list: trusted_k8s_api_container_images
               items:
                 - quay.io/argoproj/argocd
+                - registry.k8s.io/sig-storage/nfs-subdir-external-provisioner
+                - ghcr.io/kyverno/reports-controller
                 - ghcr.io/kyverno/cleanup-controller
                 - ghcr.io/kyverno/kyverno
                 - ghcr.io/tensorchord/cloudnative-pgvecto.rs
+                - docker.io/bitnami/kubectl
                 - docker.elastic.co/eck/eck-operator
                 - ghcr.io/kedacore/keda
                 - docker.io/infisical/kubernetes-operator
