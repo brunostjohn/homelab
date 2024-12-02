@@ -99,6 +99,16 @@ spec:
                 - ghcr.io/flaresolverr/flaresolverr
               override:
                 items: append
+            - list: known_clear_log_cmd
+              items:
+                - containerd
+            - list: known_clear_log_pname
+              items:
+                - k3s-agent
+            - macro: allowed_clear_log_files
+              condition: or (proc.cmdline in (known_clear_log_cmd) and proc.pname in (known_clear_log_pname))
+              override:
+                condition: append
 
   syncPolicy:
     automated:
