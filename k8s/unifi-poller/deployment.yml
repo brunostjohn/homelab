@@ -28,15 +28,15 @@ spec:
               cpu: "200m"
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: metrics
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: metrics
           startupProbe:
             httpGet:
-              path: /metrics
+              path: /
               port: metrics
             failureThreshold: 30
             periodSeconds: 10

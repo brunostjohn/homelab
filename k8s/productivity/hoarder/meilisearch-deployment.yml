@@ -4,6 +4,8 @@ metadata:
   name: hoarder-meilisearch
   namespace: productivity
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels:
