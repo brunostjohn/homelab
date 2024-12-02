@@ -4,6 +4,8 @@ metadata:
   name: truecommand
   namespace: truecommand
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: truecommand
