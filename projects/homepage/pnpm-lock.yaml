@@ -15,8 +15,8 @@ importers:
         specifier: ^3.5.6
         version: 3.5.6
       '@jellyfin/sdk':
-        specifier: ^0.10.0
-        version: 0.10.0(axios@1.7.7)
+        specifier: ^0.11.0
+        version: 0.11.0(axios@1.7.7)
       '@kubernetes/client-node':
         specifier: ^0.22.0
         version: 0.22.3(bufferutil@4.0.8)(utf-8-validate@6.0.4)
@@ -495,8 +495,8 @@ packages:
     resolution: {integrity: sha512-wgm9Ehl2jpeqP3zw/7mo3kRHFp5MEDhqAdwy1fTGkHAwnkGOVsgpvQhL8B5n1qlb01jV3n/bI0ZfZp5lWA1k4w==}
     engines: {node: '>=18.0.0'}
 
-  '@jellyfin/sdk@0.10.0':
-    resolution: {integrity: sha512-fUUwiPOGQEFYxnS9olYkv7GXIX5N9JYdRBR8bapN86OhbHWzL1JHgWf/sAUcNTQGlCWMKTJqve4KFOQB1FlMAQ==}
+  '@jellyfin/sdk@0.11.0':
+    resolution: {integrity: sha512-WmM4as9ptqH+CvC2YsUefNWQDmu2aWIamwAoj7h2BFR6l019pcRFG5FT22egwbdizR6DfdpmsoAWB4x9QCzcEQ==}
     peerDependencies:
       axios: ^1.3.4
 
@@ -3287,7 +3287,7 @@ snapshots:
     dependencies:
       minipass: 7.1.2
 
-  '@jellyfin/sdk@0.10.0(axios@1.7.7)':
+  '@jellyfin/sdk@0.11.0(axios@1.7.7)':
     dependencies:
       axios: 1.7.7
 
