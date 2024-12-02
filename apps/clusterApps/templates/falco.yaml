@@ -83,6 +83,7 @@ spec:
                 - ghcr.io/goauthentik/server
                 - docker.io/longhornio/csi-attacher
                 - docker.elastic.co/beats/filebeat
+                - ghcr.io/cloudnative-pg/pgbouncer
             - macro: user_known_contact_k8s_api_server_activities
               condition: or container.image.repository in (trusted_k8s_api_container_images)
               override:
