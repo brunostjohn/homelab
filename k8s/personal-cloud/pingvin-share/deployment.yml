@@ -4,6 +4,8 @@ metadata:
   name: pingvin-share
   namespace: pingvin-share
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: pingvin-share
