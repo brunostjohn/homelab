@@ -82,6 +82,13 @@ spec:
               condition: or container.image.repository in (trusted_k8s_api_container_images)
               override:
                 condition: append
+            - list: trusted_proc_names
+              items:
+                - postgres
+            - macro: user_shell_container_exclusions
+              condition: or (container.image.repository in (trusted_k8s_api_container_images) and proc.pname in (trusted_proc_names))
+              override:
+                condition: append
 
   syncPolicy:
     automated:
