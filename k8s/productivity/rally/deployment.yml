@@ -45,6 +45,12 @@ spec:
             timeoutSeconds: 5
             successThreshold: 1
             failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            failureThreshold: 30
           env:
             - name: DATABASE_URL
               valueFrom:
