@@ -90,6 +90,11 @@ spec:
               condition: or (container.image.repository in (trusted_k8s_api_container_images) and proc.pname in (trusted_proc_names))
               override:
                 condition: append
+            - list: known_drop_and_execute_containers
+              items:
+                - ghcr.io/flaresolverr/flaresolverr
+              override:
+                items: append
 
   syncPolicy:
     automated:
