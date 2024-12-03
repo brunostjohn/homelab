@@ -24,7 +24,7 @@
 		"@sveltejs/adapter-node": "^5.2.5",
 		"@sveltejs/enhanced-img": "^0.4.0",
 		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
+		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"@tailwindcss/typography": "^0.5.14",
 		"@tanstack/svelte-query": "^5.59.0",
 		"@trpc/client": "^10.45.2",
