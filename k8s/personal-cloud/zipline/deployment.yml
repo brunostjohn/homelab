@@ -72,6 +72,9 @@ spec:
                 name: zipline-secrets
             - configMapRef:
                 name: zipline-config
+          env:
+            - name: DEBUG
+              value: "true"
           startupProbe:
             httpGet:
               path: /
