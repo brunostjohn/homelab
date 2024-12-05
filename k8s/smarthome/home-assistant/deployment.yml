@@ -59,6 +59,7 @@ spec:
           image: ghcr.io/home-assistant/home-assistant:2024.12.0
           imagePullPolicy: IfNotPresent
           securityContext:
+            runAsUser: 0
             privileged: true
             capabilities:
               add:
