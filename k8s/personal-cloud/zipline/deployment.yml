@@ -45,7 +45,7 @@ spec:
                 name: zipline-config
       containers:
         - name: zipline
-          image: ghcr.io/diced/zipline:v4-5f9762f
+          image: ghcr.io/diced/zipline:v4-657b3ed
           imagePullPolicy: IfNotPresent
           resources:
             requests:
