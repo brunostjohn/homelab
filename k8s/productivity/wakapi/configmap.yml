@@ -10,7 +10,8 @@ data:
   WAKAPI_DISABLE_FRONTPAGE: "true"
   WAKAPI_EXPOSE_METRICS: "true"
   WAKAPI_TRUSTED_HEADER_AUTH: "true"
-  WAKAPI_TRUSTED_HEADER_AUTH_KEY: X-Authentik-User
+  WAKAPI_TRUSTED_HEADER_AUTH_KEY: X-Authentik-username
+  WAKAPI_TRUST_REVERSE_PROXY_IPS: 10.43.0.0/16,10.42.0.0/16
   WAKAPI_DB_HOST: postgres-cluster-rw-pooler.databases.svc.cluster.local
   WAKAPI_DB_PORT: "5432"
   WAKAPI_DB_USER: wakapi
