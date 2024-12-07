@@ -20,6 +20,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to outline_role;
 CREATE USER outline WITH PASSWORD '<password>';
 GRANT outline_role TO outline;
 
+-- WAKAPI
+CREATE ROLE wakapi_role;
+\c wakapi
+GRANT ALL PRIVILEGES ON DATABASE wakapi TO wakapi_role;
+GRANT ALL ON SCHEMA public TO wakapi_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO wakapi_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to wakapi_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to wakapi_role;
+CREATE USER wakapi WITH PASSWORD '<password>';
+GRANT wakapi_role TO wakapi;
+
 -- SNAPP
 CREATE ROLE snapp_role;
 \c snapp

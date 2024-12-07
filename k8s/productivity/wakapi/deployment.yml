@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wakapi
+  namespace: productivity
+  annotations:
+    reloader.stakater.com/auto: "true"
+    secrets.infisical.com/auto-reload: "true"
+spec:
+  selector:
+    matchLabels:
+      app: wakapi
+  template:
+    metadata:
+      labels:
+        app: wakapi
+    spec:
+      containers:
+        - name: wakapi
+          image: ghcr.io/muety/wakapi:2.12.2
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 512Mi
+              cpu: 500m
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          envFrom:
+            - configMapRef:
+                name: wakapi-config
+            - secretRef:
+                name: wakapi-secrets

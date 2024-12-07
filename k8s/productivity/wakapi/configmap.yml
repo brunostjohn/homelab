@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wakapi-config
+  namespace: productivity
+data:
+  ENVIRONMENT: production
+  WAKAPI_LEADERBOARD_ENABLED: "false"
+  WAKAPI_ALLOW_SIGNUP: "true"
+  WAKAPI_DISABLE_FRONTPAGE: "true"
+  WAKAPI_EXPOSE_METRICS: "true"
+  WAKAPI_TRUSTED_HEADER_AUTH: "true"
+  WAKAPI_TRUSTED_HEADER_AUTH_KEY: X-Authentik-User
+  WAKAPI_DB_HOST: postgres-cluster-rw-pooler.databases.svc.cluster.local
+  WAKAPI_DB_PORT: "5432"
+  WAKAPI_DB_USER: wakapi
+  WAKAPI_DB_NAME: wakapi
+  WAKAPI_DB_TYPE: postgres
