@@ -4,7 +4,7 @@ metadata:
   name: wakapi-config
   namespace: productivity
 data:
-  ENVIRONMENT: production
+  # ENVIRONMENT: production
   WAKAPI_LEADERBOARD_ENABLED: "false"
   WAKAPI_ALLOW_SIGNUP: "true"
   WAKAPI_DISABLE_FRONTPAGE: "true"
