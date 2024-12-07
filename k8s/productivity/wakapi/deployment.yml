@@ -15,6 +15,9 @@ spec:
       labels:
         app: wakapi
     spec:
+      volumes:
+        - name: data
+          emptyDir: {}
       containers:
         - name: wakapi
           image: ghcr.io/muety/wakapi:2.12.2
@@ -34,3 +37,20 @@ spec:
                 name: wakapi-config
             - secretRef:
                 name: wakapi-secrets
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          startupProbe:
+            httpGet:
+              path: /api/health
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: http
