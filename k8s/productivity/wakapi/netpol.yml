@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: wakapi
+  namespace: productivity
+spec:
+  podSelector:
+    matchLabels:
+      app: wakapi
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: authentik
+        - podSelector:
+            matchLabels:
+              app: authentik-outpost
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+        - podSelector:
+            matchLabels:
+              app: kube-prometheus-stack-prometheus
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: databases
+        - podSelector:
+            matchLabels:
+              cnpg.io/cluster: postgres-cluster
