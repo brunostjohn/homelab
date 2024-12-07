@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wakapi-config-file
+  namespace: productivity
+data:
+  config.yml: |
+    app:
+      custom_languages:
+        vue: Vue
+        jsx: JSX
+        tsx: TSX
+        cjs: JavaScript
+        ipynb: Python
+        svelte: Svelte
+        astro: Astro

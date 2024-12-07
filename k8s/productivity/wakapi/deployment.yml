@@ -18,6 +18,9 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
+        - name: config
+          configMap:
+            name: wakapi-config-file
       containers:
         - name: wakapi
           image: ghcr.io/muety/wakapi:2.12.2
@@ -40,6 +43,9 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /data
+            - name: config
+              mountPath: /data/config.yml
+              subPath: config.yml
           startupProbe:
             httpGet:
               path: /api/health
