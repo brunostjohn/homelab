@@ -4,7 +4,7 @@ metadata:
   name: wakapi-config
   namespace: productivity
 data:
-  # ENVIRONMENT: production
+  ENVIRONMENT: production
   WAKAPI_LEADERBOARD_ENABLED: "false"
   WAKAPI_ALLOW_SIGNUP: "true"
   WAKAPI_DISABLE_FRONTPAGE: "true"
@@ -16,3 +16,13 @@ data:
   WAKAPI_DB_USER: wakapi
   WAKAPI_DB_NAME: wakapi
   WAKAPI_DB_TYPE: postgres
+  WAKAPI_PORT: "3000"
+  WAKAPI_LISTEN_IPV4: 0.0.0.0
+  WAKAPI_LISTEN_IPV6: "::"
+  WAKAPI_BASE_PATH: /
+  WAKAPI_INSECURE_COOKIES: "false"
+  WAKAPI_DB_MAX_CONNECTIONS: "2"
+  WAKAPI_COOKIE_MAX_AGE: "172800"
+  WAKAPI_DB_SSL: "false"
+  WAKAPI_MAIL_ENABLED: "true"
+  WAKAPI_MAIL_PROVIDER: smtp
