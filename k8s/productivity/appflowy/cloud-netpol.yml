@@ -68,3 +68,10 @@ spec:
         - podSelector:
             matchLabels:
               k8s-app: kube-dns
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: minio
+        - podSelector:
+            matchLabels:
+              app: minio
