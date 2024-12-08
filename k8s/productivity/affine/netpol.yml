@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: appflowy-cloud
+  name: affine
   namespace: productivity
 spec:
   podSelector:
     matchLabels:
-      app: appflowy-cloud
+      app: affine
   policyTypes:
     - Ingress
     - Egress
@@ -18,20 +18,6 @@ spec:
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: traefik
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: monitoring
-        - podSelector:
-            matchLabels:
-              app: kube-prometheus-stack-prometheus
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: productivity
-        - podSelector:
-            matchLabels:
-              collection: appflowy
   egress:
     - to:
         - ipBlock:
@@ -53,14 +39,7 @@ spec:
               kubernetes.io/metadata.name: databases
         - podSelector:
             matchLabels:
-              app.kubernetes.io/name: redis
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: productivity
-        - podSelector:
-            matchLabels:
-              collection: appflowy
+              app: redis
     - to:
         - namespaceSelector:
             matchLabels:
@@ -68,10 +47,3 @@ spec:
         - podSelector:
             matchLabels:
               k8s-app: kube-dns
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: minio
-        - podSelector:
-            matchLabels:
-              app: minio

@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: appflowy-ai-config
-  namespace: productivity
-data:
-  APPFLOWY_AI_SERVER_PORT: "5001"
-  APPFLOWY_AI_REDIS_URL: redis://:redis@redis-master.databases.svc.cluster.local:6379/18

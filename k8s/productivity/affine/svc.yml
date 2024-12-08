@@ -1,15 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: appflowy-worker
+  name: affine
   namespace: productivity
-  labels:
-    app: appflowy-worker
 spec:
   selector:
-    app: appflowy-worker
+    app: affine
   ports:
-    - port: 4001
+    - port: 3010
       targetPort: http
       protocol: TCP
       name: http

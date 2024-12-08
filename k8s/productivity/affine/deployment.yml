@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: affine
+  namespace: productivity
+  annotations:
+    reloader.stakater.com/auto: "true"
+    secrets.infisical.com/auto-reload: "true"
+spec:
+  selector:
+    matchLabels:
+      app: affine
+  template:
+    metadata:
+      labels:
+        app: affine
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: affine-data
+      initContainers:
+        - name: migrate-db
+          image: ghcr.io/toeverything/affine-graphql:canary
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "node ./scripts/self-host-predeploy.js"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: affine-secrets
+                  key: DATABASE_URL
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: config
+              mountPath: /root/.affine/config
+              subPath: config/
+            - name: data
+              mountPath: /root/.affine/storage
+              subPath: storage/
+      containers:
+        - name: affine
+          image: ghcr.io/toeverything/affine-graphql:canary
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: 512Mi
+              cpu: 500m
+          ports:
+            - containerPort: 3010
+              protocol: TCP
+              name: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          envFrom:
+            - configMapRef:
+                name: affine-config
+            - secretRef:
+                name: affine-secrets
+          volumeMounts:
+            - name: config
+              mountPath: /root/.affine/config
+              subPath: config/
+            - name: data
+              mountPath: /root/.affine/storage
+              subPath: storage/

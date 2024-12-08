@@ -41,6 +41,16 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to appflowy_ai_role;
 CREATE USER appflowy_ai WITH PASSWORD '<password>';
 GRANT appflowy_ai_role TO appflowy_cloud;
 
+-- AFFINE
+CREATE ROLE affine_role;
+\c affine
+GRANT ALL PRIVILEGES ON DATABASE affine TO affine_role;
+GRANT ALL ON SCHEMA public TO affine_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO affine_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to affine_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to affine_role;
+CREATE USER affine WITH PASSWORD '<password>';
+GRANT affine_role TO affine;
 
 -- OUTLINE
 CREATE ROLE outline_role;

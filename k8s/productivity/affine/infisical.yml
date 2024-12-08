@@ -1,7 +1,7 @@
 apiVersion: secrets.infisical.com/v1alpha1
 kind: InfisicalSecret
 metadata:
-  name: appflowy-worker-secrets-infisical
+  name: affine-secrets-infisical
   namespace: productivity
 spec:
   resyncInterval: 10
@@ -10,12 +10,12 @@ spec:
       secretsScope:
         projectSlug: cluster-secrets-rgq1
         envSlug: dev
-        secretsPath: /appflowy/worker
+        secretsPath: /wakapi
         recursive: true
       credentialsRef:
         secretName: infisical-machine-id
         secretNamespace: infisical
   managedSecretReference:
-    secretName: appflowy-worker-secrets
+    secretName: affine-secrets
     secretNamespace: productivity
     creationPolicy: Owner
