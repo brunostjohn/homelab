@@ -11,9 +11,9 @@ data:
   REDIS_SERVER_PORT: "6379"
   REDIS_SERVER_PASSWORD: redis
   REDIS_SERVER_DATABASE: "18"
-  OIDC_SCOPE: openid email profile
-  OIDC_CLAIM_MAP_ID: preferred_username
-  OIDC_CLAIM_MAP_EMAIL: email
+  OAUTH_OIDC_SCOPE: openid email profile
+  OAUTH_OIDC_CLAIM_MAP_ID: preferred_username
+  OAUTH_OIDC_CLAIM_MAP_EMAIL: email
   NODE_ENV: production
   TELEMETRY_ENABLE: "false"
   AFFINE_CONFIG_PATH: /root/.affine/config
