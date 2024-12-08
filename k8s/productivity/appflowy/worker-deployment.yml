@@ -40,8 +40,8 @@ spec:
             httpGet:
               path: /metrics
               port: http
-          failureThreshold: 30
-          periodSeconds: 10
+            failureThreshold: 30
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /metrics

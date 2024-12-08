@@ -40,8 +40,8 @@ spec:
             httpGet:
               path: /api/server
               port: http
-          failureThreshold: 30
-          periodSeconds: 10
+            failureThreshold: 30
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /api/server
