@@ -27,27 +27,23 @@ spec:
               app: kube-prometheus-stack-prometheus
   egress:
     - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-  # egress:
-  #   - to:
-  #       - namespaceSelector:
-  #           matchLabels:
-  #             kubernetes.io/metadata.name: productivity
-  #       - podSelector:
-  #           matchLabels:
-  #             collection: appflowy
-  #   - to:
-  #       - namespaceSelector:
-  #           matchLabels:
-  #             kubernetes.io/metadata.name: databases
-  #       - podSelector:
-  #           matchLabels:
-  #             app.kubernetes.io/name: redis
-  #   - to:
-  #       - namespaceSelector:
-  #           matchLabels:
-  #             kubernetes.io/metadata.name: kube-system
-  #       - podSelector:
-  #           matchLabels:
-  #             k8s-app: kube-dns
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: productivity
+        - podSelector:
+            matchLabels:
+              collection: appflowy
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: databases
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: redis
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+        - podSelector:
+            matchLabels:
+              k8s-app: kube-dns
