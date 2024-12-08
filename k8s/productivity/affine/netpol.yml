@@ -19,7 +19,7 @@ spec:
             matchLabels:
               app.kubernetes.io/name: traefik
   egress:
-    - from:
+    - to:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: kube-system
