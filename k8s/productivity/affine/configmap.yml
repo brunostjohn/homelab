@@ -52,9 +52,9 @@ data:
     AFFiNE.use('oauth', {
       providers: {
         oidc: {
-          issuer: '${OIDC_ISSUER}',
-          clientId: '${OIDC_CLIENT_ID}',
-          clientSecret: '${OIDC_CLIENT_SECRET}',
+          issuer: '${OAUTH_OIDC_ISSUER}',
+          clientId: '${OAUTH_OIDC_CLIENT_ID}',
+          clientSecret: '${OAUTH_OIDC_CLIENT_SECRET}',
           args: {
             scope: 'openid email profile',
             claim_id: 'preferred_username',
