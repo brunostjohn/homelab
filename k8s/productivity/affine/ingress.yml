@@ -10,10 +10,10 @@ spec:
     - host: notes.zefirsroyal.cloud
       http:
         paths:
-          - pathType: ImplementationSpecific
-            path: /
+          - pathType: Prefix
+            path: "/"
             backend:
               service:
                 name: affine
                 port:
-                  name: http
+                  number: 3010
