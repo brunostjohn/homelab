@@ -11,7 +11,9 @@ spec:
   ports:
     - port: 3000
       targetPort: http
+      name: http
       protocol: TCP
     - port: 9100
       targetPort: metrics
+      name: metrics
       protocol: TCP
