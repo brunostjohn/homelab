@@ -4,6 +4,7 @@ metadata:
   name: appflowy-ai-secrets-infisical
   namespace: productivity
 spec:
+  resyncInterval: 10
   authentication:
     universalAuth:
       secretsScope:
