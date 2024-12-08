@@ -8,6 +8,6 @@ spec:
     app: affine
   ports:
     - port: 3010
-      targetPort: http
+      targetPort: 443
       protocol: TCP
       name: http
