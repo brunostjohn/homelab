@@ -38,7 +38,7 @@ spec:
               memory: "256Mi"
               cpu: "500m"
           volumeMounts:
-            - name: config
+            - name: data
               mountPath: /root/.affine/config
               subPath: config/
             - name: data
@@ -79,7 +79,7 @@ spec:
             - secretRef:
                 name: affine-secrets
           volumeMounts:
-            - name: config
+            - name: data
               mountPath: /root/.affine/config
               subPath: config/
             - name: data
