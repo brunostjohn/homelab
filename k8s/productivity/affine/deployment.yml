@@ -61,6 +61,12 @@ spec:
       containers:
         - name: affine
           image: ghcr.io/toeverything/affine-graphql:canary
+          command:
+            [
+              "sh",
+              "-c",
+              "cp /root/.affine/config/affine.js /app/src/config/affine.ts && cp /root/.affine/config/affine.js /app/src/config/affine.env.ts && cp /root/.affine/config/affine.js /app/dist/config/affine.js && cp /root/.affine/config/affine.js /app/dist/config/affine.env.js && node --import ./scripts/register.js ./dist/index.js",
+            ]
           imagePullPolicy: IfNotPresent
           resources:
             requests:
