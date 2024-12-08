@@ -7,4 +7,4 @@ data:
   RUST_LOG: info
   ADMIN_FRONTEND_REDIS_URL: redis://:redis@redis-master.databases.svc.cluster.local:6379/18
   ADMIN_FRONTEND_GOTRUE_URL: http://appflowy-gotrue.productivity.svc.cluster.local:3000
-  ADMIN_FRONTEND_APPFLOWY_CLOUD_URL: http://appflowy-cloud.productivity.svc.cluster.local:8000
+  ADMIN_FRONTEND_APPFLOWY_CLOUD_URL: http://appflowy-cloud.productivity.svc.cluster.local:3000
