@@ -35,7 +35,7 @@ spec:
             [
               "sh",
               "-c",
-              "apt update && apt install -y gettext-base && rm -rf /root/.affine/config/affine.js && envsubst < /affine.js.tmpl > /root/.affine/config/affine.js && cp /root/.affine/config/affine.js /root/.affine/config/affine.env.js && cp /root/.affine/config/affine.js /app/src/config/affine.ts && cp /root/.affine/config/affine.js /app/src/config/affine.env.ts && cp /root/.affine/config/affine.js /app/dist/config/affine.js && cp /root/.affine/config/affine.js /app/dist/config/affine.env.js && && yarn predeploy",
+              "apt update && apt install -y gettext-base && rm -rf /root/.affine/config/affine.js && envsubst < /affine.js.tmpl > /root/.affine/config/affine.js && cp /root/.affine/config/affine.js /root/.affine/config/affine.env.js && cp /root/.affine/config/affine.js /app/src/config/affine.ts && cp /root/.affine/config/affine.js /app/src/config/affine.env.ts && cp /root/.affine/config/affine.js /app/dist/config/affine.js && cp /root/.affine/config/affine.js /app/dist/config/affine.env.js && yarn predeploy",
             ]
           envFrom:
             - configMapRef:
