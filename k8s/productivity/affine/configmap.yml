@@ -82,3 +82,9 @@ data:
         bucket: 'affine-copilot',
       }
     });
+    AFFiNE.mailer.host = '${MAILER_HOST}';
+    AFFiNE.mailer.port = 587;
+    AFFiNE.mailer.secure = true;
+    AFFiNE.mailer.auth.user = '${MAILER_USER}';
+    AFFiNE.mailer.auth.pass = '${MAILER_PASSWORD}';
+    AFFiNE.mailer.from = 'Zefir\'s Notes <noreply@zefirsroyal.cloud>';
