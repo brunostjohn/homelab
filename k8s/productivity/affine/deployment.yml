@@ -42,11 +42,11 @@ spec:
                 name: affine-secrets
           resources:
             requests:
-              memory: 256Mi
-              cpu: 250m
-            limits:
-              memory: 512Mi
+              memory: 824Mi
               cpu: 500m
+            limits:
+              memory: 2Gi
+              cpu: "1"
           volumeMounts:
             - name: data
               mountPath: /root/.affine/config
@@ -68,11 +68,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: 256Mi
-              cpu: 250m
-            limits:
-              memory: 512Mi
+              memory: 824Mi
               cpu: 500m
+            limits:
+              memory: 2Gi
+              cpu: "1"
           ports:
             - containerPort: 3010
               protocol: TCP

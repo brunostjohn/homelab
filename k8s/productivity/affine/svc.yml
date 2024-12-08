@@ -10,10 +10,10 @@ spec:
     app: affine
   ports:
     - port: 3010
-      targetPort: http
+      targetPort: 3010
       protocol: TCP
       name: http
     - port: 9464
-      targetPort: metrics
+      targetPort: 9464
       protocol: TCP
       name: metrics
