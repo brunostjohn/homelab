@@ -9,7 +9,7 @@ spec:
   selector:
     app: appflowy-worker
   ports:
-    - port: 3000
+    - port: 4001
       targetPort: http
       protocol: TCP
       name: http

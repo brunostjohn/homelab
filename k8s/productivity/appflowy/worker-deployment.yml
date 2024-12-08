@@ -28,7 +28,7 @@ spec:
               memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 3000
+            - containerPort: 4001
               protocol: TCP
               name: http
           envFrom:
