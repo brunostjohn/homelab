@@ -100,6 +100,7 @@ spec:
             - list: known_drop_and_execute_containers
               items:
                 - ghcr.io/flaresolverr/flaresolverr
+                - ghcr.io/toeverything/affine-graphql
               override:
                 items: append
             - list: known_clear_log_cmd
