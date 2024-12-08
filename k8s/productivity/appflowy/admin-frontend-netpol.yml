@@ -9,7 +9,7 @@ spec:
       app: appflowy-admin-frontend
   policyTypes:
     - Ingress
-    - Egress
+    # - Egress
   ingress:
     - from:
         - namespaceSelector:
@@ -25,32 +25,25 @@ spec:
         - podSelector:
             matchLabels:
               app: kube-prometheus-stack-prometheus
-  egress:
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: productivity
-        - podSelector:
-            matchLabels:
-              collection: appflowy
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: databases
-        - podSelector:
-            matchLabels:
-              app.kubernetes.io/name: redis
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-        - podSelector:
-            matchLabels:
-              k8s-app: kube-dns
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
+  # egress:
+  #   - to:
+  #       - namespaceSelector:
+  #           matchLabels:
+  #             kubernetes.io/metadata.name: productivity
+  #       - podSelector:
+  #           matchLabels:
+  #             collection: appflowy
+  #   - to:
+  #       - namespaceSelector:
+  #           matchLabels:
+  #             kubernetes.io/metadata.name: databases
+  #       - podSelector:
+  #           matchLabels:
+  #             app.kubernetes.io/name: redis
+  #   - to:
+  #       - namespaceSelector:
+  #           matchLabels:
+  #             kubernetes.io/metadata.name: kube-system
+  #       - podSelector:
+  #           matchLabels:
+  #             k8s-app: kube-dns
