@@ -33,17 +33,17 @@ spec:
               name: http
           startupProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
             failureThreshold: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: http
           envFrom:
             - configMapRef:
