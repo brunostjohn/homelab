@@ -19,20 +19,29 @@ spec:
         app: affine
     spec:
       volumes:
+        - name: config
+          configMap:
+            name: affine-config
+        - name: secrets
+          secret:
+            secretName: affine-secrets
         - name: data
-          persistentVolumeClaim:
-            claimName: affine-data
+          emptyDir: {}
       initContainers:
         - name: migrate-db
           image: ghcr.io/toeverything/affine-graphql:canary
           imagePullPolicy: IfNotPresent
-          command: ["sh", "-c", "node ./scripts/self-host-predeploy.js"]
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: affine-secrets
-                  key: DATABASE_URL
+          command:
+            [
+              "sh",
+              "-c",
+              "rm -rf /root/.affine/config/affine.js && envsubst < /root/.affine/config/affine.js.tmpl > /root/.affine/config/affine.js && yarn predeploy",
+            ]
+          envFrom:
+            - configMapRef:
+                name: affine-config
+            - secretRef:
+                name: affine-secrets
           resources:
             requests:
               memory: 128Mi
@@ -43,10 +52,12 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /root/.affine/config
-              subPath: config/
-            - name: data
-              mountPath: /root/.affine/storage
-              subPath: storage/
+            - name: config
+              mountPath: /root/.affine/config/affine.js.tmpl
+              subPath: affine.js
+            - name: secrets
+              mountPath: /root/.affine/config/private.key
+              subPath: PRIVATE_KEY
       containers:
         - name: affine
           image: ghcr.io/toeverything/affine-graphql:canary
@@ -62,6 +73,9 @@ spec:
             - containerPort: 443
               protocol: TCP
               name: http
+            - containerPort: 9464
+              protocol: TCP
+              name: metrics
           startupProbe:
             httpGet:
               path: /
@@ -84,7 +98,6 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /root/.affine/config
-              subPath: config/
-            - name: data
-              mountPath: /root/.affine/storage
-              subPath: storage/
+            - name: secrets
+              mountPath: /root/.affine/config/private.key
+              subPath: PRIVATE_KEY

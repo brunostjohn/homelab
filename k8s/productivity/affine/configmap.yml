@@ -14,3 +14,67 @@ data:
   OIDC_SCOPE: openid email profile
   OIDC_CLAIM_MAP_ID: preferred_username
   OIDC_CLAIM_MAP_EMAIL: email
+
+  affine.js: |
+    AFFiNE.serverName = 'Zefir\'s Notes';
+    AFFiNE.server.https = true;
+    AFFiNE.server.host = 'notes.zefirsroyal.cloud';
+    AFFiNE.server.port = 3010;
+    AFFiNE.server.externalUrl = 'https://notes.zefirsroyal.cloud';
+    AFFiNE.metrics.enabled = true;
+    // AFFiNE.auth.session = {
+    //   /* How long the login session would last by default */
+    //   ttl: 15 * 24 * 60 * 60, // 15 days
+    //   /* How long we should refresh the token before it getting expired */
+    //   ttr: 7 * 24 * 60 * 60, // 7 days
+    // };
+    // AFFiNE.doc.history.interval = 1000 * 60 * 10; // 10 minutes
+    // AFFiNE.doc.manager.updatePollInterval = 1000 * 3;
+    AFFiNE.use('redis', {
+      host: 'redis-master.databases.svc.cluster.local',
+      port: 6379,
+      password: 'redis',
+      db: 18
+    });
+    AFFiNE.use('aws-s3', {
+      credentials: {
+        accessKeyId: '${AWS_ACCESS_KEY_ID}',
+        secretAccessKey: '${AWS_SECRET_ACCESS_KEY}',
+      },
+      region: 'dontmatter',
+      endpoint: 'http://minio-svc.minio.svc.cluster.local:9000',
+      s3ForcePathStyle: true
+    });
+    AFFiNE.storages.blob.provider = 'aws-s3';
+    AFFiNE.storages.blob.bucket = 'affine-blob';
+    AFFiNE.storages.avatar.provider = 'aws-s3';
+    AFFiNE.storages.avatar.bucket = 'affine-avatar';
+    AFFiNE.use('oauth', {
+      providers: {
+        oidc: {
+          issuer: '${OIDC_ISSUER}',
+          clientId: '${OIDC_CLIENT_ID}',
+          clientSecret: '${OIDC_CLIENT_SECRET}',
+          args: {
+            scope: 'openid email profile',
+            claim_id: 'preferred_username',
+            claim_email: 'email',
+            claim_name: 'name',
+          },
+        },
+      },
+    });
+    AFFiNE.use('copilot', {
+      openai: {
+        apiKey: '${OPENAI_API_KEY}',
+        baseURL: 'http://open-webui.ai.svc.cluster.local/v1',
+      },
+    //   fal: {
+    //     apiKey: 'your-key',
+    //   },
+    //   unsplashKey: 'your-key',
+      storage: {
+        provider: 'aws-s3',
+        bucket: 'affine-copilot',
+      }
+    });

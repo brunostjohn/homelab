@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: affine
   namespace: productivity
+  labels:
+    app: affine
 spec:
   selector:
     app: affine
@@ -11,3 +13,7 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: 9464
+      targetPort: metrics
+      protocol: TCP
+      name: metrics
