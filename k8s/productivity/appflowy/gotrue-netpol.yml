@@ -25,6 +25,13 @@ spec:
         - podSelector:
             matchLabels:
               app: kube-prometheus-stack-prometheus
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: productivity
+        - podSelector:
+            matchLabels:
+              collection: appflowy
   egress:
     - to:
         - ipBlock:
