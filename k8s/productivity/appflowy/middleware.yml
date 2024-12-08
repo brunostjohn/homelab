@@ -1,0 +1,10 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: appflowy-gotrue-strip
+  namespace: productivity
+spec:
+  stripPrefix:
+    forceSlash: false
+    prefixes:
+      - /gotrue

@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: appflowy
+  namespace: productivity
+  labels:
+    name: appflowy
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.middlewares: productivity-appflowy-gotrue-strip@kubernetescrd
+spec:
+  rules:
+    - host: notes.zefirsroyal.cloud
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: appflowy-cloud
+                port:
+                  number: 3000
+          - pathType: Prefix
+            path: /gotrue
+            backend:
+              service:
+                name: appflowy-gotrue
+                port:
+                  number: 3000
