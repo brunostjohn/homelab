@@ -47,7 +47,7 @@ data:
       },
       region: 'dontmatter',
       endpoint: 'http://minio-svc.minio.svc.cluster.local:9000',
-      s3ForcePathStyle: true
+      forcePathStyle: true
     });
     AFFiNE.storages.blob.provider = 'aws-s3';
     AFFiNE.storages.blob.bucket = 'affine-blob';
