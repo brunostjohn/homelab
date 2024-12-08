@@ -11,7 +11,7 @@ data:
   REDIS_SERVER_PORT: "6379"
   REDIS_SERVER_PASSWORD: redis
   REDIS_SERVER_DATABASE: "18"
-  OAUTH_OIDC_SCOPE: openid email profile
+  OAUTH_OIDC_SCOPE: openid email profile offline_access
   OAUTH_OIDC_CLAIM_MAP_ID: preferred_username
   OAUTH_OIDC_CLAIM_MAP_EMAIL: email
   NODE_ENV: production
@@ -60,7 +60,7 @@ data:
           clientId: '${OAUTH_OIDC_CLIENT_ID}',
           clientSecret: '${OAUTH_OIDC_CLIENT_SECRET}',
           args: {
-            scope: 'openid email profile',
+            scope: 'openid email profile offline_access',
             claim_id: 'preferred_username',
             claim_email: 'email',
             claim_name: 'name',
