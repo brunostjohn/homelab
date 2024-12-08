@@ -35,7 +35,7 @@ spec:
             [
               "sh",
               "-c",
-              "apt update && apt install -y gettext-base && rm -rf /root/.affine/config/affine.js && envsubst < /root/.affine/config/affine.js.tmpl > /root/.affine/config/affine.js && yarn predeploy",
+              "apt update && apt install -y gettext-base && rm -rf /root/.affine/config/affine.js && envsubst < /affine.js.tmpl > /root/.affine/config/affine.js && yarn predeploy",
             ]
           envFrom:
             - configMapRef:
@@ -53,7 +53,7 @@ spec:
             - name: data
               mountPath: /root/.affine/config
             - name: config
-              mountPath: /root/.affine/config/affine.js.tmpl
+              mountPath: /affine.js.tmpl
               subPath: affine.js
             - name: secrets
               mountPath: /root/.affine/config/private.key
