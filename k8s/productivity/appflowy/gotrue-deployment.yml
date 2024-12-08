@@ -41,15 +41,15 @@ spec:
                 name: appflowy-gotrue-secrets
           startupProbe:
             httpGet:
-              path: /settings
+              path: /health
               port: http
             failureThreshold: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /settings
+              path: /health
               port: http
           livenessProbe:
             httpGet:
-              path: /settings
+              path: /health
               port: http
