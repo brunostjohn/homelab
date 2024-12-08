@@ -14,6 +14,7 @@ data:
   OIDC_SCOPE: openid email profile
   OIDC_CLAIM_MAP_ID: preferred_username
   OIDC_CLAIM_MAP_EMAIL: email
+  AFFINE_CONFIG_PATH: /root/.affine/config
 
   affine.js: |
     AFFiNE.serverName = 'Zefir\'s Notes';
