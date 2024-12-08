@@ -16,4 +16,4 @@ spec:
               service:
                 name: affine
                 port:
-                  number: 3010
+                  name: http
