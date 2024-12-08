@@ -30,6 +30,17 @@ GRANT ALL ON ALL SEQUENCES IN SCHEMA public to appflowy_cloud_role;
 GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to appflowy_cloud_role;
 CREATE USER appflowy_cloud WITH PASSWORD '<password>';
 GRANT appflowy_cloud_role TO appflowy_cloud;
+-- AI
+CREATE ROLE appflowy_ai_role;
+\c appflowy_ai
+GRANT ALL PRIVILEGES ON DATABASE appflowy_ai TO appflowy_ai_role;
+GRANT ALL ON SCHEMA public TO appflowy_ai_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO appflowy_ai_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to appflowy_ai_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to appflowy_ai_role;
+CREATE USER appflowy_ai WITH PASSWORD '<password>';
+GRANT appflowy_ai_role TO appflowy_cloud;
+
 
 -- OUTLINE
 CREATE ROLE outline_role;

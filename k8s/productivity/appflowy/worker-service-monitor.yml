@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: appflowy-worker
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: appflowy-worker
+  endpoints:
+    - port: http
+      path: /metrics

@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: appflowy-cloud
+  name: appflowy-worker
   namespace: productivity
 spec:
   podSelector:
     matchLabels:
-      app: appflowy-cloud
+      app: appflowy-worker
   policyTypes:
     - Ingress
     - Egress

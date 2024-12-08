@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appflowy-admin-frontend
+  namespace: productivity
+  annotations:
+    reloader.stakater.com/auto: "true"
+    secrets.infisical.com/auto-reload: "true"
+spec:
+  selector:
+    matchLabels:
+      app: appflowy-admin-frontend
+  template:
+    metadata:
+      labels:
+        app: appflowy-admin-frontend
+        collection: appflowy
+    spec:
+      containers:
+        - name: appflowy-admin-frontend
+          image: docker.io/appflowyinc/admin_frontend:0.8.3
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: appflowy-admin-frontend-config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10

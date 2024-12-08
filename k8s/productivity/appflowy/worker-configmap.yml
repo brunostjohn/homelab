@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appflowy-worker-config
+  namespace: productivity
+data:
+  RUST_LOG: info
+  APPFLOWY_ENVIRONMENT: production
+  APPFLOWY_WORKER_REDIS_URL: redis://:redis@redis-master.databases.svc.cluster.local:6379/18
+  APPFLOWY_WORKER_ENVIRONMENT: production
+  APPFLOWY_WORKER_IMPORT_TICK_INTERVAL: "30"
+  APPFLOWY_S3_USE_MINIO: "true"
+  APPFLOWY_S3_BUCKET: appflowy
+  APPFLOWY_S3_MINIO_URL: http://minio-svc.minio.svc.cluster.local:9000

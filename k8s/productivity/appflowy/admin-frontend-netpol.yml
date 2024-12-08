@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: appflowy-cloud
+  name: appflowy-admin-frontend
   namespace: productivity
 spec:
   podSelector:
     matchLabels:
-      app: appflowy-cloud
+      app: appflowy-admin-frontend
   policyTypes:
     - Ingress
     - Egress
@@ -27,19 +27,12 @@ spec:
               app: kube-prometheus-stack-prometheus
   egress:
     - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-            except:
-              - 10.0.0.0/8
-              - 172.16.0.0/12
-              - 192.168.0.0/16
-    - to:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: databases
+              kubernetes.io/metadata.name: productivity
         - podSelector:
             matchLabels:
-              cnpg.io/cluster: postgres-cluster
+              collection: appflowy
     - to:
         - namespaceSelector:
             matchLabels:
@@ -47,10 +40,3 @@ spec:
         - podSelector:
             matchLabels:
               app.kubernetes.io/name: redis
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: productivity
-        - podSelector:
-            matchLabels:
-              collection: appflowy
