@@ -59,7 +59,7 @@ spec:
               memory: 512Mi
               cpu: 500m
           ports:
-            - containerPort: 3010
+            - containerPort: 443
               protocol: TCP
               name: http
           startupProbe:
