@@ -7,6 +7,9 @@ metadata:
     reloader.stakater.com/auto: "true"
     secrets.infisical.com/auto-reload: "true"
 spec:
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: affine
