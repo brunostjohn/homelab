@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: wakapi
+  name: appflowy-gotrue
   namespace: productivity
 spec:
   podSelector:
     matchLabels:
-      app: wakapi
+      app: appflowy-gotrue
   policyTypes:
     - Ingress
     - Egress
@@ -14,10 +14,10 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: authentik
+              kubernetes.io/metadata.name: kube-system
         - podSelector:
             matchLabels:
-              app: authentik-outpost
+              app.kubernetes.io/name: traefik
     - from:
         - namespaceSelector:
             matchLabels:
@@ -40,10 +40,3 @@ spec:
         - podSelector:
             matchLabels:
               cnpg.io/cluster: postgres-cluster
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-        - podSelector:
-            matchLabels:
-              k8s-app: kube-dns

@@ -25,6 +25,7 @@ spec:
       containers:
         - name: wakapi
           image: ghcr.io/muety/wakapi:2.12.2
+          imagePullPolicy: IfNotPresent
           resources:
             requests:
               memory: 256Mi

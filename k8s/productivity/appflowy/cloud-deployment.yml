@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appflowy-cloud
+  namespace: productivity
+  annotations:
+    reloader.stakater.com/auto: "true"
+    secrets.infisical.com/auto-reload: "true"
+spec:
+  selector:
+    matchLabels:
+      app: appflowy-cloud
+  template:
+    metadata:
+      labels:
+        app: appflowy-cloud
+        collection: appflowy
+    spec:
+      containers:
+        - name: appflowy-cloud
+          image: docker.io/appflowyinc/appflowy_cloud:0.8.2
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+              name: http
+          envFrom:
+            - configMapRef:
+                name: appflowy-cloud-config
+            - secretRef:
+                name: appflowy-cloud-secrets
+          startupProbe:
+            httpGet:
+              path: /api/server
+              port: http
+          failureThreshold: 30
+          periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/server
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /api/server
+              port: http

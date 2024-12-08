@@ -9,6 +9,28 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to blocky_role;
 CREATE USER blocky WITH PASSWORD '<password>';
 GRANT blocky_role TO blocky;
 
+-- APPFLOWY
+-- GOTRUE
+CREATE ROLE appflowy_gotrue_role;
+\c appflowy_gotrue
+GRANT ALL PRIVILEGES ON DATABASE appflowy_gotrue TO appflowy_gotrue_role;
+GRANT ALL ON SCHEMA public TO appflowy_gotrue_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO appflowy_gotrue_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to appflowy_gotrue_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to appflowy_gotrue_role;
+CREATE USER appflowy_gotrue WITH PASSWORD '<password>';
+GRANT appflowy_gotrue_role TO appflowy_gotrue;
+-- CLOUD
+CREATE ROLE appflowy_cloud_role;
+\c appflowy_cloud
+GRANT ALL PRIVILEGES ON DATABASE appflowy_cloud TO appflowy_cloud_role;
+GRANT ALL ON SCHEMA public TO appflowy_cloud_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO appflowy_cloud_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to appflowy_cloud_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to appflowy_cloud_role;
+CREATE USER appflowy_cloud WITH PASSWORD '<password>';
+GRANT appflowy_cloud_role TO appflowy_cloud;
+
 -- OUTLINE
 CREATE ROLE outline_role;
 \c outline
