@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: appflowy-gotrue
-          image: docker.io/appflowyinc/gotrue:0.8.2
+          image: docker.io/appflowyinc/gotrue:0.8.3
           imagePullPolicy: IfNotPresent
           resources:
             requests:
