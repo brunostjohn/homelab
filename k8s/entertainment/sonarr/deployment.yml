@@ -22,8 +22,6 @@ spec:
         - name: entertainment-content
           persistentVolumeClaim:
             claimName: entertainment-content-pvc
-      securityContext:
-        fsGroup: 1001
       containers:
         - name: sonarr
           image: ghcr.io/hotio/sonarr:release-4.0.11.2680
