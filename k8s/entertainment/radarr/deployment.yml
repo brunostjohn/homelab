@@ -26,9 +26,6 @@ spec:
         - name: radarr
           image: linuxserver/radarr:5.15.1
           imagePullPolicy: IfNotPresent
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 0
           resources:
             requests:
               memory: "512Mi"
@@ -42,13 +39,13 @@ spec:
               protocol: TCP
           env:
             - name: PGID
-              value: "1000"
+              value: "0"
             - name: PUID
-              value: "1000"
+              value: "0"
             - name: TZ
               value: "Europe/Dublin"
             - name: UMASK
-              value: "002"
+              value: "000"
           volumeMounts:
             - name: radarr-config
               mountPath: /config
