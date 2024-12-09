@@ -47,7 +47,7 @@ spec:
             - name: TZ
               value: "Europe/Dublin"
             - name: UMASK
-              value: "777"
+              value: "000"
           volumeMounts:
             - name: sonarr-config
               mountPath: /config
