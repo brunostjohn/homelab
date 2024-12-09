@@ -24,7 +24,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: sonarr
-          image: ghcr.io/hotio/sonarr:release-4.0.8.1874
+          image: ghcr.io/hotio/sonarr:release-4.0.11.2680
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
