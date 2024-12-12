@@ -86,7 +86,7 @@ importers:
         version: 5.2.10(@sveltejs/kit@2.10.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))
       '@sveltejs/enhanced-img':
         specifier: ^0.4.0
-        version: 0.4.3(rollup@4.28.1)(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1))
+        version: 0.4.4(rollup@4.28.1)(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1))
       '@sveltejs/kit':
         specifier: ^2.0.0
         version: 2.10.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1))
@@ -877,8 +877,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.4.0
 
-  '@sveltejs/enhanced-img@0.4.3':
-    resolution: {integrity: sha512-hhuaZW2a+4p/niPpPnGEDWBbYy54rvvPlD3JArCyWYMbkdj825HkgyzvNZWbA0nrKDhdFNbbVVsVNBMDvPOLrQ==}
+  '@sveltejs/enhanced-img@0.4.4':
+    resolution: {integrity: sha512-BlBTGfbLUgHa+zSVrsGLOd+noCKWfipoOjoxE26bAAX97v7zh5eiCAp1KEdpkluL05Tl3+nR14gQdPsATyZqoA==}
     peerDependencies:
       svelte: ^5.0.0
       vite: '>= 5.0.0'
@@ -2042,9 +2042,6 @@ packages:
     resolution: {integrity: sha512-n0ecAFtCY5LEeL+PJ1Xj4n3c2gzj8tMpak0KMGnvoSJEjCsCnRB0mekBtJZAo7beyynW9Qj5Um1KfMBAeTNplw==}
     peerDependencies:
       svelte: ^3 || ^4 || ^5.0.0-next.42
-
-  magic-string@0.30.14:
-    resolution: {integrity: sha512-5c99P1WKTed11ZC0HMJOj6CDIue6F8ySu+bJL+85q1zBEIY8IklrJ1eiKC2NDRh3Ct3FcvmJPyQHb9erXMTJNw==}
 
   magic-string@0.30.15:
     resolution: {integrity: sha512-zXeaYRgZ6ldS1RJJUrMrYgNJ4fdwnyI6tVqoiIhyCyv5IVTK9BU8Ic2l253GGETQHxI4HNUwhJ3fjDhKqEoaAw==}
@@ -3760,9 +3757,9 @@ snapshots:
       '@sveltejs/kit': 2.10.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1))
       rollup: 4.28.1
 
-  '@sveltejs/enhanced-img@0.4.3(rollup@4.28.1)(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1))':
+  '@sveltejs/enhanced-img@0.4.4(rollup@4.28.1)(svelte@5.11.2)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1))':
     dependencies:
-      magic-string: 0.30.14
+      magic-string: 0.30.15
       sharp: 0.33.5
       svelte: 5.11.2
       svelte-parse-markup: 0.1.5(svelte@5.11.2)
@@ -4963,10 +4960,6 @@ snapshots:
   lucide-svelte@0.468.0(svelte@5.11.2):
     dependencies:
       svelte: 5.11.2
-
-  magic-string@0.30.14:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.0
 
   magic-string@0.30.15:
     dependencies:
