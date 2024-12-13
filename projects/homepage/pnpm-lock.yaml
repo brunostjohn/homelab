@@ -36,8 +36,8 @@ importers:
         specifier: ^8.3.0
         version: 8.5.1(svelte@5.12.0)
       formsnap:
-        specifier: ^1.0.1
-        version: 1.0.1(svelte@5.12.0)(sveltekit-superforms@2.21.1(@sveltejs/kit@2.11.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.12.0)(typescript@5.7.2))
+        specifier: ^2.0.0
+        version: 2.0.0(svelte@5.12.0)(sveltekit-superforms@2.21.1(@sveltejs/kit@2.11.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.12.0)(typescript@5.7.2))
       minio:
         specifier: ^8.0.1
         version: 8.0.2
@@ -1630,11 +1630,12 @@ packages:
     resolution: {integrity: sha512-tzN8e4TX8+kkxGPK8D5u0FNmjPUjw3lwC9lSLxxoB/+GtsJG91CO8bSWy73APlgAZzZbXEYZJuxjkHH2w+Ezhw==}
     engines: {node: '>= 6'}
 
-  formsnap@1.0.1:
-    resolution: {integrity: sha512-TvU9CoLSiacW1c7wXhLiyVpyy/LBfG0CEFDbs3M3jrsxBSrkTpsuhbQ8JYKY3CNCmIhZlgxCH+Vqr7RBF9G53w==}
+  formsnap@2.0.0:
+    resolution: {integrity: sha512-W61elddvdzeBEs10nNvwxQnx/FctJFHBXPk9uluNQAckHo1nuSUvSQGIjtLjTKIbQdQnwEOoxqWrk9tuv0U7hA==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
     peerDependencies:
-      svelte: ^4.0.0 || ^5.0.0-next.1
-      sveltekit-superforms: ^2.3.0
+      svelte: ^5.0.0
+      sveltekit-superforms: ^2.19.0
 
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
@@ -1798,6 +1799,9 @@ packages:
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
+
+  inline-style-parser@0.2.4:
+    resolution: {integrity: sha512-0aO8FkhNZlj/ZIbNi7Lxxr12obT7cL1moPfE4tg1LkX7LlLfC6DeX4l2ZEud1ukP9jNQyNnfzQVqwbwmAATY4Q==}
 
   inquirer@8.2.6:
     resolution: {integrity: sha512-M1WuAmb7pn9zdFRtQYk26ZBoY043Sse0wVDdk4Bppr+JOXyQYybdtvK+l9wUibhtjdjvtoiNy8tk+EgsYIUqKg==}
@@ -2714,6 +2718,9 @@ packages:
   strnum@1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
 
+  style-to-object@1.0.8:
+    resolution: {integrity: sha512-xT47I/Eo0rwJmaXC4oilDGDWLohVhR6o/xAQcPQN8q6QBuZVL8qMYL85kLmST5cPjAorwvqIA4qXTRQoYHaL6g==}
+
   sucrase@3.35.0:
     resolution: {integrity: sha512-8EbVDiu9iN/nESwxeSxDKe0dunta1GOlHufmSSXxMD2z2/tMZpDMpvXQGsc+ajGo8y2uYUmixaSRUc/QPoQ0GA==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -2783,6 +2790,12 @@ packages:
     resolution: {integrity: sha512-eKXIjLxB4C7eQWPqKEdxcGfNXm2g/qJ67zmEZK/GigCZMfrTR3m7DPY93R6MX+5uoqM1FRYxl8LZ1oy4URWi2A==}
     peerDependencies:
       svelte: ^4.0.0
+
+  svelte-toolbelt@0.5.0:
+    resolution: {integrity: sha512-t3tenZcnfQoIeRuQf/jBU7bvTeT3TGkcEE+1EUr5orp0lR7NEpprflpuie3x9Dn0W9nOKqs3HwKGJeeN5Ok1sQ==}
+    engines: {node: '>=18', pnpm: '>=8.7.0'}
+    peerDependencies:
+      svelte: ^5.0.0-next.126
 
   svelte@5.12.0:
     resolution: {integrity: sha512-nOd7uj0D/4A3IrHnltaFYndVPGViYSs0s+Zi3N4uQg3owJt9RoiUdwxYx8qjorj5CtaGsx8dNYsFVbH6czrGNg==}
@@ -4530,10 +4543,10 @@ snapshots:
       combined-stream: 1.0.8
       mime-types: 2.1.35
 
-  formsnap@1.0.1(svelte@5.12.0)(sveltekit-superforms@2.21.1(@sveltejs/kit@2.11.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.12.0)(typescript@5.7.2)):
+  formsnap@2.0.0(svelte@5.12.0)(sveltekit-superforms@2.21.1(@sveltejs/kit@2.11.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.12.0)(typescript@5.7.2)):
     dependencies:
-      nanoid: 5.0.9
       svelte: 5.12.0
+      svelte-toolbelt: 0.5.0(svelte@5.12.0)
       sveltekit-superforms: 2.21.1(@sveltejs/kit@2.11.1(@sveltejs/vite-plugin-svelte@5.0.2(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(svelte@5.12.0)(vite@6.0.3(@types/node@22.10.1)(jiti@2.4.1)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.12.0)(typescript@5.7.2)
 
   fraction.js@4.3.7: {}
@@ -4725,6 +4738,8 @@ snapshots:
   import-meta-resolve@4.1.0: {}
 
   inherits@2.0.4: {}
+
+  inline-style-parser@0.2.4: {}
 
   inquirer@8.2.6:
     dependencies:
@@ -5625,6 +5640,10 @@ snapshots:
 
   strnum@1.0.5: {}
 
+  style-to-object@1.0.8:
+    dependencies:
+      inline-style-parser: 0.2.4
+
   sucrase@3.35.0:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
@@ -5694,6 +5713,12 @@ snapshots:
 
   svelte-subscribe@2.0.1(svelte@5.12.0):
     dependencies:
+      svelte: 5.12.0
+
+  svelte-toolbelt@0.5.0(svelte@5.12.0):
+    dependencies:
+      clsx: 2.1.1
+      style-to-object: 1.0.8
       svelte: 5.12.0
 
   svelte@5.12.0:

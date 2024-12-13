@@ -61,7 +61,7 @@
 		"clsx": "^2.1.1",
 		"cmdk-sv": "^0.0.18",
 		"embla-carousel-svelte": "^8.3.0",
-		"formsnap": "^1.0.1",
+		"formsnap": "^2.0.0",
 		"minio": "^8.0.1",
 		"paneforge": "^0.0.6",
 		"sabnzbd-api": "^1.5.0",
