@@ -56,7 +56,7 @@ spec:
                 name: hassio-secrets
       containers:
         - name: homeassistant
-          image: ghcr.io/home-assistant/home-assistant:2024.12.2
+          image: ghcr.io/home-assistant/home-assistant:2024.12.3
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 0
