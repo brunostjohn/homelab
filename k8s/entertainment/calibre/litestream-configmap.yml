@@ -5,6 +5,9 @@ metadata:
   namespace: entertainment
 data:
   litestream.yml: |
+    addr: ":9090"
+    logging:
+      type: json
     dbs:
       - path: /calibre-library/metadata.db
         replicas:
@@ -14,6 +17,7 @@ data:
             force-path-style: true
             path: calibre-web/metadata
             skip-verify: true
+            validation-interval: 6h
       - path: /config/cwa.db
         replicas:
           - type: s3
@@ -22,6 +26,7 @@ data:
             force-path-style: true
             path: calibre-web/cwa
             skip-verify: true
+            validation-interval: 6h
       - path: /config/gdrive.db
         replicas:
           - type: s3
@@ -30,6 +35,7 @@ data:
             force-path-style: true
             path: calibre-web/gdrive
             skip-verify: true
+            validation-interval: 6h
       - path: /config/app.db
         replicas:
           - type: s3
@@ -38,3 +44,4 @@ data:
             bucket: litestream
             path: calibre-web/app
             skip-verify: true
+            validation-interval: 6h
