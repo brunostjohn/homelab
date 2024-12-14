@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redis-sentinel
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: redis-sentinel
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: redis
+    targetRevision: 20.5.0
+    repoURL: https://charts.bitnami.com/bitnami
+    helm:
+      valuesObject:
+        auth:
+          password: redis
+        architecture: replication
+        master:
+          persistence:
+            storageClass: longhorn-unreplicated
+        replica:
+          replicas: 2
+          persistence:
+            storageClass: longhorn-unreplicated
+        sentinel:
+          enabled: true
+          persistence:
+            enabled: true
+            storageClass: longhorn-unreplicated
+          masterService:
+            enabled: true
+        metrics:
+          enabled: true
+          podMonitor:
+            enabled: true
+          serviceMontior:
+            enabled: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
