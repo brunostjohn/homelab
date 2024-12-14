@@ -21,6 +21,13 @@ spec:
     - from:
         - ipBlock:
             cidr: 10.1.0.0/16
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+        - podSelector:
+            matchLabels:
+              app: kube-prometheus-stack-prometheus
   egress:
     - to:
         - ipBlock:
