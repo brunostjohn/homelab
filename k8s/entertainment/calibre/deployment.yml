@@ -40,8 +40,6 @@ spec:
               "/calibre-library/metadata.db",
             ]
           volumeMounts:
-            - name: data
-              mountPath: /var/lib/myapp
             - name: litestream-configmap
               mountPath: /etc/litestream.yml
               subPath: litestream.yml
@@ -62,8 +60,6 @@ spec:
               "/config/cwa.db",
             ]
           volumeMounts:
-            - name: data
-              mountPath: /var/lib/myapp
             - name: litestream-configmap
               mountPath: /etc/litestream.yml
               subPath: litestream.yml
@@ -83,8 +79,6 @@ spec:
               "/config/gdrive.db",
             ]
           volumeMounts:
-            - name: data
-              mountPath: /var/lib/myapp
             - name: litestream-configmap
               mountPath: /etc/litestream.yml
               subPath: litestream.yml
@@ -104,8 +98,6 @@ spec:
               "/config/app.db",
             ]
           volumeMounts:
-            - name: data
-              mountPath: /var/lib/myapp
             - name: litestream-configmap
               mountPath: /etc/litestream.yml
               subPath: litestream.yml
@@ -119,8 +111,6 @@ spec:
           image: litestream/litestream:0.3
           args: ["replicate"]
           volumeMounts:
-            - name: data
-              mountPath: /var/lib/myapp
             - name: litestream-configmap
               mountPath: /etc/litestream.yml
               subPath: litestream.yml
