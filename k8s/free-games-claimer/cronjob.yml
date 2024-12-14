@@ -4,7 +4,7 @@ metadata:
   name: free-games-claimer
   namespace: default
 spec:
-  schedule: "56 18 * * *"
+  schedule: "0 19 * * *"
   jobTemplate:
     spec:
       template:
@@ -26,4 +26,7 @@ spec:
               volumeMounts:
                 - name: free-games-claimer
                   mountPath: /fgc/data
+              ports:
+                - containerPort: 6080
+                  protocol: TCP
           restartPolicy: OnFailure
