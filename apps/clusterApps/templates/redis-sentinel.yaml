@@ -22,10 +22,16 @@ spec:
         master:
           persistence:
             storageClass: longhorn-unreplicated
+        rbac:
+          create: true
+        serviceAccount:
+          create: true
+          automountServiceAccountToken: true
         replica:
           replicas: 2
           persistence:
             storageClass: longhorn-unreplicated
+          automountServiceAccountToken: true
         sentinel:
           enabled: true
           persistence:
