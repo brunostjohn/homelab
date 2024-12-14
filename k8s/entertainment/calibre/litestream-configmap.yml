@@ -10,27 +10,31 @@ data:
         replicas:
           - type: s3
             bucket: litestream
-            endpoint: minio-svc.minio.svc.cluster.local:9000
+            endpoint: http://minio-svc.minio.svc.cluster.local:9000
             force-path-style: true
             path: calibre-web/metadata
+            skip-verify: true
       - path: /config/cwa.db
         replicas:
           - type: s3
-            endpoint: minio-svc.minio.svc.cluster.local:9000
+            endpoint: http://minio-svc.minio.svc.cluster.local:9000
             bucket: litestream
             force-path-style: true
             path: calibre-web/cwa
+            skip-verify: true
       - path: /config/gdrive.db
         replicas:
           - type: s3
             bucket: litestream
-            endpoint: minio-svc.minio.svc.cluster.local:9000
+            endpoint: http://minio-svc.minio.svc.cluster.local:9000
             force-path-style: true
             path: calibre-web/gdrive
+            skip-verify: true
       - path: /config/app.db
         replicas:
           - type: s3
             force-path-style: true
-            endpoint: minio-svc.minio.svc.cluster.local:9000
+            endpoint: http://minio-svc.minio.svc.cluster.local:9000
             bucket: litestream
             path: calibre-web/app
+            skip-verify: true
