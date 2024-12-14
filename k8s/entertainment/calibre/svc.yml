@@ -11,3 +11,5 @@ spec:
       targetPort: 8083
       protocol: TCP
       name: http
+  type: LoadBalancer
+  loadBalancerIP: 10.0.69.1
