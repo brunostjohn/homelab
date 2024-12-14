@@ -8,13 +8,29 @@ data:
     dbs:
       - path: /calibre-library/metadata.db
         replicas:
-          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/metadata
+          - type: s3
+            bucket: litestream
+            endpoint: minio-svc.minio.svc.cluster.local:9000
+            force-path-style: true
+            path: calibre-web/metadata
       - path: /config/cwa.db
         replicas:
-          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/cwa
+          - type: s3
+            endpoint: minio-svc.minio.svc.cluster.local:9000
+            bucket: litestream
+            force-path-style: true
+            path: calibre-web/cwa
       - path: /config/gdrive.db
         replicas:
-          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/gdrive
+          - type: s3
+            bucket: litestream
+            endpoint: minio-svc.minio.svc.cluster.local:9000
+            force-path-style: true
+            path: calibre-web/gdrive
       - path: /config/app.db
         replicas:
-          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/app
+          - type: s3
+            force-path-style: true
+            endpoint: minio-svc.minio.svc.cluster.local:9000
+            bucket: litestream
+            path: calibre-web/app
