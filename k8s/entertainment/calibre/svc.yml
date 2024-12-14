@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: calibre
   namespace: entertainment
+  labels:
+    app: calibre
 spec:
   selector:
     app: calibre
@@ -11,5 +13,9 @@ spec:
       targetPort: 8083
       protocol: TCP
       name: http
+    - port: 9090
+      targetPort: 9090
+      protocol: TCP
+      name: metrics
   type: LoadBalancer
   loadBalancerIP: 10.0.69.1

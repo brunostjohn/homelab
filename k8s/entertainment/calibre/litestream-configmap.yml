@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: calibre-litestream
+  namespace: entertainment
+data:
+  litestream.yml: |
+    dbs:
+      - path: /calibre-library/metadata.db
+        replicas:
+          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/metadata
+      - path: /config/cwa.db
+        replicas:
+          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/cwa
+      - path: /config/gdrive.db
+        replicas:
+          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/gdrive
+      - path: /config/app.db
+        replicas:
+          - url: s3://litestream.minio-svc.minio.svc.cluster.local:9000/calibre-web/app
