@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: calibre-litestream
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: calibre
+  endpoints:
+    - port: http
+      path: /metrics
