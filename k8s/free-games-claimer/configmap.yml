@@ -7,3 +7,5 @@ data:
   TIMEOUT: "60"
   LOGIN_TIMEOUT: "180"
   DISPLAY: "0"
+  SHOW: "false"
+  DEBUG: "false"
