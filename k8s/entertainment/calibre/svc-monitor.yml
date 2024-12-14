@@ -8,5 +8,5 @@ spec:
     matchLabels:
       app: calibre
   endpoints:
-    - port: http
+    - port: metrics
       path: /metrics
