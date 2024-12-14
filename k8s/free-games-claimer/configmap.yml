@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: free-games-claimer
+  namespace: default
+data:
+  TIMEOUT: "60"
+  LOGIN_TIMEOUT: "180"

@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: free-games-claimer
+  namespace: default
+spec:
+  schedule: "49 18 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: free-games-claimer
+              image: ghcr.io/vogler/free-games-claimer:latest
+              command: ["/bin/sh", "-c", "node epic-games"]
+              imagePullPolicy: Always
+              envFrom:
+                - secretRef:
+                    name: free-games-claimer-secrets
+                - configMapRef:
+                    name: free-games-claimer
+              volumeMounts:
+                - name: free-games-claimer
+                  mountPath: /fgc/data
+          restartPolicy: OnFailure

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: free-games-claimer
+  namespace: default
+spec:
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: longhorn-unreplicated
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
