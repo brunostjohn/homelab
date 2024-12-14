@@ -4,6 +4,7 @@ metadata:
   name: calibre
   namespace: entertainment
 spec:
+  revisionHistoryLimit: 3
   strategy:
     type: Recreate
   selector:

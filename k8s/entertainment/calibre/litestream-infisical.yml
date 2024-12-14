@@ -2,7 +2,7 @@ apiVersion: secrets.infisical.com/v1alpha1
 kind: InfisicalSecret
 metadata:
   name: calibre-litestream-secrets-infisical
-  namespace: productivity
+  namespace: entertainment
 spec:
   resyncInterval: 10
   authentication:
