@@ -29,4 +29,6 @@ spec:
               ports:
                 - containerPort: 6080
                   protocol: TCP
+                - containerPort: 5900
+                  protocol: TCP
           restartPolicy: OnFailure
