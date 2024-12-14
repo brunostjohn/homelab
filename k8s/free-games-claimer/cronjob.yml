@@ -4,7 +4,7 @@ metadata:
   name: free-games-claimer
   namespace: default
 spec:
-  schedule: "19 19 * * *"
+  schedule: "01 23 * * *"
   jobTemplate:
     spec:
       template:
@@ -30,4 +30,4 @@ spec:
                   protocol: TCP
                 - containerPort: 5900
                   protocol: TCP
-          restartPolicy: OnFailure
+          restartPolicy: Never
