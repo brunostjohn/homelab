@@ -6,3 +6,4 @@ metadata:
 data:
   TIMEOUT: "60"
   LOGIN_TIMEOUT: "180"
+  DISPLAY: "0"
