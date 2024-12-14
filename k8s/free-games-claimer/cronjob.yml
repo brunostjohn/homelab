@@ -4,7 +4,7 @@ metadata:
   name: free-games-claimer
   namespace: default
 spec:
-  schedule: "09 19 * * *"
+  schedule: "12 19 * * *"
   jobTemplate:
     spec:
       template:
