@@ -4,11 +4,15 @@ metadata:
   name: free-games-claimer
   namespace: default
 spec:
-  schedule: "49 18 * * *"
+  schedule: "50 18 * * *"
   jobTemplate:
     spec:
       template:
         spec:
+          volumes:
+            - name: free-games-claimer
+              persistentVolumeClaim:
+                claimName: free-games-claimer
           containers:
             - name: free-games-claimer
               image: ghcr.io/vogler/free-games-claimer:latest
