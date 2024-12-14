@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre
+  namespace: entertainment
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: calibre
+  template:
+    metadata:
+      labels:
+        app: calibre
+    spec:
+      volumes:
+        - name: calibre-config
+          persistentVolumeClaim:
+            claimName: calibre-config
+        - name: calibre-ingest
+          nfs:
+            server: 10.0.3.1
+            path: /mnt/jabberwock/cwa-book-ingest
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
+      containers:
+        - name: calibre
+          image: docker.io/crocodilestick/calibre-web-automated:V2.1.2
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 500m
+            limits:
+              memory: 1Gi
+              cpu: "1"
+          ports:
+            - containerPort: 8083
+              protocol: TCP
+              name: http
+          env:
+            - name: TZ
+              value: Europe/Dublin
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: DOCKER_MODS
+              value: lscr.io/linuxserver/mods:universal-calibre-v7.16.0
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - name: calibre-config
+              mountPath: /config
+            - name: calibre-ingest
+              mountPath: /cwa-book-ingest
+            - name: entertainment-content
+              mountPath: /calibre-library
+              subPath: media/calibre/
