@@ -4,7 +4,7 @@ metadata:
   name: free-games-claimer
   namespace: default
 spec:
-  schedule: "12 19 * * *"
+  schedule: "14 19 * * *"
   jobTemplate:
     spec:
       template:
@@ -16,7 +16,6 @@ spec:
           containers:
             - name: free-games-claimer
               image: ghcr.io/vogler/free-games-claimer:latest
-              command: ["/bin/sh", "-c", "node epic-games"]
               imagePullPolicy: IfNotPresent
               envFrom:
                 - secretRef:
