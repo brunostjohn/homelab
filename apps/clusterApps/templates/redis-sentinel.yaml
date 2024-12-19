@@ -51,7 +51,10 @@ spec:
             enabled: true
         tls:
           enabled: true
-          existingSecret: redis-tls-qmfgd
+          existingSecret: redis-tls
+          certFilename: tls.crt
+          certKeyFilename: tls.key
+          certCAFilename: ca.crt
         networkPolicy:
           enabled: true
           allowExternal: false
