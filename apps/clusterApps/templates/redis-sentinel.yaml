@@ -64,8 +64,8 @@ spec:
           metrics:
             extraArgs:
               tls-client-key-file: /opt/bitnami/redis/certs/tls.key
-              tls-client-cert-file: /opt/bitnami/redis/certs/tls.key
-              tls-ca-cert-file: /opt/bitnami/redis/certs/tls.key
+              tls-client-cert-file: /opt/bitnami/redis/certs/tls.crt
+              tls-ca-cert-file: /opt/bitnami/redis/certs/ca.crt
             allowExternal: false
             ingressNSMatchLabels:
               kubernetes.io/metadata.name: monitoring
