@@ -5,6 +5,8 @@ metadata:
   namespace: blocky
   annotations:
     reloader.stakater.com/auto: "true"
+  labels:
+    redis-sentinel: "true"
 spec:
   replicas: 3
   strategy:
