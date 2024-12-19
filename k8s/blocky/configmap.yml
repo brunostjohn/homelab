@@ -109,7 +109,7 @@ data:
     #  flushInterval: 30s
 
     redis:
-      address: redis-sentinel.databases.svc.cluster.local:6379
+      address: mymaster
       password: redis
       database: 8
       required: true
