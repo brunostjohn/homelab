@@ -50,11 +50,7 @@ spec:
           serviceMontior:
             enabled: true
         tls:
-          enabled: true
-          existingSecret: redis-tls
-          certFilename: tls.crt
-          certKeyFilename: tls.key
-          certCAFilename: ca.crt
+          enabled: false
         networkPolicy:
           enabled: true
           allowExternal: false
@@ -62,8 +58,6 @@ spec:
           ingressNSPodMatchLabels:
             redis-sentinel: "true"
           metrics:
-            extraArgs:
-              skip-tls-verification: "true"
             allowExternal: false
             ingressNSMatchLabels:
               kubernetes.io/metadata.name: monitoring
