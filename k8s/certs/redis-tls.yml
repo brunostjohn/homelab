@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: redis-tls
+  namespace: databases
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+    reflector.v1.k8s.emberstack.com/reflection-auto-allowed: "true"
+spec:
+  secretName: redis-tls
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer
