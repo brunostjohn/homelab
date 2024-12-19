@@ -9,7 +9,7 @@ metadata:
 spec:
   secretName: redis-tls
   issuerRef:
-    name: self-signed
+    name: selfsigned
     kind: ClusterIssuer
   commonName: redis-sentinel.databases.svc.cluster.local
   dnsNames:
