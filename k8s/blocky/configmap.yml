@@ -111,7 +111,7 @@ data:
     redis:
       address: mymaster
       password: redis
-      database: 8
+      database: 0
       required: true
       connectionAttempts: 3
       connectionCooldown: 3s
