@@ -115,10 +115,11 @@ data:
       required: true
       connectionAttempts: 3
       connectionCooldown: 3s
+      sentinelPassword: redis
       sentinelAddresses:
-        - redis-sentinel-node-0.redis-sentinel-headless.databases.svc.cluster.local:26379
-        - redis-sentinel-node-1.redis-sentinel-headless.databases.svc.cluster.local:26379
-        - redis-sentinel-node-2.redis-sentinel-headless.databases.svc.cluster.local:26379
+        - redis-sentinel-node-0.redis-sentinel.databases.svc.cluster.local:26379
+        - redis-sentinel-node-1.redis-sentinel.databases.svc.cluster.local:26379
+        - redis-sentinel-node-2.redis-sentinel.databases.svc.cluster.local:26379
 
     minTlsServeVersion: 1.3
 
