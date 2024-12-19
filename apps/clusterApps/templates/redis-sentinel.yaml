@@ -20,7 +20,9 @@ spec:
           password: redis
         architecture: replication
         master:
-          replicas: 3
+          configuration: |
+            databases 32
+          replicaCount: 3
           persistence:
             storageClass: longhorn-unreplicated
         rbac:
@@ -29,7 +31,9 @@ spec:
           create: true
           automountServiceAccountToken: true
         replica:
-          replicas: 2
+          configuration: |
+            databases 32
+          replicaCount: 2
           persistence:
             storageClass: longhorn-unreplicated
           automountServiceAccountToken: true
