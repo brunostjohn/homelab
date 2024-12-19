@@ -11,3 +11,16 @@ spec:
   issuerRef:
     name: selfsigned
     kind: ClusterIssuer
+  commonName: redis-sentinel.databases.svc.cluster.local
+  dnsNames:
+    - redis-sentinel.databases.svc.cluster.local
+    - "*.redis-sentinel.databases.svc.cluster.local"
+    - "*.redis-sentinel.databases.svc"
+    - "*.redis-sentinel.databases"
+    - "*.redis-sentinel"
+    - redis-sentinel-headless.databases.svc.cluster.local
+    - "*.redis-sentinel-headless.databases.svc.cluster.local"
+    - "*.redis-sentinel-headless.databases.svc"
+    - "*.redis-sentinel-headless.databases"
+    - "*.redis-sentinel-headless"
+    - redis-sentinel-master.databases.svc.cluster.local
