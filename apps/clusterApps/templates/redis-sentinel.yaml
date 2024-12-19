@@ -20,6 +20,7 @@ spec:
           password: redis
         architecture: replication
         master:
+          replicas: 3
           persistence:
             storageClass: longhorn-unreplicated
         rbac:
