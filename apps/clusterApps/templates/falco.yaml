@@ -113,8 +113,11 @@ spec:
               items:
                 - k3s-agent
                 - k3s-server
+            - list: known_clear_log_containers
+              items:
+                - docker.io/longhornio/longhorn-instance-manager
             - macro: allowed_clear_log_files
-              condition: or (proc.name in (known_clear_log_cmd) and proc.pname in (known_clear_log_pname))
+              condition: or ((proc.name in (known_clear_log_cmd) and proc.pname in (known_clear_log_pname)) or container.image.repository in (known_clear_log_containers))
               override:
                 condition: append
 
