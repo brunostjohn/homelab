@@ -22,7 +22,6 @@ spec:
         master:
           configuration: |
             databases 32
-          replicaCount: 3
           persistence:
             storageClass: longhorn-unreplicated
         rbac:
@@ -33,7 +32,7 @@ spec:
         replica:
           configuration: |
             databases 32
-          replicaCount: 2
+          replicaCount: 3
           persistence:
             storageClass: longhorn-unreplicated
           automountServiceAccountToken: true
@@ -50,6 +49,21 @@ spec:
             enabled: true
           serviceMontior:
             enabled: true
+        tls:
+          enabled: true
+          existingSecret: redis-tls-qmfgd
+        networkPolicy:
+          enabled: true
+          allowExternal: false
+          allowExternalEgress: false
+          ingressNSPodMatchLabels:
+            redis-sentinel: "true"
+          metrics:
+            allowExternal: false
+            ingressNSMatchLabels:
+              kubernetes.io/metadata.name: monitoring
+            ingressNSPodMatchLabels:
+              app.kubernetes.io/name: prometheus
   syncPolicy:
     automated:
       prune: true
