@@ -86,6 +86,7 @@ spec:
                 - ghcr.io/cloudnative-pg/pgbouncer
                 - ghcr.io/stakater/reloader
                 - ghcr.io/brunostjohn/refund-bot
+                - docker.io/longhornio/longhorn-instance-manager
             - macro: user_known_contact_k8s_api_server_activities
               condition: or container.image.repository in (trusted_k8s_api_container_images)
               override:
@@ -102,6 +103,7 @@ spec:
                 - ghcr.io/flaresolverr/flaresolverr
                 - ghcr.io/toeverything/affine-graphql
                 - docker.io/crocodilestick/calibre-web-automated
+                - docker.io/longhornio/longhorn-instance-manager
               override:
                 items: append
             - list: known_clear_log_cmd
