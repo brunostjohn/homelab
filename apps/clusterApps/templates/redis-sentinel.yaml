@@ -62,6 +62,10 @@ spec:
           ingressNSPodMatchLabels:
             redis-sentinel: "true"
           metrics:
+            extraArgs:
+              tls-client-key-file: tls.key
+              tls-client-cert-file: tls.crt
+              tls-ca-cert-file: ca.crt
             allowExternal: false
             ingressNSMatchLabels:
               kubernetes.io/metadata.name: monitoring
