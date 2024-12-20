@@ -50,7 +50,7 @@ spec:
         backupRetentionPolicy: "expire"
       historyTags:
         backupRetentionPolicy: "keep"
-    retentionPolicy: "14d"
+    retentionPolicy: "7d"
 
   certificates:
     serverTLSSecret: postgres-cluster-cert-secret
