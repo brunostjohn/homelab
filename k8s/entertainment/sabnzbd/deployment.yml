@@ -75,4 +75,14 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 10
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
