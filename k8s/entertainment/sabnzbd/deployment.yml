@@ -27,6 +27,7 @@ spec:
                       - s2.m-nodes.zefirscloud.local
                       - s5
                       - s6.m-nodes.zefirscloud.local
+                      - s7.m-nodes.zefirscloud.local
       volumes:
         - name: entertainment-content
           persistentVolumeClaim:
@@ -38,7 +39,6 @@ spec:
         nameservers:
           - 10.0.2.1
           - 1.1.1.1
-          - 8.8.8.8
       securityContext:
         fsGroup: 1001
       containers:
@@ -50,7 +50,7 @@ spec:
               memory: 2Gi
               cpu: "2"
             limits:
-              memory: 4Gi
+              memory: 8Gi
               cpu: "4"
           securityContext:
             allowPrivilegeEscalation: false
