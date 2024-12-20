@@ -38,21 +38,21 @@ spec:
           env:
             - name: TZ
               value: Europe/Dublin
-            # - name: DB_TYPE
-            #   value: postgres
-            # - name: DB_HOST
-            #   value: postgres-cluster-rw-pooler.databases.svc.cluster.local
-            # - name: DB_PORT
-            #   value: "5432"
-            # - name: DB_USER
-            #   value: jellyseerr
-            # - name: DB_PASS
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: jellyseerr-pg
-            #       key: password
-            # - name: DB_NAME
-            #   value: jellyseerr
+            - name: DB_TYPE
+              value: postgres
+            - name: DB_HOST
+              value: postgres-cluster-rw-pooler.databases.svc.cluster.local
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_USER
+              value: jellyseerr
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: jellyseerr-pg
+                  key: password
+            - name: DB_NAME
+              value: jellyseerr
           volumeMounts:
             - name: jellyseerr-config
               mountPath: /app/config
