@@ -17,7 +17,7 @@ spec:
   project: default
   source:
     chart: emqx-operator
-    targetRevision: 2.2.25
+    targetRevision: 2.2.26
     repoURL: https://repos.emqx.io/charts
   syncPolicy:
     automated:
