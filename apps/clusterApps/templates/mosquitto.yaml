@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: emqx
+  name: mosquitto
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: databases
+    namespace: smarthome
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: k8s/emqx
+    path: k8s/smarthome/mosquitto
     repoURL: https://github.com/brunostjohn/homelab.git
   syncPolicy:
     automated:
