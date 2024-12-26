@@ -41,10 +41,10 @@ spec:
           resources:
             requests:
               nvidia.com/gpu.shared: "1"
-              ephemeral-storage: "40Gi"
+              ephemeral-storage: "80Gi"
             limits:
               nvidia.com/gpu.shared: "1"
-              ephemeral-storage: "80Gi"
+              ephemeral-storage: "120Gi"
           ports:
             - containerPort: 8265
               name: http-server
