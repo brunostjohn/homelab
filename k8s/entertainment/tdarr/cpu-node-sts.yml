@@ -10,6 +10,7 @@ spec:
     matchLabels:
       app: tdarr-cpu-node
   serviceName: tdarr-cpu-node
+  revisionHistoryLimit: 3
   replicas: 1
   template:
     metadata:

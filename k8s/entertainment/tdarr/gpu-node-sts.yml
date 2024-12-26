@@ -11,6 +11,7 @@ spec:
       app: tdarr-gpu-node
   serviceName: tdarr-gpu-node
   replicas: 1
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:
