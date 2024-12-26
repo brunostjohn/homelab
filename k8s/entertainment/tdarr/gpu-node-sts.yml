@@ -55,20 +55,20 @@ spec:
             - containerPort: 8266
               name: http
               protocol: TCP
-          startupProbe:
-            httpGet:
-              path: /api/v2/status
-              port: http
-            failureThreshold: 30
-            periodSeconds: 10
-          livenessProbe:
-            httpGet:
-              path: /api/v2/status
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /api/v2/status
-              port: http
+          # startupProbe:
+          #   httpGet:
+          #     path: /api/v2/status
+          #     port: http
+          #   failureThreshold: 30
+          #   periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /api/v2/status
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /api/v2/status
+          #     port: http
           volumeMounts:
             - name: app-data
               mountPath: /app/configs
