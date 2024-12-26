@@ -16,10 +16,6 @@ spec:
       labels:
         app: tdarr-cpu-node
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
       volumes:
         - name: logs
           emptyDir: {}
