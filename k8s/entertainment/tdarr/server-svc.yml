@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tdarr-server
+  namespace: entertainment
+spec:
+  selector:
+    app: tdarr-server
+  ports:
+    - port: 8265
+      targetPort: 8265
+      protocol: TCP
+      name: http-server
+    - port: 8266
+      targetPort: 8266
+      protocol: TCP
+      name: http-ui

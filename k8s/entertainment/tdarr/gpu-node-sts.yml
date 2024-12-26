@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tdarr-gpu-node
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: tdarr-gpu-node
+  serviceName: tdarr-gpu-node
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tdarr-gpu-node
+    spec:
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: transcode-cache
+          emptyDir: {}
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: app-data
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
+      runtimeClassName: nvidia
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Exists"
+          effect: "NoSchedule"
+      containers:
+        - name: tdarr-gpu-node
+          image: ghcr.io/haveagitgat/tdarr_node:2.27.02
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: tdarr-gpu-node
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: all
+            - name: nodeName
+              value: $(HOSTNAME)
+          resources:
+            requests:
+              ephemeral-storage: 40Gi
+              nvidia.com/gpu.shared: "1"
+            limits:
+              ephemeral-storage: 80Gi
+              nvidia.com/gpu.shared: "1"
+          ports:
+            - containerPort: 8266
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: app-data
+              mountPath: /app/configs
+              subPath: configs
+            - name: logs
+              mountPath: /app/logs
+            - name: transcode-cache
+              mountPath: /temp
+            - name: entertainment-content
+              mountPath: /media
+              subPath: media
+  volumeClaimTemplates:
+    - metadata:
+        name: app-data
+      spec:
+        storageClassName: longhorn-unreplicated
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi

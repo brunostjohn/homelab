@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tdarr-server
+  namespace: entertainment
+data:
+  key: value
+  TZ: Europe/Dublin
+  PUID: "1001"
+  PGID: "1001"
+  UMASK_SET: "002"
+  serverIP: "0.0.0.0"
+  serverPort: "8266"
+  webUIPort: "8265"
+  internalNode: "true"
+  inContainer: "true"
+  ffmpegVersion: "6"
+  nodeName: ZefirsTdarr

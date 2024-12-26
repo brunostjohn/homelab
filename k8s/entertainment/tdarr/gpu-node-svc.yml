@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tdarr-gpu-node
+  namespace: entertainment
+  labels:
+    app: tdarr-gpu-node
+spec:
+  selector:
+    app: tdarr-gpu-node
+  ports:
+    - port: 8266
+      targetPort: 8266

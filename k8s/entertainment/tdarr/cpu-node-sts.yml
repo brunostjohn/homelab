@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tdarr-cpu-node
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: tdarr-cpu-node
+  serviceName: tdarr-cpu-node
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tdarr-cpu-node
+    spec:
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: transcode-cache
+          emptyDir: {}
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: app-data
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
+      containers:
+        - name: tdarr-cpu-node
+          image: ghcr.io/haveagitgat/tdarr_node:2.27.02
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: tdarr-cpu-node
+          env:
+            - name: nodeName
+              value: $(HOSTNAME)
+          resources:
+            requests:
+              ephemeral-storage: 40Gi
+            limits:
+              ephemeral-storage: 80Gi
+          ports:
+            - containerPort: 8266
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: app-data
+              mountPath: /app/configs
+              subPath: configs
+            - name: logs
+              mountPath: /app/logs
+            - name: transcode-cache
+              mountPath: /temp
+            - name: entertainment-content
+              mountPath: /media
+              subPath: media
+  volumeClaimTemplates:
+    - metadata:
+        name: app-data
+      spec:
+        storageClassName: longhorn-unreplicated
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi

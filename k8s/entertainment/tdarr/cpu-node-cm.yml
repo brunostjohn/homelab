@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tdarr-cpu-node
+  namespace: entertainment
+data:
+  TZ: Europe/Dublin
+  PUID: "1001"
+  PGID: "1001"
+  UMASK_SET: "002"
+  serverIP: 0.0.0.0
+  serverPort: "8266"
+  inContainer: "true"
+  ffmpegVersion: "6"

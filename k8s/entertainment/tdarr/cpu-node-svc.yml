@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tdarr-cpu-node
+  namespace: entertainment
+  labels:
+    app: tdarr-cpu-node
+spec:
+  selector:
+    app: tdarr-cpu-node
+  ports:
+    - port: 8266
+      targetPort: 8266

@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tdarr-server
+  namespace: entertainment
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tdarr-server
+  template:
+    metadata:
+      labels:
+        app: tdarr-server
+    spec:
+      runtimeClassName: nvidia
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Exists"
+          effect: "NoSchedule"
+      volumes:
+        - name: transcode-cache
+          emptyDir: {}
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: tdarr-server-pvc
+        - name: logs
+          emptyDir: {}
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
+      containers:
+        - name: tdarr
+          image: ghcr.io/haveagitgat/tdarr:2.27.02
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              nvidia.com/gpu.shared: "1"
+              ephemeral-storage: "40Gi"
+            limits:
+              nvidia.com/gpu.shared: "1"
+              ephemeral-storage: "80Gi"
+          ports:
+            - containerPort: 8265
+              name: http-server
+              protocol: TCP
+            - containerPort: 8266
+              name: http-ui
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: tdarr-server
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: all
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: all
+          volumeMounts:
+            - name: transcode-cache
+              mountPath: /temp
+            - name: app-data
+              mountPath: /app/server
+              subPath: server
+            - name: app-data
+              mountPath: /app/config
+              subPath: config
+            - name: logs
+              mountPath: /app/logs
+            - name: entertainment-content
+              mountPath: /media
+              subPath: media
