@@ -49,6 +49,20 @@ spec:
             - containerPort: 8266
               name: http-ui
               protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /api/v2/status
+              port: http-server
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v2/status
+              port: http-server
+          readinessProbe:
+            httpGet:
+              path: /api/v2/status
+              port: http-ui
           envFrom:
             - configMapRef:
                 name: tdarr-server
