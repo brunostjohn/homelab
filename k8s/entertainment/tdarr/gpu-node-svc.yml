@@ -11,3 +11,5 @@ spec:
   ports:
     - port: 8266
       targetPort: 8266
+      protocol: TCP
+      name: http

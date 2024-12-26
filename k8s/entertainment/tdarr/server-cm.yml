@@ -6,9 +6,9 @@ metadata:
 data:
   key: value
   TZ: Europe/Dublin
-  PUID: "1000"
-  PGID: "1000"
-  UMASK_SET: "002"
+  PUID: "0"
+  PGID: "0"
+  UMASK_SET: "000"
   serverIP: "0.0.0.0"
   serverPort: "8266"
   webUIPort: "8265"
