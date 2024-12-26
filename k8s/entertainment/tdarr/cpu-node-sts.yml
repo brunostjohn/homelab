@@ -36,21 +36,8 @@ spec:
                 name: tdarr-cpu-node
           env:
             - name: nodeName
-              value: $(HOSTNAME)
-          # startupProbe:
-          #   httpGet:
-          #     path: /api/v2/status
-          #     port: http
-          #   failureThreshold: 30
-          #   periodSeconds: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /api/v2/status
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /api/v2/status
-          #     port: http
+              fieldRef:
+                fieldPath: metadata.name
           resources:
             requests:
               ephemeral-storage: 40Gi
