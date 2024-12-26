@@ -104,6 +104,8 @@ spec:
                 - ghcr.io/toeverything/affine-graphql
                 - docker.io/crocodilestick/calibre-web-automated
                 - docker.io/longhornio/longhorn-instance-manager
+                - ghcr.io/haveagitgat/tdarr
+                - ghcr.io/haveagitgat/tdarr_node
               override:
                 items: append
             - list: known_clear_log_cmd
