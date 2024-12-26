@@ -11,7 +11,7 @@ spec:
       app: tdarr-cpu-node
   serviceName: tdarr-cpu-node
   revisionHistoryLimit: 3
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
