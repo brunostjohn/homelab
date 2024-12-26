@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tdarr-exporter
+  namespace: entertainment
+data:
+  TDARR_URL: http://tdarr-server.entertainment.svc.cluster.local:8265

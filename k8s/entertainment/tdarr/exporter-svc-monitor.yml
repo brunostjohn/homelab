@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tdarr-exporter
+  namespace: entertainment
+spec:
+  selector:
+    matchLabels:
+      app: tdarr-exporter
+  endpoints:
+    - port: metrics
+      path: /metrics
