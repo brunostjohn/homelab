@@ -42,9 +42,9 @@ spec:
               protocol: TCP
           env:
             - name: PGID
-              value: "1000"
+              value: "0"
             - name: PUID
-              value: "1000"
+              value: "0"
             - name: TZ
               value: "Europe/Dublin"
           volumeMounts:
