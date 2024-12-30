@@ -23,7 +23,7 @@ spec:
       containers:
         - name: jellyseerr
           imagePullPolicy: Always
-          image: docker.io/fallenbagel/jellyseerr:2.1.0
+          image: docker.io/fallenbagel/jellyseerr:2.2.0
           resources:
             requests:
               memory: "2Gi"
