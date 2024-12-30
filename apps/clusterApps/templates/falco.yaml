@@ -106,6 +106,7 @@ spec:
                 - docker.io/longhornio/longhorn-instance-manager
                 - ghcr.io/haveagitgat/tdarr
                 - ghcr.io/haveagitgat/tdarr_node
+                - docker.io/thijsvanloef/palworld-server-docker
               override:
                 items: append
             - list: known_clear_log_cmd
