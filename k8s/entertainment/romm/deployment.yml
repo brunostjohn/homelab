@@ -65,6 +65,8 @@ spec:
           envFrom:
             - secretRef:
                 name: romm-secrets
+            - configMapRef:
+                name: romm-config
           volumeMounts:
             - name: resources
               mountPath: /romm/resources

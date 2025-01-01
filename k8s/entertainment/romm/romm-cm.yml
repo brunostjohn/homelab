@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: romm-config
+  namespace: romm
+data:
+  REDIS_HOST: redis-master.databases.svc.cluster.local
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD: redis
+  REDIS_DB: "20"
+  ENABLE_SCHEDULED_RESCAN: "true"
+  ENABLE_SCHEDULED_UPDATE_SWITCH_TITLEDB: "true"
+  ENABLE_SCHEDULED_UPDATE_MAME_XML: "true"
