@@ -46,24 +46,15 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "250m"
-            limits:
-              memory: "2Gi"
+              memory: 1Gi
               cpu: "500m"
+            limits:
+              memory: 2Gi
+              cpu: "1"
           ports:
             - containerPort: 8080
               protocol: TCP
               name: http
-          env:
-            - name: DB_HOST
-              value: mariadb.romm.svc.cluster.local
-            - name: DB_NAME
-              value: romm
-            - name: DB_USER
-              value: romm-user
-            - name: DB_PASSWD
-              value: romm
           envFrom:
             - secretRef:
                 name: romm-secrets
@@ -80,21 +71,21 @@ spec:
               mountPath: /romm/library
             - name: redis-data
               mountPath: /redis-data
-          # startupProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          #   initialDelaySeconds: 60
-          # readinessProbe:
-          #   httpGet:
-          #     path: /api/heartbeat
-          #     port: http
-          #   initialDelaySeconds: 240
-          # livenessProbe:
-          #   httpGet:
-          #     path: /api/heartbeat
-          #     port: http
-          #   initialDelaySeconds: 240
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /api/heartbeat
+              port: http
+            initialDelaySeconds: 240
+          livenessProbe:
+            httpGet:
+              path: /api/heartbeat
+              port: http
+            initialDelaySeconds: 240
 ---
 apiVersion: apps/v1
 kind: Deployment

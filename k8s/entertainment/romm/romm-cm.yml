@@ -15,3 +15,7 @@ data:
   OIDC_ENABLED: "true"
   OIDC_REDIRECT_URI: https://romm.zefirsroyal.cloud/api/oauth/openid
   OIDC_SERVER_APPLICATION_URL: https://auth.zefirsroyal.cloud/application/o/romm
+  DB_HOST: mariadb.romm.svc.cluster.local
+  DB_NAME: romm
+  DB_USER: romm-user
+  DB_PASSWD: romm
