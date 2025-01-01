@@ -90,7 +90,7 @@ spec:
             httpGet:
               path: /api/heartbeat
               port: http
-            failureThreshold: 30
+            failureThreshold: 80
             periodSeconds: 10
           livenessProbe:
             httpGet:
