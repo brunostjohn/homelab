@@ -24,11 +24,11 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "250m"
+              memory: 512Mi
+              cpu: 500m
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: 1Gi
+              cpu: "1"
           ports:
             - containerPort: 9000
               protocol: TCP
@@ -80,6 +80,10 @@ spec:
               value: "5432"
             - name: POSTGRES_DB
               value: mealie
+            - name: PUID
+              value: "0"
+            - name: PGID
+              value: "0"
           startupProbe:
             httpGet:
               path: /
