@@ -12,3 +12,6 @@ data:
   ENABLE_SCHEDULED_UPDATE_SWITCH_TITLEDB: "true"
   ENABLE_SCHEDULED_UPDATE_MAME_XML: "true"
   TZ: Europe/Dublin
+  OIDC_ENABLED: "true"
+  OIDC_REDIRECT_URI: https://romm.zefirsroyal.cloud/api/oauth/openid
+  OIDC_SERVER_APPLICATION_URL: https://auth.zefirsroyal.cloud/application/o/romm/
