@@ -82,19 +82,18 @@ spec:
               mountPath: /redis-data
           startupProbe:
             httpGet:
-              path: /
+              path: /api/heartbeat
               port: http
-            initialDelaySeconds: 60
+            failureThreshold: 30
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /api/heartbeat
               port: http
-            initialDelaySeconds: 240
           livenessProbe:
             httpGet:
               path: /api/heartbeat
               port: http
-            initialDelaySeconds: 240
 ---
 apiVersion: apps/v1
 kind: Deployment
