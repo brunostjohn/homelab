@@ -20,7 +20,7 @@ spec:
             claimName: pingvin-share-pvc
       containers:
         - name: pingvin-share
-          image: docker.io/stonith404/pingvin-share:v1.7.2
+          image: docker.io/stonith404/pingvin-share:v1.8.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
