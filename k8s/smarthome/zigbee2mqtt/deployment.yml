@@ -35,6 +35,9 @@ spec:
               mountPath: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
           securityContext:
             privileged: true
+          env:
+            - name: ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER
+              value: zstack
           ports:
             - containerPort: 8080
               name: http
