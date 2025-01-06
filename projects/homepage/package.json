@@ -17,7 +17,7 @@
 		"api:mealie:generate": "rm -rf ./src/lib/generatedApiClients/mealie && mkdir -p ./src/lib/generatedApiClients/mealie && npx @hey-api/openapi-ts -i ./src/lib/apiSpecs/mealie.json -o ./src/lib/generatedApiClients/mealie -c @hey-api/client-fetch"
 	},
 	"devDependencies": {
-		"@hey-api/client-fetch": "^0.5.0",
+		"@hey-api/client-fetch": "^0.6.0",
 		"@hey-api/openapi-ts": "^0.60.0",
 		"@openapitools/openapi-generator-cli": "^2.13.13",
 		"@sveltejs/adapter-auto": "^3.0.0",
