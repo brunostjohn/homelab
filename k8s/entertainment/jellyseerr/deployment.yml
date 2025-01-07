@@ -5,9 +5,6 @@ metadata:
   namespace: entertainment
 spec:
   replicas: 1
-  revisionHistoryLimit: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: jellyseerr
@@ -17,9 +14,13 @@ spec:
         app: jellyseerr
     spec:
       volumes:
-        - name: jellyseerr-config
-          persistentVolumeClaim:
-            claimName: jellyseerr-config
+        - name: logs
+          emptyDir: {}
+        - name: cache
+          emptyDir: {}
+        - name: configjson
+          secret:
+            secretName: jellyseerr-secrets
       containers:
         - name: jellyseerr
           imagePullPolicy: Always
@@ -49,13 +50,18 @@ spec:
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: jellyseerr-pg
-                  key: password
+                  name: jellyseerr-secrets
+                  key: DB_PASS
             - name: DB_NAME
               value: jellyseerr
           volumeMounts:
-            - name: jellyseerr-config
-              mountPath: /app/config
+            - name: cache
+              mountPath: /app/config/cache
+            - name: logs
+              mountPath: /app/config/logs
+            - name: configjson
+              mountPath: /app/config/config.json
+              subPath: CONFIG_JSON
           startupProbe:
             httpGet:
               path: /
