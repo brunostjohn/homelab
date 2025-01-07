@@ -1,25 +1,25 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: tdarr
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: entertainment
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: k8s/entertainment/tdarr
-    repoURL: https://github.com/brunostjohn/homelab.git
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    retry:
-      limit: 5
-      backoff:
-        duration: 30s
-        factor: 2
-        maxDuration: 5m
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: tdarr
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: entertainment
+#     server: https://kubernetes.default.svc
+#   project: default
+#   source:
+#     path: k8s/entertainment/tdarr
+#     repoURL: https://github.com/brunostjohn/homelab.git
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     retry:
+#       limit: 5
+#       backoff:
+#         duration: 30s
+#         factor: 2
+#         maxDuration: 5m
