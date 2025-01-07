@@ -21,9 +21,23 @@ spec:
         - name: configjson
           secret:
             secretName: jellyseerr-secrets
+      initContainers:
+        - name: copy-settings
+          imagePullPolicy: IfNotPresent
+          image: docker.io/library/busybox:1.33.1
+          command:
+            - /bin/sh
+            - -c
+            - cp /app/config/config.json /app/config/settings.json
+          volumeMounts:
+            - name: configjson
+              mountPath: /app/config/config.json
+              subPath: CONFIG_JSON
+            - name: logscache
+              mountPath: /app/config
       containers:
         - name: jellyseerr
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           image: docker.io/fallenbagel/jellyseerr:2.2.3
           resources:
             requests:
@@ -57,9 +71,6 @@ spec:
           volumeMounts:
             - name: logscache
               mountPath: /app/config
-            - name: configjson
-              mountPath: /app/config/settings.json
-              subPath: CONFIG_JSON
           startupProbe:
             httpGet:
               path: /
