@@ -4,6 +4,7 @@ metadata:
   name: jellyseerr-secrets-infisical
   namespace: entertainment
 spec:
+  resyncInterval: 10
   authentication:
     universalAuth:
       secretsScope:

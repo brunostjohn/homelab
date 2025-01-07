@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: jellyseerr
   namespace: entertainment
+  annotations:
+    secrets.infisical.com/auto-reload: "true"
 spec:
   replicas: 1
   selector:
