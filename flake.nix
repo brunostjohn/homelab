@@ -87,7 +87,7 @@
           };
           modules = [
             ./nix/hosts/s5
-            ./nix/modules/k3sMaster
+            ./nix/modules/k3sAgent
             ./nix/modules/10gbit
           ] ++ globalModulesMNode;
         };
@@ -115,7 +115,7 @@
           };
           modules = [
             ./nix/hosts/s7
-            ./nix/modules/k3sAgent
+            ./nix/modules/k3sMaster
             ./nix/modules/nvidiaGpu
           ] ++ globalModulesMNode;
         };
