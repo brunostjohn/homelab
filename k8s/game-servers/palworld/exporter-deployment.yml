@@ -18,7 +18,7 @@ spec:
         app: palworld-exporter
     spec:
       nodeSelector:
-        kubernetes.io/hostname: s7.m-nodes.zefirscloud.local
+        kubernetes.io/hostname: s7
       containers:
         - name: palworld-exporter
           image: docker.io/bostrt/palworld-exporter

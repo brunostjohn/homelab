@@ -14,7 +14,7 @@ spec:
     spec:
       runtimeClassName: nvidia
       nodeSelector:
-        kubernetes.io/hostname: "s7.m-nodes.zefirscloud.local"
+        kubernetes.io/hostname: s7
       tolerations:
         - key: "nvidia.com/gpu"
           operator: "Exists"

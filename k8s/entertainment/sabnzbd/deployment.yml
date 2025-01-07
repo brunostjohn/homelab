@@ -25,9 +25,9 @@ spec:
                     values:
                       - s1
                       - s2.m-nodes.zefirscloud.local
-                      - s5
+                      - s5.m-nodes.zefirscloud.local
                       - s6.m-nodes.zefirscloud.local
-                      - s7.m-nodes.zefirscloud.local
+                      - s7
       volumes:
         - name: entertainment-content
           persistentVolumeClaim:
