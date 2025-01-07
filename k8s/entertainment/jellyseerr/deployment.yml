@@ -14,9 +14,7 @@ spec:
         app: jellyseerr
     spec:
       volumes:
-        - name: logs
-          emptyDir: {}
-        - name: cache
+        - name: logscache
           emptyDir: {}
         - name: configjson
           secret:
@@ -55,10 +53,8 @@ spec:
             - name: DB_NAME
               value: jellyseerr
           volumeMounts:
-            - name: cache
-              mountPath: /app/config/cache
-            - name: logs
-              mountPath: /app/config/logs
+            - name: logscache
+              mountPath: /app/config
             - name: configjson
               mountPath: /app/config/config.json
               subPath: CONFIG_JSON
