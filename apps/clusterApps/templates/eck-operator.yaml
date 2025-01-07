@@ -1,31 +1,31 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: eck-operator-system
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: eck-operator
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  destination:
-    namespace: eck-operator-system
-    server: https://kubernetes.default.svc
-  project: default
-  source:
-    chart: eck-operator
-    targetRevision: 2.15.0
-    repoURL: https://helm.elastic.co
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    retry:
-      limit: 5
-      backoff:
-        duration: 30s
-        factor: 2
-        maxDuration: 5m
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: eck-operator-system
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: eck-operator
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   destination:
+#     namespace: eck-operator-system
+#     server: https://kubernetes.default.svc
+#   project: default
+#   source:
+#     chart: eck-operator
+#     targetRevision: 2.15.0
+#     repoURL: https://helm.elastic.co
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     retry:
+#       limit: 5
+#       backoff:
+#         duration: 30s
+#         factor: 2
+#         maxDuration: 5m
