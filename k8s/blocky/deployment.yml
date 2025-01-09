@@ -20,7 +20,7 @@ spec:
     metadata:
       labels:
         app: blocky
-        redis-sentinel: "true"
+        dragonfly: "true"
     spec:
       volumes:
         - name: blocky-config
