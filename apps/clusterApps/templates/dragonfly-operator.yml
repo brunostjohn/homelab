@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dragonfly-operator
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: databases
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: dragonfly-operator
+    targetRevision: v1.1.8
+    repoURL: ghcr.io/dragonflydb/dragonfly-operator/helm/dragonfly-operator
+    helm:
+      valuesObject:
+        replicaCount: 2
+        additional-labels:
+          app: dragonfly-operator
+        serviceMonitor:
+          enabled: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
