@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ctrl/qbittorrent':
         specifier: ^9.0.1
-        version: 9.1.0
+        version: 9.2.0
       '@internationalized/date':
         specifier: ^3.5.6
         version: 3.6.0
@@ -190,12 +190,12 @@ packages:
     resolution: {integrity: sha512-wENP7LH4BmCjz+gXVq7Nzz20zMjY/huuG7aDk/yu/LhFdC84e/l8222rCIAo0lwhU451lFcJKLcOmtG6TNrBAQ==}
     engines: {node: '>=18'}
 
-  '@ctrl/qbittorrent@9.1.0':
-    resolution: {integrity: sha512-mqro5vP94m/evgGSv6fa7Hrip2fhI0F/dMgsTisvi9gChtfXpX1Cj1EwJNzBOiT6yYamEtLJuEe41XLQiXEo/Q==}
+  '@ctrl/qbittorrent@9.2.0':
+    resolution: {integrity: sha512-95hcrot7lRPZ/HpDwjDS0qNIDBk015uPX/RastT1AWFGWfZmN/TijUfvwEXHHh6lHziZE2pdT2NQMgvrE1Gg4g==}
     engines: {node: '>=18'}
 
-  '@ctrl/shared-torrent@6.1.0':
-    resolution: {integrity: sha512-LWhAH6C5Ekp3co8tyRVxAOZhlhHqQmuvc5GXoHcAetIFYbPaKhsqdGEACHtGl549cVO676gQjmvLEgzQnsn56g==}
+  '@ctrl/shared-torrent@6.2.1':
+    resolution: {integrity: sha512-0ouXQnBEik6B3LXByiXnDZ6MAj8r9oMEE09q2MkifqSRmGImhZKq7iNbzcGzTn9BI1TU/anwjSOrxjmYV4T5eQ==}
     engines: {node: '>=18'}
 
   '@ctrl/torrent-file@4.1.0':
@@ -2468,6 +2468,9 @@ packages:
   rfc4648@1.5.3:
     resolution: {integrity: sha512-MjOWxM065+WswwnmNONOT+bD1nXzY9Km6u3kzvnx8F8/HXGZdz3T6e6vZJ8Q/RIMUSp/nxqjH3GwvJDy8ijeQQ==}
 
+  rfc4648@1.5.4:
+    resolution: {integrity: sha512-rRg/6Lb+IGfJqO05HZkN50UtY7K/JhxJag1kP23+zyMfrvoB0B7RWv06MbOzoc79RgCdNTiUaNsTT1AJZ7Z+cg==}
+
   rimraf@5.0.10:
     resolution: {integrity: sha512-l0OE8wL34P4nJH/H2ffoaniAokM2qSmrtXHmlpvYr5AVVX8msAyW0l8NVJFDxlSK4u3Uh/f41cQheDVdnYijwQ==}
     hasBin: true
@@ -2841,6 +2844,10 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
 
+  type-fest@4.31.0:
+    resolution: {integrity: sha512-yCxltHW07Nkhv/1F6wWBr8kz+5BGMfP+RbRSYFnegVb0qV/UMT0G0ElBloPVerqn4M2ZV80Ir1FtCcYv1cT6vQ==}
+    engines: {node: '>=16'}
+
   typescript@5.7.3:
     resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
     engines: {node: '>=14.17'}
@@ -3093,21 +3100,22 @@ snapshots:
 
   '@ctrl/magnet-link@4.0.2':
     dependencies:
-      rfc4648: 1.5.3
+      rfc4648: 1.5.4
       uint8array-extras: 1.4.0
 
-  '@ctrl/qbittorrent@9.1.0':
+  '@ctrl/qbittorrent@9.2.0':
     dependencies:
       '@ctrl/magnet-link': 4.0.2
-      '@ctrl/shared-torrent': 6.1.0
+      '@ctrl/shared-torrent': 6.2.1
       '@ctrl/torrent-file': 4.1.0
       cookie: 1.0.2
       node-fetch-native: 1.6.4
       ofetch: 1.4.1
+      type-fest: 4.31.0
       ufo: 1.5.4
       uint8array-extras: 1.4.0
 
-  '@ctrl/shared-torrent@6.1.0': {}
+  '@ctrl/shared-torrent@6.2.1': {}
 
   '@ctrl/torrent-file@4.1.0':
     dependencies:
@@ -5234,6 +5242,8 @@ snapshots:
 
   rfc4648@1.5.3: {}
 
+  rfc4648@1.5.4: {}
+
   rimraf@5.0.10:
     dependencies:
       glob: 10.4.5
@@ -5712,6 +5722,8 @@ snapshots:
 
   type-fest@2.19.0:
     optional: true
+
+  type-fest@4.31.0: {}
 
   typescript@5.7.3: {}
 
