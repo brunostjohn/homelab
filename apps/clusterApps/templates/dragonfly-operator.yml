@@ -13,7 +13,7 @@ spec:
   source:
     chart: dragonfly-operator
     targetRevision: v1.1.8
-    repoURL: ghcr.io/dragonflydb/dragonfly-operator/helm/dragonfly-operator
+    repoURL: ghcr.io/dragonflydb/dragonfly-operator/helm
     helm:
       valuesObject:
         replicaCount: 2
