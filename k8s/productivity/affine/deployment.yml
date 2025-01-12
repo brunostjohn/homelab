@@ -27,7 +27,7 @@ spec:
           emptyDir: {}
       initContainers:
         - name: migrate-db
-          image: ghcr.io/toeverything/affine-graphql:canary
+          image: ghcr.io/toeverything/affine-graphql:stable
           imagePullPolicy: IfNotPresent
           command:
             [
@@ -58,7 +58,7 @@ spec:
               subPath: PRIVATE_KEY
       containers:
         - name: affine
-          image: ghcr.io/toeverything/affine-graphql:canary
+          image: ghcr.io/toeverything/affine-graphql:stable
           command:
             [
               "sh",
