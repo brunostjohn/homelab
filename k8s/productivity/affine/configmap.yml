@@ -26,6 +26,7 @@ data:
     AFFiNE.server.port = 3010;
     AFFiNE.server.externalUrl = 'https://notes.zefirsroyal.cloud';
     AFFiNE.metrics.enabled = true;
+    AFFiNE.redis.host = 'dragonfly.databases.svc.cluster.local';
     // AFFiNE.auth.session = {
     //   /* How long the login session would last by default */
     //   ttl: 15 * 24 * 60 * 60, // 15 days
