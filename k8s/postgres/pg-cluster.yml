@@ -4,6 +4,7 @@ metadata:
   namespace: databases
   name: postgres-cluster
 spec:
+  reusePVC: true
   instances: 4
   imageName: ghcr.io/tensorchord/cloudnative-pgvecto.rs:15.5
 
