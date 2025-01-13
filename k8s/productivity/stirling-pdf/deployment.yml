@@ -20,7 +20,7 @@ spec:
             claimName: stirling-pdf-trainingdata
       containers:
         - name: stirling-pdf
-          image: docker.io/frooodle/s-pdf:0.36.6
+          image: docker.io/frooodle/s-pdf:0.37.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
