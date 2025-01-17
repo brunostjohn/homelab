@@ -37,7 +37,7 @@ spec:
           tolerationSeconds: 20
       containers:
         - name: blocky
-          image: ghcr.io/0xerr0r/blocky:v0.24
+          image: ghcr.io/0xerr0r/blocky:v0.25
           imagePullPolicy: IfNotPresent
           resources:
             requests:
