@@ -5,7 +5,8 @@
     "fileMatch": ["apps/.+\\.y(a?)ml$"]
   },
   "kubernetes": {
-    "fileMatch": ["k8s/.+\\.y(a?)ml$"]
+    "fileMatch": ["k8s/.+\\.y(a?)ml$"],
+    "ignorePaths": ["k8s/productivity/hoarder/meilisearch-deployment.yml"]
   },
   "separateMajorMinor": true,
   "packageRules": [
