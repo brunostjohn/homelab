@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: tdarr-exporter
-          image: docker.io/homeylab/tdarr-exporter:1.4.2
+          image: docker.io/homeylab/tdarr-exporter:1.4.3
           imagePullPolicy: IfNotPresent
           resources:
             requests:
