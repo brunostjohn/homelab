@@ -54,8 +54,8 @@ importers:
         specifier: ^2.19.0
         version: 2.23.1(@sveltejs/kit@2.16.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.19.6)(vite@6.0.11(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.19.6)(vite@6.0.11(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.19.6)(typescript@5.7.3)
       tailwind-merge:
-        specifier: ^2.5.2
-        version: 2.6.0
+        specifier: ^3.0.0
+        version: 3.0.1
       tailwind-variants:
         specifier: ^0.3.0
         version: 0.3.1(tailwindcss@4.0.1)
@@ -2523,8 +2523,8 @@ packages:
   tailwind-merge@2.5.4:
     resolution: {integrity: sha512-0q8cfZHMu9nuYP/b5Shb7Y7Sh1B7Nnl5GqNr1U+n2p6+mybvRtayrQ+0042Z5byvTA8ihjlP8Odo8/VnHbZu4Q==}
 
-  tailwind-merge@2.6.0:
-    resolution: {integrity: sha512-P+Vu1qXfzediirmHOC3xKGAYeZtPcV9g76X+xg2FD4tYgR71ewMA35Y3sCz3zhiN/dwefRpJX0yBcgwi1fXNQA==}
+  tailwind-merge@3.0.1:
+    resolution: {integrity: sha512-AvzE8FmSoXC7nC+oU5GlQJbip2UO7tmOhOfQyOmPhrStOGXHU08j8mZEHZ4BmCqY5dWTCo4ClWkNyRNx1wpT0g==}
 
   tailwind-variants@0.3.1:
     resolution: {integrity: sha512-krn67M3FpPwElg4FsZrOQd0U26o7UDH/QOkK8RNaiCCrr052f6YJPBUfNKnPo/s/xRzNPtv1Mldlxsg8Tb46BQ==}
@@ -5177,7 +5177,7 @@ snapshots:
 
   tailwind-merge@2.5.4: {}
 
-  tailwind-merge@2.6.0: {}
+  tailwind-merge@3.0.1: {}
 
   tailwind-variants@0.3.1(tailwindcss@4.0.1):
     dependencies:
