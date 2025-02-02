@@ -73,8 +73,8 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0
       '@hey-api/openapi-ts':
-        specifier: ^0.63.0
-        version: 0.63.2(typescript@5.7.3)
+        specifier: ^0.64.0
+        version: 0.64.0(typescript@5.7.3)
       '@openapitools/openapi-generator-cli':
         specifier: ^2.13.13
         version: 2.16.3(class-validator@0.14.1)
@@ -384,8 +384,8 @@ packages:
     resolution: {integrity: sha512-dBt0A7op9kf4BcK++x6HBYDmvCvnJUZEGe5QytghPFHnMXPyKwDKomwL/v5e9ERk6E0e1GzL/e/y6pWUso9zrQ==}
     engines: {node: '>= 16'}
 
-  '@hey-api/openapi-ts@0.63.2':
-    resolution: {integrity: sha512-HC5fR3+07P1AvDYrcZv0kbnhWogvMFot848PfpS3Gbncm47mDdO/uhNGIr2RF9CaRIvJNSJvAf1jL3XAQZ18RA==}
+  '@hey-api/openapi-ts@0.64.0':
+    resolution: {integrity: sha512-gXrzVgnTy1kCy0oH6mqj0C2nEbpktBZtKhbIDRf4qK7+yy5n+vTOzmUUpOP0gTNUzCJEOxb/qN/rymnyVBBVTA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=22.11.0}
     hasBin: true
     peerDependencies:
@@ -3016,7 +3016,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.0
 
-  '@hey-api/openapi-ts@0.63.2(typescript@5.7.3)':
+  '@hey-api/openapi-ts@0.64.0(typescript@5.7.3)':
     dependencies:
       '@hey-api/json-schema-ref-parser': 1.0.1
       c12: 2.0.1
