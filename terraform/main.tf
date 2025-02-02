@@ -24,7 +24,7 @@ terraform {
 
     infisical = {
       source  = "Infisical/infisical"
-      version = "0.12.13"
+      version = "0.13.0"
     }
   }
 
