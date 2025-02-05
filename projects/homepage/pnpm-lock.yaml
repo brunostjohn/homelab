@@ -71,7 +71,7 @@ importers:
     devDependencies:
       '@hey-api/client-fetch':
         specifier: ^0.8.0
-        version: 0.8.0
+        version: 0.8.1
       '@hey-api/openapi-ts':
         specifier: ^0.64.0
         version: 0.64.1(typescript@5.7.3)
@@ -377,8 +377,8 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@hey-api/client-fetch@0.8.0':
-    resolution: {integrity: sha512-OgmFmfH4e/04qPFD3jBnaO4rZhymzgx7msCivgFv77c/i0ivI86ZFxTB0V6A9Vsr50BYvI8EXsXdtLx5F1Cdwg==}
+  '@hey-api/client-fetch@0.8.1':
+    resolution: {integrity: sha512-AaVNVLBl7N9Fun7QDnb00YDubAFjB9ICi5U6kmzcJSnnQTQGRMsuBBRupQV5ERdMMFt71zjSDym7Z+gLVe8m3A==}
 
   '@hey-api/json-schema-ref-parser@1.0.2':
     resolution: {integrity: sha512-F6LSkttZcT/XiX3ydeDqTY3uRN3BLJMwyMTk4kg/ichZlKUp3+3Odv0WokSmXGSoZGTW/N66FROMYAm5NPdJlA==}
@@ -3008,7 +3008,7 @@ snapshots:
       '@hapi/hoek': 9.3.0
     optional: true
 
-  '@hey-api/client-fetch@0.8.0': {}
+  '@hey-api/client-fetch@0.8.1': {}
 
   '@hey-api/json-schema-ref-parser@1.0.2':
     dependencies:
