@@ -13,7 +13,7 @@ importers:
         version: 9.1.0
       '@internationalized/date':
         specifier: ^3.5.6
-        version: 3.6.0
+        version: 3.7.0
       '@jellyfin/sdk':
         specifier: ^0.11.0
         version: 0.11.0(axios@1.7.9)
@@ -496,8 +496,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@internationalized/date@3.6.0':
-    resolution: {integrity: sha512-+z6ti+CcJnRlLHok/emGEsWQhe7kfSmEW+/6qCzvKY67YPh7YOBfvc7+/+NXq+zJlbArg30tYpqLjNgcAYv2YQ==}
+  '@internationalized/date@3.7.0':
+    resolution: {integrity: sha512-VJ5WS3fcVx0bejE/YHfbDKR/yawZgKqn/if+oEeLqNwBtPzVB06olkfcnojTmEMX+gTpH+FlQ69SHNitJ8/erQ==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3101,7 +3101,7 @@ snapshots:
   '@img/sharp-win32-x64@0.33.5':
     optional: true
 
-  '@internationalized/date@3.6.0':
+  '@internationalized/date@3.7.0':
     dependencies:
       '@swc/helpers': 0.5.15
 
@@ -3180,7 +3180,7 @@ snapshots:
     dependencies:
       '@floating-ui/core': 1.6.8
       '@floating-ui/dom': 1.6.12
-      '@internationalized/date': 3.6.0
+      '@internationalized/date': 3.7.0
       dequal: 2.0.3
       focus-trap: 7.6.2
       nanoid: 5.0.9
@@ -3697,14 +3697,14 @@ snapshots:
 
   bits-ui@0.21.16(svelte@5.19.9):
     dependencies:
-      '@internationalized/date': 3.6.0
+      '@internationalized/date': 3.7.0
       '@melt-ui/svelte': 0.76.2(svelte@5.19.9)
       nanoid: 5.0.9
       svelte: 5.19.9
 
   bits-ui@0.22.0(svelte@5.19.9):
     dependencies:
-      '@internationalized/date': 3.6.0
+      '@internationalized/date': 3.7.0
       '@melt-ui/svelte': 0.76.2(svelte@5.19.9)
       nanoid: 5.0.9
       svelte: 5.19.9
