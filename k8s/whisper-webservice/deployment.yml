@@ -18,7 +18,7 @@ spec:
             claimName: whisper-modelcache
       containers:
         - name: whisper-webservice
-          image: docker.io/onerahmet/openai-whisper-asr-webservice:v1.8.0
+          image: docker.io/onerahmet/openai-whisper-asr-webservice:v1.8.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
