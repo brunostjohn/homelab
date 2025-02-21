@@ -74,7 +74,7 @@ importers:
         version: 0.8.1
       '@hey-api/openapi-ts':
         specifier: ^0.64.0
-        version: 0.64.4(typescript@5.7.3)
+        version: 0.64.5(typescript@5.7.3)
       '@openapitools/openapi-generator-cli':
         specifier: ^2.13.13
         version: 2.16.3(class-validator@0.14.1)
@@ -534,8 +534,8 @@ packages:
     resolution: {integrity: sha512-F6LSkttZcT/XiX3ydeDqTY3uRN3BLJMwyMTk4kg/ichZlKUp3+3Odv0WokSmXGSoZGTW/N66FROMYAm5NPdJlA==}
     engines: {node: '>= 16'}
 
-  '@hey-api/openapi-ts@0.64.4':
-    resolution: {integrity: sha512-ffN/6/v0ulgMcdNKFQydX1+jB7jM4imlIbdMtKf7OTZrSS3XERDIKYNd6yq35xuhC9+BfLQn9+2Y0I9fL1icAA==}
+  '@hey-api/openapi-ts@0.64.5':
+    resolution: {integrity: sha512-Vl6QQbkb+TXPG/ihobCPj/13KFJPfnjTVljno+T18L2ywL8cRHDFYqi5356ktBixBuwK2cSJvKzxYR6TIMq+AA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=22.11.0}
     hasBin: true
     peerDependencies:
@@ -1758,8 +1758,8 @@ packages:
     resolution: {integrity: sha512-E1b1lFFLvLgak2whF2xDBcOy6NLVGZBqqjJjsIhvopKfWWEi64pLVTWWehV8KlLerZkfNTA95sTe2OdJKm1OzQ==}
     engines: {node: '>= 14'}
 
-  giget@1.2.4:
-    resolution: {integrity: sha512-Wv+daGyispVoA31TrWAVR+aAdP7roubTPEM/8JzRnqXhLbdJH0T9eQyXVFF8fjk3WKTsctII6QcyxILYgNp2DA==}
+  giget@1.2.5:
+    resolution: {integrity: sha512-r1ekGw/Bgpi3HLV3h1MRBIlSAdHoIMklpaQ3OQLFcRw9PwAj2rqigvIbg+dBUI51OxVI2jsEtDywDBjSiuf7Ug==}
     hasBin: true
 
   glob@10.4.5:
@@ -2179,8 +2179,8 @@ packages:
     resolution: {integrity: sha512-IO9QvjUMWxPQQhs60oOu10CRkWCiZzSUkzbXGGV9pviYl1fXYcvkzQ5jV9z8Y6un8ARoVRl4EtC6v6jNqbaJ/w==}
     engines: {node: '>=14.16'}
 
-  nypm@0.5.2:
-    resolution: {integrity: sha512-AHzvnyUJYSrrphPhRWWZNcoZfArGNp3Vrc4pm/ZurO74tYNTgAPrEyBQEKy+qioqmWlPXwvMZCG2wOaHlPG0Pw==}
+  nypm@0.5.4:
+    resolution: {integrity: sha512-X0SNNrZiGU8/e/zAB7sCTtdxWTMSIO73q+xuKgglm2Yvzwlo8UoC5FNySQFCvl84uPaeADkqHUZUkWy4aH4xOA==}
     engines: {node: ^14.16.0 || >=16.10.0}
     hasBin: true
 
@@ -3231,7 +3231,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.0
 
-  '@hey-api/openapi-ts@0.64.4(typescript@5.7.3)':
+  '@hey-api/openapi-ts@0.64.5(typescript@5.7.3)':
     dependencies:
       '@hey-api/json-schema-ref-parser': 1.0.2
       c12: 2.0.1
@@ -3966,7 +3966,7 @@ snapshots:
       confbox: 0.1.8
       defu: 6.1.4
       dotenv: 16.4.7
-      giget: 1.2.4
+      giget: 1.2.5
       jiti: 2.4.2
       mlly: 1.7.4
       ohash: 1.1.4
@@ -4444,14 +4444,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  giget@1.2.4:
+  giget@1.2.5:
     dependencies:
       citty: 0.1.6
       consola: 3.4.0
       defu: 6.1.4
       node-fetch-native: 1.6.6
-      nypm: 0.5.2
-      ohash: 1.1.4
+      nypm: 0.5.4
       pathe: 2.0.3
       tar: 6.2.1
 
@@ -4868,7 +4867,7 @@ snapshots:
   normalize-url@8.0.1:
     optional: true
 
-  nypm@0.5.2:
+  nypm@0.5.4:
     dependencies:
       citty: 0.1.6
       consola: 3.4.0
