@@ -20,7 +20,7 @@ spec:
             claimName: mealie-data
       containers:
         - name: mealie
-          image: ghcr.io/mealie-recipes/mealie:v2.7.0
+          image: ghcr.io/mealie-recipes/mealie:v2.7.1
           imagePullPolicy: IfNotPresent
           resources:
             requests:
