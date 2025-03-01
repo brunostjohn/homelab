@@ -74,7 +74,7 @@ importers:
         version: 0.8.2
       '@hey-api/openapi-ts':
         specifier: ^0.64.0
-        version: 0.64.7(typescript@5.8.2)
+        version: 0.64.8(typescript@5.8.2)
       '@openapitools/openapi-generator-cli':
         specifier: ^2.13.13
         version: 2.17.0(class-validator@0.14.1)
@@ -384,9 +384,9 @@ packages:
     resolution: {integrity: sha512-F6LSkttZcT/XiX3ydeDqTY3uRN3BLJMwyMTk4kg/ichZlKUp3+3Odv0WokSmXGSoZGTW/N66FROMYAm5NPdJlA==}
     engines: {node: '>= 16'}
 
-  '@hey-api/openapi-ts@0.64.7':
-    resolution: {integrity: sha512-xpaBzdGAKz7cPuGah1GZWl3zTZquOXRnwmpVCQKEUpvDtSYWBLjSxtAYIqDBjwJkuNHcakZBIWLcappx7slc2g==}
-    engines: {node: ^18.18.0 || ^20.9.0 || >=22.11.0}
+  '@hey-api/openapi-ts@0.64.8':
+    resolution: {integrity: sha512-ytPt/k+ecK7zcpxVocPWzD1bKn98a+9WDK8eJITvbOEkvYsWlozAPO63tQg+65Qpl2pr37025fEo8YcX+DPhBQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=22.10.0}
     hasBin: true
     peerDependencies:
       typescript: ^5.5.3
@@ -2047,8 +2047,8 @@ packages:
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
 
-  ohash@1.1.4:
-    resolution: {integrity: sha512-FlDryZAahJmEF3VR3w1KogSEdWX3WhA5GPakFx4J81kEAiHyLMpdLLElS8n8dfNadMgAne/MywcvmogzscVt4g==}
+  ohash@1.1.5:
+    resolution: {integrity: sha512-AtXrG/lMFjPBWj3uhWYFwYVZQqutPYRsv6nnPLTipnC+gJuMFc+WFzf/jx+94Ebray1vxfQfEFDtpIpppOe4xQ==}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -3013,7 +3013,7 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.1.0
 
-  '@hey-api/openapi-ts@0.64.7(typescript@5.8.2)':
+  '@hey-api/openapi-ts@0.64.8(typescript@5.8.2)':
     dependencies:
       '@hey-api/json-schema-ref-parser': 1.0.2
       c12: 2.0.1
@@ -3751,7 +3751,7 @@ snapshots:
       giget: 1.2.5
       jiti: 2.4.2
       mlly: 1.7.4
-      ohash: 1.1.4
+      ohash: 1.1.5
       pathe: 1.1.2
       perfect-debounce: 1.0.0
       pkg-types: 1.3.1
@@ -4656,7 +4656,7 @@ snapshots:
       node-fetch-native: 1.6.6
       ufo: 1.5.4
 
-  ohash@1.1.4: {}
+  ohash@1.1.5: {}
 
   once@1.4.0:
     dependencies:
