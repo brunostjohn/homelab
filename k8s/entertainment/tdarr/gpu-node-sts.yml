@@ -35,7 +35,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: tdarr-gpu-node
-          image: ghcr.io/haveagitgat/tdarr_node:2.34.01
+          image: ghcr.io/haveagitgat/tdarr_node:2.35.02
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
