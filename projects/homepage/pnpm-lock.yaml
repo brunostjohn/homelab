@@ -58,7 +58,7 @@ importers:
         version: 3.0.2
       tailwind-variants:
         specifier: ^0.3.0
-        version: 0.3.1(tailwindcss@4.0.9)
+        version: 0.3.1(tailwindcss@4.0.10)
       trpc-sveltekit:
         specifier: ^3.6.2
         version: 3.6.2(@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.18.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.3)(vite@6.2.0(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.22.3)(vite@6.2.0(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5))
@@ -95,7 +95,7 @@ importers:
         version: 5.0.3(svelte@5.22.3)(vite@6.2.0(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
       '@tailwindcss/typography':
         specifier: ^0.5.14
-        version: 0.5.16(tailwindcss@4.0.9)
+        version: 0.5.16(tailwindcss@4.0.10)
       '@tanstack/svelte-query':
         specifier: ^5.59.0
         version: 5.67.1(svelte@5.22.3)
@@ -152,7 +152,7 @@ importers:
         version: 1.6.2
       tailwindcss:
         specifier: ^4.0.0
-        version: 4.0.9
+        version: 4.0.10
       trpc-svelte-query-adapter:
         specifier: ^2.3.14
         version: 2.3.15(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.22.3)(vite@6.2.0(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.67.1(svelte@5.22.3))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(svelte@5.22.3)(typescript@5.8.2)
@@ -2536,8 +2536,8 @@ packages:
     peerDependencies:
       tailwindcss: '*'
 
-  tailwindcss@4.0.9:
-    resolution: {integrity: sha512-12laZu+fv1ONDRoNR9ipTOpUD7RN9essRVkX36sjxuRUInpN7hIiHN4lBd/SIFjbISvnXzp8h/hXzmU8SQQYhw==}
+  tailwindcss@4.0.10:
+    resolution: {integrity: sha512-Z8U/6E2BWSdDkt3IWPiphoV+8V6aNzRmu2SriSbuhm6i3QIcY3TdUJzUP5NX8M8MZuIl+v4/77Rer8u4YSrSsg==}
 
   tar@6.2.1:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
@@ -3509,13 +3509,13 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.9)':
+  '@tailwindcss/typography@0.5.16(tailwindcss@4.0.10)':
     dependencies:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 4.0.9
+      tailwindcss: 4.0.10
 
   '@tanstack/query-core@5.67.1': {}
 
@@ -5190,12 +5190,12 @@ snapshots:
 
   tailwind-merge@3.0.2: {}
 
-  tailwind-variants@0.3.1(tailwindcss@4.0.9):
+  tailwind-variants@0.3.1(tailwindcss@4.0.10):
     dependencies:
       tailwind-merge: 2.5.4
-      tailwindcss: 4.0.9
+      tailwindcss: 4.0.10
 
-  tailwindcss@4.0.9: {}
+  tailwindcss@4.0.10: {}
 
   tar@6.2.1:
     dependencies:
