@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mosquitto
-          image: docker.io/eclipse-mosquitto:2.0.20
+          image: docker.io/eclipse-mosquitto:2.0.21
           command: ["mosquitto", "-c", "/mosquitto-no-auth.conf"]
           resources:
             requests:
