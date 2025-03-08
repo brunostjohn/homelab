@@ -75,17 +75,17 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
           readinessProbe:
             httpGet:
               path: /api/heartbeat
               port: http
-            initialDelaySeconds: 240
+            initialDelaySeconds: 270
           livenessProbe:
             httpGet:
               path: /api/heartbeat
               port: http
-            initialDelaySeconds: 240
+            initialDelaySeconds: 270
 ---
 apiVersion: apps/v1
 kind: Deployment
