@@ -9,6 +9,7 @@ spec:
   replicas: 3
   args:
     - "--default_lua_flags=allow-undeclared-keys"
+    - "--dbnum=32"
   resources:
     requests:
       cpu: "1"
