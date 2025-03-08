@@ -64,7 +64,7 @@ spec:
             - name: GRIST_TELEMETRY_LEVEL
               value: "off"
             - name: REDIS_URL
-              value: redis://:redis@redis-master.databases.svc.cluster.local:6379/17
+              value: redis://dragonfly.databases.svc.cluster.local:6379/17
             - name: GRIST_SANDBOX_FLAVOR
               value: unsandboxed
             - name: GRIST_FORCE_LOGIN

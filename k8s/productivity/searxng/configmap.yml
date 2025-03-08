@@ -28,7 +28,7 @@ data:
     ui:
       static_use_hash: true
     redis:
-      url: redis://:redis@redis-master.databases.svc.cluster.local:6379/18
+      url: redis://dragonfly.databases.svc.cluster.local:6379/18
     enabled_plugins:
       - 'Hash plugin'
       - 'Self Informations'

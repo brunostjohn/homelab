@@ -63,7 +63,7 @@ spec:
             - name: INFLUXDB_URL
               value: http://influxdb.monitoring.svc.cluster.local:8086
             - name: REDIS_URL
-              value: redis://:redis@redis-master.databases.svc.cluster.local:6379/16
+              value: redis://dragonfly.databases.svc.cluster.local:6379/16
             - name: IMAGE_GEN_SERVERS
               value: brunosdesktop.trustedmachines.zefirscloud.internal:8188,ad-inference.default.svc.cluster.local:8188,ap-inference.default.svc.cluster.local:8188,comfyui.ai.svc.cluster.local:8188
             - name: OLLAMA_URLS

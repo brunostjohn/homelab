@@ -48,7 +48,7 @@ spec:
                   name: manyfold
                   key: database_url
             - name: REDIS_URL
-              value: redis://redis@redis-master.databases.svc.cluster.local:6379/0
+              value: redis://dragonfly.databases.svc.cluster.local:6379/11
             - name: SECRET_KEY_BASE
               valueFrom:
                 secretKeyRef:
