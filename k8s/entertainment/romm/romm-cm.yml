@@ -20,3 +20,5 @@ data:
   DB_PORT: "5432"
   DB_NAME: romm
   DB_USER: romm
+  DISABLE_USERPASS_LOGIN: "true"
+  ENABLE_RESCAN_ON_FILESYSTEM_CHANGE: "true"
