@@ -9,6 +9,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to blocky_role;
 CREATE USER blocky WITH PASSWORD '<password>';
 GRANT blocky_role TO blocky;
 
+-- ROMM
+CREATE ROLE romm_role;
+\c romm
+GRANT ALL PRIVILEGES ON DATABASE romm TO romm_role;
+GRANT ALL ON SCHEMA public TO romm_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO romm_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to romm_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to romm_role;
+CREATE USER romm WITH PASSWORD '<password>';
+GRANT romm_role TO romm;
+
 -- APPFLOWY
 -- GOTRUE
 CREATE ROLE appflowy_gotrue_role;
