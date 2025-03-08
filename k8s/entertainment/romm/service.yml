@@ -11,18 +11,3 @@ spec:
       targetPort: 8080
       protocol: TCP
       name: http
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mariadb
-  namespace: romm
-spec:
-  selector:
-    app: mariadb
-  ports:
-    - port: 3306
-      targetPort: 3306
-      protocol: TCP
-      name: mysql
-
