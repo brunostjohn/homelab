@@ -73,9 +73,9 @@ spec:
               mountPath: /redis-data
           startupProbe:
             httpGet:
-              path: /
+              path: /api/heartbeat
               port: http
-            initialDelaySeconds: 120
+            initialDelaySeconds: 270
           readinessProbe:
             httpGet:
               path: /api/heartbeat
