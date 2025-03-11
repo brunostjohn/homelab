@@ -6,7 +6,7 @@ resource "helm_release" "argocd" {
   namespace  = "argocd"
 
   create_namespace = true
-  version          = "7.8.9"
+  version          = "7.8.10"
   wait             = true
 
   values = [templatefile("${path.module}/values/argocd.yml.tpl", {
