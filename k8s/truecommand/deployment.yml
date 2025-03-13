@@ -24,7 +24,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: truecommand
-          image: docker.io/ixsystems/truecommand:3.0.2
+          image: docker.io/ixsystems/truecommand:3.1.0
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 1001
