@@ -19,7 +19,7 @@ importers:
         version: 0.11.0(axios@1.7.9)
       '@kubernetes/client-node':
         specifier: ^1.0.0
-        version: 1.0.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)
+        version: 1.1.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)
       '@trpc/server':
         specifier: ^10.45.2
         version: 10.45.2
@@ -37,7 +37,7 @@ importers:
         version: 8.5.2(svelte@5.23.0)
       formsnap:
         specifier: ^2.0.0
-        version: 2.0.0(svelte@5.23.0)(sveltekit-superforms@2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2))
+        version: 2.0.0(svelte@5.23.0)(sveltekit-superforms@2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2))
       minio:
         specifier: ^8.0.1
         version: 8.0.5
@@ -52,7 +52,7 @@ importers:
         version: 0.3.28(svelte@5.23.0)
       sveltekit-superforms:
         specifier: ^2.19.0
-        version: 2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2)
+        version: 2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2)
       tailwind-merge:
         specifier: ^3.0.0
         version: 3.0.2
@@ -61,7 +61,7 @@ importers:
         version: 1.0.0(tailwindcss@4.0.14)
       trpc-sveltekit:
         specifier: ^3.6.2
-        version: 3.6.3(@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5))
+        version: 3.6.3(@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(ws@8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5))
       unifi-client:
         specifier: ^0.11.0
         version: 0.11.1
@@ -80,19 +80,19 @@ importers:
         version: 2.17.0(class-validator@0.14.1)
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
-        version: 4.0.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))
+        version: 4.0.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))
       '@sveltejs/adapter-node':
         specifier: ^5.2.5
-        version: 5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))
+        version: 5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))
       '@sveltejs/enhanced-img':
         specifier: ^0.4.0
-        version: 0.4.4(rollup@4.30.1)(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+        version: 0.4.4(rollup@4.30.1)(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       '@sveltejs/kit':
         specifier: ^2.0.0
-        version: 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+        version: 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.0
-        version: 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+        version: 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       '@tailwindcss/typography':
         specifier: ^0.5.14
         version: 0.5.16(tailwindcss@4.0.14)
@@ -155,13 +155,13 @@ importers:
         version: 4.0.14
       trpc-svelte-query-adapter:
         specifier: ^2.3.14
-        version: 2.3.15(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.67.3(svelte@5.23.0))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(svelte@5.23.0)(typescript@5.8.2)
+        version: 2.3.15(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.67.3(svelte@5.23.0))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(svelte@5.23.0)(typescript@5.8.2)
       typescript:
         specifier: ^5.0.0
         version: 5.8.2
       vite:
         specifier: ^6.0.0
-        version: 6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)
+        version: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)
       zod:
         specifier: ^3.23.8
         version: 3.24.2
@@ -541,8 +541,8 @@ packages:
     peerDependencies:
       jsep: ^0.4.0||^1.0.0
 
-  '@kubernetes/client-node@1.0.0':
-    resolution: {integrity: sha512-a8NSvFDSHKFZ0sR1hbPSf8IDFNJwctEU5RodSCNiq/moRXWmrdmqhb1RRQzF+l+TSBaDgHw3YsYNxxE92STBzw==}
+  '@kubernetes/client-node@1.1.0':
+    resolution: {integrity: sha512-6Sp7ekNfMmDH2HvEQLb8vuPu+mX0xNkPElQLX5N/mjxeMimFWfecZeiFfIaG+Q9S1v+snZfTNJjvpOwNUVO7RA==}
 
   '@lukeed/csprng@1.1.0':
     resolution: {integrity: sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==}
@@ -968,6 +968,9 @@ packages:
   '@types/node@22.10.1':
     resolution: {integrity: sha512-qKgsUwfHZV2WCWLAnVP1JqnpE6Im6h3Y0+fYgMTasNQ7V++CBX5OT1as0g0f+OyubbFqhf6XVNIsmN4IIhEgGQ==}
 
+  '@types/node@22.13.10':
+    resolution: {integrity: sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==}
+
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
 
@@ -983,8 +986,8 @@ packages:
   '@types/validator@13.12.2':
     resolution: {integrity: sha512-6SlHBzUW8Jhf3liqrGGXyTJSIFe4nqlJ5A5KaMZ2l/vbM3Wh3KSybots/wfWVzNLK4D1NZluDlSQIbIEPx6oyA==}
 
-  '@types/ws@8.5.13':
-    resolution: {integrity: sha512-osM/gWBTPKgHV8XkTunnegTRIsvF6owmf5w+JtAfOw472dptdm0dlGv4xCt6GwQRcC2XVOvvRE/0bAoQcL2QkA==}
+  '@types/ws@8.18.0':
+    resolution: {integrity: sha512-8svvI3hMyvN0kKCJMvTJP/x6Y/EoQbepff882wL+Sn5QsXb3etnamgrJq4isrBxSJj5L2AuXcI0+bgkoAXGUJw==}
 
   '@typeschema/class-validator@0.3.0':
     resolution: {integrity: sha512-OJSFeZDIQ8EK1HTljKLT5CItM2wsbgczLN8tMEfz3I1Lmhc5TBfkZ0eikFzUC16tI3d1Nag7um6TfCgp2I2Bww==}
@@ -1541,8 +1544,8 @@ packages:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
 
-  foreground-child@3.3.0:
-    resolution: {integrity: sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==}
+  foreground-child@3.3.1:
+    resolution: {integrity: sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==}
     engines: {node: '>=14'}
 
   form-data@4.0.1:
@@ -1648,6 +1651,10 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
+
+  hpagent@1.2.0:
+    resolution: {integrity: sha512-A91dYTeIB6NoXG+PxTQpCCDDnfHsW9kc06Lvpu1TEe9gnd6ZFeiBoRO9JvzEv6xK7EX97/dUE8g/vBMTqTS3CA==}
+    engines: {node: '>=14'}
 
   http-cache-semantics@4.1.1:
     resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}
@@ -1766,8 +1773,8 @@ packages:
   joi@17.13.3:
     resolution: {integrity: sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==}
 
-  jose@5.9.6:
-    resolution: {integrity: sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ==}
+  jose@6.0.10:
+    resolution: {integrity: sha512-skIAxZqcMkOrSwjJvplIPYrlXGpxTPnro2/QWTDCxAdWQrSTV5/KqspMWmi5WAx5+ULswASJiZ0a+1B/Lxt9cw==}
 
   js-yaml@4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
@@ -1790,8 +1797,8 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
-  jsonpath-plus@10.2.0:
-    resolution: {integrity: sha512-T9V+8iNYKFL2n2rF+w02LBOT2JjDnTjioaNFrxRy0Bv1y/hNsqR/EBK7Ojy2ythRHwmz2cRIls+9JitQGZC/sw==}
+  jsonpath-plus@10.3.0:
+    resolution: {integrity: sha512-8TNmfeTCk2Le33A3vRRwtuworG/L5RrgMvdjhKZxvyShO+mBu2fP50OWUjRLNtvw344DdDarFh9buFAZs5ujeA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -2028,8 +2035,8 @@ packages:
     engines: {node: ^14.16.0 || >=16.10.0}
     hasBin: true
 
-  oauth4webapi@3.1.4:
-    resolution: {integrity: sha512-eVfN3nZNbok2s/ROifO0UAc5G8nRoLSbrcKJ09OqmucgnhXEfdIQOR4gq1eJH1rN3gV7rNw62bDEgftsgFtBEg==}
+  oauth4webapi@3.3.1:
+    resolution: {integrity: sha512-ZwX7UqYrP3Lr+Glhca3a1/nF2jqf7VVyJfhGuW5JtrfDUxt0u+IoBPzFjZ2dd7PJGkdM6CFPVVYzuDYKHv101A==}
 
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
@@ -2044,8 +2051,8 @@ packages:
     resolution: {integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==}
     engines: {node: '>=6'}
 
-  openid-client@6.1.7:
-    resolution: {integrity: sha512-JfY/KvQgOutmG2P+oVNKInE7zIh+im1MQOaO7g5CtNnTWMociA563WweiEMKfR9ry9XG3K2HGvj9wEqhCQkPMg==}
+  openid-client@6.3.4:
+    resolution: {integrity: sha512-CGZGk9Y6Bv9R4bXlrzVoxzD1n4h8iP914UhjVyRSftqzqO4CWaRqKpOmW253Jmpv4EWkz7/Gut/90iiWW8t0ow==}
 
   ora@5.4.1:
     resolution: {integrity: sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==}
@@ -2251,9 +2258,6 @@ packages:
   restore-cursor@3.1.0:
     resolution: {integrity: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==}
     engines: {node: '>=8'}
-
-  rfc4648@1.5.3:
-    resolution: {integrity: sha512-MjOWxM065+WswwnmNONOT+bD1nXzY9Km6u3kzvnx8F8/HXGZdz3T6e6vZJ8Q/RIMUSp/nxqjH3GwvJDy8ijeQQ==}
 
   rfc4648@1.5.4:
     resolution: {integrity: sha512-rRg/6Lb+IGfJqO05HZkN50UtY7K/JhxJag1kP23+zyMfrvoB0B7RWv06MbOzoc79RgCdNTiUaNsTT1AJZ7Z+cg==}
@@ -2785,6 +2789,18 @@ packages:
       utf-8-validate:
         optional: true
 
+  ws@8.18.1:
+    resolution: {integrity: sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
   xml2js@0.6.2:
     resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
     engines: {node: '>=4.0.0'}
@@ -3125,29 +3141,31 @@ snapshots:
     dependencies:
       jsep: 1.4.0
 
-  '@kubernetes/client-node@1.0.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)':
+  '@kubernetes/client-node@1.1.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)':
     dependencies:
       '@types/js-yaml': 4.0.9
-      '@types/node': 22.10.1
+      '@types/node': 22.13.10
       '@types/node-fetch': 2.6.12
       '@types/stream-buffers': 3.0.7
       '@types/tar': 6.1.13
-      '@types/ws': 8.5.13
-      form-data: 4.0.1
-      isomorphic-ws: 5.0.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5))
+      '@types/ws': 8.18.0
+      form-data: 4.0.2
+      hpagent: 1.2.0
+      isomorphic-ws: 5.0.0(ws@8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5))
       js-yaml: 4.1.0
-      jsonpath-plus: 10.2.0
+      jsonpath-plus: 10.3.0
       node-fetch: 2.7.0
-      openid-client: 6.1.7
-      rfc4648: 1.5.3
+      openid-client: 6.3.4
+      rfc4648: 1.5.4
+      socks-proxy-agent: 8.0.5
       stream-buffers: 3.0.3
       tar: 7.4.3
       tmp-promise: 3.0.3
-      tslib: 2.8.1
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)
+      ws: 8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)
     transitivePeerDependencies:
       - bufferutil
       - encoding
+      - supports-color
       - utf-8-validate
 
   '@lukeed/csprng@1.1.0': {}
@@ -3419,34 +3437,34 @@ snapshots:
     dependencies:
       acorn: 8.14.1
 
-  '@sveltejs/adapter-auto@4.0.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))':
+  '@sveltejs/adapter-auto@4.0.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))':
     dependencies:
-      '@sveltejs/kit': 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      '@sveltejs/kit': 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       import-meta-resolve: 4.1.0
 
-  '@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))':
+  '@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))':
     dependencies:
       '@rollup/plugin-commonjs': 28.0.2(rollup@4.30.1)
       '@rollup/plugin-json': 6.1.0(rollup@4.30.1)
       '@rollup/plugin-node-resolve': 16.0.0(rollup@4.30.1)
-      '@sveltejs/kit': 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      '@sveltejs/kit': 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       rollup: 4.30.1
 
-  '@sveltejs/enhanced-img@0.4.4(rollup@4.30.1)(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))':
+  '@sveltejs/enhanced-img@0.4.4(rollup@4.30.1)(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))':
     dependencies:
       magic-string: 0.30.15
       sharp: 0.33.5
       svelte: 5.23.0
       svelte-parse-markup: 0.1.5(svelte@5.23.0)
-      vite: 6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)
+      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)
       vite-imagetools: 7.0.5(rollup@4.30.1)
       zimmerframe: 1.1.2
     transitivePeerDependencies:
       - rollup
 
-  '@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))':
+  '@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       devalue: 5.1.1
@@ -3459,27 +3477,27 @@ snapshots:
       set-cookie-parser: 2.7.1
       sirv: 3.0.1
       svelte: 5.23.0
-      vite: 6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)
+      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       debug: 4.4.0
       svelte: 5.23.0
-      vite: 6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)
+      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
       svelte: 5.23.0
-      vite: 6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)
-      vitefu: 1.0.4(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)
+      vitefu: 1.0.4(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
     transitivePeerDependencies:
       - supports-color
 
@@ -3537,10 +3555,14 @@ snapshots:
 
   '@types/node-fetch@2.6.12':
     dependencies:
-      '@types/node': 22.10.1
-      form-data: 4.0.1
+      '@types/node': 22.13.10
+      form-data: 4.0.2
 
   '@types/node@22.10.1':
+    dependencies:
+      undici-types: 6.20.0
+
+  '@types/node@22.13.10':
     dependencies:
       undici-types: 6.20.0
 
@@ -3552,19 +3574,19 @@ snapshots:
 
   '@types/stream-buffers@3.0.7':
     dependencies:
-      '@types/node': 22.10.1
+      '@types/node': 22.13.10
 
   '@types/tar@6.1.13':
     dependencies:
-      '@types/node': 22.10.1
+      '@types/node': 22.13.10
       minipass: 4.2.8
 
   '@types/validator@13.12.2':
     optional: true
 
-  '@types/ws@8.5.13':
+  '@types/ws@8.18.0':
     dependencies:
-      '@types/node': 22.10.1
+      '@types/node': 22.13.10
 
   '@typeschema/class-validator@0.3.0(@types/json-schema@7.0.15)(class-validator@0.14.1)':
     dependencies:
@@ -4115,7 +4137,7 @@ snapshots:
     dependencies:
       is-callable: 1.2.7
 
-  foreground-child@3.3.0:
+  foreground-child@3.3.1:
     dependencies:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
@@ -4133,11 +4155,11 @@ snapshots:
       es-set-tostringtag: 2.1.0
       mime-types: 2.1.35
 
-  formsnap@2.0.0(svelte@5.23.0)(sveltekit-superforms@2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2)):
+  formsnap@2.0.0(svelte@5.23.0)(sveltekit-superforms@2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2)):
     dependencies:
       svelte: 5.23.0
       svelte-toolbelt: 0.5.0(svelte@5.23.0)
-      sveltekit-superforms: 2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2)
+      sveltekit-superforms: 2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2)
 
   fraction.js@4.3.7: {}
 
@@ -4202,7 +4224,7 @@ snapshots:
 
   glob@10.4.5:
     dependencies:
-      foreground-child: 3.3.0
+      foreground-child: 3.3.1
       jackspeak: 3.4.3
       minimatch: 9.0.5
       minipass: 7.1.2
@@ -4258,6 +4280,8 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
+
+  hpagent@1.2.0: {}
 
   http-cache-semantics@4.1.1: {}
 
@@ -4368,9 +4392,9 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  isomorphic-ws@5.0.0(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)):
+  isomorphic-ws@5.0.0(ws@8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)):
     dependencies:
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)
+      ws: 8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)
 
   iterare@1.2.1: {}
 
@@ -4391,7 +4415,7 @@ snapshots:
       '@sideway/pinpoint': 2.0.0
     optional: true
 
-  jose@5.9.6: {}
+  jose@6.0.10: {}
 
   js-yaml@4.1.0:
     dependencies:
@@ -4415,7 +4439,7 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  jsonpath-plus@10.2.0:
+  jsonpath-plus@10.3.0:
     dependencies:
       '@jsep-plugin/assignment': 1.3.0(jsep@1.4.0)
       '@jsep-plugin/regex': 1.0.4(jsep@1.4.0)
@@ -4622,7 +4646,7 @@ snapshots:
       tinyexec: 0.3.2
       ufo: 1.5.4
 
-  oauth4webapi@3.1.4: {}
+  oauth4webapi@3.3.1: {}
 
   ofetch@1.4.1:
     dependencies:
@@ -4640,10 +4664,10 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
-  openid-client@6.1.7:
+  openid-client@6.3.4:
     dependencies:
-      jose: 5.9.6
-      oauth4webapi: 3.1.4
+      jose: 6.0.10
+      oauth4webapi: 3.3.1
 
   ora@5.4.1:
     dependencies:
@@ -4813,8 +4837,6 @@ snapshots:
     dependencies:
       onetime: 5.1.2
       signal-exit: 3.0.7
-
-  rfc4648@1.5.3: {}
 
   rfc4648@1.5.4: {}
 
@@ -5131,9 +5153,9 @@ snapshots:
       magic-string: 0.30.17
       zimmerframe: 1.1.2
 
-  sveltekit-superforms@2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2):
+  sveltekit-superforms@2.24.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@types/json-schema@7.0.15)(svelte@5.23.0)(typescript@5.8.2):
     dependencies:
-      '@sveltejs/kit': 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      '@sveltejs/kit': 2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       devalue: 5.1.1
       memoize-weak: 1.0.2
       svelte: 5.23.0
@@ -5217,9 +5239,9 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  trpc-svelte-query-adapter@2.3.15(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.67.3(svelte@5.23.0))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(svelte@5.23.0)(typescript@5.8.2):
+  trpc-svelte-query-adapter@2.3.15(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.67.3(svelte@5.23.0))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(svelte@5.23.0)(typescript@5.8.2):
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       '@tanstack/svelte-query': 5.67.3(svelte@5.23.0)
       '@trpc/client': 10.45.2(@trpc/server@10.45.2)
       '@trpc/server': 10.45.2
@@ -5227,12 +5249,12 @@ snapshots:
       svelte: 5.23.0
       typescript: 5.8.2
 
-  trpc-sveltekit@3.6.3(@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1))))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)):
+  trpc-sveltekit@3.6.3(@sveltejs/adapter-node@5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(ws@8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)):
     dependencies:
-      '@sveltejs/adapter-node': 5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)))
+      '@sveltejs/adapter-node': 5.2.12(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))
       '@trpc/client': 10.45.2(@trpc/server@10.45.2)
       '@trpc/server': 10.45.2
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5)
+      ws: 8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5)
 
   ts-algebra@2.0.0:
     optional: true
@@ -5331,20 +5353,20 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1):
+  vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1):
     dependencies:
       esbuild: 0.25.0
       postcss: 8.5.3
       rollup: 4.34.9
     optionalDependencies:
-      '@types/node': 22.10.1
+      '@types/node': 22.13.10
       fsevents: 2.3.3
       jiti: 2.4.2
       yaml: 2.6.1
 
-  vitefu@1.0.4(vite@6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)):
+  vitefu@1.0.4(vite@6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)):
     optionalDependencies:
-      vite: 6.2.1(@types/node@22.10.1)(jiti@2.4.2)(yaml@2.6.1)
+      vite: 6.2.1(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)
 
   wcwidth@1.0.1:
     dependencies:
@@ -5400,6 +5422,11 @@ snapshots:
   wrappy@1.0.2: {}
 
   ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@6.0.5):
+    optionalDependencies:
+      bufferutil: 4.0.9
+      utf-8-validate: 6.0.5
+
+  ws@8.18.1(bufferutil@4.0.9)(utf-8-validate@6.0.5):
     optionalDependencies:
       bufferutil: 4.0.9
       utf-8-validate: 6.0.5
