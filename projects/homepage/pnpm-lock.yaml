@@ -77,7 +77,7 @@ importers:
         version: 0.64.12(typescript@5.8.2)
       '@openapitools/openapi-generator-cli':
         specifier: ^2.13.13
-        version: 2.18.1(class-validator@0.14.1)
+        version: 2.18.3(class-validator@0.14.1)
       '@sveltejs/adapter-auto':
         specifier: ^4.0.0
         version: 4.0.0(@sveltejs/kit@2.19.0(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.23.0)(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(svelte@5.23.0)(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))
@@ -599,8 +599,8 @@ packages:
     engines: {node: '>=8.0.0', npm: '>=5.0.0'}
     hasBin: true
 
-  '@openapitools/openapi-generator-cli@2.18.1':
-    resolution: {integrity: sha512-+hzSHrMksxOAmaukjGiVA2EcvbQCtMFwC/+h0RexBhXcAKAiA0tALjgcjEzMkaOphKj3pwnM0K76Dbz3b4QF6Q==}
+  '@openapitools/openapi-generator-cli@2.18.3':
+    resolution: {integrity: sha512-dqK+Q+PXyok9EtyLXKKEmT5HZt67uPuJjx/DTQVyurhgIBbVrJN4p9j1lVC6bIH7fnYIux4QCZCaYFovTaJfng==}
     engines: {node: '>=16'}
     hasBin: true
 
@@ -2241,8 +2241,8 @@ packages:
     resolution: {integrity: sha512-GDhwkLfywWL2s6vEjyhri+eXmfH6j1L7JE27WhqLeYzoh/A3DBaYGEj2H/HFZCn/kMfim73FXxEJTw06WtxQwg==}
     engines: {node: '>= 14.18.0'}
 
-  reflect-metadata@0.1.13:
-    resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
+  reflect-metadata@0.2.2:
+    resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
 
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
@@ -2296,8 +2296,8 @@ packages:
     resolution: {integrity: sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==}
     engines: {npm: '>=2.0.0'}
 
-  rxjs@7.8.1:
-    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+  rxjs@7.8.2:
+    resolution: {integrity: sha512-dhKf903U/PQZY6boNNtAGdWbG85WAbjT/1xYoZIC7FAY0yWapOBQVsVrDl58W86//e1VpMNBtRV4MaXfdMySFA==}
 
   sabnzbd-api@1.5.0:
     resolution: {integrity: sha512-bfiHGVBoLG5/BKyuLIIFbMHGKpZlGEinFPOlp7huUjRlJkB9vqoDD82Q5Dutd6yV1GwbZtUEcgYtGGNtqe0sMQ==}
@@ -3192,31 +3192,31 @@ snapshots:
       nanoid: 5.0.9
       svelte: 5.23.0
 
-  '@nestjs/axios@3.1.3(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1))(axios@1.8.3)(rxjs@7.8.1)':
+  '@nestjs/axios@3.1.3(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(axios@1.8.3)(rxjs@7.8.2)':
     dependencies:
-      '@nestjs/common': 10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1)
+      '@nestjs/common': 10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       axios: 1.8.3
-      rxjs: 7.8.1
+      rxjs: 7.8.2
 
-  '@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1)':
+  '@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)':
     dependencies:
       iterare: 1.2.1
-      reflect-metadata: 0.1.13
-      rxjs: 7.8.1
+      reflect-metadata: 0.2.2
+      rxjs: 7.8.2
       tslib: 2.8.1
       uid: 2.0.2
     optionalDependencies:
       class-validator: 0.14.1
 
-  '@nestjs/core@10.4.15(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1))(reflect-metadata@0.1.13)(rxjs@7.8.1)':
+  '@nestjs/core@10.4.15(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(reflect-metadata@0.2.2)(rxjs@7.8.2)':
     dependencies:
-      '@nestjs/common': 10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1)
+      '@nestjs/common': 10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nuxtjs/opencollective': 0.3.2
       fast-safe-stringify: 2.1.1
       iterare: 1.2.1
       path-to-regexp: 3.3.0
-      reflect-metadata: 0.1.13
-      rxjs: 7.8.1
+      reflect-metadata: 0.2.2
+      rxjs: 7.8.2
       tslib: 2.8.1
       uid: 2.0.2
     transitivePeerDependencies:
@@ -3230,11 +3230,11 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@openapitools/openapi-generator-cli@2.18.1(class-validator@0.14.1)':
+  '@openapitools/openapi-generator-cli@2.18.3(class-validator@0.14.1)':
     dependencies:
-      '@nestjs/axios': 3.1.3(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1))(axios@1.8.3)(rxjs@7.8.1)
-      '@nestjs/common': 10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1)
-      '@nestjs/core': 10.4.15(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.1.13)(rxjs@7.8.1))(reflect-metadata@0.1.13)(rxjs@7.8.1)
+      '@nestjs/axios': 3.1.3(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(axios@1.8.3)(rxjs@7.8.2)
+      '@nestjs/common': 10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/core': 10.4.15(@nestjs/common@10.4.15(class-validator@0.14.1)(reflect-metadata@0.2.2)(rxjs@7.8.2))(reflect-metadata@0.2.2)(rxjs@7.8.2)
       '@nuxtjs/opencollective': 0.3.2
       axios: 1.8.3
       chalk: 4.1.2
@@ -3247,8 +3247,8 @@ snapshots:
       inquirer: 8.2.6
       lodash: 4.17.21
       proxy-agent: 6.5.0
-      reflect-metadata: 0.1.13
-      rxjs: 7.8.1
+      reflect-metadata: 0.2.2
+      rxjs: 7.8.2
       tslib: 2.8.1
     transitivePeerDependencies:
       - '@nestjs/microservices'
@@ -4350,7 +4350,7 @@ snapshots:
       mute-stream: 0.0.8
       ora: 5.4.1
       run-async: 2.4.1
-      rxjs: 7.8.1
+      rxjs: 7.8.2
       string-width: 4.2.3
       strip-ansi: 6.0.1
       through: 2.3.8
@@ -4835,7 +4835,7 @@ snapshots:
 
   readdirp@4.1.2: {}
 
-  reflect-metadata@0.1.13: {}
+  reflect-metadata@0.2.2: {}
 
   regenerator-runtime@0.14.1: {}
 
@@ -4925,7 +4925,7 @@ snapshots:
     dependencies:
       tslib: 1.14.1
 
-  rxjs@7.8.1:
+  rxjs@7.8.2:
     dependencies:
       tslib: 2.8.1
 
