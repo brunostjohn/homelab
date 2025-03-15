@@ -30,8 +30,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       cmdk-sv:
-        specifier: ^0.0.18
-        version: 0.0.18(svelte@5.23.0)
+        specifier: ^0.0.19
+        version: 0.0.19(svelte@5.23.0)
       embla-carousel-svelte:
         specifier: ^8.3.0
         version: 8.5.2(svelte@5.23.0)
@@ -1234,8 +1234,8 @@ packages:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
-  cmdk-sv@0.0.18:
-    resolution: {integrity: sha512-istixiQSy9Ez/mQ4VXWB69btqNyDZckbd1XFEwR46Vw+n5zjdmvoWAcOTj0uX3FZXtw9ikwLVmfoW2nwwMClRg==}
+  cmdk-sv@0.0.19:
+    resolution: {integrity: sha512-Vm6+/up5nQbwGmNw0uYFbXTrbpF460/FhMohTskzzszMtIR/u/78haucSmJWjjp9bW0wxpHXZWa6fk+Lj1tKnA==}
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.1
 
@@ -3863,7 +3863,7 @@ snapshots:
 
   clsx@2.1.1: {}
 
-  cmdk-sv@0.0.18(svelte@5.23.0):
+  cmdk-sv@0.0.19(svelte@5.23.0):
     dependencies:
       bits-ui: 0.21.16(svelte@5.23.0)
       nanoid: 5.0.9
