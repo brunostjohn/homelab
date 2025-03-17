@@ -5,7 +5,7 @@ metadata:
   namespace: entertainment
 spec:
   capacity:
-    storage: 10Gi
+    storage: 30Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
