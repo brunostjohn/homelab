@@ -20,7 +20,7 @@
 		"@hey-api/client-fetch": "^0.8.0",
 		"@hey-api/openapi-ts": "^0.64.0",
 		"@openapitools/openapi-generator-cli": "^2.13.13",
-		"@sveltejs/adapter-auto": "^4.0.0",
+		"@sveltejs/adapter-auto": "^5.0.0",
 		"@sveltejs/adapter-node": "^5.2.5",
 		"@sveltejs/enhanced-img": "^0.4.0",
 		"@sveltejs/kit": "^2.0.0",
