@@ -33,18 +33,18 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "4"
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          startupProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # startupProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
           ports:
             - containerPort: 6052
               name: http
