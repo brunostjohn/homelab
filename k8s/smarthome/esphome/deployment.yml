@@ -7,6 +7,7 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: esphome
@@ -31,7 +32,7 @@ spec:
               cpu: "256m"
             limits:
               memory: "512Mi"
-              cpu: "512m"
+              cpu: "4"
           livenessProbe:
             httpGet:
               path: /
