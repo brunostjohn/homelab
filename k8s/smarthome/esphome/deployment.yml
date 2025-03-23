@@ -28,10 +28,10 @@ spec:
           imagePullPolicy: IfNotPresent
           resources:
             requests:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "256m"
             limits:
-              memory: "512Mi"
+              memory: "4Gi"
               cpu: "4"
           livenessProbe:
             httpGet:
