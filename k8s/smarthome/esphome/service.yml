@@ -13,4 +13,5 @@ spec:
     - port: 80
       targetPort: http
       name: http-80
+  loadBalancerIP: 10.4.0.4
   type: LoadBalancer
