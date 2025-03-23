@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: esphome
+  namespace: smarthome
+spec:
+  selector:
+    matchLabels:
+      app: esphome
+  template:
+    metadata:
+      labels:
+        app: esphome
+    spec:
+      volumes:
+        - name: esphome-config
+          persistentVolumeClaim:
+            claimName: esphome-config
+      containers:
+        - name: esphome
+          image: ghcr.io/esphome/esphome:2025.3.1
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "256m"
+            limits:
+              memory: "512Mi"
+              cpu: "512m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          ports:
+            - containerPort: 6052
+              name: http
+          env:
+            - name: ESPHOME_DASHBOARD_USE_PING
+              value: "true"
+          volumeMounts:
+            - name: esphome-config
+              mountPath: /config
