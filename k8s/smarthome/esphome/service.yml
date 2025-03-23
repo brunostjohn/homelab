@@ -7,5 +7,6 @@ spec:
   selector:
     app: esphome
   ports:
-  - port: 6052
-    targetPort: http
+    - port: 6052
+      targetPort: http
+  type: LoadBalancer
