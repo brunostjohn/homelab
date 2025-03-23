@@ -7,7 +7,7 @@ resource "kubernetes_persistent_volume_claim" "entertainment_content" {
     access_modes = ["ReadWriteMany"]
     resources {
       requests = {
-        storage = "11Ti"
+        storage = "20Ti"
       }
     }
     storage_class_name = "jabberwock-nfs-csi"
