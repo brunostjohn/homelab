@@ -9,6 +9,8 @@ spec:
   ports:
     - port: 6052
       targetPort: http
+      name: http
     - port: 80
       targetPort: http
+      name: http-80
   type: LoadBalancer
