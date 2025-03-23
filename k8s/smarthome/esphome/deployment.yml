@@ -50,6 +50,8 @@ spec:
           env:
             - name: ESPHOME_DASHBOARD_USE_PING
               value: "true"
+            - name: TZ
+              value: Europe/Dublin
           volumeMounts:
             - name: esphome-config
               mountPath: /config
