@@ -155,7 +155,7 @@ importers:
         version: 4.0.15
       trpc-svelte-query-adapter:
         specifier: ^2.3.14
-        version: 2.3.15(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.3)(vite@6.2.3(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.69.0(svelte@5.25.3))(@trpc/client@11.0.0(@trpc/server@11.0.0(typescript@5.8.2))(typescript@5.8.2))(@trpc/server@11.0.0(typescript@5.8.2))(svelte@5.25.3)(typescript@5.8.2)
+        version: 2.3.16(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.3)(vite@6.2.3(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.69.0(svelte@5.25.3))(@trpc/client@11.0.0(@trpc/server@11.0.0(typescript@5.8.2))(typescript@5.8.2))(@trpc/server@11.0.0(typescript@5.8.2))(svelte@5.25.3)(typescript@5.8.2)
       typescript:
         specifier: ^5.0.0
         version: 5.8.2
@@ -2587,10 +2587,10 @@ packages:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
 
-  trpc-svelte-query-adapter@2.3.15:
-    resolution: {integrity: sha512-r6lox+4NuV3x0UJGAD45PjRJeQkOvLRM75fPKcStkjw1Tq5gIzJ4PwhL3vJ44PZhAJbabXmqwznqJ4TNwmm0eA==}
+  trpc-svelte-query-adapter@2.3.16:
+    resolution: {integrity: sha512-lMGTJfeWs4nW7wsxKMWR26UzLBYMg1cAGEvpq9Y94layZ1f2nPvXfcqGsDBuka6x9yDlgpBhMICFu9e1sj09dw==}
     peerDependencies:
-      '@sveltejs/vite-plugin-svelte': ^4.0.0
+      '@sveltejs/vite-plugin-svelte': '>=4.0.0 <6'
       '@tanstack/svelte-query': ^5.8.2
       '@trpc/client': ^10.43.3
       '@trpc/server': ^10.43.3
@@ -5274,7 +5274,7 @@ snapshots:
 
   tree-kill@1.2.2: {}
 
-  trpc-svelte-query-adapter@2.3.15(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.3)(vite@6.2.3(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.69.0(svelte@5.25.3))(@trpc/client@11.0.0(@trpc/server@11.0.0(typescript@5.8.2))(typescript@5.8.2))(@trpc/server@11.0.0(typescript@5.8.2))(svelte@5.25.3)(typescript@5.8.2):
+  trpc-svelte-query-adapter@2.3.16(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.3)(vite@6.2.3(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1)))(@tanstack/svelte-query@5.69.0(svelte@5.25.3))(@trpc/client@11.0.0(@trpc/server@11.0.0(typescript@5.8.2))(typescript@5.8.2))(@trpc/server@11.0.0(typescript@5.8.2))(svelte@5.25.3)(typescript@5.8.2):
     dependencies:
       '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.25.3)(vite@6.2.3(@types/node@22.13.10)(jiti@2.4.2)(yaml@2.6.1))
       '@tanstack/svelte-query': 5.69.0(svelte@5.25.3)
