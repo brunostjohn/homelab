@@ -15,5 +15,8 @@
       "automerge": true
     }
   ],
+  "npm": {
+    "ignorePaths": ["projects/homepage/**"]
+  },
   "platformAutomerge": true
 }
