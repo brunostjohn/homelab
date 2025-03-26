@@ -22,7 +22,7 @@ spec:
           [
             {
               "name": "iot-macvlan",
-              "interface": "macvlan0",
+              "interface": "vlan0",
               "namespace": "smarthome"
             }
           ]
@@ -43,7 +43,7 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
       # hostNetwork: false
-      # dnsPolicy: ClusterFirstWithHostNet
+      dnsPolicy: ClusterFirstWithHostNet
       initContainers:
         - name: prepare-secrets-yaml
           image: docker.io/suzukishunsuke/alpine-envsubst:0.1.0
