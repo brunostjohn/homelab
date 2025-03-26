@@ -11,9 +11,18 @@ spec:
       "master": "lan0",
       "mode": "bridge",
       "ipam": {
-        "type": "whereabouts",
-        "range": "10.4.0.0/16",
-        "gateway": "10.4.0.1",
-        "configuration_path": "/var/lib/rancher/k3s/agent/etc/cni/net.d/whereabouts.d/whereabouts.conf"
+        "type": "dhcp",
+        "daemonSocketPath": "/run/cni/dhcp.sock",
+        "request": [
+            {
+                "skipDefault": false
+            }
+        ],
+        "provide": [
+            {
+                "option": "host-name",
+                "fromArg": "K8S_POD_NAME"
+            }
+        ]
       }
     }
