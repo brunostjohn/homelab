@@ -17,15 +17,15 @@ spec:
       app: homeassistant
   template:
     metadata:
-      annotations:
-        k8s.v1.cni.cncf.io/networks: |
-          [
-            {
-              "name": "iot-macvlan",
-              "interface": "vlan0",
-              "namespace": "smarthome"
-            }
-          ]
+      # annotations:
+      #   k8s.v1.cni.cncf.io/networks: |
+      #     [
+      #       {
+      #         "name": "iot-macvlan",
+      #         "interface": "vlan0",
+      #         "namespace": "smarthome"
+      #       }
+      #     ]
       labels:
         app: homeassistant
     spec:
@@ -42,7 +42,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
-      # hostNetwork: false
+      hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       initContainers:
         - name: prepare-secrets-yaml
