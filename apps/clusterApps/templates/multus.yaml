@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     chart: multus
-    targetRevision: v4.2.000
+    targetRevision: 4.2.000
     repoURL: https://rke2-charts.rancher.io
     helm:
       valuesObject:
