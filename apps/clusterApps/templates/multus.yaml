@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: multus
+    chart: rke2-multus
     targetRevision: 4.2.000
     repoURL: https://rke2-charts.rancher.io
     helm:
