@@ -22,12 +22,12 @@ spec:
             confDir: /var/lib/rancher/k3s/agent/etc/cni/net.d
             binDir: /var/lib/rancher/k3s/data/current/bin
             kubeconfig: /var/lib/rancher/k3s/agent/etc/cni/net.d/multus.d/multus.kubeconfig
-          rke2-whereabouts:
-            fullnameOverride: whereabouts
-            enabled: true
-            cniConf:
-              confDir: /var/lib/rancher/k3s/agent/etc/cni/net.d
-              binDir: /var/lib/rancher/k3s/data/current/bin
+        rke2-whereabouts:
+          fullnameOverride: whereabouts
+          enabled: true
+          cniConf:
+          confDir: /var/lib/rancher/k3s/agent/etc/cni/net.d
+          binDir: /var/lib/rancher/k3s/data/current/bin
   syncPolicy:
     automated:
       prune: true
