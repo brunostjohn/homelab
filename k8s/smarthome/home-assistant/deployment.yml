@@ -17,6 +17,15 @@ spec:
       app: homeassistant
   template:
     metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |
+          [
+            {
+              "name": "iot-macvlan",
+              "interface": "lan0",
+              "namespace": "smarthome"
+            }
+          ]
       labels:
         app: homeassistant
     spec:
