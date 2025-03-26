@@ -22,7 +22,7 @@ spec:
           [
             {
               "name": "iot-macvlan",
-              "interface": "lan0",
+              "interface": "eth1",
               "namespace": "smarthome"
             }
           ]
