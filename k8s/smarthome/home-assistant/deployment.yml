@@ -42,8 +42,8 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
-      hostNetwork: false
-      dnsPolicy: ClusterFirstWithHostNet
+      # hostNetwork: false
+      # dnsPolicy: ClusterFirstWithHostNet
       initContainers:
         - name: prepare-secrets-yaml
           image: docker.io/suzukishunsuke/alpine-envsubst:0.1.0
