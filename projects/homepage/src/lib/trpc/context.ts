@@ -16,21 +16,31 @@ export async function createContext(event: RequestEvent) {
 		? env.DEVELOPMENT_USER
 		: event.request.headers.get("X-authentik-username")!;
 
-	const {
-		results: [user],
-	} = await authentikCoreApi.coreUsersList({
-		username,
-	});
+	try {
+		const {
+			results: [user],
+		} = await authentikCoreApi.coreUsersList({
+			username,
+		});
 
-	if (!user) {
-		throw new Error("User not found");
+		if (!user) {
+			throw new Error("User not found");
+		}
+
+		return {
+			event,
+			username,
+			user,
+		};
+	} catch (error) {
+		console.error(error);
+
+		return {
+			event,
+			username,
+			user: null,
+		};
 	}
-
-	return {
-		event,
-		username,
-		user,
-	};
 }
 
 export type Context = Awaited<ReturnType<typeof createContext>>;
