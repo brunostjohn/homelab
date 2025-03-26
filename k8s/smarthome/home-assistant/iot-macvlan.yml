@@ -26,5 +26,16 @@ spec:
                 "fromArg": "K8S_POD_NAME"
             }
         ]
-      }
+      },
+      "plugins": [
+        {
+          "type": "route-override",
+          "addroutes": [
+            {
+              "dst": "10.43.0.0/16",
+              "gw": "10.42.7.1"
+            }
+          ]
+        }
+      ]
     }
