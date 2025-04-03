@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: fifth-cert-prod
+  namespace: kube-system
+  annotations:
+    reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+    reflector.v1.k8s.emberstack.com/reflection-auto-allowed: "true"
+spec:
+  secretName: fifth-cert-prod
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: dustmaxx.ing
+  dnsNames:
+    - dustmaxx.ing
+    - "*.dustmaxx.ing"
