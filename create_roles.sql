@@ -9,6 +9,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to blocky_role;
 CREATE USER blocky WITH PASSWORD '<password>';
 GRANT blocky_role TO blocky;
 
+-- BLUEMAP_MODDED
+CREATE ROLE bluemap_modded_role;
+\c bluemap_modded
+GRANT ALL PRIVILEGES ON DATABASE bluemap_modded TO bluemap_modded_role;
+GRANT ALL ON SCHEMA public TO bluemap_modded_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO bluemap_modded_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to bluemap_modded_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to bluemap_modded_role;
+CREATE USER bluemap_modded WITH PASSWORD '<password>';
+GRANT bluemap_modded_role TO bluemap_modded;
+
 -- ROMM
 CREATE ROLE romm_role;
 \c romm

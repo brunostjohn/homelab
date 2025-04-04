@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: modded-mc-map-ingress
+  namespace: game-servers
+spec:
+  tls:
+    - hosts:
+        - map.dustermaxx.ing
+      secretName: fifth-cert-prod
+  rules:
+    - host: map.dustermaxx.ing
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: modded-mc-service
+                port:
+                  name: map
