@@ -19,6 +19,7 @@ data:
   WHITELIST: |
     zefirfanno1
     TheDordo
+    Injured
   MAX_PLAYERS: "10"
   SERVER_NAME: "Dustermaxxing Central"
   ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
