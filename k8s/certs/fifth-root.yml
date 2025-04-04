@@ -15,3 +15,6 @@ spec:
   dnsNames:
     - dustmaxx.ing
     - "*.dustmaxx.ing"
+  additionalOutputFormats:
+    - type: CombinedPEM
+    - type: DER

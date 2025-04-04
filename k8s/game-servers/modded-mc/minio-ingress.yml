@@ -3,15 +3,11 @@ kind: IngressRoute
 metadata:
   name: modded-mc-minio-ingress
   namespace: game-servers
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   entryPoints:
     - websecure
   tls:
-    certResolver: le
-    domains:
-      - main: dustmaxx.ing
+    secretName: fifth-cert-prod
   routes:
     - match: Host(`dustmaxx.ing`)
       kind: Rule
