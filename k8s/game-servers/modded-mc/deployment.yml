@@ -22,6 +22,9 @@ spec:
         - name: modded-mc-pvc
           persistentVolumeClaim:
             claimName: modded-mc-pvc
+        - name: modded-mc-pvc-again
+          persistentVolumeClaim:
+            claimName: modded-mc-pvc-again
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
