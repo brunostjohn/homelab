@@ -49,6 +49,6 @@ spec:
               subPath: cubes.yml
               readOnly: true
             - name: duster-proxy-config
-              mountPath: /etc/infrared/proxies/duster.yml
-              subPath: duster.yml
+              mountPath: /etc/infrared/proxies/dustmaxxing.yml
+              subPath: dustmaxxing.yml
               readOnly: true

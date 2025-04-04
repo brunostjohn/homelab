@@ -4,9 +4,9 @@ metadata:
   name: infrared-duster-proxy-config
   namespace: game-servers
 data:
-  cubes.yml: |
+  dustmaxxing.yml: |
     domains:
-      - dustermaxx.ing
-      - mc.dustermaxx.ing
+      - dustmaxx.ing
+      - mc.dustmaxx.ing
     addresses:
       - modded-mc.game-servers.svc.cluster.local:25565
