@@ -7,7 +7,7 @@ spec:
   entryPoints:
     - websecure
   tls:
-    secretName: fifth-cert-prod
+    secretName: fifth-cert-prod-rw4fk
   routes:
     - match: Host(`dustmaxx.ing`)
       kind: Rule
