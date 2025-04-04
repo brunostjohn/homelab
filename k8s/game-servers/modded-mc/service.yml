@@ -11,7 +11,13 @@ spec:
   ports:
     - port: 25565
       targetPort: minecraft
+      protocol: TCP
+      name: minecraft
     - port: 9100
       targetPort: metrics
+      protocol: TCP
+      name: metrics
     - port: 8100
       targetPort: map
+      protocol: TCP
+      name: map
