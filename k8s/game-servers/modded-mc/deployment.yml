@@ -3,7 +3,13 @@ kind: Deployment
 metadata:
   name: modded-mc
   namespace: game-servers
+  annotations:
+    reloader.stakater.com/auto: "true"
+    secrets.infisical.com/auto-reload: "true"
 spec:
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: modded-mc
