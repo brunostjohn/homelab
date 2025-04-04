@@ -28,13 +28,13 @@ spec:
         - name: modded-mc
           image: docker.io/itzg/minecraft-server:latest
           imagePullPolicy: IfNotPresent
-          resources:
-            requests:
-              memory: "8Gi"
-              cpu: "4"
-            limits:
-              memory: "16Gi"
-              cpu: "6"
+          # resources:
+          #   requests:
+          #     memory: "8Gi"
+          #     cpu: "4"
+          #   limits:
+          #     memory: "16Gi"
+          #     cpu: "6"
           ports:
             - containerPort: 25565
               protocol: TCP
