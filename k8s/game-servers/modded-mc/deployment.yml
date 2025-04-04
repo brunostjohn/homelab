@@ -46,8 +46,10 @@ spec:
               protocol: TCP
               name: map
           volumeMounts:
-            - name: modded-mc-pvc
+            - name: modded-mc-pvc-again
               mountPath: /data
+            - name: modded-mc-pvc
+              mountPath: /data-again
           startupProbe:
             exec:
               command:
