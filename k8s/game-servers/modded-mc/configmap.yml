@@ -13,7 +13,7 @@ data:
   VERSION: 1.21.1
   ONLINE_MODE: "false"
   MOTD: "§4D§2U§3S§5T§6E§7R§9M§aA§bX§cX§dE§eR §f§lCENTRAL"
-  ICON: https://homepage-assets.static.zefirsroyal.cloud/images/modded-server-icon.png
+  ICON: https://homepage-assets.static.zefirsroyal.cloud/images/server-icon-worse.png
   OPS: |
     zefirfanno1
   WHITELIST: |
