@@ -12,7 +12,16 @@ data:
   TYPE: NEOFORGE
   VERSION: 1.21.1
   ONLINE_MODE: "false"
-  ICON: https://homepage-assets.static.zefirsroyal.cloud/kitty.png
+  MOTD: "&4D&2U&3S&5T&6E&7R&9M&aA&bX&cX&dE&eR &f&lCENTRAL"
+  ICON: https://homepage-assets.static.zefirsroyal.cloud/images/modded-server-icon.png
+  OPS: |
+    zefirfanno1
+  WHITELIST: |
+    zefirfanno1
+    TheDordo
+  MAX_PLAYERS: "10"
+  SERVER_NAME: "Dustermaxxing Central"
+  ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
   CURSEFORGE_FILES: |
     https://www.curseforge.com/minecraft/mc-mods/modernfix
     https://www.curseforge.com/minecraft/mc-mods/supermartijn642s-config-lib
@@ -122,3 +131,4 @@ data:
     https://www.curseforge.com/minecraft/mc-mods/iron-jetpacks
     https://www.curseforge.com/minecraft/mc-mods/corail-tombstone
     https://www.curseforge.com/minecraft/mc-mods/resourceful-config
+    https://www.curseforge.com/minecraft/mc-mods/distant-horizons
