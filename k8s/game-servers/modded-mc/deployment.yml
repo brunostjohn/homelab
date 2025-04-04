@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: modded-mc
+  namespace: game-servers
+spec:
+  selector:
+    matchLabels:
+      app: modded-mc
+  template:
+    metadata:
+      labels:
+        app: modded-mc
+    spec:
+      volumes:
+        - name: modded-mc-pvc
+          persistentVolumeClaim:
+            claimName: modded-mc-pvc
+      nodeSelector:
+        kubernetes.io/hostname: s7
+      containers:
+        - name: modded-mc
+          image: docker.io/itzg/minecraft-server:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "8Gi"
+              cpu: "4"
+            limits:
+              memory: "16Gi"
+              cpu: "6"
+          ports:
+            - containerPort: 25565
+              protocol: TCP
+              name: minecraft
+            - containerPort: 9100
+              protocol: TCP
+              name: metrics
+            - containerPort: 8100
+              protocol: TCP
+              name: map
+          volumeMounts:
+            - name: modded-mc-pvc
+              mountPath: /data
+          startupProbe:
+            exec:
+              command:
+                - mc-monitor
+                - status
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - mc-monitor
+                - status
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          livenessProbe:
+            exec:
+              command:
+                - mc-monitor
+                - status
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          envFrom:
+            - configMapRef:
+                name: modded-mc-config
+            - secretRef:
+                name: modded-mc-secrets

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: infrared-duster-proxy-config
+  namespace: game-servers
+data:
+  cubes.yml: |
+    domains:
+      - dustermaxx.ing
+    addresses:
+      - modded-mc.game-servers.svc.cluster.local:25565

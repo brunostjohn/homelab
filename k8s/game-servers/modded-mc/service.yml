@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: modded-mc
+  namespace: game-servers
+  labels:
+    app: modded-mc
+spec:
+  selector:
+    app: modded-mc
+  ports:
+    - port: 25565
+      targetPort: minecraft
+    - port: 9100
+      targetPort: metrics
+    - port: 8100
+      targetPort: map

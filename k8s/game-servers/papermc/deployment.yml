@@ -4,6 +4,7 @@ metadata:
   name: papermc
   namespace: game-servers
 spec:
+  replicas: 0
   strategy:
     type: Recreate
   selector:

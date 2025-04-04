@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-config
+  namespace: game-servers
+data:
+  EULA: "true"
+  TZ: Europe/Dublin
+  USE_AIKAR_FLAGS: "true"
+  INIT_MEMORY: 8G
+  MAX_MEMORY: 16G
+  TYPE: NEOFORGE
+  VERSION: 1.21.1
+  ONLINE_MODE: "false"
+  ICON: https://homepage-assets.static.zefirsroyal.cloud/kitty.png
+  CURSEFORGE_FILES: |
+    https://www.curseforge.com/minecraft/mc-mods/modernfix
+    https://www.curseforge.com/minecraft/mc-mods/supermartijn642s-config-lib
+    https://www.curseforge.com/minecraft/mc-mods/elytra-slot
+    https://www.curseforge.com/minecraft/mc-mods/overloaded-armor-bar
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-ocean-monuments-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/ae2-qol-recipes
+    https://www.curseforge.com/minecraft/mc-mods/snow-real-magic
+    https://www.curseforge.com/minecraft/mc-mods/puzzles-lib
+    https://www.curseforge.com/minecraft/mc-mods/macaws-roofs
+    https://www.curseforge.com/minecraft/mc-mods/macaws-fences-and-walls
+    https://www.curseforge.com/minecraft/mc-mods/macaws-windows
+    https://www.curseforge.com/minecraft/mc-mods/ferritecore
+    https://www.curseforge.com/minecraft/mc-mods/just-enough-professions-jep
+    https://www.curseforge.com/minecraft/mc-mods/controlling
+    https://www.curseforge.com/minecraft/mc-mods/supplementaries
+    https://www.curseforge.com/minecraft/mc-mods/monolib
+    https://www.curseforge.com/minecraft/mc-mods/colorful-hearts
+    https://www.curseforge.com/minecraft/mc-mods/macaws-lights-and-lamps
+    https://www.curseforge.com/minecraft/mc-mods/carry-on
+    https://www.curseforge.com/minecraft/mc-mods/justenoughbreeding
+    https://www.curseforge.com/minecraft/mc-mods/balm
+    https://www.curseforge.com/minecraft/mc-mods/enchantment-descriptions
+    https://www.curseforge.com/minecraft/mc-mods/mouse-tweaks
+    https://www.curseforge.com/minecraft/mc-mods/tax-free-levels
+    https://www.curseforge.com/minecraft/mc-mods/konkrete
+    https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2
+    https://www.curseforge.com/minecraft/mc-mods/visual-workbench
+    https://www.curseforge.com/minecraft/mc-mods/fastworkbench
+    https://www.curseforge.com/minecraft/mc-mods/just-zoom
+    https://www.curseforge.com/minecraft/mc-mods/create-ultimate-factory
+    https://www.curseforge.com/minecraft/mc-mods/lootr
+    https://www.curseforge.com/minecraft/mc-mods/sophisticated-core
+    https://www.curseforge.com/minecraft/mc-mods/fastfurnace
+    https://www.curseforge.com/minecraft/mc-mods/chunky-pregenerator-forge
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-witch-huts-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/deeperdarker
+    https://www.curseforge.com/minecraft/mc-mods/loot-integrations
+    https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map
+    https://www.curseforge.com/minecraft/mc-mods/ftb-ultimine-forge
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-jungle-temples-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/mss-moogs-soaring-structures
+    https://www.curseforge.com/minecraft/mc-mods/supermartijn642s-core-lib
+    https://www.curseforge.com/minecraft/mc-mods/cucumber
+    https://www.curseforge.com/minecraft/mc-mods/placebo
+    https://www.curseforge.com/minecraft/mc-mods/create-misc-and-things
+    https://www.curseforge.com/minecraft/mc-mods/curios-continuation
+    https://www.curseforge.com/minecraft/mc-mods/framework
+    https://www.curseforge.com/minecraft/mc-mods/jade
+    https://www.curseforge.com/minecraft/mc-mods/ae2-things-forge
+    https://www.curseforge.com/minecraft/mc-mods/inventory-hud-forge
+    https://www.curseforge.com/minecraft/mc-mods/dis-enchanting-table
+    https://www.curseforge.com/minecraft/mc-mods/jade-addons
+    https://www.curseforge.com/minecraft/mc-mods/prickle
+    https://www.curseforge.com/minecraft/mc-mods/better-archeology
+    https://www.curseforge.com/minecraft/mc-mods/cristel-lib
+    https://www.curseforge.com/minecraft/mc-mods/ftb-library-forge
+    https://www.curseforge.com/minecraft/mc-mods/create
+    https://www.curseforge.com/minecraft/mc-mods/waystones
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-mineshafts-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/applied-energistics-2-wireless-terminals
+    https://www.curseforge.com/minecraft/mc-mods/selene
+    https://www.curseforge.com/minecraft/mc-mods/dungeon-crawl
+    https://www.curseforge.com/minecraft/mc-mods/merequester
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-desert-temples-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/cloth-config
+    https://www.curseforge.com/minecraft/mc-mods/create-better-fps
+    https://www.curseforge.com/minecraft/mc-mods/refurbished-furniture
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-nether-fortresses-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/searchables
+    https://www.curseforge.com/minecraft/mc-mods/mns-moogs-nether-structures
+    https://www.curseforge.com/minecraft/mc-mods/when-dungeons-arise-seven-seas
+    https://www.curseforge.com/minecraft/mc-mods/just-enough-resources-jer
+    https://www.curseforge.com/minecraft/mc-mods/sophisticated-backpacks
+    https://www.curseforge.com/minecraft/mc-mods/create-ore-excavation
+    https://www.curseforge.com/minecraft/mc-mods/create-mechanical-extruder
+    https://www.curseforge.com/minecraft/mc-mods/guideme
+    https://www.curseforge.com/minecraft/mc-mods/towns-and-towers
+    https://www.curseforge.com/minecraft/mc-mods/refined-storage
+    https://www.curseforge.com/minecraft/mc-mods/irisshaders
+    https://www.curseforge.com/minecraft/mc-mods/fusion-connected-textures
+    https://www.curseforge.com/minecraft/mc-mods/the-twilight-forest
+    https://www.curseforge.com/minecraft/mc-mods/yungs-api-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/owo-lib
+    https://www.curseforge.com/minecraft/mc-mods/create-cheese
+    https://www.curseforge.com/minecraft/mc-mods/moogs-voyager-structures
+    https://www.curseforge.com/minecraft/mc-mods/jei
+    https://www.curseforge.com/minecraft/mc-mods/bookshelf
+    https://www.curseforge.com/minecraft/mc-mods/yungs-better-dungeons-neoforge
+    https://www.curseforge.com/minecraft/mc-mods/xaeros-minimap
+    https://www.curseforge.com/minecraft/mc-mods/login-protection
+    https://www.curseforge.com/minecraft/mc-mods/simplehats
+    https://www.curseforge.com/minecraft/mc-mods/accessories
+    https://www.curseforge.com/minecraft/mc-mods/refined-storage-jei-integration
+    https://www.curseforge.com/minecraft/shaders/complementary-reimagined
+    https://www.curseforge.com/minecraft/mc-mods/caelus
+    https://www.curseforge.com/minecraft/mc-mods/euphoria-patches
+    https://www.curseforge.com/minecraft/mc-mods/macaws-doors
+    https://www.curseforge.com/minecraft/mc-mods/sodium
+    https://www.curseforge.com/minecraft/mc-mods/cupboard
+    https://www.curseforge.com/minecraft/mc-mods/moogs-end-structures
+    https://www.curseforge.com/minecraft/mc-mods/clean-swing-through-grass
+    https://www.curseforge.com/minecraft/mc-mods/goblin-traders
+    https://www.curseforge.com/minecraft/mc-mods/kiwi
+    https://www.curseforge.com/minecraft/mc-mods/entityculling
+    https://www.curseforge.com/minecraft/mc-mods/architectury-api
+    https://www.curseforge.com/minecraft/mc-mods/iron-jetpacks
+    https://www.curseforge.com/minecraft/mc-mods/corail-tombstone
+    https://www.curseforge.com/minecraft/mc-mods/resourceful-config

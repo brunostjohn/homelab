@@ -1,0 +1,21 @@
+apiVersion: secrets.infisical.com/v1alpha1
+kind: InfisicalSecret
+metadata:
+  name: modded-mc-secrets-infisical
+  namespace: game-servers
+spec:
+  resyncInterval: 50
+  authentication:
+    universalAuth:
+      secretsScope:
+        projectSlug: cluster-secrets-rgq1
+        envSlug: dev
+        secretsPath: /modded-mc
+        recursive: true
+      credentialsRef:
+        secretName: infisical-machine-id
+        secretNamespace: infisical
+  managedSecretReference:
+    secretName: modded-mc-secrets
+    secretNamespace: game-servers
+    creationPolicy: Owner

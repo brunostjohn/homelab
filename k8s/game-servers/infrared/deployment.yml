@@ -19,6 +19,9 @@ spec:
         - name: cubes-proxy-config
           configMap:
             name: infrared-cubes-proxy-config
+        - name: duster-proxy-config
+          configMap:
+            name: infrared-duster-proxy-config
       containers:
         - name: infrared
           image: docker.io/haveachin/infrared:2.0.0-alpha.r2
@@ -41,4 +44,8 @@ spec:
             - name: cubes-proxy-config
               mountPath: /etc/infrared/proxies/cubes.yml
               subPath: cubes.yml
+              readOnly: true
+            - name: duster-proxy-config
+              mountPath: /etc/infrared/proxies/duster.yml
+              subPath: duster.yml
               readOnly: true
