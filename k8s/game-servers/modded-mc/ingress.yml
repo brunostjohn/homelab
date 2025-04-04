@@ -6,10 +6,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - map.dustermaxx.ing
+        - map.dustmaxx.ing
       secretName: fifth-cert-prod
   rules:
-    - host: map.dustermaxx.ing
+    - host: map.dustmaxx.ing
       http:
         paths:
           - path: /
