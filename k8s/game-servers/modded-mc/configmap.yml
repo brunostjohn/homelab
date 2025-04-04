@@ -24,6 +24,8 @@ data:
   ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
   CURSEFORGE_FILES: |
     https://www.curseforge.com/minecraft/mc-mods/modernfix
+    https://www.curseforge.com/minecraft/mc-mods/bluemap
+    https://www.curseforge.com/minecraft/mc-mods/prometheus-exporter
     https://www.curseforge.com/minecraft/mc-mods/supermartijn642s-config-lib
     https://www.curseforge.com/minecraft/mc-mods/elytra-slot
     https://www.curseforge.com/minecraft/mc-mods/overloaded-armor-bar

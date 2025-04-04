@@ -7,5 +7,6 @@ data:
   cubes.yml: |
     domains:
       - dustermaxx.ing
+      - mc.dustermaxx.ing
     addresses:
       - modded-mc.game-servers.svc.cluster.local:25565
