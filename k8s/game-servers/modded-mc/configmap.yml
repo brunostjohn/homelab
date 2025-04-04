@@ -24,6 +24,7 @@ data:
   SERVER_NAME: "Dustermaxxing Central"
   ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
   CURSEFORGE_FILES: |
+    https://www.curseforge.com/minecraft/mc-mods/craterlib
     https://www.curseforge.com/minecraft/mc-mods/ftb-essentials
     https://www.curseforge.com/minecraft/mc-mods/modernfix
     https://www.curseforge.com/minecraft/mc-mods/bluemap
