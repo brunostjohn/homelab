@@ -16,6 +16,6 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: modded-mc-service
+                name: modded-mc
                 port:
                   name: map
