@@ -44,6 +44,9 @@ data:
         mc.zefirsroyal.cloud: 10.0.5.5
         steveis.mattmaxx.ing: 10.0.5.5
         klaudia-postgres.local: 10.0.3.11
+        "*.dustmaxx.ing": 10.0.2.0
+        mc.dustmaxx.ing: 10.0.5.5
+        dustmaxx.ing: 10.0.2.0
 
     conditional:
       fallbackUpstream: false
