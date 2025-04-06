@@ -5,6 +5,10 @@ metadata:
   namespace: game-servers
 data:
   Caddyfile: |
+    {
+      auto_https off
+    }
+
     dustmaxx.ing {
       root * /data
       file_server
