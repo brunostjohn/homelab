@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: modded-mc-webserver
+  namespace: game-servers
+spec:
+  selector:
+    matchLabels:
+      app: modded-mc-webserver
+  template:
+    metadata:
+      labels:
+        app: modded-mc-webserver
+    spec:
+      containers:
+        - name: modded-mc-webserver
+          image: caddy
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 256m
+            limits:
+              memory: 256Mi
+              cpu: 500m
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: modded-mc-webserver-config
+              mountPath: /etc/caddy/Caddyfile
+              subPath: Caddyfile
+            - name: modded-mc-webserver-index
+              mountPath: /data/index.html
+              subPath: index.html
+          startupProbe:
+            httpGet:
+              path: /health
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+      volumes:
+        - name: modded-mc-webserver-config
+          configMap:
+            name: modded-mc-webserver
+        - name: modded-mc-webserver-index
+          configMap:
+            name: modded-mc-webserver

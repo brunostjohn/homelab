@@ -1,0 +1,152 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-webserver
+  namespace: game-servers
+data:
+  Caddyfile: |
+    dustmaxx.ing {
+      root * /data
+      file_server
+    }
+
+    /health {
+      respond "OK" 200
+    }
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dustmaxxing Kingdom</title>
+        <link rel="icon" type="image/jpg" href="https://dustmaxxing-shit.static.zefirsroyal.cloud/duster-lore.jpg">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                background-color: #1a1a1a;
+                color: #ffffff;
+                line-height: 1.6;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+
+            .main-content {
+                text-align: center;
+                max-width: 600px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .server-icon {
+                width: 200px;
+                height: 200px;
+                border-radius: 20px;
+                margin-bottom: 30px;
+                background-color: #2d2d2d;
+                background-image: url('https://dustmaxxing-shit.static.zefirsroyal.cloud/duster-lore.jpg');
+                background-size: cover;
+                background-position: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 20px;
+                color: #ffffff;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+
+            p {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+                color: #cccccc;
+            }
+
+            .button-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .download-button {
+                display: inline-block;
+                padding: 20px 40px;
+                background-color: #dd39e2;
+                color: white;
+                text-decoration: none;
+                border-radius: 8px;
+                font-size: 1.4rem;
+                transition: transform 0.2s, background-color 0.3s;
+                font-weight: bold;
+            }
+
+            .download-button:hover {
+                background-color: #3aa528;
+                transform: translateY(-2px);
+            }
+
+            .server-ip {
+                display: inline-block;
+                padding: 15px 30px;
+                background-color: #2d2d2d;
+                color: white;
+                text-decoration: none;
+                border-radius: 8px;
+                font-size: 1.1rem;
+                transition: background-color 0.3s;
+            }
+
+            .server-ip:hover {
+                background-color: #363636;
+            }
+
+            footer {
+                margin-top: 60px;
+                text-align: center;
+                color: #666666;
+            }
+
+            @media (max-width: 480px) {
+                .server-icon {
+                    width: 150px;
+                    height: 150px;
+                }
+
+                h1 {
+                    font-size: 2rem;
+                }
+
+                .download-button {
+                    padding: 15px 30px;
+                    font-size: 1.2rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="main-content">
+            <div class="server-icon"></div>
+            <h1>Dustmaxxer Central</h1>
+            <p>Become one of the dustmaxxers</p>
+            <div class="button-container">
+                <a href="https://dustmaxxing-shit.static.zefirsroyal.cloud/modpack.zip" class="download-button">Download Modpack</a>
+                <p class="server-ip">Join here: <b>dustmaxx.ing</b></p>
+            </div>
+        </main>
+    </body>
+    </html>

@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: modded-mc-webserver-ingress
+  namespace: game-servers
+spec:
+  tls:
+    - hosts:
+        - dustmaxx.ing
+      secretName: fifth-cert-prod
+  rules:
+    - host: dustmaxx.ing
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: modded-mc-webserver
+                port:
+                  name: http
