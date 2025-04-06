@@ -7,6 +7,7 @@ spec:
   tls:
     - hosts:
         - map.dustmaxx.ing
+        - dustmaxx.ing
       secretName: fifth-cert-prod
   rules:
     - host: map.dustmaxx.ing
@@ -19,3 +20,13 @@ spec:
                 name: modded-mc
                 port:
                   name: map
+    - host: dustmaxx.ing
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: modded-mc-webserver
+                port:
+                  name: http
