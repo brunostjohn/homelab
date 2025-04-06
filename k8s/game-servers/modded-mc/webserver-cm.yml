@@ -13,10 +13,6 @@ data:
       root * /data
       file_server
     }
-
-    /health {
-      respond "OK" 200
-    }
   index.html: |
     <!DOCTYPE html>
     <html lang="en">
