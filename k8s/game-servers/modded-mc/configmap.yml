@@ -19,6 +19,8 @@ data:
   ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
   ALLOW_FLIGHT: "true"
   CURSEFORGE_FILES: |
+    https://www.curseforge.com/minecraft/mc-mods/mekanism
+    https://www.curseforge.com/minecraft/mc-mods/mekanism-generators
     https://www.curseforge.com/minecraft/mc-mods/simple-discord-link-bot-forge-fabric-spigot
     https://www.curseforge.com/minecraft/mc-mods/craterlib
     https://www.curseforge.com/minecraft/mc-mods/ftb-essentials
