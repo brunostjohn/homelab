@@ -145,6 +145,7 @@ data:
             <p>Become one of the dustmaxxers</p>
             <div class="button-container">
                 <a href="https://dustmaxxing-shit.static.zefirsroyal.cloud/modpack.zip" class="download-button">Download Modpack</a>
+                <a href="https://map.dustmaxx.ing" class="server-ip">Check out the map</a>
                 <p class="server-ip">Join here: <b>dustmaxx.ing</b></p>
             </div>
         </main>
