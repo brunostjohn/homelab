@@ -9,7 +9,7 @@ data:
       auto_https off
     }
 
-    dustmaxx.ing {
+    http://dustmaxx.ing:80 {
       root * /data
       file_server
     }
