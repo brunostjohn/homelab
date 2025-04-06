@@ -19,9 +19,6 @@ spec:
         app: modded-mc
     spec:
       volumes:
-        - name: modded-mc-pvc
-          persistentVolumeClaim:
-            claimName: modded-mc-pvc
         - name: modded-mc-pvc-again
           persistentVolumeClaim:
             claimName: modded-mc-pvc-again
@@ -51,8 +48,6 @@ spec:
           volumeMounts:
             - name: modded-mc-pvc-again
               mountPath: /data
-            - name: modded-mc-pvc
-              mountPath: /data-again
           startupProbe:
             exec:
               command:
