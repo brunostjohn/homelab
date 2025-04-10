@@ -19,7 +19,7 @@ spec:
         runAsUser: 1000
       containers:
         - name: exporter
-          image: emqx/emqx-exporter:0.2.10
+          image: emqx/emqx-exporter:0.2.11
           imagePullPolicy: IfNotPresent
           args:
             - --emqx.nodes=emqx-dashboard.databases.svc.cluster.local:18083
