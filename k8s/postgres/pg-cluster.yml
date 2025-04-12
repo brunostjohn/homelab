@@ -19,7 +19,7 @@ spec:
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
-        destinationPath: s3://postgres-cluster-backups/
+        destinationPath: s3://posgres-cluster-backups/
         endpointURL: http://minio-svc.minio.svc.cluster.local:9000
         s3Credentials:
           accessKeyId:
