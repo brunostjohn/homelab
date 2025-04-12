@@ -7,6 +7,7 @@ metadata:
   namespace: homeassistant
   annotations:
     secrets.infisical.com/auto-reload: "true"
+    reloader.stakater.com/auto: "true"
 spec:
   revisionHistoryLimit: 3
   replicas: 1
