@@ -13,11 +13,23 @@ spec:
   enableSuperuserAccess: true
 
   bootstrap:
-    initdb:
-      postInitApplicationSQL:
-        - CREATE EXTENSION IF NOT EXISTS "vectors";
-        - CREATE EXTENSION IF NOT EXISTS "cube";
-        - CREATE EXTENSION IF NOT EXISTS "earthdistance";
+    recovery:
+      source: clusterBackup
+
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: s3://posgres-cluster-backups/
+        endpointURL: http://minio-svc.minio.svc.cluster.local:9000
+        s3Credentials:
+          accessKeyId:
+            name: postgres-cluster-backup-minio
+            key: MINIO_ACCESS_KEY
+          secretAccessKey:
+            name: postgres-cluster-backup-minio
+            key: MINIO_SECRET_KEY
+        wal:
+          maxParallel: 8
 
   storage:
     size: 60Gi
