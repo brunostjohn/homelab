@@ -14,14 +14,12 @@ spec:
 
   bootstrap:
     recovery:
-      # source: clusterBackup
-      backup:
-        name: postgres-cluster-backup-20250408000000
+      source: clusterBackup
 
   externalClusters:
     - name: clusterBackup
       barmanObjectStore:
-        destinationPath: s3://posgres-cluster-backups/
+        destinationPath: s3://postgres-cluster-backups/
         endpointURL: http://minio-svc.minio.svc.cluster.local:9000
         s3Credentials:
           accessKeyId:
@@ -30,8 +28,6 @@ spec:
           secretAccessKey:
             name: postgres-cluster-backup-minio
             key: MINIO_SECRET_KEY
-        wal:
-          maxParallel: 8
 
   storage:
     size: 60Gi
@@ -53,6 +49,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: s3://posgres-cluster-backups/
+      serverName: recovered-postgres-cluster-n1
       endpointURL: http://minio-svc.minio.svc.cluster.local:9000
       s3Credentials:
         accessKeyId:
