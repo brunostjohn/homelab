@@ -14,7 +14,9 @@ spec:
 
   bootstrap:
     recovery:
-      source: clusterBackup
+      # source: clusterBackup
+      backup:
+        name: postgres-cluster-backup-20250408000000
 
   externalClusters:
     - name: clusterBackup
