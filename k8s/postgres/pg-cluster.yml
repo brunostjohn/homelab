@@ -20,6 +20,9 @@ spec:
     - name: clusterBackup
       barmanObjectStore:
         destinationPath: s3://posgres-cluster-backups/
+        serverName: postgres-cluster
+        wal:
+          maxParallel: 8
         endpointURL: http://minio-svc.minio.svc.cluster.local:9000
         s3Credentials:
           accessKeyId:
