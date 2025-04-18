@@ -11,6 +11,7 @@ data:
   ENABLE_SCHEDULED_RESCAN: "true"
   ENABLE_SCHEDULED_UPDATE_SWITCH_TITLEDB: "true"
   ENABLE_SCHEDULED_UPDATE_MAME_XML: "true"
+  ROMM_PORT: "8080"
   TZ: Europe/Dublin
   OIDC_ENABLED: "true"
   OIDC_REDIRECT_URI: https://romm.zefirsroyal.cloud/api/oauth/openid
