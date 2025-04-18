@@ -11,3 +11,18 @@ spec:
       targetPort: 8080
       protocol: TCP
       name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: romm-internal
+  namespace: romm
+spec:
+  selector:
+    app: romm
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  type: LoadBalancer
