@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flaresolverr
-          image: ghcr.io/flaresolverr/flaresolverr:v3.3.22
+          image: ghcr.io/flaresolverr/flaresolverr:v3.3.24
           imagePullPolicy: IfNotPresent
           resources:
             limits:
