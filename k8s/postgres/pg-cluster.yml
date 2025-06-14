@@ -33,7 +33,7 @@ spec:
             key: MINIO_SECRET_KEY
 
   storage:
-    size: 70Gi
+    size: 80Gi
     storageClass: longhorn-unreplicated
 
   monitoring:
