@@ -24,7 +24,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: radarr
-          image: linuxserver/radarr:5.25.0
+          image: linuxserver/radarr:5.26.2
           imagePullPolicy: IfNotPresent
           resources:
             requests:
