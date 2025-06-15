@@ -25,7 +25,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: audiobookshelf
-          image: ghcr.io/advplyr/audiobookshelf:2.24.0
+          image: ghcr.io/advplyr/audiobookshelf:2.25.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
