@@ -30,7 +30,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: tdarr-cpu-node
-          image: ghcr.io/haveagitgat/tdarr_node:2.44.01
+          image: ghcr.io/haveagitgat/tdarr_node:2.45.01
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
