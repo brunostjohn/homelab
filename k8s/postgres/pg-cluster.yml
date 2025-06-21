@@ -20,7 +20,7 @@ spec:
     - name: clusterBackup
       barmanObjectStore:
         destinationPath: s3://posgres-cluster-backups/
-        serverName: recovered-postgres-cluster-n1
+        serverName: recovered-postgres-cluster-n2
         wal:
           maxParallel: 8
         endpointURL: http://minio-svc.minio.svc.cluster.local:9000
@@ -34,7 +34,7 @@ spec:
 
   storage:
     size: 80Gi
-    storageClass: longhorn-unreplicated
+    storageClass: local-path
 
   monitoring:
     enablePodMonitor: true
@@ -52,7 +52,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: s3://posgres-cluster-backups/
-      serverName: recovered-postgres-cluster-n2
+      serverName: recovered-postgres-cluster-n3
       endpointURL: http://minio-svc.minio.svc.cluster.local:9000
       s3Credentials:
         accessKeyId:
