@@ -22,10 +22,10 @@ importers:
         version: 5.1.0(svelte@5.34.7)(vite@7.0.0)
       prettier:
         specifier: ^3.1.1
-        version: 3.6.0
+        version: 3.6.1
       prettier-plugin-svelte:
         specifier: ^3.1.2
-        version: 3.4.0(prettier@3.6.0)(svelte@5.34.7)
+        version: 3.4.0(prettier@3.6.1)(svelte@5.34.7)
       svelte:
         specifier: ^5.0.0-next.1
         version: 5.34.7
@@ -638,8 +638,8 @@ packages:
       prettier: ^3.0.0
       svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
 
-  prettier@3.6.0:
-    resolution: {integrity: sha512-ujSB9uXHJKzM/2GBuE0hBOUgC77CN3Bnpqa+g80bkv3T3A93wL/xlzDATHhnhkzifz/UE2SNOvmbTz5hSkDlHw==}
+  prettier@3.6.1:
+    resolution: {integrity: sha512-5xGWRa90Sp2+x1dQtNpIpeOQpTDBs9cZDmA/qs2vDNN2i18PdapqY7CmBeyLlMuGqXJRIOPaCaVZTLNQRWUH/A==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -1193,12 +1193,12 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  prettier-plugin-svelte@3.4.0(prettier@3.6.0)(svelte@5.34.7):
+  prettier-plugin-svelte@3.4.0(prettier@3.6.1)(svelte@5.34.7):
     dependencies:
-      prettier: 3.6.0
+      prettier: 3.6.1
       svelte: 5.34.7
 
-  prettier@3.6.0: {}
+  prettier@3.6.1: {}
 
   readdirp@4.1.2: {}
 
