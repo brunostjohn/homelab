@@ -24,7 +24,7 @@ spec:
       containers:
         - name: linkwarden
           imagePullPolicy: IfNotPresent
-          image: ghcr.io/linkwarden/linkwarden:v2.11.3
+          image: ghcr.io/linkwarden/linkwarden:v2.11.4
           resources:
             limits:
               memory: "2Gi"
