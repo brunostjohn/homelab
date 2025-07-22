@@ -38,7 +38,7 @@ spec:
       containers:
         - name: jellyseerr
           imagePullPolicy: IfNotPresent
-          image: docker.io/fallenbagel/jellyseerr:2.7.1
+          image: docker.io/fallenbagel/jellyseerr:2.7.2
           resources:
             requests:
               memory: "2Gi"
