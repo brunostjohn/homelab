@@ -5,7 +5,7 @@ metadata:
   namespace: homeassistant
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
