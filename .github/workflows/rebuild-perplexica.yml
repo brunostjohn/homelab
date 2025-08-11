@@ -13,7 +13,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ItzCrazyKns/Perplexica
       - name: Set up Docker Buildx
@@ -52,7 +52,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ItzCrazyKns/Perplexica
       - name: Set up Docker Buildx
