@@ -87,7 +87,7 @@ spec:
       containers:
         - name: prowlarr-exporter
           imagePullPolicy: IfNotPresent
-          image: ghcr.io/onedr0p/exportarr:v2.2
+          image: ghcr.io/onedr0p/exportarr:v2.3
           args:
             - prowlarr
           env:
