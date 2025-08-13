@@ -38,7 +38,7 @@ spec:
   project: default
   source:
     chart: falco
-    targetRevision: 6.2.3
+    targetRevision: 6.2.4
     repoURL: https://falcosecurity.github.io/charts
     helm:
       valuesObject:
