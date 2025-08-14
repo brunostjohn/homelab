@@ -13,7 +13,7 @@ importers:
         version: 6.1.0(@sveltejs/kit@2.29.1(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))
       '@sveltejs/adapter-node':
         specifier: ^5.2.5
-        version: 5.2.14(@sveltejs/kit@2.29.1(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))
+        version: 5.2.15(@sveltejs/kit@2.29.1(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))
       '@sveltejs/kit':
         specifier: ^2.0.0
         version: 2.29.1(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2)
@@ -368,8 +368,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
-  '@sveltejs/adapter-node@5.2.14':
-    resolution: {integrity: sha512-TjJvfw0HZlbBGGAW2vFtdGjdKhqpGW3ZDIz0nzy8Zx6Ki6oFmYTjV5Kwn3LWTsyjbsUSXhfFPCuYop3z1iS9qQ==}
+  '@sveltejs/adapter-node@5.2.15':
+    resolution: {integrity: sha512-yNy4iYzNsOz+Bx8K5Zqr2K8QMyyc6wqd3iL2XdTVXvODYvGkqmctaCZEY4CZv/YghXjkqeRkiU9CibzGMRWzmQ==}
     peerDependencies:
       '@sveltejs/kit': ^2.4.0
 
@@ -866,7 +866,7 @@ snapshots:
     dependencies:
       '@sveltejs/kit': 2.29.1(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2)
 
-  '@sveltejs/adapter-node@5.2.14(@sveltejs/kit@2.29.1(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))':
+  '@sveltejs/adapter-node@5.2.15(@sveltejs/kit@2.29.1(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))':
     dependencies:
       '@rollup/plugin-commonjs': 28.0.6(rollup@4.46.2)
       '@rollup/plugin-json': 6.1.0(rollup@4.46.2)
