@@ -13,7 +13,7 @@ importers:
         version: 6.1.0(@sveltejs/kit@2.30.0(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))
       '@sveltejs/adapter-node':
         specifier: ^5.2.5
-        version: 5.2.15(@sveltejs/kit@2.30.0(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))
+        version: 5.2.16(@sveltejs/kit@2.30.0(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))
       '@sveltejs/kit':
         specifier: ^2.0.0
         version: 2.30.0(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2)
@@ -368,8 +368,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
-  '@sveltejs/adapter-node@5.2.15':
-    resolution: {integrity: sha512-yNy4iYzNsOz+Bx8K5Zqr2K8QMyyc6wqd3iL2XdTVXvODYvGkqmctaCZEY4CZv/YghXjkqeRkiU9CibzGMRWzmQ==}
+  '@sveltejs/adapter-node@5.2.16':
+    resolution: {integrity: sha512-YfgTfdmlYF853/NWll+XF3xE08vkh+Zr/F25XF69KEwigtRZwPACgPgUWgpJIQqi3SM3L0GiKUe6lvXcfEvlQg==}
     peerDependencies:
       '@sveltejs/kit': ^2.4.0
 
@@ -466,6 +466,15 @@ packages:
 
   fdir@6.4.6:
     resolution: {integrity: sha512-hiFoqpyZcfNm1yc4u8oWCf9A2c4D3QjCrks3zmoVKVxpQRzmPNar1hUJcBG2RQHvEVGDN+Jm81ZheVLAQMK6+w==}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+
+  fdir@6.5.0:
+    resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
+    engines: {node: '>=12.0.0'}
     peerDependencies:
       picomatch: ^3 || ^4
     peerDependenciesMeta:
@@ -765,7 +774,7 @@ snapshots:
       '@rollup/pluginutils': 5.2.0(rollup@4.46.2)
       commondir: 1.0.1
       estree-walker: 2.0.2
-      fdir: 6.4.6(picomatch@4.0.3)
+      fdir: 6.5.0(picomatch@4.0.3)
       is-reference: 1.2.1
       magic-string: 0.30.17
       picomatch: 4.0.3
@@ -866,7 +875,7 @@ snapshots:
     dependencies:
       '@sveltejs/kit': 2.30.0(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2)
 
-  '@sveltejs/adapter-node@5.2.15(@sveltejs/kit@2.30.0(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))':
+  '@sveltejs/adapter-node@5.2.16(@sveltejs/kit@2.30.0(@sveltejs/vite-plugin-svelte@6.1.2(svelte@5.38.1)(vite@7.1.2))(svelte@5.38.1)(vite@7.1.2))':
     dependencies:
       '@rollup/plugin-commonjs': 28.0.6(rollup@4.46.2)
       '@rollup/plugin-json': 6.1.0(rollup@4.46.2)
@@ -983,6 +992,10 @@ snapshots:
   estree-walker@2.0.2: {}
 
   fdir@6.4.6(picomatch@4.0.3):
+    optionalDependencies:
+      picomatch: 4.0.3
+
+  fdir@6.5.0(picomatch@4.0.3):
     optionalDependencies:
       picomatch: 4.0.3
 
