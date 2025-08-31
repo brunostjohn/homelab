@@ -6,7 +6,7 @@ metadata:
 spec:
   config: |-
     {
-      "cniVersion": "1.0.0",
+      "cniVersion": "0.3.0",
       "plugins": [
         {
           "type": "route-override",
