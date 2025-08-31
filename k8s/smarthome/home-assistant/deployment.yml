@@ -50,6 +50,7 @@ spec:
           image: docker.io/suzukishunsuke/alpine-envsubst:0.1.0
           imagePullPolicy: IfNotPresent
           securityContext:
+            privileged: true
             capabilities:
               add:
                 - NET_ADMIN
