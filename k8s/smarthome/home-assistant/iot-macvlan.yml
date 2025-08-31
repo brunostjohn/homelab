@@ -9,6 +9,15 @@ spec:
       "cniVersion": "1.0.0",
       "plugins": [
         {
+          "type": "route-override",
+          "addroutes": [
+            {
+              "dst": "10.43.0.0/16",
+              "gw": "10.42.3.1"
+            }
+          ]
+        },
+        {
           "type": "vlan",
           "mtu": 9000,
           "vlanId": 8, 
@@ -34,15 +43,6 @@ spec:
               ]
             }
           }
-        },
-        {
-          "type": "route-override",
-          "addroutes": [
-            {
-              "dst": "10.43.0.0/16",
-              "gw": "10.42.3.1"
-            }
-          ]
         }
       ]
     }
