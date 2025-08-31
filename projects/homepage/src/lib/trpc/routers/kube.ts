@@ -13,7 +13,7 @@ export const kubeRouter = t.router({
 	metrics: t.procedure.query(async () => {
 		const coreApi = kc.makeApiClient(CoreV1Api);
 		const metricsApi = new Metrics(kc);
-		const { body: nodes } = await coreApi.listNode();
+		const { items } = await coreApi.listNode();
 
 		let cpuTotal = 0;
 		let cpuUsage = 0;
@@ -28,15 +28,15 @@ export const kubeRouter = t.router({
 				memory: { total: number };
 			};
 		} = {};
-		nodes.items.forEach((node) => {
+		items.forEach((node) => {
 			const cpu = Number.parseInt(node.status?.capacity?.cpu ?? "0", 10);
 			const mem = parseMemory(node.status?.capacity?.memory ?? "0");
 			const ready =
 				(node.status?.conditions?.filter(
 					(condition) => condition.type === "Ready" && condition.status === "True"
 				).length ?? 0) > 0;
-			nodeMap[node.metadata.name] = {
-				name: node.metadata?.name,
+			nodeMap[node.metadata?.name ?? ""] = {
+				name: node.metadata?.name ?? "",
 				ready,
 				cpu: {
 					total: cpu,
