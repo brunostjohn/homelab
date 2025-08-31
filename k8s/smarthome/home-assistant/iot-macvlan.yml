@@ -37,7 +37,7 @@ spec:
                     "fromArg": "K8S_POD_NAME"
                 }
             ]
-          },
+          }
         }
       ]
     }
