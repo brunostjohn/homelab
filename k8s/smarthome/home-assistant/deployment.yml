@@ -68,11 +68,11 @@ spec:
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:2025.8.3
           imagePullPolicy: IfNotPresent
-          command:
-            [
+          command: [
               "/bin/sh",
               "-c",
-              "ip route add 10.43.0.0/16 via 10.42.3.1 && /init",
+              "/init",
+              # "ip route add 10.43.0.0/16 via 10.42.3.1 && /init",
             ]
           securityContext:
             runAsUser: 0
