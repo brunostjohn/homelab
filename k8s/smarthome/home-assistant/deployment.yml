@@ -49,16 +49,11 @@ spec:
         - name: prepare-secrets-yaml
           image: docker.io/suzukishunsuke/alpine-envsubst:0.1.0
           imagePullPolicy: IfNotPresent
-          securityContext:
-            privileged: true
-            capabilities:
-              add:
-                - NET_ADMIN
           command:
             [
               "/bin/sh",
               "-c",
-              "rm -rf /config/secrets.yaml && envsubst < /secrets-template.yaml > /config/secrets.yaml && ip route add 10.43.0.0/16 via 10.42.3.1",
+              "rm -rf /config/secrets.yaml && envsubst < /secrets-template.yaml > /config/secrets.yaml",
             ]
           volumeMounts:
             - name: ha-config
@@ -73,6 +68,12 @@ spec:
         - name: homeassistant
           image: ghcr.io/home-assistant/home-assistant:2025.8.3
           imagePullPolicy: IfNotPresent
+          command:
+            [
+              "/bin/sh",
+              "-c",
+              "ip route add 10.43.0.0/16 via 10.42.3.1 && python3 -m homeassistant --config /config",
+            ]
           securityContext:
             runAsUser: 0
             privileged: true
