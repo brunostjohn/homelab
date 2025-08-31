@@ -49,6 +49,10 @@ spec:
         - name: prepare-secrets-yaml
           image: docker.io/suzukishunsuke/alpine-envsubst:0.1.0
           imagePullPolicy: IfNotPresent
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
           command:
             [
               "/bin/sh",
