@@ -9,34 +9,34 @@ spec:
       "cniVersion": "1.0.0",
       "plugins": [
         {
-          "type": "route-override",
-          "addroutes": [
-            {
-              "dst": "10.43.0.0/16",
-              "gw": "10.42.3.1"
-            }
-          ]
-        },
-        {
           "type": "vlan",
           "mtu": 9000,
           "vlanId": 8, 
           "master": "lan0",
           "mode": "bridge",
           "ipam": {
-            "type": "dhcp",
-            "daemonSocketPath": "/run/cni/dhcp.sock",
-            "request": [
-                {
-                    "skipDefault": false
-                }
+            "type": "static",
+            "addresses": [
+              {
+                "address": "10.4.69.69/16",
+                "gateway": "10.4.0.1"
+              }
             ],
-            "provide": [
-                {
-                    "option": "host-name",
-                    "fromArg": "K8S_POD_NAME"
-                }
-            ]
+            "routes": [
+              {
+                "dst": "0.0.0.0/0"
+              },
+              {
+                "dst": "10.43.0.0/16",
+                "gw": "10.42.3.1"
+              }
+            ],
+            "dns": {
+              "nameservers": [
+                "10.4.0.1",
+                "1.1.1.1"
+              ]
+            }
           }
         }
       ]
