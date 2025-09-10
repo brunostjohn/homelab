@@ -17,7 +17,7 @@ spec:
       containers:
         - name: rally
           imagePullPolicy: IfNotPresent
-          image: docker.io/lukevella/rallly:4.3.1
+          image: docker.io/lukevella/rallly:4.4.0
           resources:
             requests:
               memory: "256Mi"
