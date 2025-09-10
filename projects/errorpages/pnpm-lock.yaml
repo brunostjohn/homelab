@@ -10,13 +10,13 @@ importers:
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^6.0.0
-        version: 6.1.0(@sveltejs/kit@2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))
+        version: 6.1.0(@sveltejs/kit@2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))
       '@sveltejs/adapter-node':
         specifier: ^5.2.5
-        version: 5.3.2(@sveltejs/kit@2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))
+        version: 5.3.2(@sveltejs/kit@2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))
       '@sveltejs/kit':
         specifier: ^2.0.0
-        version: 2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)
+        version: 2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.0.0
         version: 6.2.0(svelte@5.38.8)(vite@7.1.5)
@@ -378,8 +378,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.4.0
 
-  '@sveltejs/kit@2.37.1':
-    resolution: {integrity: sha512-4T9rF2Roe7RGvHfcn6+n92Yc2NF88k7ljFz9+wE0jWxyencqRpadr2/CvlcQbbTXf1ozmFxgMO6af+qm+1mPFw==}
+  '@sveltejs/kit@2.38.0':
+    resolution: {integrity: sha512-iLmykJOv4PAZvuC0niq1HUoK/LZdfsTW1CpkPAAnroYeYiV7Bp73Eeh/As8u0Y1n/2IDM+p9cdoHYufcpvkXkQ==}
     engines: {node: '>=18.13'}
     hasBin: true
     peerDependencies:
@@ -521,9 +521,6 @@ packages:
 
   locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
-
-  magic-string@0.30.18:
-    resolution: {integrity: sha512-yi8swmWbO17qHhwIBNeeZxTceJMeBvWJaId6dyvTSOwTipqeHhMhOrz6513r1sOKnpvQ7zkhlG8tPrpilwTxHQ==}
 
   magic-string@0.30.19:
     resolution: {integrity: sha512-2N21sPY9Ws53PZvsEpVtNuSW+ScYbQdp4b9qUaL+9QkHUrGFKo56Lg9Emg5s9V/qrtNBmiR01sYhUOwu3H+VOw==}
@@ -889,19 +886,19 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
-  '@sveltejs/adapter-auto@6.1.0(@sveltejs/kit@2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))':
+  '@sveltejs/adapter-auto@6.1.0(@sveltejs/kit@2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))':
     dependencies:
-      '@sveltejs/kit': 2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)
+      '@sveltejs/kit': 2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)
 
-  '@sveltejs/adapter-node@5.3.2(@sveltejs/kit@2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))':
+  '@sveltejs/adapter-node@5.3.2(@sveltejs/kit@2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5))':
     dependencies:
       '@rollup/plugin-commonjs': 28.0.6(rollup@4.50.1)
       '@rollup/plugin-json': 6.1.0(rollup@4.50.1)
       '@rollup/plugin-node-resolve': 16.0.1(rollup@4.50.1)
-      '@sveltejs/kit': 2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)
+      '@sveltejs/kit': 2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)
       rollup: 4.50.1
 
-  '@sveltejs/kit@2.37.1(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)':
+  '@sveltejs/kit@2.38.0(@sveltejs/vite-plugin-svelte@6.2.0(svelte@5.38.8)(vite@7.1.5))(svelte@5.38.8)(vite@7.1.5)':
     dependencies:
       '@standard-schema/spec': 1.0.0
       '@sveltejs/acorn-typescript': 1.0.5(acorn@8.15.0)
@@ -912,7 +909,7 @@ snapshots:
       devalue: 5.3.2
       esm-env: 1.2.2
       kleur: 4.1.5
-      magic-string: 0.30.18
+      magic-string: 0.30.19
       mrmime: 2.0.1
       sade: 1.8.1
       set-cookie-parser: 2.7.1
@@ -1042,10 +1039,6 @@ snapshots:
   kleur@4.1.5: {}
 
   locate-character@3.0.0: {}
-
-  magic-string@0.30.18:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.5
 
   magic-string@0.30.19:
     dependencies:
