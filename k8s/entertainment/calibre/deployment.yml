@@ -33,7 +33,7 @@ spec:
             name: calibre-litestream
       initContainers:
         - name: init-litestream-metadata
-          image: litestream/litestream:0.3
+          image: litestream/litestream:0.5
           imagePullPolicy: IfNotPresent
           args:
             [
@@ -53,7 +53,7 @@ spec:
             - secretRef:
                 name: calibre-litestream-secrets
         - name: init-litestream-cwa
-          image: litestream/litestream:0.3
+          image: litestream/litestream:0.5
           imagePullPolicy: IfNotPresent
           args:
             [
@@ -72,7 +72,7 @@ spec:
             - secretRef:
                 name: calibre-litestream-secrets
         - name: init-litestream-gdrive
-          image: litestream/litestream:0.3
+          image: litestream/litestream:0.5
           imagePullPolicy: IfNotPresent
           args:
             [
@@ -91,7 +91,7 @@ spec:
             - secretRef:
                 name: calibre-litestream-secrets
         - name: init-litestream-app
-          image: litestream/litestream:0.3
+          image: litestream/litestream:0.5
           imagePullPolicy: IfNotPresent
           args:
             [
@@ -111,7 +111,7 @@ spec:
                 name: calibre-litestream-secrets
       containers:
         - name: litestream
-          image: litestream/litestream:0.3
+          image: litestream/litestream:0.5
           args: ["replicate"]
           volumeMounts:
             - name: litestream-configmap
