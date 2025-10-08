@@ -1,4 +1,4 @@
-FROM python:3.13-bookworm AS klipper-cloner
+FROM python:3.14-bookworm AS klipper-cloner
 
 RUN apt update \
  && apt install -y \
@@ -15,7 +15,7 @@ RUN python -m venv venv \
  && venv/bin/python -m compileall klipper/klippy \
  && venv/bin/python klipper/klippy/chelper/__init__.py
 
-FROM python:3.13-bookworm AS moonraker-cloner
+FROM python:3.14-bookworm AS moonraker-cloner
 
 WORKDIR /opt
 
@@ -25,7 +25,7 @@ RUN git clone https://github.com/Arksine/moonraker moonraker \
 RUN python -m venv venv \
  && venv/bin/pip install -r moonraker/scripts/moonraker-requirements.txt
 
-FROM python:3.13-slim-bookworm AS runner
+FROM python:3.14-slim-bookworm AS runner
 
 WORKDIR /opt
 
