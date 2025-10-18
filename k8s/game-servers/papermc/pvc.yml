@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: papermc
+  name: papermc-data
   namespace: game-servers
 spec:
   storageClassName: floof-nfs-csi

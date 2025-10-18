@@ -7,6 +7,7 @@ metadata:
     reloader.stakater.com/auto: "true"
     secrets.infisical.com/auto-reload: "true"
 spec:
+  replicas: 1
   strategy:
     type: Recreate
   revisionHistoryLimit: 3
@@ -19,9 +20,9 @@ spec:
         app: modded-mc
     spec:
       volumes:
-        - name: modded-mc-pvc-again
+        - name: modded-mc-pvc-again-again
           persistentVolumeClaim:
-            claimName: modded-mc-pvc-again
+            claimName: modded-mc-pvc-again-again
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
@@ -46,7 +47,7 @@ spec:
               protocol: TCP
               name: map
           volumeMounts:
-            - name: modded-mc-pvc-again
+            - name: modded-mc-pvc-again-again
               mountPath: /data
           startupProbe:
             exec:
@@ -71,6 +72,6 @@ spec:
             periodSeconds: 30
           envFrom:
             - configMapRef:
-                name: modded-mc-config
+                name: modded-mc-config-again-again
             - secretRef:
-                name: modded-mc-secrets
+                name: modded-mc-secrets-again-again

@@ -18,7 +18,7 @@ spec:
       nodeSelector:
         kubernetes.io/hostname: s7
       volumes:
-        - name: papermc
+        - name: papermc-data
           hostPath:
             path: /mc-world
       containers:
@@ -43,7 +43,7 @@ spec:
               protocol: TCP
               name: map
           volumeMounts:
-            - name: papermc
+            - name: papermc-data
               mountPath: /data
           env:
             - name: EULA
@@ -57,9 +57,9 @@ spec:
             - name: MAX_MEMORY
               value: 16G
             - name: TYPE
-              value: paper
+              value: fabric
             - name: VERSION
-              value: "1.21.1"
+              value: "1.21.8"
             - name: ONLINE_MODE
               value: "false"
             - name: ICON
