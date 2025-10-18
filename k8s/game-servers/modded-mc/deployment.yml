@@ -72,6 +72,6 @@ spec:
             periodSeconds: 30
           envFrom:
             - configMapRef:
-                name: modded-mc-config-again-again
+                name: modded-mc-config
             - secretRef:
-                name: modded-mc-secrets-again-again
+                name: modded-mc-secrets
