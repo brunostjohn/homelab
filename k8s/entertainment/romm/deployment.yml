@@ -86,3 +86,6 @@ spec:
               path: /api/heartbeat
               port: http
             initialDelaySeconds: 270
+            periodSeconds: 30
+            timeoutSeconds: 30
+            failureThreshold: 5
