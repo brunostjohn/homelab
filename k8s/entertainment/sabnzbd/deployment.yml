@@ -43,7 +43,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: sabnzbd
-          image: lscr.io/linuxserver/sabnzbd:4.5.4
+          image: lscr.io/linuxserver/sabnzbd:4.5.5
           imagePullPolicy: IfNotPresent
           resources:
             requests:
