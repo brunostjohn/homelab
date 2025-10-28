@@ -26,7 +26,7 @@ spec:
       containers:
         - name: manyfold
           imagePullPolicy: IfNotPresent
-          image: lscr.io/linuxserver/manyfold:0.126.0
+          image: lscr.io/linuxserver/manyfold:0.127.0
           resources:
             requests:
               memory: "512Mi"
