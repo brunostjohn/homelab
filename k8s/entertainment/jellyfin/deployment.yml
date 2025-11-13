@@ -26,8 +26,9 @@ spec:
         fsGroup: 1000
       volumes:
         - name: jellyfin-config
-          persistentVolumeClaim:
-            claimName: jellyfin-config-pvc
+          hostPath:
+            type: Directory
+            path: /jellyfin-lockable
         - name: jellyfin-cache
           persistentVolumeClaim:
             claimName: jellyfin-cache-pvc
