@@ -1,3 +1,14 @@
+-- DROP
+CREATE ROLE drop_role;
+\c drop
+GRANT ALL PRIVILEGES ON DATABASE drop TO drop_role;
+GRANT ALL ON SCHEMA public TO drop_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO drop_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to drop_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to drop_role;
+CREATE USER drop WITH PASSWORD '<password>';
+GRANT drop_role TO drop;
+
 -- BLOCKY
 CREATE ROLE blocky_role;
 \c blocky

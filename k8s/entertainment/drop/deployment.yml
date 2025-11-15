@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drop
+  namespace: entertainment
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: drop
+  template:
+    metadata:
+      labels:
+        app: drop
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      volumes:
+        - name: drop-storage
+          persistentVolumeClaim:
+            claimName: drop-storage-pvc
+      containers:
+        - name: drop
+          image: ghcr.io/drop-oss/drop:v0.3.4
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: drop-config
+            - secretRef:
+                name: drop-secrets
+          volumeMounts:
+            - name: drop-storage
+              mountPath: /data
+              subPath: data
+            - name: drop-storage
+              mountPath: /config
+              subPath: config
+          startupProbe:
+            httpGet:
+              path: /api/v1/
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: /api/v1/
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 30
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 30
+            failureThreshold: 10

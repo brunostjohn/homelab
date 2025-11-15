@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: drop-config
+  namespace: entertainment
+data:
+  EXTERNAL_URL: https://drop.zefirsroyal.cloud
+  OIDC_WELLKNOWN: https://auth.zefirsroyal.cloud/application/o/drop/.well-known/openid-configuration
+  OIDC_ADMIN_GROUP: authentik Admins
+  DISABLE_SIMPLE_AUTH: "true"
+  OIDC_USERNAME_CLAIM: preferred_username
+  OIDC_SCOPES: openid email profile
