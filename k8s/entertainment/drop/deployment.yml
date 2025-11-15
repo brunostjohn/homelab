@@ -23,6 +23,9 @@ spec:
         - name: drop-storage
           persistentVolumeClaim:
             claimName: drop-storage-pvc
+        - name: entertainment-content
+          persistentVolumeClaim:
+            claimName: entertainment-content-pvc
       containers:
         - name: drop
           image: ghcr.io/drop-oss/drop:v0.3.4
@@ -50,6 +53,9 @@ spec:
             - name: drop-storage
               mountPath: /config
               subPath: config
+            - name: entertainment-content
+              mountPath: /library
+              subpath: media/games
           startupProbe:
             httpGet:
               path: /api/v1/
