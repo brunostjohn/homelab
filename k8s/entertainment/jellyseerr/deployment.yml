@@ -6,7 +6,7 @@ metadata:
   annotations:
     secrets.infisical.com/auto-reload: "true"
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: jellyseerr
@@ -81,9 +81,9 @@ spec:
             httpGet:
               path: /
               port: http
-            failureThreshold: 5
-            timeoutSeconds: 5
-            periodSeconds: 20
+            failureThreshold: 30
+            timeoutSeconds: 10
+            periodSeconds: 30
           readinessProbe:
             httpGet:
               path: /
