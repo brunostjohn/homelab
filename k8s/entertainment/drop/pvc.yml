@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 1Ti
-  storageClassName: jabberwock-iscsi-csi
+  storageClassName: jabberwock-iscsi-nfs
