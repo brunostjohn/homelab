@@ -8,5 +8,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Ti
+      storage: 100Gi
   storageClassName: jabberwock-nfs-csi
