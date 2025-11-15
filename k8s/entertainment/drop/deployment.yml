@@ -49,13 +49,9 @@ spec:
           volumeMounts:
             - name: drop-storage
               mountPath: /data
-              subPath: data
-            - name: drop-storage
-              mountPath: /config
-              subPath: config
             - name: entertainment-content
               mountPath: /library
-              subpath: media/games
+              subPath: media/games
           startupProbe:
             httpGet:
               path: /api/v1/
