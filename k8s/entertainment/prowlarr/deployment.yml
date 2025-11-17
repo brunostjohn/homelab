@@ -22,7 +22,7 @@ spec:
             claimName: prowlarr-config
       containers:
         - name: prowlarr
-          image: docker.io/linuxserver/prowlarr:2.1.5
+          image: docker.io/linuxserver/prowlarr:2.3.0
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
