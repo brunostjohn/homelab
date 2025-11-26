@@ -19,7 +19,7 @@ terraform {
 
     grafana = {
       source  = "grafana/grafana"
-      version = "4.18.0"
+      version = "4.20.0"
     }
 
     infisical = {
