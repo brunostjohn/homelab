@@ -23,7 +23,7 @@ data:
       configure_url: "https://auth.zefirsroyal.cloud/application/o/home-assistant/.well-known/openid-configuration"
       username_field: "preferred_username"
       scope: "openid profile email"
-      block_login: false
+      block_login: true
       openid_text: "Login with Zefir's Cloud"
 
     http:
