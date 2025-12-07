@@ -49,17 +49,17 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "250m"
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 8080
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8080
-          startupProbe:
-            httpGet:
-              path: /
-              port: 8080
-            periodSeconds: 10
-            failureThreshold: 30
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          # startupProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #   periodSeconds: 10
+          #   failureThreshold: 30
