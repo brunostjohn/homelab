@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homeassistant-ingress
+  namespace: homeassistant
+  labels:
+    app.kubernetes.io/name: homeassistant
+spec:
+  rules:
+    - host: thekingdom.zefirsroyal.cloud
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: homeassistant-svc
+                port:
+                  number: 8123
