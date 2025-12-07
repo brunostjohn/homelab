@@ -17,6 +17,15 @@ data:
       ip_address: 10.4.69.69
       advertise_ip: 10.4.69.69
 
+    openid:
+      client_id: !secret client_id
+      client_secret: !secret client_secret
+      configure_url: "https://auth.zefirsroyal.cloud/application/o/home-assistant/.well-known/openid-configuration"
+      username_field: "preferred_username"
+      scope: "openid profile email"
+      block_login: false
+      openid_text: "Login with Zefir's Cloud"
+
     http:
       use_x_forwarded_for: true
       trusted_proxies:
