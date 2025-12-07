@@ -115,9 +115,9 @@ spec:
           volumeMounts:
             - name: ha-config
               mountPath: /config
-            # - name: ha-configmap
-            #   mountPath: /config/configuration.yaml
-            #   subPath: configuration.yaml
+            - name: ha-configmap
+              mountPath: /config/configuration.yaml
+              subPath: configuration.yaml
       restartPolicy: Always
       volumes:
         - name: ha-config
