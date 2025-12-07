@@ -91,27 +91,30 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "500m"
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 8123
-          #   initialDelaySeconds: 30
-          #   failureThreshold: 3
-          #   timeoutSeconds: 1
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 8123
-          #   initialDelaySeconds: 30
-          #   failureThreshold: 3
-          #   timeoutSeconds: 1
-          #   periodSeconds: 10
-          # startupProbe:
-          #   tcpSocket:
-          #     port: 8123
-          #   initialDelaySeconds: 30
-          #   failureThreshold: 30
-          #   timeoutSeconds: 1
-          #   periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              port: 8123
+              path: /manifest.json
+            initialDelaySeconds: 30
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: 8123
+              path: /manifest.json
+            initialDelaySeconds: 30
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /manifest.json
+              port: 8123
+            initialDelaySeconds: 30
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
           volumeMounts:
             - name: ha-config
               mountPath: /config
