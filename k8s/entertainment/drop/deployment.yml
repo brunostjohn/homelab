@@ -23,7 +23,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: drop
-          image: ghcr.io/drop-oss/drop:v0.3.4
+          image: ghcr.io/drop-oss/drop:v0.3.5
           imagePullPolicy: IfNotPresent
           resources:
             requests:
