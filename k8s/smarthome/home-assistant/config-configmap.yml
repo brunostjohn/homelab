@@ -13,6 +13,10 @@ data:
     script: !include scripts.yaml
     scene: !include scenes.yaml
 
+    homekit:
+      ip_address: 10.4.69.69
+      advertise_ip: 10.4.69.69
+
     http:
       use_x_forwarded_for: true
       trusted_proxies:
