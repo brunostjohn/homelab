@@ -32,10 +32,5 @@ data:
     prometheus:
       namespace: homeassistant
 
-    auth_header:
-      username_header: X-Authentik-username
-
     logger:
       default: info
-
-    awtrix:
