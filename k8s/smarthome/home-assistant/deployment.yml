@@ -10,7 +10,7 @@ metadata:
     reloader.stakater.com/auto: "true"
 spec:
   revisionHistoryLimit: 3
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   selector:
@@ -43,7 +43,6 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
-      # hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       initContainers:
         - name: prepare-secrets-yaml
@@ -92,27 +91,27 @@ spec:
             limits:
               memory: "1Gi"
               cpu: "500m"
-          livenessProbe:
-            tcpSocket:
-              port: 8123
-            initialDelaySeconds: 30
-            failureThreshold: 3
-            timeoutSeconds: 1
-            periodSeconds: 10
-          readinessProbe:
-            tcpSocket:
-              port: 8123
-            initialDelaySeconds: 30
-            failureThreshold: 3
-            timeoutSeconds: 1
-            periodSeconds: 10
-          startupProbe:
-            tcpSocket:
-              port: 8123
-            initialDelaySeconds: 30
-            failureThreshold: 30
-            timeoutSeconds: 1
-            periodSeconds: 5
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8123
+          #   initialDelaySeconds: 30
+          #   failureThreshold: 3
+          #   timeoutSeconds: 1
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 8123
+          #   initialDelaySeconds: 30
+          #   failureThreshold: 3
+          #   timeoutSeconds: 1
+          #   periodSeconds: 10
+          # startupProbe:
+          #   tcpSocket:
+          #     port: 8123
+          #   initialDelaySeconds: 30
+          #   failureThreshold: 30
+          #   timeoutSeconds: 1
+          #   periodSeconds: 5
           volumeMounts:
             - name: ha-config
               mountPath: /config
