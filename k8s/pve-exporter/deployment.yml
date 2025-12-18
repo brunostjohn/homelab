@@ -21,7 +21,7 @@ spec:
             secretName: pve-exporter-config
       containers:
         - name: pve-exporter
-          image: docker.io/prompve/prometheus-pve-exporter:3.6.0
+          image: docker.io/prompve/prometheus-pve-exporter:3.7.0
           imagePullPolicy: IfNotPresent
           resources:
             limits:
