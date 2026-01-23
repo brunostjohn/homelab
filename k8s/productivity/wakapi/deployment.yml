@@ -24,7 +24,7 @@ spec:
             name: wakapi-config-file
       containers:
         - name: wakapi
-          image: ghcr.io/muety/wakapi:2.17.0
+          image: ghcr.io/muety/wakapi:2.17.1
           imagePullPolicy: IfNotPresent
           resources:
             requests:
