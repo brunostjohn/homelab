@@ -42,7 +42,7 @@ spec:
           securityContext:
             runAsGroup: 1001
             runAsUser: 1001
-          image: docker.io/rommapp/romm:4.5.0
+          image: docker.io/rommapp/romm:4.6.0
           imagePullPolicy: IfNotPresent
           # resources:
           #   requests:
