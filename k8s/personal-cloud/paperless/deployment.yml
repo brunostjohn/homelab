@@ -188,7 +188,7 @@ spec:
     spec:
       containers:
         - name: gotenberg
-          image: docker.io/gotenberg/gotenberg:8.25
+          image: docker.io/gotenberg/gotenberg:8.26
           imagePullPolicy: IfNotPresent
           securityContext:
             privileged: false
