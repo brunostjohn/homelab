@@ -12,7 +12,7 @@ spec:
   project: default
   source:
     chart: dragonfly-operator
-    targetRevision: v1.3.1
+    targetRevision: v1.4.0
     repoURL: ghcr.io/dragonflydb/dragonfly-operator/helm
     helm:
       valuesObject:
