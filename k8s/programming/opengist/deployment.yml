@@ -20,7 +20,7 @@ spec:
             claimName: opengist-data
       containers:
         - name: opengist
-          image: ghcr.io/thomiceli/opengist:1.11.1
+          image: ghcr.io/thomiceli/opengist:1.12.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
