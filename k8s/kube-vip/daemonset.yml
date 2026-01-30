@@ -54,7 +54,7 @@ spec:
               value: "65510"
             - name: bgp_peeraddress
               value: 10.0.0.1
-          image: ghcr.io/kube-vip/kube-vip:v1.0.3
+          image: ghcr.io/kube-vip/kube-vip:v1.0.4
           imagePullPolicy: Always
           name: kube-vip
           resources: {}
