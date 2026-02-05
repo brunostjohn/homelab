@@ -24,7 +24,7 @@ spec:
             claimName: esphome-config
       containers:
         - name: esphome
-          image: ghcr.io/esphome/esphome:2026.1.3
+          image: ghcr.io/esphome/esphome:2026.1.4
           imagePullPolicy: IfNotPresent
           resources:
             requests:
