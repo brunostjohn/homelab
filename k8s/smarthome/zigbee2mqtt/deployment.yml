@@ -26,7 +26,7 @@ spec:
             path: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
       containers:
         - name: zigbee2mqtt
-          image: docker.io/koenkk/zigbee2mqtt:2.7.2
+          image: docker.io/koenkk/zigbee2mqtt:2.8.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: zigbee2mqtt-data
