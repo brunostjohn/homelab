@@ -37,7 +37,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}},value=v15.5.0
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@v6.19.1
+        uses: docker/build-push-action@v6.19.2
         with:
           build-args: |-
             CNPG_TAG=15.5
