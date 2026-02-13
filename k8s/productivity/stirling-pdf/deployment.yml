@@ -20,7 +20,7 @@ spec:
             claimName: stirling-pdf-trainingdata
       containers:
         - name: stirling-pdf
-          image: docker.io/stirlingtools/stirling-pdf:2.4.5
+          image: docker.io/stirlingtools/stirling-pdf:2.4.6
           imagePullPolicy: IfNotPresent
           resources:
             requests:
