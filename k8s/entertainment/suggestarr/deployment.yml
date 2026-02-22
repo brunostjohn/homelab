@@ -21,7 +21,7 @@ spec:
             claimName: suggestarr-config-pvc
       containers:
         - name: suggestarr
-          image: docker.io/ciuse99/suggestarr:v2.1.8
+          image: docker.io/ciuse99/suggestarr:v2.2.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
