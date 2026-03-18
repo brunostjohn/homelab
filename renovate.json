@@ -11,8 +11,39 @@
   "separateMajorMinor": true,
   "packageRules": [
     {
+      "description": "Immich: do not bump Helm chart; app images updated via customManagers",
+      "matchManagers": ["argocd"],
+      "matchDatasources": ["helm"],
+      "matchDepNames": ["immich"],
+      "enabled": false
+    },
+    {
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "automerge": true
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Immich server image tag inside Argo Helm values",
+      "managerFilePatterns": ["/apps/clusterApps/templates/immich\\.yaml$/"],
+      "matchStrings": [
+        "(?m)^        image:\\n          tag: (?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+)\\n\\n        immich:"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "ghcr.io/immich-app/immich-server",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "description": "Immich machine-learning (CUDA) image tag inside Argo Helm values",
+      "managerFilePatterns": ["/apps/clusterApps/templates/immich\\.yaml$/"],
+      "matchStrings": [
+        "(?m)^        machine-learning:\\n          image:\\n            tag: (?<currentValue>v[0-9]+\\.[0-9]+\\.[0-9]+-cuda)"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "ghcr.io/immich-app/immich-machine-learning",
+      "versioningTemplate": "semver"
     }
   ],
   "npm": {
