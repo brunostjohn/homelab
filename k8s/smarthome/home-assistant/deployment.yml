@@ -71,7 +71,7 @@ spec:
             [
               "/bin/sh",
               "-c",
-              "ip route add 10.43.0.0/16 via $(route -n | grep 'UG[ \t]' | awk '{print $2}' | grep 10.42 | head -n 1) && /init",
+              "GW=$(route -n | grep 'UG[ \t]' | awk '{print $2}' | grep 10.42 | head -n 1); [ -n \"$GW\" ] && ip route replace 10.43.0.0/16 via \"$GW\" || true; exec /init",
             ]
           securityContext:
             runAsUser: 0

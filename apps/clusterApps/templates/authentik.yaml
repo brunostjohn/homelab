@@ -1,0 +1,107 @@
+apiVersion: secrets.infisical.com/v1alpha1
+kind: InfisicalSecret
+metadata:
+  name: authentik-secrets-infisical
+  namespace: authentik
+spec:
+  authentication:
+    universalAuth:
+      secretsScope:
+        projectSlug: cluster-secrets-rgq1
+        envSlug: dev
+        secretsPath: /authentik
+        recursive: true
+      credentialsRef:
+        secretName: infisical-machine-id
+        secretNamespace: infisical
+  managedSecretReference:
+    secretName: authentik-secrets
+    secretNamespace: authentik
+    creationPolicy: Owner
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: authentik
+  namespace: argocd
+spec:
+  destination:
+    namespace: authentik
+    server: https://kubernetes.default.svc
+  project: security
+  revisionHistoryLimit: 10
+  source:
+    chart: authentik
+    helm:
+      values: |-
+        global:
+          addPrometheusAnnotations: false
+          env:
+            - name: AUTHENTIK_LISTEN__TRUSTED_PROXY_CIDRS
+              value: 10.43.0.0/16,10.0.0.0/8,10.42.0.0/16
+
+        geoip:
+          enabled: false
+
+        authentik:
+          secret_key: env://AUTHENTIK_SECRET_KEY
+          error_reporting:
+            enabled: false
+          postgresql:
+            name: ""
+            user: ""
+            host: ""
+            password: ""
+
+        envFrom:
+          - secretRef:
+              name: authentik-secrets
+
+        server:
+          replicas: 3
+          metrics:
+            enabled: false
+            serviceMonitor:
+              enabled: false
+          ingress:
+            ingressClassName: traefik
+            enabled: true
+            hosts:
+              - auth.zefirsroyal.cloud
+              - authentik.local
+
+        worker:
+          replicas: 2
+          startupProbe: null
+          readinessProbe: null
+          livenessProbe: null
+
+        postgresql:
+          enabled: false
+
+        redis:
+          enabled: false
+
+        email:
+          host: ""
+          port: ""
+          username: ""
+          password: ""
+          use_tls: false
+          use_ssl: true
+          timeout: 30
+          from: ""
+    path: .
+    repoURL: https://charts.goauthentik.io
+    targetRevision: 2026.2.1
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 2m
+      limit: 5

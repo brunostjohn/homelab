@@ -1,0 +1,112 @@
+apiVersion: secrets.infisical.com/v1alpha1
+kind: InfisicalSecret
+metadata:
+  name: immich-secrets-infisical
+  namespace: immich
+spec:
+  authentication:
+    universalAuth:
+      secretsScope:
+        projectSlug: cluster-secrets-rgq1
+        envSlug: dev
+        secretsPath: /immich
+        recursive: true
+      credentialsRef:
+        secretName: infisical-machine-id
+        secretNamespace: infisical
+  managedSecretReference:
+    secretName: immich-secrets
+    secretNamespace: immich
+    creationPolicy: Owner
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: immich
+  namespace: argocd
+spec:
+  destination:
+    namespace: immich
+    server: https://kubernetes.default.svc
+  project: default
+  revisionHistoryLimit: 10
+  source:
+    chart: immich
+    helm:
+      values: |
+        env:
+          REDIS_HOSTNAME: dragonfly.databases.svc.cluster.local
+          REDIS_PORT: "6379"
+          REDIS_DBINDEX: "9"
+          DB_HOSTNAME: postgres-cluster-rw-pooler.databases.svc.cluster.local
+          DB_USERNAME: immich
+          DB_DATABASE_NAME: immich
+          DB_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: immich-secrets
+                key: DB_PASSWORD
+                namespace: immich
+          NVIDIA_VISIBLE_DEVICES: all
+          NVIDIA_DRIVER_CAPABILITIES: "compute,video,utility"
+
+        image:
+          tag: v2.5.6
+
+        immich:
+          metrics:
+            enabled: true
+          persistence:
+            library:
+              existingClaim: immich-library
+
+        postgresql:
+          enabled: false
+
+        redis:
+          enabled: false
+
+        server:
+          resources:
+            requests:
+              nvidia.com/gpu.shared: "1"
+            limits:
+              nvidia.com/gpu.shared: "1"
+          runtimeClassName: nvidia
+          enabled: true
+          probes:
+            startup:
+              spec:
+                failureThreshold: 360
+
+        machine-learning:
+          image:
+            tag: v2.5.6-cuda
+          resources:
+            requests:
+              nvidia.com/gpu.shared: "1"
+            limits:
+              nvidia.com/gpu.shared: "1"
+          runtimeClassName: nvidia
+          enabled: true
+          persistence:
+            cache:
+              enabled: true
+              size: 10Gi
+              type: pvc
+              storageClass: floof-nfs-csi
+              accessMode: ReadWriteMany
+    path: .
+    repoURL: https://immich-app.github.io/immich-charts
+    targetRevision: 0.9.2
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 2m
+      limit: 5
