@@ -39,6 +39,9 @@ spec:
           env:
             - name: AUTHENTIK_LISTEN__TRUSTED_PROXY_CIDRS
               value: 10.43.0.0/16,10.0.0.0/8,10.42.0.0/16
+          envFrom:
+            - secretRef:
+                name: authentik-secrets
 
         geoip:
           enabled: false
@@ -52,10 +55,6 @@ spec:
             user: ""
             host: ""
             password: ""
-
-        envFrom:
-          - secretRef:
-              name: authentik-secrets
 
         server:
           replicas: 3
