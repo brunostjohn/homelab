@@ -23,7 +23,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: cloudflare-ddns
-          image: docker.io/favonia/cloudflare-ddns:1.15.1
+          image: docker.io/favonia/cloudflare-ddns:1.16.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
