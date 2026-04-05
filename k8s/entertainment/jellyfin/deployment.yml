@@ -47,8 +47,8 @@ spec:
               cpu: "1"
               nvidia.com/gpu.shared: "1"
             limits:
-              memory: "4Gi"
-              cpu: "2"
+              memory: "8Gi"
+              cpu: "4"
               nvidia.com/gpu.shared: "1"
           ports:
             - containerPort: 8096
