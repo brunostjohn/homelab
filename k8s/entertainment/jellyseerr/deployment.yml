@@ -38,7 +38,7 @@ spec:
       containers:
         - name: jellyseerr
           imagePullPolicy: IfNotPresent
-          image: ghcr.io/seerr-team/seerr:v3.1.1
+          image: ghcr.io/seerr-team/seerr:v3.2.0
           resources:
             requests:
               memory: "2Gi"
