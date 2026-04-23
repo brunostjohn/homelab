@@ -59,23 +59,31 @@ data:
         headers:
           accept: "application/json, text/html"
         content_type: 'application/json; charset=utf-8'
-        payload: |
+        payload: >
           {
-            "content": "ZEFIR HAS SAID A WORD!!!!",
+            "content": "{{ word }}",
             "tts": false,
             "embeds": [
               {
                 "id": 652627557,
                 "title": "{{ word }}",
-                "description": "SO MANY OPINIONS",
+                "description": "{{ description }}",
                 "color": 15148011,
                 "fields": [],
                 "footer": {
-                  "text": "twin ❤️‍🩹"
+                  "text": "automated button sender 5000 ❤️‍🩹"
                 },
                 "author": {
-                  "name": "word zefir said"
+                  "name": "what is on his mind this time?",
+                  "icon_url": "https://media.tenor.com/hxY0c0sHYx0AAAAM/monkey-thinking-monkey.gif"
+                {% if image_url !== "None" %}
+                },
+                "image": {
+                  "url": "{{ image_url }}"
                 }
+                {% else %}
+                }
+                {% endif %}
               }
             ],
             "components": [],
