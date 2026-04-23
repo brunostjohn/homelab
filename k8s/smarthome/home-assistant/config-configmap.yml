@@ -52,6 +52,9 @@ data:
       zefir_words:
         url: !secret zefir_words_discord_webhook_url
         method: POST
+        headers:
+          accept: "application/json, text/html"
+        content_type: 'application/json; charset=utf-8'
         payload: |
           {
             "content": "ZEFIR HAS SAID A WORD!!!!",
