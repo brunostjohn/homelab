@@ -47,3 +47,33 @@ data:
 
     logger:
       default: info
+
+    rest_command:
+      zefir_words:
+        url: !secret zefir_words_discord_webhook_url
+        method: POST
+        payload: |
+          {
+            "content": "ZEFIR HAS SAID A WORD!!!!",
+            "tts": false,
+            "embeds": [
+              {
+                "id": 652627557,
+                "title": "{{ word }}",
+                "description": "SO MANY OPINIONS",
+                "color": 15148011,
+                "fields": [],
+                "footer": {
+                  "text": "twin ❤️‍🩹"
+                },
+                "author": {
+                  "name": "word zefir said"
+                }
+              }
+            ],
+            "components": [],
+            "actions": {},
+            "flags": 0,
+            "username": "Zefir",
+            "avatar_url": "https://i.ibb.co/Q33TNh2n/cat.jpg"
+          }
