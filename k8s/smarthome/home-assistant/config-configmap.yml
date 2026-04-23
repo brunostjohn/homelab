@@ -76,7 +76,7 @@ data:
                 "author": {
                   "name": "what is on his mind this time?",
                   "icon_url": "https://media.tenor.com/hxY0c0sHYx0AAAAM/monkey-thinking-monkey.gif"
-                {% if image_url !== "None" %}
+                {% if image_url != "None" %}
                 },
                 "image": {
                   "url": "{{ image_url }}"
