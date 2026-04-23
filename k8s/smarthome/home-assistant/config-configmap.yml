@@ -15,7 +15,7 @@ data:
 
     homeassistant:
       media_dirs:
-        media: /config/media
+        media: /media
 
     homekit:
       ip_address: 10.4.69.69

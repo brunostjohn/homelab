@@ -121,6 +121,9 @@ spec:
             - name: ha-configmap
               mountPath: /config/configuration.yaml
               subPath: configuration.yaml
+            - name: ha-media
+              mountPath: /media
+              readOnly: false
       restartPolicy: Always
       volumes:
         - name: ha-config
@@ -132,3 +135,6 @@ spec:
         - name: ha-secrets-template
           configMap:
             name: hassio-secrets-template
+        - name: ha-media
+          persistentVolumeClaim:
+            claimName: hassio-media
