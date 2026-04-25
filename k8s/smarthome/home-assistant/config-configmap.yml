@@ -53,6 +53,23 @@ data:
       default: info
 
     rest_command:
+      zefir_words_wordonly:
+        url: !secret zefir_words_wordonly_discord_webhook_url
+        method: POST
+        headers:
+          accept: "application/json, text/html"
+        content_type: 'application/json; charset=utf-8'
+        payload: >
+          {
+            "content": "{{ word }}",
+            "embeds": [],
+            "tts": false,
+            "components": [],
+            "actions": {},
+            "flags": 0,
+            "username": "Zefir",
+            "avatar_url": "https://i.ibb.co/Q33TNh2n/cat.jpg"
+          }
       zefir_words:
         url: !secret zefir_words_discord_webhook_url
         method: POST
