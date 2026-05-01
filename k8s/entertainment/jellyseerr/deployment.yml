@@ -6,7 +6,7 @@ metadata:
   annotations:
     secrets.infisical.com/auto-reload: "true"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: jellyseerr
