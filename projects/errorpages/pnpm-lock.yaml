@@ -10,16 +10,16 @@ importers:
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^7.0.0
-        version: 7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))
+        version: 7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))
       '@sveltejs/adapter-node':
         specifier: ^5.2.5
-        version: 5.5.4(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))
+        version: 5.5.4(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))
       '@sveltejs/kit':
         specifier: ^2.0.0
-        version: 2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))
+        version: 2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^7.0.0
-        version: 7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2))
+        version: 7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2))
       prettier:
         specifier: ^3.1.1
         version: 3.8.3
@@ -540,8 +540,8 @@ packages:
       typescript:
         optional: true
 
-  '@sveltejs/vite-plugin-svelte@7.1.0':
-    resolution: {integrity: sha512-atk0ZbHXKvUOpn8eG3kE0BvRcWvMubOYLLMvyLFYpf+IpLj7lfEaykMa/2Yy8o7PJ/qvxXO4SXruq8coIjq1yw==}
+  '@sveltejs/vite-plugin-svelte@7.1.1':
+    resolution: {integrity: sha512-FOJdbE5pxae68DoTBJ49t1dIA7TSmMHR6CsuJhX90cO/UfrEMHA7KJNUj3WdZuUDJPu4ujqpJ2Tgqd2gTWr6Xg==}
     engines: {node: ^20.19 || ^22.12 || >=24}
     peerDependencies:
       svelte: ^5.46.4
@@ -1200,23 +1200,23 @@ snapshots:
     dependencies:
       acorn: 8.16.0
 
-  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))':
+  '@sveltejs/adapter-auto@7.0.1(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))':
     dependencies:
-      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))
+      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))
 
-  '@sveltejs/adapter-node@5.5.4(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))':
+  '@sveltejs/adapter-node@5.5.4(@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2)))':
     dependencies:
       '@rollup/plugin-commonjs': 29.0.0(rollup@4.59.0)
       '@rollup/plugin-json': 6.1.0(rollup@4.59.0)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.59.0)
-      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))
+      '@sveltejs/kit': 2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))
       rollup: 4.59.0
 
-  '@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))':
+  '@sveltejs/kit@2.59.1(@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2)))(svelte@5.55.5(@typescript-eslint/types@8.58.1))(typescript@6.0.3)(vite@8.0.10(esbuild@0.27.2))':
     dependencies:
       '@standard-schema/spec': 1.1.0
       '@sveltejs/acorn-typescript': 1.0.9(acorn@8.16.0)
-      '@sveltejs/vite-plugin-svelte': 7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2))
+      '@sveltejs/vite-plugin-svelte': 7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2))
       '@types/cookie': 0.6.0
       acorn: 8.16.0
       cookie: 0.6.0
@@ -1232,7 +1232,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  '@sveltejs/vite-plugin-svelte@7.1.0(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2))':
+  '@sveltejs/vite-plugin-svelte@7.1.1(svelte@5.55.5(@typescript-eslint/types@8.58.1))(vite@8.0.10(esbuild@0.27.2))':
     dependencies:
       deepmerge: 4.3.1
       magic-string: 0.30.21
