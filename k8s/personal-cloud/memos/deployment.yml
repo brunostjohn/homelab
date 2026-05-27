@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: memos
-          image: docker.io/neosmemo/memos:0.28
+          image: docker.io/neosmemo/memos:0.29
           imagePullPolicy: IfNotPresent
           resources:
             requests:
