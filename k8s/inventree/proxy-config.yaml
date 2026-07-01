@@ -80,7 +80,7 @@ data:
 
         # Authentication is handled by the forward_auth directive
         # This is required to ensure that media files are only accessible to authenticated users
-        forward_auth http://inventree-server:8000 {
+        forward_auth http://inventree-server.productivity.svc.cluster.local:80 {
           uri /auth/
         }
       }
@@ -88,5 +88,5 @@ data:
       # All other requests are proxied to the InvenTree server.
       # Trusted proxies are configured globally above, so the Ingress-provided
       # X-Forwarded-* headers are forwarded through to InvenTree unchanged.
-      reverse_proxy http://inventree-server:8000
+      reverse_proxy http://inventree-server.productivity.svc.cluster.local:80
     }
