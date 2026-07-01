@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: part-db
+  namespace: productivity
+  labels:
+    name: part-db
+spec:
+  rules:
+    - host: parts.zefirsroyal.cloud
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: part-db
+                port:
+                  number: 80

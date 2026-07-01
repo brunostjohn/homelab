@@ -9,6 +9,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to drop_role;
 CREATE USER drop WITH PASSWORD '<password>';
 GRANT drop_role TO drop;
 
+-- PART-DB
+CREATE ROLE part_db_role;
+\c part_db
+GRANT ALL PRIVILEGES ON DATABASE part_db TO part_db_role;
+GRANT ALL ON SCHEMA public TO part_db_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO part_db_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to part_db_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to part_db_role;
+CREATE USER part_db WITH PASSWORD '<password>';
+GRANT part_db_role TO part_db;
+
 -- BLOCKY
 CREATE ROLE blocky_role;
 \c blocky
