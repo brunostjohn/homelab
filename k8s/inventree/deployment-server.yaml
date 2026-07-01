@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventree-server
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: inventree-server
+  template:
+    metadata:
+      labels:
+        app: inventree-server
+    spec:
+      volumes:
+        - name: inventree
+          persistentVolumeClaim:
+            claimName: inventree-pvc
+      containers:
+        - name: inventree-server
+          image: inventree/inventree:stable
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          envFrom:
+            - configMapRef:
+                name: inventree-config
+            - secretRef:
+                name: inventree-secrets
+          ports:
+            - containerPort: 8000
+              name: http
+              protocol: TCP
+          startupProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: inventree
+              mountPath: /home/inventree/data

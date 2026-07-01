@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: part-db
+  name: inventree-proxy
   namespace: productivity
 spec:
   selector:
-    app: part-db
+    app: inventree-proxy
   ports:
     - port: 80
       targetPort: 80
-      protocol: TCP
       name: http
+      protocol: TCP

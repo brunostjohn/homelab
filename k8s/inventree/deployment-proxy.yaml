@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventree-proxy
+  namespace: productivity
+spec:
+  selector:
+    matchLabels:
+      app: inventree-proxy
+  template:
+    metadata:
+      labels:
+        app: inventree-proxy
+    spec:
+      volumes:
+        - name: inventree-proxy
+          persistentVolumeClaim:
+            claimName: inventree-pvc
+      containers:
+        - name: inventree-proxy
+          image: caddy:alpine
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: inventree-proxy
+              subPath: static
+              mountPath: /var/www/static
+            - name: inventree-proxy
+              subPath: media
+              mountPath: /var/www/media
+            - name: inventree-proxy
+              mountPath: /var/log
+            - name: inventree-proxy
+              mountPath: /data
+            - name: inventree-proxy
+              mountPath: /config

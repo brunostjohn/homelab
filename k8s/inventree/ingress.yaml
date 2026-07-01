@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: part-db
+  name: inventree
   namespace: productivity
   labels:
-    name: part-db
+    name: inventree
 spec:
   rules:
     - host: parts.zefirsroyal.cloud
@@ -14,6 +14,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: part-db
+                name: inventree-proxy
                 port:
                   number: 80
