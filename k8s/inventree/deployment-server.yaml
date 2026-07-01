@@ -35,29 +35,29 @@ spec:
             - containerPort: 8000
               name: http
               protocol: TCP
-          startupProbe:
-            tcpSocket:
-              port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
+          # startupProbe:
+          #   tcpSocket:
+          #     port: 8000
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 8000
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 8000
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
           volumeMounts:
             - name: inventree
               mountPath: /home/inventree/data
