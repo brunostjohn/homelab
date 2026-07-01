@@ -16,6 +16,9 @@ spec:
         - name: inventree-proxy
           persistentVolumeClaim:
             claimName: inventree-pvc
+        - name: inventree-proxy-config
+          configMap:
+            name: inventree-proxy-config
       containers:
         - name: inventree-proxy
           image: caddy:alpine
@@ -43,3 +46,6 @@ spec:
               mountPath: /data
             - name: inventree-proxy
               mountPath: /config
+            - name: inventree-proxy-config
+              mountPath: /etc/caddy/Caddyfile
+              subPath: Caddyfile
