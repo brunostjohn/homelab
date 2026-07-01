@@ -17,7 +17,7 @@ data:
   INVENTREE_DB_PORT: "5432"
   INVENTREE_DB_USER: "inventree"
   INVENTREE_CACHE_ENABLED: "True"
-  INVENTREE_CACHE_HOST: "dragonfly.database.svc.cluster.local"
+  INVENTREE_CACHE_HOST: "dragonfly.databases.svc.cluster.local"
   INVENTREE_CACHE_PORT: "6379"
   INVENTREE_GUNICORN_TIMEOUT: "90"
   INVENTREE_EMAIL_TLS: "True"
