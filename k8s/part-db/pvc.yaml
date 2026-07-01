@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: inventree-pvc
+  name: part-db-pvc
   namespace: productivity
 spec:
   resources:
@@ -9,5 +9,5 @@ spec:
       storage: 10Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  storageClassName: floof-nfs-csi
+    - ReadWriteOnce
+  storageClassName: floof-iscsi-csi
