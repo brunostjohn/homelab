@@ -23,3 +23,4 @@ data:
   INVENTREE_EMAIL_TLS: "True"
   INVENTREE_ADMIN_ENABLED: "True"
   INVENTREE_TIMEZONE: "Europe/Dublin"
+  INVENTREE_TRUSTED_ORIGINS: "https://parts.zefirsroyal.cloud"
