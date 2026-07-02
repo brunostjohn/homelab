@@ -14,7 +14,7 @@ data:
   HBOX_DATABASE_USERNAME: "homebox"
   HBOX_DATABASE_DATABASE: "homebox"
   HBOX_OIDC_ENABLED: "true"
-  HBOX_OIDC_ISSUER_URL: ""
+  HBOX_OIDC_ISSUER_URL: "https://auth.zefirsroyal.cloud/application/o/homebox/"
   HBOX_OPTIONS_TRUST_PROXY: "true"
   HBOX_OPTIONS_HOSTNAME: "homebox.zefirsroyal.cloud"
   HBOX_OIDC_AUTO_REDIRECT: "true"
