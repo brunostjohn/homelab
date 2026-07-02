@@ -27,8 +27,32 @@ spec:
             - configMapRef:
                 name: homebox-config
             - secretRef:
-                name: homebox-secrets-infisical
+                name: homebox-secrets
           ports:
             - containerPort: 7745
               protocol: TCP
               name: http
+          startupProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 7745
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 7745
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 7745
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
