@@ -20,6 +20,17 @@ GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to part_db_role;
 CREATE USER part_db WITH PASSWORD '<password>';
 GRANT part_db_role TO part_db;
 
+-- HOMEBOX
+CREATE ROLE homebox_role;
+\c homebox
+GRANT ALL PRIVILEGES ON DATABASE homebox TO homebox_role;
+GRANT ALL ON SCHEMA public TO homebox_role;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO homebox_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public to homebox_role;
+GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to homebox_role;
+CREATE USER homebox WITH PASSWORD '<password>';
+GRANT homebox_role TO homebox;
+
 -- BLOCKY
 CREATE ROLE blocky_role;
 \c blocky

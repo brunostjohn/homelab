@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homebox-config
+  namespace: smarthome
+data:
+  HBOX_OPTIONS_ALLOW_ANALYTICS: "false"
+  HBOX_WEB_MAX_UPLOAD_SIZE: "10"
+  HBOX_LOG_FORMAT: "json"
+  HBOX_LOG_LEVEL: "info"
+  HBOX_DATABASE_DRIVER: "postgres"
+  HBOX_DATABASE_HOST: "postgres-cluster-rw-pooler.databases.svc.cluster.local"
+  HBOX_DATABASE_PORT: "5432"
+  HBOX_DATABASE_USERNAME: "homebox"
+  HBOX_DATABASE_DATABASE: "homebox"
+  HBOX_OIDC_ENABLED: "true"
+  HBOX_OIDC_ISSUER_URL: ""
+  HBOX_OPTIONS_TRUST_PROXY: "true"
+  HBOX_OPTIONS_HOSTNAME: "homebox.zefirsroyal.cloud"
+  HBOX_OIDC_AUTO_REDIRECT: "true"
+  HBOX_OPTIONS_ALLOW_LOCAL_LOGIN: "false"
+  HBOX_STORAGE_CONN_STRING: "s3://homebox?endpoint=http://minio.minio.svc.cluster.local:9000&disable_https=true&use_path_style=true"
