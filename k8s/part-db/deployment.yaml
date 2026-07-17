@@ -19,7 +19,7 @@ spec:
         fsGroup: 33
       initContainers:
         - name: migrate-db
-          image: jbtronics/part-db1:v2.13.1
+          image: jbtronics/part-db1:v2.13.2
           securityContext:
             runAsUser: 33 # www-data
           command: [/bin/bash, "-c"]
@@ -46,7 +46,7 @@ spec:
                 name: part-db-configmap
       containers:
         - name: part-db
-          image: jbtronics/part-db1:v2.13.1
+          image: jbtronics/part-db1:v2.13.2
           resources:
             requests:
               memory: "512Mi"
