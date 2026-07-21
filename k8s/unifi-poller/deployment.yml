@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: unifi-poller
-          image: ghcr.io/unpoller/unpoller:v3.3.1
+          image: ghcr.io/unpoller/unpoller:v3.3.3
           imagePullPolicy: IfNotPresent
           resources:
             requests:
