@@ -6,7 +6,6 @@ metadata:
 data:
   dustmaxxing.yml: |
     domains:
-      - dustmaxx.ing
-      - mc.dustmaxx.ing
+      - mc.zefirsroyal.cloud
     addresses:
       - modded-mc.game-servers.svc.cluster.local:25565
