@@ -56,3 +56,29 @@ spec:
             capabilities:
               drop:
                 - ALL
+        - name: cloudflare-ddns-minecraft
+          image: docker.io/favonia/cloudflare-ddns:1.17.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
+          env:
+            - name: CF_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-ddns-secrets
+                  key: api-token
+            - name: DOMAINS
+              value: mc.zefirsroyal.cloud
+            - name: PROXIED
+              value: "false"
+            - name: IP6_PROVIDER
+              value: none
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
