@@ -20,14 +20,14 @@ spec:
         app: modded-mc
     spec:
       volumes:
-        - name: modded-mc-pvc-again-again
+        - name: modded-mc-data
           persistentVolumeClaim:
-            claimName: modded-mc-pvc-again-again
+            claimName: modded-mc-data-26-1-2
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
         - name: modded-mc
-          image: docker.io/itzg/minecraft-server:latest
+          image: docker.io/itzg/minecraft-server:2026.8.0-java25@sha256:e3335993929a1565f73c30b2041bcbc1473fc9c406fdd5a0d0ea24c08ef73320
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -40,14 +40,11 @@ spec:
             - containerPort: 25565
               protocol: TCP
               name: minecraft
-            - containerPort: 9100
-              protocol: TCP
-              name: metrics
             - containerPort: 8100
               protocol: TCP
               name: map
           volumeMounts:
-            - name: modded-mc-pvc-again-again
+            - name: modded-mc-data
               mountPath: /data
           startupProbe:
             exec:
@@ -75,3 +72,35 @@ spec:
                 name: modded-mc-config
             - secretRef:
                 name: modded-mc-secrets
+        - name: mc-monitor
+          image: docker.io/itzg/mc-monitor:0.17.0@sha256:0d6b89c29d93cfcfcfee7bfd8e3758ddf00e20eb157e3e9a6560a93fe7fe84d1
+          imagePullPolicy: IfNotPresent
+          args:
+            - export-for-prometheus
+          env:
+            - name: EXPORT_SERVERS
+              value: 127.0.0.1:25565
+            - name: EXPORT_PORT
+              value: "9100"
+            - name: TIMEOUT
+              value: 10s
+          ports:
+            - containerPort: 9100
+              protocol: TCP
+              name: metrics
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65534
+            runAsGroup: 65534
+          resources:
+            requests:
+              memory: 32Mi
+              cpu: 10m
+            limits:
+              memory: 64Mi
+              cpu: 100m
