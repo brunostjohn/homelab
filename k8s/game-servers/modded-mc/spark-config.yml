@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-spark-config
+  namespace: game-servers
+data:
+  config.json: |
+    {
+      "backgroundProfiler": false,
+      "backgroundProfilerEngine": "java"
+    }

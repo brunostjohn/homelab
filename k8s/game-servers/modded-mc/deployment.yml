@@ -30,6 +30,9 @@ spec:
         - name: servercore-config
           configMap:
             name: modded-mc-servercore-config
+        - name: spark-config
+          configMap:
+            name: modded-mc-spark-config
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
@@ -58,6 +61,9 @@ spec:
               readOnly: true
             - name: servercore-config
               mountPath: /config/servercore
+              readOnly: true
+            - name: spark-config
+              mountPath: /config/spark
               readOnly: true
           startupProbe:
             exec:
