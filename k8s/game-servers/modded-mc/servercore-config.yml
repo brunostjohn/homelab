@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-servercore-config
+  namespace: game-servers
+data:
+  optimizations.yml: |
+    # Keep every optimization without full vanilla parity disabled.
+    reduce-sync-loads: false
+    cache-ticking-chunks: false
+    optimize-command-blocks: false
+    fast-biome-lookups: false
+    cancel-duplicate-fluid-ticks: false
+  config.yml: |
+    # Explicitly keep every behavior-changing ServerCore feature disabled.
+    # Missing non-toggle values are filled from ServerCore 1.5.19 defaults.
+    features:
+      prevent-enderpearl-chunkloading: false
+      chunk-tick-distance-affects-random-ticks: false
+      prevent-moving-into-unloaded-chunks: false
+      lobotomize-villagers:
+        enabled: false
+    dynamic:
+      enabled: false
+    breeding-cap:
+      enabled: false
+    mob-spawning:
+      zombie-reinforcements:
+        enforce-mobcap: false
+      nether-portal-randomticks:
+        enforce-mobcap: false
+      monster-spawners:
+        enforce-mobcap: false
+      infested:
+        enforce-mobcap: false
+    activation-range:
+      enabled: false

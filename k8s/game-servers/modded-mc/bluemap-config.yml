@@ -6,4 +6,4 @@ metadata:
 data:
   core.conf: |
     accept-download: true
-    render-thread-count: 2
+    render-thread-count: 1

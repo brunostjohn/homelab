@@ -19,6 +19,7 @@ spec:
       labels:
         app: modded-mc
     spec:
+      terminationGracePeriodSeconds: 120
       volumes:
         - name: modded-mc-data
           persistentVolumeClaim:
@@ -26,6 +27,9 @@ spec:
         - name: bluemap-config
           configMap:
             name: modded-mc-bluemap-config
+        - name: servercore-config
+          configMap:
+            name: modded-mc-servercore-config
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
@@ -52,13 +56,17 @@ spec:
             - name: bluemap-config
               mountPath: /config/bluemap
               readOnly: true
+            - name: servercore-config
+              mountPath: /config/servercore
+              readOnly: true
           startupProbe:
             exec:
               command:
                 - mc-monitor
                 - status
-            failureThreshold: 30
+            failureThreshold: 120
             periodSeconds: 10
+            timeoutSeconds: 5
           readinessProbe:
             exec:
               command:
@@ -66,13 +74,16 @@ spec:
                 - status
             initialDelaySeconds: 30
             periodSeconds: 30
+            timeoutSeconds: 5
           livenessProbe:
             exec:
               command:
                 - mc-monitor
                 - status
             initialDelaySeconds: 30
+            failureThreshold: 6
             periodSeconds: 30
+            timeoutSeconds: 5
           envFrom:
             - configMapRef:
                 name: modded-mc-config
