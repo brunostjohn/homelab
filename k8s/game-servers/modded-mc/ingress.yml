@@ -6,11 +6,12 @@ metadata:
 spec:
   tls:
     - hosts:
-        - map.dustmaxx.ing
+        - map.zefirsroyal.cloud
+    - hosts:
         - dustmaxx.ing
       secretName: fifth-cert-prod
   rules:
-    - host: map.dustmaxx.ing
+    - host: map.zefirsroyal.cloud
       http:
         paths:
           - path: /
