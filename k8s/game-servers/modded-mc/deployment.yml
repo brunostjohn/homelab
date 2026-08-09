@@ -23,7 +23,7 @@ spec:
       volumes:
         - name: modded-mc-data
           persistentVolumeClaim:
-            claimName: modded-mc-chunksmith-canary-20260809
+            claimName: modded-mc-data-26-1-2
         - name: bluemap-config
           configMap:
             name: modded-mc-bluemap-config
