@@ -33,6 +33,9 @@ spec:
         - name: spark-config
           configMap:
             name: modded-mc-spark-config
+        - name: distant-horizons-config
+          configMap:
+            name: modded-mc-distant-horizons-config
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
@@ -64,6 +67,10 @@ spec:
               readOnly: true
             - name: spark-config
               mountPath: /config/spark
+              readOnly: true
+            - name: distant-horizons-config
+              mountPath: /config/DistantHorizons.toml
+              subPath: DistantHorizons.toml
               readOnly: true
           startupProbe:
             exec:

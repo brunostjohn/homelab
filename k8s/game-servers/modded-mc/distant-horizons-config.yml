@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-distant-horizons-config
+  namespace: game-servers
+data:
+  DistantHorizons.toml: |
+    _version = 4
+
+    [server]
+      realTimeUpdateDistanceRadiusInChunks = 256
+      levelKeyPrefix = ""
+      maxSyncOnLoadRequestDistance = 4096
+      synchronizeOnLoad = true
+      serverKey = ""
+      maxGenerationRequestDistance = 4096
+      enableServerGeneration = true
+      sendLevelKeys = true
+      serverId = 924525456
+      generationRequestRateLimit = 10
+      syncOnLoadRateLimit = 25
+      enableRealTimeUpdates = true
+      globalBandwidthLimit = 0
+      playerBandwidthLimit = 500
+      enableAdaptiveTransferSpeed = true
+
+      [server.experimental]
+        enableNSizedGeneration = false
+
+    [common.lodBuilding]
+      worldCompression = "VISUALLY_EQUAL"
+      dataCompression = "Z_STD_BLOCK"
+      disableUnchangedChunkCheck = false
+
+      [common.lodBuilding.experimental]
+        upsampleLowerDetailLodsToFillHoles = false
+
+    [common.multiThreading]
+      numberOfThreads = 2
+      threadRunTimeRatio = "0.75"
+      threadPriority = 5
+
+    [common.worldGenerator]
+      distantGeneratorMode = "FEATURES"
+      showGenerationProgress = "DISABLED"
+      generationMaxChunkRadius = 0
+      generationProgressDisplayIntervalInSeconds = 2
+      generationProgressIncludeChunksPerSecond = true
+      generationProgressDisableMessageDisplayTimeInSeconds = 20
+      generationCenterChunkZ = 0
+      enableDistantGeneration = true
+      generationCenterChunkX = 0
