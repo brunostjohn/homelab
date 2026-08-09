@@ -23,7 +23,7 @@ spec:
       volumes:
         - name: modded-mc-data
           persistentVolumeClaim:
-            claimName: modded-mc-data-26-1-2
+            claimName: modded-mc-chunksmith-canary-20260809
         - name: bluemap-config
           configMap:
             name: modded-mc-bluemap-config
@@ -36,6 +36,9 @@ spec:
         - name: distant-horizons-config
           configMap:
             name: modded-mc-distant-horizons-config
+        - name: chunksmith-config
+          configMap:
+            name: modded-mc-chunksmith-config
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
@@ -71,6 +74,9 @@ spec:
             - name: distant-horizons-config
               mountPath: /config/DistantHorizons.toml
               subPath: DistantHorizons.toml
+              readOnly: true
+            - name: chunksmith-config
+              mountPath: /config/chunksmith
               readOnly: true
           startupProbe:
             exec:

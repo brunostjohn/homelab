@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-chunksmith-config
+  namespace: game-servers
+data:
+  config.json: |
+    {
+      "version": 2,
+      "language": "en",
+      "continueOnRestart": false,
+      "forceLoadExistingChunks": false,
+      "silent": false,
+      "updateInterval": 1,
+      "ioThrottle": true,
+      "throttleTargetMspt": 54.0,
+      "throttleMaxChunkMillis": 750,
+      "throttleMaxQueuedWrites": 50,
+      "lodEnabled": "auto",
+      "throttleMaxLodQueue": 16,
+      "lodDhOverride": false
+    }

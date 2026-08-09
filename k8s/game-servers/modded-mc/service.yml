@@ -7,7 +7,7 @@ metadata:
     app: modded-mc
 spec:
   selector:
-    app: modded-mc
+    app: modded-mc-production-maintenance
   ports:
     - port: 25565
       targetPort: minecraft

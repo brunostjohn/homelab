@@ -14,7 +14,7 @@ data:
       synchronizeOnLoad = true
       serverKey = ""
       maxGenerationRequestDistance = 4096
-      enableServerGeneration = true
+      enableServerGeneration = false
       sendLevelKeys = true
       serverId = 924525456
       generationRequestRateLimit = 10
@@ -48,5 +48,5 @@ data:
       generationProgressIncludeChunksPerSecond = true
       generationProgressDisableMessageDisplayTimeInSeconds = 20
       generationCenterChunkZ = 0
-      enableDistantGeneration = true
+      enableDistantGeneration = false
       generationCenterChunkX = 0

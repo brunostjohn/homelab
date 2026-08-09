@@ -7,7 +7,7 @@ data:
   EULA: "true"
   TZ: Europe/Dublin
   JVM_XX_OPTS: "-XX:+UseZGC"
-  JVM_OPTS: "-Xlog:gc*,safepoint:file=/data/logs/gc.log:time,uptime,level,tags:filecount=5,filesize=20M"
+  JVM_OPTS: "-Xlog:gc*,safepoint:file=/data/logs/gc.log:time,uptime,level,tags:filecount=5,filesize=20M -Dchunksmith.maxWorkingCount=1"
   INIT_MEMORY: 8G
   MAX_MEMORY: 16G
   TYPE: NEOFORGE
@@ -31,3 +31,5 @@ data:
     https://www.curseforge.com/minecraft/mc-mods/servercore/files/8312206
     https://www.curseforge.com/minecraft/mc-mods/zfastnoise/files/8519662
     https://www.curseforge.com/minecraft/mc-mods/spark/files/7815877
+  MODRINTH_PROJECTS: |
+    chunksmith:qQk6EqQA
