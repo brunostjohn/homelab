@@ -71,6 +71,9 @@ spec:
             - containerPort: 25565
               protocol: TCP
               name: minecraft
+            - containerPort: 25566
+              protocol: TCP
+              name: cslod
             - containerPort: 8100
               protocol: TCP
               name: map

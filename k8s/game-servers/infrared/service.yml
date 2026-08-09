@@ -11,5 +11,9 @@ spec:
       targetPort: 25565
       protocol: TCP
       name: minecraft
+    - port: 25566
+      targetPort: cslod
+      protocol: TCP
+      name: cslod
   type: LoadBalancer
   loadBalancerIP: 10.0.5.5

@@ -7,12 +7,16 @@ metadata:
     app: modded-mc
 spec:
   selector:
-    app: modded-mc-production-maintenance
+    app: modded-mc
   ports:
     - port: 25565
       targetPort: minecraft
       protocol: TCP
       name: minecraft
+    - port: 25566
+      targetPort: cslod
+      protocol: TCP
+      name: cslod
     - port: 9100
       targetPort: metrics
       protocol: TCP
