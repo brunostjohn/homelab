@@ -23,6 +23,9 @@ spec:
         - name: modded-mc-data
           persistentVolumeClaim:
             claimName: modded-mc-data-26-1-2
+        - name: bluemap-config
+          configMap:
+            name: modded-mc-bluemap-config
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
@@ -46,6 +49,9 @@ spec:
           volumeMounts:
             - name: modded-mc-data
               mountPath: /data
+            - name: bluemap-config
+              mountPath: /config/bluemap
+              readOnly: true
           startupProbe:
             exec:
               command:

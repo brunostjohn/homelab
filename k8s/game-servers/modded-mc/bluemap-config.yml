@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-bluemap-config
+  namespace: game-servers
+data:
+  core.conf: |
+    accept-download: true
+    render-thread-count: 2
