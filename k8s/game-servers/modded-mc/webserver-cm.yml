@@ -144,7 +144,8 @@ data:
             <h1>Dustmaxxer Central</h1>
             <p>Become one of the dustmaxxers</p>
             <div class="button-container">
-                <a href="https://dustmaxxing-shit.static.zefirsroyal.cloud/modpack.zip" class="download-button">Download Modpack</a>
+                <a href="https://dustmaxxing-shit.static.zefirsroyal.cloud/modpack.zip?v=26.1.2-1" class="download-button">Download Modpack</a>
+                <a href="https://dustmaxxing-shit.static.zefirsroyal.cloud/modpack.zip.sha256?v=26.1.2-1" class="server-ip">SHA-256: ce38def6090a90c0c813fd435209131fb569a34b1d5ea6264209ce12dacc6d0c</a>
                 <a href="https://map.zefirsroyal.cloud" class="server-ip">Check out the map</a>
                 <p class="server-ip">Join here: <b>mc.zefirsroyal.cloud</b></p>
             </div>
