@@ -6,7 +6,7 @@ metadata:
   annotations:
     secrets.infisical.com/auto-reload: "true"
 spec:
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   selector:
