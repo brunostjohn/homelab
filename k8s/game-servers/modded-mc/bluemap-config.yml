@@ -7,3 +7,18 @@ data:
   core.conf: |
     accept-download: true
     render-thread-count: 1
+  plugin.conf: |
+    live-player-markers: true
+    hidden-game-modes: [
+      "spectator"
+    ]
+    hide-vanished: true
+    hide-invisible: true
+    hide-sneaking: false
+    hide-below-sky-light: 0
+    hide-below-block-light: 0
+    hide-different-world: false
+    skin-download: true
+
+    # Pause all rendering whenever anyone is playing.
+    player-render-limit: 1

@@ -8,6 +8,9 @@ data:
   TZ: Europe/Dublin
   JVM_XX_OPTS: "-XX:+UseZGC"
   JVM_OPTS: "-Xlog:gc*,safepoint:file=/data/logs/gc.log:time,uptime,level,tags:filecount=5,filesize=20M -Dchunksmith.maxWorkingCount=1"
+  BACKGROUND_PREGEN_CAMPAIGN: nether-end-256c-v1
+  RCON_CMDS_FIRST_CONNECT: "cs pause"
+  RCON_CMDS_PERIOD: "2"
   INIT_MEMORY: 8G
   MAX_MEMORY: 16G
   TYPE: NEOFORGE

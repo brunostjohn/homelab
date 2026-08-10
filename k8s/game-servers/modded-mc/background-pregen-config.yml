@@ -1,0 +1,1018 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: modded-mc-background-pregen
+  namespace: game-servers
+data:
+  verify-coverage.py: |
+    #!/usr/bin/env python3
+    """Verify durable Anvil chunks and CSLOD records for a circular chunk radius."""
+
+    import argparse
+    import os
+    import struct
+    import sys
+    from pathlib import Path
+
+
+    def expected_by_region(radius: int) -> dict[tuple[int, int], list[int]]:
+        regions: dict[tuple[int, int], list[int]] = {}
+        diameter = 2 * radius + 1
+        radius_squared_x4 = diameter * diameter
+
+        for chunk_z in range(-radius, radius + 1):
+            for chunk_x in range(-radius, radius + 1):
+                if 4 * (chunk_x * chunk_x + chunk_z * chunk_z) > radius_squared_x4:
+                    continue
+                region = (chunk_x // 32, chunk_z // 32)
+                slot = (chunk_z % 32) * 32 + (chunk_x % 32)
+                regions.setdefault(region, []).append(slot)
+
+        return regions
+
+
+    def read_prefix(path: Path, size: int) -> tuple[bytes, int]:
+        try:
+            with path.open("rb") as handle:
+                prefix = handle.read(size)
+                # Chunksmith writes payload first and the CSLOD header last. Read
+                # the size from the same open file description after the header so
+                # a newly committed header can never be checked against a stale size.
+                return prefix, os.fstat(handle.fileno()).st_size
+        except FileNotFoundError:
+            return b"", 0
+
+
+    def main() -> int:
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--world-dir", type=Path, required=True)
+        parser.add_argument("--cslod-dir", type=Path, required=True)
+        parser.add_argument("--radius", type=int, required=True)
+        args = parser.parse_args()
+
+        regions = expected_by_region(args.radius)
+        expected = sum(len(slots) for slots in regions.values())
+        anvil_present = 0
+        anvil_missing = 0
+        anvil_invalid = 0
+        cslod_present = 0
+        cslod_missing = 0
+        cslod_invalid = 0
+
+        for (region_x, region_z), slots in regions.items():
+            anvil_path = args.world_dir / "region" / f"r.{region_x}.{region_z}.mca"
+            anvil_header, anvil_size = read_prefix(anvil_path, 4096)
+            anvil_sectors = (anvil_size + 4095) // 4096
+
+            cslod_path = args.cslod_dir / f"r.{region_x}.{region_z}.cslod"
+            cslod_header, cslod_size = read_prefix(cslod_path, 8192)
+
+            for slot in slots:
+                anvil_base = slot * 4
+                if len(anvil_header) < anvil_base + 4:
+                    anvil_missing += 1
+                else:
+                    location = struct.unpack_from(">I", anvil_header, anvil_base)[0]
+                    sector_offset = location >> 8
+                    sector_count = location & 0xFF
+                    if sector_offset == 0 and sector_count == 0:
+                        anvil_missing += 1
+                    elif (
+                        sector_offset < 2
+                        or sector_count == 0
+                        or sector_offset + sector_count > anvil_sectors
+                    ):
+                        anvil_invalid += 1
+                    else:
+                        anvil_present += 1
+
+                cslod_base = slot * 8
+                if len(cslod_header) < cslod_base + 8:
+                    cslod_missing += 1
+                else:
+                    offset, length = struct.unpack_from(">ii", cslod_header, cslod_base)
+                    if offset == 0 and length == 0:
+                        cslod_missing += 1
+                    elif offset < 8192 or length <= 0 or offset + length > cslod_size:
+                        cslod_invalid += 1
+                    else:
+                        cslod_present += 1
+
+        print(
+            f"expected={expected} "
+            f"anvil_present={anvil_present} anvil_missing={anvil_missing} "
+            f"anvil_invalid={anvil_invalid} cslod_present={cslod_present} "
+            f"cslod_missing={cslod_missing} cslod_invalid={cslod_invalid}"
+        )
+
+        if anvil_invalid or cslod_invalid:
+            return 2
+        if anvil_missing or cslod_missing:
+            return 1
+        return 0
+
+
+    if __name__ == "__main__":
+        sys.exit(main())
+
+  controller.sh: |
+    #!/bin/sh
+    set -u
+    umask 077
+
+    DATA_DIR="${MCPREGEN_DATA_DIR:-/data}"
+    RCON_BIN="${MCPREGEN_RCON_BIN:-rcon-cli}"
+    POLL_SECONDS="${MCPREGEN_POLL_SECONDS:-2}"
+    EMPTY_SECONDS="${MCPREGEN_EMPTY_SECONDS:-60}"
+    VERIFY_POLL_SECONDS="${MCPREGEN_VERIFY_POLL_SECONDS:-30}"
+    MAP_SETTLE_SECONDS="${MCPREGEN_MAP_SETTLE_SECONDS:-65}"
+    MAP_POLL_SECONDS="${MCPREGEN_MAP_POLL_SECONDS:-30}"
+    MIN_FREE_KIB="${MCPREGEN_MIN_FREE_KIB:-157286400}"
+    MAX_DISK_PERCENT="${MCPREGEN_MAX_DISK_PERCENT:-85}"
+    MAX_MEMORY_BYTES="${MCPREGEN_MAX_MEMORY_BYTES:-21474836480}"
+    EXPECTED_CAMPAIGN="nether-end-256c-v1"
+    CAMPAIGN="${BACKGROUND_PREGEN_CAMPAIGN:-}"
+
+    TASK_DIR="${DATA_DIR}/config/chunksmith/tasks/minecraft"
+    STATE_DIR="${DATA_DIR}/config/chunksmith/background-pregen"
+    LOG_DIR="${DATA_DIR}/logs"
+    LATEST_LOG="${LOG_DIR}/latest.log"
+    VERIFY_SCRIPT="${MCPREGEN_VERIFY_SCRIPT:-/config/background-pregen/verify-coverage.py}"
+    COMPLETION_MARKER="${STATE_DIR}/${EXPECTED_CAMPAIGN}.complete"
+    NETHER_TASK="${TASK_DIR}/the_nether.properties"
+    END_TASK="${TASK_DIR}/the_end.properties"
+    TARGET_RADIUS="4096.0"
+    TARGET_COUNT="263169"
+    session_nonce="$(cat /proc/sys/kernel/random/uuid 2>/dev/null || \
+      printf '%s-%s' "$(date +%s)" "$$")"
+    CONTROLLER_SESSION="${EXPECTED_CAMPAIGN}-${session_nonce}"
+
+    log() {
+      printf '%s [background-pregen] %s\n' "$(date '+%Y-%m-%dT%H:%M:%S%z')" "$*"
+    }
+
+    rcon() {
+      "${RCON_BIN}" "$@"
+    }
+
+    is_uint() {
+      case "$1" in
+        ''|*[!0-9]*) return 1 ;;
+        *) return 0 ;;
+      esac
+    }
+
+    atomic_write() {
+      target="$1"
+      shift
+      target_dir="$(dirname "${target}")"
+      tmp="${target}.tmp.$$"
+
+      mkdir -p "${target_dir}" || return 1
+      if ! printf '%s\n' "$@" >"${tmp}"; then
+        rm -f "${tmp}"
+        return 1
+      fi
+      if ! mv -f "${tmp}" "${target}"; then
+        rm -f "${tmp}"
+        return 1
+      fi
+    }
+
+    property_is() {
+      property_file="$1"
+      property="$2"
+      value="$3"
+      test -f "${property_file}" && grep -Fqx "${property}=${value}" "${property_file}"
+    }
+
+    task_matches() {
+      task_file="$1"
+      task_world="$2"
+      radius="$3"
+      count="$4"
+      cancelled="$5"
+
+      property_is "${task_file}" world "${task_world}" &&
+        property_is "${task_file}" center-x 0.0 &&
+        property_is "${task_file}" center-z 0.0 &&
+        property_is "${task_file}" radius "${radius}" &&
+        property_is "${task_file}" shape circle &&
+        property_is "${task_file}" pattern region &&
+        property_is "${task_file}" chunks "${count}" &&
+        property_is "${task_file}" cancelled "${cancelled}"
+    }
+
+    task_is_target_complete() {
+      task_matches "$1" "$2" "${TARGET_RADIUS}" "${TARGET_COUNT}" true
+    }
+
+    task_is_target_resumable() {
+      task_file="$1"
+      task_world="$2"
+      property_is "${task_file}" world "${task_world}" &&
+        property_is "${task_file}" center-x 0.0 &&
+        property_is "${task_file}" center-z 0.0 &&
+        property_is "${task_file}" radius "${TARGET_RADIUS}" &&
+        property_is "${task_file}" shape circle &&
+        property_is "${task_file}" pattern region &&
+        property_is "${task_file}" cancelled false
+    }
+
+    task_is_known_predecessor() {
+      slug="$1"
+      case "${slug}" in
+        nether)
+          task_matches "${NETHER_TASK}" minecraft:the_nether 1024.0 16641 true
+          ;;
+        end)
+          task_matches "${END_TASK}" minecraft:the_end 2048.0 66049 true
+          ;;
+        *)
+          return 1
+          ;;
+      esac
+    }
+
+    authorization_file() {
+      printf '%s/%s.authorized\n' "${STATE_DIR}" "$1"
+    }
+
+    log_start_file() {
+      printf '%s/%s.log-start\n' "${STATE_DIR}" "$1"
+    }
+
+    log_cursor_file() {
+      printf '%s/%s.log-cursor\n' "${STATE_DIR}" "$1"
+    }
+
+    failure_file() {
+      printf '%s/%s.failed\n' "${STATE_DIR}" "$1"
+    }
+
+    authorization_is_valid() {
+      slug="$1"
+      task_world="$2"
+      authorization="$(authorization_file "${slug}")"
+      log_start="$(log_start_file "${slug}")"
+      cursor_file="$(log_cursor_file "${slug}")"
+
+      test -f "${authorization}" &&
+        test -f "${log_start}" &&
+        test -f "${cursor_file}" &&
+        grep -Fqx "campaign=${EXPECTED_CAMPAIGN}" "${authorization}" &&
+        grep -Fqx "world=${task_world}" "${authorization}"
+    }
+
+    authorize_target() {
+      slug="$1"
+      task_world="$2"
+      authorization="$(authorization_file "${slug}")"
+      log_start="$(log_start_file "${slug}")"
+      cursor_file="$(log_cursor_file "${slug}")"
+
+      atomic_write "${log_start}" "campaign=${EXPECTED_CAMPAIGN}" "world=${task_world}" \
+        "started_at=$(date '+%Y-%m-%dT%H:%M:%S%z')" || return 1
+      initialize_log_cursor "${cursor_file}" || return 1
+      atomic_write "${authorization}" "campaign=${EXPECTED_CAMPAIGN}" "world=${task_world}" \
+        "authorized_at=$(date '+%Y-%m-%dT%H:%M:%S%z')" || return 1
+    }
+
+    mark_failed() {
+      slug="$1"
+      reason="$2"
+      failed="$(failure_file "${slug}")"
+      if ! test -f "${failed}"; then
+        atomic_write "${failed}" "campaign=${EXPECTED_CAMPAIGN}" "reason=${reason}" \
+          "failed_at=$(date '+%Y-%m-%dT%H:%M:%S%z')" || true
+      fi
+      log "${slug} blocked: ${reason}"
+    }
+
+    has_failed() {
+      test -f "$(failure_file "$1")"
+    }
+
+    fatal_generation_stream() {
+      grep -aEi 'VERIFICATION FAILED|Generation task threw an uncaught exception|failed to write LOD|failed to (save|write) chunk|Long2ObjectLinkedOpenHashMap|ReferenceOpenHashSet|java\.lang\.(NullPointerException|IllegalStateException|ConcurrentModificationException|OutOfMemoryError)|SQLiteException|database disk image is malformed|DistanceManager.*(exception|error)|ChunkMap.*(exception|error)|watchdog.*(crash|timeout)' |
+        grep -avF 'MonsterRoomFeature: Failed to fetch mob spawner entity'
+    }
+
+    fatal_bluemap_stream() {
+      grep -aEi 'No regions found in world|RENDER_ERROR|Failed to load chunks for region|Error while processing map-tile|Exception while doing some work|Failed to save hires model|Failed to (load|save) tile|Failed to iterate over map region-state|Failed to delete render-state cell|Failed to (load|save) (render-state|render state)|Could not (load|save) (render-state|render state)|\[BlueMap(/[^]]*)?\].*(failed|error|exception)'
+    }
+
+    cursor_value() {
+      cursor="$1"
+      key="$2"
+      sed -n "s/^${key}=//p" "${cursor}" 2>/dev/null | head -n 1
+    }
+
+    prefix_hash() {
+      logfile="$1"
+      bytes="$2"
+      if test "${bytes}" -eq 0; then
+        printf '%s\n' empty
+        return 0
+      fi
+      case "${logfile}" in
+        *.gz)
+          gzip -t "${logfile}" 2>/dev/null || return 1
+          zcat "${logfile}" 2>/dev/null | head -c "${bytes}" | sha256sum | awk '{print $1}'
+          ;;
+        *) head -c "${bytes}" "${logfile}" 2>/dev/null | sha256sum | awk '{print $1}' ;;
+      esac
+    }
+
+    uncompressed_size() {
+      logfile="$1"
+      case "${logfile}" in
+        *.gz)
+          gzip -t "${logfile}" 2>/dev/null || return 1
+          zcat "${logfile}" 2>/dev/null | wc -c | awk '{print $1}'
+          ;;
+        *) stat -c %s "${logfile}" 2>/dev/null ;;
+      esac
+    }
+
+    snapshot_log_cursor() {
+      cursor="$1"
+      logfile="$2"
+      expected_inode="$3"
+      offset="$4"
+      is_uint "${expected_inode}" || return 1
+      is_uint "${offset}" || return 1
+      prefix_bytes="${offset}"
+      if test "${prefix_bytes}" -gt 65536; then
+        prefix_bytes=65536
+      fi
+      hash="$(prefix_hash "${logfile}" "${prefix_bytes}")" || return 1
+      test -n "${hash}" || return 1
+      current_inode="$(stat -c %i "${logfile}" 2>/dev/null || printf '0')"
+      test "${current_inode}" = "${expected_inode}" || return 1
+      atomic_write "${cursor}" "inode=${expected_inode}" "offset=${offset}" \
+        "prefix_bytes=${prefix_bytes}" "prefix_sha256=${hash}"
+    }
+
+    initialize_log_cursor() {
+      cursor="$1"
+      test -f "${LATEST_LOG}" || return 1
+      inode="$(stat -c %i "${LATEST_LOG}" 2>/dev/null || printf '0')"
+      size="$(stat -c %s "${LATEST_LOG}" 2>/dev/null || printf '0')"
+      snapshot_log_cursor "${cursor}" "${LATEST_LOG}" "${inode}" "${size}"
+    }
+
+    find_rotated_log() {
+      old_inode="$1"
+      prefix_bytes="$2"
+      expected_hash="$3"
+      for logfile in "${LOG_DIR}"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.log \
+        "${LOG_DIR}"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.log.gz; do
+        test -f "${logfile}" || continue
+        if test "${logfile##*.}" != gz; then
+          inode="$(stat -c %i "${logfile}" 2>/dev/null || printf '0')"
+          if test "${inode}" = "${old_inode}"; then
+            printf '%s\n' "${logfile}"
+            return 0
+          fi
+        fi
+        test "${prefix_bytes}" -gt 0 || continue
+        candidate_hash="$(prefix_hash "${logfile}" "${prefix_bytes}")" || continue
+        if test "${candidate_hash}" = "${expected_hash}"; then
+          printf '%s\n' "${logfile}"
+          return 0
+        fi
+      done
+      return 1
+    }
+
+    scan_archives_after() {
+      scope="$1"
+      anchor="$2"
+      seen_anchor=0
+      archive_list="$(ls -1tr \
+        "${LOG_DIR}"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.log \
+        "${LOG_DIR}"/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.log.gz \
+        2>/dev/null || true)"
+      for archive in ${archive_list}; do
+        if test "${archive}" = "${anchor}"; then
+          seen_anchor=1
+          continue
+        fi
+        test "${seen_anchor}" -eq 1 || continue
+        archive_size="$(uncompressed_size "${archive}")" || return 1
+        is_uint "${archive_size}" || return 1
+        if log_segment_has_failure "${scope}" "${archive}" 0 "${archive_size}"; then
+          record_log_failure "${scope}" "fatal signature in ${archive}"
+          return 1
+        fi
+      done
+      test "${seen_anchor}" -eq 1
+    }
+
+    log_segment_has_failure() {
+      scope="$1"
+      logfile="$2"
+      offset="$3"
+      bytes="$4"
+      test "${bytes}" -gt 0 || return 1
+      case "${logfile}" in
+        *.gz) stream_command="zcat" ;;
+        *) stream_command="cat" ;;
+      esac
+      if test "${scope}" = bluemap; then
+        "${stream_command}" "${logfile}" 2>/dev/null |
+          tail -c "+$((offset + 1))" | head -c "${bytes}" |
+          fatal_bluemap_stream >/dev/null 2>&1
+      else
+        "${stream_command}" "${logfile}" 2>/dev/null |
+          tail -c "+$((offset + 1))" | head -c "${bytes}" |
+          fatal_generation_stream >/dev/null 2>&1
+      fi
+    }
+
+    record_log_failure() {
+      scope="$1"
+      reason="$2"
+      if test "${scope}" = bluemap; then
+        atomic_write "${map_failure}" "campaign=${EXPECTED_CAMPAIGN}" \
+          "reason=${reason}" \
+          "failed_at=$(date '+%Y-%m-%dT%H:%M:%S%z')" || true
+        log "BlueMap blocked: ${reason}"
+      else
+        mark_failed "${scope}" "${reason}"
+      fi
+    }
+
+    scan_log_cursor() {
+      scope="$1"
+      cursor="$2"
+      test -f "${LATEST_LOG}" || return 1
+      test -f "${cursor}" || return 1
+
+      old_inode="$(cursor_value "${cursor}" inode)"
+      offset="$(cursor_value "${cursor}" offset)"
+      prefix_bytes="$(cursor_value "${cursor}" prefix_bytes)"
+      expected_hash="$(cursor_value "${cursor}" prefix_sha256)"
+      is_uint "${old_inode}" || return 1
+      is_uint "${offset}" || return 1
+      is_uint "${prefix_bytes}" || return 1
+      test -n "${expected_hash}" || return 1
+
+      current_inode="$(stat -c %i "${LATEST_LOG}" 2>/dev/null || printf '0')"
+      current_size="$(stat -c %s "${LATEST_LOG}" 2>/dev/null || printf '0')"
+      is_uint "${current_inode}" || return 1
+      is_uint "${current_size}" || return 1
+
+      current_prefix_hash="$(prefix_hash "${LATEST_LOG}" "${prefix_bytes}")" || return 1
+      if test "${current_inode}" = "${old_inode}" &&
+        test "${current_size}" -ge "${offset}" &&
+        test "${current_prefix_hash}" = "${expected_hash}"; then
+        delta="$((current_size - offset))"
+        if log_segment_has_failure "${scope}" "${LATEST_LOG}" "${offset}" "${delta}"; then
+          record_log_failure "${scope}" "fatal signature in latest.log"
+          return 1
+        fi
+        snapshot_log_cursor "${cursor}" "${LATEST_LOG}" "${current_inode}" "${current_size}"
+        return $?
+      fi
+
+      if test "${current_inode}" = "${old_inode}" && test "${current_size}" -ge "${offset}"; then
+        record_log_failure "${scope}" "current log prefix changed without an inode change"
+        return 1
+      fi
+
+      rotated="$(find_rotated_log "${old_inode}" "${prefix_bytes}" "${expected_hash}")" || {
+        record_log_failure "${scope}" "could not reconcile a log rotation"
+        return 1
+      }
+      rotated_size="$(uncompressed_size "${rotated}")" || return 1
+      is_uint "${rotated_size}" || return 1
+      if test "${rotated_size}" -lt "${offset}"; then
+        record_log_failure "${scope}" "rotated log is shorter than the campaign cursor: ${rotated}"
+        return 1
+      fi
+      delta="$((rotated_size - offset))"
+      if log_segment_has_failure "${scope}" "${rotated}" "${offset}" "${delta}"; then
+        record_log_failure "${scope}" "fatal signature in ${rotated}"
+        return 1
+      fi
+      scan_archives_after "${scope}" "${rotated}" || return 1
+
+      latest_inode_now="$(stat -c %i "${LATEST_LOG}" 2>/dev/null || printf '0')"
+      test "${latest_inode_now}" = "${current_inode}" || return 1
+      if log_segment_has_failure "${scope}" "${LATEST_LOG}" 0 "${current_size}"; then
+        record_log_failure "${scope}" "fatal signature in latest.log after rotation"
+        return 1
+      fi
+      snapshot_log_cursor "${cursor}" "${LATEST_LOG}" "${current_inode}" "${current_size}"
+    }
+
+    scan_latest_log() {
+      slug="$1"
+      scan_log_cursor "${slug}" "$(log_cursor_file "${slug}")"
+    }
+
+    read_player_count() {
+      list_output="$(rcon list 2>/dev/null)" || return 1
+      player_count="$(printf '%s\n' "${list_output}" |
+        sed -n 's/.*There are \([0-9][0-9]*\) of a max.*/\1/p' | head -n 1)"
+      is_uint "${player_count}" || return 1
+      printf '%s\n' "${player_count}"
+    }
+
+    read_progress() {
+      rcon cs progress 2>/dev/null
+    }
+
+    pause_generation() {
+      pause_output="$(rcon cs pause 2>&1)" || {
+        log "Chunksmith pause transport failed: ${pause_output}"
+        return 1
+      }
+      if printf '%s' "${pause_output}" | grep -Eq 'Task paused for|No tasks to pause'; then
+        log "Chunksmith pause: ${pause_output}"
+        return 0
+      fi
+      log "Chunksmith pause was not acknowledged: ${pause_output}"
+      return 1
+    }
+
+    ensure_bluemap_stopped() {
+      output="$(rcon bluemap stop 2>&1)" || {
+        log "BlueMap stop transport failed: ${output}"
+        return 1
+      }
+      if printf '%s' "${output}" | grep -Eq 'Render-Threads are (now|already) stopped'; then
+        return 0
+      fi
+      log "BlueMap stop was not acknowledged: ${output}"
+      return 1
+    }
+
+    ensure_bluemap_running() {
+      output="$(rcon bluemap start 2>&1)" || {
+        log "BlueMap start transport failed: ${output}"
+        return 1
+      }
+      if printf '%s' "${output}" | grep -Eq 'Render-Threads are (now|already) running'; then
+        return 0
+      fi
+      log "BlueMap start was not acknowledged: ${output}"
+      return 1
+    }
+
+    resources_are_safe() {
+      disk_line="$(df -Pk "${DATA_DIR}" 2>/dev/null | awk 'END {print $4 " " $5}')"
+      disk_free_kib="$(printf '%s\n' "${disk_line}" | awk '{print $1}')"
+      disk_used="$(printf '%s\n' "${disk_line}" | awk '{gsub(/%/, "", $2); print $2}')"
+      is_uint "${disk_free_kib}" || return 1
+      is_uint "${disk_used}" || return 1
+
+      if test "${disk_free_kib}" -lt "${MIN_FREE_KIB}" ||
+        test "${disk_used}" -ge "${MAX_DISK_PERCENT}"; then
+        log "resource guard: disk is ${disk_used}% used with ${disk_free_kib} KiB free"
+        return 1
+      fi
+
+      if test -r /sys/fs/cgroup/memory.current; then
+        memory_current="$(cat /sys/fs/cgroup/memory.current 2>/dev/null || printf '0')"
+        is_uint "${memory_current}" || return 1
+        if test "${memory_current}" -ge "${MAX_MEMORY_BYTES}"; then
+          log "resource guard: cgroup memory is ${memory_current} bytes"
+          return 1
+        fi
+      fi
+      return 0
+    }
+
+    verify_dimension() {
+      slug="$1"
+      case "${slug}" in
+        nether)
+          world_dir="${DATA_DIR}/world/dimensions/minecraft/the_nether"
+          cslod_dir="${DATA_DIR}/world/chunksmith/lod/minecraft_the_nether"
+          ;;
+        end)
+          world_dir="${DATA_DIR}/world/dimensions/minecraft/the_end"
+          cslod_dir="${DATA_DIR}/world/chunksmith/lod/minecraft_the_end"
+          ;;
+        *)
+          return 2
+          ;;
+      esac
+
+      verify_output="$(python3 "${VERIFY_SCRIPT}" --world-dir "${world_dir}" \
+        --cslod-dir "${cslod_dir}" --radius 256 2>&1)"
+      verify_status=$?
+      log "${slug} coverage: ${verify_output}"
+      return "${verify_status}"
+    }
+
+    server_is_empty_now() {
+      count="$(read_player_count)" || return 1
+      test "${count}" -eq 0
+    }
+
+    start_target() {
+      slug="$1"
+      task_world="$2"
+
+      authorization_is_valid "${slug}" "${task_world}" || return 1
+      task_is_known_predecessor "${slug}" || {
+        log "${slug} predecessor changed; refusing to start or confirm"
+        return 1
+      }
+      scan_latest_log "${slug}" || return 1
+      resources_are_safe || return 1
+      ensure_bluemap_stopped || return 1
+      server_is_empty_now || return 1
+
+      pattern_output="$(rcon cs pattern region 2>&1)" || {
+        log "could not select Chunksmith region pattern: ${pattern_output}"
+        return 1
+      }
+      if ! printf '%s' "${pattern_output}" | grep -Fq 'Pattern changed to region'; then
+        log "Chunksmith pattern was not acknowledged: ${pattern_output}"
+        return 1
+      fi
+      server_is_empty_now || return 1
+
+      start_output="$(rcon cs start "${task_world}" circle 0 0 256c 2>&1)" || {
+        log "could not start ${task_world}: ${start_output}"
+        return 1
+      }
+
+      if printf '%s' "${start_output}" | grep -Fq "Task started in ${task_world}"; then
+        log "${start_output}"
+        return 0
+      fi
+
+      if printf '%s' "${start_output}" | grep -Fq 'A task was already started for this world'; then
+        task_is_known_predecessor "${slug}" || return 1
+        authorization_is_valid "${slug}" "${task_world}" || return 1
+        server_is_empty_now || return 1
+        confirm_output="$(rcon cs confirm 2>&1)" || {
+          log "could not confirm ${task_world}: ${confirm_output}"
+          return 1
+        }
+        if printf '%s' "${confirm_output}" | grep -Fq "Task started in ${task_world}"; then
+          log "${confirm_output}"
+          return 0
+        fi
+        log "Chunksmith confirm was not acknowledged: ${confirm_output}"
+        return 1
+      fi
+
+      log "Chunksmith start was not acknowledged: ${start_output}"
+      return 1
+    }
+
+    resume_target() {
+      slug="$1"
+      task_world="$2"
+      task_file="$3"
+
+      authorization_is_valid "${slug}" "${task_world}" || return 1
+      task_is_target_resumable "${task_file}" "${task_world}" || return 1
+      scan_latest_log "${slug}" || return 1
+      resources_are_safe || return 1
+      ensure_bluemap_stopped || return 1
+      server_is_empty_now || return 1
+
+      resume_output="$(rcon cs continue "${task_world}" 2>&1)" || {
+        log "could not resume ${task_world}: ${resume_output}"
+        return 1
+      }
+      if printf '%s' "${resume_output}" | grep -Fq "Task continuing for ${task_world}"; then
+        log "${resume_output}"
+        return 0
+      fi
+      log "Chunksmith continue was not acknowledged: ${resume_output}"
+      return 1
+    }
+
+    process_dimension() {
+      slug="$1"
+      task_world="$2"
+      task_file="$3"
+
+      if has_failed "${slug}"; then
+        return 2
+      fi
+
+      if task_is_target_complete "${task_file}" "${task_world}"; then
+        if ! authorization_is_valid "${slug}" "${task_world}"; then
+          mark_failed "${slug}" "unrecognized completed 256c task"
+          return 2
+        fi
+        scan_latest_log "${slug}" || return 2
+        verify_dimension "${slug}"
+        verify_status=$?
+        # CSLOD and Anvil headers can still be settling immediately after the task
+        # leaves the queue. Any non-zero result remains fail-closed and is retried;
+        # fatal write/verification errors are handled by the log barrier above.
+        return "${verify_status}"
+      fi
+
+      if task_is_target_resumable "${task_file}" "${task_world}"; then
+        if ! authorization_is_valid "${slug}" "${task_world}"; then
+          mark_failed "${slug}" "unrecognized resumable 256c task"
+          return 2
+        fi
+        resume_target "${slug}" "${task_world}" "${task_file}" || true
+        return 1
+      fi
+
+      if ! task_is_known_predecessor "${slug}"; then
+        mark_failed "${slug}" "saved task does not match the approved predecessor or target"
+        return 2
+      fi
+
+      if ! authorization_is_valid "${slug}" "${task_world}"; then
+        if ! authorize_target "${slug}" "${task_world}"; then
+          log "could not persist authorization for ${task_world}"
+          return 1
+        fi
+      fi
+      start_target "${slug}" "${task_world}" || true
+      return 1
+    }
+
+    map_log_start="${STATE_DIR}/bluemap.log-start"
+    map_log_cursor="${STATE_DIR}/bluemap.log-cursor"
+    map_failure="${STATE_DIR}/bluemap.failed"
+
+    scan_bluemap_logs() {
+      test -f "${map_log_start}" || return 0
+      scan_log_cursor bluemap "${map_log_cursor}"
+    }
+
+    schedule_map_update() {
+      map_id="$1"
+      scheduled="${STATE_DIR}/bluemap-${map_id}.scheduled"
+      if test -f "${scheduled}" &&
+        grep -Fqx "campaign=${EXPECTED_CAMPAIGN}" "${scheduled}" &&
+        grep -Fqx "map=${map_id}" "${scheduled}" &&
+        grep -Fqx "controller_session=${CONTROLLER_SESSION}" "${scheduled}"; then
+        return 0
+      fi
+
+      output="$(rcon bluemap update "${map_id}" 2>&1)" || {
+        log "BlueMap update transport failed for ${map_id}: ${output}"
+        return 1
+      }
+      if ! printf '%s' "${output}" | grep -Fq "Created new update-task for map ${map_id}"; then
+        log "BlueMap update was not acknowledged for ${map_id}: ${output}"
+        return 1
+      fi
+      atomic_write "${scheduled}" "campaign=${EXPECTED_CAMPAIGN}" "map=${map_id}" \
+        "controller_session=${CONTROLLER_SESSION}" \
+        "scheduled_at=$(date '+%Y-%m-%dT%H:%M:%S%z')" || return 1
+      log "BlueMap update accepted for ${map_id}"
+    }
+
+    completion_marker_is_valid() {
+      test -f "${COMPLETION_MARKER}" &&
+        grep -Fqx "campaign=${EXPECTED_CAMPAIGN}" "${COMPLETION_MARKER}" &&
+        grep -Fqx 'nether=verified' "${COMPLETION_MARKER}" &&
+        grep -Fqx 'end=verified' "${COMPLETION_MARKER}" &&
+        grep -Fqx 'bluemap=verified' "${COMPLETION_MARKER}" &&
+        task_is_target_complete "${NETHER_TASK}" minecraft:the_nether &&
+        task_is_target_complete "${END_TASK}" minecraft:the_end &&
+        ! has_failed nether &&
+        ! has_failed end &&
+        ! test -f "${map_failure}" &&
+        verify_dimension nether >/dev/null 2>&1 &&
+        verify_dimension end >/dev/null 2>&1
+    }
+
+    if test "${CAMPAIGN}" != "${EXPECTED_CAMPAIGN}"; then
+      log "campaign is not armed; controller exiting"
+      exit 0
+    fi
+
+    for value in "${POLL_SECONDS}" "${EMPTY_SECONDS}" "${VERIFY_POLL_SECONDS}" \
+      "${MAP_SETTLE_SECONDS}" "${MAP_POLL_SECONDS}" "${MIN_FREE_KIB}" \
+      "${MAX_DISK_PERCENT}" "${MAX_MEMORY_BYTES}"; do
+      if ! is_uint "${value}" || test "${value}" -eq 0; then
+        log "invalid numeric controller setting: ${value}"
+        exit 64
+      fi
+    done
+
+    if ! test -r "${VERIFY_SCRIPT}" || ! command -v python3 >/dev/null 2>&1; then
+      log "coverage verifier is unavailable"
+      exit 65
+    fi
+
+    mkdir -p "${STATE_DIR}" || exit 66
+    if completion_marker_is_valid; then
+      log "campaign already verified complete; controller exiting"
+      exit 0
+    fi
+    if test -f "${COMPLETION_MARKER}"; then
+      log "ignoring invalid or stale completion marker"
+    fi
+
+    if authorization_is_valid nether minecraft:the_nether; then
+      scan_latest_log nether || true
+    fi
+    if authorization_is_valid end minecraft:the_end; then
+      scan_latest_log end || true
+    fi
+
+    log "armed for sequential 256c Nether then End generation"
+    empty_since=0
+    map_idle_samples=0
+
+    while :; do
+      player_count="$(read_player_count)" || {
+        empty_since=0
+        map_idle_samples=0
+        pause_generation || true
+        ensure_bluemap_stopped || true
+        sleep "${POLL_SECONDS}"
+        continue
+      }
+
+      progress_output="$(read_progress)" || {
+        empty_since=0
+        map_idle_samples=0
+        pause_generation || true
+        ensure_bluemap_stopped || true
+        sleep "${POLL_SECONDS}"
+        continue
+      }
+      tasks_active=1
+      if printf '%s' "${progress_output}" | grep -Fq 'No tasks running'; then
+        tasks_active=0
+      fi
+
+      if test "${tasks_active}" -eq 1; then
+        if test "${player_count}" -gt 0; then
+          empty_since=0
+          map_idle_samples=0
+          pause_generation || true
+        fi
+        if authorization_is_valid nether minecraft:the_nether; then
+          scan_latest_log nether || pause_generation || true
+        fi
+        if authorization_is_valid end minecraft:the_end; then
+          scan_latest_log end || pause_generation || true
+        fi
+        if ! resources_are_safe; then
+          pause_generation || true
+          ensure_bluemap_stopped || true
+          empty_since=0
+        fi
+        sleep "${POLL_SECONDS}"
+        continue
+      fi
+
+      if test "${player_count}" -gt 0; then
+        empty_since=0
+        map_idle_samples=0
+        ensure_bluemap_stopped || true
+        sleep "${POLL_SECONDS}"
+        continue
+      fi
+
+      if has_failed nether || has_failed end || test -f "${map_failure}"; then
+        pause_generation || true
+        ensure_bluemap_stopped || true
+        sleep "${VERIFY_POLL_SECONDS}"
+        continue
+      fi
+
+      if ! resources_are_safe; then
+        ensure_bluemap_stopped || true
+        empty_since=0
+        sleep "${VERIFY_POLL_SECONDS}"
+        continue
+      fi
+
+      now="$(date +%s)"
+      if test "${empty_since}" -eq 0; then
+        empty_since="${now}"
+        log "server empty; waiting ${EMPTY_SECONDS}s before background work"
+      fi
+      if test "$((now - empty_since))" -lt "${EMPTY_SECONDS}"; then
+        sleep "${POLL_SECONDS}"
+        continue
+      fi
+
+      process_dimension nether minecraft:the_nether "${NETHER_TASK}"
+      nether_status=$?
+      if test "${nether_status}" -ne 0; then
+        if task_is_target_complete "${NETHER_TASK}" minecraft:the_nether; then
+          sleep "${VERIFY_POLL_SECONDS}"
+        else
+          sleep "${POLL_SECONDS}"
+        fi
+        continue
+      fi
+
+      process_dimension end minecraft:the_end "${END_TASK}"
+      end_status=$?
+      if test "${end_status}" -ne 0; then
+        if task_is_target_complete "${END_TASK}" minecraft:the_end; then
+          sleep "${VERIFY_POLL_SECONDS}"
+        else
+          sleep "${POLL_SECONDS}"
+        fi
+        continue
+      fi
+
+      if ! test -f "${map_log_start}"; then
+        initialize_log_cursor "${map_log_cursor}" || {
+          sleep "${MAP_POLL_SECONDS}"
+          continue
+        }
+        atomic_write "${map_log_start}" "campaign=${EXPECTED_CAMPAIGN}" \
+          "started_at=$(date '+%Y-%m-%dT%H:%M:%S%z')" || {
+          sleep "${MAP_POLL_SECONDS}"
+          continue
+        }
+      elif ! test -f "${map_log_cursor}"; then
+        atomic_write "${map_failure}" "campaign=${EXPECTED_CAMPAIGN}" \
+          'reason=BlueMap log cursor is missing' \
+          "failed_at=$(date '+%Y-%m-%dT%H:%M:%S%z')" || true
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      fi
+
+      scan_bluemap_logs || {
+        ensure_bluemap_stopped || true
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      }
+      ensure_bluemap_running || {
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      }
+      schedule_map_update world_the_nether || {
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      }
+      schedule_map_update world_the_end || {
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      }
+
+      nether_map_marker="${STATE_DIR}/bluemap-world_the_nether.scheduled"
+      end_map_marker="${STATE_DIR}/bluemap-world_the_end.scheduled"
+      nether_map_time="$(stat -c %Y "${nether_map_marker}" 2>/dev/null || printf '0')"
+      end_map_time="$(stat -c %Y "${end_map_marker}" 2>/dev/null || printf '0')"
+      map_not_before="${nether_map_time}"
+      if test "${end_map_time}" -gt "${map_not_before}"; then
+        map_not_before="${end_map_time}"
+      fi
+      map_not_before="$((map_not_before + MAP_SETTLE_SECONDS))"
+      if test "${now}" -lt "${map_not_before}"; then
+        sleep "${POLL_SECONDS}"
+        continue
+      fi
+
+      scan_bluemap_logs || {
+        ensure_bluemap_stopped || true
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      }
+
+      tasks_output="$(rcon bluemap tasks 2>/dev/null || true)"
+      status_output="$(rcon bluemap 2>/dev/null || true)"
+      if printf '%s' "${tasks_output}" | grep -Fq 'no pending tasks, all done' &&
+        printf '%s' "${status_output}" | grep -Fq 'render-thread is idle' &&
+        printf '%s' "${status_output}" | grep -Fq '3 maps are updated'; then
+        map_idle_samples="$((map_idle_samples + 1))"
+      else
+        map_idle_samples=0
+      fi
+
+      if test "${map_idle_samples}" -lt 2; then
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      fi
+
+      if ! task_is_target_complete "${NETHER_TASK}" minecraft:the_nether ||
+        ! task_is_target_complete "${END_TASK}" minecraft:the_end ||
+        ! verify_dimension nether || ! verify_dimension end ||
+        has_failed nether || has_failed end || test -f "${map_failure}"; then
+        log "final verification changed; refusing completion"
+        map_idle_samples=0
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      fi
+
+      if ! atomic_write "${COMPLETION_MARKER}" "campaign=${EXPECTED_CAMPAIGN}" \
+        'nether=verified' 'end=verified' 'bluemap=verified' \
+        "completed_at=$(date '+%Y-%m-%dT%H:%M:%S%z')"; then
+        log "could not persist completion marker; retrying"
+        sleep "${MAP_POLL_SECONDS}"
+        continue
+      fi
+
+      log "Nether, End, and BlueMap campaign verified complete; controller exiting permanently"
+      exit 0
+    done

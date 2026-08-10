@@ -39,6 +39,9 @@ spec:
         - name: chunksmith-config
           configMap:
             name: modded-mc-chunksmith-config
+        - name: background-pregen-config
+          configMap:
+            name: modded-mc-background-pregen
       nodeSelector:
         kubernetes.io/hostname: s7
       initContainers:
@@ -60,6 +63,44 @@ spec:
         - name: modded-mc
           image: docker.io/itzg/minecraft-server:2026.8.0-java25@sha256:e3335993929a1565f73c30b2041bcbc1473fc9c406fdd5a0d0ea24c08ef73320
           imagePullPolicy: IfNotPresent
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    controller=/config/background-pregen/controller.sh
+                    log=/data/logs/background-pregen-controller.log
+                    lock=/data/logs/background-pregen-controller.lock
+                    if ! command -v flock >/dev/null 2>&1 ||
+                      ! command -v gosu >/dev/null 2>&1 ||
+                      ! test -r "${controller}" ||
+                      ! gosu 1000:1000 test -w /data/logs ||
+                      ! gosu 1000:1000 test -w /data/config/chunksmith; then
+                      printf '%s [background-pregen] launcher preflight failed\n' \
+                        "$(date '+%Y-%m-%dT%H:%M:%S%z')" >>"${log}" 2>&1 || true
+                      exit 0
+                    fi
+                    nohup gosu 1000:1000 flock -n "${lock}" /bin/sh -c '
+                      while :; do
+                        /bin/sh /config/background-pregen/controller.sh
+                        status=$?
+                        if test "${status}" -eq 0; then
+                          exit 0
+                        fi
+                        case "${status}" in
+                          64|65|66)
+                            printf "%s [background-pregen] permanent controller setup error %s; launcher exiting\n" \
+                              "$(date "+%Y-%m-%dT%H:%M:%S%z")" "${status}"
+                            exit 0
+                            ;;
+                        esac
+                        printf "%s [background-pregen] controller exited %s; restarting in 15s\n" \
+                          "$(date "+%Y-%m-%dT%H:%M:%S%z")" "${status}"
+                        sleep 15
+                      done
+                    ' </dev/null >>"${log}" 2>&1 &
           resources:
             requests:
               memory: "20Gi"
@@ -95,6 +136,9 @@ spec:
               readOnly: true
             - name: chunksmith-config
               mountPath: /config/chunksmith
+              readOnly: true
+            - name: background-pregen-config
+              mountPath: /config/background-pregen
               readOnly: true
           startupProbe:
             exec:
