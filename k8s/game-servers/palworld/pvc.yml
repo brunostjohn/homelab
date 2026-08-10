@@ -3,12 +3,13 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: palworld
-  name: palworld-server-pvc
+  name: palworld-data-2026-08-10
   namespace: game-servers
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: floof-nfs-csi
+  storageClassName: local-path
+  volumeMode: Filesystem
   resources:
     requests:
-      storage: 12Gi
+      storage: 32Gi

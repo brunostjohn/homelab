@@ -20,6 +20,7 @@ spec:
       labels:
         app: palworld
     spec:
+      terminationGracePeriodSeconds: 60
       nodeSelector:
         kubernetes.io/hostname: s7
       containers:
@@ -64,5 +65,5 @@ spec:
               name: datadir
       volumes:
         - name: datadir
-          hostPath:
-            path: /palworld
+          persistentVolumeClaim:
+            claimName: palworld-data-2026-08-10

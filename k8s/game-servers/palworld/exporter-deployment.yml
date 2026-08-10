@@ -58,5 +58,5 @@ spec:
               name: datadir
       volumes:
         - name: datadir
-          hostPath:
-            path: /palworld
+          persistentVolumeClaim:
+            claimName: palworld-data-2026-08-10
