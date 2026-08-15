@@ -25,7 +25,7 @@ spec:
         kubernetes.io/hostname: s7
       containers:
         - name: server
-          image: docker.io/thijsvanloef/palworld-server-docker:v2.7.1
+          image: docker.io/thijsvanloef/palworld-server-docker:v2.7.2
           imagePullPolicy: IfNotPresent
           startupProbe:
             exec:
