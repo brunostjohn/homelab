@@ -92,7 +92,7 @@ spec:
           from: ""
     path: .
     repoURL: https://charts.goauthentik.io
-    targetRevision: 2026.8.0
+    targetRevision: 2026.8.1
   syncPolicy:
     automated:
       allowEmpty: true
