@@ -24,8 +24,8 @@ spec:
   startingDeadlineSeconds: 10800
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 3
-  # Enable after the trusted initial manifest and hashes have been seeded.
-  suspend: true
+  # Trusted baseline seeded; live download and repair checks passed.
+  suspend: false
   jobTemplate:
     spec:
       backoffLimit: 1
@@ -49,7 +49,18 @@ spec:
             - name: sync
               image: python:3.13-alpine@sha256:7415fbc3c9e4979cc717d92377ab2bc7b2b4a2af1ac03cc52b5f3f88efedaf3a
               command: [python, -u, /scripts/xzz_sync.py]
-              args: [--apply]
+              args:
+                - --apply
+                - --max-checks
+                - "200000"
+                - --max-files
+                - "200000"
+                - --max-seconds
+                - "19800"
+                - --max-bytes
+                - "53687091200"
+                - --rate
+                - "2097152"
               env:
                 - name: PYTHONDONTWRITEBYTECODE
                   value: "1"
@@ -70,7 +81,7 @@ spec:
                       name: boardripper-xzz-secrets
                       key: PASSWORD
                 - name: BOARDRIPPER_URL
-                  value: http://boardripper.productivity.svc.cluster.local:8080
+                  value: http://boardripper.productivity.svc.cluster.local:8080/api/databank/scan
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true

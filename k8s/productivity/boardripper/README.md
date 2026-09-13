@@ -72,6 +72,30 @@ Verified downloads, recovery journals and bounded verification checkpoints
 support retries. Keep the state PVC and recovery copies: they hold the trust
 baseline and rollback evidence, not another copy of the whole collection.
 
+The daily run is limited to 5.5 hours, 50 GiB of file transfers, and 200,000
+file operations/checks, with a 2 MiB/s transfer target. Unfinished work resumes
+on the next run. The first audit reads existing local bytes to establish a
+verification cache; later runs hash only changed local file fingerprints.
+Each run fetches the remote manifest and hash index, not the whole corpus.
+Files without published checksums are left for review. Existing byte-identical
+files at verified alternative paths are reused without creating another copy.
+A 5 GiB free-space reserve protects the destination from filling up.
+
+The initial trust baseline and verified aliases are stored only on the state
+PVC, outside Git. Do not regenerate that baseline from a changed remote source
+to clear a freeze. Review receipts in `/state/receipts`, compare the pinned
+hashes and retained backups, and approve any legitimate upstream changes
+explicitly. The script exits nonzero for freezes, failed transfers, or changes
+requiring review, so Kubernetes records a failed Job. It does not send alerts.
+
+After downloads or repairs, the worker requests a BoardRipper library scan.
+An unavailable/busy scanner is retried on the next applying run. Metadata-only
+categorization uses the BoardRipper API and never renames NAS files.
+
+Worker source: `scripts/boardripper-xzz-sync/xzz_sync.py`. Regenerate its
+ConfigMap with `python3 scripts/boardripper-xzz-sync/build_configmap.py` after
+editing, and run `python3 -m unittest discover -s scripts/boardripper-xzz-sync`.
+
 ## Updates and verification
 
 The image is pinned to a release and digest. Update it through Git/Argo;
