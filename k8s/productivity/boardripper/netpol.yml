@@ -20,3 +20,10 @@ spec:
       ports:
         - port: 8080
           protocol: TCP
+    - from:
+        - podSelector:
+            matchLabels:
+              app: boardripper-xzz-sync
+      ports:
+        - port: 8080
+          protocol: TCP

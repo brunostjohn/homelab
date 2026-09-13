@@ -9,14 +9,17 @@ Deploy changes through Git and Argo CD.
 
 ## Storage
 
-The existing NAS export `10.0.3.1:/mnt/jabberwock/shares/global` is mounted
-read-only, with only its `Repair Schematics` subdirectory visible to the app.
+The NAS export `10.0.3.1:/mnt/jabberwock/shares/global/Repair Schematics` is
+mounted read-only and exposes only the repair collection to the app.
 Do not change the NAS files' ownership, mode, or ACLs. Any access adjustment
 must be confined to the NFS share settings.
 
-The NFS share is read-only, restricted to `10.0.0.0/16`, and maps clients to
-the existing `bruno:shareusers` identity. Kubernetes mounts the repair folder
-directly; it does not use an NFS `subPath` mount.
+The NFS share is restricted to `10.0.0.0/16` and maps clients to
+the `root:shareusers` identity so existing root-owned folders are readable
+without changing their permissions. The container still runs as UID/GID 65532.
+Kubernetes mounts the repair folder directly; it does not use an NFS `subPath`
+mount. The export permits the scheduled sync job to write; both BoardRipper
+volume settings remain read-only.
 
 The separate `boardripper-data` local-path PVC stores SQLite databases,
 indexes, settings, persistent MCP pairing credentials, and uploads.
@@ -50,6 +53,24 @@ pairing tokens survive restarts on the PVC.
 
 Enable automatic library scanning in Settings. All configuration persists
 on the data PVC. Keep browser control tools disabled unless explicitly wanted.
+
+## Incremental XZZ sync
+
+`boardripper-xzz-sync` runs daily at 04:00 in `Europe/Dublin`, using the existing
+`XZZ 2025` directory. Infisical supplies `USERNAME` and `PASSWORD` from
+`/xzz_repo` in the cluster secrets project's `dev` environment. Only Secret
+references belong in Git; never commit credentials or private library manifests.
+
+The worker compares the remote manifest and hashes against a persistent trusted
+baseline. It downloads missing files and repairs local hash mismatches, keeping
+recovery copies of replaced bytes in `.xzz-sync-backups`. It never propagates
+remote deletions. A changed hash for an already trusted remote path requires
+review; a large catalog reduction or mass hash change freezes the run.
+
+Repairs write through the original inode to preserve ownership, mode and ACLs.
+Verified downloads, recovery journals and bounded verification checkpoints
+support retries. Keep the state PVC and recovery copies: they hold the trust
+baseline and rollback evidence, not another copy of the whole collection.
 
 ## Updates and verification
 

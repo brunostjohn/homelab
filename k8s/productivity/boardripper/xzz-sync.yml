@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: boardripper-xzz-sync-state
+  namespace: productivity
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: boardripper-xzz-sync
+  namespace: productivity
+spec:
+  schedule: "0 4 * * *"
+  timeZone: Europe/Dublin
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 10800
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 3
+  # Enable after the trusted initial manifest and hashes have been seeded.
+  suspend: true
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 21600
+      template:
+        metadata:
+          labels:
+            app: boardripper-xzz-sync
+        spec:
+          automountServiceAccountToken: false
+          restartPolicy: Never
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            fsGroup: 65532
+            fsGroupChangePolicy: OnRootMismatch
+            seccompProfile:
+              type: RuntimeDefault
+          containers:
+            - name: sync
+              image: python:3.13-alpine@sha256:7415fbc3c9e4979cc717d92377ab2bc7b2b4a2af1ac03cc52b5f3f88efedaf3a
+              command: [python, -u, /scripts/xzz_sync.py]
+              args: [--apply]
+              env:
+                - name: PYTHONDONTWRITEBYTECODE
+                  value: "1"
+                - name: XZZ_BASE_URL
+                  value: https://xzzcopyparty.slimeinacloak.com/
+                - name: XZZ_LIBRARY_ROOT
+                  value: /library/XZZ 2025
+                - name: XZZ_STATE_DIR
+                  value: /state
+                - name: USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: boardripper-xzz-secrets
+                      key: USERNAME
+                - name: PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: boardripper-xzz-secrets
+                      key: PASSWORD
+                - name: BOARDRIPPER_URL
+                  value: http://boardripper.productivity.svc.cluster.local:8080
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: [ALL]
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 256Mi
+                limits:
+                  cpu: "1"
+                  memory: 1Gi
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+                  readOnly: true
+                - name: state
+                  mountPath: /state
+                - name: library
+                  mountPath: /library
+                - name: tmp
+                  mountPath: /tmp
+          volumes:
+            - name: script
+              configMap:
+                name: boardripper-xzz-sync-script
+            - name: state
+              persistentVolumeClaim:
+                claimName: boardripper-xzz-sync-state
+            - name: library
+              nfs:
+                server: 10.0.3.1
+                path: /mnt/jabberwock/shares/global/Repair Schematics
+                readOnly: false
+            - name: tmp
+              emptyDir:
+                sizeLimit: 64Mi
