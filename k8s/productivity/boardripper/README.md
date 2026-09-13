@@ -23,11 +23,12 @@ enforced quota.
 
 ## Authentication
 
-Create an Authentik application with slug `boardripper` and a proxy provider
+Authentik application `boardripper` uses `Provider for BoardRipper` (ID 426)
 in **Forward auth (single application)** mode, external host
-`https://boards.zefirsroyal.cloud`. Attach it to the existing **Proxy Outpost**
-and bind the intended user's access policy. No unauthenticated-path regex is
-needed in Authentik: exact ingress paths handle MCP separately.
+`https://boards.zefirsroyal.cloud`. It is assigned to the existing **Proxy Outpost**
+with a user binding for `bruno` (Bruno St John). The outpost manages its own
+`/outpost.goauthentik.io` ingress. Header authentication interception is disabled;
+the unauthenticated-path list is empty. Exact ingress paths handle MCP separately.
 
 The main ingress requires Authentik. In particular, `/api/mcp/token`, pairing,
 settings, the browser bridge, and `/api/mcp/oauth/authorize` remain protected.

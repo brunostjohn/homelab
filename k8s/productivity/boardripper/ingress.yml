@@ -99,24 +99,3 @@ spec:
                 name: boardripper
                 port:
                   number: 8080
----
-# Keep this Ingress in the outpost's namespace to avoid cross-namespace or
-# ExternalName service references. The application otherwise lives in productivity.
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: boardripper-authentik
-  namespace: authentik
-spec:
-  ingressClassName: traefik
-  rules:
-    - host: boards.zefirsroyal.cloud
-      http:
-        paths:
-          - path: /outpost.goauthentik.io/
-            pathType: Prefix
-            backend:
-              service:
-                name: ak-outpost-proxy-outpost
-                port:
-                  number: 9000
