@@ -14,6 +14,10 @@ read-only, with only its `Repair Schematics` subdirectory visible to the app.
 Do not change the NAS files' ownership, mode, or ACLs. Any access adjustment
 must be confined to the NFS share settings.
 
+The NFS share is read-only, restricted to `10.0.0.0/16`, and maps clients to
+the existing `bruno:shareusers` identity. Kubernetes mounts the repair folder
+directly; it does not use an NFS `subPath` mount.
+
 The separate `boardripper-data` local-path PVC stores SQLite databases,
 indexes, settings, persistent MCP pairing credentials, and uploads.
 `/library/incoming` uses the PVC, so uploads never write to the NAS collection.

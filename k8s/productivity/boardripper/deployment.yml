@@ -88,7 +88,6 @@ spec:
               mountPath: /data
             - name: library
               mountPath: /library/Repair Schematics
-              subPath: Repair Schematics
               readOnly: true
             - name: data
               mountPath: /library/incoming
@@ -100,5 +99,5 @@ spec:
         - name: library
           nfs:
             server: 10.0.3.1
-            path: /mnt/jabberwock/shares/global
+            path: /mnt/jabberwock/shares/global/Repair Schematics
             readOnly: true
