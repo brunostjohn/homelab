@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: boardripper-data
+  namespace: productivity
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+spec:
+  accessModes:
+    - ReadWriteOnce
+  # SQLite databases need local filesystem locking, separate from the NAS library.
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 20Gi
