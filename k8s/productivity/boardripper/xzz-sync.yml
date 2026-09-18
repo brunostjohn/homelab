@@ -47,7 +47,7 @@ spec:
               type: RuntimeDefault
           containers:
             - name: sync
-              image: python:3.13-alpine@sha256:8a6c5efbf700a149072e3e0c39678a093a675a60e7fa607f6c9011f335b0b24b
+              image: python:3.13-alpine@sha256:1a63a53928ce53d2b0baf08092a703f4840ac5dfbd61fd48802dbf48e08c801e
               command: [python, -u, /scripts/xzz_sync.py]
               args:
                 - --apply
