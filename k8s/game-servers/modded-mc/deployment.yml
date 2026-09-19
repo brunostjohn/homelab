@@ -171,7 +171,7 @@ spec:
             - secretRef:
                 name: modded-mc-secrets
         - name: mc-monitor
-          image: docker.io/itzg/mc-monitor:0.18.0@sha256:67d28629ccaa73d58bb441b0f73ca293fa53b81cbaf51041dddd65e0f0da22b6
+          image: docker.io/itzg/mc-monitor:0.18.1@sha256:6e38245c074f5d15e28131657f48b41eaaac08d18a24131c545cc607345f92bb
           imagePullPolicy: IfNotPresent
           args:
             - export-for-prometheus
