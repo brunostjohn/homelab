@@ -45,7 +45,7 @@ spec:
               mountPath: /data
       containers:
         - name: boardripper
-          image: ghcr.io/alexeyinwerp/boardripper:v0.43.1@sha256:58cd2269b0575a90454c3e21e2609f278b748c900996ed2a3a9a7382f19148f4
+          image: ghcr.io/alexeyinwerp/boardripper:v0.43.4@sha256:97a812041a1096c766ec517abadba7fca7e1b3cb9298dfc19c11ff8c00a47bde
           ports:
             - name: http
               containerPort: 8080
