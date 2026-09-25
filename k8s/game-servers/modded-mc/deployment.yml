@@ -46,7 +46,7 @@ spec:
         kubernetes.io/hostname: s7
       initContainers:
         - name: prepare-data-directories
-          image: docker.io/itzg/minecraft-server:2026.9.1-java25@sha256:e8640538dac5d54c2838d57fa9641e735ad0cf2b71fb0e8a68da3b542a315749
+          image: docker.io/itzg/minecraft-server:2026.9.2-java25@sha256:de5d1b1a83eba576f6c8a688fac2a3523ce457724cdebc8ea48d7818b74cdf6e
           imagePullPolicy: IfNotPresent
           command:
             - mkdir
@@ -61,7 +61,7 @@ spec:
               mountPath: /data
       containers:
         - name: modded-mc
-          image: docker.io/itzg/minecraft-server:2026.9.1-java25@sha256:e8640538dac5d54c2838d57fa9641e735ad0cf2b71fb0e8a68da3b542a315749
+          image: docker.io/itzg/minecraft-server:2026.9.2-java25@sha256:de5d1b1a83eba576f6c8a688fac2a3523ce457724cdebc8ea48d7818b74cdf6e
           imagePullPolicy: IfNotPresent
           lifecycle:
             postStart:
