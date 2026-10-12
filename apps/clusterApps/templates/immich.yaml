@@ -51,7 +51,7 @@ spec:
           NVIDIA_DRIVER_CAPABILITIES: "compute,video,utility"
 
         image:
-          tag: v2.7.5
+          tag: v3.3.1
 
         immich:
           metrics:
