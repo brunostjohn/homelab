@@ -44,6 +44,8 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
       dnsPolicy: ClusterFirstWithHostNet
+      nodeSelector:
+        lan0-mtu: "9000"
       initContainers:
         - name: prepare-secrets-yaml
           image: docker.io/suzukishunsuke/alpine-envsubst:0.1.0

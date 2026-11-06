@@ -22,6 +22,8 @@ spec:
         app: blocky
         dragonfly: "true"
     spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
       volumes:
         - name: blocky-config
           configMap:
