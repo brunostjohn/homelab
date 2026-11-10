@@ -77,6 +77,32 @@ through `HONCHO_TOKEN_DIR` and a local operator forward through `HONCHO_URL`.
 Prometheus monitors cover API, worker and embeddings; rules cover unavailable memory,
 queue age and stale queue metrics. Actual scraping awaits recovery of Prometheus's Pi.
 
+## Family Mealie
+
+`mealie-family.yml` runs the stock `mdlopresti/mealie-mcp` image pinned by digest,
+with its native FastMCP HTTP entrypoint and the same authenticated proxy pattern as
+private iCloud. The server binds only to pod loopback; its gateway accepts a dedicated
+bearer token, and network policy permits only Rakazo API/worker ingress plus Mealie
+and DNS egress. Both credentials are in Infisical `/rakazo`; no PVC is added.
+
+The native connection is named **Mealie Family** and available only in Family.
+Discovery exposes 116 tools. Authentication rejection, recipe/meal-plan/shopping-list
+reads, and creation/read/item-addition/deletion of a uniquely named temporary list
+passed; the temporary data was removed. The Mealie API token is named `Rakazo Family`
+and acts as Bruno in his existing Mealie household.
+
+Mealie v3.30.0 was crash-looping on its `authmethod` enum migration. Correcting only
+that enum's owner to the existing `mealie` login let the installed migrations finish.
+Existing recipes were preserved. No Mealie source change was made.
+
+Infisical's session-pooled PostgreSQL path also timed out during integration setup.
+A direct-connection transaction check passed in 77 ms while the pooled check timed
+out. Its existing bootstrap Secret `infisical/infisical-secrets` now uses
+`postgres-cluster-rw.databases.svc.cluster.local` in `DB_CONNECTION_URI`, with the
+same credentials/database. Both replicas recovered and secret saves/sync resumed.
+This bootstrap Secret is not operator-managed; do not restore the exhausted pooler
+hostname from legacy Terraform.
+
 Both PostgreSQL templates contain pre-existing legacy objects. In the new Rakazo
 and proxy databases only, the inherited `public.system` table was moved into
 `inherited_template_quarantine` and access to inherited schemas revoked from PUBLIC.
@@ -101,7 +127,7 @@ MinIO's stable root credentials and rotated OIDC secret are now managed in Infis
 - Docker browser/terminal/takeover and saved-home restoration checks.
 - Proxy OAuth refresh and complete pod-replacement persistence checks.
 - Klaudia's space access, inbound Resend bridge, Composio and stock iPhone push tests.
-- Personal/Family infrastructure MCPs, Family Mealie and verified deletion approval policy.
+- Personal/Family infrastructure MCPs and verified deletion approval policy.
 - Existing Prometheus integration, storage/backup alerts and application health checks.
 - Final retention cleanup, fresh-backup restore test and fresh MinIO OIDC login test.
 - Separate recoverable encryption-key copy and remaining failure/persistence checks.
