@@ -1,0 +1,10 @@
+{
+  "name": "homelab-mcp-runtime",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "ssh-mcp": "2.25.0",
+    "supergateway": "4.2.2",
+    "truenas-mcp": "1.0.0"
+  }
+}
