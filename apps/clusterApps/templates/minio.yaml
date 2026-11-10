@@ -50,7 +50,7 @@ spec:
           tag: RELEASE.2024-04-18T19-09-19Z@sha256:036a068d7d6b69400da6bc07a480bee1e241ef3c341c41d988ed11f520f85124
           pullPolicy: IfNotPresent
     repoURL: https://charts.min.io/
-    targetRevision: 5.3.0
+    targetRevision: 5.4.0
   syncPolicy:
     automated:
       allowEmpty: true
