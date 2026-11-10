@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: barman-minio-compat
+  namespace: databases
+data:
+  sitecustomize.py: |
+    # shortcut: remove when MinIO supports the SDK's CRC32 DeleteObjects checksum.
+    import base64
+    import hashlib
+    import botocore.handlers
+
+    def minio_content_md5(params, **kwargs):
+        params["headers"]["Content-MD5"] = base64.b64encode(
+            hashlib.md5(params["body"]).digest()
+        ).decode("ascii")
+
+    botocore.handlers.BUILTIN_HANDLERS.append(
+        ("before-call.s3.DeleteObjects", minio_content_md5)
+    )

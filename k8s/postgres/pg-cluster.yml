@@ -7,6 +7,17 @@ spec:
   instances: 3
   imageName: ghcr.io/tensorchord/cloudnative-vectorchord:15.13-0.4.3
 
+  env:
+    - name: PYTHONPATH
+      value: /projected/barman-compat
+  projectedVolumeTemplate:
+    sources:
+      - configMap:
+          name: barman-minio-compat
+          items:
+            - key: sitecustomize.py
+              path: barman-compat/sitecustomize.py
+
   primaryUpdateStrategy: unsupervised
 
   enableSuperuserAccess: true
@@ -19,7 +30,7 @@ spec:
     - name: clusterBackup
       barmanObjectStore:
         destinationPath: s3://posgres-cluster-backups/
-        serverName: recovered-postgres-cluster-n4
+        serverName: recovered-postgres-cluster-n5
         wal:
           maxParallel: 8
         endpointURL: http://minio-svc.minio.svc.cluster.local:9000
@@ -54,6 +65,8 @@ spec:
       destinationPath: s3://posgres-cluster-backups/
       serverName: recovered-postgres-cluster-n5
       endpointURL: http://minio-svc.minio.svc.cluster.local:9000
+      wal:
+        maxParallel: 8
       s3Credentials:
         accessKeyId:
           name: postgres-cluster-backup-minio
