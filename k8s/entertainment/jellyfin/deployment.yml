@@ -30,8 +30,9 @@ spec:
             type: Directory
             path: /jellyfin-lockable
         - name: jellyfin-cache
-          persistentVolumeClaim:
-            claimName: jellyfin-cache-pvc
+          # Cache and transcodes are disposable; keep them off shared NAS storage.
+          emptyDir:
+            sizeLimit: 50Gi
         - name: entertainment-content
           persistentVolumeClaim:
             claimName: entertainment-content-pvc
