@@ -1,0 +1,32 @@
+name: Build Rakazo Embeddings
+
+on: # yamllint disable-line rule:truthy
+  push:
+    paths:
+      - k8s/rakazo/embeddings/Dockerfile
+      - .github/workflows/rebuild-rakazo-embeddings.yml
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4.4.1
+      - uses: docker/login-action@v4.8.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v7.4.0
+        with:
+          context: k8s/rakazo/embeddings
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/brunostjohn/rakazo-embeddings:tei-1.9.4-bge-m3-5617a9f
+          cache-from: type=gha
+          cache-to: type=gha,mode=min
