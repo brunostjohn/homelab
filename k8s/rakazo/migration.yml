@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rakazo-migrate-4352edf
+  namespace: rakazo
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "-1"
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 900
+  template:
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      restartPolicy: Never
+      containers:
+      - name: migrate
+        image: ghcr.io/elie222/rakazo/app@sha256:3f1c9a1853da0a2364ecb0560ab1d07b6170b664db34d1b85f5c04c1aeb56af2
+        workingDir: "/app/apps/api"
+        command:
+        - node
+        - "--enable-source-maps"
+        - dist/cli/migrate-database.js
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: DATABASE_URL
+        - name: DATABASE_MIGRATION_URL
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: DATABASE_MIGRATION_URL
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: '2'
+            memory: 1536Mi

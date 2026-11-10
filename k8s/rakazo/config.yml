@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rakazo
+  namespace: rakazo
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"
+data:
+  NODE_ENV: production
+  DATA_DIR: "/data"
+  CONTENT_ENCRYPTION: 'on'
+  SECRET_STORE: encrypted
+  API_HOST: 0.0.0.0
+  API_URL: https://bots.zefirsroyal.cloud
+  BETTER_AUTH_URL: https://bots.zefirsroyal.cloud
+  WEB_ORIGIN: https://bots.zefirsroyal.cloud
+  TRUSTED_PROXIES: 10.42.0.0/16
+  AUTH_PASSWORD_ENABLED: 'false'
+  SIGNUPS_ENABLED: 'true'
+  SIGNUP_ALLOWLIST: brunost.john@icloud.com,klaudiastrugacz@icloud.com
+  RAKAZO_ADMIN_EMAILS: brunost.john@icloud.com
+  OIDC_ISSUER: https://auth.zefirsroyal.cloud/application/o/rakazo/
+  OIDC_NAME: Authentik
+  OIDC_SCOPES: openid email profile
+  OIDC_ALLOW_SIGNUP_BYPASS: 'false'
+  WAKEUP_DRIVER: graphile
+  AGENT_RUNTIME: pi
+  PI_DEFAULT_PROVIDER: local
+  PI_DEFAULT_MODEL: gpt-6.1-sol
+  PI_DEFAULT_CREDENTIALS: host
+  RAKAZO_LOCAL_MODELS: gpt-6.1-sol,claude-sonnet-5-5
+  RAKAZO_LOCAL_MODELS_URL: http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1
+  RAKAZO_LOCAL_VISION_MODELS: gpt-6.1-sol,claude-sonnet-5-5
+  RAKAZO_LOCAL_REASONING_MODELS: gpt-6.1-sol
+  RAKAZO_LOCAL_CONTEXT_WINDOW: '200000'
+  RAKAZO_LOCAL_MAX_TOKENS: '16384'
+  DB_POOL_MAX: '15'
+  GRAPHILE_WORKER_CONCURRENCY: '4'
+  OBJECT_STORAGE_BUCKET: rakazo-data
+  OBJECT_STORAGE_ENDPOINT: http://minio.minio.svc.cluster.local:9000
+  OBJECT_STORAGE_REGION: us-east-1
+  OBJECT_STORAGE_PATH_STYLE: 'true'
+  SANDBOX_PROVIDER: docker
+  SANDBOX_SUPERVISOR_URL: http://10.0.194.215:7091
+  SANDBOX_IDLE_MS: '600000'
+  SANDBOX_MAX_COMPUTERS_PER_USER: '4'
+  SANDBOX_MAX_COMPUTERS_PER_SPACE: '4'
+  COMPUTER_SETTINGS_ENABLED: 'false'
+  MCP_ALLOW_PRIVATE_ENDPOINT: 'true'
+  RAKAZO_SECRETS_ALLOW_PRIVATE_HTTP: 'true'
+  INBOUND_EMAIL_DOMAIN: bots.zefirsroyal.cloud
+  EMAIL_PROVIDER: resend
+  EMAIL_FROM: Rakazo <notifications@bots.zefirsroyal.cloud>
+  WELCOME_EMAIL_ENABLED: 'false'
+  PHONE_CALLS_ENABLED: 'false'
+  MEDIA_GENERATION_PROVIDER: disabled
+  LOG_FORMAT: json

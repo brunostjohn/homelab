@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rakazo-proxy
+  namespace: rakazo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rakazo-proxy
+  template:
+    metadata:
+      labels:
+        app: rakazo-proxy
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: bootstrap-config
+          image: eceasy/cli-proxy-api:v8.0.64@sha256:362e7ac699a0f2608d7c55f8f8cb764e5afbfe4ed22aadc26fcb147eecbf2a03
+          command:
+            - sh
+            - -ec
+            - |
+              case "$PROXY_API_KEY$PROXY_MANAGEMENT_KEY" in *[!a-zA-Z0-9_-]*) exit 1;; esac
+              test -n "$PROXY_API_KEY" && test -n "$PROXY_MANAGEMENT_KEY"
+              umask 077
+              printf 'config-version: 8\nserver:\n  host: "0.0.0.0"\n  port: 8317\n  kv-store:\n    disabled: true\nmanagement:\n  allow-remote: false\n  secret-key: "%s"\n  disable-control-panel: true\naccess:\n  api-keys: ["%s"]\noauth:\n  auth-dir: "/cache/auths"\n' "$PROXY_MANAGEMENT_KEY" "$PROXY_API_KEY" > /bootstrap/config.example.yaml
+          env:
+            - name: PROXY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rakazo
+                  key: PROXY_API_KEY
+            - name: PROXY_MANAGEMENT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rakazo
+                  key: PROXY_MANAGEMENT_KEY
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: bootstrap
+              mountPath: /bootstrap
+      containers:
+        - name: proxy
+          image: eceasy/cli-proxy-api:v8.0.64@sha256:362e7ac699a0f2608d7c55f8f8cb764e5afbfe4ed22aadc26fcb147eecbf2a03
+          env:
+            - name: PGSTORE_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: rakazo
+                  key: PROXY_PGSTORE_DSN
+            - name: PGSTORE_LOCAL_PATH
+              value: /cache
+            - name: TZ
+              value: Europe/Dublin
+          ports:
+            - name: http
+              containerPort: 8317
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: "2"
+              memory: 1Gi
+          readinessProbe:
+            tcpSocket:
+              port: http
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+          volumeMounts:
+            - name: bootstrap
+              mountPath: /CLIProxyAPI/config.example.yaml
+              subPath: config.example.yaml
+              readOnly: true
+            - name: cache
+              mountPath: /cache
+      volumes:
+        - name: bootstrap
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Mi
+        - name: cache
+          emptyDir:
+            sizeLimit: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rakazo-proxy
+  namespace: rakazo
+spec:
+  selector:
+    app: rakazo-proxy
+  ports:
+    - name: http
+      port: 8317
+      targetPort: http

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rakazo
+  namespace: rakazo
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: bots.zefirsroyal.cloud
+      http:
+        paths:
+          - path: /novnc
+            pathType: Prefix
+            backend:
+              service:
+                name: rakazo-computer-screens
+                port:
+                  number: 5173
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rakazo-web
+                port:
+                  number: 5173

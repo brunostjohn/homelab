@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rakazo-homes
+  namespace: rakazo
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false,Delete=false
+    argocd.argoproj.io/sync-wave: "-3"
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: floof-nfs-retain
+  resources:
+    requests:
+      storage: 100Gi
