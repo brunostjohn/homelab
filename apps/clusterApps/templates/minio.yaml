@@ -1,0 +1,64 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+spec:
+  destination:
+    namespace: minio
+    server: https://kubernetes.default.svc
+  project: storage
+  revisionHistoryLimit: 10
+  source:
+    chart: minio
+    helm:
+      valuesObject:
+        resources:
+          requests:
+            memory: 2Gi
+        replicas: 2
+        metrics:
+          serviceMonitor:
+            enabled: true
+            includeNode: true
+        environment:
+          MINIO_DOMAIN: static.zefirsroyal.cloud
+        persistence:
+          enabled: true
+          storageClass: nfs-jabberwock-subpath
+          size: 100Gi
+        securityContext:
+          enabled: false
+        oidc:
+          enabled: true
+          configUrl: https://auth.zefirsroyal.cloud/application/o/minio/.well-known/openid-configuration
+          clientId: s6YPn8NDFN9jIgSiTxUMBfxCCcRVxFhBwsfwEVId
+          claimName: policy
+          scopes: openid profile email minio
+          redirectUri: https://minio.zefirsroyal.cloud/oauth_callback
+          displayName: Zefir's Cloud
+          existingClientSecretName: minio-root-credentials
+          existingClientSecretKey: oidcClientSecret
+        existingSecret: minio-root-credentials
+        image:
+          repository: quay.io/minio/minio
+          tag: RELEASE.2024-04-18T19-09-19Z@sha256:036a068d7d6b69400da6bc07a480bee1e241ef3c341c41d988ed11f520f85124
+          pullPolicy: IfNotPresent
+        mcImage:
+          repository: quay.io/minio/minio
+          tag: RELEASE.2024-04-18T19-09-19Z@sha256:036a068d7d6b69400da6bc07a480bee1e241ef3c341c41d988ed11f520f85124
+          pullPolicy: IfNotPresent
+    repoURL: https://charts.min.io/
+    targetRevision: 5.3.0
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 2m
+      limit: 5
