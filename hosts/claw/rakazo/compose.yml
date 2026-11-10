@@ -1,0 +1,75 @@
+name: rakazo
+services:
+  supervisor:
+    image: ghcr.io/elie222/rakazo/app@sha256:3f1c9a1853da0a2364ecb0560ab1d07b6170b664db34d1b85f5c04c1aeb56af2
+    command: [pnpm, --filter, "@rakazo/sandbox-supervisor", start]
+    restart: unless-stopped
+    init: true
+    user: root
+    security_opt: [no-new-privileges:true]
+    pids_limit: 256
+    mem_limit: 512m
+    environment:
+      NODE_ENV: production
+      DATA_DIR: /data
+      SUPERVISOR_HOST: 0.0.0.0
+      SUPERVISOR_PORT: "7091"
+      DOCKER_SOCKET: /var/run/docker.sock
+      SANDBOX_SUPERVISOR_TOKEN: ${SANDBOX_SUPERVISOR_TOKEN:?Required}
+      SANDBOX_SCREEN_NETWORK: isolated
+      SANDBOX_COMPUTER_EGRESS: open
+      RAKAZO_COMPUTER_IMAGE: ghcr.io/elie222/rakazo/computer@sha256:30ac39fa9238a7eda0fd5a3ecb6b4ab5a28e2c5dd5b7c19be235d86bfb439ed1
+      RAKAZO_COMPUTER_MEMORY: 4g
+      RAKAZO_COMPUTER_CPUS: "2"
+      RAKAZO_COMPUTER_PIDS_LIMIT: "2048"
+      LOG_FORMAT: json
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - type: volume
+        source: homes
+        target: /data
+        volume:
+          nocopy: true
+    ports:
+      - 10.0.194.215:7091:7091
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://127.0.0.1:7091/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+  # Stock supervisor discovers this service and joins it to isolated computer networks.
+  web:
+    image: ghcr.io/elie222/rakazo/app@sha256:3f1c9a1853da0a2364ecb0560ab1d07b6170b664db34d1b85f5c04c1aeb56af2
+    working_dir: /app/apps/web
+    command: [node_modules/.bin/vite, preview, --host, 0.0.0.0, --port, "5173"]
+    restart: unless-stopped
+    init: true
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    pids_limit: 128
+    mem_limit: 512m
+    environment:
+      NODE_ENV: production
+      RAYON_NUM_THREADS: "4"
+      API_PROXY_TARGET: http://10.0.0.6:32100
+      RAKAZO_HOST: bots.zefirsroyal.cloud
+      SCREEN_PROXY_SECRET: ${SCREEN_PROXY_SECRET:?Required}
+    ports:
+      - 10.0.194.215:5173:5173
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+volumes:
+  homes:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=10.0.3.5,rw,nfsvers=4.1
+      device: :/mnt/floofpool/object/vol/pvc-1624ceac-c78f-429b-9e9d-faf3ce77cb18

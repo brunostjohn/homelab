@@ -1,0 +1,26 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: floof-nfs-retain
+  annotations:
+    argocd.argoproj.io/sync-wave: "-4"
+mountOptions:
+- nfsvers=4.1
+- async
+- nodiratime
+- noatime
+parameters:
+  csi.storage.k8s.io/controller-expand-secret-name: controller-expand-secret-floof-nfs-csi-floof-nfs-democratic-csi
+  csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
+  csi.storage.k8s.io/controller-publish-secret-name: controller-publish-secret-floof-nfs-csi-floof-nfs-democratic-cs
+  csi.storage.k8s.io/controller-publish-secret-namespace: kube-system
+  csi.storage.k8s.io/node-publish-secret-name: node-publish-secret-floof-nfs-csi-floof-nfs-democratic-csi
+  csi.storage.k8s.io/node-publish-secret-namespace: kube-system
+  csi.storage.k8s.io/node-stage-secret-name: node-stage-secret-floof-nfs-csi-floof-nfs-democratic-csi
+  csi.storage.k8s.io/node-stage-secret-namespace: kube-system
+  csi.storage.k8s.io/provisioner-secret-name: provisioner-secret-floof-nfs-csi-floof-nfs-democratic-csi
+  csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+provisioner: floof-nfs-csi
+reclaimPolicy: Retain
+volumeBindingMode: Immediate

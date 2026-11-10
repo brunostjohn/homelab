@@ -1,0 +1,22 @@
+apiVersion: secrets.infisical.com/v1alpha1
+kind: InfisicalSecret
+metadata:
+  name: rakazo
+  namespace: rakazo
+  annotations:
+    argocd.argoproj.io/sync-wave: "-4"
+spec:
+  authentication:
+    universalAuth:
+      secretsScope:
+        projectSlug: cluster-secrets-rgq1
+        envSlug: dev
+        secretsPath: "/rakazo"
+        recursive: false
+      credentialsRef:
+        secretName: infisical-machine-id
+        secretNamespace: infisical
+  managedSecretReference:
+    secretName: rakazo
+    secretNamespace: rakazo
+    creationPolicy: Owner

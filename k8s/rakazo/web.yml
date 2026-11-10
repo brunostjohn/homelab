@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rakazo-web
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rakazo-web
+  template:
+    metadata:
+      labels:
+        app: rakazo-web
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: assets
+        emptyDir:
+          sizeLimit: 1Gi
+      containers:
+      - name: web
+        image: ghcr.io/elie222/rakazo/app@sha256:3f1c9a1853da0a2364ecb0560ab1d07b6170b664db34d1b85f5c04c1aeb56af2
+        imagePullPolicy: IfNotPresent
+        workingDir: "/app/apps/web"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        command:
+        - node_modules/.bin/vite
+        - preview
+        - "--host"
+        - 0.0.0.0
+        - "--port"
+        - '5173'
+        env:
+        - name: NODE_ENV
+          value: production
+        - name: RAYON_NUM_THREADS
+          value: '4'
+        - name: API_PROXY_TARGET
+          value: http://rakazo-api:3100
+        - name: RAKAZO_HOST
+          value: bots.zefirsroyal.cloud
+        - name: SCREEN_PROXY_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: SCREEN_PROXY_SECRET
+        ports:
+        - name: http
+          containerPort: 5173
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+        volumeMounts:
+        - name: assets
+          mountPath: "/app/apps/web/asset-archive"
+        readinessProbe:
+          httpGet:
+            path: "/"
+            port: http
+            httpHeaders:
+            - name: Host
+              value: bots.zefirsroyal.cloud
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rakazo-web
+  namespace: rakazo
+spec:
+  selector:
+    app: rakazo-web
+  ports:
+  - name: http
+    port: 5173
+    targetPort: http

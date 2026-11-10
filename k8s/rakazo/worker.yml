@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rakazo-worker
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rakazo-worker
+  template:
+    metadata:
+      labels:
+        app: rakazo-worker
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: homes
+        persistentVolumeClaim:
+          claimName: rakazo-homes
+      - name: staging
+        emptyDir:
+          sizeLimit: 40Gi
+      terminationGracePeriodSeconds: 3000
+      containers:
+      - name: worker
+        image: ghcr.io/elie222/rakazo/app@sha256:3f1c9a1853da0a2364ecb0560ab1d07b6170b664db34d1b85f5c04c1aeb56af2
+        imagePullPolicy: IfNotPresent
+        workingDir: "/app/apps/worker"
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        command:
+        - node
+        - "--enable-source-maps"
+        - dist/index.js
+        envFrom:
+        - configMapRef:
+            name: rakazo
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: DATABASE_URL
+        - name: ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: ENCRYPTION_KEY
+        - name: OBJECT_STORAGE_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: OBJECT_STORAGE_ACCESS_KEY_ID
+        - name: OBJECT_STORAGE_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: OBJECT_STORAGE_SECRET_ACCESS_KEY
+        - name: SANDBOX_SUPERVISOR_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: SANDBOX_SUPERVISOR_TOKEN
+        - name: COMPOSIO_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: COMPOSIO_API_KEY
+        - name: EMAIL_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: RESEND_API_KEY
+        - name: RAKAZO_LOCAL_MODELS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: PROXY_API_KEY
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+            ephemeral-storage: 1Gi
+          limits:
+            cpu: '2'
+            memory: 2Gi
+            ephemeral-storage: 45Gi
+        volumeMounts:
+        - name: homes
+          mountPath: "/data"
+        - name: staging
+          mountPath: "/data/staging"
+        startupProbe:
+          exec:
+            command:
+            - node
+            - dist/health-check.js
+          periodSeconds: 10
+          failureThreshold: 18
+          timeoutSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - node
+            - dist/health-check.js
+          periodSeconds: 30
+          failureThreshold: 3
+          timeoutSeconds: 5
