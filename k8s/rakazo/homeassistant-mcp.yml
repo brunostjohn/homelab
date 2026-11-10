@@ -1,0 +1,231 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homeassistant-mcp-proxy
+  namespace: rakazo
+data:
+  default.conf.template: |
+    server {
+      listen 8080;
+      server_name _;
+      access_log off;
+      client_max_body_size 2m;
+      location = /health {
+        return 200 'ok';
+      }
+      location / {
+        if ($http_authorization != "Bearer ${HOMEASSISTANT_MCP_TOKEN}") { return 401; }
+        proxy_pass http://127.0.0.1:8086;
+        proxy_http_version 1.1;
+        proxy_set_header Host 127.0.0.1:8086;
+        proxy_set_header Connection "";
+        proxy_set_header Authorization "";
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 3600s;
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homeassistant-mcp
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: homeassistant-mcp
+  template:
+    metadata:
+      labels:
+        app: homeassistant-mcp
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: mcp-cache
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: proxy-tmp
+        emptyDir:
+          sizeLimit: 16Mi
+      - name: proxy-config
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Mi
+      - name: proxy-template
+        configMap:
+          name: homeassistant-mcp-proxy
+      containers:
+      - name: mcp
+        image: ghcr.io/homeassistant-ai/ha-mcp:9.1.2@sha256:381b1e01635d3c51f35a01882863610bc0b76a22bae93835a6a5a5c926d9ecb4
+        command:
+        - ha-mcp-web
+        env:
+        - name: HOMEASSISTANT_URL
+          value: http://homeassistant-svc.homeassistant.svc.cluster.local:8123
+        - name: HOMEASSISTANT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: HASSIO_TOKEN
+        - name: MCP_HOST
+          value: 127.0.0.1
+        - name: MCP_PORT
+          value: '8086'
+        - name: MCP_SECRET_PATH
+          value: "/mcp"
+        - name: HA_MCP_DISABLE_SETTINGS_UI
+          value: 'true'
+        - name: HOME
+          value: "/tmp"
+        - name: PYTHONDONTWRITEBYTECODE
+          value: '1'
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: mcp-cache
+          mountPath: "/tmp"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 1Gi
+            ephemeral-storage: 256Mi
+        startupProbe:
+          exec:
+            command:
+            - python
+            - "-c"
+            - import socket; socket.create_connection(('127.0.0.1',8086),2).close()
+          periodSeconds: 5
+          failureThreshold: 30
+        readinessProbe:
+          exec:
+            command:
+            - python
+            - "-c"
+            - import socket; socket.create_connection(('127.0.0.1',8086),2).close()
+          periodSeconds: 20
+      - name: auth-proxy
+        image: nginxinc/nginx-unprivileged:1.29.3-alpine@sha256:5aea7cc516b419e3526f47dd1531be31a56a046cfe44754d94f9383e13e2ee99
+        command:
+        - sh
+        - "-ec"
+        args:
+        - envsubst '${HOMEASSISTANT_MCP_TOKEN}' < /config/default.conf.template >
+          /etc/nginx/conf.d/default.conf; exec nginx -g 'daemon off;'
+        env:
+        - name: HOMEASSISTANT_MCP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: HOMEASSISTANT_MCP_TOKEN
+        ports:
+        - name: http
+          containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: proxy-tmp
+          mountPath: "/tmp"
+        - name: proxy-config
+          mountPath: "/etc/nginx/conf.d"
+        - name: proxy-template
+          mountPath: "/config"
+          readOnly: true
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: "/health"
+            port: http
+          periodSeconds: 10
+      nodeSelector:
+        kubernetes.io/arch: amd64
+  revisionHistoryLimit: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homeassistant-mcp
+  namespace: rakazo
+spec:
+  selector:
+    app: homeassistant-mcp
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: homeassistant-mcp
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      app: homeassistant-mcp
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - rakazo-api
+          - rakazo-worker
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: homeassistant
+      podSelector:
+        matchLabels:
+          app: homeassistant
+    ports:
+    - protocol: TCP
+      port: 8123

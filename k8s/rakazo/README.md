@@ -109,6 +109,33 @@ and proxy databases only, the inherited `public.system` table was moved into
 No inherited data was deleted. An unused `rakazo_app` template0 probe database also
 remains quarantined. Active database names are `rakazo` and `rakazo_proxy`.
 
+## Household infrastructure MCPs
+
+Kubernetes and Home Assistant run stock, digest-pinned MCP servers behind the same
+internal bearer-authenticated gateway pattern as Mealie. Their native Rakazo
+connections explicitly select Personal and Family, rather than future spaces.
+Both passed missing/wrong/case-altered token rejection and authenticated discovery.
+Kubernetes exposes 23 tools and passed namespace listing plus create/read/update/delete
+of a uniquely named temporary ConfigMap; the test object was removed. Home Assistant
+exposes 77 tools and passed its system-health call against the installed 2026.11.1.
+Its API credential is the user-provided `/rakazo/HASSIO_TOKEN`.
+
+The Kubernetes MCP has a dedicated cluster-admin service account, as requested for
+homelab administration. Its projected token is mounted only in the MCP container;
+the authentication sidecar has none. It reaches the Kubernetes API and HTTPS chart
+registries. Home Assistant egress is limited to its existing service and DNS.
+Neither deployment adds a PVC. Home Assistant MCP settings are fixed in environment
+variables and its settings UI is disabled; pod-local caches/settings are disposable.
+
+UniFi's native Composio connection now uses the replacement `Rakazo household` key;
+the old account connection and both superseded keys were removed. The live key is
+also stored as `/rakazo/UNIFI_API_KEY`. Its current expiry is 10 December 2026; renew
+it before then and update both Infisical and the Composio connected account.
+
+These connections carry broad administrative access. Custom persistent-deletion
+approval behavior remains to be verified with stock Rakazo; MCP server instructions
+alone are not an enforcement boundary. SSH and TrueNAS integration remain in progress.
+
 ## Backup recovery
 
 The retained 6 November n5 backup was restored on isolated scratch storage, replayed
