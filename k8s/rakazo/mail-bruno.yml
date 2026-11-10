@@ -1,0 +1,233 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mail-bruno-proxy
+  namespace: rakazo
+data:
+  default.conf.template: |
+    server {
+      listen 8080;
+      server_name _;
+      access_log off;
+      client_max_body_size 2m;
+      location = /health {
+        return 200 'ok';
+      }
+      location / {
+        if ($http_authorization != "Bearer ${MAIL_MCP_TOKEN}") { return 401; }
+        proxy_pass http://127.0.0.1:9557;
+        proxy_http_version 1.1;
+        proxy_set_header Host 127.0.0.1:9557;
+        proxy_set_header Connection "";
+        proxy_set_header Authorization "";
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 3600s;
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mail-bruno
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mail-bruno
+  template:
+    metadata:
+      labels:
+        app: mail-bruno
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: mail-cache
+        emptyDir:
+          sizeLimit: 2Gi
+      - name: proxy-tmp
+        emptyDir:
+          sizeLimit: 16Mi
+      - name: proxy-config
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Mi
+      - name: proxy-template
+        configMap:
+          name: mail-bruno-proxy
+      containers:
+      - name: mail
+        image: ghcr.io/wh1isper/mcp-email-server:1.14.0@sha256:b2b311c911ab669d73c820cd128fc647ca6993b3024fc05b19b34e09861b05b2
+        command: [sh, -ec]
+        args:
+        - mkdir -p /tmp/mail; chmod 700 /tmp/mail; exec mcp-email-server streamable-http --host 127.0.0.1 --port 9557
+        env:
+        - name: HOME
+          value: /tmp/mail
+        - name: MCP_ALLOWED_HOSTS
+          value: '127.0.0.1:9557'
+        - name: MCP_ALLOWED_ORIGINS
+          value: https://bots.zefirsroyal.cloud
+        - name: MCP_EMAIL_SERVER_ACCOUNT_NAME
+          value: bruno-icloud
+        - name: MCP_EMAIL_SERVER_FULL_NAME
+          value: Bruno
+        - name: MCP_EMAIL_SERVER_EMAIL_ADDRESS
+          value: brunoturek@icloud.com
+        - name: MCP_EMAIL_SERVER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: ICLOUD_BRUNO_APP_PASSWORD
+        - name: MCP_EMAIL_SERVER_IMAP_HOST
+          value: imap.mail.me.com
+        - name: MCP_EMAIL_SERVER_SMTP_HOST
+          value: smtp.mail.me.com
+        - name: MCP_EMAIL_SERVER_SMTP_PORT
+          value: '587'
+        - name: MCP_EMAIL_SERVER_SMTP_SSL
+          value: 'false'
+        - name: MCP_EMAIL_SERVER_SMTP_START_SSL
+          value: 'true'
+        - name: MCP_EMAIL_SERVER_ALLOWED_RECIPIENTS
+          value: '*'
+        # Permanent deletion stays disabled until the approval policy is verified.
+        - name: MCP_EMAIL_SERVER_ALLOWED_MUTATIONS
+          value: draft,organize,send,append
+        - name: MCP_EMAIL_SERVER_ENABLE_ATTACHMENT_CONTENT
+          value: 'true'
+        - name: MCP_EMAIL_SERVER_METADATA_SNAPSHOT_ROWS
+          value: '1000'
+        - name: MCP_EMAIL_SERVER_METADATA_REFRESH_BATCH_SIZE
+          value: '50'
+        - name: MCP_EMAIL_SERVER_REPORT_BLOCKED_MUTATIONS
+          value: 'true'
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        volumeMounts:
+        - name: mail-cache
+          mountPath: /tmp
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+            ephemeral-storage: 2Gi
+        startupProbe:
+          exec:
+            command: [python, -c, "import socket; socket.create_connection(('127.0.0.1',9557),2).close()"]
+          periodSeconds: 5
+          failureThreshold: 30
+        readinessProbe:
+          exec:
+            command: [python, -c, "import socket; socket.create_connection(('127.0.0.1',9557),2).close()"]
+          periodSeconds: 20
+      - name: auth-proxy
+        image: nginxinc/nginx-unprivileged:1.29.3-alpine@sha256:5aea7cc516b419e3526f47dd1531be31a56a046cfe44754d94f9383e13e2ee99
+        command: [sh, -ec]
+        args:
+        - envsubst '${MAIL_MCP_TOKEN}' < /config/default.conf.template > /etc/nginx/conf.d/default.conf; exec nginx -g 'daemon off;'
+        env:
+        - name: MAIL_MCP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: ICLOUD_BRUNO_MCP_TOKEN
+        ports:
+        - name: http
+          containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        volumeMounts:
+        - name: proxy-tmp
+          mountPath: /tmp
+        - name: proxy-config
+          mountPath: /etc/nginx/conf.d
+        - name: proxy-template
+          mountPath: /config
+          readOnly: true
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mail-bruno
+  namespace: rakazo
+spec:
+  selector:
+    app: mail-bruno
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: mail-bruno
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      app: mail-bruno
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values: [rakazo-api, rakazo-worker]
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except: [10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, 169.254.0.0/16]
+    ports:
+    - protocol: TCP
+      port: 993
+    - protocol: TCP
+      port: 587

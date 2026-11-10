@@ -40,6 +40,42 @@ The encryption key must be backed up separately from the database and object sto
 - GPT-6.1 Sol passed text, vision and streamed tool-call checks; Claude Sonnet 5.5
   passed vision. These two models are configured as deployment-wide choices.
 - MinIO scoped credentials passed read/write/version recovery and cross-bucket denial.
+- Personal and Family have separate native Honcho connections, workspace-scoped JWTs,
+  and shared memory within each space. All three existing bots inherit that scope.
+- Both memory workspaces passed save, semantic recall, subscription-backed reasoning,
+  cross-space denial, pod-replacement persistence, replacement and forgetting checks.
+  Family Chief also passed Rakazo's native save/recall/forget tools.
+- Bruno's private iCloud connection uses a self-hosted authenticated MCP service in
+  Personal only. Its 21 tools are connected; permanent deletion is disabled.
+- The stock desktop app signs in through Authentik using TOTP. Its signed passkey
+  domain does not include this self-hosted Authentik domain.
+
+## Memory
+
+Honcho v3.6.0 runs an API and one deriver worker on the existing PostgreSQL cluster,
+with a separate database and restricted runtime role. Redis and telemetry are disabled.
+The migration Job alone receives owner credentials. Its guarded correction sets the
+two initially empty embedding columns to vector(1024); it refuses to reinterpret
+nonempty columns of another dimension.
+
+CPU Text Embeddings Inference uses BGE-M3 revision
+`5617a9f61b028005a4858fdac845db406aefb181`, baked into the pinned image. CPU warmup
+exceeded 8 GiB, so the service requests/limits 16 GiB and allows ten minutes to start;
+measured steady memory was approximately 2.7 GiB. Inputs are limited to 8,192 tokens
+with automatic truncation disabled. No new PVC or paid embedding endpoint is used.
+All enabled Honcho reasoning routes use the internal subscription proxy and low
+reasoning effort. Network policies prevent external paid-provider calls.
+
+Native fact saving and recall supplement MEMORY.md; whole conversations are not
+ingested. Honcho facts and vectors are sensitive plaintext database content.
+Workspace JWTs are encrypted in Rakazo's stored connection credentials; the signing
+key is in Infisical. Operator bootstrap credentials are not given to Rakazo.
+
+`honcho-smoke.py seed`, followed by pod replacement and `honcho-smoke.py verify`,
+exercises synthetic facts and removes them. It requires private workspace-token files
+through `HONCHO_TOKEN_DIR` and a local operator forward through `HONCHO_URL`.
+Prometheus monitors cover API, worker and embeddings; rules cover unavailable memory,
+queue age and stale queue metrics. Actual scraping awaits recovery of Prometheus's Pi.
 
 Both PostgreSQL templates contain pre-existing legacy objects. In the new Rakazo
 and proxy databases only, the inherited `public.system` table was moved into
@@ -52,17 +88,20 @@ remains quarantined. Active database names are `rakazo` and `rakazo_proxy`.
 The retained 6 November n5 backup was restored on isolated scratch storage, replayed
 its required WAL and successfully queried all 63 connectable databases. This was
 restore/access verification, not an application-level integrity audit. Obsolete
-completed n5 backups were pruned and roughly 500 GiB reclaimed. WAL archiving is
-running again; a fresh backup and retired-archive cleanup are still in progress.
+completed n5 backups were pruned and roughly 500 GiB reclaimed. A fresh backup,
+`minio-recovery-20261110`, completed at 20:24 UTC. Retired-archive cleanup is in progress.
+The s4 VM subsequently stopped; after confirming it was powered off, MinIO's
+terminating pod was replaced on s3 using the same cached image digest. Both MinIO
+pods are running and WAL archiving resumed at 22:07 UTC. The s4 VM remains stopped.
 The temporary MinIO network restriction was removed and the NAS reservation restored.
+MinIO's stable root credentials and rotated OIDC secret are now managed in Infisical.
 
 ## Still being completed
 
 - Docker browser/terminal/takeover and saved-home restoration checks.
 - Proxy OAuth refresh and complete pod-replacement persistence checks.
-- Honcho 3.6.0 with per-space credentials and local BGE-M3 embeddings.
-- Personal/Family spaces, inbound Resend bridge, Composio and stock iPhone push tests.
-- Family administration credentials and verified deletion approval policy.
+- Klaudia's space access, inbound Resend bridge, Composio and stock iPhone push tests.
+- Personal/Family infrastructure MCPs, Family Mealie and verified deletion approval policy.
 - Existing Prometheus integration, storage/backup alerts and application health checks.
-- Fresh backup verification, final retention cleanup, MinIO OIDC rotation and durable image source.
+- Final retention cleanup, fresh-backup restore test and fresh MinIO OIDC login test.
 - Separate recoverable encryption-key copy and remaining failure/persistence checks.
