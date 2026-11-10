@@ -9,6 +9,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEnV+roEnvzvCtDJPEOx7DoP0gPQBLWHUKfsG9twTiGv brunost.john@icloud.com"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII3q4MlXwUAQ8CJunI6yPHuAWPmdqPocrgedkOZPGy5E brunostjohn@MacBookPro.localdomain"
+      "restrict ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOZ6/iEAJ5RIpA/+H89uMvm8x/gMeZWHxwkZdDaOwg1V rakazo-household"
     ];
   };
 

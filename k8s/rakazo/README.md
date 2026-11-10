@@ -130,7 +130,8 @@ variables and its settings UI is disabled; pod-local caches/settings are disposa
 Kubernetes MCP uses a rolling update with zero unavailable replicas. A proxy-image
 update with the former Recreate strategy interrupted Chief at 23:20 UTC with a
 connection-refused error. Native read calls using the stored credential subsequently
-passed in both Personal and Family. The internal token requires no manual login.
+passed in both Personal and Family. A controlled replacement passed 35 consecutive
+native Rakazo calls with no failures. The internal token requires no manual login.
 
 UniFi's native Composio connection now uses the replacement `Rakazo household` key;
 the old account connection and both superseded keys were removed. The live key is
@@ -139,7 +140,27 @@ it before then and update both Infisical and the Composio connected account.
 
 These connections carry broad administrative access. Custom persistent-deletion
 approval behavior remains to be verified with stock Rakazo; MCP server instructions
-alone are not an enforcement boundary. SSH and TrueNAS integration remain in progress.
+alone are not an enforcement boundary.
+
+`ssh-mcp.yml` uses stock ssh-mcp 2.25.0 through Supergateway 4.2.2, with strict pinned
+host keys and a separate `restrict` SSH key on six reachable Kubernetes nodes and
+Docker VM 10.0.194.215. Its seven profiles use the existing `brunostjohn` account;
+existing sudo access on the Kubernetes nodes is unchanged. Docker administration
+uses that account's existing Docker group. Proxmox SSH and the offline Pi are not
+configured. Config and key copies have private permissions on a memory emptyDir;
+no new PVC or account is created. Stateful sessions and local audit files are lost
+on pod replacement. Rakazo Auto reviews MCP writes; SSH's own elicitation cannot
+be used by the current Rakazo client, so SSH uses `auto`. This is broad admin access,
+not a guaranteed human gate for every destructive command.
+
+`truenas-floof.yml` and `truenas-jabberwock.yml` use stock truenas-mcp 1.0.0 with the
+existing TrueNAS 25.04 REST API. Each has its own `Rakazo Household` admin key,
+expiring 10 November 2027, in Infisical `/rakazo`. A loopback proxy verifies each
+NAS's pinned public TLS certificate with its actual `localhost` identity; TLS
+verification is not disabled. Update the mounted public certificate when it rotates.
+Egress reaches only that NAS on 443 and cluster DNS. The single hierarchical tool
+covers storage, sharing, accounts and other NAS APIs; its `confirm` argument is not
+a human approval boundary. Both NAS connections and SSH are for Personal and Family.
 
 ## Backup recovery
 
@@ -147,7 +168,9 @@ The retained 6 November n5 backup was restored on isolated scratch storage, repl
 its required WAL and successfully queried all 63 connectable databases. This was
 restore/access verification, not an application-level integrity audit. Obsolete
 completed n5 backups were pruned and roughly 500 GiB reclaimed. A fresh backup,
-`minio-recovery-20261110`, completed at 20:24 UTC. Retired-archive cleanup is in progress.
+`minio-recovery-20261110`, completed at 20:24 UTC. Its archive `20261110T193941`
+also restored on isolated scratch storage, replayed all 13 required WAL segments,
+promoted and queried all 66 databases at 23:41 UTC. Retired-archive cleanup is in progress.
 The s4 VM subsequently stopped; after confirming it was powered off, MinIO's
 terminating pod was replaced on s3 using the same cached image digest. Both MinIO
 pods are running and WAL archiving resumed at 22:07 UTC. The s4 VM remains stopped.
@@ -161,5 +184,5 @@ MinIO's stable root credentials and rotated OIDC secret are now managed in Infis
 - Klaudia's space access, inbound Resend bridge, Composio and stock iPhone push tests.
 - Personal/Family infrastructure MCPs and verified deletion approval policy.
 - Existing Prometheus integration, storage/backup alerts and application health checks.
-- Final retention cleanup, fresh-backup restore test and fresh MinIO OIDC login test.
+- Final retention cleanup and fresh MinIO OIDC login test.
 - Separate recoverable encryption-key copy and remaining failure/persistence checks.
