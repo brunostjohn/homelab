@@ -127,6 +127,11 @@ registries. Home Assistant egress is limited to its existing service and DNS.
 Neither deployment adds a PVC. Home Assistant MCP settings are fixed in environment
 variables and its settings UI is disabled; pod-local caches/settings are disposable.
 
+Kubernetes MCP uses a rolling update with zero unavailable replicas. A proxy-image
+update with the former Recreate strategy interrupted Chief at 23:20 UTC with a
+connection-refused error. Native read calls using the stored credential subsequently
+passed in both Personal and Family. The internal token requires no manual login.
+
 UniFi's native Composio connection now uses the replacement `Rakazo household` key;
 the old account connection and both superseded keys were removed. The live key is
 also stored as `/rakazo/UNIFI_API_KEY`. Its current expiry is 10 December 2026; renew
