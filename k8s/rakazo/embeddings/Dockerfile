@@ -8,5 +8,10 @@ ADD --chmod=0444 https://huggingface.co/BAAI/bge-m3/resolve/${MODEL_REVISION}/to
 ADD --chmod=0444 https://huggingface.co/BAAI/bge-m3/resolve/${MODEL_REVISION}/special_tokens_map.json /model/special_tokens_map.json
 ADD --chmod=0444 https://huggingface.co/BAAI/bge-m3/resolve/${MODEL_REVISION}/1_Pooling/config.json /model/1_Pooling/config.json
 
+# Honcho also needs these fixed tokenizer tables for offline startup.
+ADD --chmod=0444 --checksum=sha256:446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken /tokenizers/fb374d419588a4632f3f557e76b4b70aebbca790
+ADD --chmod=0444 --checksum=sha256:223921b76ee99bde995b7ff738513eef100fb51d18c93597a113bcffe865b2a7 https://openaipublic.blob.core.windows.net/encodings/cl100k_base.tiktoken /tokenizers/9b5ad71b2ce5302211f9c61530b329a4922fc6a4
+RUN chmod 0555 /model /model/1_Pooling /tokenizers
+
 ENV MODEL_ID=/model HF_HUB_OFFLINE=1
 LABEL org.opencontainers.image.description="TEI CPU with pinned BGE-M3 weights for household Honcho memory"
