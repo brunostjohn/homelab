@@ -1,0 +1,281 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubernetes-mcp
+  namespace: rakazo
+automountServiceAccountToken: false
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: rakazo-household-admin
+subjects:
+- kind: ServiceAccount
+  name: kubernetes-mcp
+  namespace: rakazo
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes-mcp-config
+  namespace: rakazo
+data:
+  mcp.toml: |
+    port = "8081"
+    bind_address = "127.0.0.1"
+    stateless = true
+    cluster_provider_strategy = "in-cluster"
+    cluster_auth_mode = "kubeconfig"
+    toolsets = ["core", "config", "helm"]
+    read_only = false
+    max_in_flight = 8
+    server_instructions = "Use for the household Kubernetes cluster. Follow GitOps for lasting configuration. Ask the user before deleting deployments, namespaces, persistent data, backups, accounts, or standalone computers with unsaved state. Controller-owned replaceable pods may be restarted for requested maintenance. Never expose credentials in messages."
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes-mcp-proxy
+  namespace: rakazo
+data:
+  default.conf.template: |
+    server {
+      listen 8080;
+      server_name _;
+      access_log off;
+      client_max_body_size 16m;
+      location = /health {
+        proxy_pass http://127.0.0.1:8081/healthz;
+      }
+      location / {
+        if ($http_authorization != "Bearer ${KUBERNETES_MCP_TOKEN}") { return 401; }
+        proxy_pass http://127.0.0.1:8081;
+        proxy_http_version 1.1;
+        proxy_set_header Host 127.0.0.1:8081;
+        proxy_set_header Connection "";
+        proxy_set_header Authorization "";
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 3600s;
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubernetes-mcp
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: kubernetes-mcp
+  template:
+    metadata:
+      labels:
+        app: kubernetes-mcp
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: mcp-cache
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: proxy-tmp
+        emptyDir:
+          sizeLimit: 16Mi
+      - name: proxy-config
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Mi
+      - name: proxy-template
+        configMap:
+          name: kubernetes-mcp-proxy
+      - name: server-config
+        configMap:
+          name: kubernetes-mcp-config
+      - name: kube-api
+        projected:
+          defaultMode: 420
+          sources:
+          - serviceAccountToken:
+              path: token
+              expirationSeconds: 3600
+          - configMap:
+              name: kube-root-ca.crt
+              items:
+              - key: ca.crt
+                path: ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  fieldPath: metadata.namespace
+      containers:
+      - name: mcp
+        image: quay.io/containers/kubernetes_mcp_server:v0.1.2@sha256:c289505b06079d7f265a6fef977ce1abbfbbb4271772db17db5b58edbf44c255
+        args:
+        - "--config"
+        - "/config/mcp.toml"
+        env:
+        - name: HOME
+          value: "/tmp"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: mcp-cache
+          mountPath: "/tmp"
+        - name: server-config
+          mountPath: "/config"
+          readOnly: true
+        - name: kube-api
+          mountPath: "/var/run/secrets/kubernetes.io/serviceaccount"
+          readOnly: true
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 1Gi
+            ephemeral-storage: 256Mi
+        startupProbe:
+          tcpSocket:
+            port: 8080
+          periodSeconds: 5
+          failureThreshold: 30
+      - name: auth-proxy
+        image: nginxinc/nginx-unprivileged:1.29.3-alpine@sha256:5aea7cc516b419e3526f47dd1531be31a56a046cfe44754d94f9383e13e2ee99
+        command:
+        - sh
+        - "-ec"
+        args:
+        - envsubst '${KUBERNETES_MCP_TOKEN}' < /config/default.conf.template > /etc/nginx/conf.d/default.conf;
+          exec nginx -g 'daemon off;'
+        env:
+        - name: KUBERNETES_MCP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: KUBERNETES_MCP_TOKEN
+        ports:
+        - name: http
+          containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: proxy-tmp
+          mountPath: "/tmp"
+        - name: proxy-config
+          mountPath: "/etc/nginx/conf.d"
+        - name: proxy-template
+          mountPath: "/config"
+          readOnly: true
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: "/health"
+            port: http
+          periodSeconds: 10
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      serviceAccountName: kubernetes-mcp
+  revisionHistoryLimit: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubernetes-mcp
+  namespace: rakazo
+spec:
+  selector:
+    app: kubernetes-mcp
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: kubernetes-mcp
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      app: kubernetes-mcp
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - rakazo-api
+          - rakazo-worker
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/24
+    ports:
+    - protocol: TCP
+      port: 6443
+  - to:
+    - ipBlock:
+        cidr: 10.43.0.1/32
+    ports:
+    - protocol: TCP
+      port: 443
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 10.0.0.0/8
+        - 172.16.0.0/12
+        - 192.168.0.0/16
+    ports:
+    - protocol: TCP
+      port: 443
