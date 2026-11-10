@@ -1,0 +1,75 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: honcho
+  namespace: rakazo
+spec:
+  selector:
+    matchLabels:
+      app: honcho-api
+  endpoints:
+  - port: http
+    interval: 30s
+    path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: honcho-worker
+  namespace: rakazo
+spec:
+  selector:
+    matchLabels:
+      app: honcho-worker
+  podMetricsEndpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rakazo-embeddings
+  namespace: rakazo
+spec:
+  selector:
+    matchLabels:
+      app: rakazo-embeddings
+  endpoints:
+  - port: metrics
+    interval: 30s
+    path: /metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: rakazo-memory
+  namespace: rakazo
+spec:
+  groups:
+  - name: rakazo-memory
+    rules:
+    - alert: RakazoMemoryUnavailable
+      expr: kube_deployment_status_replicas_available{namespace="rakazo",deployment=~"honcho-api|honcho-worker|rakazo-embeddings"} < 1
+      for: 10m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Rakazo memory component {{ $labels.deployment }} is unavailable'
+        description: 'Memory needs Honcho API, its worker, and local embeddings. Check pod events and logs.'
+    - alert: RakazoMemoryQueueStalled
+      expr: max(deriver_queue_oldest_pending_age_seconds{namespace="rakazo"}) > 900
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: Rakazo memory work has waited more than fifteen minutes
+        description: Check the Honcho worker, subscription proxy authentication/quota, and local embedding service.
+    - alert: RakazoMemoryMetricsStale
+      expr: time() - max(deriver_metrics_last_success_timestamp_seconds{namespace="rakazo"}) > 300
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: Honcho queue metrics are no longer refreshing
+        description: Check the Honcho worker database connection and metrics poller.

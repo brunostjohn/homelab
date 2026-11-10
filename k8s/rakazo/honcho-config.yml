@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: honcho
+  namespace: rakazo
+  annotations:
+    argocd.argoproj.io/sync-wave: '-3'
+data:
+  config.toml: |
+    [app]
+    NAMESPACE = "rakazo"
+    MULTI_TENANT = false
+    TENANT_ID = "household"
+
+    [db]
+    POOL_SIZE = 5
+    MAX_OVERFLOW = 5
+    SCHEMA = "public"
+
+    [auth]
+    USE_AUTH = true
+
+    [cache]
+    ENABLED = false
+
+    [telemetry]
+    ENABLED = false
+
+    [metrics]
+    ENABLED = true
+
+    [embedding]
+    VECTOR_DIMENSIONS = 1024
+    MAX_INPUT_TOKENS = 8192
+    MAX_TOKENS_PER_REQUEST = 8192
+    MAX_CONCURRENT_EMBEDDINGS = 2
+    MAX_PENDING_EMBED_TASKS = 8
+
+    [embedding.model_config]
+    transport = "openai"
+    model = "BAAI/bge-m3"
+    dimensions_mode = "never"
+    encoding_format_mode = "float"
+    max_batch_size = 8
+    timeout = 120
+
+    [embedding.model_config.overrides]
+    base_url = "http://rakazo-embeddings.rakazo.svc.cluster.local/v1"
+    api_key_env = "HONCHO_EMBEDDING_API_KEY"
+
+    [deriver]
+    ENABLED = true
+    WORKERS = 1
+
+    [deriver.model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [deriver.model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [summary.model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [summary.model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [dream.deduction_model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [dream.deduction_model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [dream.induction_model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [dream.induction_model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [dialectic.levels.minimal.model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [dialectic.levels.minimal.model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [dialectic.levels.low.model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [dialectic.levels.low.model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [dialectic.levels.medium.model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [dialectic.levels.medium.model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [dialectic.levels.high.model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [dialectic.levels.high.model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"
+
+    [dialectic.levels.max.model_config]
+    transport = "openai"
+    model = "gpt-6.1-sol"
+    thinking_effort = "low"
+    [dialectic.levels.max.model_config.overrides]
+    base_url = "http://rakazo-proxy.rakazo.svc.cluster.local:8317/v1"

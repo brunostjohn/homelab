@@ -1,0 +1,345 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honcho-api
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: honcho-api
+  template:
+    metadata:
+      labels:
+        app: honcho-api
+        component: honcho
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      # These nodes have unresolved runtime/availability failures during rollout.
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values: [s4.m-nodes.zefirscloud.local, s6.m-nodes.zefirscloud.local]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: config
+        configMap:
+          name: honcho
+      - name: cache
+        emptyDir:
+          sizeLimit: 2Gi
+      initContainers:
+      - name: tokenizers
+        image: ghcr.io/brunostjohn/rakazo-embeddings:tei-1.9.4-bge-m3-5617a9f@sha256:d70d128c827016df77f6895b0a18e727868dbd32db3e28775b890c265f88eab7
+        command: ["sh", "-ec", "mkdir -p /cache/tiktoken; cp /tokenizers/* /cache/tiktoken/"]
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        volumeMounts:
+        - name: cache
+          mountPath: /cache
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+      containers:
+      - name: honcho-api
+        image: ghcr.io/plastic-labs/honcho:v3.6.0@sha256:eb906a2d251aa48b22347e4465b40785ea7a84e2bfd1105780416bf1f0121099
+        workingDir: "/app"
+        command:
+        - "/app/.venv/bin/fastapi"
+        - run
+        - "--host"
+        - 0.0.0.0
+        - "--port"
+        - '8000'
+        - src/main.py
+        env:
+        - name: DB_CONNECTION_URI
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: HONCHO_DATABASE_URL
+        - name: AUTH_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: HONCHO_JWT_SECRET
+        - name: LLM_OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: PROXY_API_KEY
+        - name: HONCHO_EMBEDDING_API_KEY
+          value: local-embeddings
+        - name: HF_HOME
+          value: "/tmp/huggingface"
+        - name: TIKTOKEN_CACHE_DIR
+          value: "/tmp/tiktoken"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: config
+          mountPath: "/app/config.toml"
+          subPath: config.toml
+          readOnly: true
+        - name: cache
+          mountPath: "/tmp"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            cpu: '2'
+            memory: 2Gi
+            ephemeral-storage: 2Gi
+        ports:
+        - name: http
+          containerPort: 8000
+        startupProbe:
+          httpGet:
+            path: "/health"
+            port: http
+          periodSeconds: 5
+          failureThreshold: 60
+        readinessProbe:
+          httpGet:
+            path: "/health"
+            port: http
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: "/health"
+            port: http
+          periodSeconds: 30
+          failureThreshold: 5
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honcho-worker
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: honcho-worker
+  template:
+    metadata:
+      labels:
+        app: honcho-worker
+        component: honcho
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      # These nodes have unresolved runtime/availability failures during rollout.
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values: [s4.m-nodes.zefirscloud.local, s6.m-nodes.zefirscloud.local]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: config
+        configMap:
+          name: honcho
+      - name: cache
+        emptyDir:
+          sizeLimit: 2Gi
+      initContainers:
+      - name: tokenizers
+        image: ghcr.io/brunostjohn/rakazo-embeddings:tei-1.9.4-bge-m3-5617a9f@sha256:d70d128c827016df77f6895b0a18e727868dbd32db3e28775b890c265f88eab7
+        command: ["sh", "-ec", "mkdir -p /cache/tiktoken; cp /tokenizers/* /cache/tiktoken/"]
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        volumeMounts:
+        - name: cache
+          mountPath: /cache
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+      containers:
+      - name: honcho-worker
+        image: ghcr.io/plastic-labs/honcho:v3.6.0@sha256:eb906a2d251aa48b22347e4465b40785ea7a84e2bfd1105780416bf1f0121099
+        workingDir: "/app"
+        command:
+        - "/app/.venv/bin/python"
+        - "-m"
+        - src.deriver
+        ports:
+        - name: metrics
+          containerPort: 9090
+        env:
+        - name: DB_CONNECTION_URI
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: HONCHO_DATABASE_URL
+        - name: AUTH_JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: HONCHO_JWT_SECRET
+        - name: LLM_OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: PROXY_API_KEY
+        - name: HONCHO_EMBEDDING_API_KEY
+          value: local-embeddings
+        - name: HF_HOME
+          value: "/tmp/huggingface"
+        - name: TIKTOKEN_CACHE_DIR
+          value: "/tmp/tiktoken"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: config
+          mountPath: "/app/config.toml"
+          subPath: config.toml
+          readOnly: true
+        - name: cache
+          mountPath: "/tmp"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+          limits:
+            cpu: '2'
+            memory: 2Gi
+            ephemeral-storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: honcho
+  namespace: rakazo
+  labels:
+    app: honcho-api
+spec:
+  selector:
+    app: honcho-api
+  ports:
+  - name: http
+    port: 8000
+    targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: honcho
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      component: honcho
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - rakazo-api
+          - rakazo-worker
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring
+    ports:
+    - protocol: TCP
+      port: 8000
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring
+    ports:
+    - protocol: TCP
+      port: 9090
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: databases
+      podSelector:
+        matchLabels:
+          cnpg.io/cluster: postgres-cluster
+    ports:
+    - protocol: TCP
+      port: 5432
+  - to:
+    - podSelector:
+        matchLabels:
+          app: rakazo-proxy
+    ports:
+    - protocol: TCP
+      port: 8317
+  - to:
+    - podSelector:
+        matchLabels:
+          app: rakazo-embeddings
+    ports:
+    - protocol: TCP
+      port: 8080

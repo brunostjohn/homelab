@@ -1,0 +1,142 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rakazo-embeddings
+  namespace: rakazo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rakazo-embeddings
+  template:
+    metadata:
+      labels:
+        app: rakazo-embeddings
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      # These nodes have unresolved runtime/availability failures during rollout.
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: NotIn
+                values: [s4.m-nodes.zefirscloud.local, s6.m-nodes.zefirscloud.local]
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: cache
+        emptyDir:
+          sizeLimit: 512Mi
+      containers:
+      - name: embeddings
+        image: ghcr.io/brunostjohn/rakazo-embeddings:tei-1.9.4-bge-m3-5617a9f@sha256:d70d128c827016df77f6895b0a18e727868dbd32db3e28775b890c265f88eab7
+        args:
+        - --model-id=/model
+        - --served-model-name=BAAI/bge-m3
+        - --port=8080
+        - --dtype=float32
+        - --auto-truncate=false
+        - --tokenization-workers=2
+        - --max-concurrent-requests=2
+        - --max-batch-tokens=8192
+        - --max-batch-requests=1
+        - --max-client-batch-size=8
+        env:
+        - name: OMP_NUM_THREADS
+          value: '4'
+        - name: MKL_NUM_THREADS
+          value: '4'
+        - name: HF_HOME
+          value: /tmp/huggingface
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: metrics
+          containerPort: 9000
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        volumeMounts:
+        - name: cache
+          mountPath: /tmp
+        resources:
+          requests:
+            cpu: '1'
+            memory: 16Gi
+          limits:
+            cpu: '4'
+            memory: 16Gi
+            ephemeral-storage: 512Mi
+        startupProbe:
+          httpGet:
+            path: /health
+            port: http
+          periodSeconds: 10
+          failureThreshold: 60
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          periodSeconds: 30
+          failureThreshold: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rakazo-embeddings
+  namespace: rakazo
+  labels:
+    app: rakazo-embeddings
+spec:
+  selector:
+    app: rakazo-embeddings
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+  - name: metrics
+    port: 9000
+    targetPort: metrics
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: rakazo-embeddings
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      app: rakazo-embeddings
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          component: honcho
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring
+    ports:
+    - protocol: TCP
+      port: 8080
+    - protocol: TCP
+      port: 9000
+  egress: []
