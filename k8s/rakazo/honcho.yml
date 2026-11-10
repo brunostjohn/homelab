@@ -73,7 +73,7 @@ spec:
             memory: 64Mi
       containers:
       - name: honcho-api
-        image: ghcr.io/plastic-labs/honcho:v3.6.0@sha256:eb906a2d251aa48b22347e4465b40785ea7a84e2bfd1105780416bf1f0121099
+        image: ghcr.io/plastic-labs/honcho:v3.6.1@sha256:2ced1a958f14c128ddb05e68deb549f9281681e44595a7a3c34adebf5b432b16
         workingDir: "/app"
         command:
         - "/app/.venv/bin/fastapi"
@@ -221,7 +221,7 @@ spec:
             memory: 64Mi
       containers:
       - name: honcho-worker
-        image: ghcr.io/plastic-labs/honcho:v3.6.0@sha256:eb906a2d251aa48b22347e4465b40785ea7a84e2bfd1105780416bf1f0121099
+        image: ghcr.io/plastic-labs/honcho:v3.6.1@sha256:2ced1a958f14c128ddb05e68deb549f9281681e44595a7a3c34adebf5b432b16
         workingDir: "/app"
         command:
         - "/app/.venv/bin/python"
