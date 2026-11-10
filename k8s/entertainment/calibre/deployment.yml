@@ -137,7 +137,7 @@ spec:
               containerPort: 9090
               protocol: TCP
         - name: calibre
-          image: docker.io/crocodilestick/calibre-web-automated:V2.1.2
+          image: docker.io/crocodilestick/calibre-web-automated:v4.0.8
           imagePullPolicy: IfNotPresent
           resources:
             requests:
