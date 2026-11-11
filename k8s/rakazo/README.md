@@ -225,35 +225,7 @@ The resulting observed/persistence/subscription counters were exactly 5/2/2.
 The production collector is scraped successfully; existing historical errors can
 trigger alerts on its first start.
 
-## Backup recovery
+## Operations record
 
-The retained 6 November n5 backup was restored on isolated scratch storage, replayed
-its required WAL and successfully queried all 63 connectable databases. This was
-restore/access verification, not an application-level integrity audit. Obsolete
-completed n5 backups were pruned and roughly 500 GiB reclaimed. A fresh backup,
-`minio-recovery-20261110`, completed at 20:24 UTC. Its archive `20261110T193941`
-also restored on isolated scratch storage, replayed all 13 required WAL segments,
-promoted and queried all 66 databases at 23:41 UTC. Retired-archive cleanup is in progress.
-The s4 VM subsequently stopped; after confirming it was powered off, MinIO's
-terminating pod was replaced on s3 using the same cached image digest. Both MinIO
-pods are running and WAL archiving resumed at 22:07 UTC. The s4 VM remains stopped.
-The temporary MinIO network restriction was removed and the NAS reservation restored.
-MinIO's stable root credentials and rotated OIDC secret are now managed in Infisical.
-A fresh Authentik login passed after rotation. Storage has several TiB free again.
-
-The retained 2024 MinIO version rejects the current AWS SDK's multi-object deletion
-without Content-MD5. Rakazo checkpoints succeed, but removal of older home revisions
-fails and needs a storage compatibility fix. Newer MinIO releases remove the bundled
-OIDC administration console, so upgrading requires accounting for that behavior rather
-than changing the image blindly. No Rakazo source patch or runtime monkeypatch is used.
-An isolated empty-storage test of the unmodified October 2025 MinIO source image
-passed version recovery, multipart completion with every-byte verification, and the
-stock AWS SDK's CRC32 multi-delete without Content-MD5. Production remains unchanged
-pending console/OIDC compatibility verification. The 11 November scheduled backup
-failed with InvalidPart at multipart completion; a primary-target retry is running.
-
-## Still being completed
-
-- Klaudia's physical-device login and the explicitly deferred real email test.
-- Final retention cleanup, nightly backup completion and MinIO checksum compatibility.
-- Remaining full API/worker replacement and user-facing failure-message checks.
+Detailed recovery verification is kept in the operator's private rollout record.
+Consult the deployed GitOps manifests for current storage versions and backup settings.
