@@ -64,13 +64,19 @@ spec:
             - name: diagnostics
               containerPort: 9980
               protocol: TCP
+          # The key-location maps (7 GiB) and the blocks are memory-mapped from the iSCSI volume, and the page cache
+          # counts against the limit: at 8Gi a remote worker's per-file reads took 0.6 s each, every one a page fault
+          # over iSCSI. The Go heap stays small (GOMEMLIMIT); the rest of the limit is page cache the kernel can take back.
+          env:
+            - name: GOMEMLIMIT
+              value: 6GiB
           resources:
             requests:
               cpu: 500m
               memory: 3Gi
             limits:
               cpu: "4"
-              memory: 8Gi
+              memory: 16Gi
           startupProbe:
             httpGet:
               path: /-/healthy

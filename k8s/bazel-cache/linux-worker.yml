@@ -144,8 +144,8 @@ spec:
             - /config/runner.jsonnet
           resources:
             requests:
-              cpu: "1"
-              memory: 2Gi
+              cpu: 250m
+              memory: 512Mi
             limits:
               cpu: "6"
               memory: 12Gi
