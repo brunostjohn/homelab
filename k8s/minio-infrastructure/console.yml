@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio-auth-console
+  namespace: minio
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio-auth-console
+  template:
+    metadata:
+      labels:
+        app: minio-auth-console
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: console
+        # Preserve the existing embedded OIDC console; all real S3 requests use MINIO_SERVER_URL.
+        image: quay.io/minio/minio:RELEASE.2024-04-18T19-09-19Z@sha256:036a068d7d6b69400da6bc07a480bee1e241ef3c341c41d988ed11f520f85124
+        args: [server, /tmp/console-state, --address, '127.0.0.1:19000', --console-address, ':9090', -S, /tmp/certs]
+        env:
+        - name: HOME
+          value: /tmp
+        - name: MINIO_SERVER_URL
+          value: http://minio.minio.svc.cluster.local:9000
+        - name: MINIO_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: minio-root-credentials
+              key: rootPassword
+        - name: MINIO_ROOT_USER
+          valueFrom:
+            secretKeyRef:
+              name: minio-root-credentials
+              key: rootUser
+        - name: MINIO_IDENTITY_OPENID_CONFIG_URL
+          value: https://auth.zefirsroyal.cloud/application/o/minio/.well-known/openid-configuration
+        - name: MINIO_IDENTITY_OPENID_CLIENT_ID
+          value: s6YPn8NDFN9jIgSiTxUMBfxCCcRVxFhBwsfwEVId
+        - name: MINIO_IDENTITY_OPENID_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: minio-root-credentials
+              key: oidcClientSecret
+        - name: MINIO_IDENTITY_OPENID_REDIRECT_URI
+          value: https://minio.zefirsroyal.cloud/oauth_callback
+        - name: MINIO_IDENTITY_OPENID_SCOPES
+          value: openid profile email minio
+        - name: MINIO_IDENTITY_OPENID_CLAIM_NAME
+          value: policy
+        - name: MINIO_IDENTITY_OPENID_DISPLAY_NAME
+          value: Zefir's Cloud
+        - name: MINIO_BROWSER_REDIRECT_URL
+          value: https://minio.zefirsroyal.cloud
+        ports:
+        - name: http
+          containerPort: 9090
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 20
+          periodSeconds: 30
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        resources:
+          requests:
+            cpu: 25m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 1Gi
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-auth-console
+  namespace: minio
+spec:
+  selector:
+    app: minio-auth-console
+  ports:
+  - name: http
+    port: 9090
+    targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: minio-auth-console
+  namespace: minio
+spec:
+  podSelector:
+    matchLabels:
+      app: minio-auth-console
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - port: 9090
+      protocol: TCP
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: minio
+    ports:
+    - port: 9000
+      protocol: TCP
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+  - ports:
+    - port: 443
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-console-ingress
+  namespace: minio
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: minio.zefirsroyal.cloud
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: minio-auth-console
+            port:
+              number: 9090
