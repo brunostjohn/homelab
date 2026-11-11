@@ -14,8 +14,42 @@ spec:
         - podSelector:
             matchLabels:
               app: frontend
+        - podSelector:
+            matchLabels:
+              app: scheduler
       ports:
         - port: grpc
+          protocol: TCP
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: monitoring
+      ports:
+        - port: diagnostics
+          protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: scheduler
+  namespace: bazel-cache
+spec:
+  podSelector:
+    matchLabels:
+      app: scheduler
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+      ports:
+        - port: client
+          protocol: TCP
+    # The Macs' workers through the node port; the port itself checks their tokens.
+    - ports:
+        - port: worker
           protocol: TCP
     - from:
         - namespaceSelector:

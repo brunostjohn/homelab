@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler
+  namespace: bazel-cache
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  # The queue lives in memory: a second replica would be a second, separate queue.
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: scheduler
+  template:
+    metadata:
+      labels:
+        app: scheduler
+        app.kubernetes.io/part-of: bazel-cache
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        feature.node.kubernetes.io/cpu-cpuid.AVX2: "true"
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: scheduler
+          image: ghcr.io/buildbarn/bb-scheduler:20261102T094740Z-c9ba98c@sha256:50789bdae47ee83905c059f88adbf22c9253139883723f76fbed27def8b0c566
+          imagePullPolicy: IfNotPresent
+          args:
+            - /config/scheduler.jsonnet
+          ports:
+            - name: client
+              containerPort: 8982
+              protocol: TCP
+            - name: worker
+              containerPort: 8983
+              protocol: TCP
+            - name: diagnostics
+              containerPort: 9980
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "2"
+              memory: 1Gi
+          readinessProbe:
+            httpGet:
+              path: /-/healthy
+              port: diagnostics
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: diagnostics
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: config
+          configMap:
+            name: bazel-cache-config
+            items:
+              - key: scheduler.jsonnet
+                path: scheduler.jsonnet
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scheduler
+  namespace: bazel-cache
+  labels:
+    app.kubernetes.io/part-of: bazel-cache
+spec:
+  selector:
+    app: scheduler
+  ports:
+    - name: client
+      port: 8982
+      targetPort: client
+      protocol: TCP
+    - name: diagnostics
+      port: 9980
+      targetPort: diagnostics
+      protocol: TCP
+---
+# The Macs' bb_workers connect here, through the API server's VIP like the frontend's port
+# (grpc://10.0.2.22:30983), with a worker token (aud bazel-worker).
+apiVersion: v1
+kind: Service
+metadata:
+  name: scheduler-workers
+  namespace: bazel-cache
+spec:
+  type: NodePort
+  selector:
+    app: scheduler
+  ports:
+    - name: worker
+      port: 8983
+      targetPort: worker
+      nodePort: 30983
+      protocol: TCP

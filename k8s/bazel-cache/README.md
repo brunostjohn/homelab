@@ -1,8 +1,13 @@
 # Bazel cache
 
-A Buildbarn remote cache (bb-storage) for the Macs' Bazel builds. The frontend checks tokens and hides action
-results whose outputs were evicted. One storage shard keeps the CAS and action cache in preallocated files on a
-1 TiB `floof-iscsi-csi` volume.
+A Buildbarn remote cache (bb-storage) and executor (bb-scheduler) for the Macs' Bazel builds. The frontend checks
+tokens, hides action results whose outputs were evicted, and forwards Execute to the scheduler. One storage shard
+keeps the CAS and action cache in preallocated files on a 1 TiB `floof-iscsi-csi` volume.
+
+Workers connect to the scheduler's node port, `10.0.2.22:30983`, with a token whose audience is `bazel-worker`
+(`make-cache-token.sh <key dir> <name> bazel-worker`). That token lets a worker hand results straight back to
+clients, so cache tokens can't register a worker. The Mac workers are set up by the repo's `tools/remote`. With no
+worker of a platform left, Execute fails after two minutes and Bazel builds those actions on the asking Mac.
 
 The Macs reach it at `grpc://10.0.2.22:30980`: the frontend's fixed node port, through the API server's VIP. Its
 LoadBalancer address, `10.0.4.4:8980`, is not reachable from the client VLANs (10.0.5.10 wasn't either), while

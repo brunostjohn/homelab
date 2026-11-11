@@ -152,5 +152,73 @@ data:
         },
         "getAuthorizer": { "allow": {} },
         "putAuthorizer": { "allow": {} }
-      }
+      },
+      // Remote execution: Execute and WaitExecution go to the scheduler, which hands actions to the Macs' workers.
+      "schedulers": {
+        "": {
+          "endpoint": {
+            "address": "scheduler.bazel-cache:8982",
+            "addMetadataJmespathExpression": {
+              "expression": "{\"build.bazel.remote.execution.v2.requestmetadata-bin\": incomingGRPCMetadata.\"build.bazel.remote.execution.v2.requestmetadata-bin\"}"
+            }
+          }
+        }
+      },
+      "executeAuthorizer": { "allow": {} }
+    }
+  scheduler.jsonnet: |
+    local storage = { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } };
+    {
+      // Reached only by the frontend (netpol.yml), which checked the client's token.
+      "clientGrpcServers": [{ "listenAddresses": [":8982"], "authenticationPolicy": { "allow": {} } }],
+      // A worker's results go straight back to the client that asked, so only a holder of a worker token
+      // (aud bazel-worker, signed by the cache's key) may take work.
+      "workerGrpcServers": [{
+        "listenAddresses": [":8983"],
+        "authenticationPolicy": {
+          "jwt": {
+            "jwksInline": {
+              "keys": [{
+                "kty": "RSA",
+                "alg": "RS256",
+                "use": "sig",
+                "kid": "bazel-cache-1",
+                "n": "tTf7W7nZFdlP2iGeUb5FaR4oClbAjMir64X3hj7KKSXEF2YQf3cRAVNbOrkIzb6mt7n3gTFSknfnfJRZH0PctwlZevBPjQZaCvEndsZV-gBSskGt1H207tP8A8TV6_vjknw-f7dIPNhbJ7oNC_fcl9TDDNvCbN2hSoQxAyJ1glOl2QXtBqeydu4YN7GJ3ZW4gLvhxKyhxGBaIxfFJ3Q5rG4_p2OW8obVda9LuGvG8qaUEK27NY6Jv_8VccS6f4_jq1iO88AF9FC9jwvqV5oPotBOJYl9GXgYVlFzmUM6T_vseisUHr0RQ1Suz2_-3015jVWzSAseZyNXkXlQ6g7GRaX71vaFcmEhgCbETe7FR4TV62SAAh_QWXcC-2R6nM9DY5zaR-Ot-t6893s0dmY2YX32zM2opWbd484SudrmhI9Qeuyg9LRcaxBayqg3VjCCIoyYiYw0OfcUnAFInBCfGes7gzSYOE3ray4EOiKhZPphLY3ElDHzeyNg1_N8fMCd",
+                "e": "AQAB"
+              }]
+            },
+            "maximumCacheSize": 100,
+            "cacheReplacementPolicy": "LEAST_RECENTLY_USED",
+            "claimsValidationJmespathExpression": { "expression": "payload.aud == 'bazel-worker'" },
+            "metadataExtractionJmespathExpression": { "expression": "`{}`" }
+          }
+        }
+      }],
+      "maximumMessageSizeBytes": 16 * 1024 * 1024,
+      "global": {
+        "diagnosticsHttpServer": {
+          "httpServers": [{ "listenAddresses": [":9980"], "authenticationPolicy": { "allow": {} } }],
+          "enablePrometheus": true
+        }
+      },
+      // Reads each Action message for its platform and timeout.
+      "contentAddressableStorage": {
+        "chunkStorage": storage,
+        "chunkMappingStorage": { "chunkMappingValidating": { "backend": storage } },
+        "cdcParameterCache": { "cacheSize": 1000, "cacheDuration": "60s", "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
+      },
+      "executeAuthorizer": { "allow": {} },
+      "modifyDrainsAuthorizer": { "allow": {} },
+      "killOperationsAuthorizer": { "allow": {} },
+      "synchronizeAuthorizer": { "allow": {} },
+      "actionRouter": {
+        "simple": {
+          "platformKeyExtractor": { "action": {} },
+          "invocationKeyExtractors": [{ "correlatedInvocationsId": {} }, { "toolInvocationId": {} }],
+          "initialSizeClassAnalyzer": { "defaultExecutionTimeout": "1800s", "maximumExecutionTimeout": "7200s" }
+        }
+      },
+      // With no worker of a platform left, Execute fails soon and Bazel builds those actions locally
+      // (--remote_local_fallback) instead of waiting for one.
+      "platformQueueWithNoWorkersTimeout": "120s"
     }
