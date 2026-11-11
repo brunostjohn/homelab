@@ -40,13 +40,14 @@ spec:
             - name: diagnostics
               containerPort: 9980
               protocol: TCP
+          # Both Macs' agents together pushed it past 1Gi (OOMKilled five times in the first hour).
           resources:
             requests:
-              cpu: 250m
-              memory: 256Mi
-            limits:
-              cpu: "2"
+              cpu: 500m
               memory: 1Gi
+            limits:
+              cpu: "4"
+              memory: 4Gi
           readinessProbe:
             httpGet:
               path: /-/healthy
