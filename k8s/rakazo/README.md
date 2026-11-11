@@ -29,7 +29,8 @@ computer loss; versioning is recovery protection, not immutable storage.
 
 CLIProxyAPI uses its native PostgreSQL store and an ephemeral local mirror.
 Neither computer containers nor the screen proxy receive S3 or database credentials.
-The encryption key must be backed up separately from the database and object store.
+The encryption key has a separately encrypted, locally retained recovery copy;
+see `recovery/rakazo/README.md`. Decryption was checked against the live key.
 
 ## Verified during rollout, 10–11 November 2026
 
@@ -39,6 +40,8 @@ The encryption key must be backed up separately from the database and object sto
 - OpenAI/Codex and Claude OAuth accounts connected to the internal proxy.
 - GPT-6.1 Sol passed text, vision and streamed tool-call checks; Claude Sonnet 5.5
   passed vision and streamed tool calls. Claude refreshed its OAuth token automatically.
+  A complete proxy pod replacement preserved both credentials exactly from PostgreSQL,
+  including Claude's refreshed token; both models passed streamed tool calls afterward.
   These two models are configured as deployment-wide choices.
 - MinIO scoped credentials passed read/write/version recovery and cross-bucket denial.
 - Personal and Family have separate native Honcho connections, workspace-scoped JWTs,
@@ -46,6 +49,13 @@ The encryption key must be backed up separately from the database and object sto
 - Both memory workspaces passed save, semantic recall, subscription-backed reasoning,
   cross-space denial, pod-replacement persistence, replacement and forgetting checks.
   Family Chief also passed Rakazo's native save/recall/forget tools.
+- Klaudia's private space has its own third Honcho workspace and scoped credential.
+  Save, semantic recall, forgetting and denial of both other workspaces passed.
+  Shared Family memory also resolves under her account.
+- Four Docker computers ran concurrently. Native page browsing, terminal and screen
+  takeover passed. Recreating a test computer after removing its NFS cache restored
+  both its file and identical Chromium History from MinIO. Oversized and interrupted
+  saves left the computer running and its previous saved revision unchanged.
 - Bruno's private iCloud connection uses a self-hosted authenticated MCP service in
   Personal only. Its 21 tools are connected; permanent deletion is disabled.
 - The stock desktop app signs in through Authentik using TOTP. Its signed passkey
@@ -141,7 +151,7 @@ UniFi's native Composio connection now uses the replacement `Rakazo household` k
 the old account connection and both superseded keys were removed. The live key is
 also stored as `/rakazo/UNIFI_API_KEY`. Its current expiry is 10 December 2026; renew
 it before then and update Infisical, both Composio connected accounts and the encrypted
-credential on the custom UniFi Network integration. Site Manager is connected separately
+credentials on both accounts' custom UniFi Network integrations. Site Manager is connected separately
 in Personal and Family. Its catalog covers inventory and metrics only.
 
 **UniFi Network** adds all 73 operations from the official Network 10.6.109 OpenAPI
@@ -156,8 +166,11 @@ the credential to the schema URL too. The prepared configuration was validated t
 `prepareApiInstall` and saved with Rakazo's native encrypted secret format. The key is
 sent only to `api.ui.com`, in `X-API-Key`; no key is stored in the schema or model inputs.
 Custom infrastructure integrations explicitly select Personal and Family. Stock Rakazo
-also ties integrations to the account that installs them; another member's own bots
-need that member's connection rather than inheriting Bruno's private credentials.
+ties integrations to the message sender's account, even for shared bots. Klaudia has
+separate account-owned connections to the seven household services in Family only;
+read calls to all seven passed under her identity. Her Personal space does not inherit
+those connections or Bruno's private mailbox. Both household accounts use the dedicated
+household service credentials, not each other's personal mail/OAuth connections.
 
 These connections carry broad administrative access. Stock Auto approval is an AI review,
 not a guaranteed human gate. Its reviewer prompt is not operator-configurable, and shell,
@@ -209,6 +222,8 @@ logs, and future upstream log changes may require updating the expressions. Vali
 used five synthetic lines: an ordinary line, `previous home revision removal failed`,
 `computer.checkpoint_skipped`, `invalid_grant`, and `429 /v1/chat/completions`.
 The resulting observed/persistence/subscription counters were exactly 5/2/2.
+The production collector is scraped successfully; existing historical errors can
+trigger alerts on its first start.
 
 ## Backup recovery
 
@@ -231,12 +246,14 @@ without Content-MD5. Rakazo checkpoints succeed, but removal of older home revis
 fails and needs a storage compatibility fix. Newer MinIO releases remove the bundled
 OIDC administration console, so upgrading requires accounting for that behavior rather
 than changing the image blindly. No Rakazo source patch or runtime monkeypatch is used.
+An isolated empty-storage test of the unmodified October 2025 MinIO source image
+passed version recovery, multipart completion with every-byte verification, and the
+stock AWS SDK's CRC32 multi-delete without Content-MD5. Production remains unchanged
+pending console/OIDC compatibility verification. The 11 November scheduled backup
+failed with InvalidPart at multipart completion; a primary-target retry is running.
 
 ## Still being completed
 
-- Docker browser/terminal/takeover and saved-home restoration checks.
-- Proxy OAuth refresh and complete pod-replacement persistence checks.
-- Klaudia's own space/integration access and the explicitly deferred real email test.
-- Live error-counter scraping after its GitOps rollout.
+- Klaudia's physical-device login and the explicitly deferred real email test.
 - Final retention cleanup, nightly backup completion and MinIO checksum compatibility.
-- Separate recoverable encryption-key copy and remaining failure/persistence checks.
+- Remaining full API/worker replacement and user-facing failure-message checks.
