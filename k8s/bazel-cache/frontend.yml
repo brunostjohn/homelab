@@ -75,6 +75,9 @@ spec:
 ---
 # gRPC over plain L4: kube-vip announces the address, no ingress in the path. kube-vip reads the annotation; the
 # cloud provider copies spec.loadBalancerIP into it only when the Service is created, never on a later change.
+# The address is not reachable from the client VLANs yet (neither was 10.0.5.10): Services created since kube-vip
+# v1.3 get no route at the gateway. Until that is fixed the Macs use the fixed node port through the API VIP,
+# grpc://10.0.2.22:30980, which kube-proxy forwards from any node.
 apiVersion: v1
 kind: Service
 metadata:
@@ -91,6 +94,7 @@ spec:
     - name: grpc
       port: 8980
       targetPort: grpc
+      nodePort: 30980
       protocol: TCP
 ---
 apiVersion: v1

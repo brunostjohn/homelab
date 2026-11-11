@@ -1,8 +1,12 @@
 # Bazel cache
 
-A Buildbarn remote cache (bb-storage) for the Macs' Bazel builds, at `grpc://10.0.4.4:8980` on the LAN. The
-frontend checks tokens and hides action results whose outputs were evicted. One storage shard keeps the CAS and
-action cache in preallocated files on a 1 TiB `floof-iscsi-csi` volume.
+A Buildbarn remote cache (bb-storage) for the Macs' Bazel builds. The frontend checks tokens and hides action
+results whose outputs were evicted. One storage shard keeps the CAS and action cache in preallocated files on a
+1 TiB `floof-iscsi-csi` volume.
+
+The Macs reach it at `grpc://10.0.2.22:30980`: the frontend's fixed node port, through the API server's VIP. Its
+LoadBalancer address, `10.0.4.4:8980`, gets no route from the client VLANs yet, like every Service kube-vip has
+announced since v1.3.
 
 ## Before the first sync
 
