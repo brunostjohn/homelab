@@ -4,10 +4,15 @@ A Buildbarn remote cache (bb-storage) and executor (bb-scheduler) for the Macs' 
 tokens, hides action results whose outputs were evicted, and forwards Execute to the scheduler. One storage shard
 keeps the CAS and action cache in preallocated files on a 1 TiB `floof-iscsi-csi` volume.
 
-Workers connect to the scheduler's node port, `10.0.2.22:30983`, with a token whose audience is `bazel-worker`
-(`make-cache-token.sh <key dir> <name> bazel-worker`). That token lets a worker hand results straight back to
-clients, so cache tokens can't register a worker. The Mac workers are set up by the repo's `tools/remote`. With no
-worker of a platform left, Execute fails after two minutes and Bazel builds those actions on the asking Mac.
+The Mac workers connect to the scheduler's node port on s7, `10.0.0.10:30983`, and read the CAS through the
+frontend's, `10.0.0.10:30980`. Through the API VIP, `10.0.2.22`, a long-lived connection is reset after 10-50 s
+even with traffic on it (measured with HTTP/2 pings answered), while the same connection to a node's own address
+stays up, and a worker's long-poll broke every few seconds. Workers authenticate with a token whose audience is
+`bazel-worker` (`make-cache-token.sh <key dir> <name> bazel-worker`): it lets a worker hand results straight back to
+clients, so a cache token can't register one. The Mac workers are set up by the repo's `tools/remote`. The Linux
+workers (`linux-worker.yml`) reach the scheduler on an in-cluster port only their pods may use, and the storage shard
+directly. With no worker of a platform left, Execute fails after two minutes and Bazel builds those actions on the
+asking Mac.
 
 The Macs reach it at `grpc://10.0.2.22:30980`: the frontend's fixed node port, through the API server's VIP. Its
 LoadBalancer address, `10.0.4.4:8980`, is not reachable from the client VLANs (10.0.5.10 wasn't either), while

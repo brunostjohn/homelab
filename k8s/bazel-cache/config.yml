@@ -131,6 +131,10 @@ data:
             "metadataExtractionJmespathExpression": { "expression": "`{}`" }
           }
         }
+      }, {
+        // The cluster's own Linux workers (linux-worker.yml), reachable from those pods alone (netpol.yml).
+        "listenAddresses": [":8985"],
+        "authenticationPolicy": { "allow": {} }
       }],
       "maximumMessageSizeBytes": 16 * 1024 * 1024,
       "global": {

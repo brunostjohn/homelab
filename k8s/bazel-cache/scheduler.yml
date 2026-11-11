@@ -43,6 +43,9 @@ spec:
             - name: worker
               containerPort: 8983
               protocol: TCP
+            - name: cluster-worker
+              containerPort: 8985
+              protocol: TCP
             - name: diagnostics
               containerPort: 9980
               protocol: TCP
@@ -93,6 +96,10 @@ spec:
     - name: client
       port: 8982
       targetPort: client
+      protocol: TCP
+    - name: cluster-worker
+      port: 8985
+      targetPort: cluster-worker
       protocol: TCP
     - name: diagnostics
       port: 9980

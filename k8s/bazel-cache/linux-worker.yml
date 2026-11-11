@@ -1,0 +1,173 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bazel-cache-linux-worker
+  namespace: bazel-cache
+data:
+  worker.jsonnet: |
+    local storage = { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } };
+    {
+      "blobstore": {
+        "contentAddressableStorage": {
+          "chunkStorage": storage,
+          "chunkMappingStorage": { "chunkMappingValidating": { "backend": storage } },
+          "cdcParameterCache": { "cacheSize": 1000, "cacheDuration": "60s", "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
+        },
+        "actionCache": storage
+      },
+      "maximumMessageSizeBytes": 16 * 1024 * 1024,
+      "scheduler": { "address": "scheduler.bazel-cache:8985" },
+      "global": {
+        "diagnosticsHttpServer": {
+          "httpServers": [{ "listenAddresses": [":9980"], "authenticationPolicy": { "allow": {} } }],
+          "enablePrometheus": true
+        }
+      },
+      "buildDirectories": [{
+        "native": {
+          "buildDirectoryPath": "/worker/build",
+          // Every input is hard-linked from here into an action's directory; with the build directory it stays under
+          // the pod's 28Gi of node-local scratch.
+          "cacheDirectoryPath": "/worker/cache",
+          "maximumCacheFileCount": 400000,
+          "maximumCacheSizeBytes": 16 * 1024 * 1024 * 1024,
+          "cacheReplacementPolicy": "LEAST_RECENTLY_USED"
+        },
+        "runners": [{
+          "endpoint": { "address": "unix:///worker/runner" },
+          "concurrency": 6,
+          // Bazel's //bazel/platforms:exec_linux_x86_64, property for property: the runner's userland is part of the
+          // platform, so a new image is a new platform and never reuses another's results.
+          "platform": {
+            "properties": [
+              { "name": "ISA", "value": "x86-64" },
+              { "name": "OSFamily", "value": "linux" },
+              { "name": "container-image", "value": "docker://debian@sha256:99c0b25c46d0214d5a2091092e7908907dcaecd6a962cde0ac700acee222b6f3" }
+            ]
+          },
+          "workerId": { "pod": std.extVar("POD_NAME"), "node": std.extVar("NODE_NAME") }
+        }]
+      }],
+      "inputDownloadConcurrency": 16,
+      "outputUploadConcurrency": 16,
+      "directoryCache": { "maximumCount": 10000, "maximumSizeBytes": 64 * 1024 * 1024, "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
+    }
+  runner.jsonnet: |
+    {
+      "buildDirectoryPath": "/worker/build",
+      "grpcServers": [{ "listenPaths": ["/worker/runner"], "authenticationPolicy": { "allow": {} } }],
+      "global": {},
+      "setTmpdirEnvironmentVariable": true
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linux-worker
+  namespace: bazel-cache
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: linux-worker
+  template:
+    metadata:
+      labels:
+        app: linux-worker
+        app.kubernetes.io/part-of: bazel-cache
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        feature.node.kubernetes.io/cpu-cpuid.AVX2: "true"
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app: linux-worker
+      enableServiceLinks: false
+      terminationGracePeriodSeconds: 60
+      initContainers:
+        - name: bb-runner-installer
+          image: ghcr.io/buildbarn/bb-runner-installer:20261102T094740Z-c9ba98c@sha256:3242e966d6de8a8d514db34e9e741b08f242200f23ad6094295915906acc26d5
+          volumeMounts:
+            - name: bb
+              mountPath: /bb/
+        - name: volume-init
+          image: docker.io/library/busybox:1.38.0@sha256:a46257e06c82ad85242d0d38077d0a52d9896389ca60a1a59d3463db586e5fa4
+          command:
+            - sh
+            - -c
+            - mkdir -pm 0777 /worker/build && mkdir -pm 0700 /worker/cache && chmod 0777 /worker
+          volumeMounts:
+            - name: worker
+              mountPath: /worker
+      containers:
+        - name: worker
+          image: ghcr.io/buildbarn/bb-worker:20261102T094740Z-c9ba98c@sha256:ba07db89d5cd6ae750497a38037abe127426c771a55c8a3da48c4205b929a32a
+          args:
+            - /config/worker.jsonnet
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          ports:
+            - name: diagnostics
+              containerPort: 9980
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "2"
+              memory: 2Gi
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: worker
+              mountPath: /worker
+        - name: runner
+          image: docker.io/library/debian:bookworm-20261027-slim@sha256:99c0b25c46d0214d5a2091092e7908907dcaecd6a962cde0ac700acee222b6f3
+          command:
+            - /bb/bb_runner
+            - /config/runner.jsonnet
+          resources:
+            requests:
+              cpu: "1"
+              memory: 2Gi
+            limits:
+              cpu: "6"
+              memory: 12Gi
+          securityContext:
+            runAsUser: 65534
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: worker
+              mountPath: /worker
+            - name: bb
+              mountPath: /bb
+              readOnly: true
+      volumes:
+        - name: bb
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: bazel-cache-linux-worker
+        # Node-local scratch, within the 20-30 GB a build node may give it.
+        - name: worker
+          emptyDir:
+            sizeLimit: 28Gi

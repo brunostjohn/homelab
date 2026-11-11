@@ -17,6 +17,9 @@ spec:
         - podSelector:
             matchLabels:
               app: scheduler
+        - podSelector:
+            matchLabels:
+              app: linux-worker
       ports:
         - port: grpc
           protocol: TCP
@@ -50,6 +53,13 @@ spec:
     # The Macs' workers through the node port; the port itself checks their tokens.
     - ports:
         - port: worker
+          protocol: TCP
+    - from:
+        - podSelector:
+            matchLabels:
+              app: linux-worker
+      ports:
+        - port: cluster-worker
           protocol: TCP
     - from:
         - namespaceSelector:
