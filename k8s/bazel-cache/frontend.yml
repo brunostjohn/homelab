@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: bazel-cache
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        app.kubernetes.io/part-of: bazel-cache
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        feature.node.kubernetes.io/cpu-cpuid.AVX2: "true"
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: frontend
+          image: ghcr.io/buildbarn/bb-storage:20261102T091443Z-ca3d8b4@sha256:fecab707a842ee1915f2eea06810a1eb2eacc876d498648c67ba32230717f212
+          imagePullPolicy: IfNotPresent
+          args:
+            - /config/frontend.jsonnet
+          ports:
+            - name: grpc
+              containerPort: 8980
+              protocol: TCP
+            - name: diagnostics
+              containerPort: 9980
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: "2"
+              memory: 1Gi
+          readinessProbe:
+            httpGet:
+              path: /-/healthy
+              port: diagnostics
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: diagnostics
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: config
+          configMap:
+            name: bazel-cache-config
+            items:
+              - key: frontend.jsonnet
+                path: frontend.jsonnet
+---
+# gRPC over plain L4: kube-vip announces the address, no ingress in the path.
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: bazel-cache
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.0.5.10
+  selector:
+    app: frontend
+  ports:
+    - name: grpc
+      port: 8980
+      targetPort: grpc
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-diagnostics
+  namespace: bazel-cache
+  labels:
+    app.kubernetes.io/part-of: bazel-cache
+spec:
+  selector:
+    app: frontend
+  ports:
+    - name: diagnostics
+      port: 9980
+      targetPort: diagnostics
+      protocol: TCP

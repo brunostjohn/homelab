@@ -20,6 +20,12 @@
     {
       "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "automerge": true
+    },
+    {
+      "description": "Buildbarn: bb_storage parses k8s/bazel-cache/config.yml against its own image's protos, so bump the image by hand together with the config from buildbarn/bb-deployments",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/buildbarn/**"],
+      "automerge": false
     }
   ],
   "customManagers": [

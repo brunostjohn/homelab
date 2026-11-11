@@ -1,0 +1,156 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bazel-cache-config
+  namespace: bazel-cache
+data:
+  # bb_storage parses these strictly against the protos of its own image: an image bump can reject them (see README).
+  storage.jsonnet: |
+    // One shard on one 1 TiB volume. Every size below is fixed at first start: changing one discards that store.
+    // 877 GiB in all, so ext4's overhead and the 5% reserved for root stay free.
+    {
+      // Reached only by the frontend (netpol.yml); clients authenticate there.
+      "grpcServers": [{ "listenAddresses": [":8981"], "authenticationPolicy": { "allow": {} } }],
+      "maximumMessageSizeBytes": 2 * 1024 * 1024,
+      "global": {
+        "diagnosticsHttpServer": {
+          "httpServers": [{ "listenAddresses": [":9980"], "authenticationPolicy": { "allow": {} } }],
+          "enablePrometheus": true
+        }
+      },
+      "supportedCompressors": ["ZSTD"],
+      "contentAddressableStorageServer": {
+        "contentAddressableStorage": {
+          "chunkStorage": {
+            "local": {
+              // 66 bytes per entry: ~100M entries, 5-10x the objects 860 GiB holds at this build's mean blob size.
+              "keyLocationMap": {
+                "onBlockDevice": { "file": { "path": "/storage/cs/key_location_map", "sizeBytes": 6 * 1024 * 1024 * 1024 } },
+                "maximumGetAttempts": 16,
+                "maximumPutAttempts": 64
+              },
+              "oldBlocks": 8,
+              "currentBlocks": 24,
+              "newBlocks": 3,
+              "blocksOnBlockDevice": {
+                "source": { "file": { "path": "/storage/cs/blocks", "sizeBytes": 860 * 1024 * 1024 * 1024 } },
+                "spareBlocks": 3
+              },
+              "persistent": { "stateDirectoryPath": "/storage/cs/persistent_state", "minimumEpochInterval": "300s" },
+              "chunkingParameters": { "minChunkSizeBytes": 256 * 1024, "horizonSizeBytes": 2 * 1024 * 1024 }
+            }
+          },
+          "chunkMappingStorage": {
+            "local": {
+              "keyLocationMap": {
+                "onBlockDevice": { "file": { "path": "/storage/cms/key_location_map", "sizeBytes": 64 * 1024 * 1024 } },
+                "maximumGetAttempts": 16,
+                "maximumPutAttempts": 64
+              },
+              "oldBlocks": 8,
+              "currentBlocks": 24,
+              "newBlocks": 1,
+              "blocksOnBlockDevice": {
+                "source": { "file": { "path": "/storage/cms/blocks", "sizeBytes": 2 * 1024 * 1024 * 1024 } },
+                "spareBlocks": 3
+              },
+              "persistent": { "stateDirectoryPath": "/storage/cms/persistent_state", "minimumEpochInterval": "300s" }
+            }
+          }
+        },
+        "getAuthorizer": { "allow": {} },
+        "putAuthorizer": { "allow": {} },
+        "findMissingAuthorizer": { "allow": {} },
+        "maximumChunkCount": 100000
+      },
+      "actionCache": {
+        "backend": {
+          "local": {
+            "keyLocationMap": {
+              "onBlockDevice": { "file": { "path": "/storage/ac/key_location_map", "sizeBytes": 1024 * 1024 * 1024 } },
+              "maximumGetAttempts": 16,
+              "maximumPutAttempts": 64
+            },
+            "oldBlocks": 8,
+            "currentBlocks": 24,
+            "newBlocks": 1,
+            "blocksOnBlockDevice": {
+              "source": { "file": { "path": "/storage/ac/blocks", "sizeBytes": 8 * 1024 * 1024 * 1024 } },
+              "spareBlocks": 3
+            },
+            "persistent": { "stateDirectoryPath": "/storage/ac/persistent_state", "minimumEpochInterval": "300s" }
+          }
+        },
+        "getAuthorizer": { "allow": {} },
+        "putAuthorizer": { "allow": {} }
+      }
+    }
+  frontend.jsonnet: |
+    {
+      "grpcServers": [{
+        "listenAddresses": [":8980"],
+        // Bazel sends `Authorization: Bearer <token>` (make-cache-token.sh). The key below is public; the token is not.
+        "authenticationPolicy": {
+          "jwt": {
+            "jwksInline": {
+              "keys": [{
+                "kty": "RSA",
+                "alg": "RS256",
+                "use": "sig",
+                "kid": "bazel-cache-1",
+                "n": "tTf7W7nZFdlP2iGeUb5FaR4oClbAjMir64X3hj7KKSXEF2YQf3cRAVNbOrkIzb6mt7n3gTFSknfnfJRZH0PctwlZevBPjQZaCvEndsZV-gBSskGt1H207tP8A8TV6_vjknw-f7dIPNhbJ7oNC_fcl9TDDNvCbN2hSoQxAyJ1glOl2QXtBqeydu4YN7GJ3ZW4gLvhxKyhxGBaIxfFJ3Q5rG4_p2OW8obVda9LuGvG8qaUEK27NY6Jv_8VccS6f4_jq1iO88AF9FC9jwvqV5oPotBOJYl9GXgYVlFzmUM6T_vseisUHr0RQ1Suz2_-3015jVWzSAseZyNXkXlQ6g7GRaX71vaFcmEhgCbETe7FR4TV62SAAh_QWXcC-2R6nM9DY5zaR-Ot-t6893s0dmY2YX32zM2opWbd484SudrmhI9Qeuyg9LRcaxBayqg3VjCCIoyYiYw0OfcUnAFInBCfGes7gzSYOE3ray4EOiKhZPphLY3ElDHzeyNg1_N8fMCd",
+                "e": "AQAB"
+              }]
+            },
+            "maximumCacheSize": 1000,
+            "cacheReplacementPolicy": "LEAST_RECENTLY_USED",
+            "claimsValidationJmespathExpression": { "expression": "payload.aud == 'bazel-cache'" },
+            "metadataExtractionJmespathExpression": { "expression": "`{}`" }
+          }
+        }
+      }],
+      "maximumMessageSizeBytes": 2 * 1024 * 1024,
+      "global": {
+        "diagnosticsHttpServer": {
+          "httpServers": [{ "listenAddresses": [":9980"], "authenticationPolicy": { "allow": {} } }],
+          "enablePrometheus": true
+        }
+      },
+      "supportedCompressors": ["ZSTD"],
+      "contentAddressableStorageServer": {
+        "contentAddressableStorage": {
+          "chunkStorage": {
+            "existenceCaching": {
+              "backend": { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } },
+              "existenceCache": { "cacheSize": 1000000, "cacheDuration": "60s", "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
+            }
+          },
+          "chunkMappingStorage": {
+            "existenceCaching": {
+              "backend": {
+                "chunkMappingValidating": {
+                  "backend": { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } }
+                }
+              },
+              "existenceCache": { "cacheSize": 1000000, "cacheDuration": "60s", "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
+            }
+          },
+          "cdcParameterCache": { "cacheSize": 1000, "cacheDuration": "60s", "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
+        },
+        "getAuthorizer": { "allow": {} },
+        "putAuthorizer": { "allow": {} },
+        "findMissingAuthorizer": { "allow": {} },
+        "maximumChunkCount": 100000
+      },
+      "actionCache": {
+        // An ActionResult whose outputs were evicted is a miss, not a hit Bazel later fails to download.
+        "backend": {
+          "completenessChecking": {
+            "backend": { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" } } },
+            "maximumTotalTreeSizeBytes": 64 * 1024 * 1024
+          }
+        },
+        "getAuthorizer": { "allow": {} },
+        "putAuthorizer": { "allow": {} }
+      }
+    }

@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: storage
+  namespace: bazel-cache
+  annotations:
+    reloader.stakater.com/auto: "true"
+spec:
+  replicas: 1
+  serviceName: storage
+  revisionHistoryLimit: 3
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain
+  selector:
+    matchLabels:
+      app: storage
+  template:
+    metadata:
+      labels:
+        app: storage
+        app.kubernetes.io/part-of: bazel-cache
+    spec:
+      # The image index carries an x86-64-v3 build; AVX2 nodes run either variant, the Ivy Bridge VMs only the v1 one.
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        feature.node.kubernetes.io/cpu-cpuid.AVX2: "true"
+      enableServiceLinks: false
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: layout
+          image: docker.io/library/busybox:1.38.0@sha256:a46257e06c82ad85242d0d38077d0a52d9896389ca60a1a59d3463db586e5fa4
+          command:
+            - sh
+            - -c
+            - mkdir -p -m 0700 /storage/cs/persistent_state /storage/cms/persistent_state /storage/ac/persistent_state
+          volumeMounts:
+            - name: data
+              mountPath: /storage
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      containers:
+        - name: storage
+          image: ghcr.io/buildbarn/bb-storage:20261102T091443Z-ca3d8b4@sha256:fecab707a842ee1915f2eea06810a1eb2eacc876d498648c67ba32230717f212
+          imagePullPolicy: IfNotPresent
+          args:
+            - /config/storage.jsonnet
+          ports:
+            - name: grpc
+              containerPort: 8981
+              protocol: TCP
+            - name: diagnostics
+              containerPort: 9980
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 500m
+              memory: 2Gi
+            limits:
+              cpu: "4"
+              memory: 6Gi
+          startupProbe:
+            httpGet:
+              path: /-/healthy
+              port: diagnostics
+            failureThreshold: 60
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /-/healthy
+              port: diagnostics
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: diagnostics
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            - name: data
+              mountPath: /storage
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: config
+          configMap:
+            name: bazel-cache-config
+            items:
+              - key: storage.jsonnet
+                path: storage.jsonnet
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: floof-iscsi-csi
+        resources:
+          requests:
+            storage: 1Ti
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage
+  namespace: bazel-cache
+  labels:
+    app.kubernetes.io/part-of: bazel-cache
+spec:
+  clusterIP: None
+  selector:
+    app: storage
+  ports:
+    - name: grpc
+      port: 8981
+      targetPort: grpc
+      protocol: TCP
+    - name: diagnostics
+      port: 9980
+      targetPort: diagnostics
+      protocol: TCP
