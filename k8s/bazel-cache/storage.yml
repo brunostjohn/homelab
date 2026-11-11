@@ -81,10 +81,15 @@ spec:
             httpGet:
               path: /-/healthy
               port: diagnostics
+            timeoutSeconds: 5
+          # Under both Macs' load the health check answered after more than a second and a one-second probe restarted
+          # storage (every Mac's cache gone for a minute): only one silent for a minute is restarted.
           livenessProbe:
             httpGet:
               path: /-/healthy
               port: diagnostics
+            timeoutSeconds: 5
+            failureThreshold: 6
           volumeMounts:
             - name: config
               mountPath: /config
