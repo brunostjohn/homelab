@@ -73,12 +73,15 @@ spec:
               - key: frontend.jsonnet
                 path: frontend.jsonnet
 ---
-# gRPC over plain L4: kube-vip announces the address, no ingress in the path.
+# gRPC over plain L4: kube-vip announces the address, no ingress in the path. kube-vip reads the annotation; the
+# cloud provider copies spec.loadBalancerIP into it only when the Service is created, never on a later change.
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend
   namespace: bazel-cache
+  annotations:
+    kube-vip.io/loadbalancerIPs: 10.0.4.4
 spec:
   type: LoadBalancer
   loadBalancerIP: 10.0.4.4
