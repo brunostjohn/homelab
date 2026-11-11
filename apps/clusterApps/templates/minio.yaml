@@ -18,17 +18,12 @@ spec:
           requests:
             memory: 2Gi
         replicas: 2
+        nodeSelector:
+          kubernetes.io/arch: amd64
         statefulSetUpdate:
           updateStrategy: OnDelete
-        postJob:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: kubernetes.io/hostname
-                    operator: In
-                    values: [s3, s7]
+        # Do not create the chart's public default consoleAdmin account.
+        users: []
         metrics:
           serviceMonitor:
             enabled: true

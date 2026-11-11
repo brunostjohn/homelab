@@ -2,6 +2,9 @@
 
 The existing `minio-secrets` Argo CD Application owns these resources. Infisical
 supplies stable root credentials and the rotated OIDC client secret.
+The chart's default user creation is disabled; existing users are preserved.
+Its otherwise unnecessary post-install hook would create a publicly known
+`consoleAdmin` credential. Household access uses Authentik instead.
 
 The `minio-auth-console` Deployment preserves the currently installed, unmodified
 2024 embedded console and its Authentik login. `MINIO_SERVER_URL` directs all its
