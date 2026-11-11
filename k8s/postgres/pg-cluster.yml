@@ -61,10 +61,14 @@ spec:
       - "vchord.so"
 
   backup:
+    target: primary
     barmanObjectStore:
       destinationPath: s3://posgres-cluster-backups/
       serverName: recovered-postgres-cluster-n5
       endpointURL: http://minio-svc.minio.svc.cluster.local:9000
+      data:
+        additionalCommandArgs:
+          - "--read-timeout=600"
       wal:
         maxParallel: 8
       s3Credentials:
