@@ -31,7 +31,7 @@ spec:
           sizeLimit: 1Gi
       containers:
       - name: web
-        image: ghcr.io/elie222/rakazo/app@sha256:b81ae4b1ba6003731489255b2c92b974ef81a99d43404b831cbbc7c8ac324236
+        image: ghcr.io/elie222/rakazo/app@sha256:971d2174b857f33695c6aef8f2ff836dcaf49ad8118fe290c55072cf59221591
         imagePullPolicy: IfNotPresent
         workingDir: "/app/apps/web"
         securityContext:
