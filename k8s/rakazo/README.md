@@ -31,14 +31,15 @@ CLIProxyAPI uses its native PostgreSQL store and an ephemeral local mirror.
 Neither computer containers nor the screen proxy receive S3 or database credentials.
 The encryption key must be backed up separately from the database and object store.
 
-## Verified during rollout, 10 November 2026
+## Verified during rollout, 10–11 November 2026
 
 - All 252 upstream migrations completed on the existing PostgreSQL 15.13 cluster.
 - API health/readiness, worker startup, public HTTPS and Bruno's Authentik login work.
 - Authentik admission is restricted to the group containing Bruno and Klaudia.
 - OpenAI/Codex and Claude OAuth accounts connected to the internal proxy.
 - GPT-6.1 Sol passed text, vision and streamed tool-call checks; Claude Sonnet 5.5
-  passed vision. These two models are configured as deployment-wide choices.
+  passed vision and streamed tool calls. Claude refreshed its OAuth token automatically.
+  These two models are configured as deployment-wide choices.
 - MinIO scoped credentials passed read/write/version recovery and cross-bucket denial.
 - Personal and Family have separate native Honcho connections, workspace-scoped JWTs,
   and shared memory within each space. All three existing bots inherit that scope.
@@ -49,10 +50,12 @@ The encryption key must be backed up separately from the database and object sto
   Personal only. Its 21 tools are connected; permanent deletion is disabled.
 - The stock desktop app signs in through Authentik using TOTP. Its signed passkey
   domain does not include this self-hosted Authentik domain.
+- Bruno confirmed delivery of the one-time Expo test notification on his physical
+  iPhone using the stock Rakazo app. No custom app or Expo access token was needed.
 
 ## Memory
 
-Honcho v3.6.0 runs an API and one deriver worker on the existing PostgreSQL cluster,
+Honcho v3.6.1 runs an API and one deriver worker on the existing PostgreSQL cluster,
 with a separate database and restricted runtime role. Redis and telemetry are disabled.
 The migration Job alone receives owner credentials. Its guarded correction sets the
 two initially empty embedding columns to vector(1024); it refuses to reinterpret
@@ -74,8 +77,9 @@ key is in Infisical. Operator bootstrap credentials are not given to Rakazo.
 `honcho-smoke.py seed`, followed by pod replacement and `honcho-smoke.py verify`,
 exercises synthetic facts and removes them. It requires private workspace-token files
 through `HONCHO_TOKEN_DIR` and a local operator forward through `HONCHO_URL`.
-Prometheus monitors cover API, worker and embeddings; rules cover unavailable memory,
-queue age and stale queue metrics. Actual scraping awaits recovery of Prometheus's Pi.
+Prometheus successfully scrapes API, worker and embeddings; rules cover unavailable
+memory, queue age and stale queue metrics. The HTTP-mode TEI image exposes `/metrics`
+on its HTTP port 8080. Prometheus is running on s3 after its Pi became unreachable.
 
 ## Family Mealie
 
@@ -136,11 +140,29 @@ native Rakazo calls with no failures. The internal token requires no manual logi
 UniFi's native Composio connection now uses the replacement `Rakazo household` key;
 the old account connection and both superseded keys were removed. The live key is
 also stored as `/rakazo/UNIFI_API_KEY`. Its current expiry is 10 December 2026; renew
-it before then and update both Infisical and the Composio connected account.
+it before then and update Infisical, both Composio connected accounts and the encrypted
+credential on the custom UniFi Network integration. Site Manager is connected separately
+in Personal and Family. Its catalog covers inventory and metrics only.
 
-These connections carry broad administrative access. Custom persistent-deletion
-approval behavior remains to be verified with stock Rakazo; MCP server instructions
-alone are not an enforcement boundary.
+**UniFi Network** adds all 73 operations from the official Network 10.6.109 OpenAPI
+schema through Rakazo's native API adapter. Native application-info and site-list calls
+passed in both spaces. Its concrete Cloud Connector URL uses `/network/integration`,
+with the selected console ID substituted before import. The importer does not resolve
+server variables, and one overlong description uses its official summary to meet the
+2,000-character limit. This is connector configuration, not an application modification.
+
+Import the public schema separately from the API credential: stock OpenAPI setup sends
+the credential to the schema URL too. The prepared configuration was validated through
+`prepareApiInstall` and saved with Rakazo's native encrypted secret format. The key is
+sent only to `api.ui.com`, in `X-API-Key`; no key is stored in the schema or model inputs.
+Custom infrastructure integrations explicitly select Personal and Family. Stock Rakazo
+also ties integrations to the account that installs them; another member's own bots
+need that member's connection rather than inheriting Bruno's private credentials.
+
+These connections carry broad administrative access. Stock Auto approval is an AI review,
+not a guaranteed human gate. Its reviewer prompt is not operator-configurable, and shell,
+file writes and computer actions can bypass the MCP review path. MCP server instructions
+and NAS `confirm` parameters are not enforcement boundaries.
 
 `ssh-mcp.yml` uses stock ssh-mcp 2.25.0 through Supergateway 4.2.2, with strict pinned
 host keys and a separate `restrict` SSH key on six reachable Kubernetes nodes and
@@ -161,6 +183,32 @@ verification is not disabled. Update the mounted public certificate when it rota
 Egress reaches only that NAS on 443 and cluster DNS. The single hierarchical tool
 covers storage, sharing, accounts and other NAS APIs; its `confirm` argument is not
 a human approval boundary. Both NAS connections and SSH are for Personal and Family.
+Native Rakazo SSH execution and both NAS pool-list calls passed in each space. Private
+temporary SSH/API-key transfer files were removed after verification.
+
+## Email and monitoring
+
+The Resend receiving bridge is deployed as the `rakazo-email` Cloudflare Worker.
+Source, seven passing fixture tests and operational details are under
+`projects/rakazo-email/`. Resend sending and receiving are verified for the bot subdomain;
+root-domain iCloud mail is unchanged. Signature rejection, ignored-event handling and
+live health checks passed. The real sender/attachment/reply test remains pending at the
+user's request. `career-partner@bots.zefirsroyal.cloud` is the currently claimed address.
+Stock sender validation uses Bruno's login identity `brunost.john@icloud.com`; connecting
+the `brunoturek@icloud.com` mailbox does not change that identity.
+
+`operations-monitoring.yml` adds bucket/version metrics, capacity and growth prediction,
+backup freshness, WAL failure, service health, embedding errors and UniFi key-expiry
+alerts to the existing Prometheus stack. Live targets and rule evaluation passed.
+
+`log-metrics.yml` runs stock Alloy with namespace-scoped pod/log read permissions.
+It counts persistence and subscription errors from API, worker and proxy logs, retains
+no raw logs, sends nothing externally and adds no PVC. Labels contain only the app and
+collector metadata. The counters are best-effort: pod replacement can replay recent
+logs, and future upstream log changes may require updating the expressions. Validation
+used five synthetic lines: an ordinary line, `previous home revision removal failed`,
+`computer.checkpoint_skipped`, `invalid_grant`, and `429 /v1/chat/completions`.
+The resulting observed/persistence/subscription counters were exactly 5/2/2.
 
 ## Backup recovery
 
@@ -176,13 +224,19 @@ terminating pod was replaced on s3 using the same cached image digest. Both MinI
 pods are running and WAL archiving resumed at 22:07 UTC. The s4 VM remains stopped.
 The temporary MinIO network restriction was removed and the NAS reservation restored.
 MinIO's stable root credentials and rotated OIDC secret are now managed in Infisical.
+A fresh Authentik login passed after rotation. Storage has several TiB free again.
+
+The retained 2024 MinIO version rejects the current AWS SDK's multi-object deletion
+without Content-MD5. Rakazo checkpoints succeed, but removal of older home revisions
+fails and needs a storage compatibility fix. Newer MinIO releases remove the bundled
+OIDC administration console, so upgrading requires accounting for that behavior rather
+than changing the image blindly. No Rakazo source patch or runtime monkeypatch is used.
 
 ## Still being completed
 
 - Docker browser/terminal/takeover and saved-home restoration checks.
 - Proxy OAuth refresh and complete pod-replacement persistence checks.
-- Klaudia's space access, inbound Resend bridge, Composio and stock iPhone push tests.
-- Personal/Family infrastructure MCPs and verified deletion approval policy.
-- Existing Prometheus integration, storage/backup alerts and application health checks.
-- Final retention cleanup and fresh MinIO OIDC login test.
+- Klaudia's own space/integration access and the explicitly deferred real email test.
+- Live error-counter scraping after its GitOps rollout.
+- Final retention cleanup, nightly backup completion and MinIO checksum compatibility.
 - Separate recoverable encryption-key copy and remaining failure/persistence checks.

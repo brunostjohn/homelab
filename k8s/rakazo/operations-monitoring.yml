@@ -30,7 +30,7 @@ spec:
   - name: rakazo-operations
     rules:
     - alert: RakazoServiceUnavailable
-      expr: kube_deployment_status_replicas_available{namespace="rakazo",deployment=~"rakazo-api|rakazo-web|rakazo-worker|rakazo-proxy|kubernetes-mcp|homeassistant-mcp|ssh-mcp|truenas-floof|truenas-jabberwock|mealie-family|mail-bruno"} < 1
+      expr: kube_deployment_status_replicas_available{namespace="rakazo",deployment=~"rakazo-api|rakazo-web|rakazo-worker|rakazo-proxy|rakazo-log-metrics|kubernetes-mcp|homeassistant-mcp|ssh-mcp|truenas-floof|truenas-jabberwock|mealie-family|mail-bruno"} < 1
       for: 5m
       labels:
         severity: warning
@@ -38,7 +38,7 @@ spec:
         summary: 'Household service {{ $labels.deployment }} is unavailable'
         description: Check Argo CD synchronization, pod readiness and service logs.
     - alert: RakazoMetricsUnavailable
-      expr: up{namespace="rakazo",job=~"honcho|rakazo/honcho-worker|rakazo-embeddings"} == 0
+      expr: up{namespace="rakazo",job=~"honcho|rakazo/honcho-worker|rakazo-embeddings|rakazo-log-metrics"} == 0
       for: 5m
       labels:
         severity: warning
@@ -53,6 +53,22 @@ spec:
       annotations:
         summary: Household memory embedding requests are failing
         description: Inspect TEI overload/error counters and Honcho retries before increasing concurrency.
+    - alert: RakazoHomePersistenceErrors
+      expr: sum(increase(rakazo_logs_home_persistence_errors_total{namespace="rakazo"}[15m])) > 0 or sum(rakazo_logs_home_persistence_errors_total{namespace="rakazo"} unless rakazo_logs_home_persistence_errors_total{namespace="rakazo"} offset 15m) > 0
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Rakazo reported an unsaved checkpoint or old-revision cleanup failure
+        description: Check computer saved state and MinIO errors before stopping a computer. Collector replacement can replay recent log events.
+    - alert: RakazoSubscriptionErrors
+      expr: sum(increase(rakazo_logs_subscription_errors_total{namespace="rakazo"}[15m])) > 0 or sum(rakazo_logs_subscription_errors_total{namespace="rakazo"} unless rakazo_logs_subscription_errors_total{namespace="rakazo"} offset 15m) > 0
+      for: 2m
+      labels:
+        severity: warning
+      annotations:
+        summary: Subscription authentication or quota errors were reported
+        description: Check proxy account refresh and subscription allowances; no paid fallback is configured. Collector replacement can replay recent log events.
     - alert: HouseholdMinioCapacityLow
       expr: min(minio_cluster_capacity_usable_free_bytes{namespace="minio"} / minio_cluster_capacity_usable_total_bytes{namespace="minio"}) < 0.15
       for: 15m

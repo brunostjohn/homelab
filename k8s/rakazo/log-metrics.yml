@@ -1,0 +1,243 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+rules:
+- apiGroups: ['']
+  resources: [pods]
+  verbs: [get, list, watch]
+- apiGroups: ['']
+  resources: [pods/log]
+  verbs: [get]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+subjects:
+- kind: ServiceAccount
+  name: rakazo-log-metrics
+  namespace: rakazo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: rakazo-log-metrics
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+data:
+  config.alloy: |
+    logging {
+      level = "warn"
+    }
+    discovery.kubernetes "rakazo" {
+      role = "pod"
+      namespaces {
+        names = ["rakazo"]
+      }
+      selectors {
+        role = "pod"
+        label = "app in (rakazo-api,rakazo-worker,rakazo-proxy)"
+      }
+    }
+    discovery.relabel "rakazo" {
+      targets = discovery.kubernetes.rakazo.targets
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_name"]
+        regex = "api|worker|proxy"
+        action = "keep"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_pod_label_app"]
+        target_label = "app"
+      }
+    }
+    loki.source.kubernetes "rakazo" {
+      targets = discovery.relabel.rakazo.output
+      forward_to = [loki.process.errors.receiver]
+    }
+    loki.process "errors" {
+      // Retain counters only; chat text and raw logs have no storage or destination.
+      forward_to = []
+      stage.label_keep {
+        values = ["app"]
+      }
+      stage.metrics {
+        metric.counter {
+          name = "observed_lines_total"
+          prefix = "rakazo_logs_"
+          description = "Application log lines observed by the error monitor"
+          match_all = true
+          action = "inc"
+          max_idle_duration = "24h"
+        }
+      }
+      stage.match {
+        selector = "{app=~\"rakazo-api|rakazo-worker\"} |~ \"previous home revision removal failed|computer[.]checkpoint_skipped|computer[.]sleep_deferred|(?i:checkpoint.{0,80}(failed|error))\""
+        stage.metrics {
+          metric.counter {
+            name = "home_persistence_errors_total"
+            prefix = "rakazo_logs_"
+            description = "Failed or deferred home checkpoint and old-revision cleanup events"
+            match_all = true
+            action = "inc"
+            max_idle_duration = "24h"
+          }
+        }
+      }
+      stage.match {
+        selector = "{app=~\"rakazo-api|rakazo-worker|rakazo-proxy\"} |~ \"(?i)(invalid_grant|usage_limit_reached|insufficient_quota|quota_exceeded|refresh.{0,80}(failed|error)|(401|403|429).{0,120}/v1/(chat/completions|responses|messages))\""
+        stage.metrics {
+          metric.counter {
+            name = "subscription_errors_total"
+            prefix = "rakazo_logs_"
+            description = "Subscription authentication, refresh, and quota failure events"
+            match_all = true
+            action = "inc"
+            max_idle_duration = "24h"
+          }
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: rakazo-log-metrics
+  template:
+    metadata:
+      labels:
+        app: rakazo-log-metrics
+    spec:
+      serviceAccountName: rakazo-log-metrics
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 473
+        runAsGroup: 473
+        fsGroup: 473
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: alloy
+        image: grafana/alloy:v1.21.0@sha256:9726bfba078de9bc2212c60c6e643238c700b4fe0868ea78cbe03163d03d95bf
+        args: [run, --disable-reporting, --server.http.listen-addr=0.0.0.0:12345, --storage.path=/tmp/alloy, /etc/alloy/config.alloy]
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop: [ALL]
+        resources:
+          requests:
+            cpu: 25m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        ports:
+        - name: metrics
+          containerPort: 12345
+        readinessProbe:
+          httpGet:
+            path: /-/ready
+            port: metrics
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: metrics
+          initialDelaySeconds: 30
+        volumeMounts:
+        - name: config
+          mountPath: /etc/alloy
+          readOnly: true
+        - name: runtime
+          mountPath: /tmp
+      volumes:
+      - name: config
+        configMap:
+          name: rakazo-log-metrics
+      - name: runtime
+        emptyDir:
+          sizeLimit: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+  labels:
+    app: rakazo-log-metrics
+spec:
+  selector:
+    app: rakazo-log-metrics
+  ports:
+  - name: metrics
+    port: 12345
+    targetPort: metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+spec:
+  selector:
+    matchLabels:
+      app: rakazo-log-metrics
+  endpoints:
+  - port: metrics
+    interval: 30s
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: rakazo-log-metrics
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      app: rakazo-log-metrics
+  policyTypes: [Ingress, Egress]
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring
+    ports:
+    - port: 12345
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/8
+    ports:
+    - port: 443
+    - port: 6443
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
