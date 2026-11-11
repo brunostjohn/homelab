@@ -1,0 +1,276 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: truenas-jabberwock-proxy
+  namespace: rakazo
+data:
+  default.conf.template: |
+    server {
+      listen 8080;
+      server_name _;
+      access_log off;
+      client_max_body_size 2m;
+      location = /health {
+        proxy_pass http://127.0.0.1:8081/health;
+      }
+      location / {
+        if ($http_authorization != "Bearer ${JABBERWOCK_MCP_TOKEN}") { return 401; }
+        proxy_pass http://127.0.0.1:8081;
+        proxy_http_version 1.1;
+        proxy_set_header Host 127.0.0.1:8081;
+        proxy_set_header Connection "";
+        proxy_set_header Authorization "";
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 3600s;
+      }
+    }
+
+    # The NAS certificate names localhost; trust its pinned public certificate.
+    server {
+      listen 127.0.0.1:9443;
+      server_name _;
+      access_log off;
+      client_max_body_size 16m;
+      location / {
+        proxy_pass https://10.0.3.1:443;
+        proxy_set_header Host localhost;
+        proxy_ssl_trusted_certificate /config/nas-ca.pem;
+        proxy_ssl_verify on;
+        proxy_ssl_server_name on;
+        proxy_ssl_name localhost;
+        proxy_read_timeout 300s;
+      }
+    }
+  nas-ca.pem: |
+    -----BEGIN CERTIFICATE-----
+    MIIDrTCCApWgAwIBAgIENGRP+zANBgkqhkiG9w0BAQsFADCBgDELMAkGA1UEBhMC
+    VVMxEjAQBgNVBAoMCWlYc3lzdGVtczESMBAGA1UEAwwJbG9jYWxob3N0MSEwHwYJ
+    KoZIhvcNAQkBFhJpbmZvQGl4c3lzdGVtcy5jb20xEjAQBgNVBAgMCVRlbm5lc3Nl
+    ZTESMBAGA1UEBwwJTWFyeXZpbGxlMB4XDTI2MTAxMDEzMzkwM1oXDTI3MTExMTEz
+    MzkwM1owgYAxCzAJBgNVBAYTAlVTMRIwEAYDVQQKDAlpWHN5c3RlbXMxEjAQBgNV
+    BAMMCWxvY2FsaG9zdDEhMB8GCSqGSIb3DQEJARYSaW5mb0BpeHN5c3RlbXMuY29t
+    MRIwEAYDVQQIDAlUZW5uZXNzZWUxEjAQBgNVBAcMCU1hcnl2aWxsZTCCASIwDQYJ
+    KoZIhvcNAQEBBQADggEPADCCAQoCggEBAKH9vPdkZXzRgp3gzqCBTzbaPymBSeSO
+    HfLTepA8v0dkrJFrpTzknjSIcjE65Zb56memVcMNctsikRR1setrJDLxbTh1YFQ2
+    mkXy5rOMUgznmv+iy7kBuGj5R1rALUf34BNU/4YAYerh3pF3EuqWlmy5jjWFnFNH
+    Xjv8ZC0bJxshvR8JCtVmgL8c8272h/C8lpa5+TgaFkUbw1GTAj10P5WL9W0kHjHW
+    5/a1wc3nQpvlnXTQw+fajrpJbHYmnZtH70yoDM/tONkNhGr9y/4pZ6jPTotl+gUX
+    J0460WSjjtJ+hKlth0V+GvHKdS+bqwS3Trx+rUJDpRpo6/EocvoanocCAwEAAaMt
+    MCswFAYDVR0RBA0wC4IJbG9jYWxob3N0MBMGA1UdJQQMMAoGCCsGAQUFBwMBMA0G
+    CSqGSIb3DQEBCwUAA4IBAQA61J43tCoGwQ+gf9m7qQKH7aV82qXV2++Q3ifb6Aaf
+    6WjcJVdnCCoSpicShT7By1OLyHqPkN7xeIRq47UTLYvcsGwDxOp1yRVGz7I7c4rS
+    4k4DgUGgPGnjsNq6NdA2mYPNL0Ds6gOXaysB/jwSEQ0DO2jdi+IAoNyAGhflkxyc
+    MVgI86pPDgwXZpLNNcdDkJeKecF1LoDhczqkfKBLSaV9QBPFsO+KeiuNZL68psgf
+    PLT95da5pDlnuldZkxgvMH2/2lqHUbtD9gksLX75aLAbKlSXQAKn1F3tHFmNdTL8
+    N86rONcTgm8inHRXwUp8ERLmnWPtQPXOJfmQjLfRSPS/
+    -----END CERTIFICATE-----
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: truenas-jabberwock
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: truenas-jabberwock
+  template:
+    metadata:
+      labels:
+        app: truenas-jabberwock
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: mcp-cache
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: proxy-tmp
+        emptyDir:
+          sizeLimit: 16Mi
+      - name: proxy-config
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Mi
+      - name: proxy-template
+        configMap:
+          name: truenas-jabberwock-proxy
+      containers:
+      - name: mcp
+        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:3478ce3954061504095dd37c188d2d057c48c587965271c66356e5053638a324
+        env:
+        - name: HOME
+          value: "/tmp"
+        - name: TRUENAS_URL
+          value: http://127.0.0.1:9443
+        - name: TRUENAS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: JABBERWOCK_API_KEY
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: mcp-cache
+          mountPath: "/tmp"
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+            ephemeral-storage: 256Mi
+        startupProbe:
+          exec:
+            command:
+            - node
+            - "-e"
+            - fetch('http://127.0.0.1:8081/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+          periodSeconds: 10
+          timeoutSeconds: 15
+          failureThreshold: 12
+        readinessProbe:
+          exec:
+            command:
+            - node
+            - "-e"
+            - fetch('http://127.0.0.1:8081/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+          periodSeconds: 30
+          timeoutSeconds: 15
+          failureThreshold: 2
+        stdin: true
+        args:
+        - "--stdio"
+        - truenas-mcp
+        - "--outputTransport"
+        - streamableHttp
+        - "--host"
+        - 127.0.0.1
+        - "--port"
+        - '8081'
+        - "--healthEndpoint"
+        - "/health"
+        - "--healthCheck"
+        - server
+      - name: auth-proxy
+        image: nginxinc/nginx-unprivileged:1.31.7-alpine@sha256:b5047b9b76845eac124358373c6852377c52e4b05834a47647e955dd91cb8f1e
+        command:
+        - sh
+        - "-ec"
+        args:
+        - envsubst '${JABBERWOCK_MCP_TOKEN}' < /config/default.conf.template > /etc/nginx/conf.d/default.conf;
+          exec nginx -g 'daemon off;'
+        env:
+        - name: JABBERWOCK_MCP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: JABBERWOCK_MCP_TOKEN
+        ports:
+        - name: http
+          containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: proxy-tmp
+          mountPath: "/tmp"
+        - name: proxy-config
+          mountPath: "/etc/nginx/conf.d"
+        - name: proxy-template
+          mountPath: "/config"
+          readOnly: true
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: "/health"
+            port: http
+          periodSeconds: 10
+          timeoutSeconds: 15
+      nodeSelector:
+        kubernetes.io/arch: amd64
+  revisionHistoryLimit: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: truenas-jabberwock
+  namespace: rakazo
+spec:
+  selector:
+    app: truenas-jabberwock
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: truenas-jabberwock
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      app: truenas-jabberwock
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - rakazo-api
+          - rakazo-worker
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 10.0.3.1/32
+    ports:
+    - protocol: TCP
+      port: 443

@@ -1,0 +1,396 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ssh-mcp-config
+  namespace: rakazo
+data:
+  config.toml: |
+    [defaults]
+    defaultProfile = "kube-s3"
+    # shortcut: Rakazo reviews writes; require MCP elicitation once its client supports it.
+    approvalMode = "auto"
+    commandTimeoutMs = 60000
+    commandMaxOutputBytes = 1048576
+    sessionMaxPerConnection = 3
+    sessionIdleTimeoutMs = 600000
+    sessionBackgroundMaxMs = 3600000
+
+    [[profiles]]
+    name = "kube-s1"
+    host = "10.0.0.2"
+    port = 22
+    user = "brunostjohn"
+    auth = "key"
+    keyRef = "/runtime/keys/id_ed25519"
+    trustedHostKey = "SHA256:eY6fKfsAs8i8ifYQ+sstMa73+jTCgCVygh4VLoEL8Xc"
+    role = "admin"
+    group = "prod"
+    tty = false
+
+    [[profiles]]
+    name = "kube-s2"
+    host = "10.0.3.3"
+    port = 22
+    user = "brunostjohn"
+    auth = "key"
+    keyRef = "/runtime/keys/id_ed25519"
+    trustedHostKey = "SHA256:QYZLe6fpc1wcUfHW9xa7Vrr0LJGcwmcmIAsLCr5Cvt8"
+    role = "admin"
+    group = "prod"
+    tty = false
+
+    [[profiles]]
+    name = "kube-s3"
+    host = "10.0.0.6"
+    port = 22
+    user = "brunostjohn"
+    auth = "key"
+    keyRef = "/runtime/keys/id_ed25519"
+    trustedHostKey = "SHA256:+SJv1rLJHZTIefQxJk6qzeKdNVllozGXlg4ZoCVO+9c"
+    role = "admin"
+    group = "prod"
+    tty = false
+
+    [[profiles]]
+    name = "kube-s5"
+    host = "10.0.0.8"
+    port = 22
+    user = "brunostjohn"
+    auth = "key"
+    keyRef = "/runtime/keys/id_ed25519"
+    trustedHostKey = "SHA256:/9C+nXlt821v/f//eLJ6ne//kpXEFmddqn6PyTwrVKc"
+    role = "admin"
+    group = "prod"
+    tty = false
+
+    [[profiles]]
+    name = "kube-s6"
+    host = "10.0.0.9"
+    port = 22
+    user = "brunostjohn"
+    auth = "key"
+    keyRef = "/runtime/keys/id_ed25519"
+    trustedHostKey = "SHA256:G+ganSRL9fyPXrPiBdvoFbRZLiTHtWW0YwqYbIRbGT8"
+    role = "admin"
+    group = "prod"
+    tty = false
+
+    [[profiles]]
+    name = "kube-s7"
+    host = "10.0.0.10"
+    port = 22
+    user = "brunostjohn"
+    auth = "key"
+    keyRef = "/runtime/keys/id_ed25519"
+    trustedHostKey = "SHA256:IISA2pvAfi6P7wFneXSV0jw35cgmhkZuV0eeRkTdwdY"
+    role = "admin"
+    group = "prod"
+    tty = false
+
+    [[profiles]]
+    name = "docker-claw"
+    host = "10.0.194.215"
+    port = 22
+    user = "brunostjohn"
+    auth = "key"
+    keyRef = "/runtime/keys/id_ed25519"
+    trustedHostKey = "SHA256:trFXnAP0QiE/Y/QzfnBmYeOORNA6HOWkP2JUpX4rBIs"
+    role = "admin"
+    group = "prod"
+    tty = false
+
+    [policy.roleBindings.admin]
+    prod = ["read-only", "safe", "destructive", "privileged"]
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ssh-mcp-proxy
+  namespace: rakazo
+data:
+  default.conf.template: |
+    server {
+      listen 8080;
+      server_name _;
+      access_log off;
+      client_max_body_size 2m;
+      location = /health {
+        proxy_pass http://127.0.0.1:8081/health;
+      }
+      location / {
+        if ($http_authorization != "Bearer ${SSH_MCP_TOKEN}") { return 401; }
+        proxy_pass http://127.0.0.1:8081;
+        proxy_http_version 1.1;
+        proxy_set_header Host 127.0.0.1:8081;
+        proxy_set_header Connection "";
+        proxy_set_header Authorization "";
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_read_timeout 3600s;
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssh-mcp
+  namespace: rakazo
+  annotations:
+    reloader.stakater.com/auto: 'true'
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: ssh-mcp
+  template:
+    metadata:
+      labels:
+        app: ssh-mcp
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+      - name: mcp-cache
+        emptyDir:
+          sizeLimit: 256Mi
+      - name: proxy-tmp
+        emptyDir:
+          sizeLimit: 16Mi
+      - name: proxy-config
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Mi
+      - name: proxy-template
+        configMap:
+          name: ssh-mcp-proxy
+      - name: runtime
+        emptyDir:
+          medium: Memory
+          sizeLimit: 4Mi
+      - name: ssh-config
+        configMap:
+          name: ssh-mcp-config
+      - name: ssh-key
+        secret:
+          secretName: rakazo
+          defaultMode: 288
+          items:
+          - key: SSH_PRIVATE_KEY
+            path: id_ed25519
+      containers:
+      - name: mcp
+        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:3478ce3954061504095dd37c188d2d057c48c587965271c66356e5053638a324
+        env:
+        - name: HOME
+          value: "/tmp"
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: mcp-cache
+          mountPath: "/tmp"
+        - name: runtime
+          mountPath: "/runtime"
+          readOnly: true
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+            ephemeral-storage: 256Mi
+        startupProbe:
+          exec:
+            command:
+            - node
+            - "-e"
+            - fetch('http://127.0.0.1:8081/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+          periodSeconds: 10
+          timeoutSeconds: 15
+          failureThreshold: 12
+        readinessProbe:
+          exec:
+            command:
+            - node
+            - "-e"
+            - fetch('http://127.0.0.1:8081/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))
+          periodSeconds: 30
+          timeoutSeconds: 15
+          failureThreshold: 2
+        stdin: true
+        args:
+        - "--stdio"
+        - ssh-mcp --config /runtime/config/config.toml --hostKeyMode strict
+        - "--outputTransport"
+        - streamableHttp
+        - "--host"
+        - 127.0.0.1
+        - "--port"
+        - '8081'
+        - "--healthEndpoint"
+        - "/health"
+        - "--healthCheck"
+        - server
+        - "--stateful"
+        - "--sessionTimeout"
+        - '1800000'
+      - name: auth-proxy
+        image: nginxinc/nginx-unprivileged:1.31.7-alpine@sha256:b5047b9b76845eac124358373c6852377c52e4b05834a47647e955dd91cb8f1e
+        command:
+        - sh
+        - "-ec"
+        args:
+        - envsubst '${SSH_MCP_TOKEN}' < /config/default.conf.template > /etc/nginx/conf.d/default.conf;
+          exec nginx -g 'daemon off;'
+        env:
+        - name: SSH_MCP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: rakazo
+              key: SSH_MCP_TOKEN
+        ports:
+        - name: http
+          containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: proxy-tmp
+          mountPath: "/tmp"
+        - name: proxy-config
+          mountPath: "/etc/nginx/conf.d"
+        - name: proxy-template
+          mountPath: "/config"
+          readOnly: true
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: "/health"
+            port: http
+          periodSeconds: 10
+          timeoutSeconds: 15
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      initContainers:
+      - name: prepare-config
+        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:3478ce3954061504095dd37c188d2d057c48c587965271c66356e5053638a324
+        command:
+        - sh
+        - "-ec"
+        - umask 077; mkdir -p /runtime/config /runtime/keys; chmod 700 /runtime/config
+          /runtime/keys; cp /config/config.toml /runtime/config/config.toml; cp /secret/id_ed25519
+          /runtime/keys/id_ed25519; chmod 600 /runtime/config/config.toml /runtime/keys/id_ed25519
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: runtime
+          mountPath: "/runtime"
+        - name: ssh-config
+          mountPath: "/config"
+          readOnly: true
+        - name: ssh-key
+          mountPath: "/secret"
+          readOnly: true
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+  revisionHistoryLimit: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssh-mcp
+  namespace: rakazo
+spec:
+  selector:
+    app: ssh-mcp
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ssh-mcp
+  namespace: rakazo
+spec:
+  podSelector:
+    matchLabels:
+      app: ssh-mcp
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - rakazo-api
+          - rakazo-worker
+    ports:
+    - protocol: TCP
+      port: 8080
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.2/32
+    - ipBlock:
+        cidr: 10.0.3.3/32
+    - ipBlock:
+        cidr: 10.0.0.6/32
+    - ipBlock:
+        cidr: 10.0.0.8/32
+    - ipBlock:
+        cidr: 10.0.0.9/32
+    - ipBlock:
+        cidr: 10.0.0.10/32
+    - ipBlock:
+        cidr: 10.0.194.215/32
+    ports:
+    - protocol: TCP
+      port: 22
