@@ -18,12 +18,15 @@ spec:
           requests:
             memory: 2Gi
         replicas: 2
+        statefulSetUpdate:
+          updateStrategy: OnDelete
         metrics:
           serviceMonitor:
             enabled: true
             includeNode: true
         environment:
           MINIO_DOMAIN: static.zefirsroyal.cloud
+          MINIO_BROWSER_REDIRECT_URL: https://minio.zefirsroyal.cloud
         persistence:
           enabled: true
           storageClass: nfs-jabberwock-subpath
@@ -42,8 +45,8 @@ spec:
           existingClientSecretKey: oidcClientSecret
         existingSecret: minio-root-credentials
         image:
-          repository: quay.io/minio/minio
-          tag: RELEASE.2024-04-18T19-09-19Z@sha256:036a068d7d6b69400da6bc07a480bee1e241ef3c341c41d988ed11f520f85124
+          repository: ghcr.io/brunostjohn/minio
+          tag: RELEASE.2025-10-15T17-29-55Z@sha256:855865ecb73cdbfc1bc8b46eb3fffbc90ea5a628f6d64ccc4b0e625b34c94745
           pullPolicy: IfNotPresent
         mcImage:
           repository: quay.io/minio/minio
