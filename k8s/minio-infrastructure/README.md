@@ -22,7 +22,16 @@ two-drive cluster upgrade retaining versions and scoped IAM credentials. The
 preserved embedded console also passed login and bucket create/read/delete against
 the newer server, verified independently through the S3 API.
 
-Keep the MinIO server image pinned by digest. Pause obsolete-backup cleanup and
+Keep the MinIO server image pinned by digest. StatefulSet updates use `OnDelete`
+so GitOps prepares a new image without restarting storage unexpectedly; an operator
+must replace the two controller-owned pods during the coordinated update.
+Pause obsolete-backup cleanup and
 avoid active full backups during a two-pod restart: this two-drive deployment needs
 both drives for write quorum. WAL remains on PostgreSQL while archiving retries.
 Never delete files from the MinIO backing directories to make space.
+
+The preserved console's real Authentik login passed after switching its ingress.
+The replacement primary backup `20261111T005610` completed at 01:26 UTC on
+11 November, covering WAL `00000064000003910000003F` through
+`000000640000039100000045`. The previously restored November 6 and November 10
+recovery sets remain retained during this update.
