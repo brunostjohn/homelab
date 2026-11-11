@@ -236,7 +236,7 @@ spec:
         stdin: true
         args:
         - "--stdio"
-        - ssh-mcp --config /runtime/config/config.toml --hostKeyMode strict
+        - ssh-mcp --config=/runtime/config/config.toml --hostKeyMode=strict
         - "--outputTransport"
         - streamableHttp
         - "--host"
