@@ -5,3 +5,4 @@ stack.env
 !/.env.example
 .DS_Store
 /dist
+/recovery/rakazo/encryption-key.rsa-oaep
