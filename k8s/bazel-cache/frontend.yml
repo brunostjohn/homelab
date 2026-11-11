@@ -40,22 +40,31 @@ spec:
             - name: diagnostics
               containerPort: 9980
               protocol: TCP
-          # Both Macs' agents together pushed it past 1Gi (OOMKilled five times in the first hour).
+          # Go's collector lets the heap grow to twice what is live before it runs: with both Macs' agents writing at
+          # once that crossed 1Gi, then 4Gi (OOMKilled five more times in 94 minutes, each a burst of cache misses on
+          # every Mac). GOMEMLIMIT makes it collect harder near the limit instead.
+          env:
+            - name: GOMEMLIMIT
+              value: 5GiB
           resources:
             requests:
               cpu: 500m
-              memory: 1Gi
+              memory: 2Gi
             limits:
               cpu: "4"
-              memory: 4Gi
+              memory: 6Gi
           readinessProbe:
             httpGet:
               path: /-/healthy
               port: diagnostics
+            timeoutSeconds: 5
+          # A busy frontend answers the health check late, not never: a one-second timeout restarted it under load.
           livenessProbe:
             httpGet:
               path: /-/healthy
               port: diagnostics
+            timeoutSeconds: 5
+            failureThreshold: 6
           volumeMounts:
             - name: config
               mountPath: /config
