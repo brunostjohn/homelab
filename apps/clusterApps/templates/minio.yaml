@@ -20,6 +20,15 @@ spec:
         replicas: 2
         statefulSetUpdate:
           updateStrategy: OnDelete
+        postJob:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values: [s3, s7]
         metrics:
           serviceMonitor:
             enabled: true
