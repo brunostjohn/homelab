@@ -1,0 +1,95 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rakazo-minio-buckets
+  namespace: rakazo
+spec:
+  namespaceSelector:
+    matchNames: [minio]
+  selector:
+    matchLabels:
+      app: minio
+      monitoring: 'true'
+      release: minio
+  endpoints:
+  - port: http
+    path: /minio/v2/metrics/bucket
+    interval: 60s
+    metricRelabelings:
+    - sourceLabels: [bucket]
+      regex: 'rakazo-data|posgres-cluster-backups|'
+      action: keep
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: rakazo-operations
+  namespace: rakazo
+spec:
+  groups:
+  - name: rakazo-operations
+    rules:
+    - alert: RakazoServiceUnavailable
+      expr: kube_deployment_status_replicas_available{namespace="rakazo",deployment=~"rakazo-api|rakazo-web|rakazo-worker|rakazo-proxy|kubernetes-mcp|homeassistant-mcp|ssh-mcp|truenas-floof|truenas-jabberwock|mealie-family|mail-bruno"} < 1
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Household service {{ $labels.deployment }} is unavailable'
+        description: Check Argo CD synchronization, pod readiness and service logs.
+    - alert: RakazoMetricsUnavailable
+      expr: up{namespace="rakazo",job=~"honcho|rakazo/honcho-worker|rakazo-embeddings"} == 0
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: 'Metrics scrape for {{ $labels.job }} is failing'
+        description: Check its ServiceMonitor, endpoint and network policy.
+    - alert: RakazoEmbeddingFailures
+      expr: sum(increase(te_request_failure{namespace="rakazo"}[15m])) > 5
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: Household memory embedding requests are failing
+        description: Inspect TEI overload/error counters and Honcho retries before increasing concurrency.
+    - alert: HouseholdMinioCapacityLow
+      expr: min(minio_cluster_capacity_usable_free_bytes{namespace="minio"} / minio_cluster_capacity_usable_total_bytes{namespace="minio"}) < 0.15
+      for: 15m
+      labels:
+        severity: warning
+      annotations:
+        summary: MinIO has less than 15 percent free capacity
+        description: Check backup retention, current object bytes and retained versions before cleanup.
+    - alert: HouseholdMinioCapacityExhaustionSoon
+      expr: min(predict_linear(minio_cluster_capacity_usable_free_bytes{namespace="minio"}[12h], 3 * 86400)) < 0
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: MinIO growth predicts capacity exhaustion within three days
+        description: Compare PostgreSQL archives and Rakazo bucket/version growth with recent workload changes.
+    - alert: HouseholdPostgresBackupStale
+      expr: time() - max(cnpg_collector_last_available_backup_timestamp{namespace="databases",pod=~"postgres-cluster-[0-9]+"}) > 26 * 3600
+      for: 15m
+      labels:
+        severity: critical
+      annotations:
+        summary: PostgreSQL has no completed backup from the last 26 hours
+        description: Check the CNPG Backup status, MinIO quorum/capacity and WAL archiver before pruning any recovery set.
+    - alert: HouseholdPostgresWalArchivingFailed
+      expr: sum(increase(cnpg_pg_stat_archiver_failed_count{namespace="databases",pod=~"postgres-cluster-[0-9]+"}[15m])) > 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: PostgreSQL WAL archiving is failing
+        description: Inspect pg_stat_archiver and MinIO health; do not remove WAL needed by retained backups.
+    - alert: HouseholdUniFiKeyExpiring
+      expr: (vector(1796860800) - time()) < 7 * 86400
+      for: 1h
+      labels:
+        severity: warning
+      annotations:
+        summary: The household UniFi API key expires on 10 December 2026
+        description: Renew it in UniFi and update Infisical plus both Rakazo space connections; update this expiry rule too.

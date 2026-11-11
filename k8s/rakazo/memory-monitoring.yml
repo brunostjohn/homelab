@@ -36,7 +36,7 @@ spec:
     matchLabels:
       app: rakazo-embeddings
   endpoints:
-  - port: metrics
+  - port: http
     interval: 30s
     path: /metrics
 ---
