@@ -5,90 +5,19 @@ metadata:
   namespace: bazel-cache
 data:
   # bb_storage parses these strictly against the protos of its own image: an image bump can reject them (see README).
-  storage.jsonnet: |
-    // One shard on one 1 TiB volume. Every size below is fixed at first start: changing one discards that store.
-    // 877 GiB in all, so ext4's overhead and the 5% reserved for root stay free.
-    {
-      // Reached only by the frontend (netpol.yml); clients authenticate there.
-      "grpcServers": [{ "listenAddresses": [":8981"], "authenticationPolicy": { "allow": {} } }],
-      "maximumMessageSizeBytes": 2 * 1024 * 1024,
-      "global": {
-        "diagnosticsHttpServer": {
-          "httpServers": [{ "listenAddresses": [":9980"], "authenticationPolicy": { "allow": {} } }],
-          "enablePrometheus": true
-        }
-      },
-      "supportedCompressors": ["ZSTD"],
-      "contentAddressableStorageServer": {
-        "contentAddressableStorage": {
-          "chunkStorage": {
-            "local": {
-              // 66 bytes per entry: ~100M entries, 5-10x the objects 860 GiB holds at this build's mean blob size.
-              "keyLocationMap": {
-                "onBlockDevice": { "file": { "path": "/storage/cs/key_location_map", "sizeBytes": 6 * 1024 * 1024 * 1024 } },
-                "maximumGetAttempts": 16,
-                "maximumPutAttempts": 64
-              },
-              "oldBlocks": 8,
-              "currentBlocks": 24,
-              "newBlocks": 3,
-              "blocksOnBlockDevice": {
-                "source": { "file": { "path": "/storage/cs/blocks", "sizeBytes": 860 * 1024 * 1024 * 1024 } },
-                "spareBlocks": 3
-              },
-              "persistent": { "stateDirectoryPath": "/storage/cs/persistent_state", "minimumEpochInterval": "300s" },
-              "chunkingParameters": { "minChunkSizeBytes": 256 * 1024, "horizonSizeBytes": 2 * 1024 * 1024 }
-            }
-          },
-          "chunkMappingStorage": {
-            "local": {
-              "keyLocationMap": {
-                "onBlockDevice": { "file": { "path": "/storage/cms/key_location_map", "sizeBytes": 64 * 1024 * 1024 } },
-                "maximumGetAttempts": 16,
-                "maximumPutAttempts": 64
-              },
-              "oldBlocks": 8,
-              "currentBlocks": 24,
-              "newBlocks": 1,
-              "blocksOnBlockDevice": {
-                "source": { "file": { "path": "/storage/cms/blocks", "sizeBytes": 2 * 1024 * 1024 * 1024 } },
-                "spareBlocks": 3
-              },
-              "persistent": { "stateDirectoryPath": "/storage/cms/persistent_state", "minimumEpochInterval": "300s" }
-            }
-          }
-        },
-        "getAuthorizer": { "allow": {} },
-        "putAuthorizer": { "allow": {} },
-        "findMissingAuthorizer": { "allow": {} },
-        "maximumChunkCount": 100000
-      },
-      "actionCache": {
-        "backend": {
-          "local": {
-            "keyLocationMap": {
-              "onBlockDevice": { "file": { "path": "/storage/ac/key_location_map", "sizeBytes": 1024 * 1024 * 1024 } },
-              "maximumGetAttempts": 16,
-              "maximumPutAttempts": 64
-            },
-            "oldBlocks": 8,
-            "currentBlocks": 24,
-            "newBlocks": 1,
-            "blocksOnBlockDevice": {
-              "source": { "file": { "path": "/storage/ac/blocks", "sizeBytes": 8 * 1024 * 1024 * 1024 } },
-              "spareBlocks": 3
-            },
-            "persistent": { "stateDirectoryPath": "/storage/ac/persistent_state", "minimumEpochInterval": "300s" }
-          }
-        },
-        "getAuthorizer": { "allow": {} },
-        "putAuthorizer": { "allow": {} }
-      }
-    }
   frontend.jsonnet: |
     {
       "grpcServers": [{
         "listenAddresses": [":8980"],
+        // Something between the Macs' VLANs and the node port resets a connection idle for 15 s (measured; cause
+        // not found), which cut every worker's long-poll and every Execute stream waiting on a slow action: ping first.
+        "keepaliveParameters": {
+          "time": "10s",
+          "timeout": "10s",
+          "maxConnectionIdle": "0s",
+          "maxConnectionAge": "0s",
+          "maxConnectionAgeGrace": "0s"
+        },
         // Bazel sends `Authorization: Bearer <token>` (make-cache-token.sh). The key below is public; the token is not.
         "authenticationPolicy": {
           "jwt": {
@@ -175,6 +104,15 @@ data:
       // (aud bazel-worker, signed by the cache's key) may take work.
       "workerGrpcServers": [{
         "listenAddresses": [":8983"],
+        // Something between the Macs' VLANs and the node port resets a connection idle for 15 s (measured; cause
+        // not found), which cut every worker's long-poll and every Execute stream waiting on a slow action: ping first.
+        "keepaliveParameters": {
+          "time": "10s",
+          "timeout": "10s",
+          "maxConnectionIdle": "0s",
+          "maxConnectionAge": "0s",
+          "maxConnectionAgeGrace": "0s"
+        },
         "authenticationPolicy": {
           "jwt": {
             "jwksInline": {
@@ -221,4 +159,93 @@ data:
       // With no worker of a platform left, Execute fails soon and Bazel builds those actions locally
       // (--remote_local_fallback) instead of waiting for one.
       "platformQueueWithNoWorkersTimeout": "120s"
+    }
+---
+# Its own ConfigMap: Reloader restarts every workload that mounts a ConfigMap that changed, and a storage restart drops
+# every Mac's cache for half a minute.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bazel-cache-storage-config
+  namespace: bazel-cache
+data:
+  storage.jsonnet: |
+    // One shard on one 1 TiB volume. Every size below is fixed at first start: changing one discards that store.
+    // 877 GiB in all, so ext4's overhead and the 5% reserved for root stay free.
+    {
+      // Reached only by the frontend (netpol.yml); clients authenticate there.
+      "grpcServers": [{ "listenAddresses": [":8981"], "authenticationPolicy": { "allow": {} } }],
+      "maximumMessageSizeBytes": 2 * 1024 * 1024,
+      "global": {
+        "diagnosticsHttpServer": {
+          "httpServers": [{ "listenAddresses": [":9980"], "authenticationPolicy": { "allow": {} } }],
+          "enablePrometheus": true
+        }
+      },
+      "supportedCompressors": ["ZSTD"],
+      "contentAddressableStorageServer": {
+        "contentAddressableStorage": {
+          "chunkStorage": {
+            "local": {
+              // 66 bytes per entry: ~100M entries, 5-10x the objects 860 GiB holds at this build's mean blob size.
+              "keyLocationMap": {
+                "onBlockDevice": { "file": { "path": "/storage/cs/key_location_map", "sizeBytes": 6 * 1024 * 1024 * 1024 } },
+                "maximumGetAttempts": 16,
+                "maximumPutAttempts": 64
+              },
+              "oldBlocks": 8,
+              "currentBlocks": 24,
+              "newBlocks": 3,
+              "blocksOnBlockDevice": {
+                "source": { "file": { "path": "/storage/cs/blocks", "sizeBytes": 860 * 1024 * 1024 * 1024 } },
+                "spareBlocks": 3
+              },
+              "persistent": { "stateDirectoryPath": "/storage/cs/persistent_state", "minimumEpochInterval": "300s" },
+              "chunkingParameters": { "minChunkSizeBytes": 256 * 1024, "horizonSizeBytes": 2 * 1024 * 1024 }
+            }
+          },
+          "chunkMappingStorage": {
+            "local": {
+              "keyLocationMap": {
+                "onBlockDevice": { "file": { "path": "/storage/cms/key_location_map", "sizeBytes": 64 * 1024 * 1024 } },
+                "maximumGetAttempts": 16,
+                "maximumPutAttempts": 64
+              },
+              "oldBlocks": 8,
+              "currentBlocks": 24,
+              "newBlocks": 1,
+              "blocksOnBlockDevice": {
+                "source": { "file": { "path": "/storage/cms/blocks", "sizeBytes": 2 * 1024 * 1024 * 1024 } },
+                "spareBlocks": 3
+              },
+              "persistent": { "stateDirectoryPath": "/storage/cms/persistent_state", "minimumEpochInterval": "300s" }
+            }
+          }
+        },
+        "getAuthorizer": { "allow": {} },
+        "putAuthorizer": { "allow": {} },
+        "findMissingAuthorizer": { "allow": {} },
+        "maximumChunkCount": 100000
+      },
+      "actionCache": {
+        "backend": {
+          "local": {
+            "keyLocationMap": {
+              "onBlockDevice": { "file": { "path": "/storage/ac/key_location_map", "sizeBytes": 1024 * 1024 * 1024 } },
+              "maximumGetAttempts": 16,
+              "maximumPutAttempts": 64
+            },
+            "oldBlocks": 8,
+            "currentBlocks": 24,
+            "newBlocks": 1,
+            "blocksOnBlockDevice": {
+              "source": { "file": { "path": "/storage/ac/blocks", "sizeBytes": 8 * 1024 * 1024 * 1024 } },
+              "spareBlocks": 3
+            },
+            "persistent": { "stateDirectoryPath": "/storage/ac/persistent_state", "minimumEpochInterval": "300s" }
+          }
+        },
+        "getAuthorizer": { "allow": {} },
+        "putAuthorizer": { "allow": {} }
+      }
     }

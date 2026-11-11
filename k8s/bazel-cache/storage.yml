@@ -100,7 +100,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: bazel-cache-config
+            name: bazel-cache-storage-config
             items:
               - key: storage.jsonnet
                 path: storage.jsonnet
