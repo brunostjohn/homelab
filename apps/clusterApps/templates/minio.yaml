@@ -18,6 +18,8 @@ spec:
           requests:
             memory: 2Gi
         replicas: 2
+        nodeSelector:
+          kubernetes.io/arch: amd64
         statefulSetUpdate:
           updateStrategy: OnDelete
         # Do not create the chart's public default consoleAdmin account.
