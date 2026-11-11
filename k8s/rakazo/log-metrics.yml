@@ -140,7 +140,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: alloy
-        image: grafana/alloy:v1.21.0@sha256:9726bfba078de9bc2212c60c6e643238c700b4fe0868ea78cbe03163d03d95bf
+        image: grafana/alloy:v1.21.3@sha256:8ab871206bd2d8f89277f53abffee5f452a293980788d52f85fa183a87a505a4
         args: [run, --disable-reporting, --server.http.listen-addr=0.0.0.0:12345, --storage.path=/tmp/alloy, /etc/alloy/config.alloy]
         securityContext:
           allowPrivilegeEscalation: false
