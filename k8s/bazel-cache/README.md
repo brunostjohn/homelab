@@ -1,6 +1,6 @@
 # Bazel cache
 
-A Buildbarn remote cache (bb-storage) for the Macs' Bazel builds, at `grpc://10.0.5.10:8980` on the LAN. The
+A Buildbarn remote cache (bb-storage) for the Macs' Bazel builds, at `grpc://10.0.4.4:8980` on the LAN. The
 frontend checks tokens and hides action results whose outputs were evicted. One storage shard keeps the CAS and
 action cache in preallocated files on a 1 TiB `floof-iscsi-csi` volume.
 

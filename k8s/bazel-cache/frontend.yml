@@ -81,7 +81,7 @@ metadata:
   namespace: bazel-cache
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.0.5.10
+  loadBalancerIP: 10.0.4.4
   selector:
     app: frontend
   ports:
