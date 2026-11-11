@@ -5,8 +5,8 @@ results whose outputs were evicted. One storage shard keeps the CAS and action c
 1 TiB `floof-iscsi-csi` volume.
 
 The Macs reach it at `grpc://10.0.2.22:30980`: the frontend's fixed node port, through the API server's VIP. Its
-LoadBalancer address, `10.0.4.4:8980`, gets no route from the client VLANs yet, like every Service kube-vip has
-announced since v1.3.
+LoadBalancer address, `10.0.4.4:8980`, is not reachable from the client VLANs (10.0.5.10 wasn't either), while
+older LoadBalancer addresses are. kube-vip logs adding the VIP on lan0 and the BGP host; the cause is not known yet.
 
 ## Before the first sync
 
