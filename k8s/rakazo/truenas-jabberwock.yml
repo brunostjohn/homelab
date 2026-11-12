@@ -113,7 +113,7 @@ spec:
           name: truenas-jabberwock-proxy
       containers:
       - name: mcp
-        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:1d335d8034c5a149a947c20a085d6e8a3cb5c92a36b6ab8e5d8778eef93dfec9
+        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:0e724d85ab002368706651169ae1a81b883b91adab1202462ace0a97fc2f298f
         env:
         - name: HOME
           value: "/tmp"
