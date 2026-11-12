@@ -1,7 +1,7 @@
 name: rakazo
 services:
   supervisor:
-    image: ghcr.io/elie222/rakazo/app@sha256:971d2174b857f33695c6aef8f2ff836dcaf49ad8118fe290c55072cf59221591
+    image: ghcr.io/elie222/rakazo/app@sha256:e46e9f39f8a8bd9574d874b88fdcd5aec9b7de9f1407c806f0da16ba93ce52b0
     command: [pnpm, --filter, "@rakazo/sandbox-supervisor", start]
     restart: unless-stopped
     init: true
@@ -44,7 +44,7 @@ services:
         max-file: "3"
   # Stock supervisor discovers this service and joins it to isolated computer networks.
   web:
-    image: ghcr.io/elie222/rakazo/app@sha256:971d2174b857f33695c6aef8f2ff836dcaf49ad8118fe290c55072cf59221591
+    image: ghcr.io/elie222/rakazo/app@sha256:e46e9f39f8a8bd9574d874b88fdcd5aec9b7de9f1407c806f0da16ba93ce52b0
     working_dir: /app/apps/web
     command: [node_modules/.bin/vite, preview, --host, 0.0.0.0, --port, "5173"]
     restart: unless-stopped
