@@ -6,7 +6,7 @@ metadata:
   annotations:
     reloader.stakater.com/auto: "true"
 spec:
-  replicas: 0
+  replicas: 1
   serviceName: storage
   revisionHistoryLimit: 3
   persistentVolumeClaimRetentionPolicy:
