@@ -15,7 +15,7 @@ resource "helm_release" "akri" {
 
   repository = "https://project-akri.github.io/akri/"
   chart      = "akri"
-  version    = "0.13.8"
+  version    = "0.14.0"
 
   values = [file("${path.module}/values/akri.yml")]
 }
