@@ -21,7 +21,9 @@ data:
         "diagnosticsHttpServer": {
           "httpServers": [{ "listenAddresses": [":9980"], "authenticationPolicy": { "allow": {} } }],
           "enablePrometheus": true
-        }
+        },
+        // The worker runs as root and the runner as nobody: the action directories it makes must be writable by both.
+        "setUmask": { "umask": 0 }
       },
       "buildDirectories": [{
         "native": {
