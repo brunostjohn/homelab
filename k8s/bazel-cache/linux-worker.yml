@@ -44,7 +44,7 @@ data:
             "properties": [
               { "name": "ISA", "value": "x86-64" },
               { "name": "OSFamily", "value": "linux" },
-              { "name": "container-image", "value": "docker://debian@sha256:99c0b25c46d0214d5a2091092e7908907dcaecd6a962cde0ac700acee222b6f3" }
+              { "name": "container-image", "value": "docker://buildpack-deps@sha256:f53cd4c58cdb96a467b98696cd510a949ef4ccd7d23e07b75107de754773007a" }
             ]
           },
           "workerId": { "pod": std.extVar("POD_NAME"), "node": std.extVar("NODE_NAME") }
@@ -140,7 +140,9 @@ spec:
             - name: worker
               mountPath: /worker
         - name: runner
-          image: docker.io/library/debian:bookworm-20261027-slim@sha256:99c0b25c46d0214d5a2091092e7908907dcaecd6a962cde0ac700acee222b6f3
+          # Debian with gcc and libc6-dev: rustc links what it builds for this platform (rules_rust's process_wrapper,
+          # build scripts, proc-macros) with the image's cc. Bazel declares no C toolchain for Linux.
+          image: docker.io/library/buildpack-deps:bookworm@sha256:f53cd4c58cdb96a467b98696cd510a949ef4ccd7d23e07b75107de754773007a
           command:
             - /bb/bb_runner
             - /config/runner.jsonnet
