@@ -50,7 +50,7 @@ data:
         "contentAddressableStorage": {
           "chunkStorage": {
             "existenceCaching": {
-              "backend": { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } },
+              "backend": { "grpc": { "client": { "address": "storage-local-0.storage.bazel-cache:8981" }, "enableCompression": true } },
               "existenceCache": { "cacheSize": 1000000, "cacheDuration": "60s", "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
             }
           },
@@ -58,7 +58,7 @@ data:
             "existenceCaching": {
               "backend": {
                 "chunkMappingValidating": {
-                  "backend": { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } }
+                  "backend": { "grpc": { "client": { "address": "storage-local-0.storage.bazel-cache:8981" }, "enableCompression": true } }
                 }
               },
               "existenceCache": { "cacheSize": 1000000, "cacheDuration": "60s", "cacheReplacementPolicy": "LEAST_RECENTLY_USED" }
@@ -75,7 +75,7 @@ data:
         // An ActionResult whose outputs were evicted is a miss, not a hit Bazel later fails to download.
         "backend": {
           "completenessChecking": {
-            "backend": { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" } } },
+            "backend": { "grpc": { "client": { "address": "storage-local-0.storage.bazel-cache:8981" } } },
             "maximumTotalTreeSizeBytes": 64 * 1024 * 1024
           }
         },
@@ -96,7 +96,7 @@ data:
       "executeAuthorizer": { "allow": {} }
     }
   scheduler.jsonnet: |
-    local storage = { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } };
+    local storage = { "grpc": { "client": { "address": "storage-local-0.storage.bazel-cache:8981" }, "enableCompression": true } };
     {
       // Reached only by the frontend (netpol.yml), which checked the client's token.
       "clientGrpcServers": [{ "listenAddresses": [":8982"], "authenticationPolicy": { "allow": {} } }],
@@ -174,8 +174,8 @@ metadata:
   namespace: bazel-cache
 data:
   storage.jsonnet: |
-    // One shard on one 1 TiB volume. Every size below is fixed at first start: changing one discards that store.
-    // 877 GiB in all, so ext4's overhead and the 5% reserved for root stay free.
+    // One shard on s7's local disk. Every size below is fixed at first start: changing one discards that store.
+    // 76 GiB in all (storage.yml says why no more).
     {
       // Reached only by the frontend (netpol.yml); clients authenticate there.
       "grpcServers": [{ "listenAddresses": [":8981"], "authenticationPolicy": { "allow": {} } }],
@@ -191,9 +191,9 @@ data:
         "contentAddressableStorage": {
           "chunkStorage": {
             "local": {
-              // 66 bytes per entry: ~100M entries, 5-10x the objects 860 GiB holds at this build's mean blob size.
+              // 66 bytes per entry: ~16M entries, 5-10x the objects 64 GiB holds at this build's mean blob size.
               "keyLocationMap": {
-                "onBlockDevice": { "file": { "path": "/storage/cs/key_location_map", "sizeBytes": 6 * 1024 * 1024 * 1024 } },
+                "onBlockDevice": { "file": { "path": "/storage/cs/key_location_map", "sizeBytes": 1024 * 1024 * 1024 } },
                 "maximumGetAttempts": 16,
                 "maximumPutAttempts": 64
               },
@@ -201,7 +201,7 @@ data:
               "currentBlocks": 24,
               "newBlocks": 3,
               "blocksOnBlockDevice": {
-                "source": { "file": { "path": "/storage/cs/blocks", "sizeBytes": 860 * 1024 * 1024 * 1024 } },
+                "source": { "file": { "path": "/storage/cs/blocks", "sizeBytes": 64 * 1024 * 1024 * 1024 } },
                 "spareBlocks": 3
               },
               "persistent": { "stateDirectoryPath": "/storage/cs/persistent_state", "minimumEpochInterval": "300s" },

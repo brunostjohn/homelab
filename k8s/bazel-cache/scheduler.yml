@@ -106,8 +106,8 @@ spec:
       targetPort: diagnostics
       protocol: TCP
 ---
-# The Macs' bb_workers connect here, through the API server's VIP like the frontend's port
-# (grpc://10.0.2.22:30983), with a worker token (aud bazel-worker).
+# The Macs' bb_workers connect here on s7's own address, like the frontend's port (grpc://10.0.0.10:30983), with a
+# worker token (aud bazel-worker).
 apiVersion: v1
 kind: Service
 metadata:

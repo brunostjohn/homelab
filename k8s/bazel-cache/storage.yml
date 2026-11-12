@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: storage
+  name: storage-local
   namespace: bazel-cache
   annotations:
     reloader.stakater.com/auto: "true"
@@ -21,10 +21,10 @@ spec:
         app: storage
         app.kubernetes.io/part-of: bazel-cache
     spec:
-      # The image index carries an x86-64-v3 build; AVX2 nodes run either variant, the Ivy Bridge VMs only the v1 one.
+      # On s7's own SSD rather than floof's iSCSI LUN, where a remote worker's per-file reads were page faults over the
+      # network. The local-path volume lives on s7, so the pod does too.
       nodeSelector:
-        kubernetes.io/arch: amd64
-        feature.node.kubernetes.io/cpu-cpuid.AVX2: "true"
+        kubernetes.io/hostname: s7
       enableServiceLinks: false
       terminationGracePeriodSeconds: 60
       securityContext:
@@ -64,19 +64,18 @@ spec:
             - name: diagnostics
               containerPort: 9980
               protocol: TCP
-          # The key-location maps (7 GiB) and the blocks are memory-mapped from the iSCSI volume, and the page cache
-          # counts against the limit: at 8Gi a remote worker's per-file reads took 0.6 s each, every one a page fault
-          # over iSCSI. The Go heap stays small (GOMEMLIMIT); the rest of the limit is page cache the kernel can take back.
+          # The key-location maps (2 GiB) and the blocks are memory-mapped, and the page cache counts against the
+          # limit. The Go heap stays small (GOMEMLIMIT); the rest of the limit is page cache the kernel can take back.
           env:
             - name: GOMEMLIMIT
-              value: 6GiB
+              value: 4GiB
           resources:
             requests:
               cpu: 500m
-              memory: 3Gi
+              memory: 2Gi
             limits:
               cpu: "4"
-              memory: 16Gi
+              memory: 8Gi
           startupProbe:
             httpGet:
               path: /-/healthy
@@ -121,10 +120,12 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: floof-iscsi-csi
+        # local-path does not enforce the size; storage.jsonnet's files take 76 GiB of s7's root filesystem, which
+        # keeps it above the kubelet's 10% eviction threshold with the Linux worker's scratch full.
+        storageClassName: local-path
         resources:
           requests:
-            storage: 1Ti
+            storage: 80Gi
 ---
 apiVersion: v1
 kind: Service

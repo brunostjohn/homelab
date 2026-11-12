@@ -5,7 +5,7 @@ metadata:
   namespace: bazel-cache
 data:
   worker.jsonnet: |
-    local storage = { "grpc": { "client": { "address": "storage-0.storage.bazel-cache:8981" }, "enableCompression": true } };
+    local storage = { "grpc": { "client": { "address": "storage-local-0.storage.bazel-cache:8981" }, "enableCompression": true } };
     {
       "blobstore": {
         "contentAddressableStorage": {

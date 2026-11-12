@@ -2,7 +2,7 @@
 
 A Buildbarn remote cache (bb-storage) and executor (bb-scheduler) for the Macs' Bazel builds. The frontend checks
 tokens, hides action results whose outputs were evicted, and forwards Execute to the scheduler. One storage shard
-keeps the CAS and action cache in preallocated files on a 1 TiB `floof-iscsi-csi` volume.
+keeps the CAS and action cache in preallocated files, 76 GiB in all, on s7's SSD (`local-path`).
 
 The Mac workers connect to the scheduler's node port on s7, `10.0.0.10:30983`, and read the CAS through the
 frontend's, `10.0.0.10:30980`. Through the API VIP, `10.0.2.22`, a long-lived connection is reset after 10-50 s
@@ -14,9 +14,10 @@ workers (`linux-worker.yml`) reach the scheduler on an in-cluster port only thei
 directly. With no worker of a platform left, Execute fails after two minutes and Bazel builds those actions on the
 asking Mac.
 
-The Macs reach it at `grpc://10.0.2.22:30980`: the frontend's fixed node port, through the API server's VIP. Its
-LoadBalancer address, `10.0.4.4:8980`, is not reachable from the client VLANs (10.0.5.10 wasn't either), while
-older LoadBalancer addresses are. kube-vip logs adding the VIP on lan0 and the BGP host; the cause is not known yet.
+The Macs reach it at `grpc://10.0.0.10:30980`, the frontend's fixed node port on s7's own address, for the same
+reason as the workers. Its LoadBalancer address, `10.0.4.4:8980`, is not reachable from the client VLANs (10.0.5.10
+wasn't either), while older LoadBalancer addresses are. kube-vip logs adding the VIP on lan0 and the BGP host; the
+cause is not known yet.
 
 ## Before the first sync
 
