@@ -113,7 +113,7 @@ spec:
           name: truenas-floof-proxy
       containers:
       - name: mcp
-        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:3478ce3954061504095dd37c188d2d057c48c587965271c66356e5053638a324
+        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:8b1c3a4679c317678b11b1e509db567a7ca033a9b68f3f93092c8166aeda5b09
         env:
         - name: HOME
           value: "/tmp"
