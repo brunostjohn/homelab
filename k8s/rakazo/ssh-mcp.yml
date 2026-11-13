@@ -191,7 +191,7 @@ spec:
             path: id_ed25519
       containers:
       - name: mcp
-        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:0e724d85ab002368706651169ae1a81b883b91adab1202462ace0a97fc2f298f
+        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:3cd9f1ec27dabf290b53a96d5076743ada508e407bf5e9e1cef062b6ae2d4390
         env:
         - name: HOME
           value: "/tmp"
@@ -298,7 +298,7 @@ spec:
         kubernetes.io/arch: amd64
       initContainers:
       - name: prepare-config
-        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:0e724d85ab002368706651169ae1a81b883b91adab1202462ace0a97fc2f298f
+        image: ghcr.io/brunostjohn/homelab-mcp:2026-11-10@sha256:3cd9f1ec27dabf290b53a96d5076743ada508e407bf5e9e1cef062b6ae2d4390
         command:
         - sh
         - "-ec"
