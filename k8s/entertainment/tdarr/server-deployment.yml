@@ -36,7 +36,7 @@ spec:
             claimName: entertainment-content-pvc
       containers:
         - name: tdarr
-          image: ghcr.io/haveagitgat/tdarr:3.07.00
+          image: ghcr.io/haveagitgat/tdarr:3.08.00
           imagePullPolicy: IfNotPresent
           resources:
             requests:
