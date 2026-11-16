@@ -25,7 +25,7 @@ spec:
           type: RuntimeDefault
       initContainers:
         - name: bootstrap-config
-          image: eceasy/cli-proxy-api:v8.0.72@sha256:7cac48fd7f3ac0b7b6b73508d92179e29454087d9af81eb9a5c9fb50cdd87bc8
+          image: eceasy/cli-proxy-api:v8.0.74@sha256:282c9b59111743b4dea606841d2508300bc8649be006c26b17ddcd18d76b9387
           command:
             - sh
             - -ec
@@ -54,7 +54,7 @@ spec:
               mountPath: /bootstrap
       containers:
         - name: proxy
-          image: eceasy/cli-proxy-api:v8.0.72@sha256:7cac48fd7f3ac0b7b6b73508d92179e29454087d9af81eb9a5c9fb50cdd87bc8
+          image: eceasy/cli-proxy-api:v8.0.74@sha256:282c9b59111743b4dea606841d2508300bc8649be006c26b17ddcd18d76b9387
           env:
             - name: PGSTORE_DSN
               valueFrom:
