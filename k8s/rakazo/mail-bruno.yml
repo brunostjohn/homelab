@@ -69,7 +69,7 @@ spec:
           name: mail-bruno-proxy
       containers:
       - name: mail
-        image: ghcr.io/wh1isper/mcp-email-server:1.14.0@sha256:b2b311c911ab669d73c820cd128fc647ca6993b3024fc05b19b34e09861b05b2
+        image: ghcr.io/wh1isper/mcp-email-server:1.14.1@sha256:df0a3d3e262024dbc2fcd1ee5d6278191746c662374644a22518557c2837ba82
         command: [sh, -ec]
         args:
         - mkdir -p /tmp/mail; chmod 700 /tmp/mail; exec mcp-email-server streamable-http --host 127.0.0.1 --port 9557
