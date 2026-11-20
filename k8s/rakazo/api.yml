@@ -34,7 +34,7 @@ spec:
           sizeLimit: 40Gi
       initContainers:
       - name: data-init
-        image: ghcr.io/elie222/rakazo/app@sha256:0ede140417319081bf646c97768976aaf0643e07b8ca2970d43da789ecff3b82
+        image: ghcr.io/elie222/rakazo/app@sha256:a771451af0a789f75165c46e1d4a340ec2e1717208a599c4c7e1b5996e137c1b
         command:
         - sh
         - "-ec"
@@ -55,7 +55,7 @@ spec:
           mountPath: "/data"
       containers:
       - name: api
-        image: ghcr.io/elie222/rakazo/app@sha256:0ede140417319081bf646c97768976aaf0643e07b8ca2970d43da789ecff3b82
+        image: ghcr.io/elie222/rakazo/app@sha256:a771451af0a789f75165c46e1d4a340ec2e1717208a599c4c7e1b5996e137c1b
         imagePullPolicy: IfNotPresent
         workingDir: "/app/apps/api"
         securityContext:
