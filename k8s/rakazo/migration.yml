@@ -25,7 +25,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: migrate
-        image: ghcr.io/elie222/rakazo/app@sha256:0ede140417319081bf646c97768976aaf0643e07b8ca2970d43da789ecff3b82
+        image: ghcr.io/elie222/rakazo/app@sha256:21e195e9dbee671b517a046a42ecc87628e5bd02534fdeae0b0b9290d80d01a0
         workingDir: "/app/apps/api"
         command:
         - node
